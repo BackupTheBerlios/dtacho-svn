@@ -1,0 +1,85 @@
+
+INFO
+----
+
+Web page:         http://www.digitaler-tachograph.org/
+Development page: http://developer.berlios.de/projects/dtacho/
+
+
+STATUS
+------
+
+Currently this software converts a DTCO driver card .DDD file to an XML file.
+
+
+NOTES
+-----
+
+This software depends on some additional components (jars) that can be found
+in the classes directory.
+
+The jars were obtained from the following sources:
+
+* xmlrpc
+
+  URL: http://ws.apache.org/xmlrpc/
+  File: xmlrpc-3.1-bin.tar.gz
+  JARS:
+  -xmlrpc-common-3.1.jar
+  -xmlrpc-client-3.1.jar
+  -xmlrpc-server-3.1.jar
+  -commons-logging-1.1.jar
+  -ws-commons-util-1.0.2.jar
+
+* jdom
+
+  URL: http://www.jdom.org/
+  File: jdom-1.1.tar.gz
+  JARS:
+  -jdom-1.1.jar
+
+
+HOW TO RUN
+----------
+
+Change to the top of the directory tree where you find the org directory.
+E.g. if you have compiled the source in eclipse change to the bin directory:
+
+gerald@dtachdev:~/workspace/dtacho/bin$ ls -lR | grep ^d
+drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
+drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
+drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
+drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
+drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
+
+To run the format converter it is requires to include
+-the current directory
+-the directory that contains the additional jar files mentioned above
+to the java class path.
+
+This is done with option -cp.
+
+Example:
+gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" org.digitalertachograph.DDDQuery.Controller driver_card.DDD
+
+This will read the driver_card.DDD file, print some (debug) info and output the file driver_card.xml
+
+
+SPECIFICATIONS
+--------------
+
+The specification of the digital tachograph can be found on The European Union On-line web page
+http://www.europa.eu
+
+Following regulations (available in several languages) are of particular interest for this project:
+
+-Commission Regulation (EC) No 1360/2002 of 13 June 2002 adapting for the seventh time
+ to technical progress Council Regulation (EEC) No 3821/85 on recording equipment in road transport
+
+ http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002R1360:EN:NOT
+
+-Commission Regulation (EC) No 432/2004 of 5 March 2004 adapting for the eighth time
+ to technical progress Council Regulation (EEC) No 3821/85 of 20 December 1985 on recording equipment
+ in road transport
+
+ http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32004R0432:EN:NOT
