@@ -1,15 +1,33 @@
 
+dtacho project
+==============
+
+
 INFO
 ----
 
-Web page:         http://www.digitaler-tachograph.org/
-Development page: http://developer.berlios.de/projects/dtacho/
+This project aims to develop an operating system independent open source
+software to convert driver card and vehicle unit byte data of a digital
+tachograph (DTCO) to XML. An application to examine and visualize the data
+shall also be developed.
+
+Web page (German):        http://www.digitaler-tachograph.org/
+Project/development page: http://developer.berlios.de/projects/dtacho/
+
+User and developer mailing lists for this projects are available. For details
+go to our web page or the project page at Berlios.
+
+For information/specifications of the DTCO see below, chapter SPECIFICATIONS.
 
 
 STATUS
 ------
 
+The byte data to XML converter is written Java.
+
+08.12.2007
 Currently this software converts a DTCO driver card .DDD file to an XML file.
+The code was developed by Martin Barth in his diploma thesis.
 
 
 NOTES
@@ -52,7 +70,7 @@ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
 drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
 drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
 
-To run the format converter it is requires to include
+To run the format converter it is required to include
 -the current directory
 -the directory that contains the additional jar files mentioned above
 to the java class path.
@@ -60,26 +78,35 @@ to the java class path.
 This is done with option -cp.
 
 Example:
-gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" org.digitalertachograph.DDDQuery.Controller driver_card.DDD
 
-This will read the driver_card.DDD file, print some (debug) info and output the file driver_card.xml
+gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+org.digitalertachograph.DDDQuery.Controller driver_card.DDD
+
+This will read the file driver_card.DDD, print some (debug) info and output
+the file driver_card.xml
 
 
 SPECIFICATIONS
 --------------
 
-The specification of the digital tachograph can be found on The European Union On-line web page
-http://www.europa.eu
+The specification of the digital tachograph (DTCO) can be found on The
+European Union On-line web page at http://www.europa.eu
 
-Following regulations (available in several languages) are of particular interest for this project:
+Following regulations (available in several languages) are of particular
+interest for this project:
 
--Commission Regulation (EC) No 1360/2002 of 13 June 2002 adapting for the seventh time
- to technical progress Council Regulation (EEC) No 3821/85 on recording equipment in road transport
+-Commission Regulation (EC) No 1360/2002 of 13 June 2002 adapting for the
+ seventh time to technical progress Council Regulation (EEC) No 3821/85 on
+ recording equipment in road transport
 
  http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002R1360:EN:NOT
 
--Commission Regulation (EC) No 432/2004 of 5 March 2004 adapting for the eighth time
- to technical progress Council Regulation (EEC) No 3821/85 of 20 December 1985 on recording equipment
- in road transport
+-Commission Regulation (EC) No 432/2004 of 5 March 2004 adapting for the
+ eighth time to technical progress Council Regulation (EEC) No 3821/85 of
+ 20 December 1985 on recording equipment in road transport
 
  http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32004R0432:EN:NOT
+
+-Consolidated versions of Council Regulation (EEC) No 3821/85
+
+ http://eur-lex.europa.eu/Result.do?direct=yes&lang=en&xsl=lex04_consleg_page&consleg=01985R3821&suffixewhereihm=ID_CELEX:01985R3821
