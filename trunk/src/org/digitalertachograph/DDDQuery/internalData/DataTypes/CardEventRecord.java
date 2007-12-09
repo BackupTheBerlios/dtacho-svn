@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,9 +17,9 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
-import java.sql.Time;
+//import java.sql.Time;
 
-import javax.swing.event.DocumentEvent.EventType;
+//import javax.swing.event.DocumentEvent.EventType;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
@@ -27,10 +27,10 @@ import org.jdom.Element;
 public class CardEventRecord extends DataClass {
 	/*
 	 * CardEventRecord ::= SEQUENCE {
-	 * 	eventType EventFaultType, 1byte
-	 * 	eventBeginTime TimeReal, 4byte
-	 * 	eventEndTime TimeReal, 4byte
-	 * 	eventVehicleRegistration VehicleRegistrationIdentification 15byte;
+	 * 	eventType EventFaultType, 1 bytes
+	 * 	eventBeginTime TimeReal, 4 bytes
+	 * 	eventEndTime TimeReal, 4 bytes
+	 * 	eventVehicleRegistration VehicleRegistrationIdentification, 15 bytes
 	 * }
 	 * -- 
 	 * 
@@ -80,17 +80,6 @@ public class CardEventRecord extends DataClass {
 			VehicleRegistrationIdentification eventVehicleRegistration) {
 		this.eventVehicleRegistration = eventVehicleRegistration;
 	}
-
-	/*
-	 * CardEventRecord ::= SEQUENCE {
-	 * 	eventType EventFaultType, 1byte
-	 * 	eventBeginTime TimeReal, 4byte
-	 * 	eventEndTime TimeReal, 4byte
-	 * 	eventVehicleRegistration VehicleRegistrationIdentification 15byte;
-	 * }
-	 * -- 
-	 * 
-	 */
 	
 	@Override
 	public Element generateXMLElement(String name) {
@@ -101,6 +90,4 @@ public class CardEventRecord extends DataClass {
 		node.addContent( eventVehicleRegistration.generateXMLElement("eventVehicleRegistration"));
 		return node;
 	}
-
-
 }

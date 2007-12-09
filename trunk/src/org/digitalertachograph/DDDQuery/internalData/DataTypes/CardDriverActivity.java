@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,8 +26,8 @@ import org.jdom.Element;
 public class CardDriverActivity extends DataClass {
 	/*
 	 * CardDriverActivity ::= SEQUENCE {
-	 * 	activityPointerOldestDayRecord INTEGER(0..CardActivityLengthRange-1), 2byte
-	 * 	activityPointerNewestRecord INTEGER(0..CardActivityLengthRange-1), 2byte;
+	 * 	activityPointerOldestDayRecord INTEGER(0..CardActivityLengthRange-1), 2 bytes
+	 * 	activityPointerNewestRecord INTEGER(0..CardActivityLengthRange-1), 2 bytes
 	 * 	activityDailyRecords OCTET STRING (SIZE(CardActivityLengthRange))
 	 * }
 	 * --
@@ -35,7 +35,7 @@ public class CardDriverActivity extends DataClass {
 	 * 
 	 * activityDailyRecords is the space available to store the driver activity data 
 	 * (data structure: CardActivityDailyRecord) for each calendar day where the card
-	 *  has been used.
+	 * has been used.
 	 */
 	private int activityPointerOldestDayRecord;
 	private int activityPointerNewestRecord;
@@ -74,7 +74,6 @@ public class CardDriverActivity extends DataClass {
 			activityDailyRecords.add(cadr);
 		}
 		lastPartOfActivityDailyRecords = arrayCopy(buff, beginning, buff.length - beginning); 
-
 	}
 
 
@@ -109,7 +108,7 @@ public class CardDriverActivity extends DataClass {
 		activityPointerNewestRecordElement.setText(Integer.toString(activityPointerNewestRecord));
 		node.addContent(activityPointerNewestRecordElement);
 		
-		Iterator it = activityDailyRecords.iterator();
+		Iterator<CardActivityDailyRecord> it = activityDailyRecords.iterator();
 		Element cardActivityDailyRecordsElement = new Element("cardActivityDailyRecords");
 		while(it.hasNext()){
 			CardActivityDailyRecord cadr = (CardActivityDailyRecord) it.next();
@@ -125,5 +124,4 @@ public class CardDriverActivity extends DataClass {
 		
 		return node;
 	}
-	
 }

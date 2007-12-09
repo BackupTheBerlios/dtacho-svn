@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,24 +17,24 @@
 
 package org.digitalertachograph.DDDQuery;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+//import java.io.BufferedOutputStream;
+//import java.io.BufferedWriter;
+//import java.io.DataOutputStream;
+//import java.io.FileOutputStream;
+//import java.io.PrintStream;
 import java.net.URL;
 import java.util.Vector;
 
 //ssl support
-import java.security.cert.X509Certificate;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+//import java.security.cert.X509Certificate;
+//import javax.net.ssl.HostnameVerifier;
+//import javax.net.ssl.HttpsURLConnection;
+//import javax.net.ssl.SSLContext;
+//import javax.net.ssl.SSLSession;
+//import javax.net.ssl.TrustManager;
+//import javax.net.ssl.X509TrustManager;
 
-import org.apache.xmlrpc.XmlRpcException;
+//import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
@@ -57,6 +57,7 @@ public class Controller {
 		c.setupWebserver();
 		//c.manual();
 		c.process(argv[0]);
+		System.out.println("\ndone!");
 	}
 
 	public static Controller getInstance(){
@@ -78,10 +79,11 @@ public class Controller {
 			client.setConfig(config);
 
 
-			Vector params = new Vector ();
+			Vector<String> params = new Vector<String>();
 			params.addElement(xml);
 			// this method returns a string
-			String result = (String) client.execute ("storeXML", params);
+			//String result = (String) client.execute ("storeXML", params);
+			client.execute("storeXML", params);
 
 			//System.out.println(result);
 		}catch(Exception e){

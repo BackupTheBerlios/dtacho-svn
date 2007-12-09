@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,70 +25,80 @@ public class EventFaultType extends DataClass {
 	 * EventFaultType ::= OCTET STRING (SIZE(1)).
 	 * 
 	 * Value assignment:
-�0x�H General events,
-�00�H No further details,
-�01�H Insertion of a non-valid card,
-�02�H Card conflict,
-�03�H Time overlap,
-�04�H Driving without an appropriate card,
-�05�H Card insertion while driving,
-�06�H Last card session not correctly closed,
-�07�H Over speeding,
-�08�H Power supply interruption,
-�09�H Motion data error,
-�0A�H to �0F�H RFU,
-�1x�H Vehicle unit related security breach attempt events,
-�10�H No further details,
-�11�H Motion sensor authentication failure,
-�12�H Tachograph card authentication failure,
-�13�H Unauthorised change of motion sensor,
-�14�H Card data input integrity error
-�15�H Stored user data integrity error,
-�16�H Internal data transfer error,
-�17�H Unauthorised case opening,
-�18�H Hardware sabotage,
-�19�H to �1F�H RFU,
-�2x�H Sensor related security breach attempt events,
-�20�H No further details,
-�21�H Authentication failure,
-�22�H Stored data integrity error,
-�23�H Internal data transfer error,
-�24�H Unauthorised case opening,
-�25�H Hardware sabotage,
-�26�H to �2F�H RFU,
-�3x�H Recording equipment faults,
-�30�H No further details,
-�31�H VU internal fault,
-�32�H Printer fault,
-�33�H Display fault,
-�34�H Downloading fault,
-�35�H Sensor fault,
-�36�H to �3F�H RFU
-�4x�H Card faults,
-�40�H No further details,
-�41�H to �4F�H RFU
-�50�H to �7F�H RFU,
-�80�H to �FF�H Manufacturer specific.
+	 * 
+	 * '0x' General events,
+	 *  '00'H No further details,
+	 *  '01'H Insertion of a non-valid card,
+	 *  '02'H Card conflict,
+	 *  '03'H Time overlap,
+	 *  '04'H Driving without an appropriate card,
+	 *  '05'H Card insertion while driving,
+	 *  '06'H Last card session not correctly closed,
+	 *  '07'H Over speeding,
+	 *  '08'H Power supply interruption,
+	 *  '09'H Motion data error,
+	 *  '0A'H to �0F�H RFU,
+	 * 
+	 * '1x'H Vehicle unit related security breach attempt events,
+	 *  '10'H No further details,
+	 *  '11'H Motion sensor authentication failure,
+	 *  '12'H Tachograph card authentication failure,
+	 *  '13'H Unauthorised change of motion sensor,
+	 *  '14'H Card data input integrity error
+	 *  '15'H Stored user data integrity error,
+	 *  '16'H Internal data transfer error,
+	 *  '17'H Unauthorised case opening,
+	 *  '18'H Hardware sabotage,
+	 *  '19'H to '1F'H RFU,
+	 * 
+	 * '2x'H Sensor related security breach attempt events,
+	 *  '20'H No further details,
+	 *  '21'H Authentication failure,
+	 *  '22'H Stored data integrity error,
+	 *  '23'H Internal data transfer error,
+	 *  '24'H Unauthorised case opening,
+	 *  '25'H Hardware sabotage,
+	 *  '26'H to '2F'H RFU,
+	 * 
+	 * '3x'H Recording equipment faults,
+	 *  '30'H No further details,
+	 *  '31'H VU internal fault,
+	 *  '32'H Printer fault,
+	 *  '33'H Display fault,
+	 *  '34'H Downloading fault,
+	 *  '35'H Sensor fault,
+	 *  '36'H to '3F'H RFU
+	 * 
+	 * '4x'H Card faults,
+	 *  '40'H No further details,
+	 *  '41'H to '4F'H RFU
+	 * 
+	 * '50'H to '7F'H RFU,
+	 *
+	 * '80'H to 'FF'H Manufacturer specific.
 	 */
 	
 	private byte eventFaultType;
 	private byte category;
 	public final byte GENERAL_EVENT = 0;
-	public final byte VEHICLE_UNIT_RELATED_SECURITY_BREACH_ATTEPT_EVENTS = 1;
-	public final byte SENSOR_RELATED_SECURITY_BREACH_ATTEMPT_EVENTS = 2;
-	public final byte RECORDING_EQUIPMENT_FAULTS = 3;
-	public final byte CARD_FAULTS = 4;
+	public final byte VEHICLE_UNIT_RELATED_SECURITY_BREACH_ATTEMPT_EVENT = 1;
+	public final byte SENSOR_RELATED_SECURITY_BREACH_ATTEMPT_EVENT = 2;
+	public final byte RECORDING_EQUIPMENT_FAULT = 3;
+	public final byte CARD_FAULT = 4;
 	public final byte RFU = 5;
-	public final byte MANUFACTURE_SPECIFIC = 6;
+	public final byte MANUFACTURER_SPECIFIC = 6;
 	
 	
 	public EventFaultType(byte b){
 		eventFaultType = b;
-		category = (byte) (b & 0xF0);
-		if(5 < category && category < 8)
-			category = 5;
-		else if(category > 8)
-			category = 6;
+		category = (byte) ((b & 0xF0) >> 4);
+
+		if (category >= 5 && category < 8)
+			// 0x50 ... 0x7F
+			category = RFU;
+		else if (category >= 8)
+			// 0x80 ... 0xFF
+			category = MANUFACTURER_SPECIFIC;
 	}
 
 

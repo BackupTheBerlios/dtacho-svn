@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,5 +60,4 @@ public class CompanyActivityRecord extends DataClass {
 		node.addContent( downloadPeriodEnd.generateXMLElement("downloadPeriodEnd"));
 		return node;
 	}
-	
 }

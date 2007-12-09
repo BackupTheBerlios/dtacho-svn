@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,12 +23,13 @@ import org.jdom.Element;
 public class WorkshopCardHolderIdentification extends DataClass {
 	/*
 	 * WorkshopCardHolderIdentification ::= SEQUENCE {
-	 * 	workshopName Name, 36byte
-	 * 	workshopAddress Address, 36byte
-	 * 	cardHolderName HolderName, 72byte
-	 * 	cardHolderPreferredLanguage Language 2byte
+	 * 	workshopName Name, 36 bytes
+	 * 	workshopAddress Address, 36 bytes
+	 * 	cardHolderName HolderName, 72 bytes
+	 * 	cardHolderPreferredLanguage Language 2 bytes
 	 * }
 	 */
+
 	private Name workshopName;
 	private Address workshopAddress;
 	private HolderName cardHolderName;
@@ -83,5 +84,4 @@ public class WorkshopCardHolderIdentification extends DataClass {
 		node.addContent( cardHolderPreferredLanguage.generateXMLElement("cardHolderPreferredLanguage"));
 		return node;
 	}
-	
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,16 +22,16 @@ import org.jdom.Element;
 
 public class EF_ICC extends DataClass {
 	static final public int size = 25;
-	private CardICCIdentification cardICCIdentification;
+	private CardIccIdentification cardIccIdentification;
 	
 	public EF_ICC(byte[] value){
-		cardICCIdentification = new CardICCIdentification(value);
+		cardIccIdentification = new CardIccIdentification(value);
 	}
 	
 	public Element generateXMLElement(String name){
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element(this.getClass().getSimpleName());
-		Element child = cardICCIdentification.generateXMLElement("cardICCIdentification");
+		Element child = cardIccIdentification.generateXMLElement("cardIccIdentification");
 		node.addContent(child);
 		return node;
 	}

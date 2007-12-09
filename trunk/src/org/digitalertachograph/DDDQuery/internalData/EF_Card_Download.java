@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ public class EF_Card_Download extends DataClass {
 	private NoOfCalibrationsSinceDownload noOfCalibrationsSinceDownload;
 	
 	public EF_Card_Download(byte[] value, int cardType){
-		this.size = value.length;
+		size = value.length;
 		this.cardType = cardType; 
 
 		switch (cardType) {

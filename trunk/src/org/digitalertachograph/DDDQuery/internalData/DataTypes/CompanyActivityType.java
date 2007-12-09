@@ -49,6 +49,4 @@ public class CompanyActivityType extends DataClass {
 		node.addContent( new Element("companyActivityType").setText(Short.toString(companyActivityType)));
 		return node;
 	}
-
-	
 }

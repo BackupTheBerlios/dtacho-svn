@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import org.jdom.Element;
 public class CompanyActivityData extends DataClass {
 	/*
 	 * CompanyActivityData ::= SEQUENCE {
-	 * 	companyPointerNewestRecord INTEGER(0..NoOfCompanyActivityRecords-1), 2byte
+	 * 	companyPointerNewestRecord INTEGER(0..NoOfCompanyActivityRecords-1), 2 bytes
 	 * 	companyActivityRecords SET SIZE(NoOfCompanyActivityRecords) OF
 	 * 		companyActivityRecord SEQUENCE {
 	 * 				companyActivityType CompanyActivityType,
@@ -40,7 +40,7 @@ public class CompanyActivityData extends DataClass {
 	 */
 
 	private int companyPointerNewestRecord;
-	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector();
+	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>();
 	
 	public CompanyActivityData(byte[] value){
 		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
@@ -55,13 +55,12 @@ public class CompanyActivityData extends DataClass {
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		node.addContent( new Element("companyPointerNewestRecord").setText(Integer.toString(companyPointerNewestRecord)));
-		Iterator iter = companyActivityRecords.iterator();
+		Iterator<CompanyActivityRecord> iter = companyActivityRecords.iterator();
 		while (iter.hasNext()) {
 			CompanyActivityRecord car = (CompanyActivityRecord) iter.next();
 			node.addContent( car.generateXMLElement("companyActivityRecord"));
 		}
 		
 		return node;
-	
 	}
 }

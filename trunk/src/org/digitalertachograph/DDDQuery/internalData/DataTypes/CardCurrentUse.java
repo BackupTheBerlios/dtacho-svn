@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ import org.jdom.Element;
 public class CardCurrentUse extends DataClass{
 	/*
 	 * CardCurrentUse ::= SEQUENCE {
-	 * 	sessionOpenTime TimeReal, 4byte
-	 * 	sessionOpenVehicle VehicleRegistrationIdentification, 15byte
+	 * 	sessionOpenTime TimeReal, 4 bytes
+	 * 	sessionOpenVehicle VehicleRegistrationIdentification, 15 bytes
 	 * }
 	 */
 	private TimeReal sessionOpenTime;

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ import org.jdom.Element;
 public class VehicleIdentificationNumber extends DataClass {
 	/*
 	 * VehicleIdentificationNumber ::= IA5String(SIZE(17))
+	 * 
 	 * Value assignment: As defined in ISO 3779.
 	 */
 	
@@ -46,5 +47,4 @@ public class VehicleIdentificationNumber extends DataClass {
 		node.addContent( new Element("vehicleIdentificationNumber").setText( vehicleIdentificationNumber) );
 		return node;
 	}
-	
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,13 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class TyreSize extends DataClass {
+	/*
+	 * TyreSize ::= IA5String(SIZE(15))
+	 * 
+	 * Value assignment: in accordance with Directive 92/23 (EEC) 31.3.1992,
+	 * OJ L129, p. 95
+	 */
+	
 	private String tyreSize;
 	
 	public TyreSize(byte[] value){
@@ -39,5 +46,4 @@ public class TyreSize extends DataClass {
 	public Element generateXMLElement(String name) {
 		return new Element(name).addContent(new Element("tyreSize").setText(tyreSize));
 	}
-
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ import org.jdom.Element;
 public class CompanyCardHolderIdentification extends DataClass {
 	/*
 	 * CompanyCardHolderIdentification ::= SEQUENCE {
-	 * 	companyName Name, 36byte
-	 * 	companyAddress Address, 36byte
-	 * 	cardHolderPreferredLanguage Language 2byte
+	 * 	companyName Name, 36 bytes
+	 * 	companyAddress Address, 36 bytes
+	 * 	cardHolderPreferredLanguage Language, 2 bytes
 	 * }
 	 */
 	private Name companyName;

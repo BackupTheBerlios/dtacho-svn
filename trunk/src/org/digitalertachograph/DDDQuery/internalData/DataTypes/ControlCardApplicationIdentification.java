@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * 	noOfControlActivityRecords NoOfControlActivityRecords
 	 * }
 	 * --
-	 * CardStructureVersion ::= OCTET STRING (SIZE(2)) (seite 63)
+	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
 	 * --
 	 * NoOfControlActivityRecords ::= INTEGER(0..2^16-1)
 	 */
@@ -75,5 +75,4 @@ public class ControlCardApplicationIdentification extends DataClass {
 		node.addContent( new Element("noOfControlActivityRecords").setText( Integer.toString(noOfControlActivityRecords)));
 		return node;
 	}
-	
 }

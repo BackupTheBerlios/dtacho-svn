@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import org.jdom.Element;
 
 public class CardNumber extends DataClass {
 	
-	// Abhï¿½ngig von der cardType wird ne andere Choice getroffen!
+	// Abhängig vom Kartentyp (cardType) wird eine andere Wahl getroffen!
 	
 	/*
 	 * 	 * CardNumber ::= CHOICE {
@@ -48,8 +48,8 @@ public class CardNumber extends DataClass {
 	 * --
 	 * CardRenewalIndex ::= IA5String(SIZE(1)).
 	 * Value assignment: (see this Annex Chapter VII).
-	 * ï¿½0ï¿½ First issue.
-	 * Order for increase: ï¿½0..9, A..Zï¿½.
+	 * "0" First issue.
+	 * Order for increase: "0..9, A..Z".
 	 */
 	
 	// TODO versteh mich und schreib mich!!!!!!
@@ -135,27 +135,27 @@ public class CardNumber extends DataClass {
 		
 		if(c.isAnonymized()){
 			if(cardType == EquipmentType.DRIVER_CARD){
-				node.addContent(new Element("driverIdentification").setText("1anonymous0123"));
+				node.addContent( new Element("driverIdentification").setText("1anonymous0123"));
 				
-				node.addContent(new Element("cardReplacementIndex").setText("x"));
+				node.addContent( new Element("cardReplacementIndex").setText("x"));
 				node.addContent( new Element("cardRenewalIndex").setText("y"));
 			}else{
 				node.addContent( new Element("ownerIdentification").setText("1anonymous012"));
 
 				node.addContent( new Element("cardConsecutiveIndex").setText("y"));
-				node.addContent(new Element("cardReplacementIndex").setText("x"));
+				node.addContent( new Element("cardReplacementIndex").setText("x"));
 				node.addContent( new Element("cardRenewalIndex").setText("y"));
 			}
 		}else{
 		
 			if(cardType == EquipmentType.DRIVER_CARD){
-				node.addContent(new Element("driverIdentification").setText(driverIdentification));
-				node.addContent(new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
+				node.addContent( new Element("driverIdentification").setText(driverIdentification));
+				node.addContent( new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
 				node.addContent( new Element("cardRenewalIndex").setText(Character.toString(cardRenewalIndex)));
 			}else{
 				node.addContent( new Element("ownerIdentification").setText(ownerIdentification));
 				node.addContent( new Element("cardConsecutiveIndex").setText(Character.toString(cardConsecutiveIndex)));
-				node.addContent(new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
+				node.addContent( new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
 				node.addContent( new Element("cardRenewalIndex").setText(Character.toString(cardRenewalIndex)));
 			}
 		}

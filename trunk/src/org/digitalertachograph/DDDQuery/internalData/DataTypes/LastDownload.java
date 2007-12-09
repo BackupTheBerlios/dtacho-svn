@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,9 +15,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-	package org.digitalertachograph.DDDQuery.internalData.DataTypes;
+package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
-import org.digitalertachograph.DDDQuery.internalData.DataClass;
+//import org.digitalertachograph.DDDQuery.internalData.DataClass;
 
 public class LastDownload extends TimeReal {
 	public LastDownload(){

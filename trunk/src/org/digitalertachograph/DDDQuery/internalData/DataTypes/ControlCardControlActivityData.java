@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ public class ControlCardControlActivityData extends DataClass {
 	
 	/*
 	 * ControlCardControlActivityData ::= SEQUENCE {	
-	 * 	controlPointerNewestRecord INTEGER(0..NoOfControlActivityRecords-1), 2byte
+	 * 	controlPointerNewestRecord INTEGER(0..NoOfControlActivityRecords-1), 2 bytes
 	 * 	controlActivityRecords SET SIZE(NoOfControlActivityRecords) OF controlActivityRecord SEQUENCE {
 	 * 			controlType ControlType,
 	 * 			controlTime TimeReal,
@@ -35,12 +35,12 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 			controlledVehicleRegistration VehicleRegistrationIdentification,
 	 * 			controlDownloadPeriodBegin TimeReal,
 	 * 			controlDownloadPeriodEnd TimeReal
-	 * 	} // which is a CardControlActiviyDataRecord
+	 * 	} // which is a CardControlActivityDataRecord
 	 * }
 	 */
 	
 	private int controlPointerNewestRecord;
-	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector();
+	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>();
 
 	public ControlCardControlActivityData(byte[] value){
 		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
@@ -73,7 +73,7 @@ public class ControlCardControlActivityData extends DataClass {
 		Element node = new Element(name);
 		node.addContent( new Element("controlActivityRecords").setText( Integer.toString( controlPointerNewestRecord)));
 		
-		Iterator it = controlActivityRecords.iterator();
+		Iterator<CardControlActivityDataRecord> it = controlActivityRecords.iterator();
 		while (it.hasNext()) {
 			CardControlActivityDataRecord ccadr = (CardControlActivityDataRecord) it.next();
 			Element ccadrElement = ccadr.generateXMLElement("controlActivityRecord");

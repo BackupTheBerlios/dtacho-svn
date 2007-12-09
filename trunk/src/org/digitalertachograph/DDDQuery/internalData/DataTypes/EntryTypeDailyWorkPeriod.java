@@ -51,6 +51,4 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 		node.addContent( new Element("entryTypeDailyWorkPeriod").setText( Byte.toString( entryTypeDailyWorkPeriod)));
 		return node;
 	}
-
-	
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ import org.jdom.Element;
 public class SpecificConditionRecord extends DataClass {
 	/*
 	 * SpecificConditionRecord ::= SEQUENCE {
-	 * 	entryTime TimeReal, 4byte
-	 * 	 SpecificConditionType, 1byte
+	 * 	entryTime TimeReal, 4 bytes
+	 * 	SpecificConditionType, 1 byte
 	 * }
 	 */
 	private TimeReal entryTime;
@@ -58,5 +58,4 @@ public class SpecificConditionRecord extends DataClass {
 		node.addContent( specificConditionType.generateXMLElement("specificConditionType"));
 		return node;
 	}
-	
 }

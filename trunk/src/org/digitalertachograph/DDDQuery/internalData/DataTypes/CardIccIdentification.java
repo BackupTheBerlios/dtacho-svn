@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
-public class CardICCIdentification extends DataClass {
+public class CardIccIdentification extends DataClass {
 	/* name, 						size, default,	comment
 	 * clockStop,					1,	0x00		OCTET STRING (SIZE(1)),
 	 * cardExtendedSerialNumber,	8,	0x00..0x00	ExtendedSerialNumber
@@ -30,45 +30,45 @@ public class CardICCIdentification extends DataClass {
 	 * icIdentifier					2,	0x00..0x00	OCTET STRING (SIZE(2))
 	 * 
 	 * ---
-	 * CardApprovalNumber ::= IA5String(SIZE(8)) (seite 57)
+	 * CardApprovalNumber ::= IA5String(SIZE(8))
 	 * ---
 	 * ExtendedSerialNumber ::= SEQUENCE {
 	 * 		serialNumber INTEGER(0..2^32-1) <- 4 byte
 	 * 		monthYear BCDString(SIZE(2))
 	 * 		type OCTET STRING(SIZE(1))
 	 * 		manufacturerCode ManufacturerCode <- 1byte
-	 * } (seite 72)
+	 * }
 	 * ---
-	 * ManufacturerCode ::= INTEGER(0..255) (seite 74)
+	 * ManufacturerCode ::= INTEGER(0..255)
 	 */
 	
 	private byte clockStop;
-	private ExtendedSerialNumber cardExtendedSearialNumber;
+	private ExtendedSerialNumber cardExtendedSerialNumber;
 	private String cardApprovalNumber;
 	private byte[] cardPersonaliserID;
-	private byte[] embedderIcAssemberID;
-	private byte[] icIdentfier;
+	private byte[] embedderIcAssemblerID;
+	private byte[] icIdentifier;
 
-	public CardICCIdentification(byte[] value){
+	public CardIccIdentification(byte[] value){
 		clockStop = value[0];
-		cardExtendedSearialNumber = new ExtendedSerialNumber( arrayCopy(value, 1, 8));
+		cardExtendedSerialNumber = new ExtendedSerialNumber( arrayCopy(value, 1, 8));
 		cardApprovalNumber = new String(arrayCopy(value, 9, 8));
 		cardPersonaliserID = arrayCopy(value, 17, 1);
-		embedderIcAssemberID = arrayCopy(value, 18, 5);
-		icIdentfier = arrayCopy(value,23, 2);
+		embedderIcAssemblerID = arrayCopy(value, 18, 5);
+		icIdentifier = arrayCopy(value,23, 2);
 	}
 	
 	public String getCardApprovalNumber() {
 		return cardApprovalNumber;
 	}
 
-	public ExtendedSerialNumber getCardExtendedSearialNumber() {
-		return cardExtendedSearialNumber;
+	public ExtendedSerialNumber getCardExtendedSerialNumber() {
+		return cardExtendedSerialNumber;
 	}
 
-	public void setCardExtendedSearialNumber(
-			ExtendedSerialNumber cardExtendedSearialNumber) {
-		this.cardExtendedSearialNumber = cardExtendedSearialNumber;
+	public void setCardExtendedSerialNumber(
+			ExtendedSerialNumber cardExtendedSerialNumber) {
+		this.cardExtendedSerialNumber = cardExtendedSerialNumber;
 	}
 
 	public byte[] getCardPersonaliserID() {
@@ -87,20 +87,20 @@ public class CardICCIdentification extends DataClass {
 		this.clockStop = clockStop;
 	}
 
-	public byte[] getEmbedderIcAssemberID() {
-		return embedderIcAssemberID;
+	public byte[] getEmbedderIcAssemblerID() {
+		return embedderIcAssemblerID;
 	}
 
-	public void setEmbedderIcAssemberID(byte[] embedderIcAssemberID) {
-		this.embedderIcAssemberID = embedderIcAssemberID;
+	public void setEmbedderIcAssemblerID(byte[] embedderIcAssemblerID) {
+		this.embedderIcAssemblerID = embedderIcAssemblerID;
 	}
 
-	public byte[] getIcIdentfier() {
-		return icIdentfier;
+	public byte[] getIcIdentifier() {
+		return icIdentifier;
 	}
 
-	public void setIcIdentfier(byte[] icIdentfier) {
-		this.icIdentfier = icIdentfier;
+	public void setIcIdentifier(byte[] icIdentifier) {
+		this.icIdentifier = icIdentifier;
 	}
 
 	public void setCardApprovalNumber(String cardApprovalNumber) {
@@ -111,12 +111,11 @@ public class CardICCIdentification extends DataClass {
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		node.addContent( new Element("clockStop").setText( Byte.toString(clockStop) ));
-		node.addContent( cardExtendedSearialNumber.generateXMLElement("cardExtendedSerialNumber"));
+		node.addContent( cardExtendedSerialNumber.generateXMLElement("cardExtendedSerialNumber"));
 		node.addContent( new Element("cardApprovalNumber").setText(cardApprovalNumber));
 		node.addContent( new Element("cardPersonaliserID").setText( convertIntoHexString(cardPersonaliserID)));
-		node.addContent( new Element("embedderIcAssemberID").setText( convertIntoHexString(embedderIcAssemberID)));
-		node.addContent( new Element("icIdentfier").setText( convertIntoHexString(icIdentfier)));
+		node.addContent( new Element("embedderIcAssemblerID").setText( convertIntoHexString(embedderIcAssemblerID)));
+		node.addContent( new Element("icIdentifier").setText( convertIntoHexString(icIdentifier)));
 		return node;
 	}
-	
 }

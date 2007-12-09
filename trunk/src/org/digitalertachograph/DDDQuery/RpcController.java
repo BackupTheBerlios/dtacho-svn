@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
 
 package org.digitalertachograph.DDDQuery;
 
-import org.apache.xmlrpc.server.PropertyHandlerMapping;
-import org.apache.xmlrpc.server.XmlRpcServer;
-import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
-import org.apache.xmlrpc.webserver.WebServer;
-import org.digitalertachograph.DDDQuery.internalData.TachographData;
+//import org.apache.xmlrpc.server.PropertyHandlerMapping;
+//import org.apache.xmlrpc.server.XmlRpcServer;
+//import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
+//import org.apache.xmlrpc.webserver.WebServer;
+//import org.digitalertachograph.DDDQuery.internalData.TachographData;
 
 public class RpcController {
 

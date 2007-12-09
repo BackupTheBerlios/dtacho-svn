@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class VuPartNumber extends DataClass {
+	/*
+	 * VuPartNumber ::= IA5String((SIZE(16))
+	 */
+	
 	private String vuPartNumber;
 	
 	public VuPartNumber(byte[]value){
@@ -41,5 +45,4 @@ public class VuPartNumber extends DataClass {
 		node.addContent(new Element("vuPartNumber").setText(vuPartNumber));
 		return node;
 	}
-
 }

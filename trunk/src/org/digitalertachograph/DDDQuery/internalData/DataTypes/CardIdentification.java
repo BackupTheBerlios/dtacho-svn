@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,13 +22,13 @@ import org.jdom.Element;
 
 public class CardIdentification extends DataClass {
 	/*
-	 * CardIdentification ::= SEQUENCE{
-	 * 	cardIssuingMemberState NationNumeric, 1byte
-	 * 	cardNumber CardNumber, 16byte
-	 * 	cardIssuingAuthorityName Name, 36byte
-	 * 	cardIssueDate TimeReal, 4byte
-	 * 	cardValidityBegin TimeReal, 4byte
-	 * 	cardExpiryDate TimeReal, 4byte
+	 * CardIdentification ::= SEQUENCE {
+	 * 	cardIssuingMemberState NationNumeric, 1 byte
+	 * 	cardNumber CardNumber, 16 bytes
+	 * 	cardIssuingAuthorityName Name, 36 bytes
+	 * 	cardIssueDate TimeReal, 4 bytes
+	 * 	cardValidityBegin TimeReal, 4 bytes
+	 * 	cardExpiryDate TimeReal, 4 bytes
 	 * }
 
 	 */

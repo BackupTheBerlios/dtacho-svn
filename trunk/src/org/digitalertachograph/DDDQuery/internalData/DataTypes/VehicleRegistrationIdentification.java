@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,8 +23,8 @@ import org.jdom.Element;
 public class VehicleRegistrationIdentification extends DataClass {
 	/*
 	 * VehicleRegistrationIdentification ::= SEQUENCE {
-	 * 	vehicleRegistrationNation NationNumeric, 1byte
-	 * 	vehicleRegistrationNumber VehicleRegistrationNumber, 14byte
+	 * 	vehicleRegistrationNation NationNumeric, 1 byte
+	 * 	vehicleRegistrationNumber VehicleRegistrationNumber, 14 bytes
 	 * }
 	 */
 

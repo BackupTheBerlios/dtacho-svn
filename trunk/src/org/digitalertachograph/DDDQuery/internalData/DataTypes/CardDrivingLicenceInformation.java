@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,9 @@ import org.jdom.Element;
 public class CardDrivingLicenceInformation extends DataClass {
 	/*
 	 * CardDrivingLicenceInformation ::= SEQUENCE {
-	 * 	drivingLicenceIssuingAuthority Name, 36 
-	 * 	drivingLicenceIssuingNation NationNumeric, 1 
-	 * 	drivingLicenceNumber IA5String(SIZE(16)), 16
+	 * 	drivingLicenceIssuingAuthority Name, 36 bytes
+	 * 	drivingLicenceIssuingNation NationNumeric, 1 byte 
+	 * 	drivingLicenceNumber IA5String(SIZE(16)), 16 bytes
 	 * }
 	 */
 	

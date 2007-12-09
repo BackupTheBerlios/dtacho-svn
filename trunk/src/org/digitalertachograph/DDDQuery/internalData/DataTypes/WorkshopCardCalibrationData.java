@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,14 +26,15 @@ import java.util.Iterator;
 public class WorkshopCardCalibrationData extends DataClass {
 	/*
 	 * WorkshopCardCalibrationData ::= SEQUENCE {
-	 * 	calibrationTotalNumber INTEGER(0..2^16-1), 2byte
-	 * 	calibrationPointerNewestRecord INTEGER(0..NoOfCalibrationRecords-1), 1byte
+	 * 	calibrationTotalNumber INTEGER(0..2^16-1), 2 bytes
+	 * 	calibrationPointerNewestRecord INTEGER(0..NoOfCalibrationRecords-1), 1 bytes
 	 * 	calibrationRecords SET SIZE(NoOfCalibrationRecords) OF WorkshopCardCalibrationRecord 
 	 * } 
 	 */
+
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
-	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector();
+	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>();
 	
 	public WorkshopCardCalibrationData(byte[] value){
 		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
@@ -82,7 +83,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 		node.addContent( ctnNode );
 		node.addContent( cpnrNode );
 		
-		Iterator it = calibrationRecords.iterator();
+		Iterator<WorkshopCardCalibrationRecord> it = calibrationRecords.iterator();
 		while(it.hasNext()){
 			WorkshopCardCalibrationRecord wccr = (WorkshopCardCalibrationRecord) it.next();
 			Element wccrNode = wccr.generateXMLElement("WorkshopCardCalibrationRecord");
@@ -91,6 +92,4 @@ public class WorkshopCardCalibrationData extends DataClass {
 		
 		return node;
 	}
-	
-
 }

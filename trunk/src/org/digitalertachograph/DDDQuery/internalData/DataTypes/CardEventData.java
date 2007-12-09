@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,14 +23,14 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class CardEventData extends DataClass{
-	
 	/*
 	 * CardEventData ::= SEQUENCE SIZE(6) OF {
 	 * 	cardEventRecords SET SIZE(NoOfEventsPerType) OF CardEventRecord
 	 * }
 	 */
 
-	private Vector<CardEventRecord>[] cardEventRecords = new Vector[6]; // 6 stï¿½ck.
+	private Vector<CardEventRecord> cardEventRecords[] = new Vector[6]; // 6 Stück.
+
 	public CardEventData(byte[] value){
 		for (int i = 0; i < cardEventRecords.length; i++)
 			cardEventRecords[i] = new Vector<CardEventRecord>();
@@ -39,18 +39,15 @@ public class CardEventData extends DataClass{
 			byte[] record = arrayCopy(value, i, 24);
 			CardEventRecord tmp = new CardEventRecord(record);
 			// TODO bin mir nicht sicher, ob das wirklich so ist.
-			
 			cardEventRecords[ tmp.getEventType().getCategory() ].add(tmp);
 		}
-		
-		
 	}
 	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		for (int i = 0; i < cardEventRecords.length; i++) {
-			Iterator it = cardEventRecords[i].iterator();
+			Iterator<CardEventRecord> it = cardEventRecords[i].iterator();
 			while(it.hasNext()){
 				CardEventRecord ced = (CardEventRecord) it.next();
 				Element cedElement = ced.generateXMLElement("CardEventRecord");
@@ -60,5 +57,4 @@ public class CardEventData extends DataClass{
 		
 		return node;
 	}
-
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,12 +23,12 @@ import org.jdom.Element;
 public class CardControlActivityDataRecord extends DataClass {
 	/*
 	 * CardControlActivityDataRecord ::= SEQUENCE {
-	 * 	controlType ControlType, 1byte
-	 * 	controlTime TimeReal, 4byte;
-	 * 	controlCardNumber FullCardNumber, 18byte;
-	 * 	controlVehicleRegistration VehicleRegistrationIdentification, 15byte,
-	 * 	controlDownloadPeriodBegin TimeReal, 4byte
-	 * 	controlDownloadPeriodEnd TimeReal, 4byte
+	 * 	controlType ControlType, 1 byte
+	 * 	controlTime TimeReal, 4 bytes
+	 * 	controlCardNumber FullCardNumber, 18 bytes
+	 * 	controlVehicleRegistration VehicleRegistrationIdentification, 15 bytes
+	 * 	controlDownloadPeriodBegin TimeReal, 4 bytes
+	 * 	controlDownloadPeriodEnd TimeReal, 4 bytes
 	 * }
 	 */
 

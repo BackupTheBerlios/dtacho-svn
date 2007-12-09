@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,11 +20,11 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
-public class EF_CA_Cerfiticate extends DataClass {
+public class EF_CA_Certificate extends DataClass {
 	public static final int size = 194;
 	private MemberStateCertificate cardCertificate;
 	
-	public EF_CA_Cerfiticate(byte [] value){
+	public EF_CA_Certificate(byte [] value){
 		cardCertificate = new MemberStateCertificate();
 		cardCertificate.setCertificate(value);
 	}
@@ -36,6 +36,4 @@ public class EF_CA_Cerfiticate extends DataClass {
 		node.addContent(child);
 		return node;
 	}
-	
-
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,31 +23,32 @@ import org.jdom.Element;
 public class SpecificConditionType extends DataClass {
 	/*
 	 * SpecificConditionType ::= INTEGER(0..255)
+	 * 
 	 * Value assignment:
-	 * "00"H RFU
-	 * "01"H Out of scope - Begin
-	 * "02"H Out of scope - End
-	 * "03"H Ferry/Train crossing
-	 * "04"H .. �FF�H RFU.
+	 * '00'H RFU
+	 * '01'H Out of scope - Begin
+	 * '02'H Out of scope - End
+	 * '03'H Ferry/Train crossing
+	 * '04'H .. 'FF'H RFU.
 	 */
-	private byte specificContitionType;
+	private byte specificConditionType;
 
-	public SpecificConditionType(byte specificContitionType) {
-		this.specificContitionType = specificContitionType;
+	public SpecificConditionType(byte specificConditionType) {
+		this.specificConditionType = specificConditionType;
 	}
 
-	public byte getSpecificContitionType() {
-		return specificContitionType;
+	public byte getSpecificConditionType() {
+		return specificConditionType;
 	}
 
-	public void setSpecificContitionType(byte specificContitionType) {
-		this.specificContitionType = specificContitionType;
+	public void setSpecificConditionType(byte specificConditionType) {
+		this.specificConditionType = specificConditionType;
 	}
 	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent( new Element("specificContitionType").setText( Byte.toString( specificContitionType )));
+		node.addContent( new Element("specificConditionType").setText( Byte.toString( specificConditionType )));
 		return node;
 	}
 	

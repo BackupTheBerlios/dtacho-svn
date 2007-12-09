@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,33 +24,37 @@ public class RegionNumeric extends DataClass {
 	/*
 	 * RegionNumeric ::= OCTET STRING (SIZE(1))
 	 * 		Value assignment:
-	 * 		ï¿½00ï¿½H No information available
+	 * 		'00'H No information available
 	 * 		Spain:
-	 * 		ï¿½01ï¿½H Andalucï¿½a
-	 * 		ï¿½02ï¿½H Aragï¿½n
-	 * 		ï¿½03ï¿½H Asturias
-	 * 		ï¿½04ï¿½H Cantabria
-	 * 		ï¿½05ï¿½H Cataluï¿½a
-	 * 		ï¿½06ï¿½H Castilla-Leï¿½n
-	 * 		ï¿½07ï¿½H Castilla-La-Mancha#
-	 * 		ï¿½08ï¿½H Valencia
-	 * 		ï¿½09ï¿½H Extremadura
-	 * 		ï¿½0Aï¿½H Galicia
-	 * 		ï¿½0Bï¿½H Baleares
-	 * 		ï¿½0Cï¿½H Canarias
-	 *		ï¿½0Dï¿½H La Rioja
-	 *		ï¿½0Eï¿½H Madrid
-	 *		ï¿½0Fï¿½H Murcia
-	 *		ï¿½10ï¿½H Navarra
-	 *		ï¿½11ï¿½H Paï¿½s Vasco.
+	 * 		'01'H Andalucía
+	 * 		'02'H Aragón
+	 * 		'03'H Asturias
+	 * 		'04'H Cantabria
+	 * 		'05'H Cataluña
+	 * 		'06'H Castilla-León
+	 * 		'07'H Castilla-La-Mancha
+	 * 		'08'H Valencia
+	 * 		'09'H Extremadura
+	 * 		'0A'H Galicia
+	 * 		'0B'H Baleares
+	 * 		'0C'H Canarias
+	 *		'0D'H La Rioja
+	 *		'0E'H Madrid
+	 *		'0F'H Murcia
+	 *		'10'H Navarra
+	 *		'11'H País Vasco.
 	 */
+
 	private byte regionNumeric;
+
 	public RegionNumeric(byte regionNumeric){
 		this.regionNumeric = regionNumeric;
 	}
+
 	public byte getRegionNumeric() {
 		return regionNumeric;
 	}
+
 	public void setRegionNumeric(byte regionNumeric) {
 		this.regionNumeric = regionNumeric;
 	}
@@ -61,6 +65,4 @@ public class RegionNumeric extends DataClass {
 		node.addContent( new Element("regionNumeric").setText( Byte.toString( regionNumeric )));
 		return node;
 	}
-	
-
 }

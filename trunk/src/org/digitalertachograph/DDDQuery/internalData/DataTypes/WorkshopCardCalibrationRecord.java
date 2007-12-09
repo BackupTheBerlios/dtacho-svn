@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,28 +20,28 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
 
-import sun.jdbc.odbc.OdbcDef;
+//import sun.jdbc.odbc.OdbcDef;
 
 
 public class WorkshopCardCalibrationRecord extends DataClass {
 	/*
 	 * WorkshopCardCalibrationRecord ::= SEQUENCE {
-	 * 	calibrationPurpose CalibrationPurpose, 1byte
-	 * 	vehicleIdentificationNumber VehicleIdentificationNumber, 17
-	 * 	vehicleRegistration VehicleRegistrationIdentification, 15
-	 * 	wVehicleCharacteristicConstant W-VehicleCharacteristicConstant, 2byte
-	 * 	kConstantOfRecordingEquipment K-ConstantOfRecordingEquipment, 2byte
-	 * 	lTyreCircumference L-TyreCircumference, 2byte
-	 * 	tyreSize TyreSize, 15
-	 * 	authorisedSpeed SpeedAuthorised, 1
-	 * 	oldOdometerValue OdometerShort, 3
-	 * 	newOdometerValue OdometerShort, 3
-	 * 	oldTimeValue TimeReal, 4
-	 * 	newTimeValue TimeReal, 4
-	 * 	nextCalibrationDate TimeReal, 4
-	 * 	vuPartNumber VuPartNumber, 16
-	 * 	vuSerialNumber VuSerialNumber, 8
-	 * 	sensorSerialNumber SensorSerialNumber 8
+	 * 	calibrationPurpose CalibrationPurpose, 1 byte
+	 * 	vehicleIdentificationNumber VehicleIdentificationNumber, 17 bytes
+	 * 	vehicleRegistration VehicleRegistrationIdentification, 15 bytes
+	 * 	wVehicleCharacteristicConstant W-VehicleCharacteristicConstant, 2 bytes
+	 * 	kConstantOfRecordingEquipment K-ConstantOfRecordingEquipment, 2 bytes
+	 * 	lTyreCircumference L-TyreCircumference, 2 bytes
+	 * 	tyreSize TyreSize, 15 bytes
+	 * 	authorisedSpeed SpeedAuthorised, 1 byte
+	 * 	oldOdometerValue OdometerShort, 3 bytes
+	 * 	newOdometerValue OdometerShort, 3 bytes
+	 * 	oldTimeValue TimeReal, 4 bytes
+	 * 	newTimeValue TimeReal, 4 bytes
+	 * 	nextCalibrationDate TimeReal, 4 bytes
+	 * 	vuPartNumber VuPartNumber, 16 bytes
+	 * 	vuSerialNumber VuSerialNumber, 8 bytes
+	 * 	sensorSerialNumber SensorSerialNumber, 8 bytes
 	 * }
 	 * ---
 	 * VuSerialNumber ::= ExtendedSerialNumber

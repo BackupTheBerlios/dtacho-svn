@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,10 @@ package org.digitalertachograph.DDDQuery;
 import java.io.File;
 import java.io.FileInputStream;
 
-import org.digitalertachograph.DDDQuery.internalData.DataClass;
+//import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.digitalertachograph.DDDQuery.internalData.TachographData;
 
-import sun.io.Converters;
+//import sun.io.Converters;
 
 public class DDDDataSource implements DataSource {
 	

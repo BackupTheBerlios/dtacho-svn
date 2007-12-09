@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,11 +25,11 @@ public class CalibrationPurpose extends DataClass {
 	 * CalibrationPurpose ::= OCTET STRING (SIZE(1)).
 	 * 
 	 * Value assignment:
-	 * �00�H reserved value,
-	 * �01�H activation: recording of calibration parameters known, at the moment of the VU activation,	
-	 * �02�H first installation: first calibration of the VU after its activation,
-	 * �03�H installation: first calibration of the VU in the current vehicle,
-	 * �04�H periodic inspection.
+	 * "00"H reserved value,
+	 * "01"H activation: recording of calibration parameters known, at the moment of the VU activation,	
+	 * "02"H first installation: first calibration of the VU after its activation,
+	 * "03"H installation: first calibration of the VU in the current vehicle,
+	 * "04"H periodic inspection.
 	 * TODO konstanten?
 	 */
 	private byte calibrationPurpose;

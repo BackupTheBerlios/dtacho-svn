@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 package org.digitalertachograph.DDDQuery.internalData;
 
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardControlActivityDataRecord;
-import org.digitalertachograph.DDDQuery.internalData.DataTypes.ControlCardControlActivityData;
+//import org.digitalertachograph.DDDQuery.internalData.DataTypes.ControlCardControlActivityData;
 import org.jdom.Element;
 
 public class EF_Control_Activity_Data extends DataClass {

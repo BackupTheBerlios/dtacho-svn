@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,11 +23,10 @@ import org.jdom.Element;
 public class DriverCardHolderIdentification extends DataClass {
 	/*
 	 * DriverCardHolderIdentification ::= SEQUENCE {
-	 * 	cardHolderName HolderName, 72byte
-	 * 	cardHolderBirthDate Datef, 4byte
-	 * 	cardHolderPreferredLanguage Language, 2byte
+	 * 	cardHolderName HolderName, 72 bytes
+	 * 	cardHolderBirthDate Datef, 4 bytes
+	 * 	cardHolderPreferredLanguage Language, 2 bytes
 	 * }
-
 	 */
 
 	
@@ -68,5 +67,4 @@ public class DriverCardHolderIdentification extends DataClass {
 		node.addContent( cardHolderPreferredLanguage.generateXMLElement("cardHolderPreferredLanguage"));
 		return node;
 	}
-	
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 */
 
 package org.digitalertachograph.DDDQuery.internalData;
+
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
@@ -47,7 +48,6 @@ public class EF_Application_Identification extends DataClass {
 			default :
 				break;
 		}
-
 	}
 
 
@@ -85,6 +85,5 @@ public class EF_Application_Identification extends DataClass {
 		
 		node.addContent(child);
 		return node;
-
-}
+		}
 	}

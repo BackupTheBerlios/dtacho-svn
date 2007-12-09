@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ public class CardActivityDailyRecord extends DataClass {
 	public CardActivityDailyRecord(byte[] value) {
 
 		// if we get so less bytes we just a part of an old CardAcitivityDailyRecord.
-		if(value.length <= 12)
+		if (value.length <= 12)
 			return;
 		
 		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2));
@@ -62,12 +62,12 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityRecordDate = new TimeReal(arrayCopy(value, 4, 4));
 		this.activityDailyPresenceCounter = new String(convertIntoBCDString( arrayCopy(value, 8, 2)));
 		this.activityDayDistance = convertIntoUnsigned2ByteInt(arrayCopy(value, 10, 2));
-		this.activityChangeInfo = new Vector();
+		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 		
-		// TODO wie haben wir length in den anderen klassen genannt?!?
-		int length = 12; // we have 12byte so far
+		// TODO wie haben wir length in den anderen Klassen genannt?!?
+		int length = 12; // we have 12 bytes so far
 		for(;length < activityRecordLength; length += 2){
-			// ActivityChangeInfo <- 2byte groÃŸ
+			// ActivityChangeInfo <- 2 bytes groß
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy(value, length, 2) );
 			activityChangeInfo.add( aci );
 		}
@@ -104,13 +104,11 @@ public class CardActivityDailyRecord extends DataClass {
 				)
 		);
 
-		Iterator it = activityChangeInfo.iterator();
+		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();
 		Element activityChangeInfoElement = new Element("activityChangeInfo");
 		while (it.hasNext()) {
 			ActivityChangeInfo aci = (ActivityChangeInfo) it.next();
 			activityChangeInfoElement.addContent( aci.generateXMLElement("activityChangeInfo"));
-			
-			
 		}
 		node.addContent( activityChangeInfoElement );
 
@@ -126,5 +124,4 @@ public class CardActivityDailyRecord extends DataClass {
 	public int getSize(){
 		return size;
 	}
-
 }

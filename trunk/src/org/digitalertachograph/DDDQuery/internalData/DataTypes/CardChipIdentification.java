@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,10 +22,13 @@ import org.jdom.Element;
 
 public class CardChipIdentification extends DataClass {
 
-	/**
-	 * icSerialNumber 				0x00..0x00	OCTET STRING (SIZE(4)),
-	 * icManufacturingReferences 	0x00..0x00	OCTET STRING (SIZE(4))
+	/*
+	 * CardChipIdentification ::= SEQUENCE {
+	 *  icSerialNumber				0x00..0x00	OCTET STRING (SIZE(4)),
+	 *  icManufacturingReferences	0x00..0x00	OCTET STRING (SIZE(4))
+	 * }
 	 */
+
 	private byte[] icSerialNumber;
 	private byte[] icManufacturingReferences;
 	

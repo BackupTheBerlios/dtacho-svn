@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 */
 
 package org.digitalertachograph.DDDQuery.internalData;
+
 import java.io.FileOutputStream;
 import java.util.Vector;
 import java.util.Arrays;
@@ -29,7 +30,7 @@ public class TachographData extends DataClass {
 	private EF_IC ef_ic;
 	private EF_Application_Identification ef_application_identification;
 	private EF_Card_Certificate ef_card_certificate;
-	private EF_CA_Cerfiticate ef_ca_certificate;
+	private EF_CA_Certificate ef_ca_certificate;
 	private EF_Identification ef_identification;
 	private EF_Card_Download ef_card_download;
 	private EF_Driving_Licence_Info ef_driving_licence_info;
@@ -46,9 +47,9 @@ public class TachographData extends DataClass {
 	private EF_Controller_Activity_Data ef_controller_activity_data;
 	
 	
-	public Vector data = new Vector(); // deprecated
+	public Vector<Object> data = new Vector<Object>(); // deprecated
 	private int cardType;
-	private Vector<DataClass> dispatcherQueue = new Vector();
+	private Vector<DataClass> dispatcherQueue = new Vector<DataClass>();
 		
 	public void add(byte[] tag, byte[] length, byte[] value){
 		Object[] tmp = {tag, value};
@@ -72,14 +73,14 @@ public class TachographData extends DataClass {
 			dispatcherQueue.add(ef_card_certificate);
 		}
 		else if(Arrays.equals(tag, new byte[]{ (byte)0xC1, 0x08, 0x00} )){
-			ef_ca_certificate = new EF_CA_Cerfiticate(value);
+			ef_ca_certificate = new EF_CA_Certificate(value);
 			dispatcherQueue.add(ef_ca_certificate);
 		}
 		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x20, 0x00} )){
 			ef_identification = new EF_Identification(value, cardType);
 			dispatcherQueue.add(ef_identification);
 		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0E, 0x00} )){
+		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0e, 0x00} )){
 			ef_card_download = new EF_Card_Download(value, cardType);
 			dispatcherQueue.add(ef_card_download);
 		}
@@ -129,13 +130,13 @@ public class TachographData extends DataClass {
 		}
 		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0c, 0x00} )){
 			ef_controller_activity_data = new EF_Controller_Activity_Data(value);
-			dispatcherQueue.add(ef_control_activity_data);
+			dispatcherQueue.add(ef_controller_activity_data);
 		}else{
 			if(tag[2] != 0x01){
 				System.out.print("\nPANIC PANIC PANIC:" );
-				System.out.print( " " + Integer.toHexString( (int)(tag[0] & 0xFF)  ));
-				System.out.print( " " + Integer.toHexString( (int)(tag[1] & 0xFF)  ));
-				System.out.print( " " + Integer.toHexString( (int)(tag[2] & 0xFF)  ));
+				System.out.print( " " + Integer.toHexString( (int)(tag[0] & 0xff) ));
+				System.out.print( " " + Integer.toHexString( (int)(tag[1] & 0xff) ));
+				System.out.println( " " + Integer.toHexString( (int)(tag[2] & 0xff) ));
 			}
 		}
 	}
@@ -147,46 +148,49 @@ public class TachographData extends DataClass {
 
 
 	public void printT(){
-		Iterator it = data.iterator();
+		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
 			Object [] tmp = (Object[]) it.next();
 			System.out.print("\ntag: ");
 			for(int i = 0; i < ((byte[]) tmp[0]).length; i++)
-				System.out.print(" " +  Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xFF ));
+				System.out.print(" " + Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xff ));
 		}
 	}
 	
 	public void printTL(){
-		Iterator it = data.iterator();
+		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
 			Object [] tmp = (Object[]) it.next();
 			System.out.print("\ntag: ");
 			for(int i = 0; i < ((byte[]) tmp[0]).length; i++)
-				System.out.print(" " +  Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xFF ));	
+				// System.out.print(" " + Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xff ));
+				System.out.printf(" %02x", (int)(((byte[]) tmp[0])[i] & 0xff));		
+
 			System.out.print("\t - length: " + ( (byte[]) tmp[1]).length );
 		}
 	}
 	
 	public void printTV(){
-		Iterator it = data.iterator();
+		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
 			Object [] tmp = (Object[]) it.next();
 
 			// TAG
 			System.out.print("\n\ntag : ");
 			for(int i = 0; i < ((byte[]) tmp[0]).length; i++)
-				System.out.print(" " +  Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xFF ));		
+				//System.out.print(" " + Integer.toHexString( (int)((byte[]) tmp[0])[i] & 0xff ));		
+				System.out.printf(" %02x", (int)(((byte[]) tmp[0])[i] & 0xff));		
+
 			// VALUE
-	
 			System.out.print("\nvalue :\n");
 			for(int i = 0; i < ((byte[]) tmp[1]).length; i++){
 				// (value[i]<0?256 + value[i]:value[i])
-				System.out.print(" " +  Integer.toHexString((int) ((byte[]) tmp[1])[i] & 0xFF) );
+				System.out.print(" " + Integer.toHexString((int) ((byte[]) tmp[1])[i] & 0xff) );
 			}
 			System.out.println();
 			for(int i = 0; i < ((byte[]) tmp[1]).length; i++){
-				char c = (char) ( (int)((byte[]) tmp[1])[i] & 0xFF );
-				System.out.print( " " +  c);
+				char c = (char) ( (int)((byte[]) tmp[1])[i] & 0xff );
+				System.out.print( " " + c );
 			}
 			System.out.println();
 		}
@@ -194,7 +198,7 @@ public class TachographData extends DataClass {
 	
 	public Element generateXMLElement(String name){
 		Element root = new Element(name);
-		Iterator dispaterIterator = dispatcherQueue.iterator();
+		Iterator<DataClass> dispaterIterator = dispatcherQueue.iterator();
 		while(dispaterIterator.hasNext()){
 			DataClass dc = (DataClass) dispaterIterator.next();
 			Element node = dc.generateXMLElement(dc.getClass().getSimpleName());
@@ -229,6 +233,4 @@ public class TachographData extends DataClass {
 			e.printStackTrace();
 		}
 	}
-
-
 };

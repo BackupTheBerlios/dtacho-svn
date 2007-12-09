@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.text.DateFormat;
-import java.util.Date;
+//import java.util.Date;
 import java.util.TimeZone;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
@@ -31,7 +31,7 @@ public class TimeReal extends DataClass{
 	 * 
 	 * TimeReal{INTEGER:TimeRealRange} ::= INTEGER(0..TimeRealRange)
 	 * 
-	 * TimeRealRange ::= 2^^32-1 (seite 96)
+	 * TimeRealRange ::= 2^32-1
 	 */
 	
 	private long timereal = 0;
@@ -48,7 +48,7 @@ public class TimeReal extends DataClass{
 		this.timereal = i;
 		if(i != 0){
 		System.out.print(i + " - ");
-		Date d = new Date(i * 1000);
+		//Date d = new Date(i * 1000);
 		DateFormat format = DateFormat.getInstance();
 		format.setTimeZone( TimeZone.getTimeZone("GMT") );
 		//Thread.dumpStack();
@@ -67,5 +67,4 @@ public class TimeReal extends DataClass{
 	public Element generateXMLElement(String name) {
 		return new Element(name).setText(Long.toString(timereal));
 	}
-	
 }

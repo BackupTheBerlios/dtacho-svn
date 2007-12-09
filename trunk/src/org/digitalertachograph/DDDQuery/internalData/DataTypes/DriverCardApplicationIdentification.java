@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,13 +21,15 @@ import org.jdom.Element;
 
 public 	class DriverCardApplicationIdentification extends DataClass{
 	/*
-	 * typeOfTachographCardId EquipmentType, 		1,		0x00
-	 * cardStructureVersion CardStructureVersion, 	2,		0x0000
-	 * noOfEventsPerType NoOfEventsPerType,			1,		0x00
-	 * noOfFaultsPerType NoOfFaultsPerType,			1,		0x00
-	 * activityStructureLength CardActivityLengthRange, 2,	0x0000 
-	 * noOfCardVehicleRecords NoOfCardVehicleRecords, 2,	0x0000
-	 * noOfCardPlaceRecords NoOfCardPlaceRecords,	1,		0x00
+	 * DriverCardApplicationIdentification ::= SEQUENCE {
+	 *  typeOfTachographCardId EquipmentType, 				1,	0x00
+	 *  cardStructureVersion CardStructureVersion, 			2,	0x0000
+	 *  noOfEventsPerType NoOfEventsPerType,				1,	0x00
+	 *  noOfFaultsPerType NoOfFaultsPerType,				1,	0x00
+	 *  activityStructureLength CardActivityLengthRange,	2,	0x0000 
+	 *  noOfCardVehicleRecords NoOfCardVehicleRecords,		2,	0x0000
+	 *  noOfCardPlaceRecords NoOfCardPlaceRecords,			1,	0x00
+	 * }
 	 * ---
 	 * CardStructureVersion ::= OCTET STRING (SIZE(2)) (seite 63)
 	 * ---

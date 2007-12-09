@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -77,10 +77,10 @@ public class VehicleRegistrationNumber extends DataClass {
 
 		Element node = new Element(name);
 		node.addContent(new Element("codePage").setText(Short.toString(codePage)));
-		if(c.isAnonymized()){
+		if (c.isAnonymized()) {
 			byte [] tmp = new byte[13];
-			for(int i = 0; i < 12; i++)
-				tmp[i] = 0x41;
+			for (int i = 0; i < 13; i++)
+				tmp[i] = 0x41; // 'A'
 			
 			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString( tmp )));
 		}else{
@@ -88,5 +88,4 @@ public class VehicleRegistrationNumber extends DataClass {
 		}
 		return node;
 	}	
-
 }

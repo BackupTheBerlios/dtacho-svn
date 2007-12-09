@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,17 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class ExtendedSerialNumber extends DataClass {
-	private long serialNumber; // 4 byte int unsigned
+	/*
+	 * ExtendedSerialNumber ::= SEQUENCE {
+	 *  serialNumber INTEGER (0..2^32-1)
+	 *  monthYear BCDString (SIZE(2))
+	 *  type OCTET STRING (SIZE(1))
+	 *  manufacturerCode ManufacturerCode
+	 * }
+	 */
+
+
+	private long serialNumber; // 4 bytes int unsigned
 	private String monthYear;
 	private byte type;
 	private short manufacturerCode;
@@ -32,27 +42,35 @@ public class ExtendedSerialNumber extends DataClass {
 		type = cardExtendedSearialNumber[6]; 
 		manufacturerCode = convertIntoUnsigned1ByteInt(cardExtendedSearialNumber[7]); 
 	}
+
 	public short getManufacturerCode() {
 		return manufacturerCode;
 	}
+
 	public void setManufacturerCode(short manufacturerCode) {
 		this.manufacturerCode = manufacturerCode;
 	}
+
 	public String getMonthYear() {
 		return monthYear;
 	}
+
 	public void setMonthYear(String monthYear) {
 		this.monthYear = monthYear;
 	}
+
 	public long getSerialNumber() {
 		return serialNumber;
 	}
+
 	public void setSerialNumber(long serialNumber) {
 		this.serialNumber = serialNumber;
 	}
+
 	public byte getType() {
 		return type;
 	}
+
 	public void setType(byte type) {
 		this.type = type;
 	}

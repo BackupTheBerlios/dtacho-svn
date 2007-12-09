@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@ public class SensorInstallationSecData extends DataClass {
 	/*
 	 * Information, stored in a workshop card, related to the security data needed for
 	 * pairing motion sensors to vehicle units (requirement 214).
+	 * 
 	 * SensorInstallationSecData ::= TDesSessionKey
+	 * 
 	 * Value assignment: in accordance with ISO 16844-3.
 	 * ----
 	 * TDesSessionKey ::= SEQUENCE {
@@ -64,5 +66,4 @@ public class SensorInstallationSecData extends DataClass {
 		node.addContent( new Element("tDesKeyB").setText( convertIntoHexString( tDesKeyB )));
 		return node;
 	}
-	
 }

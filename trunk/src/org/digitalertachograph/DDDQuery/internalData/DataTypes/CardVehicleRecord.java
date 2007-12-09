@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,12 +23,12 @@ import org.jdom.Element;
 public class CardVehicleRecord extends DataClass {
 	/*
 	 * CardVehicleRecord ::= SEQUENCE {
-	 * 	vehicleOdometerBegin OdometerShort,	3byte
-	 * 	vehicleOdometerEnd OdometerShort,	3byte
-	 * 	vehicleFirstUse TimeReal,			4byte
-	 * 	vehicleLastUse TimeReal,			4byte
-	 * 	vehicleRegistration VehicleRegistrationIdentification,	15byte
-	 * 	vuDataBlockCounter VuDataBlockCounter, 2byte
+	 * 	vehicleOdometerBegin OdometerShort,	3 bytes
+	 * 	vehicleOdometerEnd OdometerShort,	3 bytes
+	 * 	vehicleFirstUse TimeReal,			4 bytes
+	 * 	vehicleLastUse TimeReal,			4 bytes
+	 * 	vehicleRegistration VehicleRegistrationIdentification,	15 bytes
+	 * 	vuDataBlockCounter VuDataBlockCounter, 2 bytes
 	 * }
 	 */
 	

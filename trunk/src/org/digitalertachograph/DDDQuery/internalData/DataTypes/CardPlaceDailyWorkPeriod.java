@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,13 +26,13 @@ import org.jdom.Element;
 public class CardPlaceDailyWorkPeriod extends DataClass {
 	/*
 	 * CardPlaceDailyWorkPeriod ::= SEQUENCE {
-	 * 	placePointerNewestRecord INTEGER(0..NoOfCardPlaceRecords-1), 1byte;
+	 * 	placePointerNewestRecord INTEGER(0..NoOfCardPlaceRecords-1), 1 byte;
 	 * 	placeRecords SET SIZE(NoOfCardPlaceRecords) OF PlaceRecord, 
 	 * }
 	 */
 	
 	private short placePointerNewestRecord;
-	private Vector<PlaceRecord> placeRecords = new Vector();
+	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>();
 	
 	public CardPlaceDailyWorkPeriod(byte[] value){
 		placePointerNewestRecord = convertIntoUnsigned1ByteInt(value[0]);
@@ -42,7 +42,6 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 			placeRecords.add( tmp );
 			
 		}
-		
 	}
 	
 	@Override
@@ -50,7 +49,7 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 		Element node = new Element(name);
 		node.addContent( new Element("placePointerNewestRecord").setText( Short.toString(placePointerNewestRecord)));
 
-		Iterator it = placeRecords.iterator();
+		Iterator<PlaceRecord> it = placeRecords.iterator();
 		while(it.hasNext()){
 			PlaceRecord pr = (PlaceRecord) it.next();
 			Element prElement = pr.generateXMLElement("placeRecord");

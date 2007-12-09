@@ -47,5 +47,4 @@ public class CompanyCardApplicationIdentification extends DataClass {
 		node.addContent( new Element("noOfCompanyActivityRecords").setText(Integer.toString(noOfCompanyActivityRecords)));
 		return node;
 	}
-	
 }

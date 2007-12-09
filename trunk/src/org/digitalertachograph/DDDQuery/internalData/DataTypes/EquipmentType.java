@@ -64,5 +64,4 @@ public class EquipmentType extends DataClass {
 		node.addContent( new Element("equipmentType").setText( Byte.toString(equipmentType)));
 		return node;
 	}
-
 }

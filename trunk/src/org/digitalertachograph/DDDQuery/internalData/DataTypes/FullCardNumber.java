@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,9 +24,9 @@ public class FullCardNumber extends DataClass {
 	
 	/*
 	 * FullCardNumber ::= SEQUENCE {
-	 * 	cardType EquipmentType, 1byte
-	 * 	cardIssuingMemberState NationNumeric, 1byte
-	 * 	cardNumber CardNumber, 16byte
+	 * 	cardType EquipmentType, 1 byte
+	 * 	cardIssuingMemberState NationNumeric, 1 byte
+	 * 	cardNumber CardNumber, 16 bytes
 	 * }
 	 */
 
@@ -65,5 +65,4 @@ public class FullCardNumber extends DataClass {
 		node.addContent( cardNumber.generateXMLElement("cardNumber"));
 		return node;
 	}
-	
 }

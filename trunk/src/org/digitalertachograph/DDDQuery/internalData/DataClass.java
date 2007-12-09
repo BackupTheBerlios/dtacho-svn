@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ public abstract class DataClass {
 	
 	static protected long convertIntoUnsigned4ByteInt(byte[] b){
 		long l = 0;
-		long accum;
+		//long accum;
 
 		//accum |= ( (long) (b[i] & 0xff) ) << shiftBy;
 		
@@ -63,8 +63,8 @@ public abstract class DataClass {
 		
 		//long dl = (((long)b[3]) & 0xFF) << 0 ;
 		int di =  (b[3] & 0xff);
-		int a = 0xff;
-		byte c = (byte) a;
+		//int a = 0xff;
+		//byte c = (byte) a;
 		long dl = ((long) di) <<0;
 		
 		

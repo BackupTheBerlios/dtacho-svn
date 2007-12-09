@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,27 +18,27 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
-import org.jdom.Attribute;
+//import org.jdom.Attribute;
 import org.jdom.Element;
 
 public class ControlType extends DataClass {
 	/*
 	 * ControlType ::= OCTET STRING (SIZE(1))
 	 * 
-	 * Value assignment  Octet aligned: �cvpdxxxx�B (8 bits)
-	 * "c"B card downloading:
-	 * 		"0"B: card not downloaded during this control activity,
-	 * 		"1"B: card downloaded during this control activity
-	 * "v"B VU downloading:
-	 * 		"0"B: VU not downloaded during this control activity,
-	 * 		"1"B: VU downloaded during this control activity
-	 * "p"B printing:
-	 * 		"0"B: no printing done during this control activity,
-	 * 		"1"B: printing done during this control activity
-	 * "d"B display:
-	 * 		"0"B: no display used during this control activity,
-	 * 		"1"B: display used during this control activity
-	 * "xxxx"B Not used.
+	 * Value assignment  Octet aligned: 'cvpdxxxx'B (8 bits)
+	 * 'c'B card downloading:
+	 * 		'0'B: card not downloaded during this control activity,
+	 * 		'1'B: card downloaded during this control activity
+	 * 'v'B VU downloading:
+	 * 		'0'B: VU not downloaded during this control activity,
+	 * 		'1'B: VU downloaded during this control activity
+	 * 'p'B printing:
+	 * 		'0'B: no printing done during this control activity,
+	 * 		'1'B: printing done during this control activity
+	 * 'd'B display:
+	 * 		'0'B: no display used during this control activity,
+	 * 		'1'B: display used during this control activity
+	 * 'xxxx'B Not used.
 	 * 
 	 * 10000000 = 0x80
 	 * 01000000 = 0x40
@@ -49,9 +49,13 @@ public class ControlType extends DataClass {
 	private byte controlType;
 	
 	private boolean card_downloading;
+	private static final byte CARD_DOWNLOADING_MASK = (byte)0x80;
 	private boolean vu_downloading;
+	private static final byte VU_DOWNLOADING_MASK = (byte)0x40;
 	private boolean printing;
+	private static final byte PRINTING_MASK = (byte)0x20;
 	private boolean display;
+	private static final byte DISPLAY_MASK = (byte)0x10;
 		
 	public ControlType(byte value){
 		this.setControlType(value);
@@ -64,10 +68,10 @@ public class ControlType extends DataClass {
 	public void setControlType(byte controlType) {
 		this.controlType = controlType;
 		
-		card_downloading = ((controlType & 0x80) == 0x80);
-		vu_downloading = ((controlType & 0x40) == 0x40);
-		printing = ((controlType & 0x20) == 0x20);
-		display = ((controlType & 0x10) == 0x10);
+		card_downloading = ((controlType & CARD_DOWNLOADING_MASK) == CARD_DOWNLOADING_MASK);
+		vu_downloading = ((controlType & VU_DOWNLOADING_MASK) == VU_DOWNLOADING_MASK);
+		printing = ((controlType & PRINTING_MASK) == PRINTING_MASK);
+		display = ((controlType & DISPLAY_MASK) == DISPLAY_MASK);
 	}
 
 	public boolean isCard_downloading() {
@@ -90,10 +94,9 @@ public class ControlType extends DataClass {
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		node.setAttribute("card_downloading", Boolean.toString(card_downloading));
+		node.setAttribute("vu_downloading", Boolean.toString(vu_downloading));
 		node.setAttribute("display", Boolean.toString(display));
 		node.setAttribute("printing", Boolean.toString(printing));
-		node.setAttribute("vu_downloading", Boolean.toString(vu_downloading));
 		return node;
 	}
-	
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ public class CardVehiclesUsed extends DataClass {
 	 */
 	
 	private int vehiclePointerNewestRecord;
-	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector();
+	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>();
 	
 	public CardVehiclesUsed(byte[] value){
 		vehiclePointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
@@ -52,7 +52,7 @@ public class CardVehiclesUsed extends DataClass {
 		Element node = new Element(name);
 		node.addContent(new Element("vehiclePointerNewestRecord").setText(Integer.toString(vehiclePointerNewestRecord)));
 		
-		Iterator iter = cardVehicleRecords.iterator();
+		Iterator<CardVehicleRecord> iter = cardVehicleRecords.iterator();
 		while (iter.hasNext()) {
 			CardVehicleRecord cvr = (CardVehicleRecord) iter.next();
 			node.addContent( cvr.generateXMLElement("cardVehicleRecord"));

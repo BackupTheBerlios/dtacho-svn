@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,8 @@ public class CardFaultData extends DataClass {
 	 * --
 	 * zwei sets, die jeweils "noOfFaultsPerType"-fach CardFaultRecords enhalten.
 	 */
-	private Vector<CardFaultRecord>[] cardFaultRecords = new Vector[2];
+
+	private Vector<CardFaultRecord> cardFaultRecords[] = new Vector[2];
 
 	public CardFaultData(byte[] value) {
 		for (int i = 0; i < cardFaultRecords.length; i++)
@@ -47,7 +48,7 @@ public class CardFaultData extends DataClass {
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		for (int i = 0; i < cardFaultRecords.length; i++) {
-			Iterator it = cardFaultRecords[i].iterator();
+			Iterator<CardFaultRecord> it = cardFaultRecords[i].iterator();
 			while(it.hasNext()){
 				CardFaultRecord cfr = (CardFaultRecord) it.next();
 				Element cfrElement = cfr.generateXMLElement("cardFaultRecord");
