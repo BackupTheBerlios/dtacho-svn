@@ -17,24 +17,9 @@
 
 package org.digitalertachograph.DDDQuery;
 
-//import java.io.BufferedOutputStream;
-//import java.io.BufferedWriter;
-//import java.io.DataOutputStream;
-//import java.io.FileOutputStream;
-//import java.io.PrintStream;
 import java.net.URL;
 import java.util.Vector;
 
-//ssl support
-//import java.security.cert.X509Certificate;
-//import javax.net.ssl.HostnameVerifier;
-//import javax.net.ssl.HttpsURLConnection;
-//import javax.net.ssl.SSLContext;
-//import javax.net.ssl.SSLSession;
-//import javax.net.ssl.TrustManager;
-//import javax.net.ssl.X509TrustManager;
-
-//import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
@@ -149,6 +134,4 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
-
-
 }

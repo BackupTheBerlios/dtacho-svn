@@ -20,25 +20,35 @@ package org.digitalertachograph.DDDQuery;
 import java.io.File;
 import java.io.FileInputStream;
 
-//import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.digitalertachograph.DDDQuery.internalData.TachographData;
-
-//import sun.io.Converters;
 
 public class DDDDataSource implements DataSource {
 	
-	String src;
-	TachographData td = new TachographData();
+	private String src;
+	private TachographData td = new TachographData();
 
+	/**
+	 * Returns the tachograph data
+	 */
 	public TachographData getTachographData() {
 		return td;
 	}
 
+	/**
+	 * Sets the source .ddd file
+	 *
+	 * @param  src	the location of the .ddd file that will be processed
+	 */
 	public void setSourceFile(String src) {
 		this.src = src;
 		readSourceFile();
 	}
-	
+
+	/**
+	 * Sets the source byte array with data of a .ddd file
+	 *
+	 * @param  src	byte array with data of a .ddd file
+	 */
 	public void setSource(byte[] src){
 		readSource(src);
 	}
@@ -75,8 +85,8 @@ public class DDDDataSource implements DataSource {
 
 			td.add(tag, length, value);
 		}	
+
 		td.printTL();
-		
 	}
 	
 	private void readSourceFile(){
@@ -109,7 +119,6 @@ public class DDDDataSource implements DataSource {
 		{
 			ex.printStackTrace();
 		}
-
 		
 		readSource(s);
 	}
@@ -118,8 +127,9 @@ public class DDDDataSource implements DataSource {
 
 		int i = 0;
 		
-		i += (b[0] & 0xFF) << 8;
-		i += (b[1] & 0xFF);
+		i += (b[0] & 0xff) << 8;
+		i += (b[1] & 0xff);
+
 		return i;
 		
 //		int length_i = 0;

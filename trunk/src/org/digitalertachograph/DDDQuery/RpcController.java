@@ -17,19 +17,10 @@
 
 package org.digitalertachograph.DDDQuery;
 
-//import org.apache.xmlrpc.server.PropertyHandlerMapping;
-//import org.apache.xmlrpc.server.XmlRpcServer;
-//import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
-//import org.apache.xmlrpc.webserver.WebServer;
-//import org.digitalertachograph.DDDQuery.internalData.TachographData;
-
 public class RpcController {
 
 	public String process(byte[] data){
 		String xml = Controller.getInstance().process(data);
 		return xml;
 	}	
-	
-
-
 }
