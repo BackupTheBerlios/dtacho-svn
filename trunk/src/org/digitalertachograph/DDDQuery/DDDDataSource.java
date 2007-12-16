@@ -28,32 +28,47 @@ public class DDDDataSource implements DataSource {
 	private TachographData td = new TachographData();
 
 	/**
-	 * Returns the tachograph data
+	 * Constructor for a DDDDataSource object
+	 */
+	public DDDDataSource() {
+	}
+	
+	/**
+	 * Sets the source byte array with data of a .ddd file.
+	 * The byte array will be parsed and a {@link TachographData}
+	 * object will be set up internally. The TachographData
+	 * object can then be copied with the {@link #getTachographData()}
+	 * method.
+	 *
+	 * @param	src		byte array with data of a .ddd file
+	 */
+	public void setSource(byte[] src) {
+		readSource(src);
+	}
+
+	/**
+	 * Returns the tachograph data.
+	 * 
+	 * @return			TachographData with content of the DDD source
 	 */
 	public TachographData getTachographData() {
 		return td;
 	}
 
 	/**
-	 * Sets the source .ddd file
+	 * Sets the source .ddd file. The file will be parsed and a
+	 * {@link TachographData} object will be set up internally.
+	 * The TachographData object can then be copied with the
+	 * {@link #getTachographData()} method.
 	 *
-	 * @param  src	the location of the .ddd file that will be processed
+	 * @param	src		the location of the .ddd file that will be processed
 	 */
 	public void setSourceFile(String src) {
 		this.src = src;
 		readSourceFile();
 	}
 
-	/**
-	 * Sets the source byte array with data of a .ddd file
-	 *
-	 * @param  src	byte array with data of a .ddd file
-	 */
-	public void setSource(byte[] src){
-		readSource(src);
-	}
-
-	private void readSource(byte[] src){
+	private void readSource(byte[] src) {
 		td = new TachographData(); // wipe
 		int pos = 0;
 		while(true){
@@ -86,10 +101,11 @@ public class DDDDataSource implements DataSource {
 			td.add(tag, length, value);
 		}	
 
+		System.out.println("internal tag structure:");
 		td.printTL();
 	}
 	
-	private void readSourceFile(){
+	private void readSourceFile() {
 		File f = new File(src);
 		FileInputStream fin = null;
 		byte[] s = null;
@@ -123,31 +139,7 @@ public class DDDDataSource implements DataSource {
 		readSource(s);
 	}
 	
-	private int calculateLength(byte[] b){
-
-		int i = 0;
-		
-		i += (b[0] & 0xff) << 8;
-		i += (b[1] & 0xff);
-
-		return i;
-		
-//		int length_i = 0;
-//		int till = 1;
-//		for(int i = 0; i <= till; i++){
-//			int tmp;
-//			if(length[i] >= 0){
-//				// the normal way..
-//				tmp = length[i];
-//			}else{
-//				// get rid of the algebraic sign
-//				tmp = 256 + length[i];
-//			}
-//
-////			shift an die passende possition
-//			tmp = tmp<<((till-i)*8);
-//			length_i += tmp;
-//		}
-//		return length_i;
+	private int calculateLength(byte[] b) {
+		return ((b[0] & 0xff) << 8) + (b[1] & 0xff);
 	}
 }

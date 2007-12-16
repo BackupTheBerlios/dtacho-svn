@@ -30,7 +30,6 @@ public class CardIdentification extends DataClass {
 	 * 	cardValidityBegin TimeReal, 4 bytes
 	 * 	cardExpiryDate TimeReal, 4 bytes
 	 * }
-
 	 */
 	
 	private NationNumeric cardIssuingMemberState;
@@ -40,6 +39,14 @@ public class CardIdentification extends DataClass {
 	private TimeReal cardValidityBegin;
 	private TimeReal cardExpiryDate;
 	
+	
+	/**
+	 * Constructor for a CardIdentification object
+	 * 
+	 * @param	value	byte array of a CardIdentification structure
+	 * 					whose data is used when the CardIdentification
+	 * 					object is created.
+	 */
 	public CardIdentification(byte[] value, int cardType){
 		cardIssuingMemberState = new NationNumeric(value[0]);
 		cardNumber = new CardNumber( arrayCopy(value, 1, 16), cardType );

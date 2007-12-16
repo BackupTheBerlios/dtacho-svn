@@ -43,6 +43,13 @@ public class CardDriverActivity extends DataClass {
 	private byte[] lastPartOfActivityDailyRecords;
 	
 	
+	/**
+	 * Constructor for a CardDriverActivity object
+	 * 
+	 * @param	value	byte array of a CardDriverActivity structure
+	 * 					whose data is used when the CardDriverActivity
+	 * 					object is created.
+	 */
 	public CardDriverActivity(byte[] value){
 		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 2, 2));

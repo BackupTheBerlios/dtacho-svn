@@ -49,6 +49,14 @@ public class CardIccIdentification extends DataClass {
 	private byte[] embedderIcAssemblerID;
 	private byte[] icIdentifier;
 
+	
+	/**
+	 * Constructor for a CardIccIdentification object
+	 * 
+	 * @param	value	byte array of a CardIccIdentification structure
+	 * 					whose data is used when the CardIccIdentification
+	 * 					object is created.
+	 */
 	public CardIccIdentification(byte[] value){
 		clockStop = value[0];
 		cardExtendedSerialNumber = new ExtendedSerialNumber( arrayCopy(value, 1, 8));

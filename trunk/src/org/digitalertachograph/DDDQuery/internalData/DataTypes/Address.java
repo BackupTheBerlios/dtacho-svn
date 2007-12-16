@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,36 +31,76 @@ public class Address extends DataClass {
 	private short codePage;
 	private byte[] address;
 	
-	public Address(){
+	//public Address(){
 		
-	}
-	
-	public Address(byte[] value){
+	//}
+
+
+	/**
+	 * Constructor for an Address object
+	 * 
+	 * @param	value	byte array of an Address structure whose data
+	 * 					is used when the Address object is created.
+	 */
+	public Address(byte[] value) {
 		this(value[0], arrayCopy(value, 1, 35));
 	}
 	
-	public Address(byte codePage, byte[] address){
+	/**
+	 * Constructor for an Address object
+	 * 
+	 * @param	codePage	byte that specifies the part of the
+	 * 						ISO/IEC 8859 used to code the address
+	 * 
+	 * @param	address		byte array that contains an address
+	 */
+	public Address(byte codePage, byte[] address) {
 		this.codePage = codePage;
 		this.address = address;
 	}
-	
+
+	/**
+	 * TODO
+	 * 
+	 * @return	empty string
+	 */
 	public String toString(){
 		// TODO write me!!
 		return "";
 	}
 
+	/**
+	 * Returns the address of an Address object.
+	 * 
+	 * @return	byte array that contains the address of the Address object
+	 */
 	public byte[] getAddress() {
 		return address;
 	}
 
+	/**
+	 * Sets the address of an Address object.
+	 * 
+	 * @param	address	byte array that contains an Address object
+	 */
 	public void setAddress(byte[] address) {
 		this.address = address;
 	}
 
+	/**
+	 * Returns the codepage of an Address object.
+	 * 
+	 * @return	codepage of the Address object
+	 */
 	public short getCodePage() {
 		return codePage;
 	}
 
+	/**
+	 * Sets the codepage of an Address object.
+	 * 
+	 * @param codePage	codepage of the Address object
+	 */
 	public void setCodePage(short codePage) {
 		this.codePage = codePage;
 	}

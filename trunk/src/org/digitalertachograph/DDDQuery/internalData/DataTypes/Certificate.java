@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,9 +23,18 @@ import org.jdom.Element;
 public class Certificate extends DataClass {
 	private byte[] certificate;
 
+	
+	/**
+	 * Constructor for a Certificate object
+	 */
+	public Certificate() {
+
+	}
+	
 	public byte[] getCertificate() {
 		return certificate;
 	}
+
 	public void setCertificate(byte[] certificate) {
 		this.certificate = certificate;
 	}

@@ -35,7 +35,15 @@ public class CardVehiclesUsed extends DataClass {
 	
 	private int vehiclePointerNewestRecord;
 	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>();
+
 	
+	/**
+	 * Constructor for a CardVehiclesUsed object
+	 * 
+	 * @param	value	byte array of a CardVehiclesUsed structure
+	 * 					whose data is used when the CardVehiclesUsed
+	 * 					object is created.
+	 */
 	public CardVehiclesUsed(byte[] value){
 		vehiclePointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 

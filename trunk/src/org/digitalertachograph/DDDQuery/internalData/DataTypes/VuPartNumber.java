@@ -27,6 +27,14 @@ public class VuPartNumber extends DataClass {
 	
 	private String vuPartNumber;
 	
+
+	/**
+	 * Constructor for a VuPartNumber object
+	 * 
+	 * @param	value	byte array of a VuPartNumber structure
+	 * 					whose data is used when the VuPartNumber
+	 * 					object is created.
+	 */
 	public VuPartNumber(byte[]value){
 		vuPartNumber = new String(value);
 	}

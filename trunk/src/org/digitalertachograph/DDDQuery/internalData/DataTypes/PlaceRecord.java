@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,19 +23,28 @@ import org.jdom.Element;
 public class PlaceRecord extends DataClass {
 	/*
 	 * PlaceRecord ::= SEQUENCE {
-	 * 	entryTime TimeReal, 4byte
+	 * 	entryTime TimeReal, 4 bytes
 	 * 	entryTypeDailyWorkPeriod EntryTypeDailyWorkPeriod, 1byte
-	 * 	dailyWorkPeriodCountry NationNumeric,	1byte
-	 * 	dailyWorkPeriodRegion RegionNumeric,	1byte
-	 * 	vehicleOdometerValue OdometerShort,		3byte
+	 * 	dailyWorkPeriodCountry NationNumeric,	1 byte
+	 * 	dailyWorkPeriodRegion RegionNumeric,	1 byte
+	 * 	vehicleOdometerValue OdometerShort,		3 bytes
 	 * } 
 	 */
+
 	private TimeReal entryTime;
 	private EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod;
 	private NationNumeric dailyWorkPeriodCountry;
 	private RegionNumeric dailyWorkPeriodRegion;
 	private int vehicleOdometerValue;
 	
+
+	/**
+	 * Constructor for a PlaceRecord object
+	 * 
+	 * @param	record	byte array of a PlaceRecord structure
+	 * 					whose data is used when the PlaceRecord
+	 * 					object is created.
+	 */
 	public PlaceRecord(byte[] record){
 		entryTime = new TimeReal( arrayCopy(record, 0, 4));
 		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod(record[4]);
@@ -43,34 +52,44 @@ public class PlaceRecord extends DataClass {
 		dailyWorkPeriodRegion = new RegionNumeric(record[6]);
 		vehicleOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy(record, 7, 3));
 	}
+	
 	public NationNumeric getDailyWorkPeriodCountry() {
 		return dailyWorkPeriodCountry;
 	}
+	
 	public void setDailyWorkPeriodCountry(NationNumeric dailyWorkPeriodCountry) {
 		this.dailyWorkPeriodCountry = dailyWorkPeriodCountry;
 	}
+	
 	public RegionNumeric getDailyWorkPeriodRegion() {
 		return dailyWorkPeriodRegion;
 	}
+	
 	public void setDailyWorkPeriodRegion(RegionNumeric dailyWorkPeriodRegion) {
 		this.dailyWorkPeriodRegion = dailyWorkPeriodRegion;
 	}
+	
 	public TimeReal getEntryTime() {
 		return entryTime;
 	}
+	
 	public void setEntryTime(TimeReal entryTime) {
 		this.entryTime = entryTime;
 	}
+	
 	public EntryTypeDailyWorkPeriod getEntryTypeDailyWorkPeriod() {
 		return entryTypeDailyWorkPeriod;
 	}
+	
 	public void setEntryTypeDailyWorkPeriod(
 			EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
+	
 	public int getVehicleOdometerValue() {
 		return vehicleOdometerValue;
 	}
+	
 	public void setVehicleOdometerValue(int vehicleOdometerValue) {
 		this.vehicleOdometerValue = vehicleOdometerValue;
 	}
@@ -91,5 +110,4 @@ public class PlaceRecord extends DataClass {
 		node.addContent( new Element("vehicleOdometerValue").setText( Integer.toString(vehicleOdometerValue)));	
 		return node;
 	}
-	
 }

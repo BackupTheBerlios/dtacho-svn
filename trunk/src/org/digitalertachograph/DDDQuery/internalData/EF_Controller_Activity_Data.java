@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.ControlCardControlActivityData;
 import org.jdom.Element;
 
+
+/**
+ * EF_Controller_Activity_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 050C
+ * 
+ */
 public class EF_Controller_Activity_Data extends DataClass {
-	public static int size;
+	public int size;
 	private ControlCardControlActivityData controlCardControlActivityData;
 	
+
+	/**
+	 * Constructor for an EF_Controller_Activity_Data object
+	 * 
+	 * @param	value	byte array of an EF_Controller_Activity_Data structure
+	 * 					whose data is used when the EF_Controller_Activity_Data
+	 * 					object is created.
+	 */
 	public EF_Controller_Activity_Data(byte[] value){
 		size = value.length;
 		controlCardControlActivityData = new ControlCardControlActivityData(value);
@@ -36,5 +51,4 @@ public class EF_Controller_Activity_Data extends DataClass {
 		node.addContent(child);
 		return node;
 	}
-
 }

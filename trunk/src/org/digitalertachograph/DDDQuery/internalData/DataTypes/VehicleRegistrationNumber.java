@@ -24,18 +24,27 @@ import org.digitalertachograph.DDDQuery.Controller;
 public class VehicleRegistrationNumber extends DataClass {
 	/*
 	 * VehicleRegistrationNumber ::= SEQUENCE {
-	 * 	codePage INTEGER (0..255),
-	 * 	vehicleRegNumber OCTET STRING (SIZE(13))
+	 * 	codePage INTEGER (0..255), 1 byte
+	 * 	vehicleRegNumber OCTET STRING (SIZE(13)), 13 bytes
 	 * }
 	 */
 	
 	private short codePage;
 	private byte[] vehicleRegNumber;
 	
-	public VehicleRegistrationNumber(){
-		
-	}
+
+	// public VehicleRegistrationNumber(){
+	//	
+	// }
 	
+
+	/**
+	 * Constructor for a VehicleRegistrationNumber object
+	 * 
+	 * @param	value	byte array of a VehicleRegistrationNumber structure
+	 * 					whose data is used when the VehicleRegistrationNumber
+	 * 					object is created.
+	 */
 	public VehicleRegistrationNumber(byte[] value){
 		this(value[0], arrayCopy(value, 1, value.length - 1));
 	}
@@ -59,7 +68,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	}
 
 	public void setCodePage(byte codePage) {
-		this.codePage = (short) (codePage & 0xFF);
+		this.codePage = (short) (codePage & 0xff);
 	}
 
 	public byte[] getVehicleRegNumber() {

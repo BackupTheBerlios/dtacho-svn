@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.WorkshopCardCalibrationData;
 import org.jdom.*;
 
+
+/**
+ * EF_Calibration,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 050A
+ * 
+ */
 public class EF_Calibration extends DataClass{
-	private WorkshopCardCalibrationData workshopCardCalibrationData;
 	public int size;
+	private WorkshopCardCalibrationData workshopCardCalibrationData;
 	
+
+	/**
+	 * Constructor for an EF_Calibration object
+	 * 
+	 * @param	value	byte array of an EF_Calibration structure
+	 * 					whose data is used when the EF_Calibration
+	 * 					object is created.
+	 */
 	public EF_Calibration(byte[] value){
 		size = value.length;
 		workshopCardCalibrationData = new WorkshopCardCalibrationData(value);

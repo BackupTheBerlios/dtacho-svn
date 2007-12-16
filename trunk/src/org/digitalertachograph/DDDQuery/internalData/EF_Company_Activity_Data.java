@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CompanyActivityData;
 import org.jdom.Element;
 
+
+/**
+ * EF_Company_Activity_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 050D
+ * 
+ */
 public class EF_Company_Activity_Data extends DataClass {
 	public int size;
 	private CompanyActivityData companyActivityData;
 	
+
+	/**
+	 * Constructor for an EF_Company_Activity_Data object
+	 * 
+	 * @param	value	byte array of an EF_Company_Activity_Data structure
+	 * 					whose data is used when the EF_Company_Activity_Data
+	 * 					object is created.
+	 */
 	public EF_Company_Activity_Data(byte[] value){
 		size = value.length;
 		companyActivityData = new CompanyActivityData( value );

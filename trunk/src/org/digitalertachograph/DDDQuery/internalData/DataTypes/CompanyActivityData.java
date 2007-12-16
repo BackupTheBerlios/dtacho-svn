@@ -42,6 +42,14 @@ public class CompanyActivityData extends DataClass {
 	private int companyPointerNewestRecord;
 	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>();
 	
+
+	/**
+	 * Constructor for a CompanyActivityData object
+	 * 
+	 * @param	value	byte array of a CompanyActivityData structure
+	 * 					whose data is used when the CompanyActivityData
+	 * 					object is created.
+	 */
 	public CompanyActivityData(byte[] value){
 		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		for (int i = 2; i < value.length; i+= 46) {

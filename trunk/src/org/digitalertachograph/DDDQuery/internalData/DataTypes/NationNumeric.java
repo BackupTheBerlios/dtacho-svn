@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,24 +20,44 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+
 public class NationNumeric extends DataClass {
-	private short nationNumeric;
 	/*
 	 * NationNumeric ::= INTEGER(0..255)
 	 */
+
+	private short nationNumeric;
+
 	
+	/**
+	 * Constructor for a NationNumeric object
+	 */
 	public NationNumeric(){
 		nationNumeric = 0;
 	}
+
+	/**
+	 * Constructor for a NationNumeric object
+	 * 
+	 * @param	nationNumeric	short value that indicates a numerical refernce to a country.
+	 */
 	public NationNumeric(short nationNumeric){
 		this.nationNumeric = nationNumeric;
 	}
+
+	/**
+	 * Constructor for a NationNumeric object
+	 * 
+	 * @param	b	byte that indicates a numerical refernce to a country.
+	 */
 	public NationNumeric(byte b){
 		nationNumeric = convertIntoUnsigned1ByteInt(b);
 	}
+
 	public short getNationNumeric() {
 		return nationNumeric;
 	}
+
 	public void setNationNumeric(short nationNumeric) {
 		this.nationNumeric = nationNumeric;
 	}
@@ -106,6 +126,4 @@ public class NationNumeric extends DataClass {
 - - Rest of Europe (FE)H,
 - - Rest of the world (FF)H
 	 */
-	
-	
 }

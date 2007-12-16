@@ -20,8 +20,15 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
+
+/**
+ * EF_Application_Identification,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0501
+ * 
+ */
 public class EF_Application_Identification extends DataClass {
-	public static int size;
+	public static final int size = 10;
 	private DriverCardApplicationIdentification driverCardApplicationIdentification;
 	private WorkshopCardApplicationIdentification workshopCardApplicationIdentification;
 	private ControlCardApplicationIdentification controlCardApplicationIdentification;
@@ -29,8 +36,15 @@ public class EF_Application_Identification extends DataClass {
 	private int cardType;
 	
 	
+	/**
+	 * Constructor for an EF_Application_Identification object
+	 * 
+	 * @param	value	byte array of an EF_Application_Identification structure
+	 * 					whose data is used when the EF_Application_Identification
+	 * 					object is created.
+	 */
 	public EF_Application_Identification(byte[] value) {
-		size = value.length;
+		// size = value.length;
 		switch (cardType = value[0]) {
 			case EquipmentType.DRIVER_CARD :
 				driverCardApplicationIdentification = new DriverCardApplicationIdentification(value);
@@ -49,7 +63,6 @@ public class EF_Application_Identification extends DataClass {
 				break;
 		}
 	}
-
 
 	public int getCardType() {
 		return cardType;
@@ -85,5 +98,6 @@ public class EF_Application_Identification extends DataClass {
 		
 		node.addContent(child);
 		return node;
-		}
 	}
+}
+

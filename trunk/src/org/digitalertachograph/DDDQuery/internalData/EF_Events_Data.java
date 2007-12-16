@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,27 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardEventData;
 import org.jdom.Element;
 
+
+/**
+ * EF_Events_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0502
+ * 
+ */
 public class EF_Events_Data extends DataClass {
-	static public int size;
+	public static final int size = 432;
 	private CardEventData cardEventData;
 
+
+	/**
+	 * Constructor for an EF_Events_Data object
+	 * 
+	 * @param	value	byte array of an EF_Events_Data structure
+	 * 					whose data is used when the EF_Events_Data
+	 * 					object is created.
+	 */
 	public EF_Events_Data(byte[] value){
-		size = value.length;
+		// size = value.length;
 		cardEventData = new CardEventData(value);
 	}
 	

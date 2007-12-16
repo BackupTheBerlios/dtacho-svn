@@ -31,19 +31,27 @@ public class CardChipIdentification extends DataClass {
 
 	private byte[] icSerialNumber;
 	private byte[] icManufacturingReferences;
-	
+
+
+	/**
+	 * Constructor for a CardChipIdentification object
+	 */
 	public CardChipIdentification(){
+
 	}
 	
 	public byte[] getIcManufacturingReferences() {
 		return icManufacturingReferences;
 	}
+
 	public void setIcManufacturingReferences(byte[] icManufacturingReferences) {
 		this.icManufacturingReferences = icManufacturingReferences;
 	}
+
 	public byte[] getIcSerialNumber() {
 		return icSerialNumber;
 	}
+
 	public void setIcSerialNumber(byte[] icSerialNumber) {
 		this.icSerialNumber = icSerialNumber;
 	}

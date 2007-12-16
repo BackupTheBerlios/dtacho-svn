@@ -22,12 +22,26 @@ import org.digitalertachograph.DDDQuery.internalData.DataTypes.LastDownload;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.NoOfCalibrationsSinceDownload;
 import org.jdom.Element;
 
+
+/**
+ * EF_Card_Download,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 050E (driver card), File ID: 0509 (workshop card)
+ * 
+ */
 public class EF_Card_Download extends DataClass {
-	static public int size;
+	public int size;
 	private int cardType;
 	private LastDownload lastDownload;
 	private NoOfCalibrationsSinceDownload noOfCalibrationsSinceDownload;
 	
+	/**
+	 * Constructor for an EF_Card_Download object
+	 * 
+	 * @param	value	byte array of an EF_Card_Download structure
+	 * 					whose data is used when the EF_Card_Download
+	 * 					object is created.
+	 */
 	public EF_Card_Download(byte[] value, int cardType){
 		size = value.length;
 		this.cardType = cardType; 

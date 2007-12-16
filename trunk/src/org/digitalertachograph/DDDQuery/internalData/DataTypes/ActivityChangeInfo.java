@@ -33,6 +33,7 @@ public class ActivityChangeInfo extends DataClass {
 	 */
 	private boolean slot;
 	private static final byte SLOT_MASK = (byte)0x80;
+
 	public static final boolean DRIVER = false;
 	public static final boolean CO_DRIVER = true;
 
@@ -44,6 +45,7 @@ public class ActivityChangeInfo extends DataClass {
 	 */
 	private boolean drivingStatus;
 	private static final byte DRIVINGSTATUS_MASK = (byte)0x40;
+
 	public static final boolean SINGLE = false;
 	public static final boolean CREW = true;
 
@@ -51,10 +53,11 @@ public class ActivityChangeInfo extends DataClass {
                     Driver (or workshop) card status in the relevant slot: 'p'B
                       INSERTED, a card is inserted, '0'B:
                       NOT INSERTED, no card is inserted (or a card is withdrawn), '1'B:
-                      B: 0010_0000 = 0x20
+                      B:0010_0000 = 0x20
 	 */
 	private boolean cardStatus;
 	private static final byte CARDSTATUS_MASK = (byte)0x20;
+
 	public static final boolean INSERTED = false;
 	public static final boolean NOT_INSERTED = true;
 
@@ -68,6 +71,7 @@ public class ActivityChangeInfo extends DataClass {
 	 */
 	private byte activity;
 	private static final byte ACTIVITY_MASK = (byte)0x18;
+
 	public static final byte BREAK = 0;
 	public static final byte AVAILABILITY = 1;
 	public static final byte WORK = 2;
@@ -83,6 +87,14 @@ public class ActivityChangeInfo extends DataClass {
 	
 	private byte[] activityChangeInfo;
 
+
+	/**
+	 * Constructor for an ActivityChangeInfo object
+	 * 
+	 * @param	value	byte array of an ActivityChangeInfo structure
+	 * 					whose data is used when the ActivityChangeInfo
+	 * 					object is created.
+	 */
 	public ActivityChangeInfo(byte[] value) {
 		activityChangeInfo = value;
 		slot = ((value[0] & SLOT_MASK) == SLOT_MASK);

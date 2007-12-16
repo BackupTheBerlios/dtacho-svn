@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,10 +19,26 @@ package org.digitalertachograph.DDDQuery.internalData;
 
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
+
+
+/**
+ * EF_Card_Certificate,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: C100
+ * 
+ */
 public class EF_Card_Certificate extends DataClass {
 	public static final int size = 194;
 	private CardCertificate cardCertificate;
 	
+
+	/**
+	 * Constructor for an EF_Card_Certificate object
+	 * 
+	 * @param	value	byte array of an EF_Card_Certificate structure
+	 * 					whose data is used when the EF_Card_Certificate
+	 * 					object is created.
+	 */
 	public EF_Card_Certificate(byte [] value){
 		cardCertificate = new CardCertificate();
 		cardCertificate.setCertificate(value);

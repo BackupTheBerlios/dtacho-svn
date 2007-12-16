@@ -29,11 +29,18 @@ public class DriverCardHolderIdentification extends DataClass {
 	 * }
 	 */
 
-	
 	private HolderName cardHolderName;
 	private Datef cardHolderBirthDate;
 	private Language cardHolderPreferredLanguage;
 	
+
+	/**
+	 * Constructor for a DriverCardHolderIdentification object
+	 * 
+	 * @param	value	byte array of a DriverCardHolderIdentification structure
+	 * 					whose data is used when the DriverCardHolderIdentification
+	 * 					object is created.
+	 */
 	public DriverCardHolderIdentification(byte[] value){
 		cardHolderName = new HolderName( arrayCopy(value, 0, 72));
 		cardHolderBirthDate = new Datef( arrayCopy(value, 72, 4));
@@ -43,18 +50,23 @@ public class DriverCardHolderIdentification extends DataClass {
 	public Datef getCardHolderBirthDate() {
 		return cardHolderBirthDate;
 	}
+
 	public void setCardHolderBirthDate(Datef cardHolderBirthDate) {
 		this.cardHolderBirthDate = cardHolderBirthDate;
 	}
+
 	public HolderName getCardHolderName() {
 		return cardHolderName;
 	}
+
 	public void setCardHolderName(HolderName cardHolderName) {
 		this.cardHolderName = cardHolderName;
 	}
+
 	public Language getCardHolderPreferredLanguage() {
 		return cardHolderPreferredLanguage;
 	}
+
 	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
 		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}

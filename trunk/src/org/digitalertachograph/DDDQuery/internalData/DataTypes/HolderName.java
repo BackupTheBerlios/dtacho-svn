@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,11 +27,20 @@ public class HolderName extends DataClass {
 	 * 	holderFirstNames Name
 	 * }
 	 */
+
 	private Name holderSurname;
 	private Name holderFirstNames;
 	
+	
+	/**
+	 * Constructor for a HolderName object
+	 * 
+	 * @param	value	byte array of a HolderName structure
+	 * 					whose data is used when the HolderName
+	 * 					object is created.
+	 */
 	public HolderName(byte[] value){
-		// 2x 36byte
+		// 2x 36 bytes
 		holderSurname = new Name( arrayCopy(value, 0, 36));
 		holderFirstNames = new Name( arrayCopy(value, 36, 36));
 	}

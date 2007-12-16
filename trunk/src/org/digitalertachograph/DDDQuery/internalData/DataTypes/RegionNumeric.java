@@ -47,6 +47,12 @@ public class RegionNumeric extends DataClass {
 
 	private byte regionNumeric;
 
+	
+	/**
+	 * Constructor for a RegionNumeric object
+	 * 
+	 * @param	regionNumeric		byte that references a region within a specified country.
+	 */
 	public RegionNumeric(byte regionNumeric){
 		this.regionNumeric = regionNumeric;
 	}

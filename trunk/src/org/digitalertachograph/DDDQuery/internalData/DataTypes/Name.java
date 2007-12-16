@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,10 +32,18 @@ public class Name extends DataClass{
 	private short codePage;
 	private byte[] name;
 	
-	public Name(){
-		
-	}
+	// public Name(){
+	//	
+	// }
 	
+
+	/**
+	 * Constructor for a Name object
+	 * 
+	 * @param	value	byte array of a Name structure
+	 * 					whose data is used when the Name
+	 * 					object is created.
+	 */
 	public Name(byte[] value){
 		this(value[0], arrayCopy(value, 1, value.length - 1));
 	}
@@ -79,8 +87,8 @@ public class Name extends DataClass{
 		Element nameElement;
 		if(c.isAnonymized()){
 			byte [] tmp = new byte[35];
-			for(int i = 0; i < 34; i++)
-				tmp[i] = 0x41;
+			for(int i = 0; i < 35; i++)
+				tmp[i] = 0x41; // 'A'
 			nameElement = new Element("name").setText( convertIntoHexString( tmp ));
 		}else{
 			nameElement = new Element("name").setText( convertIntoHexString( this.name ));

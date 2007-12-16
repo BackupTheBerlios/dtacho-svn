@@ -37,6 +37,14 @@ public class ControlCardApplicationIdentification extends DataClass {
 	private byte[] cardStructureVersion;
 	private int noOfControlActivityRecords;
 	
+	
+	/**
+	 * Constructor for a ControlCardApplicationIdentification object
+	 * 
+	 * @param	value	byte array of a ControlCardApplicationIdentification structure
+	 * 					whose data is used when the ControlCardApplicationIdentification
+	 * 					object is created.
+	 */
 	public ControlCardApplicationIdentification(byte[] value){
 		typeOfTachographCardId = new EquipmentType(value[0]);
 		cardStructureVersion = arrayCopy(value, 1, 2);

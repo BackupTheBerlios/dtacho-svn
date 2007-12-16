@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +30,19 @@ public class CompanyActivityType extends DataClass {
 	 * }
 	 */
 	private short companyActivityType;
-	
+
+	public static final short CARD_DOWNLOADING = 1;
+	public static final short VU_DOWNLOADING = 2;
+	public static final short VU_LOCK_IN = 3;
+	public static final short VU_LOCK_OUT = 4;
+
+
+	/**
+	 * Constructor for a CompanyActivityType object
+	 * 
+	 * @param	value	byte that indicates an activity carried out by a
+	 * 					company using its company card.
+	 */
 	public CompanyActivityType(byte value){
 		companyActivityType = convertIntoUnsigned1ByteInt(value);
 	}

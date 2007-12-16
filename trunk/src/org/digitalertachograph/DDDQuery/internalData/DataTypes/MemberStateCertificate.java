@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,5 +19,12 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 public class MemberStateCertificate extends Certificate {
 
+	
+	/**
+	 * Constructor for a MemberStateCertificate object
+	 */
+	public MemberStateCertificate() {
+
+	}
 }
 

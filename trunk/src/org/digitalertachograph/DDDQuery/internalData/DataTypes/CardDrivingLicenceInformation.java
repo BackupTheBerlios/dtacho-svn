@@ -32,7 +32,14 @@ public class CardDrivingLicenceInformation extends DataClass {
 	private Name drivingLicenceIssuingAuthority;
 	private NationNumeric drivingLicenceIssuingNation;
 	private String drivingLicenceNumber;
-	
+
+	/**
+	 * Constructor for a CardDrivingLicenceInformation object
+	 * 
+	 * @param	value	byte array of a CardDrivingLicenceInformation structure
+	 * 					whose data is used when the CardDrivingLicenceInformation
+	 * 					object is created.
+	 */
 	public CardDrivingLicenceInformation(byte[] value){
 		drivingLicenceIssuingAuthority = new Name( arrayCopy(value, 0, 36));
 		drivingLicenceIssuingNation = new NationNumeric(value[36]);
@@ -77,5 +84,4 @@ public class CardDrivingLicenceInformation extends DataClass {
 		
 		return node;
 	}
-
 }

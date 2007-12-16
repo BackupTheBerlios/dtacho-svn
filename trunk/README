@@ -15,7 +15,7 @@ Web page (German):        http://www.digitaler-tachograph.org/
 Project/development page: http://developer.berlios.de/projects/dtacho/
 
 User and developer mailing lists for this projects are available. For details
-go to our web page or the project page at Berlios.
+see our web page or the project page at Berlios.
 
 For information/specifications of the DTCO see below, chapter SPECIFICATIONS.
 
@@ -23,11 +23,11 @@ For information/specifications of the DTCO see below, chapter SPECIFICATIONS.
 STATUS
 ------
 
-The byte data to XML converter is written Java.
+The byte data to XML converter is written in Java.
 
 08.12.2007
-Currently this software converts a DTCO driver card .DDD file to an XML file.
-The code was developed by Martin Barth in his diploma thesis.
+Currently this software converts a DTCO driver card .DDD file (C_*.DDD) to a
+XML file. The code was developed by Martin Barth in his diploma thesis.
 
 
 NOTES
@@ -57,33 +57,75 @@ The jars were obtained from the following sources:
   -jdom-1.1.jar
 
 
-HOW TO RUN
-----------
+HOW TO RUN THE PROGRAM
+----------------------
 
-Change to the top of the directory tree where you find the org directory.
-E.g. if you have compiled the source in eclipse change to the bin directory:
+-Getting the source
 
-gerald@dtachdev:~/workspace/dtacho/bin$ ls -lR | grep ^d
-drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
-drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
-drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
-drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
-drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
+ The source can be checked out from Berlios.de via SVN.
 
-To run the format converter it is required to include
--the current directory
--the directory that contains the additional jar files mentioned above
-to the java class path.
+ gerald@dtachodev:/tmp/dtacho_test$ svn checkout svn://svn.berlios.de/dtacho/trunk
 
-This is done with option -cp.
 
-Example:
+-Compiling the source
 
-gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
-org.digitalertachograph.DDDQuery.Controller driver_card.DDD
+ To compile the source the Java Development Kit (JDK) must be installed.
+ See http://java.sun.com/javase/downloads/index.jsp for more.
 
-This will read the file driver_card.DDD, print some (debug) info and output
-the file driver_card.xml
+ -change to the trunk/src directory
+
+  gerald@dtachodev:/tmp/dtacho_test$ cd trunk/src
+
+ -run the java compiler:
+
+  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/digitalertachograph/DDDQuery/*.java
+
+
+-Running the program
+
+ If you have compiled the source as described above you are already in the
+ correct directory. 
+
+ If you have compiled the source in eclipse change to the bin directory.
+
+ 'ls -lR | grep ^d' should give the following output:
+
+ gerald@dtachodev:~/workspace/dtacho/bin$ ls -lR | grep ^d
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
+ drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
+
+ To run the format converter it is required to include
+ -the current directory
+ -the directory that contains the additional jar files mentioned in chapter
+  NOTES
+ to the java class path.
+
+ This is done with the option -cp.
+
+
+ Examples:
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
+
+ This will read the driver card file C_driver_card.DDD, print some (debug)
+ info and output the file C_driver_card.DDD.xml
+
+
+ Multiple files/wildcards are supported via command line, e.g.
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ org.digitalertachograph.DDDQuery.Controller C_*.DDD
+
+ will convert all driver card files (C_*.DDD) in the current directory
+ to XML files.
+ 
+
+ NOTE: currently only driver card files (C_*.DDD) are supported! See
+       chapter STATUS.
 
 
 SPECIFICATIONS
@@ -113,8 +155,8 @@ interest for this project:
 
 -Information about ASN.1 (Abstract Syntax Notation One) used in the regulations
 
-  ASN.1 Consortium
+ -ASN.1 Consortium
   http://www.asn1.org/
 
-  Books/References
+ -Books/References
   http://www.asn1.org/books/

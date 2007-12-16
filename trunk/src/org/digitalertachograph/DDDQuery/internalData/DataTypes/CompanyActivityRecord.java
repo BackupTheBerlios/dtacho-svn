@@ -39,7 +39,15 @@ public class CompanyActivityRecord extends DataClass {
 	private VehicleRegistrationIdentification vehicleRegistrationInformation;
 	private TimeReal downloadPeriodBegin;
 	private TimeReal downloadPeriodEnd;
+
 	
+	/**
+	 * Constructor for a CompanyActivityRecord object
+	 * 
+	 * @param	value	byte array of a CompanyActivityRecord structure
+	 * 					whose data is used when the CompanyActivityRecord
+	 * 					object is created.
+	 */
 	public CompanyActivityRecord(byte[] value){
 		companyActivityType = new CompanyActivityType( value[0] );
 		companyActivityTime = new TimeReal( arrayCopy(value, 1, 4));

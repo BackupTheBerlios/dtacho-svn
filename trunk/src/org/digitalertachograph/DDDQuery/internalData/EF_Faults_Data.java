@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,27 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardFaultData;
 import org.jdom.Element;
 
+
+/**
+ * EF_Faults_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0503
+ * 
+ */
 public class EF_Faults_Data extends DataClass {
-	static public int size;
+	public static final int size = 288;
 	private CardFaultData cardFaultData;
 	
+
+	/**
+	 * Constructor for an EF_Faults_Data object
+	 * 
+	 * @param	value	byte array of an EF_Faults_Data structure
+	 * 					whose data is used when the EF_Faults_Data
+	 * 					object is created.
+	 */
 	public EF_Faults_Data(byte[] value){
-		size = value.length;
+		// size = value.length;
 		cardFaultData = new CardFaultData(value);
 	}
 	

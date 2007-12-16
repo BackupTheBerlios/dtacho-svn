@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardDrivingLicenceInformation;
 import org.jdom.Element;
 
+
+/**
+ * EF_Driving_Licence_Info,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0521
+ * 
+ */
 public class EF_Driving_Licence_Info extends DataClass {
-	static final public int size = 53;
+	public static final int size = 53;
 	private CardDrivingLicenceInformation cardDrivingLicenceInformation;
 	
+
+	/**
+	 * Constructor for an EF_Driving_Licence_Info object
+	 * 
+	 * @param	value	byte array of an EF_Driving_Licence_Info structure
+	 * 					whose data is used when the EF_Driving_Licence_Info
+	 * 					object is created.
+	 */
 	public EF_Driving_Licence_Info(byte[] value){
 		cardDrivingLicenceInformation = new CardDrivingLicenceInformation(value);
 	}

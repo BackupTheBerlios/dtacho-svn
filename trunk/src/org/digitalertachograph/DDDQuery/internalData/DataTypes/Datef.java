@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,42 +31,57 @@ public class Datef extends DataClass {
 	private String year;
 	private String month;
 	private String day;
+
 	
-	public void setDay(byte [] day){
-		this.day = convertIntoBCDString(day); 
-	}
-	public void setMonth(byte[] month) {
-		this.month = convertIntoBCDString(month);
-	}
-	public void setYear(byte[] year) {
-		this.year = convertIntoBCDString(year);
-	}
-	
-	public Datef(){
-		
-	}
-	
+	// public Datef(){
+	//	
+	//}
+
+	/**
+	 * Constructor for a Datef object
+	 * 
+	 * @param	value	byte array of a Datef structure
+	 * 					whose data is used when the Datef
+	 * 					object is created.
+	 */
 	public Datef(byte[] value){
 		year = convertIntoBCDString( arrayCopy(value, 0, 2));
 		month = convertIntoBCDString( arrayCopy(value, 2, 1));
 		day = convertIntoBCDString( arrayCopy(value, 3, 1));
 	}
+
+	public void setDay(byte [] day){
+		this.day = convertIntoBCDString(day); 
+	}
+
+	public void setMonth(byte[] month) {
+		this.month = convertIntoBCDString(month);
+	}
+	
+	public void setYear(byte[] year) {
+		this.year = convertIntoBCDString(year);
+	}
 	
 	public String getDay() {
 		return day;
 	}
+
 	public void setDay(String day) {
 		this.day = day;
 	}
+
 	public String getMonth() {
 		return month;
 	}
+
 	public void setMonth(String month) {
 		this.month = month;
 	}
+
 	public String getYear() {
 		return year;
 	}
+
 	public void setYear(String year) {
 		this.year = year;
 	}

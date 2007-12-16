@@ -34,6 +34,14 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	private short placePointerNewestRecord;
 	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>();
 	
+
+	/**
+	 * Constructor for a CardPlaceDailyWorkPeriod object
+	 * 
+	 * @param	value	byte array of a CardPlaceDailyWorkPeriod structure
+	 * 					whose data is used when the CardPlaceDailyWorkPeriod
+	 * 					object is created.
+	 */
 	public CardPlaceDailyWorkPeriod(byte[] value){
 		placePointerNewestRecord = convertIntoUnsigned1ByteInt(value[0]);
 		for (int i = 1; i < value.length; i+=10) {

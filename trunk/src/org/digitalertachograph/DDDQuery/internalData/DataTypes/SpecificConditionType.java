@@ -33,6 +33,12 @@ public class SpecificConditionType extends DataClass {
 	 */
 	private byte specificConditionType;
 
+	
+	/**
+	 * Constructor for an SpecificConditionType object
+	 * 
+	 * @param	specificConditionType	byte that identifies a specific condition.
+	 */
 	public SpecificConditionType(byte specificConditionType) {
 		this.specificConditionType = specificConditionType;
 	}
@@ -51,5 +57,4 @@ public class SpecificConditionType extends DataClass {
 		node.addContent( new Element("specificConditionType").setText( Byte.toString( specificConditionType )));
 		return node;
 	}
-	
 }

@@ -30,6 +30,14 @@ public class TyreSize extends DataClass {
 	
 	private String tyreSize;
 	
+
+	/**
+	 * Constructor for a TyreSize object
+	 * 
+	 * @param	value	byte array of a TyreSize structure
+	 * 					whose data is used when the TyreSize
+	 * 					object is created.
+	 */
 	public TyreSize(byte[] value){
 		tyreSize = new String(value);
 	}

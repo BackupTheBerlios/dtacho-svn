@@ -35,6 +35,14 @@ public class ControlCardHolderIdentification extends DataClass {
 	private HolderName cardHolderName;
 	private Language cardHolderPreferredLanguage;
 	
+
+	/**
+	 * Constructor for a ControlCardHolderIdentification object
+	 * 
+	 * @param	value	byte array of a ControlCardHolderIdentification structure
+	 * 					whose data is used when the ControlCardHolderIdentification
+	 * 					object is created.
+	 */
 	public ControlCardHolderIdentification(byte[] value){
 		controlBodyName = new Name( arrayCopy(value, 0, 36));
 		controlBodyAddress = new Address( arrayCopy(value, 36, 36));

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.SensorInstallationSecData;
 import org.jdom.Element;
 
+
+/**
+ * EF_Sensor_Installation_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 050B
+ * 
+ */
 public class EF_Sensor_Installation_Data extends DataClass {
-	public final int size = 16;
+	public static final int size = 16;
 	private SensorInstallationSecData sensorInstallationSecData;
-	
+
+
+	/**
+	 * Constructor for an EF_Sensor_Installation_Data object
+	 * 
+	 * @param	value	byte array of an EF_Sensor_Installation_Data structure
+	 * 					whose data is used when the EF_Sensor_Installation_Data
+	 * 					object is created.
+	 */
 	public EF_Sensor_Installation_Data(byte[] value){
 		sensorInstallationSecData = new SensorInstallationSecData(value);
 	}

@@ -30,7 +30,15 @@ public class VehicleRegistrationIdentification extends DataClass {
 
 	private NationNumeric nationNumeric;
 	private VehicleRegistrationNumber vehicleRegistrationNumber;
+
 	
+	/**
+	 * Constructor for a VehicleRegistrationIdentification object
+	 * 
+	 * @param	value	byte array of a VehicleRegistrationIdentification structure
+	 * 					whose data is used when the VehicleRegistrationIdentification
+	 * 					object is created.
+	 */
 	public VehicleRegistrationIdentification(byte [] value){
 		nationNumeric = new NationNumeric(value[0]);
 		vehicleRegistrationNumber = new VehicleRegistrationNumber( arrayCopy(value, 1, 14));

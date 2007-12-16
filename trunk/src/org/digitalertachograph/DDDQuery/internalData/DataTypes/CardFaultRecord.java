@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,10 +23,10 @@ import org.jdom.Element;
 public class CardFaultRecord extends DataClass {
 	/*
 	 * CardFaultRecord ::= SEQUENCE {
-	 * 	faultType EventFaultType,
-	 * 	faultBeginTime TimeReal,
-	 * 	faultEndTime TimeReal,
-	 * 	faultVehicleRegistration VehicleRegistrationIdentification
+	 * 	faultType EventFaultType, 1 byte
+	 * 	faultBeginTime TimeReal, 4 bytes
+	 * 	faultEndTime TimeReal, 4 bytes
+	 * 	faultVehicleRegistration VehicleRegistrationIdentification, 15 bytes
 	 * }
 	 */
 
@@ -34,7 +34,15 @@ public class CardFaultRecord extends DataClass {
 	private TimeReal faultBeginTime;
 	private TimeReal faultEndTime;
 	private VehicleRegistrationIdentification faultVehicleRegistration;
+
 	
+	/**
+	 * Constructor for a CardFaultRecord object
+	 * 
+	 * @param	value	byte array of a CardFaultRecord structure
+	 * 					whose data is used when the CardFaultRecord
+	 * 					object is created.
+	 */
 	public CardFaultRecord(byte[] value){
 		faultType = new EventFaultType(value[0]);
 		faultBeginTime = new TimeReal(arrayCopy(value, 1, 4));

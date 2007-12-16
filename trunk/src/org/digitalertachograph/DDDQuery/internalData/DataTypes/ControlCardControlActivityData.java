@@ -42,6 +42,14 @@ public class ControlCardControlActivityData extends DataClass {
 	private int controlPointerNewestRecord;
 	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>();
 
+	
+	/**
+	 * Constructor for a ControlCardControlActivityData object
+	 * 
+	 * @param	value	byte array of a ControlCardControlActivityData structure
+	 * 					whose data is used when the ControlCardControlActivityData
+	 * 					object is created.
+	 */
 	public ControlCardControlActivityData(byte[] value){
 		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		for (int i = 2; i < value.length; i += 46) {

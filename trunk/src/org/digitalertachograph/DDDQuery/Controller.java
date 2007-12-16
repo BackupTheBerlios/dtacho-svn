@@ -37,12 +37,14 @@ public class Controller {
 		return anonymized;
 	}
 
-	public static void main(String[] argv){
+	public static void main(String[] args){
 		Controller c = Controller.getInstance();
 		c.setupWebserver();
 		//c.manual();
-		c.process(argv[0]);
-		System.out.println("\ndone!");
+		for (int i = 0; i < args.length; i++ )
+			c.process(args[i]);
+		System.out.println("done!");
+		System.exit(0);
 	}
 
 	public static Controller getInstance(){
@@ -90,10 +92,11 @@ public class Controller {
 	}
 
 	public void process(String file){
-		System.out.println("\n\n" + file);	
+		System.out.println("\n" + file + "\n");	
 		DDDDataSource ds = new DDDDataSource();
 		ds.setSourceFile(file);
 		TachographData td1 = ds.getTachographData();
+		System.out.println("dumping XML...");
 		td1.generateXML(file + ".xml");	
 	}
 
@@ -111,8 +114,6 @@ public class Controller {
 		sendXML(xml);
 		//System.out.println("post sendXML");
 		return xml;
-
-		//return xml;
 	}
 
 	public void setupWebserver(){

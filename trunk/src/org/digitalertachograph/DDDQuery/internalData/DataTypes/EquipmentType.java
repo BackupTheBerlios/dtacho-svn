@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -36,16 +36,22 @@ public class EquipmentType extends DataClass {
 	 * - - RFU (8..255)
 	 */
 	
-	public final static int RESERVED = 0;
-	public final static int DRIVER_CARD = 1;
-	public final static int WORKSHOP_CARD = 2;
-	public final static int CONTROL_CARD = 3;
-	public final static int COMPANY_CARD = 4;
-	public final static int MANUFACTURING_CARD = 5;
-	public final static int VEHICLE_UNIT = 6;
-	public final static int MOTION_SENSOR = 7;
+	public final static byte RESERVED = 0;
+	public final static byte DRIVER_CARD = 1;
+	public final static byte WORKSHOP_CARD = 2;
+	public final static byte CONTROL_CARD = 3;
+	public final static byte COMPANY_CARD = 4;
+	public final static byte MANUFACTURING_CARD = 5;
+	public final static byte VEHICLE_UNIT = 6;
+	public final static byte MOTION_SENSOR = 7;
 	
 	
+	/**
+	 * Constructor for an EquipmentType object
+	 * 
+	 * @param	value	byte that indicates the type of equipment for the
+	 * 					tachograph application.
+	 */
 	public EquipmentType(byte value){
 		equipmentType = value;
 	}

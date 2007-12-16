@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
+
+/**
+ * EF_IC,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0005
+ * 
+ */
 public class EF_IC extends DataClass {
-	static final public int size = 8;
+	public static final int size = 8;
 	private CardChipIdentification cardChipIdentification;
+
 	
+	/**
+	 * Constructor for an EF_IC object
+	 * 
+	 * @param	value	byte array of an EF_IC structure
+	 * 					whose data is used when the EF_IC
+	 * 					object is created.
+	 */
 	public EF_IC(byte[] value){
 		cardChipIdentification = new CardChipIdentification();
 		cardChipIdentification.setIcSerialNumber( arrayCopy(value, 0 , 4));

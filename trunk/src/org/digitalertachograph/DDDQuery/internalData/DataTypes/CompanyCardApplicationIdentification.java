@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,6 +33,14 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	private byte[] cardStructureVersion;
 	private int noOfCompanyActivityRecords;
 	
+
+	/**
+	 * Constructor for a CompanyCardApplicationIdentification object
+	 * 
+	 * @param	value	byte array of a CompanyCardApplicationIdentification structure
+	 * 					whose data is used when the CompanyCardApplicationIdentification
+	 * 					object is created.
+	 */
 	public CompanyCardApplicationIdentification(byte[] value){
 		typeOfTachographCardId = new EquipmentType(value[0]);
 		cardStructureVersion = arrayCopy(value, 1, 2);

@@ -28,9 +28,10 @@ public abstract class DataClass {
 	
 	static protected short convertIntoUnsigned1ByteInt(byte b){
 		short s;
-		s = (short) (b & 0xFF);
+		s = (short) (b & 0xff);
 		return s;	
 	}
+
 	static protected short convertIntoUnsigned1ByteInt(byte [] b){
 		return convertIntoUnsigned1ByteInt(b[0]);
 	}
@@ -38,16 +39,16 @@ public abstract class DataClass {
 	static protected int convertIntoUnsigned2ByteInt(byte[] b){
 		int i = 0;
 		
-		i += (b[0] & 0xFF) << 8;
-		i += (b[1] & 0xFF);
+		i += (b[0] & 0xff) << 8;
+		i += (b[1] & 0xff);
 		return i;
 	}
 	
 	static protected int convertIntoUnsigned3ByteInt(byte[] b){
 		int i = 0;
-		i += (b[0] & 0xFF) << 16;
-		i += (b[1] & 0xFF) << 8;
-		i += (b[2] & 0xFF);
+		i += (b[0] & 0xff) << 16;
+		i += (b[1] & 0xff) << 8;
+		i += (b[2] & 0xff);
 		return i;
 	}
 	
@@ -57,9 +58,9 @@ public abstract class DataClass {
 
 		//accum |= ( (long) (b[i] & 0xff) ) << shiftBy;
 		
-		long al = (((long)b[0]) & 0xFF) << 24 ;
-		long bl = (((long)b[1]) & 0xFF) << 16 ;
-		long cl = (((long)b[2]) & 0xFF) << 8 ;
+		long al = (((long)b[0]) & 0xff) << 24 ;
+		long bl = (((long)b[1]) & 0xff) << 16 ;
+		long cl = (((long)b[2]) & 0xff) << 8 ;
 		
 		//long dl = (((long)b[3]) & 0xFF) << 0 ;
 		int di =  (b[3] & 0xff);

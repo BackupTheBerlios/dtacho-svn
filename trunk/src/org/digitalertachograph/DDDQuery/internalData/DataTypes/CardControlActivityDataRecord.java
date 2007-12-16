@@ -39,6 +39,14 @@ public class CardControlActivityDataRecord extends DataClass {
 	private TimeReal controlDownloadPeriodBegin;
 	private TimeReal controlDownloadPeriodEnd;
 
+
+	/**
+	 * Constructor for a CardControlActivityDataRecord object
+	 * 
+	 * @param	value	byte array of a CardControlActivityDataRecord structure
+	 * 					whose data is used when the CardControlActivityDataRecord
+	 * 					object is created.
+	 */
 	public CardControlActivityDataRecord(byte[] value){
 		controlType = new ControlType(value[0]);
 		controlTime = new TimeReal( arrayCopy(value, 1, 4));

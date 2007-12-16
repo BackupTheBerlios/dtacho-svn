@@ -35,7 +35,15 @@ public class WorkshopCardCalibrationData extends DataClass {
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
 	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>();
+
 	
+	/**
+	 * Constructor for a WorkshopCardCalibrationData object
+	 * 
+	 * @param	value	byte array of a WorkshopCardCalibrationData structure
+	 * 					whose data is used when the WorkshopCardCalibrationData
+	 * 					object is created.
+	 */
 	public WorkshopCardCalibrationData(byte[] value){
 		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt(value[2]);

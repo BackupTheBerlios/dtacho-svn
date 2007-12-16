@@ -21,7 +21,6 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class FullCardNumber extends DataClass {
-	
 	/*
 	 * FullCardNumber ::= SEQUENCE {
 	 * 	cardType EquipmentType, 1 byte
@@ -33,30 +32,46 @@ public class FullCardNumber extends DataClass {
 	private EquipmentType cardType;
 	private NationNumeric cardIssuingMemberState;
 	private CardNumber cardNumber;
+
+	
+	/**
+	 * Constructor for a FullCardNumber object
+	 * 
+	 * @param	value	byte array of a FullCardNumber structure
+	 * 					whose data is used when the FullCardNumber
+	 * 					object is created.
+	 */
 	public FullCardNumber(byte[] value){
 		cardType = new EquipmentType(value[0]);
 		cardIssuingMemberState = new NationNumeric(value[1]);
 		// TODO not sure bout this solution.
 		cardNumber = new CardNumber( arrayCopy(value, 2, 16), cardType.getEquipmentType() );
 	}
+
 	public NationNumeric getCardIssuingMemberState() {
 		return cardIssuingMemberState;
 	}
+	
 	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
 		this.cardIssuingMemberState = cardIssuingMemberState;
 	}
+	
 	public CardNumber getCardNumber() {
 		return cardNumber;
 	}
+	
 	public void setCardNumber(CardNumber cardNumber) {
 		this.cardNumber = cardNumber;
 	}
+	
 	public EquipmentType getCardType() {
 		return cardType;
 	}
+	
 	public void setCardType(EquipmentType cardType) {
 		this.cardType = cardType;
 	}
+	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

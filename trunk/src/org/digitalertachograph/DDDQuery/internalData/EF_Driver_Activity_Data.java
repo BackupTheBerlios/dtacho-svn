@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardDriverActivity;
 import org.jdom.Element;
 
+
+/**
+ * EF_Driver_Activity_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0504
+ * 
+ */
 public class EF_Driver_Activity_Data extends DataClass {
 	public int size;
 	private CardDriverActivity cardDriverActivity;
 	
+
+	/**
+	 * Constructor for an EF_Driver_Activity object
+	 * 
+	 * @param	value	byte array of an EF_Driver_Activity structure
+	 * 					whose data is used when the EF_Driver_Activity
+	 * 					object is created.
+	 */
 	public EF_Driver_Activity_Data(byte[] value){
 		size = value.length;
 		cardDriverActivity = new CardDriverActivity(value);

@@ -29,6 +29,14 @@ public class VehicleIdentificationNumber extends DataClass {
 	
 	private String vehicleIdentificationNumber;
 	
+
+	/**
+	 * Constructor for a VehicleIdentificationNumber object
+	 * 
+	 * @param	value	byte array of a VehicleIdentificationNumber structure
+	 * 					whose data is used when the VehicleIdentificationNumber
+	 * 					object is created.
+	 */
 	public VehicleIdentificationNumber(byte[]value){
 		vehicleIdentificationNumber = new String(value);
 	}

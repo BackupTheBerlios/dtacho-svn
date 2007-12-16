@@ -33,8 +33,16 @@ public class CalibrationPurpose extends DataClass {
 	 * TODO konstanten?
 	 */
 	private byte calibrationPurpose;
-	
-	public CalibrationPurpose(byte value){
+
+
+	/**
+	 * Constructor for a CalibrationPurpose object
+	 * 
+	 * @param	value	byte array of a CalibrationPurpose structure
+	 * 					whose data is used when the CalibrationPurpose
+	 * 					object is created.
+	 */
+	public CalibrationPurpose(byte value) {
 		calibrationPurpose = value;
 	}
 	

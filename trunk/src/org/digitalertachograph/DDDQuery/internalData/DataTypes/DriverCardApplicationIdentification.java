@@ -48,6 +48,15 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	private int noOfCardVehicleRecords;
 	private short noOfCardPlaceRecords;
 	
+
+	
+	/**
+	 * Constructor for a DriverCardApplicationIdentification object
+	 * 
+	 * @param	value	byte array of a DriverCardApplicationIdentification structure
+	 * 					whose data is used when the DriverCardApplicationIdentification
+	 * 					object is created.
+	 */
 	public DriverCardApplicationIdentification(byte[] value){
 		typeOfTachographCardId = new EquipmentType( value[0] );
 		cardStructureVersion = arrayCopy(value, 1, 2);

@@ -35,6 +35,15 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	private HolderName cardHolderName;
 	private Language cardHolderPreferredLanguage;
 	
+	
+	/**
+	 * Constructor for a WorkshopCardHolderIdentification object
+	 * 
+	 * @param	value	byte array of a WorkshopCardHolderIdentification structure
+	 * 					whose data is used when the WorkshopCardHolderIdentification
+	 * 					object is created.
+	 */
+
 	public WorkshopCardHolderIdentification(byte[] value){
 		workshopName = new Name( arrayCopy(value, 0, 36));
 		workshopAddress = new Address( arrayCopy(value, 36, 36));
@@ -73,7 +82,6 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	public void setWorkshopName(Name workshopName) {
 		this.workshopName = workshopName;
 	}
-	
 
 	@Override
 	public Element generateXMLElement(String name) {

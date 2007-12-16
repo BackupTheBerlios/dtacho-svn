@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardVehiclesUsed;
 import org.jdom.Element;
 
+
+/**
+ * EF_Vehicles_Used,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0505
+ * 
+ */
 public class EF_Vehicles_Used extends DataClass {
-	
 	public int size;
 	private CardVehiclesUsed cardVehiclesUsed;
+
+	
+	/**
+	 * Constructor for an EF_Vehicles_Used object
+	 * 
+	 * @param	value	byte array of an EF_Vehicles_Used structure
+	 * 					whose data is used when the EF_Vehicles_Used
+	 * 					object is created.
+	 */
 	public EF_Vehicles_Used(byte[] value){
 		size = value.length;
 		cardVehiclesUsed = new CardVehiclesUsed( value);
@@ -36,6 +51,4 @@ public class EF_Vehicles_Used extends DataClass {
 		node.addContent(child);
 		return node;
 	}
-	
-	
 }

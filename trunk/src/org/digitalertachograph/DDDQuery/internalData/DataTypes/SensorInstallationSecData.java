@@ -38,6 +38,14 @@ public class SensorInstallationSecData extends DataClass {
 	private byte[] tDesKeyA;
 	private byte[] tDesKeyB;
 	
+
+	/**
+	 * Constructor for a SensorInstallationSecData object
+	 * 
+	 * @param	value	byte array of a SensorInstallationSecData structure
+	 * 					whose data is used when the SensorInstallationSecData
+	 * 					object is created.
+	 */
 	public SensorInstallationSecData(byte[] value){
 		tDesKeyA = arrayCopy(value, 0, 8);
 		tDesKeyB = arrayCopy(value, 8, 8);

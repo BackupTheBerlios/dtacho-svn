@@ -37,7 +37,7 @@ public class EventFaultType extends DataClass {
 	 *  '07'H Over speeding,
 	 *  '08'H Power supply interruption,
 	 *  '09'H Motion data error,
-	 *  '0A'H to �0F�H RFU,
+	 *  '0A'H to '0F'H RFU,
 	 * 
 	 * '1x'H Vehicle unit related security breach attempt events,
 	 *  '10'H No further details,
@@ -89,9 +89,14 @@ public class EventFaultType extends DataClass {
 	public final byte MANUFACTURER_SPECIFIC = 6;
 	
 	
-	public EventFaultType(byte b){
-		eventFaultType = b;
-		category = (byte) ((b & 0xF0) >> 4);
+	/**
+	 * Constructor for an EventFaultType object
+	 * 
+	 * @param	eventFaultType		byte that qualifies an event or fault
+	 */
+	public EventFaultType(byte eventFaultType){
+		this.eventFaultType = eventFaultType;
+		category = (byte) ((eventFaultType & 0xF0) >> 4);
 
 		if (category >= 5 && category < 8)
 			// 0x50 ... 0x7F

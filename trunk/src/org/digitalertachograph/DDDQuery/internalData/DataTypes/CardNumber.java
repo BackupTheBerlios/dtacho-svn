@@ -62,6 +62,13 @@ public class CardNumber extends DataClass {
 	private int cardType;
 	
 	
+	/**
+	 * Constructor for a CardNumber object
+	 * 
+	 * @param	value	byte array of a CardNumber structure
+	 * 					whose data is used when the CardNumber
+	 * 					object is created.
+	 */
 	public CardNumber(byte[] value, int cardType){
 		this.cardType = cardType;
 		if(cardType == EquipmentType.DRIVER_CARD){

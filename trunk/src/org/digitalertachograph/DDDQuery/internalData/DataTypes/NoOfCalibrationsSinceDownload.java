@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,8 +21,20 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class NoOfCalibrationsSinceDownload extends DataClass {
+	/* 
+	 * NoOfCalibrationsSinceDownload ::= INTEGER(0..2^16-1)
+	 */
+
 	private int noOfCalibrationsSinceDownload;
 
+	
+	/**
+	 * Constructor for a NoOfCalibrationsSinceDownload object
+	 * 
+	 * @param	value	byte array of a NoOfCalibrationsSinceDownload structure
+	 * 					whose data is used when the NoOfCalibrationsSinceDownload
+	 * 					object is created.
+	 */
 	public NoOfCalibrationsSinceDownload(byte[] value) {
 		this.noOfCalibrationsSinceDownload = convertIntoUnsigned2ByteInt(value);
 	}

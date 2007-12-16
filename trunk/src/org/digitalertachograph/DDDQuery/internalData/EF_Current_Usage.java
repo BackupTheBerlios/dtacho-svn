@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,11 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardCurrentUse;
 import org.jdom.Element;
 
+
+/**
+ * EF_Current_Usage,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0507
+ * 
+ */
 public class EF_Current_Usage extends DataClass {
-	
 	public static final int size = 19;
 	private CardCurrentUse cardCurrentUse;
 	
+
+	/**
+	 * Constructor for an EF_Current_Usage object
+	 * 
+	 * @param	value	byte array of an EF_Current_Usage structure
+	 * 					whose data is used when the EF_Current_Usage
+	 * 					object is created.
+	 */
 	public EF_Current_Usage(byte[] value){
 		cardCurrentUse = new CardCurrentUse(value);
 	}
@@ -45,5 +59,4 @@ public class EF_Current_Usage extends DataClass {
 		node.addContent(child);
 		return node;
 	}
-	
 }

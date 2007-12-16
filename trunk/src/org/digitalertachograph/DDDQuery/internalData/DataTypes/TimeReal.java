@@ -37,9 +37,17 @@ public class TimeReal extends DataClass{
 	private long timereal = 0;
 	
 	public TimeReal(){
-		
+	
 	}
 	
+
+	/**
+	 * Constructor for a TimeReal object
+	 * 
+	 * @param	value	byte array of a TimeReal structure
+	 * 					whose data is used when the TimeReal
+	 * 					object is created.
+	 */
 	public TimeReal(byte[] value){
 		this( convertIntoUnsigned4ByteInt(value));
 	}
@@ -47,7 +55,7 @@ public class TimeReal extends DataClass{
 	public TimeReal(long i){
 		this.timereal = i;
 		if(i != 0){
-		System.out.print(i + " - ");
+		System.out.println(" timestamp: " + i);
 		//Date d = new Date(i * 1000);
 		DateFormat format = DateFormat.getInstance();
 		format.setTimeZone( TimeZone.getTimeZone("GMT") );

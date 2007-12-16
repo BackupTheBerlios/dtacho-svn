@@ -50,10 +50,18 @@ public class CardActivityDailyRecord extends DataClass {
 	
 	private boolean complete = false;
 	private int size;
-	
+
+
+	/**
+	 * Constructor for a CardActivityDailyRecord object
+	 * 
+	 * @param	value	byte array of a CardActivityDailyRecord structure
+	 * 					whose data is used when the CardActivityDailyRecord
+	 * 					object is created.
+	 */
 	public CardActivityDailyRecord(byte[] value) {
 
-		// if we get so less bytes we just a part of an old CardAcitivityDailyRecord.
+		// if we get so less bytes we have just a part of an old CardActivityDailyRecord.
 		if (value.length <= 12)
 			return;
 		
@@ -75,7 +83,25 @@ public class CardActivityDailyRecord extends DataClass {
 		this.complete = true;
 	}
 	
+	/**
+	 * Indicates if the CardActivityDailyRecord object is valid.
+	 * 
+	 * @return			true if the CardActivityDailyRecord object is valid
+	 */
+	public boolean isComplete() {
+		return complete;
+	}
 
+	/**
+	 * Returns the size of the CardActivityDailyRecord structure of which an
+	 * CardActivityDailyRecord object was created.
+	 * 
+	 * @return			size (number of bytes) of the CardActivityDailyRecord structure
+	 */
+	public int getSize() {
+		return size;
+	}
+	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
@@ -113,15 +139,5 @@ public class CardActivityDailyRecord extends DataClass {
 		node.addContent( activityChangeInfoElement );
 
 		return node;
-	}
-	
-	
-	public boolean isComplete() {
-		return complete;
-	}
-
-
-	public int getSize(){
-		return size;
 	}
 }

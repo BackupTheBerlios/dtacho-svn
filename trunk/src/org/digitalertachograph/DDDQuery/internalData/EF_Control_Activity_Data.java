@@ -21,10 +21,23 @@ import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardControlActivi
 //import org.digitalertachograph.DDDQuery.internalData.DataTypes.ControlCardControlActivityData;
 import org.jdom.Element;
 
+/**
+ * EF_Control_Activity_Data,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0508
+ * 
+ */
 public class EF_Control_Activity_Data extends DataClass {
-	public static int size;
+	public int size;
 	private CardControlActivityDataRecord cardControlActivityDataRecord;
 	
+	/**
+	 * Constructor for an EF_Control_Activity_Data object
+	 * 
+	 * @param	value	byte array of an EF_Control_Activity_Data structure
+	 * 					whose data is used when the EF_Control_Activity_Data
+	 * 					object is created.
+	 */
 	public EF_Control_Activity_Data(byte[] value){
 		size = value.length;
 		cardControlActivityDataRecord = new CardControlActivityDataRecord(value);

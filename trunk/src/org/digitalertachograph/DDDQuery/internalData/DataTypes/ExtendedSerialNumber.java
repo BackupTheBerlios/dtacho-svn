@@ -30,17 +30,25 @@ public class ExtendedSerialNumber extends DataClass {
 	 * }
 	 */
 
-
 	private long serialNumber; // 4 bytes int unsigned
 	private String monthYear;
 	private byte type;
 	private short manufacturerCode;
+
 	
-	public ExtendedSerialNumber(byte[] cardExtendedSearialNumber ){
-		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy(cardExtendedSearialNumber, 0 , 4));
-		monthYear = convertIntoBCDString( arrayCopy(cardExtendedSearialNumber, 4, 2));
-		type = cardExtendedSearialNumber[6]; 
-		manufacturerCode = convertIntoUnsigned1ByteInt(cardExtendedSearialNumber[7]); 
+	/**
+	 * Constructor for an ExtendedSerialNumber object
+	 * 
+	 * @param	cardExtendedSerialNumber	byte array of an ExtendedSerialNumber structure
+	 * 										whose data is used when the ExtendedSerialNumber
+	 * 										object is created.
+	 */
+
+	public ExtendedSerialNumber(byte[] cardExtendedSerialNumber ){
+		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy(cardExtendedSerialNumber, 0 , 4));
+		monthYear = convertIntoBCDString( arrayCopy(cardExtendedSerialNumber, 4, 2));
+		type = cardExtendedSerialNumber[6]; 
+		manufacturerCode = convertIntoUnsigned1ByteInt(cardExtendedSerialNumber[7]); 
 	}
 
 	public short getManufacturerCode() {

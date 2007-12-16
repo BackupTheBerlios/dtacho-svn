@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,8 +25,17 @@ public class Language extends DataClass {
 	 * Language ::= IA5String(SIZE(2))
 	 * Value assignment: Two-letter lower-case coding according to ISO 639.
 	 */
+
 	private String language;
 	
+	
+	/**
+	 * Constructor for a Language object
+	 * 
+	 * @param	value	byte array of a Language structure
+	 * 					whose data is used when the Language
+	 * 					object is created.
+	 */
 	public Language(byte[] value){
 		language = new String(value);
 	}

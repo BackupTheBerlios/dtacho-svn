@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth
+/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +32,15 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 */
 	
 	private byte entryTypeDailyWorkPeriod;
+
 	
+	/**
+	 * Constructor for an EntryTypeDailyWorkPeriod object
+	 * 
+	 * @param	value	byte array of an EntryTypeDailyWorkPeriod structure
+	 * 					whose data is used when the EntryTypeDailyWorkPeriod
+	 * 					object is created.
+	 */
 	public EntryTypeDailyWorkPeriod(byte value){
 		entryTypeDailyWorkPeriod = value;
 	}

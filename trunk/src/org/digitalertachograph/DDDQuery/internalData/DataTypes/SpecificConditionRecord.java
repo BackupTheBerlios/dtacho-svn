@@ -29,7 +29,15 @@ public class SpecificConditionRecord extends DataClass {
 	 */
 	private TimeReal entryTime;
 	private SpecificConditionType specificConditionType;
+
 	
+	/**
+	 * Constructor for a SpecificConditionRecord object
+	 * 
+	 * @param	value	byte array of a SpecificConditionRecord structure
+	 * 					whose data is used when the SpecificConditionRecord
+	 * 					object is created.
+	 */
 	public SpecificConditionRecord(byte[] value){
 		entryTime = new TimeReal( arrayCopy(value, 0, 4));
 		specificConditionType = new SpecificConditionType(value[4]);

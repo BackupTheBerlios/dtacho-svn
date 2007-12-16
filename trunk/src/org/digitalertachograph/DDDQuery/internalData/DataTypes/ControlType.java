@@ -57,6 +57,13 @@ public class ControlType extends DataClass {
 	private boolean display;
 	private static final byte DISPLAY_MASK = (byte)0x10;
 		
+
+	/**
+	 * Constructor for a ControlType object
+	 * 
+	 * @param	value	byte that indicates the activities carried out during
+	 * 					a control.
+	 */
 	public ControlType(byte value){
 		this.setControlType(value);
 	}

@@ -29,7 +29,15 @@ public class CardCurrentUse extends DataClass{
 	 */
 	private TimeReal sessionOpenTime;
 	private VehicleRegistrationIdentification sessionOpenVehicle;
-	
+
+
+	/**
+	 * Constructor for a CardCurrentUse object
+	 * 
+	 * @param	value	byte array of a CardCurrentUse structure
+	 * 					whose data is used when the CardCurrentUse
+	 * 					object is created.
+	 */
 	public CardCurrentUse(byte[] value){
 		sessionOpenTime = new TimeReal( arrayCopy(value, 0, 4));
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy(value, 4, 15));

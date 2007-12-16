@@ -40,6 +40,13 @@ public class CardVehicleRecord extends DataClass {
 	private String vuDataBlockCounter;
 	
 	
+	/**
+	 * Constructor for a CardVehicleRecord object
+	 * 
+	 * @param	value	byte array of a CardVehicleRecord structure
+	 * 					whose data is used when the CardVehicleRecord
+	 * 					object is created.
+	 */
 	public CardVehicleRecord(byte[] value){
 		vehicleOdometerBegin = convertIntoUnsigned3ByteInt( arrayCopy(value, 0, 3));
 		vehicleOdometerEnd = convertIntoUnsigned3ByteInt( arrayCopy(value, 3, 3));

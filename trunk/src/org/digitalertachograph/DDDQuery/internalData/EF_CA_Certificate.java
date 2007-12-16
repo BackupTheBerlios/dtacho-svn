@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
+
+/**
+ * EF_CA_Certificate,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: C108
+ * 
+ */
 public class EF_CA_Certificate extends DataClass {
 	public static final int size = 194;
 	private MemberStateCertificate cardCertificate;
 	
+
+	/**
+	 * Constructor for an EF_CA_Certificate object
+	 * 
+	 * @param	value	byte array of an EF_CA_Certificate structure
+	 * 					whose data is used when the EF_CA_Certificate
+	 * 					object is created.
+	 */
 	public EF_CA_Certificate(byte [] value){
 		cardCertificate = new MemberStateCertificate();
 		cardCertificate.setCertificate(value);

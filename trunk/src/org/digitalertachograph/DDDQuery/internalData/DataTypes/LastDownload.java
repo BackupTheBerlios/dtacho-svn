@@ -20,12 +20,26 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 //import org.digitalertachograph.DDDQuery.internalData.DataClass;
 
 public class LastDownload extends TimeReal {
+
+	
+	/**
+	 * Constructor for a LastDownload object
+	 */
 	public LastDownload(){
 		super();
 	}
+
+	/**
+	 * Constructor for a LastDownload object
+	 * 
+	 * @param	value	byte array of a LastDownload structure
+	 * 					whose data is used when the LastDownload
+	 * 					object is created.
+	 */
 	public LastDownload(byte[] value){
 		super(value);
 	}
+
 	public LastDownload(long i){
 		super(i);
 	}

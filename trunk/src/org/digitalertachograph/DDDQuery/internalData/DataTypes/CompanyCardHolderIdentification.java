@@ -31,7 +31,15 @@ public class CompanyCardHolderIdentification extends DataClass {
 	private Name companyName;
 	private Address companyAddress;
 	private Language cardHolderPreferredLanguage;
+
 	
+	/**
+	 * Constructor for a CompanyCardHolderIdentification object
+	 * 
+	 * @param	value	byte array of a CompanyCardHolderIdentification structure
+	 * 					whose data is used when the CompanyCardHolderIdentification
+	 * 					object is created.
+	 */
 	public CompanyCardHolderIdentification(byte[] value){
 		companyName = new Name( arrayCopy(value, 0, 36) );
 		companyAddress = new Address( arrayCopy(value, 36, 36));

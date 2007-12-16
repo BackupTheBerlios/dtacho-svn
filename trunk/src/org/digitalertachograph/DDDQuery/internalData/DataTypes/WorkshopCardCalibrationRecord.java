@@ -64,7 +64,15 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	private VuPartNumber vuPartNumber;
 	private ExtendedSerialNumber vuSerialNumber;
 	private ExtendedSerialNumber sensorSerialNumber;
+
 	
+	/**
+	 * Constructor for a WorkshopCardCalibrationRecord object
+	 * 
+	 * @param	value	byte array of a WorkshopCardCalibrationRecord structure
+	 * 					whose data is used when the WorkshopCardCalibrationRecord
+	 * 					object is created.
+	 */
 	public WorkshopCardCalibrationRecord(byte[] value){
 		calibrationPurpose = new CalibrationPurpose(value[0]);
 		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy(value, 1, 17));

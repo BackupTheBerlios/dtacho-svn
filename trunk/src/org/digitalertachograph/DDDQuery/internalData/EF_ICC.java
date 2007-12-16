@@ -20,10 +20,25 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
 
+
+/**
+ * EF_ICC,
+ * 
+ * Council Regulation (EEC) No 3821/85 File ID: 0002
+ * 
+ */
 public class EF_ICC extends DataClass {
-	static final public int size = 25;
+	public static final int size = 25;
 	private CardIccIdentification cardIccIdentification;
+
 	
+	/**
+	 * Constructor for an EF_ICC object
+	 * 
+	 * @param	value	byte array of an EF_ICC structure
+	 * 					whose data is used when the EF_ICC
+	 * 					object is created.
+	 */
 	public EF_ICC(byte[] value){
 		cardIccIdentification = new CardIccIdentification(value);
 	}

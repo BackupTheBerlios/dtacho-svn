@@ -27,7 +27,7 @@ import org.jdom.Element;
 public class CardEventRecord extends DataClass {
 	/*
 	 * CardEventRecord ::= SEQUENCE {
-	 * 	eventType EventFaultType, 1 bytes
+	 * 	eventType EventFaultType, 1 byte
 	 * 	eventBeginTime TimeReal, 4 bytes
 	 * 	eventEndTime TimeReal, 4 bytes
 	 * 	eventVehicleRegistration VehicleRegistrationIdentification, 15 bytes
@@ -40,7 +40,15 @@ public class CardEventRecord extends DataClass {
 	private TimeReal eventBeginTime;
 	private TimeReal eventEndTime;
 	private VehicleRegistrationIdentification eventVehicleRegistration;
-	
+
+
+	/**
+	 * Constructor for a CardEventRecord object
+	 * 
+	 * @param	value	byte array of a CardEventRecord structure
+	 * 					whose data is used when the CardEventRecord
+	 * 					object is created.
+	 */
 	public CardEventRecord(byte[] value){
 		eventType = new EventFaultType(value[0]);
 		eventBeginTime = new TimeReal(arrayCopy(value, 1, 4));
@@ -68,7 +76,7 @@ public class CardEventRecord extends DataClass {
 		return eventType;
 	}
 
-	public void setEventFaultType(EventFaultType eventType) {
+	public void setEventType(EventFaultType eventType) {
 		this.eventType = eventType;
 	}
 
