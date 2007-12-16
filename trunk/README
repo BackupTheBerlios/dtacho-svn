@@ -14,20 +14,29 @@ shall also be developed.
 Web page (German):        http://www.digitaler-tachograph.org/
 Project/development page: http://developer.berlios.de/projects/dtacho/
 
-User and developer mailing lists for this projects are available. For details
+User and developer mailing lists for this project are available. For details
 see our web page or the project page at Berlios.
 
 For information/specifications of the DTCO see below, chapter SPECIFICATIONS.
 
 
+LICENSE
+-------
+
+dtacho is released under the GNU GENERAL PUBLIC LICENSE Version 2.
+
+
 STATUS
 ------
 
-The byte data to XML converter is written in Java.
+The byte data to XML converter is written in Java. The status of dtacho is
+alpha. It may not work under all circumstances and may produce false or
+unexpected results.
 
-08.12.2007
-Currently this software converts a DTCO driver card .DDD file (C_*.DDD) to a
-XML file. The code was developed by Martin Barth in his diploma thesis.
+16.12.2007
+Currently this software converts the data of a DTCO driver card .DDD file
+(C_*.DDD) to a XML file. The code was developed by Martin Barth in his diploma
+thesis. Development is continued by Gerald Schnabel.
 
 
 NOTES
@@ -84,7 +93,7 @@ HOW TO RUN THE PROGRAM
 -Running the program
 
  If you have compiled the source as described above you are already in the
- correct directory. 
+ correct directory.
 
  If you have compiled the source in eclipse change to the bin directory.
 
@@ -122,7 +131,7 @@ HOW TO RUN THE PROGRAM
 
  will convert all driver card files (C_*.DDD) in the current directory
  to XML files.
- 
+
 
  NOTE: currently only driver card files (C_*.DDD) are supported! See
        chapter STATUS.

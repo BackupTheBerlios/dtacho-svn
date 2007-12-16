@@ -1,0 +1,175 @@
+
+dtacho Projekt
+==============
+
+
+INFO
+----
+
+Dieses Projekt hat das Ziel, eine plattformunabhängige Open Source Software
+zu erstellen, die Daten von Fahrerkarten und Fahrzeugeinheiten eines Digitalen
+Tachographen (DTCO) nach XML konvertiert. Eine Anwendung zur Untersuchung und
+zur Visualisierung der Daten soll ebenfalls entwickelt werden.
+
+Webseite                  : http://www.digitaler-tachograph.org/
+Projekt-/Entwicklungsseite: http://developer.berlios.de/projects/dtacho/
+
+Es exisitieren Mailinglisten für Benutzer und Entwickler dieses Projekts. Für
+Details besuchen Sie unsere Webseite oder die Projektseite auf Berlios.
+
+Für Informationen/Spezifikationen zum DTCO siehe unten im Kapitel
+SPEZIFIKATIONEN.
+
+
+LIZENZ
+------
+
+dtacho wird unter der GNU GENERAL PUBLIC LICENSE Version 2 veröffentlicht.
+
+
+STATUS
+------
+
+Der Byte-Daten nach XML Konvertierer ist in Java geschrieben. Der Status von
+dtacho ist alpha. Es kann passieren, dass die Software nicht unter allen
+Bedingungen funktioniert und dass falsche oder unerwartete Ergebnisse auftreten.
+
+16.12.2007
+Momentan konvertiert diese Software die Daten einer .DDD-Datei (C_*.DDD), die
+von einer DTCO-Fahrerkarte stammen, zu einer XML-Datei. Der Code wurde von
+Martin Barth in seiner Diplomarbeit entwickelt. Die Entwicklung wird von
+Gerald Schnabel fortgesetzt.
+
+
+BEMERKUNGEN
+-----------
+
+Diese Software hängt von einigen zusätzlichen Komponenten (jars) ab, welche im
+Verzeichnis classes abgelegt sind.
+
+Die jars wurden von folgenden Quellen bezogen:
+
+* xmlrpc
+
+  URL: http://ws.apache.org/xmlrpc/
+  Datei: xmlrpc-3.1-bin.tar.gz
+  JARS:
+  -xmlrpc-common-3.1.jar
+  -xmlrpc-client-3.1.jar
+  -xmlrpc-server-3.1.jar
+  -commons-logging-1.1.jar
+  -ws-commons-util-1.0.2.jar
+
+* jdom
+
+  URL: http://www.jdom.org/
+  Datei: jdom-1.1.tar.gz
+  JARS:
+  -jdom-1.1.jar
+
+
+STARTEN DES PROGRAMMS
+---------------------
+
+-Den Quellcode beziehen
+
+ Der Quellcode kann von Berlios.de via SVN ausgecheckt werden.
+
+ gerald@dtachodev:/tmp/dtacho_test$ svn checkout svn://svn.berlios.de/dtacho/trunk
+
+
+-Den Quellcode compilieren
+
+ Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
+ sein. Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
+
+ -in das Verzeichnis trunk/src wechseln
+
+  gerald@dtachodev:/tmp/dtacho_test$ cd trunk/src
+
+ -den Java-Compiler aufrufen:
+
+  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/digitalertachograph/DDDQuery/*.java
+
+
+-Starten des Programms
+
+ Wenn der Quellcode wie oben beschrieben compiliert wurde, befindet man sich
+ schon im richtigen Verzeichnis.
+
+ Wenn der Quellcode mit Eclipse compiliert wurde, in das Verzeichnis bin wechseln.
+
+ 'ls -lR | grep ^d' sollte die folgende Ausgabe liefern:
+
+ gerald@dtachodev:~/workspace/dtacho/bin$ ls -lR | grep ^d
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
+ drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
+
+ Um den Formatwandler zu starten müssen
+ -das aktuelle Verzeichnis
+ -das Verzeichnis, dass die zusätzlichen jar-Dateien (siehe Kapitel BEMERKUNGEN
+  oben), enthält,
+ zum Java-Klassenpfad hinzugefügt werden.
+
+ Dies erfolgt mit der Option -cp.
+
+
+ Beispiele:
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
+
+ Es wird die Datei C_driver_card.DDD einer Fahrerkarte gelesen, einige
+ (Debug-) Informationen ausgegeben und die Datei C_driver_card.DDD.xml
+ erstellt.
+
+
+ Mehrere Dateien/Wildcards werden über die Kommandozeile unterstützt, z.B.
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ org.digitalertachograph.DDDQuery.Controller C_*.DDD
+
+ konvertiert alle Dateien von Fahrerkarten (C_*.DDD) im aktuellen Verzeichnis
+ zu XML-Dateien.
+
+
+ BEMERKUNG: momentan werden nur Dateien von Fahrerkarten (C_*.DDD)
+            unterstützt! Siehe Kapitel STATUS.
+
+
+SPEZIFIKATIONEN
+---------------
+
+Die Spezifikation des Digitalen Tachographen (DTCO) ist auf dem Portal der
+Europäischen Union unter http://www.europa.eu erhältlich.
+
+Die folgenden Verordnungen (erhältlich in verschiedenen Sprachen) sind für
+dieses Projekt von besonderem Interesse:
+
+-Verordnung (EG) Nr. 1360/2002 der Kommission vom 13. Juni 2002 zur siebten
+ Anpassung der Verordnung (EWG) Nr. 3821/85 des Rates über das Kontrollgerät
+ im Straßenverkehr an den technischen Fortschritt
+
+ http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32002R1360:DE:NOT
+
+-Verordnung (EG) Nr. 432/2004 der Kommission vom 5. März 2004 zur achten
+ Anpassung der Verordnung (EWG) Nr. 3821/85 des Rates über das Kontrollgerät
+ im Straßenverkehr an den technischen Fortschritt
+
+ http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:32004R0432:DE:NOT
+
+-Konsolidierte Fassungen der Verordnung (EWG) Nr. 3821/85
+
+ http://eur-lex.europa.eu/Result.do?direct=yes&lang=de&xsl=lex04_consleg_page&consleg=01985R3821&suffixewhereihm=ID_CELEX:01985R3821
+
+-Informationen zur ASN.1 (Abstract Syntax Notation One), die in den Verordnungen
+ verwendet wird:
+
+ -ASN.1 Consortium
+  http://www.asn1.org/
+
+ -Bücher/Referenzen
+  http://www.asn1.org/books/
