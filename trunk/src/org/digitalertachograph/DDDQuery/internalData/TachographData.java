@@ -153,10 +153,10 @@ public class TachographData extends DataClass {
 		}else{
 			if(tag[2] != 0x01){
 				// not a signature tag
-				System.out.print("\nPANIC PANIC PANIC: expected signature tag" );
-				System.out.print( " " + Integer.toHexString( (int)(tag[0] & 0xff) ));
-				System.out.print( " " + Integer.toHexString( (int)(tag[1] & 0xff) ));
-				System.out.println( " " + Integer.toHexString( (int)(tag[2] & 0xff) ));
+				System.out.print("\nPANIC PANIC PANIC: expected signature tag, got" );
+				System.out.printf( " %02x", (int)(tag[0] & 0xff) );
+				System.out.printf( " %02x", (int)(tag[1] & 0xff) );
+				System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
 			}
 		}
 	}
@@ -190,7 +190,12 @@ public class TachographData extends DataClass {
 		}
 	}
 	
-	public void printTV(){
+	public void printTV() {
+		printTV( 16 );
+	}
+		
+	public void printTV( int bytesperline ) {
+		hexdumpwidth = bytesperline;
 		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
 			Object [] tmp = (Object[]) it.next();
@@ -214,8 +219,8 @@ public class TachographData extends DataClass {
 		}
 	}
 
-	private static final int hexdumpwidth = 16;
-	private static int hexdumpcount=0;
+	private static int hexdumpwidth = 16;
+	private static int hexdumpcount = 0;
 	private static byte[] hexdumpbyte = new byte[hexdumpwidth];
 
 	private void hexdump( byte b ) {

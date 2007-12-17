@@ -79,6 +79,7 @@ HOW TO RUN THE PROGRAM
 -Compiling the source
 
  To compile the source the Java Development Kit (JDK) must be installed.
+ Please use a recent JDK. Development is done with version 6.0u3.
  See http://java.sun.com/javase/downloads/index.jsp for more.
 
  -change to the trunk/src directory

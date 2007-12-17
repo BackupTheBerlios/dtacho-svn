@@ -78,9 +78,9 @@ public abstract class DataClass {
 		
 		for(int i = 0; i < b.length; i++){
 			int hNibble, lNibble;
-			hNibble = b[i] & 0xF0;
+			hNibble = b[i] & 0xf0;
 			hNibble = hNibble >> 4;
-			lNibble = b[i] & 0x0F;
+			lNibble = b[i] & 0x0f;
 
 			/* 
 			 * TODO nibble darf nur zwischen 0..9 liegen.

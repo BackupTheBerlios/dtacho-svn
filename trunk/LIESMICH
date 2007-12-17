@@ -81,7 +81,8 @@ STARTEN DES PROGRAMMS
 -Den Quellcode compilieren
 
  Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
- sein. Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
+ sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u3.
+ Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
 
  -in das Verzeichnis trunk/src wechseln
 

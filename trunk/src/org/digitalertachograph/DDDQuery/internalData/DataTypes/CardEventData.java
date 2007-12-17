@@ -48,7 +48,7 @@ public class CardEventData extends DataClass{
 
 
 	private static final int sequencesize = 6;
-	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>();
+	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>(sequencesize);
 
 	
 	/**
@@ -69,7 +69,7 @@ public class CardEventData extends DataClass{
 		// loops are beautiful. cantaloop... funky, funky...
 		for (int j = 0; j < sequencesize; j++ ) {
 
-			cardEventRecords.add(new Vector<CardEventRecord>());
+			cardEventRecords.add(new Vector<CardEventRecord>(12));
 
 			for (int i = (noofeventspertype * 24 * j); i < (noofeventspertype * 24 * (j + 1)); i += 24) {
 				byte[] record = arrayCopy(value, i, 24);
