@@ -1,0 +1,27 @@
+
+2007-12-18
+-date and time are printed for timestamps
+-DDD file parser changes
+-misc changes
+
+2007-12-16
+-README update, german LIESMICH added
+-loads of changes, bugfixes, improvements, cleanups
+
+2007-12-13
+README update
+
+2007-12-11
+-architecture drawing added
+
+2007-12-10
+-misc changes
+
+2007-12-09
+fixes: compiler warnings, typos, bugs
+
+2007-12-08
+-updated information in README
+
+2007-12-06
+-initial source import

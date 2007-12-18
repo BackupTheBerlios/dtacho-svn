@@ -19,12 +19,14 @@ package org.digitalertachograph.DDDQuery;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Arrays;
 
 import org.digitalertachograph.DDDQuery.internalData.TachographData;
 
 public class DDDDataSource implements DataSource {
 	
-	private String src;
+	private byte[] src;
+	private String srcfile;
 	private TachographData td = new TachographData();
 
 	/**
@@ -43,9 +45,13 @@ public class DDDDataSource implements DataSource {
 	 * @param	src		byte array with data of a .ddd file
 	 */
 	public void setSource(byte[] src) {
-		readSource(src);
+		this.src = src;
 	}
 
+	public boolean processSource() {
+		return readSource(src);
+	}
+	
 	/**
 	 * Returns the tachograph data.
 	 * 
@@ -63,12 +69,16 @@ public class DDDDataSource implements DataSource {
 	 *
 	 * @param	src		the location of the .ddd file that will be processed
 	 */
-	public void setSourceFile(String src) {
-		this.src = src;
-		readSourceFile();
+	public void setSourceFile(String srcfile) {
+		this.srcfile = srcfile;
 	}
 
-	private void readSource(byte[] src) {
+	public boolean processSourceFile() {
+		return readSourceFile();
+	}
+
+	private boolean readSource(byte[] src) {
+		boolean parseresult = false;
 		td = new TachographData(); // wipe
 		int pos = 0;
 		while(true){
@@ -78,12 +88,38 @@ public class DDDDataSource implements DataSource {
 				
 			byte[] value;
 			
-			if(src.length < pos + 3){
-				break;
+			// tag
+			while(true) {
+				if(src.length < pos + 3){
+					// end of stream
+					break;
+				}
+
+				System.arraycopy(src, pos, tag, 0, 3);
+				pos += 3;
+
+				if ( td.isValidTag(tag) == false ) {
+					if(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{0x76,0x06})) {
+						System.out.println(" [EEEK] weird data (76 06, SID/TREP?!, OPTAC FW < 2.3?! ) found, skipping...");
+						if(src.length < pos + 42){
+							parseresult = false;
+							break;
+						}
+						pos += 42;
+					} else {
+						System.out.printf("invalid tag, %02x %02x %02x\n", tag[0], tag[1], tag[2]);
+						parseresult = false;
+						break;
+					}
+				} else {
+					parseresult = true;
+					break;
+				}
 			}
-			System.arraycopy(src, pos, tag, 0, 3);
-			pos += 3;
-			
+				
+			if (parseresult == false)
+				break;
+
 			if(src.length < pos + 2){
 				break;
 			}
@@ -98,15 +134,22 @@ public class DDDDataSource implements DataSource {
 			System.arraycopy(src, pos, value, 0, length_i);
 			pos += length_i;
 
-			td.add(tag, length, value);
+			parseresult = td.add(tag, length, value);
+			if(parseresult != true)
+				break;
 		}	
 
-		System.out.println("internal tag structure:");
-		td.printTL();
+		if(parseresult == true) {
+			System.out.println("internal tag structure:");
+			td.printTL();
+			return true;
+		}
+
+		return false;
 	}
-	
-	private void readSourceFile() {
-		File f = new File(src);
+		
+	private boolean readSourceFile() {
+		File f = new File(srcfile);
 		FileInputStream fin = null;
 		byte[] s = null;
 
@@ -136,7 +179,7 @@ public class DDDDataSource implements DataSource {
 			ex.printStackTrace();
 		}
 		
-		readSource(s);
+		return readSource(s);
 	}
 	
 	private int calculateLength(byte[] b) {

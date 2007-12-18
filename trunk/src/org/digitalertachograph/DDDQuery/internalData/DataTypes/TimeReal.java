@@ -18,8 +18,8 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.text.DateFormat;
-//import java.util.Date;
-import java.util.TimeZone;
+import java.util.Date;
+import java.util.Locale;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
@@ -55,11 +55,9 @@ public class TimeReal extends DataClass{
 	public TimeReal(long i){
 		this.timereal = i;
 		if(i != 0){
-		System.out.println(" timestamp: " + i);
-		//Date d = new Date(i * 1000);
-		DateFormat format = DateFormat.getInstance();
-		format.setTimeZone( TimeZone.getTimeZone("GMT") );
-		//Thread.dumpStack();
+		System.out.print(" timestamp: " + i);
+		Date d = new Date(i * 1000);
+		System.out.println(" - " + DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d) );
 		}
 	}
 

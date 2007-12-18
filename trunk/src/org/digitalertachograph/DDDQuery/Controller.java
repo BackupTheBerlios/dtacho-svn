@@ -95,9 +95,16 @@ public class Controller {
 		System.out.println("\n" + file + "\n");	
 		DDDDataSource ds = new DDDDataSource();
 		ds.setSourceFile(file);
-		TachographData td1 = ds.getTachographData();
-		System.out.println("dumping XML...");
-		td1.generateXML(file + ".xml");	
+		if(ds.processSourceFile() == true){
+			TachographData td1 = ds.getTachographData();
+			System.out.println("dumping XML...");
+			td1.generateXML(file + ".xml");	
+
+		}
+		else{
+			System.out.println("there was an error while parsing data");
+			System.out.println("NOT dumping XML!");
+		}
 	}
 
 	public String process(byte[] data){
@@ -105,15 +112,16 @@ public class Controller {
 		for(int i = 0; i< data.length; i++)
 			System.out.print((char) data[i]);
 
-
-
 		ds.setSource(data);
-		TachographData td = ds.getTachographData();
-		String xml = td.generateXML();
-		//System.out.println("pre sendXML");
-		sendXML(xml);
-		//System.out.println("post sendXML");
-		return xml;
+		if(ds.processSource() == true){
+			TachographData td = ds.getTachographData();
+			String xml = td.generateXML();
+			// System.out.println("pre sendXML");
+			sendXML(xml);
+			//	System.out.println("post sendXML");
+			return xml;
+		}
+		return "";
 	}
 
 	public void setupWebserver(){

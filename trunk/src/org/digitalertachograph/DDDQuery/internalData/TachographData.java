@@ -50,115 +50,229 @@ public class TachographData extends DataClass {
 	public Vector<Object> data = new Vector<Object>(); // deprecated
 	private int cardType;
 	private Vector<DataClass> dispatcherQueue = new Vector<DataClass>();
-		
-	public void add(byte[] tag, byte[] length, byte[] value){
+
+	
+	private static final int EF_ENTITY = 0;
+	private static final int EF_WITH_SIGNATURE = 1;
+	
+	private int efstate = EF_ENTITY;
+	private byte[] tag2;
+
+	
+	public boolean isValidTag(byte[] tag){
+		if ((Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x02})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x05})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x00})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x08})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x01})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x20})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0e})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x21})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x02})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x03})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x04})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x05})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x06})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x07})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x08})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x22})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0a})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0b})) |
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0c})) )	{
+
+			return true;
+		}
+		else {
+			return false;
+
+		}
+	}
+
+
+	public boolean add(byte[] tag, byte[] length, byte[] value){
+		boolean parseresult = false;
 		Object[] tmp = {tag, value};
 		data.add(tmp);
 		
-		if( Arrays.equals(tag, new byte[]{0x00,0x02,0x00}) ){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_ICC, 000200");
-			ef_icc = new EF_ICC(value);
-			dispatcherQueue.add(ef_icc);
+		switch(efstate) {
+			case EF_ENTITY:
+				parseresult = true;
+
+				if( Arrays.equals(tag, new byte[]{0x00,0x02,0x00}) ){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_ICC, 00 02 00");
+					ef_icc = new EF_ICC(value);
+					dispatcherQueue.add(ef_icc);
+					tag2 = new byte[]{0x00,0x02};
+					efstate = EF_ENTITY;
+				}
+				else if(Arrays.equals(tag, new byte[]{ 0x00, 0x05, 0x00})){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_IC, 00 05 00");
+					ef_ic = new EF_IC(value);
+					dispatcherQueue.add(ef_ic);
+					tag2 = new byte[]{0x00,0x05};
+					efstate = EF_ENTITY;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0xc1, 0x00, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CARD_CERTIFICATE, c1 00 00");
+					ef_card_certificate = new EF_Card_Certificate(value);
+					dispatcherQueue.add(ef_card_certificate);
+					tag2 = new byte[]{(byte)0xc1,0x00};
+					efstate = EF_ENTITY;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0xc1, 0x08, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CA_CERTIFICATE, c1 08 00");
+					ef_ca_certificate = new EF_CA_Certificate(value);
+					dispatcherQueue.add(ef_ca_certificate);
+					tag2 = new byte[]{(byte)0xc1,0x08};
+					efstate = EF_ENTITY;
+				}
+				else if(Arrays.equals(tag, new byte[]{ 0x05, 0x01, 0x00 })){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_APPLICATION_IDENTIFICATION, 05 01 00");
+					ef_application_identification = new EF_Application_Identification(value);
+					cardType = ef_application_identification.getCardType();
+					dispatcherQueue.add(ef_application_identification);
+					tag2 = new byte[]{0x05,0x01};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x20, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_IDENTIFICATION, 05 20 00");
+					ef_identification = new EF_Identification(value, cardType);
+					dispatcherQueue.add(ef_identification);
+					tag2 = new byte[]{0x05,0x20};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0e, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CARD_DOWNLOAD, 05 0e 00");
+					ef_card_download = new EF_Card_Download(value, cardType);
+					dispatcherQueue.add(ef_card_download);
+					tag2 = new byte[]{0x05,0x0e};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x21, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_DRIVING_LICENCE_INFO, 05 21 00");
+					ef_driving_licence_info = new EF_Driving_Licence_Info(value);
+					dispatcherQueue.add(ef_driving_licence_info);
+					tag2 = new byte[]{0x05,0x21};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x02, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_EVENTS_DATA, 05 02 00");
+					ef_events_data = new EF_Events_Data(value);
+					dispatcherQueue.add(ef_events_data);
+					tag2 = new byte[]{0x05,0x02};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x03, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_FAULTS_DATA, 05 03 00");
+					ef_faults_data = new EF_Faults_Data(value);
+					dispatcherQueue.add(ef_faults_data);
+					tag2 = new byte[]{0x05,0x03};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x04, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_DRIVER_ACTIVITY_DATA, 05 04 00");
+					ef_driver_activity = new EF_Driver_Activity_Data(value);
+					dispatcherQueue.add(ef_driver_activity);
+					tag2 = new byte[]{0x05,0x04};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x05, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_VEHICLES_USED, 05 05 00");
+					ef_vehicles_used = new EF_Vehicles_Used(value);
+					dispatcherQueue.add(ef_vehicles_used);
+					tag2 = new byte[]{0x05,0x05};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x06, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_PLACES, 05 06 00");
+					ef_places = new EF_Places(value);
+					dispatcherQueue.add(ef_places);
+					tag2 = new byte[]{0x05,0x06};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x07, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CURRENT_USAGE, 05 07 00");
+					ef_current_usage = new EF_Current_Usage(value);
+					dispatcherQueue.add(ef_current_usage);
+					tag2 = new byte[]{0x05,0x07};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x08, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CONTROL_ACTIVITY_DATA, 05 08 00");
+					ef_control_activity_data = new EF_Control_Activity_Data(value);
+					dispatcherQueue.add(ef_control_activity_data);
+					tag2 = new byte[]{0x05,0x08};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x22, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_SPECIFIC_CONDITIONS, 05 22 00");
+					ef_specific_conditions = new EF_Specific_Conditions(value);
+					dispatcherQueue.add(ef_specific_conditions);
+					tag2 = new byte[]{0x05,0x22};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0a, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CALIBRATION, 05 0a 00");
+					ef_calibration = new EF_Calibration(value);
+					dispatcherQueue.add(ef_calibration);
+					tag2 = new byte[]{0x05,0x0a};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0b, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_SENSOR_INSTALLATION, 05 0b 00");
+					ef_sensor_installation_data = new EF_Sensor_Installation_Data(value);
+					dispatcherQueue.add(ef_sensor_installation_data);
+					tag2 = new byte[]{0x05,0x0b};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0c, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CONTROLLER_ACTIVITY_DATA, 05 0c 00");
+					ef_controller_activity_data = new EF_Controller_Activity_Data(value);
+					dispatcherQueue.add(ef_controller_activity_data);
+					tag2 = new byte[]{0x05,0x0c};
+					efstate = EF_WITH_SIGNATURE;
+				}
+				else{
+					System.out.print(" [PANIC] unknown tag, " );
+					System.out.printf( " %02x", (int)(tag[0] & 0xff) );
+					System.out.printf( " %02x", (int)(tag[1] & 0xff) );
+					System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
+					parseresult = false;
+				}
+
+				break;
+
+			case EF_WITH_SIGNATURE:
+				if(tag[2] != 0x01){
+					// not a signature tag
+					System.out.printf(" [PANIC] expected signature tag %02x %02x 01, got", tag2[0], tag2[1] );
+					System.out.printf( " %02x", (int)(tag[0] & 0xff) );
+					System.out.printf( " %02x", (int)(tag[1] & 0xff) );
+					System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
+					parseresult = false;
+				}
+				else {
+					System.out.print(" [TAG] signature tag," );
+					System.out.printf( " %02x", (int)(tag[0] & 0xff) );
+					System.out.printf( " %02x", (int)(tag[1] & 0xff) );
+					System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
+					if(Arrays.equals(tag2, new byte[]{tag[0], tag[1]})) {
+						System.out.println(" [INFO] signature belongs to previous tag - that's fine!");
+						parseresult = true;
+					}
+					else
+						parseresult = false;
+				}
+
+				efstate = EF_ENTITY;
+				break;
+
+			default:
+				parseresult = false;
+				break;
 		}
-		else if(Arrays.equals(tag, new byte[]{ 0x00, 0x05, 0x00})){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_IC, 000500");
-			ef_ic = new EF_IC(value);
-			dispatcherQueue.add(ef_ic);
-		}
-		else if(Arrays.equals(tag, new byte[]{ 0x05, 0x01, 0x00 })){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_APPLICATION_IDENTIFICATION, 050100");
-			ef_application_identification = new EF_Application_Identification(value);
-			cardType = ef_application_identification.getCardType();
-			dispatcherQueue.add(ef_application_identification);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0xc1, 0x00, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CARD_CERTIFICATE, c10000");
-			ef_card_certificate = new EF_Card_Certificate(value);
-			dispatcherQueue.add(ef_card_certificate);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0xc1, 0x08, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CA_CERTIFICATE, c10800");
-			ef_ca_certificate = new EF_CA_Certificate(value);
-			dispatcherQueue.add(ef_ca_certificate);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x20, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_IDENTIFICATION, 052000");
-			ef_identification = new EF_Identification(value, cardType);
-			dispatcherQueue.add(ef_identification);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0e, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CARD_DOWNLOAD, 050e00");
-			ef_card_download = new EF_Card_Download(value, cardType);
-			dispatcherQueue.add(ef_card_download);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x21, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_DRIVING_LICENCE_INFO, 052100");
-			ef_driving_licence_info = new EF_Driving_Licence_Info(value);
-			dispatcherQueue.add(ef_driving_licence_info);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x02, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_EVENTS_DATA, 050200");
-			ef_events_data = new EF_Events_Data(value);
-			dispatcherQueue.add(ef_events_data);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x03, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_FAULTS_DATA, 050300");
-			ef_faults_data = new EF_Faults_Data(value);
-			dispatcherQueue.add(ef_faults_data);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x04, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_DRIVER_ACTIVITY_DATA, 050400");
-			ef_driver_activity = new EF_Driver_Activity_Data(value);
-			dispatcherQueue.add(ef_driver_activity);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x05, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_VEHICLES_USED, 050500");
-			ef_vehicles_used = new EF_Vehicles_Used(value);
-			dispatcherQueue.add(ef_vehicles_used);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x06, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_PLACES, 050600");
-			ef_places = new EF_Places(value);
-			dispatcherQueue.add(ef_places);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x07, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CURRENT_USAGE, 050700");
-			ef_current_usage = new EF_Current_Usage(value);
-			dispatcherQueue.add(ef_current_usage);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x08, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CONTROL_ACTIVITY_DATA, 050800");
-			ef_control_activity_data = new EF_Control_Activity_Data(value);
-			dispatcherQueue.add(ef_control_activity_data);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x22, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_SPECIFIC_CONDITIONS, 052200");
-			ef_specific_conditions = new EF_Specific_Conditions(value);
-			dispatcherQueue.add(ef_specific_conditions);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0a, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CALIBRATION, 050a00");
-			ef_calibration = new EF_Calibration(value);
-			dispatcherQueue.add(ef_calibration);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0b, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_SENSOR_INSTALLATION, 050b00");
-			ef_sensor_installation_data = new EF_Sensor_Installation_Data(value);
-			dispatcherQueue.add(ef_sensor_installation_data);
-		}
-		else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0c, 0x00} )){
-			System.out.println( this.getClass().getSimpleName() + ":\n EF_CONTROLLER_ACTIVITY_DATA, 050c00");
-			ef_controller_activity_data = new EF_Controller_Activity_Data(value);
-			dispatcherQueue.add(ef_controller_activity_data);
-		}else{
-			if(tag[2] != 0x01){
-				// not a signature tag
-				System.out.print("\nPANIC PANIC PANIC: expected signature tag, got" );
-				System.out.printf( " %02x", (int)(tag[0] & 0xff) );
-				System.out.printf( " %02x", (int)(tag[1] & 0xff) );
-				System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
-			}
-		}
+
+		return parseresult;
 	}
 	
 	
