@@ -1,3 +1,12 @@
+2007-12-19
+-ActivityChangeInfo:
+ -getter methods added
+ -changed component name/XML element activityChangeInfo -> value
+-CardActivityDailyRecord:  
+ -changed XML node name activityChangeInfo -> activityChangeInfoSet
+ -print date and time with activity change
+-TimeReal:
+ -misc changes
 
 2007-12-18
 -date and time are printed for timestamps

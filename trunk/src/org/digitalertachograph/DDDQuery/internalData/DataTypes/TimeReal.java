@@ -54,10 +54,11 @@ public class TimeReal extends DataClass{
 	
 	public TimeReal(long i){
 		this.timereal = i;
+
 		if(i != 0){
-		System.out.print(" timestamp: " + i);
-		Date d = new Date(i * 1000);
-		System.out.println(" - " + DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d) );
+			System.out.print(" timestamp: " + i);
+			Date d = new Date(i * 1000);
+			System.out.println(" - " + DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d) );
 		}
 	}
 

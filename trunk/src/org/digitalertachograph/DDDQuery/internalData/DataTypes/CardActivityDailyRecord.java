@@ -17,8 +17,12 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import java.text.DateFormat;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Vector;
+
+import java.util.Date;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
@@ -26,19 +30,22 @@ import org.jdom.Element;
 public class CardActivityDailyRecord extends DataClass {
 	/*
 	 * CardActivityDailyRecord ::= SEQUENCE {
-   	 * 	activityPreviousRecordLength        INTEGER(0..CardActivityLengthRange),
-   	 *  activityRecordLength				INTEGER(0..CardActivityLengthRange),
-   	 *  activityRecordDate                  TimeReal,
-   	 *  activityDailyPresenceCounter        DailyPresenceCounter,
-   	 *  activityDayDistance                 Distance,
-   	 *  activityChangeInfo                  SET SIZE(1..1440) OF ActivityChangeInfo
+   	 * 	activityPreviousRecordLength        INTEGER(0..CardActivityLengthRange), 2 bytes
+   	 *  activityRecordLength				INTEGER(0..CardActivityLengthRange), 2 bytes
+   	 *  activityRecordDate                  TimeReal, 4 bytes
+   	 *  activityDailyPresenceCounter        DailyPresenceCounter, 2 bytes
+   	 *  activityDayDistance                 Distance, 2 bytes
+   	 *  activityChangeInfo                  SET SIZE(1..1440) OF ActivityChangeInfo, 2...2880 bytes
    	 *  }
+   	 *  ---
+   	 *  CardActivityLengthRange ::= INTEGER(0..2^16-1)
+   	 *  ---
+   	 *  DailyPresenceCounter ::= BCDString(SIZE(2))
    	 *  ----
    	 *  Distance ::= INTEGER(0..2^16-1)
    	 *  ---
-   	 *  DailyPresenceCounter ::= BCDString(SIZE(2))
+   	 *  ActivityChangeInfo ::= OCTET STRING (SIZE(2))
    	 *  ---
-   	 *  CardActivityLengthRange ::= INTEGER(0..2^16-1)
 	 */
 	
 	private int activityPreviousRecordLength;
@@ -71,6 +78,8 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityDailyPresenceCounter = new String(convertIntoBCDString( arrayCopy(value, 8, 2)));
 		this.activityDayDistance = convertIntoUnsigned2ByteInt(arrayCopy(value, 10, 2));
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
+
+		System.out.printf("  %d activity changes in this record\n", activityRecordLength );
 		
 		// TODO wie haben wir length in den anderen Klassen genannt?!?
 		int length = 12; // we have 12 bytes so far
@@ -78,6 +87,9 @@ public class CardActivityDailyRecord extends DataClass {
 			// ActivityChangeInfo <- 2 bytes groß
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy(value, length, 2) );
 			activityChangeInfo.add( aci );
+
+			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
+			System.out.printf( "   %s, %02x\n", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d), aci.getActivity() );
 		}
 		this.size = length;
 		this.complete = true;
@@ -131,7 +143,7 @@ public class CardActivityDailyRecord extends DataClass {
 		);
 
 		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();
-		Element activityChangeInfoElement = new Element("activityChangeInfo");
+		Element activityChangeInfoElement = new Element("activityChangeInfoSet");
 		while (it.hasNext()) {
 			ActivityChangeInfo aci = (ActivityChangeInfo) it.next();
 			activityChangeInfoElement.addContent( aci.generateXMLElement("activityChangeInfo"));

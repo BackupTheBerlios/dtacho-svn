@@ -85,7 +85,7 @@ public class ActivityChangeInfo extends DataClass {
 	private static final byte TIME_UPPERBYTE_MASK = (byte)0x07;
 	private static final byte TIME_LOWERBYTE_MASK = (byte)0xff;
 	
-	private byte[] activityChangeInfo;
+	private byte[] value;
 
 
 	/**
@@ -96,7 +96,7 @@ public class ActivityChangeInfo extends DataClass {
 	 * 					object is created.
 	 */
 	public ActivityChangeInfo(byte[] value) {
-		activityChangeInfo = value;
+		this.value = value;
 		slot = ((value[0] & SLOT_MASK) == SLOT_MASK);
 		drivingStatus = ((value[0] & DRIVINGSTATUS_MASK) == DRIVINGSTATUS_MASK);
 		cardStatus = ((value[0] & CARDSTATUS_MASK) == CARDSTATUS_MASK);
@@ -108,10 +108,31 @@ public class ActivityChangeInfo extends DataClass {
 		time = convertIntoUnsigned2ByteInt( new byte[] { tmp, (byte) (value[1] & TIME_LOWERBYTE_MASK)});
 	}
 
+	public boolean getSlot() {
+		return slot;
+	}
+	
+	public boolean getDrivingStatus() {
+		return drivingStatus;
+	}
+	
+	public boolean getCardStatus() {
+		return cardStatus;
+	}
+	
+	public byte getActivity() {
+		return activity;
+	}
+
+	public int getTime() {
+		return time;
+	}
+	
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent( new Element("activityChangeInfo").setText( convertIntoHexString(activityChangeInfo)));
+		node.addContent( new Element("value").setText( convertIntoHexString(this.value)));
 		node.addContent( new Element("slot").setText( Boolean.toString( slot )));
 		node.addContent( new Element("drivingStatus").setText( Boolean.toString( drivingStatus )));
 		node.addContent( new Element("cardStatus").setText( Boolean.toString( cardStatus )));
