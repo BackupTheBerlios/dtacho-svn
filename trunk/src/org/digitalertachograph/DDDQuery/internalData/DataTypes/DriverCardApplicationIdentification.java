@@ -22,22 +22,28 @@ import org.jdom.Element;
 public 	class DriverCardApplicationIdentification extends DataClass{
 	/*
 	 * DriverCardApplicationIdentification ::= SEQUENCE {
-	 *  typeOfTachographCardId EquipmentType, 				1,	0x00
-	 *  cardStructureVersion CardStructureVersion, 			2,	0x0000
-	 *  noOfEventsPerType NoOfEventsPerType,				1,	0x00
-	 *  noOfFaultsPerType NoOfFaultsPerType,				1,	0x00
-	 *  activityStructureLength CardActivityLengthRange,	2,	0x0000 
-	 *  noOfCardVehicleRecords NoOfCardVehicleRecords,		2,	0x0000
-	 *  noOfCardPlaceRecords NoOfCardPlaceRecords,			1,	0x00
+	 *  typeOfTachographCardId EquipmentType, 				1,	0x00,	1 byte
+	 *  cardStructureVersion CardStructureVersion, 			2,	0x0000,	2 bytes
+	 *  noOfEventsPerType NoOfEventsPerType,				1,	0x00,	1 byte
+	 *  noOfFaultsPerType NoOfFaultsPerType,				1,	0x00,	1 byte
+	 *  activityStructureLength CardActivityLengthRange,	2,	0x0000,	2 bytes 
+	 *  noOfCardVehicleRecords NoOfCardVehicleRecords,		2,	0x0000,	2 bytes
+	 *  noOfCardPlaceRecords NoOfCardPlaceRecords,			1,	0x00,	1 byte
 	 * }
 	 * ---
-	 * CardStructureVersion ::= OCTET STRING (SIZE(2)) (seite 63)
+	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
 	 * ---
-	 * CardActivityLengthRange ::= INTEGER(0..216-1) (seite 53)
+	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
+	 * min.:  5544 bytes (28 days * 93 activity changes)
+	 * max.: 13776 bytes (28 days * 240 activity changes)
 	 * ---
-	 * NoOfCardVehicleRecords ::= INTEGER(0..216-1)
+	 * NoOfCardVehicleRecords ::= INTEGER(0..2^16-1)
+	 * min.:  84
+	 * max.: 200
 	 * ---
 	 * NoOfCardPlaceRecords ::= INTEGER(0..255)
+	 * min.:  84
+	 * max.: 112
 	 */
 	
 	private EquipmentType typeOfTachographCardId;

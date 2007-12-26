@@ -26,15 +26,17 @@ import org.jdom.Element;
 public class CardVehiclesUsed extends DataClass {
 	/*
 	 * CardVehiclesUsed := SEQUENCE {
-	 * 	vehiclePointerNewestRecord INTEGER(0..NoOfCardVehicleRecords-1),
-	 * 	cardVehicleRecords SET SIZE(NoOfCardVehicleRecords) OF CardVehicleRecord
+	 * 	vehiclePointerNewestRecord INTEGER(0..NoOfCardVehicleRecords-1), 2 bytes
+	 * 	cardVehicleRecords SET SIZE(NoOfCardVehicleRecords) OF CardVehicleRecord, 2604..6200 bytes
 	 * }
 	 * --
-	 * NoOfCardVehicleRecords ::= INTEGER(0..2^16-1)
+	 * NoOfCardVehicleRecords ::= INTEGER(0..2^16-1), 2 bytes
+	 * min.:  84
+	 * max.: 200
 	 */
 	
-	private int vehiclePointerNewestRecord;
-	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>();
+	//private int vehiclePointerNewestRecord;
+	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>(84);
 
 	
 	/**
@@ -45,25 +47,28 @@ public class CardVehiclesUsed extends DataClass {
 	 * 					object is created.
 	 */
 	public CardVehiclesUsed(byte[] value){
-		vehiclePointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
+		//vehiclePointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 
 		for (int i = 2; i < value.length; i += 31) {
 			byte[] record = arrayCopy(value, i, 31);
 			CardVehicleRecord tmp = new CardVehicleRecord(record);
+
 			cardVehicleRecords.add( tmp );
-			
 		}
 	}
 	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent(new Element("vehiclePointerNewestRecord").setText(Integer.toString(vehiclePointerNewestRecord)));
+		//node.addContent(new Element("vehiclePointerNewestRecord").setText(Integer.toString(vehiclePointerNewestRecord)));
+
+		Element recordsnode = new Element("cardVehicleRecords");
+		node.addContent(recordsnode);
 		
 		Iterator<CardVehicleRecord> iter = cardVehicleRecords.iterator();
 		while (iter.hasNext()) {
 			CardVehicleRecord cvr = (CardVehicleRecord) iter.next();
-			node.addContent( cvr.generateXMLElement("cardVehicleRecord"));
+			recordsnode.addContent( cvr.generateXMLElement("cardVehicleRecord"));
 		}
 		return node;
 	}

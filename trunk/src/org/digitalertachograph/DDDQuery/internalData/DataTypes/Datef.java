@@ -23,9 +23,9 @@ import org.jdom.Element;
 public class Datef extends DataClass {
 	/*
 	 * Datef ::= SEQUENCE {
-	 * 	year BCDString(SIZE(2)),
-	 * 	month BCDString(SIZE(1)),
-	 * 	day BCDString(SIZE(1))
+	 * 	year BCDString(SIZE(2)), 2 bytes
+	 * 	month BCDString(SIZE(1)), 1 byte
+	 * 	day BCDString(SIZE(1)), 1 byte
 	 * }
 	 */
 	private String year;

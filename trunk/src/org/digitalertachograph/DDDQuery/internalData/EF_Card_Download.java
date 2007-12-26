@@ -30,7 +30,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Card_Download extends DataClass {
-	public int size;
+	//public int size;
 	private int cardType;
 	private LastDownload lastDownload;
 	private NoOfCalibrationsSinceDownload noOfCalibrationsSinceDownload;
@@ -43,7 +43,7 @@ public class EF_Card_Download extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Card_Download(byte[] value, int cardType){
-		size = value.length;
+		//size = value.length;
 		this.cardType = cardType; 
 
 		switch (cardType) {
@@ -66,18 +66,19 @@ public class EF_Card_Download extends DataClass {
 		Element child;
 
 		switch (cardType) {
-		case EquipmentType.DRIVER_CARD :
-			child = lastDownload.generateXMLElement("lastDownload");
-			break;
+			case EquipmentType.DRIVER_CARD :
+				child = lastDownload.generateXMLElement("lastDownload");
+				break;
 			
-		case EquipmentType.WORKSHOP_CARD :
-			child = noOfCalibrationsSinceDownload.generateXMLElement("noOfCalibrationsSinceDownload");
-			break;
+			case EquipmentType.WORKSHOP_CARD :
+				child = noOfCalibrationsSinceDownload.generateXMLElement("noOfCalibrationsSinceDownload");
+				break;
 
-		default :
-			child = new Element("default");
-			break;
+			default:
+				child = new Element("default");
+				break;
 		}
+
 		node.addContent(child);
 		return node;
 	}

@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class VehicleIdentificationNumber extends DataClass {
 	/*
-	 * VehicleIdentificationNumber ::= IA5String(SIZE(17))
+	 * VehicleIdentificationNumber ::= IA5String(SIZE(17)), 17 bytes
 	 * 
 	 * Value assignment: As defined in ISO 3779.
 	 */

@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Sensor_Installation_Data extends DataClass {
-	public static final int size = 16;
+	//public static final int size = 16;
 	private SensorInstallationSecData sensorInstallationSecData;
 
 

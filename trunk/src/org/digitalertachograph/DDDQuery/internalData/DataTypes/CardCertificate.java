@@ -23,7 +23,14 @@ public class CardCertificate extends Certificate {
 	/**
 	 * Constructor for a CardCertificate object
 	 */
-	public CardCertificate() {
+	public CardCertificate(){
+		super();
+	}
 
+	/**
+	 * Constructor for a CardCertificate object
+	 */
+	public CardCertificate(byte[] certificate) {
+		super(certificate);
 	}
 }

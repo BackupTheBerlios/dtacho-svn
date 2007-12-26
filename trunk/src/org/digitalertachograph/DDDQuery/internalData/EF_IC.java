@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_IC extends DataClass {
-	public static final int size = 8;
+	//public static final int size = 8;
 	private CardChipIdentification cardChipIdentification;
 
 	

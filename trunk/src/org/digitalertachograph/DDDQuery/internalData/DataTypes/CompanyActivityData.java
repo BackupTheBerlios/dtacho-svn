@@ -29,18 +29,22 @@ public class CompanyActivityData extends DataClass {
 	 * 	companyPointerNewestRecord INTEGER(0..NoOfCompanyActivityRecords-1), 2 bytes
 	 * 	companyActivityRecords SET SIZE(NoOfCompanyActivityRecords) OF
 	 * 		companyActivityRecord SEQUENCE {
-	 * 				companyActivityType CompanyActivityType,
-	 * 				companyActivityTime TimeReal,
-	 * 				cardNumberInformation FullCardNumber,
-	 * 				vehicleRegistrationInformation VehicleRegistrationIdentification,
-	 * 				downloadPeriodBegin TimeReal,
-	 * 				downloadPeriodEnd TimeReal
+	 * 				companyActivityType CompanyActivityType, 1 byte
+	 * 				companyActivityTime TimeReal, 4 bytes
+	 * 				cardNumberInformation FullCardNumber, 18 bytes
+	 * 				vehicleRegistrationInformation VehicleRegistrationIdentification, 15 bytes
+	 * 				downloadPeriodBegin TimeReal, 4 bytes
+	 * 				downloadPeriodEnd TimeReal 4 bytes
 	 * 		}
 	 * }
+	 * ---
+	 * NoOfCompanyActivityRecords ::= INTEGER(0..2^16-1)
+	 * min.: 230
+	 * max.: 520
 	 */
 
 	private int companyPointerNewestRecord;
-	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>();
+	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>(230);
 	
 
 	/**

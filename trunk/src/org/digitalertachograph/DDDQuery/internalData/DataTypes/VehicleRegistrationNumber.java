@@ -27,6 +27,8 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 	codePage INTEGER (0..255), 1 byte
 	 * 	vehicleRegNumber OCTET STRING (SIZE(13)), 13 bytes
 	 * }
+	 * ---
+	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
 	
 	private short codePage;

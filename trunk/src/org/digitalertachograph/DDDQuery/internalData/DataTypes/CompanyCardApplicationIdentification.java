@@ -23,10 +23,14 @@ import org.jdom.Element;
 public class CompanyCardApplicationIdentification extends DataClass {
 	/*
 	 * CompanyCardApplicationIdentification ::= SEQUENCE {
-	 * 	typeOfTachographCardId EquipmentType,
-	 * 	cardStructureVersion CardStructureVersion,
-	 * 	noOfCompanyActivityRecords NoOfCompanyActivityRecords
+	 * 	typeOfTachographCardId EquipmentType, 1 byte
+	 * 	cardStructureVersion CardStructureVersion, 2 bytes
+	 * 	noOfCompanyActivityRecords NoOfCompanyActivityRecords, 2 bytes
 	 * }
+	 * ---
+	 * noOfCompanyActivityRecords ::= INTEGER(0..2^16-1)
+	 * min.: 230
+	 * max.: 520
 	 */
 
 	private EquipmentType typeOfTachographCardId;

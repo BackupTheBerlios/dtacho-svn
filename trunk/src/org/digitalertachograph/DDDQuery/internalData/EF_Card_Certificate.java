@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Card_Certificate extends DataClass {
-	public static final int size = 194;
+	//public static final int size = 194;
 	private CardCertificate cardCertificate;
 	
 
@@ -40,8 +40,7 @@ public class EF_Card_Certificate extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Card_Certificate(byte [] value){
-		cardCertificate = new CardCertificate();
-		cardCertificate.setCertificate(value);
+		cardCertificate = new CardCertificate(value);
 	}
 	
 	public Element generateXMLElement(String name){

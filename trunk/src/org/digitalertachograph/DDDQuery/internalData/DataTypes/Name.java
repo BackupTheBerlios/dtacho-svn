@@ -24,17 +24,22 @@ import org.jdom.Element;
 public class Name extends DataClass{
 	/*
 	 * Name ::= SEQUENCE {
-	 * 	codePage INTEGER (0..255),
-	 * 	name OCTET STRING (SIZE(35))
+	 * 	codePage INTEGER (0..255), 1 byte
+	 * 	name OCTET STRING (SIZE(35)), 35 bytes
 	 * }
+	 * ---
+	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
 	
 	private short codePage;
 	private byte[] name;
 	
-	// public Name(){
-	//	
-	// }
+	/**
+	 * Constructor for a Name object
+	 */
+	public Name(){
+
+	}
 	
 
 	/**
@@ -67,7 +72,7 @@ public class Name extends DataClass{
 	}
 
 	public void setCodePage(byte codePage) {
-		this.codePage = (short) (codePage & 0xFF);
+		this.codePage = (short) (codePage & 0xff);
 	}
 	
 	public byte[] getName() {

@@ -109,12 +109,12 @@ public class CardControlActivityDataRecord extends DataClass {
 	public Element generateXMLElement(String name) {
 		/*
 		 * CardControlActivityDataRecord ::= SEQUENCE {
-		 * 	controlType ControlType, 1byte
-		 * 	controlTime TimeReal, 4byte;
-		 * 	controlCardNumber FullCardNumber, 18byte;
-		 * 	controlVehicleRegistration VehicleRegistrationIdentification, 15byte,
-		 * 	controlDownloadPeriodBegin TimeReal, 4byte
-		 * 	controlDownloadPeriodEnd TimeReal, 4byte
+		 * 	controlType ControlType, 1 byte
+		 * 	controlTime TimeReal, 4 bytes
+		 * 	controlCardNumber FullCardNumber, 18 bytes
+		 * 	controlVehicleRegistration VehicleRegistrationIdentification, 15 bytes
+		 * 	controlDownloadPeriodBegin TimeReal, 4 bytes
+		 * 	controlDownloadPeriodEnd TimeReal, 4 bytes
 		 * }
 		 */
 

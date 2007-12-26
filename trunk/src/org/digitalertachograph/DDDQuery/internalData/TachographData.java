@@ -60,25 +60,26 @@ public class TachographData extends DataClass {
 
 	
 	public boolean isValidTag(byte[] tag){
-		if ((Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x02})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x05})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x00})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x08})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x01})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x20})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0e})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x21})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x02})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x03})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x04})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x05})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x06})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x07})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x08})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x22})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0a})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0b})) |
-			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0c})) )	{
+		if ((Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x02})) |		//	EF_ICC
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x05})) |		//	EF_IC
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x00})) |		//	EF_Card_Certificate
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x08})) |		//	EF_CA_Certificate
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x01})) |		//	EF_Application_Identification
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x20})) |		//	EF_Identification
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0e})) |		//	EF_Card_Download (driver card)
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x21})) |		//	EF_Driving_Licence_Info
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x02})) |		//	EF_Events_Data
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x03})) |		//	EF_Faults_Data
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x04})) |		//	EF_Driver_Activity_Data
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x05})) |		//	EF_Vehicles_Used
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x06})) |		//	EF_Places
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x07})) |		//	EF_Current_Usage
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x08})) |		//	EF_Control_Activity_Data
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x22})) |		//	EF_Specific_Conditions
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x09})) |		//	EF_Card_Download (workshop card)
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0a})) |		//	EF_Calibration
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0b})) |		//	EF_Sensor_Installation_Data
+			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0c})) )	{	//	EF_Controller_Activity_Data
 
 			return true;
 		}
@@ -211,6 +212,13 @@ public class TachographData extends DataClass {
 					tag2 = new byte[]{0x05,0x22};
 					efstate = EF_WITH_SIGNATURE;
 				}
+				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x09, 0x00} )){
+					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CARD_DOWNLOAD, 05 09 00");
+					ef_card_download = new EF_Card_Download(value, cardType);
+					dispatcherQueue.add(ef_card_download);
+					tag2 = new byte[]{0x05,0x09};
+					efstate = EF_WITH_SIGNATURE;
+				}
 				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x0a, 0x00} )){
 					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_CALIBRATION, 05 0a 00");
 					ef_calibration = new EF_Calibration(value);
@@ -233,7 +241,7 @@ public class TachographData extends DataClass {
 					efstate = EF_WITH_SIGNATURE;
 				}
 				else{
-					System.out.print(" [PANIC] unknown tag, " );
+					System.out.print(" [ERROR] unknown tag, " );
 					System.out.printf( " %02x", (int)(tag[0] & 0xff) );
 					System.out.printf( " %02x", (int)(tag[1] & 0xff) );
 					System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );
@@ -245,7 +253,7 @@ public class TachographData extends DataClass {
 			case EF_WITH_SIGNATURE:
 				if(tag[2] != 0x01){
 					// not a signature tag
-					System.out.printf(" [PANIC] expected signature tag %02x %02x 01, got", tag2[0], tag2[1] );
+					System.out.printf(" [ERROR] expected signature tag %02x %02x 01, got", tag2[0], tag2[1] );
 					System.out.printf( " %02x", (int)(tag[0] & 0xff) );
 					System.out.printf( " %02x", (int)(tag[1] & 0xff) );
 					System.out.printf( " %02x\n", (int)(tag[2] & 0xff) );

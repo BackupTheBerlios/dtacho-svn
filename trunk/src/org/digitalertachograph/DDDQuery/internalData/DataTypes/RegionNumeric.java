@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class RegionNumeric extends DataClass {
 	/*
-	 * RegionNumeric ::= OCTET STRING (SIZE(1))
+	 * RegionNumeric ::= OCTET STRING (SIZE(1)), 1 byte
 	 * 		Value assignment:
 	 * 		'00'H No information available
 	 * 		Spain:

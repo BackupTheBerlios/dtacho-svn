@@ -28,7 +28,7 @@ import org.jdom.*;
  * 
  */
 public class EF_Calibration extends DataClass{
-	public int size;
+	//public int size;
 	private WorkshopCardCalibrationData workshopCardCalibrationData;
 	
 
@@ -40,7 +40,7 @@ public class EF_Calibration extends DataClass{
 	 * 					object is created.
 	 */
 	public EF_Calibration(byte[] value){
-		size = value.length;
+		//size = value.length;
 		workshopCardCalibrationData = new WorkshopCardCalibrationData(value);
 	}
 	

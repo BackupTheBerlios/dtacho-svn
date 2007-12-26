@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Driving_Licence_Info extends DataClass {
-	public static final int size = 53;
+	//public static final int size = 53;
 	private CardDrivingLicenceInformation cardDrivingLicenceInformation;
 	
 

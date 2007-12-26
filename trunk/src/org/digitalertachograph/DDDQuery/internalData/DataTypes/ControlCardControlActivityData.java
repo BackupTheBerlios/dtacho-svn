@@ -29,18 +29,22 @@ public class ControlCardControlActivityData extends DataClass {
 	 * ControlCardControlActivityData ::= SEQUENCE {	
 	 * 	controlPointerNewestRecord INTEGER(0..NoOfControlActivityRecords-1), 2 bytes
 	 * 	controlActivityRecords SET SIZE(NoOfControlActivityRecords) OF controlActivityRecord SEQUENCE {
-	 * 			controlType ControlType,
-	 * 			controlTime TimeReal,
-	 * 			controlledCardNumber FullCardNumber,
-	 * 			controlledVehicleRegistration VehicleRegistrationIdentification,
-	 * 			controlDownloadPeriodBegin TimeReal,
-	 * 			controlDownloadPeriodEnd TimeReal
+	 * 			controlType ControlType, 1 byte
+	 * 			controlTime TimeReal, 4 bytes
+	 * 			controlledCardNumber FullCardNumber, 18 bytes
+	 * 			controlledVehicleRegistration VehicleRegistrationIdentification, 15 bytes
+	 * 			controlDownloadPeriodBegin TimeReal, 4 bytes
+	 * 			controlDownloadPeriodEnd TimeReal, 4 bytes
 	 * 	} // which is a CardControlActivityDataRecord
 	 * }
+	 * ---
+	 * NoOfControlActivityRecords ::= INTEGER(0..2^16-1)
+	 * min.: 230
+	 * max.: 520
 	 */
-	
+
 	private int controlPointerNewestRecord;
-	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>();
+	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>(230);
 
 	
 	/**

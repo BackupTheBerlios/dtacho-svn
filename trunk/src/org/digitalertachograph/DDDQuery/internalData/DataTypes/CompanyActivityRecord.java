@@ -24,12 +24,12 @@ public class CompanyActivityRecord extends DataClass {
 
 	/*
 	 * 	companyActivityRecord SEQUENCE {
-	 * 		companyActivityType CompanyActivityType,
-	 * 		companyActivityTime TimeReal,
-	 * 		cardNumberInformation FullCardNumber,
-	 * 		vehicleRegistrationInformation VehicleRegistrationIdentification,
-	 * 		downloadPeriodBegin TimeReal,
-	 * 		downloadPeriodEnd TimeReal
+	 * 		companyActivityType CompanyActivityType, 1 byte
+	 * 		companyActivityTime TimeReal, 4 bytes
+	 * 		cardNumberInformation FullCardNumber, 18 bytes
+	 * 		vehicleRegistrationInformation VehicleRegistrationIdentification, 15 bytes
+	 * 		downloadPeriodBegin TimeReal, 4 bytes
+	 * 		downloadPeriodEnd TimeReal, 4 bytes
 	 * 	}
 	 */
 	

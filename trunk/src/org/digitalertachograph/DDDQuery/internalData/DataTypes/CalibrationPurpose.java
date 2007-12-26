@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class CalibrationPurpose extends DataClass {
 	/*
-	 * CalibrationPurpose ::= OCTET STRING (SIZE(1)).
+	 * CalibrationPurpose ::= OCTET STRING (SIZE(1)), 1 byte
 	 * 
 	 * Value assignment:
 	 * "00"H reserved value,
@@ -40,7 +40,7 @@ public class CalibrationPurpose extends DataClass {
 	 * 
 	 * @param	value	byte array of a CalibrationPurpose structure
 	 * 					whose data is used when the CalibrationPurpose
-	 * 					object is created.
+	 * 					object is created
 	 */
 	public CalibrationPurpose(byte value) {
 		calibrationPurpose = value;

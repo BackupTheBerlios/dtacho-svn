@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Events_Data extends DataClass {
-	public static final int size = 432;
+	//public static final int size = 432;
 	private CardEventData cardEventData;
 
 

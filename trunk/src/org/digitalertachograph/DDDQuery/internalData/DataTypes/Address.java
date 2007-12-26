@@ -23,24 +23,28 @@ import org.jdom.Element;
 public class Address extends DataClass {
 	/*
 	 * address ::= SEQUENCE {
-	 * 	codePage INTEGER (0..255),
-	 * 	address OCTET STRING (SIZE(35))
+	 * 	codePage INTEGER (0..255), 1 byte
+	 * 	address OCTET STRING (SIZE(35)), 35 bytes
 	 * }
+	 * ---
+	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
 	
 	private short codePage;
 	private byte[] address;
 	
-	//public Address(){
+	/**
+	 * Constructor for an Address object
+	 */ 
+	public Address(){
 		
-	//}
-
+	}
 
 	/**
 	 * Constructor for an Address object
 	 * 
 	 * @param	value	byte array of an Address structure whose data
-	 * 					is used when the Address object is created.
+	 * 					is used when the Address object is created
 	 */
 	public Address(byte[] value) {
 		this(value[0], arrayCopy(value, 1, 35));
@@ -81,7 +85,7 @@ public class Address extends DataClass {
 	/**
 	 * Sets the address of an Address object.
 	 * 
-	 * @param	address	byte array that contains an Address object
+	 * @param	address		byte array with address to be set for the Address object
 	 */
 	public void setAddress(byte[] address) {
 		this.address = address;
@@ -99,7 +103,7 @@ public class Address extends DataClass {
 	/**
 	 * Sets the codepage of an Address object.
 	 * 
-	 * @param codePage	codepage of the Address object
+	 * @param	codePage	codepage to be set for the Address object
 	 */
 	public void setCodePage(short codePage) {
 		this.codePage = codePage;

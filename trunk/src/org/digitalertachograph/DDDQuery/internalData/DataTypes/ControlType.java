@@ -23,7 +23,7 @@ import org.jdom.Element;
 
 public class ControlType extends DataClass {
 	/*
-	 * ControlType ::= OCTET STRING (SIZE(1))
+	 * ControlType ::= OCTET STRING (SIZE(1)), 1 byte
 	 * 
 	 * Value assignment  Octet aligned: 'cvpdxxxx'B (8 bits)
 	 * 'c'B card downloading:

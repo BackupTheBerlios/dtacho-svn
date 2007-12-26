@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class ActivityChangeInfo extends DataClass {
 	/*	
-	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2))
+	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2)), 2 bytes
 	 * Value assignment  Octet Aligned:                     (16 bits)
 	 * 'scpaattttttttttt'B
 	 *  For Data Memory recordings (or slot status):
@@ -34,7 +34,13 @@ public class ActivityChangeInfo extends DataClass {
 	private boolean slot;
 	private static final byte SLOT_MASK = (byte)0x80;
 
+	/**
+	 * Slot: DRIVER  
+	 */
 	public static final boolean DRIVER = false;
+	/**
+	 * Slot: CO_DRIVER
+	 */
 	public static final boolean CO_DRIVER = true;
 
 	/*
@@ -46,7 +52,13 @@ public class ActivityChangeInfo extends DataClass {
 	private boolean drivingStatus;
 	private static final byte DRIVINGSTATUS_MASK = (byte)0x40;
 
+	/**
+	 * Driving status: SINGLE  
+	 */
 	public static final boolean SINGLE = false;
+	/**
+	 * Driving status: CREW
+	 */
 	public static final boolean CREW = true;
 
 	/*
@@ -58,7 +70,13 @@ public class ActivityChangeInfo extends DataClass {
 	private boolean cardStatus;
 	private static final byte CARDSTATUS_MASK = (byte)0x20;
 
+	/**
+	 * Driver (or workshop) card status in the relevant slot: INSERTED
+	 */
 	public static final boolean INSERTED = false;
+	/**
+	 * Driver (or workshop) card status in the relevant slot: NOT_INSERTED
+	 */
 	public static final boolean NOT_INSERTED = true;
 
 	/*                     
@@ -72,9 +90,21 @@ public class ActivityChangeInfo extends DataClass {
 	private byte activity;
 	private static final byte ACTIVITY_MASK = (byte)0x18;
 
+	/**
+	 * Activity: BREAK/REST
+	 */
 	public static final byte BREAK = 0;
+	/**
+	 * Activity: AVAILABILITY
+	 */
 	public static final byte AVAILABILITY = 1;
+	/**
+	 * Activity: WORK
+	 */
 	public static final byte WORK = 2;
+	/**
+	 * Activity: DRIVING
+	 */
 	public static final byte DRIVING = 3;
 
 	/*
@@ -93,7 +123,7 @@ public class ActivityChangeInfo extends DataClass {
 	 * 
 	 * @param	value	byte array of an ActivityChangeInfo structure
 	 * 					whose data is used when the ActivityChangeInfo
-	 * 					object is created.
+	 * 					object is created
 	 */
 	public ActivityChangeInfo(byte[] value) {
 		this.value = value;
@@ -108,22 +138,49 @@ public class ActivityChangeInfo extends DataClass {
 		time = convertIntoUnsigned2ByteInt( new byte[] { tmp, (byte) (value[1] & TIME_LOWERBYTE_MASK)});
 	}
 
+	/**
+	 * Returns the slot of an ActivityChangeInfo object.
+	 * 
+	 * @return	slot of the ActivityChangeInfo object ({@link #DRIVER}, {@link #CO_DRIVER})
+	 */
 	public boolean getSlot() {
 		return slot;
 	}
 	
+	/**
+	 * Returns the driving status of an ActivityChangeInfo object.
+	 * 
+	 * @return	 driving status of the ActivityChangeInfo object ({@link #SINGLE}, {@link #CREW})
+	 */
 	public boolean getDrivingStatus() {
 		return drivingStatus;
 	}
 	
+	/**
+	 * Returns the card status of an ActivityChangeInfo object.
+	 * 
+	 * @return	 card status of the ActivityChangeInfo object ({@link #INSERTED}, {@link #NOT_INSERTED})
+	 */
 	public boolean getCardStatus() {
 		return cardStatus;
 	}
 	
+	/**
+	 * Returns the activity of an ActivityChangeInfo object.
+	 * 
+	 * @return	 activity of the ActivityChangeInfo object ({@link #BREAK}, {@link #AVAILABILITY},
+	 * 			 {@link #WORK}, {@link #DRIVING})
+	 */
 	public byte getActivity() {
 		return activity;
 	}
 
+	/**
+	 * Returns the time of an ActivityChangeInfo object.
+	 * 
+	 * @return	time of the ActivityChangeInfo object in number of minutes
+	 *			since 00h00 on the given day
+	 */
 	public int getTime() {
 		return time;
 	}

@@ -23,6 +23,8 @@ import org.jdom.Element;
 public class NoOfCalibrationsSinceDownload extends DataClass {
 	/* 
 	 * NoOfCalibrationsSinceDownload ::= INTEGER(0..2^16-1)
+	 * min.: n/a
+	 * max.: n/a
 	 */
 
 	private int noOfCalibrationsSinceDownload;

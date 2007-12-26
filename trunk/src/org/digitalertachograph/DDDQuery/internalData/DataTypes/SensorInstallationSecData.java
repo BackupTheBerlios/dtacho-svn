@@ -30,8 +30,8 @@ public class SensorInstallationSecData extends DataClass {
 	 * Value assignment: in accordance with ISO 16844-3.
 	 * ----
 	 * TDesSessionKey ::= SEQUENCE {
-	 * 	tDesKeyA OCTET STRING (SIZE(8))	
-	 * 	tDesKeyB OCTET STRING (SIZE(8))
+	 * 	tDesKeyA OCTET STRING (SIZE(8)), 8 bytes
+	 * 	tDesKeyB OCTET STRING (SIZE(8)), 8 bytes
 	 * }
 	 */
 

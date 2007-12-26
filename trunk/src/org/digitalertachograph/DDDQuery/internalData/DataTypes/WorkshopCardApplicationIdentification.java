@@ -23,14 +23,14 @@ import org.jdom.Element;
 public class WorkshopCardApplicationIdentification extends DataClass {
 	/*
 	 * WorkshopCardApplicationIdentification ::= SEQUENCE {
-	 * 	typeOfTachographCardId EquipmentType,
-	 * 	cardStructureVersion CardStructureVersion,
-	 * 	noOfEventsPerType NoOfEventsPerType,
-	 * 	noOfFaultsPerType NoOfFaultsPerType,
-	 * 	activityStructureLength CardActivityLengthRange,
-	 * 	noOfCardVehicleRecords NoOfCardVehicleRecords,
-	 * 	noOfCardPlaceRecords NoOfCardPlaceRecords,
-	 * 	noOfCalibrationRecords NoOfCalibrationRecords
+	 * 	typeOfTachographCardId EquipmentType, 1 byte
+	 * 	cardStructureVersion CardStructureVersion, 2 bytes
+	 * 	noOfEventsPerType NoOfEventsPerType, 1 byte
+	 * 	noOfFaultsPerType NoOfFaultsPerType, 1 byte
+	 * 	activityStructureLength CardActivityLengthRange, 2 bytes
+	 * 	noOfCardVehicleRecords NoOfCardVehicleRecords, 2 bytes
+	 * 	noOfCardPlaceRecords NoOfCardPlaceRecords, 1 byte
+	 * 	noOfCalibrationRecords NoOfCalibrationRecords, 1 byte
 	 * }
 	 */
 	private EquipmentType typeOfTachographCardId;
@@ -42,6 +42,13 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	private short noOfCardPlaceRecords;
 	private short noOfCalibrationRecords;
 	
+
+	/**
+	 * Constructor for a WorkshopCardApplicationIdentification object
+	 */
+	public WorkshopCardApplicationIdentification(){
+
+	}
 
 	/**
 	 * Constructor for a WorkshopCardApplicationIdentification object
@@ -59,7 +66,6 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt( arrayCopy(value, 7, 2));
 		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt(value[9]);
 		noOfCalibrationRecords = convertIntoUnsigned1ByteInt( value[10] );
-		
 	}
 
 	public int getActivityStructureLength() {

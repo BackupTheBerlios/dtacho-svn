@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Current_Usage extends DataClass {
-	public static final int size = 19;
+	//public static final int size = 19;
 	private CardCurrentUse cardCurrentUse;
 	
 

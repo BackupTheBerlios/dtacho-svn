@@ -23,10 +23,10 @@ import org.jdom.Element;
 public class ExtendedSerialNumber extends DataClass {
 	/*
 	 * ExtendedSerialNumber ::= SEQUENCE {
-	 *  serialNumber INTEGER (0..2^32-1)
-	 *  monthYear BCDString (SIZE(2))
-	 *  type OCTET STRING (SIZE(1))
-	 *  manufacturerCode ManufacturerCode
+	 *  serialNumber INTEGER (0..2^32-1), 4 bytes
+	 *  monthYear BCDString (SIZE(2)), 2 bytes
+	 *  type OCTET STRING (SIZE(1)), 1 byte
+	 *  manufacturerCode ManufacturerCode, 1 byte
 	 * }
 	 */
 
@@ -43,7 +43,6 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 										whose data is used when the ExtendedSerialNumber
 	 * 										object is created.
 	 */
-
 	public ExtendedSerialNumber(byte[] cardExtendedSerialNumber ){
 		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy(cardExtendedSerialNumber, 0 , 4));
 		monthYear = convertIntoBCDString( arrayCopy(cardExtendedSerialNumber, 4, 2));

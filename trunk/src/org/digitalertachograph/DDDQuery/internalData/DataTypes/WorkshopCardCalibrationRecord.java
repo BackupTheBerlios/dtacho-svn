@@ -20,9 +20,6 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
 
-//import sun.jdbc.odbc.OdbcDef;
-
-
 public class WorkshopCardCalibrationRecord extends DataClass {
 	/*
 	 * WorkshopCardCalibrationRecord ::= SEQUENCE {

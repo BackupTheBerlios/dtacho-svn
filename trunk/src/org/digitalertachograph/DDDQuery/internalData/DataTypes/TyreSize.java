@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class TyreSize extends DataClass {
 	/*
-	 * TyreSize ::= IA5String(SIZE(15))
+	 * TyreSize ::= IA5String(SIZE(15)), 15 bytes
 	 * 
 	 * Value assignment: in accordance with Directive 92/23 (EEC) 31.3.1992,
 	 * OJ L129, p. 95

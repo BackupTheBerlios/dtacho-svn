@@ -26,7 +26,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * 	workshopName Name, 36 bytes
 	 * 	workshopAddress Address, 36 bytes
 	 * 	cardHolderName HolderName, 72 bytes
-	 * 	cardHolderPreferredLanguage Language 2 bytes
+	 * 	cardHolderPreferredLanguage Language, 2 bytes
 	 * }
 	 */
 
@@ -43,7 +43,6 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * 					whose data is used when the WorkshopCardHolderIdentification
 	 * 					object is created.
 	 */
-
 	public WorkshopCardHolderIdentification(byte[] value){
 		workshopName = new Name( arrayCopy(value, 0, 36));
 		workshopAddress = new Address( arrayCopy(value, 36, 36));

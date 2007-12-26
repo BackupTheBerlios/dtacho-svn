@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class EventFaultType extends DataClass {
 	/*
-	 * EventFaultType ::= OCTET STRING (SIZE(1)).
+	 * EventFaultType ::= OCTET STRING (SIZE(1)), 1 byte
 	 * 
 	 * Value assignment:
 	 * 

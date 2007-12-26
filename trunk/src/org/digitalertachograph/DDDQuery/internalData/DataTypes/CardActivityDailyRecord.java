@@ -37,15 +37,17 @@ public class CardActivityDailyRecord extends DataClass {
    	 *  activityDayDistance                 Distance, 2 bytes
    	 *  activityChangeInfo                  SET SIZE(1..1440) OF ActivityChangeInfo, 2...2880 bytes
    	 *  }
-   	 *  ---
-   	 *  CardActivityLengthRange ::= INTEGER(0..2^16-1)
-   	 *  ---
-   	 *  DailyPresenceCounter ::= BCDString(SIZE(2))
-   	 *  ----
-   	 *  Distance ::= INTEGER(0..2^16-1)
-   	 *  ---
-   	 *  ActivityChangeInfo ::= OCTET STRING (SIZE(2))
-   	 *  ---
+   	 * ---
+   	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
+	 * min.:  5544 bytes (28 days * 93 activity changes)
+	 * max.: 13776 bytes (28 days * 240 activity changes)
+   	 * ---
+   	 * DailyPresenceCounter ::= BCDString(SIZE(2))
+   	 * ---
+   	 * Distance ::= INTEGER(0..2^16-1)
+   	 * ---
+   	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2))
+   	 * ---
 	 */
 	
 	private int activityPreviousRecordLength;
@@ -56,7 +58,6 @@ public class CardActivityDailyRecord extends DataClass {
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 	
 	private boolean complete = false;
-	private int size;
 
 
 	/**
@@ -64,7 +65,7 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 
 	 * @param	value	byte array of a CardActivityDailyRecord structure
 	 * 					whose data is used when the CardActivityDailyRecord
-	 * 					object is created.
+	 * 					object is created
 	 */
 	public CardActivityDailyRecord(byte[] value) {
 
@@ -79,7 +80,7 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityDayDistance = convertIntoUnsigned2ByteInt(arrayCopy(value, 10, 2));
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
-		System.out.printf("  %d activity changes in this record\n", activityRecordLength );
+		System.out.printf("  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / 2 );
 		
 		// TODO wie haben wir length in den anderen Klassen genannt?!?
 		int length = 12; // we have 12 bytes so far
@@ -89,9 +90,8 @@ public class CardActivityDailyRecord extends DataClass {
 			activityChangeInfo.add( aci );
 
 			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
-			System.out.printf( "   %s, %02x\n", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d), aci.getActivity() );
+			System.out.printf( "   %s, activity %02x\n", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d), aci.getActivity() );
 		}
-		this.size = length;
 		this.complete = true;
 	}
 	
@@ -104,16 +104,27 @@ public class CardActivityDailyRecord extends DataClass {
 		return complete;
 	}
 
+	
 	/**
-	 * Returns the size of the CardActivityDailyRecord structure of which an
-	 * CardActivityDailyRecord object was created.
+	 * Returns the length of the previous CardActivityDailyRecord
 	 * 
-	 * @return			size (number of bytes) of the CardActivityDailyRecord structure
+	 * @return			length (number of bytes) of the previous CardActivityDailyRecord
 	 */
-	public int getSize() {
-		return size;
+	public int getActivityPreviousRecordLength() {
+		return activityPreviousRecordLength;
 	}
 	
+
+	/**
+	 * Returns the length of this CardActivityDailyRecord
+	 * 
+	 * @return			length (number of bytes) of this CardActivityDailyRecord
+	 */
+	public int getActivityRecordLength() {
+		return activityRecordLength;
+	}
+
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

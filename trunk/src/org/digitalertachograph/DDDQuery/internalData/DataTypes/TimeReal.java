@@ -29,8 +29,8 @@ public class TimeReal extends DataClass{
 	 * Code for a combined date and time field, where the date and time 
 	 * are expressed as seconds past 00h.00m.00s. on 1 January 1970 GMT.
 	 * 
-	 * TimeReal{INTEGER:TimeRealRange} ::= INTEGER(0..TimeRealRange)
-	 * 
+	 * TimeReal{INTEGER:TimeRealRange} ::= INTEGER(0..TimeRealRange), 4 bytes
+	 * ---
 	 * TimeRealRange ::= 2^32-1
 	 */
 	

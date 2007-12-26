@@ -22,13 +22,20 @@ import org.jdom.Element;
 
 public class Language extends DataClass {
 	/* 
-	 * Language ::= IA5String(SIZE(2))
+	 * Language ::= IA5String(SIZE(2)), 2 bytes
 	 * Value assignment: Two-letter lower-case coding according to ISO 639.
 	 */
 
 	private String language;
 	
 	
+	/**
+	 * Constructor for a Language object
+	 */
+	public Language(){
+
+	}
+
 	/**
 	 * Constructor for a Language object
 	 * 

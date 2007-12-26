@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Application_Identification extends DataClass {
-	public static final int size = 10;
+	//public static final int size = 10;
 	private DriverCardApplicationIdentification driverCardApplicationIdentification;
 	private WorkshopCardApplicationIdentification workshopCardApplicationIdentification;
 	private ControlCardApplicationIdentification controlCardApplicationIdentification;

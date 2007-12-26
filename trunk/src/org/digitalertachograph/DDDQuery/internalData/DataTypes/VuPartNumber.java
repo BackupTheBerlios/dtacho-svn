@@ -22,11 +22,18 @@ import org.jdom.Element;
 
 public class VuPartNumber extends DataClass {
 	/*
-	 * VuPartNumber ::= IA5String((SIZE(16))
+	 * VuPartNumber ::= IA5String((SIZE(16)), 16 bytes
 	 */
 	
 	private String vuPartNumber;
 	
+
+	/**
+	 * Constructor for a VuPartNumber object
+	 */
+	public VuPartNumber(){
+
+	}
 
 	/**
 	 * Constructor for a VuPartNumber object

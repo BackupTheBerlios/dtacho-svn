@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class SpecificConditionType extends DataClass {
 	/*
-	 * SpecificConditionType ::= INTEGER(0..255)
+	 * SpecificConditionType ::= INTEGER(0..255), 1 byte
 	 * 
 	 * Value assignment:
 	 * '00'H RFU

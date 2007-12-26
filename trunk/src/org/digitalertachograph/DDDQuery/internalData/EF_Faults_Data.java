@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Faults_Data extends DataClass {
-	public static final int size = 288;
+	//public static final int size = 288;
 	private CardFaultData cardFaultData;
 	
 

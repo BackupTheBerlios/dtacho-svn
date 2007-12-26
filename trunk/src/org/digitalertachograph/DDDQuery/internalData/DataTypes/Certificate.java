@@ -27,8 +27,15 @@ public class Certificate extends DataClass {
 	/**
 	 * Constructor for a Certificate object
 	 */
-	public Certificate() {
+	public Certificate(){
 
+	}
+
+	/**
+	 * Constructor for a Certificate object
+	 */
+	public Certificate(byte[] certificate) {
+		this.certificate = certificate;
 	}
 	
 	public byte[] getCertificate() {

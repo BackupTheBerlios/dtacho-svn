@@ -23,8 +23,8 @@ import org.jdom.Element;
 public class HolderName extends DataClass {
 	/*
 	 * HolderName ::= SEQUENCE {
-	 * 	holderSurname Name,
-	 * 	holderFirstNames Name
+	 * 	holderSurname Name, 36 bytes
+	 * 	holderFirstNames Name, 36 bytes
 	 * }
 	 */
 

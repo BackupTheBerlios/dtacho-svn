@@ -31,6 +31,8 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
 	 * --
 	 * NoOfControlActivityRecords ::= INTEGER(0..2^16-1)
+	 * min.: 230
+	 * max.: 520
 	 */
 
 	private EquipmentType typeOfTachographCardId;

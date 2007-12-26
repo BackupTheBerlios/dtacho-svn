@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class EntryTypeDailyWorkPeriod extends DataClass {
 	/*
-	 * EntryTypeDailyWorkPeriod ::= INTEGER
+	 * EntryTypeDailyWorkPeriod ::= INTEGER, 1 byte
 	 * Begin, related time = card insertion time or time of entry (0),
 	 * End, related time = card withdrawal time or time of entry (1),
 	 * Begin, related time manually entered (start time) (2),

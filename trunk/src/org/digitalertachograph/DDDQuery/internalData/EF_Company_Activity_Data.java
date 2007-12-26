@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Company_Activity_Data extends DataClass {
-	public int size;
+	//public int size;
 	private CompanyActivityData companyActivityData;
 	
 
@@ -40,7 +40,7 @@ public class EF_Company_Activity_Data extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Company_Activity_Data(byte[] value){
-		size = value.length;
+		//size = value.length;
 		companyActivityData = new CompanyActivityData( value );
 	}
 	

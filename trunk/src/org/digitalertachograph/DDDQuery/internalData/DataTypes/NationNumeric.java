@@ -23,7 +23,7 @@ import org.jdom.Element;
 
 public class NationNumeric extends DataClass {
 	/*
-	 * NationNumeric ::= INTEGER(0..255)
+	 * NationNumeric ::= INTEGER(0..255), 1 byte
 	 */
 
 	private short nationNumeric;

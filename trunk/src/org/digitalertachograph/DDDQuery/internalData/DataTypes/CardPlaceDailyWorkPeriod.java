@@ -27,12 +27,16 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	/*
 	 * CardPlaceDailyWorkPeriod ::= SEQUENCE {
 	 * 	placePointerNewestRecord INTEGER(0..NoOfCardPlaceRecords-1), 1 byte;
-	 * 	placeRecords SET SIZE(NoOfCardPlaceRecords) OF PlaceRecord, 
+	 * 	placeRecords SET SIZE(NoOfCardPlaceRecords) OF PlaceRecord, 840..1120 bytes
 	 * }
+	 * ---
+	 * NoOfCardPlaceRecords ::= INTEGER(0..255), 1 byte
+	 * min.:  84
+	 * max.: 112
 	 */
 	
 	private short placePointerNewestRecord;
-	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>();
+	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>(84);
 	
 
 	/**

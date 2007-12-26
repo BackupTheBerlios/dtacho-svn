@@ -24,7 +24,14 @@ public class MemberStateCertificate extends Certificate {
 	 * Constructor for a MemberStateCertificate object
 	 */
 	public MemberStateCertificate() {
+		super();
+	}
 
+	/**
+	 * Constructor for a MemberStateCertificate object
+	 */
+	public MemberStateCertificate(byte[] certificate) {
+		super(certificate);
 	}
 }
 

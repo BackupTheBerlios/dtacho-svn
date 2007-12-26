@@ -27,7 +27,6 @@ public class CardEventData extends DataClass{
 	 * CardEventData ::= SEQUENCE SIZE(6) OF {
 	 * 	cardEventRecords SET SIZE(NoOfEventsPerType) OF CardEventRecord
 	 * }
-	 *
 	 * ---
 	 * NoOfEventsPerType ::= 6..12 for driver card
 	 * NoOfEventsPerType ::= 3     for workshop card
@@ -64,7 +63,7 @@ public class CardEventData extends DataClass{
 		// within the cardeventdata sequence
 		int noofeventspertype = value.length / (sequencesize * 24);
 
-		System.out.println("  noofeventspertype: " + noofeventspertype);	
+		System.out.println(" [INFO] no of events per type: " + noofeventspertype);	
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for (int j = 0; j < sequencesize; j++ ) {
@@ -116,11 +115,14 @@ public class CardEventData extends DataClass{
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		for (int i = 0; i < sequencesize; i++) {
+			Element recordsnode = new Element("cardEventRecords");
+			node.addContent(recordsnode);
+			
 			Iterator<CardEventRecord> it = cardEventRecords.get(i).iterator();
 			while(it.hasNext()){
 				CardEventRecord cer = (CardEventRecord) it.next();
 				Element cerElement = cer.generateXMLElement("cardEventRecord");
-				node.addContent(cerElement);
+				recordsnode.addContent(cerElement);
 			}
 		}
 

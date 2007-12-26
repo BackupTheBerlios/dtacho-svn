@@ -28,25 +28,25 @@ public class CardNumber extends DataClass {
 	/*
 	 * 	 * CardNumber ::= CHOICE {
 	 * 	SEQUENCE {
-	 * 		driverIdentification IA5String(SIZE(14)),
-	 * 		cardReplacementIndex CardReplacementIndex,
-	 * 		cardRenewalIndex CardRenewalIndex
+	 * 		driverIdentification IA5String(SIZE(14)), 14 bytes
+	 * 		cardReplacementIndex CardReplacementIndex, 1 byte
+	 * 		cardRenewalIndex CardRenewalIndex, 1 byte
 	 * 		}
 	 * 	SEQUENCE {
-	 * 		ownerIdentification IA5String(SIZE(13)),
-	 * 		cardConsecutiveIndex CardConsecutiveIndex,
-	 * 		cardReplacementIndex CardReplacementIndex,
-	 * 		cardRenewalIndex CardRenewalIndex
+	 * 		ownerIdentification IA5String(SIZE(13)), 13 bytes
+	 * 		cardConsecutiveIndex CardConsecutiveIndex, 1 byte
+	 * 		cardReplacementIndex CardReplacementIndex, 1 byte
+	 * 		cardRenewalIndex CardRenewalIndex, 1 byte
 	 * 		}
 	 * }
-	 * --
-	 * CardReplacementIndex ::= IA5String(SIZE(1))
-	 * --
-	 * CardConsecutiveIndex ::= IA5String(SIZE(1))
+	 * ---
+	 * CardReplacementIndex ::= IA5String(SIZE(1)), 1 byte
+	 * ---
+	 * CardConsecutiveIndex ::= IA5String(SIZE(1)), 1 byte
 	 * Value assignment: (see this Annex Chapter VII)
 	 * Order for increase: "0..9, A..Z, a..z".
-	 * --
-	 * CardRenewalIndex ::= IA5String(SIZE(1)).
+	 * ---
+	 * CardRenewalIndex ::= IA5String(SIZE(1)), 1 byte
 	 * Value assignment: (see this Annex Chapter VII).
 	 * "0" First issue.
 	 * Order for increase: "0..9, A..Z".

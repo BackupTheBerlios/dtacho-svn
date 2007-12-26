@@ -27,7 +27,7 @@ public class CompanyActivityType extends DataClass {
 	 * 	VU downloading (2),
 	 * 	VU lock-in (3),
 	 * 	VU lock-out (4).
-	 * }
+	 * }, 1 byte
 	 */
 	private short companyActivityType;
 

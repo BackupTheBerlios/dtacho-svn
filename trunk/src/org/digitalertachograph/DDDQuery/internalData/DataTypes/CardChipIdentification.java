@@ -24,8 +24,8 @@ public class CardChipIdentification extends DataClass {
 
 	/*
 	 * CardChipIdentification ::= SEQUENCE {
-	 *  icSerialNumber				0x00..0x00	OCTET STRING (SIZE(4)),
-	 *  icManufacturingReferences	0x00..0x00	OCTET STRING (SIZE(4))
+	 *  icSerialNumber				0x00..0x00	OCTET STRING (SIZE(4)), 4 bytes
+	 *  icManufacturingReferences	0x00..0x00	OCTET STRING (SIZE(4)), 4 bytes
 	 * }
 	 */
 
@@ -40,18 +40,43 @@ public class CardChipIdentification extends DataClass {
 
 	}
 	
+	/**
+	 * Returns the IC manufacturer identifier and fabrication elements of a CardChipIdentification object.
+	 * 
+	 * @return	byte array that contains the IC manufacturer identifier and fabrication elements
+	 * 			of the CardChipIdentification object as defined in EN 726-3
+	 */
 	public byte[] getIcManufacturingReferences() {
 		return icManufacturingReferences;
 	}
 
+	/**
+	 * Sets the IC manufacturer identifier and fabrication elements of a CardChipIdentification object.
+	 * 
+	 * @param	icManufacturingReferences	byte array that contains the IC manufacturer identifier
+	 * 										and fabrication elements to be set for the
+	 * 										CardChipIdentification object
+	 */
 	public void setIcManufacturingReferences(byte[] icManufacturingReferences) {
 		this.icManufacturingReferences = icManufacturingReferences;
 	}
 
+	/**
+	 * Returns the IC serial number of a CardChipIdentification object.
+	 * 
+	 * @return	byte array that contains the IC serial number of the CardChipIdentification object
+	 * 			as defined in EN 726-3
+	 */
 	public byte[] getIcSerialNumber() {
 		return icSerialNumber;
 	}
 
+	/**
+	 * Sets the IC serial number of a CardChipIdentification object.
+	 * 
+	 * @param	icSerialNumber		byte array that contains the IC serial number to be set for the
+	 * 								CardChipIdentification object
+	 */
 	public void setIcSerialNumber(byte[] icSerialNumber) {
 		this.icSerialNumber = icSerialNumber;
 	}

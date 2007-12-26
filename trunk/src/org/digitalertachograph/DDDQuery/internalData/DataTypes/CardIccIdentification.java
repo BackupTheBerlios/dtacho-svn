@@ -22,24 +22,24 @@ import org.jdom.Element;
 
 public class CardIccIdentification extends DataClass {
 	/* name, 						size, default,	comment
-	 * clockStop,					1,	0x00		OCTET STRING (SIZE(1)),
-	 * cardExtendedSerialNumber,	8,	0x00..0x00	ExtendedSerialNumber
-	 * cardApprovalNumber,			8,	0x20..0x20	CardApprovalNumber
-	 * cardPersonaliserID			1,	0x00		OCTET STRING (SIZE(1))
-	 * embedderIcAssemblerID		5,	0x00..0x00	OCTET STRING (SIZE(5))
-	 * icIdentifier					2,	0x00..0x00	OCTET STRING (SIZE(2))
+	 * clockStop,					1,	0x00		OCTET STRING (SIZE(1)), 1 byte
+	 * cardExtendedSerialNumber,	8,	0x00..0x00	ExtendedSerialNumber, 8 bytes
+	 * cardApprovalNumber,			8,	0x20..0x20	CardApprovalNumber, 8 bytes
+	 * cardPersonaliserID			1,	0x00		OCTET STRING (SIZE(1)), 1 byte
+	 * embedderIcAssemblerID		5,	0x00..0x00	OCTET STRING (SIZE(5)), 5 bytes
+	 * icIdentifier					2,	0x00..0x00	OCTET STRING (SIZE(2)), 2 bytes
 	 * 
 	 * ---
 	 * CardApprovalNumber ::= IA5String(SIZE(8))
 	 * ---
 	 * ExtendedSerialNumber ::= SEQUENCE {
-	 * 		serialNumber INTEGER(0..2^32-1) <- 4 byte
-	 * 		monthYear BCDString(SIZE(2))
-	 * 		type OCTET STRING(SIZE(1))
-	 * 		manufacturerCode ManufacturerCode <- 1byte
+	 * 		serialNumber INTEGER(0..2^32-1), 4 bytes
+	 * 		monthYear BCDString(SIZE(2)), 2 bytes
+	 * 		type OCTET STRING(SIZE(1)), 1 byte
+	 * 		manufacturerCode ManufacturerCode, 1 byte
 	 * }
 	 * ---
-	 * ManufacturerCode ::= INTEGER(0..255)
+	 * ManufacturerCode ::= INTEGER(0..255), 1 byte
 	 */
 	
 	private byte clockStop;

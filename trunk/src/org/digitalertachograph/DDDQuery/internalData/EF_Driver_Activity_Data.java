@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Driver_Activity_Data extends DataClass {
-	public int size;
+	//public int size;
 	private CardDriverActivity cardDriverActivity;
 	
 
@@ -40,7 +40,7 @@ public class EF_Driver_Activity_Data extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Driver_Activity_Data(byte[] value){
-		size = value.length;
+		//size = value.length;
 		cardDriverActivity = new CardDriverActivity(value);
 	}
 	

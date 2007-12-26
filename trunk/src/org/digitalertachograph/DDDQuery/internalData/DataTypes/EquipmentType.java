@@ -24,7 +24,7 @@ public class EquipmentType extends DataClass {
 	private byte equipmentType;
 	
 	/*
-	 * EquipmentType ::= INTEGER(0..255)
+	 * EquipmentType ::= INTEGER(0..255), 1 byte
 	 * - - Reserved (0),
 	 * - - Driver Card (1),
 	 * - - Workshop Card (2),
@@ -36,30 +36,74 @@ public class EquipmentType extends DataClass {
 	 * - - RFU (8..255)
 	 */
 	
+	/**
+	 * Equipment type: RESERVED
+	 */
 	public final static byte RESERVED = 0;
+	/**
+	 * Equipment type: DRIVER_CARD
+	 */
 	public final static byte DRIVER_CARD = 1;
+	/**
+	 * Equipment type: WORKSHOP_CARD
+	 */
 	public final static byte WORKSHOP_CARD = 2;
+	/**
+	 * Equipment type: CONTROL_CARD
+	 */
 	public final static byte CONTROL_CARD = 3;
+	/**
+	 * Equipment type: COMPANY_CARD
+	 */
 	public final static byte COMPANY_CARD = 4;
+	/**
+	 * Equipment type: MANUFACTURING_CARD
+	 */
 	public final static byte MANUFACTURING_CARD = 5;
+	/**
+	 * Equipment type: VEHICLE_UNIT
+	 */
 	public final static byte VEHICLE_UNIT = 6;
+	/**
+	 * Equipment type: MOTION_SENSOR
+	 */
 	public final static byte MOTION_SENSOR = 7;
 	
 	
 	/**
 	 * Constructor for an EquipmentType object
+	 */
+	public EquipmentType(){
+
+	}
+
+	/**
+	 * Constructor for an EquipmentType object
 	 * 
 	 * @param	value	byte that indicates the type of equipment for the
-	 * 					tachograph application.
+	 * 					tachograph application
 	 */
 	public EquipmentType(byte value){
 		equipmentType = value;
 	}
 
+	/**
+	 * Returns the equipment type of an EquipmentType object.
+	 * 
+	 * @return	equipment type of the EquipmentType object ({@link #RESERVED}, {@link #DRIVER_CARD},
+	 * 			{@link #WORKSHOP_CARD}, {@link #CONTROL_CARD}, {@link #COMPANY_CARD}, {@link #MANUFACTURING_CARD},
+	 * 			{@link #VEHICLE_UNIT}, {@link #MOTION_SENSOR})
+	 */
 	public byte getEquipmentType() {
 		return equipmentType;
 	}
 
+	/**
+	 * Sets the equipment type of an EquipmentType object.
+	 * 
+	 * @param	equipmentType		byte that contains the equipment type to be set for
+	 * 								the EquipmentType object
+	 */
 	public void setEquipmentType(byte equipmentType) {
 		this.equipmentType = equipmentType;
 	}

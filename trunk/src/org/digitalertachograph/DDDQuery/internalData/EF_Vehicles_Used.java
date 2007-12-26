@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Vehicles_Used extends DataClass {
-	public int size;
+	//public int size;
 	private CardVehiclesUsed cardVehiclesUsed;
 
 	
@@ -40,7 +40,7 @@ public class EF_Vehicles_Used extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Vehicles_Used(byte[] value){
-		size = value.length;
+		//size = value.length;
 		cardVehiclesUsed = new CardVehiclesUsed( value);
 	}
 	

@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Specific_Conditions extends DataClass {
-	public static final int size = 280; 
+	//public static final int size = 280; 
 	private SpecificConditionRecord specificConditionRecord;
 
 	

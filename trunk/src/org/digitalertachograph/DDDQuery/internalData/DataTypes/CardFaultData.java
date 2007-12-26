@@ -25,8 +25,8 @@ import org.jdom.Element;
 public class CardFaultData extends DataClass {
 	/*
 	 * CardFaultData ::= SEQUENCE SIZE(2) OF {
-	 * 	 cardFaultRecords SET SIZE(NoOfFaultsPerType) OF CardFaultRecord }
-	 *
+	 * 	 cardFaultRecords SET SIZE(NoOfFaultsPerType) OF CardFaultRecord
+	 * }
 	 * ---
 	 * NoOfFaultsPerType ::= 12..24 for driver card
 	 * NoOfFaultsPerType ::= 6      for workshop card
@@ -89,11 +89,14 @@ public class CardFaultData extends DataClass {
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		for (int i = 0; i < sequencesize; i++) {
+			Element recordsnode = new Element("cardFaultRecords");
+			node.addContent(recordsnode);
+
 			Iterator<CardFaultRecord> it = cardFaultRecords.get(i).iterator();
 			while(it.hasNext()){
 				CardFaultRecord cfr = (CardFaultRecord) it.next();
 				Element cfrElement = cfr.generateXMLElement("cardFaultRecord");
-				node.addContent(cfrElement);
+				recordsnode.addContent(cfrElement);
 			}
 		}
 

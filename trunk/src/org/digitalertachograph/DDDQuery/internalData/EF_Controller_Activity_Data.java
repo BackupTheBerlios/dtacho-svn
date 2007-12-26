@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Controller_Activity_Data extends DataClass {
-	public int size;
+	//public int size;
 	private ControlCardControlActivityData controlCardControlActivityData;
 	
 
@@ -40,7 +40,7 @@ public class EF_Controller_Activity_Data extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Controller_Activity_Data(byte[] value){
-		size = value.length;
+		//size = value.length;
 		controlCardControlActivityData = new ControlCardControlActivityData(value);
 	}
 	

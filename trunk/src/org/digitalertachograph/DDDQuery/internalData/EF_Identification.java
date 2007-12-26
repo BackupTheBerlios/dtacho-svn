@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Identification extends DataClass {
-	public int size;
+	//public int size;
 	private int cardType;
 	private CardIdentification cardIdentification;
 	private DriverCardHolderIdentification driverCardHolderIdentification;
@@ -45,7 +45,7 @@ public class EF_Identification extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Identification(byte[] value, int cardType){
-		size = value.length;
+		//size = value.length;
 		// 65 bytes
 		this.cardType = cardType;
 		cardIdentification = new CardIdentification( arrayCopy(value,0, 65), cardType );

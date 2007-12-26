@@ -23,10 +23,10 @@ import org.jdom.Element;
 public class ControlCardHolderIdentification extends DataClass {
 	/*
 	 * ControlCardHolderIdentification ::= SEQUENCE {
-	 * 	controlBodyName Name,
-	 * 	controlBodyAddress Address,
-	 * 	cardHolderName HolderName,
-	 * 	cardHolderPreferredLanguage Language
+	 * 	controlBodyName Name, 36 bytes
+	 * 	controlBodyAddress Address, 36 bytes
+	 * 	cardHolderName HolderName, 72 bytes
+	 * 	cardHolderPreferredLanguage Language, 2 bytes
 	 * }
 	 */
 	

@@ -28,8 +28,12 @@ public class WorkshopCardCalibrationData extends DataClass {
 	 * WorkshopCardCalibrationData ::= SEQUENCE {
 	 * 	calibrationTotalNumber INTEGER(0..2^16-1), 2 bytes
 	 * 	calibrationPointerNewestRecord INTEGER(0..NoOfCalibrationRecords-1), 1 bytes
-	 * 	calibrationRecords SET SIZE(NoOfCalibrationRecords) OF WorkshopCardCalibrationRecord 
-	 * } 
+	 * 	calibrationRecords SET SIZE(NoOfCalibrationRecords) OF WorkshopCardCalibrationRecord, 9240..26775 bytes
+	 * }
+	 * ---
+	 * NoOfCalibrationRecords
+	 * min.: 88
+	 * max.: 255
 	 */
 
 	private int calibrationTotalNumber;

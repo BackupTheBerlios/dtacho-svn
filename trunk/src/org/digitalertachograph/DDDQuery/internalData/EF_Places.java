@@ -28,7 +28,7 @@ import org.jdom.Element;
  * 
  */
 public class EF_Places extends DataClass{
-	public int size;
+	//public int size;
 	private CardPlaceDailyWorkPeriod cardPlaceDailyWorkPeriod;
 	
 
@@ -40,7 +40,7 @@ public class EF_Places extends DataClass{
 	 * 					object is created.
 	 */
 	public EF_Places(byte[] value){
-		size = value.length;
+		//size = value.length;
 		cardPlaceDailyWorkPeriod = new CardPlaceDailyWorkPeriod(value);
 	}
 	public Element generateXMLElement(String name){

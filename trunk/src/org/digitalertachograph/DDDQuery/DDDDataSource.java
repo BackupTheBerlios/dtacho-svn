@@ -67,7 +67,7 @@ public class DDDDataSource implements DataSource {
 	 * The TachographData object can then be copied with the
 	 * {@link #getTachographData()} method.
 	 *
-	 * @param	src		the location of the .ddd file that will be processed
+	 * @param	srcfile		the location of the .ddd file that will be processed
 	 */
 	public void setSourceFile(String srcfile) {
 		this.srcfile = srcfile;

@@ -24,7 +24,7 @@ public class PlaceRecord extends DataClass {
 	/*
 	 * PlaceRecord ::= SEQUENCE {
 	 * 	entryTime TimeReal, 4 bytes
-	 * 	entryTypeDailyWorkPeriod EntryTypeDailyWorkPeriod, 1byte
+	 * 	entryTypeDailyWorkPeriod EntryTypeDailyWorkPeriod, 1 byte
 	 * 	dailyWorkPeriodCountry NationNumeric,	1 byte
 	 * 	dailyWorkPeriodRegion RegionNumeric,	1 byte
 	 * 	vehicleOdometerValue OdometerShort,		3 bytes
