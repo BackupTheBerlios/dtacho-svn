@@ -85,7 +85,7 @@ public class CardActivityDailyRecord extends DataClass {
 		// TODO wie haben wir length in den anderen Klassen genannt?!?
 		int length = 12; // we have 12 bytes so far
 		for(;length < activityRecordLength; length += 2){
-			// ActivityChangeInfo <- 2 bytes groß
+			// ActivityChangeInfo <- 2 bytes
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy(value, length, 2) );
 			activityChangeInfo.add( aci );
 

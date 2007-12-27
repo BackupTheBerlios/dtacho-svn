@@ -91,6 +91,10 @@ public class CardDriverActivity extends DataClass {
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
 			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy(records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy(records, cardActivityDailyRecordsOffset + 2, 2)) ) );
 
+			// break when empty CardActivityDailyRecord is found
+			if ( cadr.getActivityRecordLength() == 0 )
+				break;
+
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
 				if ( cadr.getActivityPreviousRecordLength() == 0 ) {

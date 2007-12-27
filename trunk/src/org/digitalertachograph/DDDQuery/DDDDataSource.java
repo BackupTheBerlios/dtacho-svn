@@ -100,12 +100,10 @@ public class DDDDataSource implements DataSource {
 
 				if ( td.isValidTag(tag) == false ) {
 					if(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{0x76,0x06})) {
-						System.out.println(" [EEEK] weird data (76 06, SID/TREP?!, OPTAC FW < 2.3?! ) found, skipping...");
-						if(src.length < pos + 42){
-							parseresult = false;
-							break;
-						}
-						pos += 42;
+						// OPTAC download tools with firmware < v2.3 write two bytes (76 06, SID/TREP?!) at the
+						// beginning of a .DDD file that are out of specs...
+						System.out.println(" [INFO] data 76 06 (SID/TREP?!, OPTAC FW < v2.3 ) found, skipping...");
+						pos -= 1;
 					} else {
 						System.out.printf("invalid tag, %02x %02x %02x\n", tag[0], tag[1], tag[2]);
 						parseresult = false;
