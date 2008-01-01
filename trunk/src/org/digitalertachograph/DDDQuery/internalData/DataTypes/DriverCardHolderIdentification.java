@@ -47,26 +47,68 @@ public class DriverCardHolderIdentification extends DataClass {
 		cardHolderPreferredLanguage = new Language( arrayCopy(value, 76, 2));
 	}
 	
-	public Datef getCardHolderBirthDate() {
-		return cardHolderBirthDate;
-	}
-
-	public void setCardHolderBirthDate(Datef cardHolderBirthDate) {
-		this.cardHolderBirthDate = cardHolderBirthDate;
-	}
-
+	/**
+	 * Returns the name and the first name(s) of the holder of the driver card
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @return	the name and the first name(s) of the holder of the driver card
+	 * 			of the DriverCardHolderIdentification object
+	 */
 	public HolderName getCardHolderName() {
 		return cardHolderName;
 	}
 
+	/**
+	 * Sets the name and the first name(s) of the holder of the driver card
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderName	the name and the first name(s) of the holder of the driver card
+	 * 							to be set for the DriverCardHolderIdentification object
+	 */
 	public void setCardHolderName(HolderName cardHolderName) {
 		this.cardHolderName = cardHolderName;
 	}
 
+	/**
+	 * Returns the date of birth of the holder of the driver card
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @return	the date of birth of the holder of the driver card
+	 * 			of the DriverCardHolderIdentification object
+	 */
+	public Datef getCardHolderBirthDate() {
+		return cardHolderBirthDate;
+	}
+
+	/**
+	 * Sets the date of birth of the holder of the driver card
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderBirthDate		the date of birth of the holder of the driver card
+	 * 									to be set for the DriverCardHolderIdentification object
+	 */
+	public void setCardHolderBirthDate(Datef cardHolderBirthDate) {
+		this.cardHolderBirthDate = cardHolderBirthDate;
+	}
+
+	/**
+	 * Returns the preferred language of the card holder
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @return	the preferred language of the card holder
+	 * 			of the DriverCardHolderIdentification object
+	 */
 	public Language getCardHolderPreferredLanguage() {
 		return cardHolderPreferredLanguage;
 	}
 
+	/**
+	 * Sets the preferred language of the card holder
+	 * of a DriverCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder
+	 * 											to be set for the DriverCardHolderIdentification object
+	 */
 	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
 		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}

@@ -50,36 +50,92 @@ public class WorkshopCardHolderIdentification extends DataClass {
 		cardHolderPreferredLanguage = new Language( arrayCopy(value, 142, 2));
 	}
 
-	public HolderName getCardHolderName() {
-		return cardHolderName;
-	}
-
-	public void setCardHolderName(HolderName cardHolderName) {
-		this.cardHolderName = cardHolderName;
-	}
-
-	public Language getCardHolderPreferredLanguage() {
-		return cardHolderPreferredLanguage;
-	}
-
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
-		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
-	}
-
-	public Address getWorkshopAddress() {
-		return workshopAddress;
-	}
-
-	public void setWorkshopAddress(Address workshopAddress) {
-		this.workshopAddress = workshopAddress;
-	}
-
+	/**
+	 * Returns the name of the workshop of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @return	the name of the workshop of the card holder
+	 * 			of the WorkshopCardHolderIdentification object
+	 */
 	public Name getWorkshopName() {
 		return workshopName;
 	}
 
+	/**
+	 * Sets the name of the workshop of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @param	workshopName		the name of the workshop of the card holder
+	 * 								to be set for the WorkshopCardHolderIdentification object
+	 */
 	public void setWorkshopName(Name workshopName) {
 		this.workshopName = workshopName;
+	}
+
+	/**
+	 * Returns the address of the workshop of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @return	the address of the workshop of the card holder
+	 * 			of the WorkshopCardHolderIdentification object
+	 */
+	public Address getWorkshopAddress() {
+		return workshopAddress;
+	}
+
+	/**
+	 * Sets the address of the workshop of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @param	workshopAddress		the address of the workshop of the card holder
+	 * 								to be set for the WorkshopCardHolderIdentification object
+	 */
+	public void setWorkshopAddress(Address workshopAddress) {
+		this.workshopAddress = workshopAddress;
+	}
+
+	/**
+	 * Returns the name and the first name(s) of the holder (e.g. name of the mechanic)
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @return	the name and the first name(s) of the holder (e.g. name of the mechanic)
+	 * 			of the WorkshopCardHolderIdentification object
+	 */
+	public HolderName getCardHolderName() {
+		return cardHolderName;
+	}
+
+	/**
+	 * Sets the name and the first name(s) of the holder (e.g. name of the mechanic)
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderName		the name and the first name(s) of the holder (e.g. name of the mechanic)
+	 * 								to be set for the WorkshopCardHolderIdentification object
+	 */
+	public void setCardHolderName(HolderName cardHolderName) {
+		this.cardHolderName = cardHolderName;
+	}
+
+	/**
+	 * Returns the preferred language of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @return	the preferred language of the card holder
+	 * 			of the WorkshopCardHolderIdentification object
+	 */
+	public Language getCardHolderPreferredLanguage() {
+		return cardHolderPreferredLanguage;
+	}
+
+	/**
+	 * Sets the preferred language of the card holder
+	 * of a WorkshopCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder
+	 *			 								to be set for the WorkshopCardHolderIdentification object
+	 */
+	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}
 
 	@Override

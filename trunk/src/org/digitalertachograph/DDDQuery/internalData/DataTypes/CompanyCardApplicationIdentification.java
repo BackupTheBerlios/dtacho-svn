@@ -34,9 +34,16 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 */
 
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion;
+	private byte[] cardStructureVersion = new byte[2];
 	private int noOfCompanyActivityRecords;
 	
+
+	/**
+	 * Constructor for a CompanyCardApplicationIdentification object
+	 */
+	public CompanyCardApplicationIdentification() {
+
+	}
 
 	/**
 	 * Constructor for a CompanyCardApplicationIdentification object
@@ -45,12 +52,75 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * 					whose data is used when the CompanyCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public CompanyCardApplicationIdentification(byte[] value){
+	public CompanyCardApplicationIdentification(byte[] value) {
 		typeOfTachographCardId = new EquipmentType(value[0]);
 		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfCompanyActivityRecords = convertIntoUnsigned2ByteInt( arrayCopy(value, 3, 2));
+		noOfCompanyActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 3, 2));
 	}
-	
+
+	/**
+	 * Returns the implemented type of card of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @return	the implemented type of card of the CompanyCardApplicationIdentification object
+	 */
+	public EquipmentType getTypeOfTachographCardId() {
+		return typeOfTachographCardId;
+	}
+
+	/**
+	 * Sets the implemented type of card of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @param	typeOfTachographCardId	the implemented type of card to be set
+	 * 									for the CompanyCardApplicationIdentification object
+	 */
+	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
+		this.typeOfTachographCardId = typeOfTachographCardId;
+	}
+
+	/**
+	 * Returns the version of the structure that is implemented in the card
+	 * of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @return	the version of the structure that is implemented in the card
+	 * 			of the CompanyCardApplicationIdentification object
+	 */
+	public byte[] getCardStructureVersion() {
+		return cardStructureVersion;
+	}
+
+	/**
+	 * Sets the version of the structure that is implemented in the card
+	 * of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
+	 * 									to be set for the CompanyCardApplicationIdentification object
+	 */
+	public void setCardStructureVersion(byte[] cardStructureVersion) {
+		this.cardStructureVersion = cardStructureVersion;
+	}
+
+	/**
+	 * Returns the number of company activity records the card can store
+	 * of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @return	the number of company activity records the card can store
+	 * 			of the CompanyCardApplicationIdentification object
+	 */
+	public int getNoOfCompanyActivityRecords() {
+		return noOfCompanyActivityRecords;
+	}
+
+	/**
+	 * Sets the number of company activity records the card can store
+	 * of a CompanyCardApplicationIdentification object.
+	 * 
+	 * @param	noOfCompanyActivityRecords	the number of company activity records the card can store
+	 * 										to be set for the CompanyCardApplicationIdentification object
+	 */
+	public void setNoOfCompanyActivityRecords(int noOfCompanyActivityRecords) {
+		this.noOfCompanyActivityRecords = noOfCompanyActivityRecords;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

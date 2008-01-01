@@ -43,20 +43,155 @@ public class CompanyActivityRecord extends DataClass {
 	
 	/**
 	 * Constructor for a CompanyActivityRecord object
+	 */
+	public CompanyActivityRecord() {
+
+	}
+
+	/**
+	 * Constructor for a CompanyActivityRecord object
 	 * 
 	 * @param	value	byte array of a CompanyActivityRecord structure
 	 * 					whose data is used when the CompanyActivityRecord
 	 * 					object is created.
 	 */
-	public CompanyActivityRecord(byte[] value){
+	public CompanyActivityRecord(byte[] value) {
 		companyActivityType = new CompanyActivityType( value[0] );
-		companyActivityTime = new TimeReal( arrayCopy(value, 1, 4));
-		cardNumberInformation = new FullCardNumber( arrayCopy(value, 5, 18));
-		vehicleRegistrationInformation = new VehicleRegistrationIdentification( arrayCopy(value, 23, 15));
-		downloadPeriodBegin = new TimeReal( arrayCopy(value, 38, 4));
-		downloadPeriodEnd = new TimeReal( arrayCopy(value, 42, 4));
+		companyActivityTime = new TimeReal(arrayCopy(value, 1, 4));
+		cardNumberInformation = new FullCardNumber(arrayCopy(value, 5, 18));
+		vehicleRegistrationInformation = new VehicleRegistrationIdentification(arrayCopy(value, 23, 15));
+		downloadPeriodBegin = new TimeReal(arrayCopy(value, 38, 4));
+		downloadPeriodEnd = new TimeReal(arrayCopy(value, 42, 4));
 	}
 	
+	/**
+	 * Returns the type of the company activity of a CompanyActivityRecord object.
+	 * 
+	 * @return	the type of the company activity of the CompanyActivityRecord object
+	 */
+	public CompanyActivityType getCompanyActivityType() {
+		return companyActivityType;
+	}
+
+	/**
+	 * Sets the type of the company activity of a CompanyActivityRecord object.
+	 * 
+	 * @param	companyActivityType		the type of the company activity
+	 * 									to be set for the CompanyActivityRecord object
+	 */
+	public void setCompanyActivityType(CompanyActivityType companyActivityType) {
+		this.companyActivityType = companyActivityType;
+	}
+
+	/**
+	 * Returns the date and time of the company activity of a CompanyActivityRecord object.
+	 * 
+	 * @return	the date and time of the company activity of the CompanyActivityRecord object
+	 */
+	public TimeReal getCompanyActivityTime() {
+		return companyActivityTime;
+	}
+
+	/**
+	 * Sets the date and time of the company activity of a CompanyActivityRecord object.
+	 * 
+	 * @param	companyActivityTime		the date and time of the company activity
+	 * 									to be set for the CompanyActivityRecord object
+	 */
+	public void setCompanyActivityTime(TimeReal companyActivityTime) {
+		this.companyActivityTime = companyActivityTime;
+	}
+
+	/**
+	 * Returns the card number and the card issuing Member State of the card downloaded, if any
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @return	the card number and the card issuing Member State of the card downloaded, if any
+	 * 			of the CompanyActivityRecord object
+	 */
+	public FullCardNumber getCardNumberInformation() {
+		return cardNumberInformation;
+	}
+
+	/**
+	 * Sets the card number and the card issuing Member State of the card downloaded
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @param	cardNumberInformation	the card number and the card issuing Member State of the card downloaded
+	 * 									to be set for the CompanyActivityRecord object
+	 */
+	public void setCardNumberInformation(FullCardNumber cardNumberInformation) {
+		this.cardNumberInformation = cardNumberInformation;
+	}
+
+	/**
+	 * Returns the registration number of the vehicle (VRN) and registering Member State
+	 * of the vehicle downloaded or locked in or out of a CompanyActivityRecord object.
+	 * 
+	 * @return	the registration number of the vehicle (VRN) and registering Member State
+	 * 			of the vehicle downloaded or locked in or out of the CompanyActivityRecord object
+	 */
+	public VehicleRegistrationIdentification getVehicleRegistrationInformationn() {
+		return vehicleRegistrationInformation;
+	}
+
+	/**
+	 * Sets the registration number of the vehicle (VRN) and registering Member State
+	 * of the vehicle downloaded or locked in or outof a CompanyActivityRecord object.
+	 * 
+	 * @param	vehicleRegistrationInformation	the registration number of the vehicle (VRN) and
+	 * 											registering Member State of the vehicle downloaded
+	 * 											or locked in or out to be set for the
+	 * 											CompanyActivityRecord object
+	 */
+	public void setVehicleRegistrationInformation(VehicleRegistrationIdentification vehicleRegistrationInformation) {
+		this.vehicleRegistrationInformation = vehicleRegistrationInformation;
+	}
+
+	/**
+	 * Returns the date and time of the beginning of a download period
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @return	the date and time of the beginning of a download period
+	 * 			of the CompanyActivityRecord object
+	 */
+	public TimeReal getDownloadPeriodBegin() {
+		return downloadPeriodBegin;
+	}
+
+	/**
+	 * Sets the date and time of the beginning of a download period
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @param	downloadPeriodBegin		the date and time of the beginning of a download period
+	 * 									to be set for the CompanyActivityRecord object
+	 */
+	public void setDownloadPeriodBegin(TimeReal downloadPeriodBegin) {
+		this.downloadPeriodBegin = downloadPeriodBegin;
+	}
+
+	/**
+	 * Returns the date and time of the end of a download period
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @return	the date and time of the end of a download period
+	 * 			of the CompanyActivityRecord object
+	 */
+	public TimeReal getDownloadPeriodEnd() {
+		return downloadPeriodEnd;
+	}
+
+	/**
+	 * Sets the date and time of the end of a download period
+	 * of a CompanyActivityRecord object.
+	 * 
+	 * @param	downloadPeriodEnd		the date and time of the end of a download period
+	 * 									to be set for the CompanyActivityRecord object
+	 */
+	public void setDownloadPeriodEnd(TimeReal downloadPeriodEnd) {
+		this.downloadPeriodEnd = downloadPeriodEnd;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

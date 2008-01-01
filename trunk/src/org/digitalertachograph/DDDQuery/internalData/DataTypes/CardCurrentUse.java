@@ -33,6 +33,13 @@ public class CardCurrentUse extends DataClass{
 
 	/**
 	 * Constructor for a CardCurrentUse object
+	 */
+	public CardCurrentUse(){
+
+	}
+
+	/**
+	 * Constructor for a CardCurrentUse object
 	 * 
 	 * @param	value	byte array of a CardCurrentUse structure
 	 * 					whose data is used when the CardCurrentUse
@@ -43,20 +50,47 @@ public class CardCurrentUse extends DataClass{
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy(value, 4, 15));
 	}
 
+	/**
+	 * Returns the timestamp when the card is inserted for the current usage
+	 * of a CardCurrentUse object.
+	 * 
+	 * @return	the timestamp when the card is inserted for the current usage
+	 * 			of the CardCurrentUse object
+	 */
 	public TimeReal getSessionOpenTime() {
 		return sessionOpenTime;
 	}
 
+	/**
+	 * Sets the timestamp when the card is inserted for the current usage
+	 * of a CardCurrentUse object.
+	 * 
+	 * @param	sessionOpenTime		the timestamp when the card is inserted for the current usage
+	 * 								to be set for the CardCurrentUse object
+	 */
 	public void setSessionOpenTime(TimeReal sessionOpenTime) {
 		this.sessionOpenTime = sessionOpenTime;
 	}
 
+	/**
+	 * Returns the identification of the current used vehicle, set at card insertion
+	 * of a CardCurrentUse object.
+	 * 
+	 * @return	the identification of the current used vehicle, set at card insertion
+	 * 			of the CardCurrentUse object
+	 */
 	public VehicleRegistrationIdentification getSessionOpenVehicle() {
 		return sessionOpenVehicle;
 	}
 
-	public void setSessionOpenVehicle(
-			VehicleRegistrationIdentification sessionOpenVehicle) {
+	/**
+	 * Sets the identification of the current used vehicle, set at card insertion
+	 * of a CardCurrentUse object.
+	 * 
+	 * @param	sessionOpenVehicle	the identification of the current used vehicle, set at card insertion
+	 * 								to be set for the CardCurrentUse object
+	 */
+	public void setSessionOpenVehicle( VehicleRegistrationIdentification sessionOpenVehicle) {
 		this.sessionOpenVehicle = sessionOpenVehicle;
 	}
 	
@@ -67,5 +101,4 @@ public class CardCurrentUse extends DataClass{
 		node.addContent(sessionOpenVehicle.generateXMLElement("sessionOpenVehicle") );
 		return node;
 	}
-
 }

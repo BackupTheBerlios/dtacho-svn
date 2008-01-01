@@ -28,14 +28,17 @@ public class Datef extends DataClass {
 	 * 	day BCDString(SIZE(1)), 1 byte
 	 * }
 	 */
-	private String year;
-	private String month;
-	private String day;
+	private byte[] year = new byte[2];
+	private byte month;
+	private byte day;
 
 	
-	// public Datef(){
-	//	
-	//}
+	/**
+	 * Constructor for a Datef object
+	 */
+	public Datef() {
+	
+	}
 
 	/**
 	 * Constructor for a Datef object
@@ -44,54 +47,99 @@ public class Datef extends DataClass {
 	 * 					whose data is used when the Datef
 	 * 					object is created.
 	 */
-	public Datef(byte[] value){
-		year = convertIntoBCDString( arrayCopy(value, 0, 2));
-		month = convertIntoBCDString( arrayCopy(value, 2, 1));
-		day = convertIntoBCDString( arrayCopy(value, 3, 1));
+	public Datef(byte[] value) {
+		year = arrayCopy(value, 0, 2);
+		month = value[2];
+		day = value[3];
 	}
 
-	public void setDay(byte [] day){
-		this.day = convertIntoBCDString(day); 
-	}
-
-	public void setMonth(byte[] month) {
-		this.month = convertIntoBCDString(month);
-	}
-	
-	public void setYear(byte[] year) {
-		this.year = convertIntoBCDString(year);
-	}
-	
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
-	}
-
-	public String getMonth() {
-		return month;
-	}
-
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
-	public String getYear() {
+	/**
+	 * Returns the year of a Datef object.
+	 * 
+	 * @return	the year of the Datef object as BCD
+	 */
+	public byte[] getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	/**
+	 * Returns the year of a Datef object.
+	 * 
+	 * @return	the year of the Datef object
+	 */
+	public String getYearString() {
+		return convertBCDStringIntoString(year);
+	}
+	
+	/**
+	 * Sets the year of a Datef object.
+	 * 
+	 * @param	year	the year as BCD to be set for the Datef object
+	 */
+	public void setYear(byte[] year) {
 		this.year = year;
 	}
 	
+	/**
+	 * Returns the month of a Datef object.
+	 * 
+	 * @return	the month of the Datef object as BCD
+	 */
+	public byte getMonth() {
+		return month;
+	}
+
+	/**
+	 * Returns the month of a Datef object.
+	 * 
+	 * @return	the month of the Datef object
+	 */
+	public String getMonthString() {
+		return convertBCDStringIntoString(new byte[]{month});
+	}
+	
+	/**
+	 * Sets the month of a Datef object.
+	 * 
+	 * @param	month	the month as BCD to be set for the Datef object
+	 */
+	public void setMonth(byte month) {
+		this.month = month;
+	}
+
+	/**
+	 * Returns the day of a Datef object.
+	 * 
+	 * @return	the day of the Datef object as BCD
+	 */
+	public byte getDay() {
+		return day;
+	}
+
+	/**
+	 * Returns the day of a Datef object.
+	 * 
+	 * @return	the day of the Datef object
+	 */
+	public String getDayString() {
+		return convertBCDStringIntoString(new byte[]{day});
+	}
+	
+	/**
+	 * Sets the day of a Datef object.
+	 * 
+	 * @param	day		the day as BCD to be set for the Datef object
+	 */
+	public void setDay(byte day){
+		this.day = day; 
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent(new Element("year").setText(year));
-		node.addContent(new Element("month").setText(month));
-		node.addContent(new Element("day").setText(day));
+		node.addContent(new Element("year").setText( getYearString() ));
+		node.addContent(new Element("month").setText( getMonthString() ));
+		node.addContent(new Element("day").setText( getDayString() ));
 		return node;
 	}
 }

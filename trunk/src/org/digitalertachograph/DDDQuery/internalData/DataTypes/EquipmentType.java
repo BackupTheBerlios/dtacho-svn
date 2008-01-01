@@ -25,6 +25,7 @@ public class EquipmentType extends DataClass {
 	
 	/*
 	 * EquipmentType ::= INTEGER(0..255), 1 byte
+	 * ---
 	 * - - Reserved (0),
 	 * - - Driver Card (1),
 	 * - - Workshop Card (2),
@@ -35,7 +36,7 @@ public class EquipmentType extends DataClass {
 	 * - - Motion Sensor (7),
 	 * - - RFU (8..255)
 	 */
-	
+
 	/**
 	 * Equipment type: RESERVED
 	 */

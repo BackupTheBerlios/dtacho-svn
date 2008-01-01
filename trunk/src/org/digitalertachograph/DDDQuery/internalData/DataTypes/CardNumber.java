@@ -26,50 +26,56 @@ public class CardNumber extends DataClass {
 	// Abhängig vom Kartentyp (cardType) wird eine andere Wahl getroffen!
 	
 	/*
-	 * 	 * CardNumber ::= CHOICE {
+	 * CardNumber ::= CHOICE {
 	 * 	SEQUENCE {
 	 * 		driverIdentification IA5String(SIZE(14)), 14 bytes
 	 * 		cardReplacementIndex CardReplacementIndex, 1 byte
 	 * 		cardRenewalIndex CardRenewalIndex, 1 byte
-	 * 		}
+	 * 	}
 	 * 	SEQUENCE {
 	 * 		ownerIdentification IA5String(SIZE(13)), 13 bytes
 	 * 		cardConsecutiveIndex CardConsecutiveIndex, 1 byte
 	 * 		cardReplacementIndex CardReplacementIndex, 1 byte
 	 * 		cardRenewalIndex CardRenewalIndex, 1 byte
-	 * 		}
+	 * 	}
 	 * }
 	 * ---
 	 * CardReplacementIndex ::= IA5String(SIZE(1)), 1 byte
 	 * ---
 	 * CardConsecutiveIndex ::= IA5String(SIZE(1)), 1 byte
-	 * Value assignment: (see this Annex Chapter VII)
+	 * Value assignment: (see Annex Chapter VII)
 	 * Order for increase: "0..9, A..Z, a..z".
 	 * ---
 	 * CardRenewalIndex ::= IA5String(SIZE(1)), 1 byte
-	 * Value assignment: (see this Annex Chapter VII).
+	 * Value assignment: (see Annex Chapter VII).
 	 * "0" First issue.
 	 * Order for increase: "0..9, A..Z".
 	 */
 	
-	// TODO versteh mich und schreib mich!!!!!!
-	
+
+	// card type
+	private int cardType;
+
 	private String driverIdentification;
-	private String ownerIdentification;
-	private char cardConsecutiveIndex;
 	private char cardReplacementIndex;
 	private char cardRenewalIndex;
-	private int cardType;
-	
+
+	private String ownerIdentification;
+	private char cardConsecutiveIndex;
+
 	
 	/**
 	 * Constructor for a CardNumber object
 	 * 
-	 * @param	value	byte array of a CardNumber structure
-	 * 					whose data is used when the CardNumber
-	 * 					object is created.
+	 * @param	value		byte array of a CardNumber structure
+	 * 						whose data is used when the CardNumber
+	 * 						object is created.
+	 * @param	cardType	the card type ({@link EquipmentType#DRIVER_CARD DRIVER_CARD},
+	 * 						{@link EquipmentType#WORKSHOP_CARD WORKSHOP_CARD},
+	 * 						{@link EquipmentType#CONTROL_CARD CONTROL_CARD},
+	 * 						{@link EquipmentType#COMPANY_CARD COMPANY_CARD},)
 	 */
-	public CardNumber(byte[] value, int cardType){
+	public CardNumber(byte[] value, int cardType) {
 		this.cardType = cardType;
 		if(cardType == EquipmentType.DRIVER_CARD){
 			driverIdentification = new String( arrayCopy(value, 0, 14));
@@ -84,56 +90,110 @@ public class CardNumber extends DataClass {
 	}
 
 
-	public char getCardConsecutiveIndex() {
-		return cardConsecutiveIndex;
-	}
-
-
-	public void setCardConsecutiveIndex(char cardConsecutiveIndex) {
-		this.cardConsecutiveIndex = cardConsecutiveIndex;
-	}
-
-
-	public char getCardRenewalIndex() {
-		return cardRenewalIndex;
-	}
-
-
-	public void setCardRenewalIndex(char cardRenewalIndex) {
-		this.cardRenewalIndex = cardRenewalIndex;
-	}
-
-
-	public char getCardReplacementIndex() {
-		return cardReplacementIndex;
-	}
-
-
-	public void setCardReplacementIndex(char cardReplacementIndex) {
-		this.cardReplacementIndex = cardReplacementIndex;
-	}
-
-
+	/**
+	 * Returns the unique identification of a driver in a Member State
+	 * of a CardNumber object.
+	 * 
+	 * @return	the unique identification of a driver in a Member State
+	 * 			of the CardNumber object
+	 */
 	public String getDriverIdentification() {
 		return driverIdentification;
 	}
 
 
+	/**
+	 * Sets the unique identification of a driver in a Member State
+	 * of a CardNumber object.
+	 * 
+	 * @param	driverIdentification	the unique identification of a driver in a Member State
+	 * 									to be set for the CardNumber object
+	 */
 	public void setDriverIdentification(String driverIdentification) {
 		this.driverIdentification = driverIdentification;
 	}
 
+	/**
+	 * Returns the card replacement index of a CardNumber object.
+	 * 
+	 * @return	the card replacement index of the CardNumber object
+	 */
+	public char getCardReplacementIndex() {
+		return cardReplacementIndex;
+	}
 
+	/**
+	 * Sets the card replacement index of a CardNumber object.
+	 * 
+	 * @param	cardReplacementIndex	the card replacement index
+	 * 									to be set for the CardNumber object
+	 */
+	public void setCardReplacementIndex(char cardReplacementIndex) {
+		this.cardReplacementIndex = cardReplacementIndex;
+	}
+
+	/**
+	 * Returns the card renewal index of a CardNumber object.
+	 * 
+	 * @return	the card renewal index of the CardNumber object
+	 */
+	public char getCardRenewalIndex() {
+		return cardRenewalIndex;
+	}
+
+	/**
+	 * Sets the card renewal index of a CardNumber object.
+	 * 
+	 * @param	cardRenewalIndex	the card renewal index
+	 * 									to be set for the CardNumber object
+	 */
+	public void setCardRenewalIndex(char cardRenewalIndex) {
+		this.cardRenewalIndex = cardRenewalIndex;
+	}
+
+	/**
+	 * Returns the unique identification of a company or a workshop
+	 * or a control body within a Member State of a CardNumber object.
+	 * 
+	 * @return	the unique identification of a company or a workshop
+	 * 			or a control body within a Member State of the CardNumber object
+	 */
 	public String getOwnerIdentification() {
 		return ownerIdentification;
 	}
 
-
+	/**
+	 * Sets the unique identification of a company or a workshop
+	 * or a control body within a Member State of a CardNumber object.
+	 * 
+	 * @param	ownerIdentification		the unique identification of a company or a workshop
+	 *									or a control body within a Member State
+	 * 									to be set for the CardNumber object
+	 */
 	public void setOwnerIdentification(String ownerIdentification) {
 		this.ownerIdentification = ownerIdentification;
 	}
 
-	
+	/**
+	 * Returns the card consecutive index of a CardNumber object.
+	 * 
+	 * @return	the card consecutive index of the CardNumber object
+	 */
+	public char getCardConsecutiveIndex() {
+		return cardConsecutiveIndex;
+	}
+
+	/**
+	 * Sets the card consecutive index of a CardNumber object.
+	 * 
+	 * @param	cardConsecutiveIndex	the card consecutive index
+	 * 									to be set for the CardNumber object
+	 */
+	public void setCardConsecutiveIndex(char cardConsecutiveIndex) {
+		this.cardConsecutiveIndex = cardConsecutiveIndex;
+	}
+
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Controller c = Controller.getInstance();

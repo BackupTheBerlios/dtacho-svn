@@ -41,10 +41,25 @@ public class VehicleIdentificationNumber extends DataClass {
 		vehicleIdentificationNumber = new String(value);
 	}
 
+	/**
+	 * Returns the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * serial number or frame number of a VehicleIdentificationNumber object.
+	 * 
+	 * @return	the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * 			serial number or frame number of the VehicleIdentificationNumber object
+	 */
 	public String getVehicleIdentificationNumber() {
 		return vehicleIdentificationNumber;
 	}
 
+	/**
+	 * Sets the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * serial number or frame number of a VehicleIdentificationNumber object.
+	 * 
+	 * @param	vehicleIdentificationNumber		the Vehicle Information Number (VIN) referring to the vehicle as a whole,
+	 * 											normally chassis serial number or frame number to be set for the
+	 * 											VehicleIdentificationNumber object
+	 */
 	public void setVehicleIdentificationNumber(String vehicleIdentificationNumber) {
 		this.vehicleIdentificationNumber = vehicleIdentificationNumber;
 	}

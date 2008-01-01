@@ -80,12 +80,35 @@ public class EventFaultType extends DataClass {
 	
 	private byte eventFaultType;
 	private byte category;
+
+	
+	/**
+	 * EventFaultType: GENERAL_EVENT
+	 */
 	public final byte GENERAL_EVENT = 0;
+	/**
+	 * EventFaultType: VEHICLE_UNIT_RELATED_SECURITY_BREACH_ATTEMPT_EVENT
+	 */
 	public final byte VEHICLE_UNIT_RELATED_SECURITY_BREACH_ATTEMPT_EVENT = 1;
+	/**
+	 * EventFaultType: SENSOR_RELATED_SECURITY_BREACH_ATTEMPT_EVENT
+	 */
 	public final byte SENSOR_RELATED_SECURITY_BREACH_ATTEMPT_EVENT = 2;
+	/**
+	 * EventFaultType: RECORDING_EQUIPMENT_FAULT
+	 */
 	public final byte RECORDING_EQUIPMENT_FAULT = 3;
+	/**
+	 * EventFaultType: CARD_FAULT
+	 */
 	public final byte CARD_FAULT = 4;
+	/**
+	 * EventFaultType: RFU
+	 */
 	public final byte RFU = 5;
+	/**
+	 * EventFaultType: MANUFACTURER_SPECIFIC
+	 */
 	public final byte MANUFACTURER_SPECIFIC = 6;
 	
 	
@@ -106,19 +129,46 @@ public class EventFaultType extends DataClass {
 			category = MANUFACTURER_SPECIFIC;
 	}
 
-
+	/**
+	 * Returns the category of the code qualifying an event or a fault
+	 * of a EventFaultType object.
+	 * 
+	 * @return	the category of the code qualifying an event or a fault
+	 * 			of the EventFaultType object
+	 */
 	public byte getCategory() {
 		return category;
 	}
 
+	/**
+	 * Sets the category of the code qualifying an event or a fault
+	 * of a EventFaultType object.
+	 * 
+	 * @param	category	the category of the code qualifying an event or a fault
+	 * 						to be set for the EventFaultType object
+	 */
 	public void setCategory(byte category) {
 		this.category = category;
 	}
 
+	/**
+	 * Returns the code qualifying an event or a fault
+	 * of a EventFaultType object.
+	 * 
+	 * @return	the code qualifying an event or a fault
+	 * 			of the EventFaultType object
+	 */
 	public byte getEventFaultType() {
 		return eventFaultType;
 	}
 
+	/**
+	 * Sets the code qualifying an event or a fault
+	 * of a EventFaultType object.
+	 * 
+	 * @param	eventFaultType		the code qualifying an event or a fault
+	 * 								to be set for the EventFaultType object
+	 */
 	public void setEventFaultType(byte eventFaultType) {
 		this.eventFaultType = eventFaultType;
 	}

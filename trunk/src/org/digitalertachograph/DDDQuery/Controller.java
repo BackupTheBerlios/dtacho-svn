@@ -98,6 +98,7 @@ public class Controller {
 		if(ds.processSourceFile() == true){
 			TachographData td1 = ds.getTachographData();
 			System.out.println("dumping XML...");
+			td1.setDDDFileName(file);
 			td1.generateXML(file + ".xml");	
 
 		}

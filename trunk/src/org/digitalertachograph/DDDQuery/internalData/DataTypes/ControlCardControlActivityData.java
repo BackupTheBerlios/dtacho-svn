@@ -24,7 +24,6 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class ControlCardControlActivityData extends DataClass {
-	
 	/*
 	 * ControlCardControlActivityData ::= SEQUENCE {	
 	 * 	controlPointerNewestRecord INTEGER(0..NoOfControlActivityRecords-1), 2 bytes
@@ -54,7 +53,7 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 					whose data is used when the ControlCardControlActivityData
 	 * 					object is created.
 	 */
-	public ControlCardControlActivityData(byte[] value){
+	public ControlCardControlActivityData(byte[] value) {
 		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		for (int i = 2; i < value.length; i += 46) {
 			byte[] record = arrayCopy(value, i, 46);
@@ -63,22 +62,21 @@ public class ControlCardControlActivityData extends DataClass {
 		}
 	}
 
-	public Vector<CardControlActivityDataRecord> getControlActivityRecords() {
-		return controlActivityRecords;
-	}
+	// public Vector<CardControlActivityDataRecord> getControlActivityRecords() {
+	// 	return controlActivityRecords;
+	// }
 
-	public void setControlActivityRecords(
-			Vector<CardControlActivityDataRecord> controlActivityRecords) {
-		this.controlActivityRecords = controlActivityRecords;
-	}
+	// public void setControlActivityRecords(Vector<CardControlActivityDataRecord> controlActivityRecords) {
+	// 	this.controlActivityRecords = controlActivityRecords;
+	// }
 
-	public int getControlPointerNewestRecord() {
-		return controlPointerNewestRecord;
-	}
+	// public int getControlPointerNewestRecord() {
+	// 	return controlPointerNewestRecord;
+	// }
 
-	public void setControlPointerNewestRecord(int controlPointerNewestRecord) {
-		this.controlPointerNewestRecord = controlPointerNewestRecord;
-	}
+	// public void setControlPointerNewestRecord(int controlPointerNewestRecord) {
+	// 	this.controlPointerNewestRecord = controlPointerNewestRecord;
+	// }
 	
 	@Override
 	public Element generateXMLElement(String name) {

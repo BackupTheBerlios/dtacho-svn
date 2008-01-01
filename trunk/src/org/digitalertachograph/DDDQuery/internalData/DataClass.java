@@ -73,20 +73,26 @@ public abstract class DataClass {
 		return l;
 	}
 	
-	static protected String convertIntoBCDString(byte[] b){
+	static protected String convertBCDStringIntoString(byte[] b){
 		String tmp = new String();
 		
 		for(int i = 0; i < b.length; i++){
 			int hNibble, lNibble;
 			hNibble = b[i] & 0xf0;
 			hNibble = hNibble >> 4;
-			lNibble = b[i] & 0x0f;
+			hNibble += 0x30;
 
-			/* 
-			 * TODO nibble darf nur zwischen 0..9 liegen.
-			 * */
-			tmp += "" + hNibble + lNibble; 
+			lNibble = b[i] & 0x0f;
+			lNibble += 0x30;
+
+			if ( hNibble > 0x39 )
+				hNibble = '_';
+			if ( lNibble > 0x39 )
+				lNibble = '_';
+			
+			tmp = tmp + (char)hNibble + (char)lNibble;
 		}
+
 		return tmp;
 	}
 	
@@ -116,6 +122,14 @@ public abstract class DataClass {
 	static protected String convertIntoHexString(byte b){
 		return convertIntoHexString( new byte[] { b });
 	}
-	
+
+	/**
+	 * Generates a XML tree with the properties of the object.
+	 * The given name is used as root name.
+	 * 
+	 * @param	name	the name of the root element
+	 * 
+	 * @return	the generated XML tree
+	 */
 	public abstract Element generateXMLElement(String name);
 }

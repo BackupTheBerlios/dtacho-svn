@@ -54,7 +54,7 @@ public class CompanyActivityData extends DataClass {
 	 * 					whose data is used when the CompanyActivityData
 	 * 					object is created.
 	 */
-	public CompanyActivityData(byte[] value){
+	public CompanyActivityData(byte[] value) {
 		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
 		for (int i = 2; i < value.length; i+= 46) {
 			byte[] record = arrayCopy(value, i, 46);

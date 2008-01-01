@@ -23,6 +23,7 @@ import org.jdom.Element;
 public class EntryTypeDailyWorkPeriod extends DataClass {
 	/*
 	 * EntryTypeDailyWorkPeriod ::= INTEGER, 1 byte
+	 *
 	 * Begin, related time = card insertion time or time of entry (0),
 	 * End, related time = card withdrawal time or time of entry (1),
 	 * Begin, related time manually entered (start time) (2),
@@ -36,19 +37,41 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	
 	/**
 	 * Constructor for an EntryTypeDailyWorkPeriod object
+	 */
+	public EntryTypeDailyWorkPeriod() {
+
+	}
+
+	/**
+	 * Constructor for an EntryTypeDailyWorkPeriod object
 	 * 
 	 * @param	value	byte array of an EntryTypeDailyWorkPeriod structure
 	 * 					whose data is used when the EntryTypeDailyWorkPeriod
 	 * 					object is created.
 	 */
-	public EntryTypeDailyWorkPeriod(byte value){
+	public EntryTypeDailyWorkPeriod(byte value) {
 		entryTypeDailyWorkPeriod = value;
 	}
 
+	/**
+	 * Returns the code to distinguish between begin and end for an entry of a daily
+	 * work period place and condition of the entry of an EntryTypeDailyWorkPeriod object.
+	 * 
+	 * @return	the code to distinguish between begin and end for an entry of a daily
+	 * 			work period place and condition of the entry of the EntryTypeDailyWorkPeriod object
+	 */
 	public byte getEntryTypeDailyWorkPeriod() {
 		return entryTypeDailyWorkPeriod;
 	}
 
+	/**
+	 * Sets the code to distinguish between begin and end for an entry of a daily
+	 * work period place and condition of the entry of an EntryTypeDailyWorkPeriod object.
+	 * 
+	 * @param	entryTypeDailyWorkPeriod	the code to distinguish between begin and end for an entry of a daily
+	 * 										work period place and condition of the entry to be set for the
+	 * 										EntryTypeDailyWorkPeriod object
+	 */
 	public void setEntryTypeDailyWorkPeriod(byte entryTypeDailyWorkPeriod) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
@@ -56,7 +79,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent( new Element("entryTypeDailyWorkPeriod").setText( Byte.toString( entryTypeDailyWorkPeriod)));
+		node.addContent( new Element("entryTypeDailyWorkPeriod").setText( Byte.toString(entryTypeDailyWorkPeriod)));
 		return node;
 	}
 }

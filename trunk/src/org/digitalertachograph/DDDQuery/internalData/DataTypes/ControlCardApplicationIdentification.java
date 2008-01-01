@@ -23,23 +23,32 @@ import org.jdom.Element;
 public class ControlCardApplicationIdentification extends DataClass {
 	/*
 	 * ControlCardApplicationIdentification ::= SEQUENCE {
-	 * 	typeOfTachographCardId EquipmentType,
-	 * 	cardStructureVersion CardStructureVersion,
-	 * 	noOfControlActivityRecords NoOfControlActivityRecords
+	 * 	typeOfTachographCardId EquipmentType, 1 byte
+	 * 	cardStructureVersion CardStructureVersion, 2 bytes
+	 * 	noOfControlActivityRecords NoOfControlActivityRecords, 2 bytes
 	 * }
-	 * --
+	 * ---
+	 * EquipmentType ::= INTEGER(0..255) 
+	 * ---
 	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
-	 * --
+	 * ---
 	 * NoOfControlActivityRecords ::= INTEGER(0..2^16-1)
 	 * min.: 230
 	 * max.: 520
 	 */
 
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion;
+	private byte[] cardStructureVersion = new byte[2];
 	private int noOfControlActivityRecords;
 	
 	
+	/**
+	 * Constructor for a ControlCardApplicationIdentification object
+	 */
+	public ControlCardApplicationIdentification() {
+
+	}
+
 	/**
 	 * Constructor for a ControlCardApplicationIdentification object
 	 * 
@@ -47,41 +56,80 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * 					whose data is used when the ControlCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public ControlCardApplicationIdentification(byte[] value){
+	public ControlCardApplicationIdentification(byte[] value) {
 		typeOfTachographCardId = new EquipmentType(value[0]);
 		cardStructureVersion = arrayCopy(value, 1, 2);
 		noOfControlActivityRecords = convertIntoUnsigned2ByteInt( arrayCopy(value, 3, 2));
 	}
 
-	public byte[] getCardStructureVersion() {
-		return cardStructureVersion;
-	}
-
-	public void setCardStructureVersion(byte[] cardStructureVersion) {
-		this.cardStructureVersion = cardStructureVersion;
-	}
-
-	public int getNoOfControlActivityRecords() {
-		return noOfControlActivityRecords;
-	}
-
-	public void setNoOfControlActivityRecords(int noOfControlActivityRecords) {
-		this.noOfControlActivityRecords = noOfControlActivityRecords;
-	}
-
+	/**
+	 * Returns the implemented type of card of a ControlCardApplicationIdentification object.
+	 * 
+	 * @return	the implemented type of card of the ControlCardApplicationIdentification object
+	 */
 	public EquipmentType getTypeOfTachographCardId() {
 		return typeOfTachographCardId;
 	}
 
+	/**
+	 * Sets the implemented type of card of a ControlCardApplicationIdentification object.
+	 * 
+	 * @param	typeOfTachographCardId	the implemented type of card to be set for the
+	 * 									ControlCardApplicationIdentification object
+	 */
 	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
 		this.typeOfTachographCardId = typeOfTachographCardId;
 	}
 	
+	/**
+	 * Returns the version of the structure that is implemented in the card
+	 * of a ControlCardApplicationIdentification object.
+	 * 
+	 * @return	the version of the structure that is implemented in the card
+	 * 			of the ControlCardApplicationIdentification object
+	 */
+	public byte[] getCardStructureVersion() {
+		return cardStructureVersion;
+	}
+
+	/**
+	 * Sets the version of the structure that is implemented in the card
+	 * of a ControlCardApplicationIdentification object.
+	 * 
+	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
+	 * 									to be set for the ControlCardApplicationIdentification object
+	 */
+	public void setCardStructureVersion(byte[] cardStructureVersion) {
+		this.cardStructureVersion = cardStructureVersion;
+	}
+
+	/**
+	 * Returns the number of company activity records the card can store
+	 * of a ControlCardApplicationIdentification object.
+	 * 
+	 * @return	the number of company activity records the card can store
+	 * 			of the ControlCardApplicationIdentification object
+	 */
+	public int getNoOfControlActivityRecords() {
+		return noOfControlActivityRecords;
+	}
+
+	/**
+	 * Sets the number of company activity records the card can store
+	 * of a ControlCardApplicationIdentification object.
+	 * 
+	 * @param	noOfControlActivityRecords	the number of company activity records the card can store
+	 * 										to be set for the ControlCardApplicationIdentification object
+	 */
+	public void setNoOfControlActivityRecords(int noOfControlActivityRecords) {
+		this.noOfControlActivityRecords = noOfControlActivityRecords;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
 		node.addContent( typeOfTachographCardId.generateXMLElement("typeOfTachographCardId"));
-		node.addContent( new Element("cardStructureVersion").setText( convertIntoBCDString(cardStructureVersion)));
+		node.addContent( new Element("cardStructureVersion").setText(new String(cardStructureVersion)));
 		node.addContent( new Element("noOfControlActivityRecords").setText( Integer.toString(noOfControlActivityRecords)));
 		return node;
 	}

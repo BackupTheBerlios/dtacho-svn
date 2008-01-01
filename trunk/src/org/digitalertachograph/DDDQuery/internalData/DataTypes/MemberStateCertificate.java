@@ -18,7 +18,9 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 public class MemberStateCertificate extends Certificate {
-
+	/*
+	 * MemberStateCertificate ::= Certificate, 194 bytes
+	 */
 	
 	/**
 	 * Constructor for a MemberStateCertificate object

@@ -33,6 +33,7 @@ public class DDDDataSource implements DataSource {
 	 * Constructor for a DDDDataSource object
 	 */
 	public DDDDataSource() {
+
 	}
 	
 	/**
@@ -79,8 +80,10 @@ public class DDDDataSource implements DataSource {
 
 	private boolean readSource(byte[] src) {
 		boolean parseresult = false;
-		td = new TachographData(); // wipe
+		td = new TachographData();
 		int pos = 0;
+
+		// data parser
 		while(true){
 			byte[] tag = new byte[3];
 			byte[] length = new byte[2];
@@ -88,7 +91,7 @@ public class DDDDataSource implements DataSource {
 				
 			byte[] value;
 			
-			// tag
+			// tag parser
 			while(true) {
 				if(src.length < pos + 3){
 					// end of stream
@@ -98,7 +101,7 @@ public class DDDDataSource implements DataSource {
 				System.arraycopy(src, pos, tag, 0, 3);
 				pos += 3;
 
-				if ( td.isValidTag(tag) == false ) {
+				if ( td.isValidFileID(tag) == false ) {
 					if(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{0x76,0x06})) {
 						// OPTAC download tools with firmware < v2.3 write two bytes (76 06, SID/TREP?!) at the
 						// beginning of a .DDD file that are out of specs...
@@ -106,8 +109,7 @@ public class DDDDataSource implements DataSource {
 						pos -= 1;
 					} else {
 						System.out.printf("invalid tag, %02x %02x %02x\n", tag[0], tag[1], tag[2]);
-						parseresult = false;
-						break;
+						pos -= 2;
 					}
 				} else {
 					parseresult = true;
@@ -121,12 +123,14 @@ public class DDDDataSource implements DataSource {
 			if(src.length < pos + 2){
 				break;
 			}
+
 			System.arraycopy(src, pos, length, 0, 2);
 			pos += 2;
 			
 			length_i = calculateLength(length);
 			value = new byte[length_i];
 			if(src.length < pos + length_i){
+				parseresult = false;
 				break;
 			}
 			System.arraycopy(src, pos, value, 0, length_i);

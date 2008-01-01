@@ -34,6 +34,13 @@ public class HolderName extends DataClass {
 	
 	/**
 	 * Constructor for a HolderName object
+	 */
+	public HolderName(){
+
+	}
+
+	/**
+	 * Constructor for a HolderName object
 	 * 
 	 * @param	value	byte array of a HolderName structure
 	 * 					whose data is used when the HolderName
@@ -45,19 +52,44 @@ public class HolderName extends DataClass {
 		holderFirstNames = new Name( arrayCopy(value, 36, 36));
 	}
 	
-	public Name getHolderFirstNames() {
-		return holderFirstNames;
-	}
-	public void setHolderFirstNames(Name holderFirstNames) {
-		this.holderFirstNames = holderFirstNames;
-	}
+	/**
+	 * Returns the surname (family name) of the holder of a HolderName object.
+	 * 
+	 * @return	the surname (family name) of the holder	of the HolderName object
+	 */
 	public Name getHolderSurname() {
 		return holderSurname;
 	}
+
+	/**
+	 * Sets the surname (family name) of the holder of a HolderName object.
+	 * 
+	 * @param	holderSurname		the surname (family name) of the holder
+	 * 								to be set for the HolderName object
+	 */
 	public void setHolderSurname(Name holderSurname) {
 		this.holderSurname = holderSurname;
 	}
-	
+
+	/**
+	 * Returns the first name(s) and initials of the holder of a HolderName object.
+	 * 
+	 * @return	the first name(s) and initials of the HolderName object
+	 */
+	public Name getHolderFirstNames() {
+		return holderFirstNames;
+	}
+
+	/**
+	 * Sets the first name(s) and initials of the holder of a HolderName object.
+	 * 
+	 * @param	holderFirstNames	the first name(s) and initials of the holder
+	 * 								to be set for the HolderName object
+	 */
+	public void setHolderFirstNames(Name holderFirstNames) {
+		this.holderFirstNames = holderFirstNames;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

@@ -38,23 +38,47 @@ public class SpecificConditionRecord extends DataClass {
 	 * 					whose data is used when the SpecificConditionRecord
 	 * 					object is created.
 	 */
-	public SpecificConditionRecord(byte[] value){
-		entryTime = new TimeReal( arrayCopy(value, 0, 4));
+	public SpecificConditionRecord(byte[] value) {
+		entryTime = new TimeReal(arrayCopy(value, 0, 4));
 		specificConditionType = new SpecificConditionType(value[4]);
 	}
 
+	/**
+	 * Returns the timestamp (date and time) of the entry of a SpecificConditionRecord object.
+	 * 
+	 * @return	the timestamp of the entry of the SpecificConditionRecord object
+	 */
 	public TimeReal getEntryTime() {
 		return entryTime;
 	}
 
+	/**
+	 * Sets the timestamp (date and time) of the entry of a SpecificConditionRecord object.
+	 * 
+	 * @param	entryTime	the timestamp of the entry to be set for the SpecificConditionRecord object
+	 */
 	public void setEntryTime(TimeReal entryTime) {
 		this.entryTime = entryTime;
 	}
 
+	/**
+	 * Returns the SpecificConditionType object with the code identifying the specific condition
+	 * of a SpecificConditionRecord object.
+	 * 
+	 * @return	the SpecificConditionType object with the code identifying the specific condition
+	 * 			of the SpecificConditionRecord object
+	 */
 	public SpecificConditionType getSpecificConditionType() {
 		return specificConditionType;
 	}
 
+	/**
+	 * Sets the code identifying the specific condition by a SpecificConditionType object
+	 * of a SpecificConditionRecord object.
+	 * 
+	 * @param	specificConditionType	the SpecificConditionType object with the code identifying the
+	 * 									specific condition to be set for the SpecificConditionRecord object
+	 */
 	public void setSpecificConditionType(SpecificConditionType specificConditionType) {
 		this.specificConditionType = specificConditionType;
 	}

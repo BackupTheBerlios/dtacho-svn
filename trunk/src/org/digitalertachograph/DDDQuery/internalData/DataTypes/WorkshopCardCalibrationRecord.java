@@ -41,6 +41,18 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * 	sensorSerialNumber SensorSerialNumber, 8 bytes
 	 * }
 	 * ---
+	 * W-VehicleCharacteristicConstant ::= INTEGER(0..2^16-1)
+	 * ---
+	 * K-ConstantOfRecordingEquipment ::= INTEGER(0..2^16-1)
+	 * ---
+	 * L-TyreCircumference ::= INTEGER(0..2^16-1)
+	 * ---
+	 * Speed ::= INTEGER(0..255)
+	 * ---
+	 * SpeedAuthorized ::= Speed
+	 * ---
+	 * OdometerShort ::= INTEGER(0..2^24-1)
+	 * ---
 	 * VuSerialNumber ::= ExtendedSerialNumber
 	 * ---
 	 * SensorSerialNumber ::= ExtendedSerialNumber:
@@ -65,157 +77,388 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	
 	/**
 	 * Constructor for a WorkshopCardCalibrationRecord object
+	 */
+	public WorkshopCardCalibrationRecord() {
+
+	}
+
+	/**
+	 * Constructor for a WorkshopCardCalibrationRecord object
 	 * 
 	 * @param	value	byte array of a WorkshopCardCalibrationRecord structure
 	 * 					whose data is used when the WorkshopCardCalibrationRecord
 	 * 					object is created.
 	 */
-	public WorkshopCardCalibrationRecord(byte[] value){
+	public WorkshopCardCalibrationRecord(byte[] value) {
 		calibrationPurpose = new CalibrationPurpose(value[0]);
-		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy(value, 1, 17));
-		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 18, 15));
-		wVehicleCharacteristicConstant = convertIntoUnsigned2ByteInt( arrayCopy(value, 33, 2));
-		kConstantOfRecordingEquipment = convertIntoUnsigned2ByteInt( arrayCopy(value, 35, 2));
+		vehicleIdentificationNumber = new VehicleIdentificationNumber(arrayCopy(value, 1, 17));
+		vehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 18, 15));
+		wVehicleCharacteristicConstant = convertIntoUnsigned2ByteInt(arrayCopy(value, 33, 2));
+		kConstantOfRecordingEquipment = convertIntoUnsigned2ByteInt(arrayCopy(value, 35, 2));
 		lTyreCircumference = convertIntoUnsigned2ByteInt( arrayCopy(value, 37, 2));
 		tyreSize = new TyreSize( arrayCopy(value, 39, 15));
 		authorisedSpeed = convertIntoUnsigned1ByteInt( value[54] );
-		oldOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy(value, 55, 3));
-		newOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy(value, 58, 3));
-		oldTimeValue = new TimeReal( arrayCopy(value, 61, 4));
-		newTimeValue = new TimeReal( arrayCopy(value, 65, 4));
-		vuPartNumber = new VuPartNumber( arrayCopy(value, 69, 16));
-		vuSerialNumber = new ExtendedSerialNumber( arrayCopy(value, 85, 8));
-		sensorSerialNumber = new ExtendedSerialNumber( arrayCopy(value, 93, 8));
+		oldOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy(value, 55, 3));
+		newOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy(value, 58, 3));
+		oldTimeValue = new TimeReal(arrayCopy(value, 61, 4));
+		newTimeValue = new TimeReal(arrayCopy(value, 65, 4));
+		vuPartNumber = new VuPartNumber(arrayCopy(value, 69, 16));
+		vuSerialNumber = new ExtendedSerialNumber(arrayCopy(value, 85, 8));
+		sensorSerialNumber = new ExtendedSerialNumber(arrayCopy(value, 93, 8));
 	}
 
-	public short getAuthorisedSpeed() {
-		return authorisedSpeed;
-	}
-
-	public void setAuthorisedSpeed(short authorisedSpeed) {
-		this.authorisedSpeed = authorisedSpeed;
-	}
-
+	/**
+	 * Returns the code explaining why a set of calibration parameters were recorded
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the code explaining why a set of calibration parameters were recorded
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
 	public CalibrationPurpose getCalibrationPurpose() {
 		return calibrationPurpose;
 	}
 
+	/**
+	 * Sets the code explaining why a set of calibration parameters were recorded
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	calibrationPurpose	the code explaining why a set of calibration parameters were recorded
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
 	public void setCalibrationPurpose(CalibrationPurpose calibrationPurpose) {
 		this.calibrationPurpose = calibrationPurpose;
 	}
 
-	public int getKConstantOfRecordingEquipment() {
-		return kConstantOfRecordingEquipment;
-	}
-
-	public void setKConstantOfRecordingEquipment(int constantOfRecordingEquipment) {
-		kConstantOfRecordingEquipment = constantOfRecordingEquipment;
-	}
-
-	public int getLTyreCircumference() {
-		return lTyreCircumference;
-	}
-
-	public void setLTyreCircumference(int tyreCircumference) {
-		lTyreCircumference = tyreCircumference;
-	}
-
-	public int getNewOdometerValue() {
-		return newOdometerValue;
-	}
-
-	public void setNewOdometerValue(int newOdometerValue) {
-		this.newOdometerValue = newOdometerValue;
-	}
-
-	public TimeReal getNewTimeValue() {
-		return newTimeValue;
-	}
-
-	public void setNewTimeValue(TimeReal newTimeValue) {
-		this.newTimeValue = newTimeValue;
-	}
-
-	public TimeReal getNextCalibrationDate() {
-		return nextCalibrationDate;
-	}
-
-	public void setNextCalibrationDate(TimeReal nextCalibrationDate) {
-		this.nextCalibrationDate = nextCalibrationDate;
-	}
-
-	public int getOldOdometerValue() {
-		return oldOdometerValue;
-	}
-
-	public void setOldOdometerValue(int oldOdometerValue) {
-		this.oldOdometerValue = oldOdometerValue;
-	}
-
-	public TimeReal getOldTimeValue() {
-		return oldTimeValue;
-	}
-
-	public void setOldTimeValue(TimeReal oldTimeValue) {
-		this.oldTimeValue = oldTimeValue;
-	}
-
-	public ExtendedSerialNumber getSensorSerialNumber() {
-		return sensorSerialNumber;
-	}
-
-	public void setSensorSerialNumber(ExtendedSerialNumber sensorSerialNumber) {
-		this.sensorSerialNumber = sensorSerialNumber;
-	}
-
-	public TyreSize getTyreSize() {
-		return tyreSize;
-	}
-
-	public void setTyreSize(TyreSize tyreSize) {
-		this.tyreSize = tyreSize;
-	}
-
+	/**
+	 * Returns the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * serial number or frame number of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * 			serial number or frame number of the WorkshopCardCalibrationRecord object
+	 */
 	public VehicleIdentificationNumber getVehicleIdentificationNumber() {
 		return vehicleIdentificationNumber;
 	}
 
-	public void setVehicleIdentificationNumber(
-			VehicleIdentificationNumber vehicleIdentificationNumber) {
+	/**
+	 * Sets the Vehicle Information Number (VIN) referring to the vehicle as a whole, normally chassis
+	 * serial number or frame number of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	vehicleIdentificationNumber		the Vehicle Information Number (VIN) referring to the vehicle as a whole,
+	 * 											normally chassis serial number or frame number to be set for the
+	 * 											WorkshopCardCalibrationRecord object
+	 */
+	public void setVehicleIdentificationNumber(VehicleIdentificationNumber vehicleIdentificationNumber) {
 		this.vehicleIdentificationNumber = vehicleIdentificationNumber;
 	}
 
+	/**
+	 * Returns the Vehicle Registration Number (VRN) and registering Member State
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the Vehicle Registration Number (VRN) and registering Member State
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
 	public VehicleRegistrationIdentification getVehicleRegistration() {
 		return vehicleRegistration;
 	}
 
-	public void setVehicleRegistration(
-			VehicleRegistrationIdentification vehicleRegistration) {
+	/**
+	 * Sets the Vehicle Registration Number (VRN) and registering Member State
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	vehicleRegistration		the Vehicle Registration Number (VRN) and registering Member State
+	 * 									to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setVehicleRegistration(VehicleRegistrationIdentification vehicleRegistration) {
 		this.vehicleRegistration = vehicleRegistration;
 	}
 
-	public VuPartNumber getVuPartNumber() {
-		return vuPartNumber;
-	}
-
-	public void setVuPartNumber(VuPartNumber vuPartNumber) {
-		this.vuPartNumber = vuPartNumber;
-	}
-
-	public ExtendedSerialNumber getVuSerialNumber() {
-		return vuSerialNumber;
-	}
-
-	public void setVuSerialNumber(ExtendedSerialNumber vuSerialNumber) {
-		this.vuSerialNumber = vuSerialNumber;
-	}
-
+	/**
+	 * Returns the characteristic coefficient of the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the characteristic coefficient of the vehicle
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
 	public int getWVehicleCharacteristicConstant() {
 		return wVehicleCharacteristicConstant;
 	}
 
+	/**
+	 * Sets the characteristic coefficient of the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	vehicleCharacteristicConstant	the characteristic coefficient of the vehicle
+	 * 											to be set for the WorkshopCardCalibrationRecord object
+	 */
 	public void setWVehicleCharacteristicConstant(int vehicleCharacteristicConstant) {
 		wVehicleCharacteristicConstant = vehicleCharacteristicConstant;
+	}
+
+	/**
+	 * Returns the constant of the recording equipment
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the constant of the recording equipment
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public int getKConstantOfRecordingEquipment() {
+		return kConstantOfRecordingEquipment;
+	}
+
+	/**
+	 * Sets the constant of the recording equipment
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	constantOfRecordingEquipment	the constant of the recording equipment
+	 * 											to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setKConstantOfRecordingEquipment(int constantOfRecordingEquipment) {
+		kConstantOfRecordingEquipment = constantOfRecordingEquipment;
+	}
+
+	/**
+	 * Returns the effective circumference of the wheel tyres
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the effective circumference of the wheel tyres
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public int getLTyreCircumference() {
+		return lTyreCircumference;
+	}
+
+	/**
+	 * Sets the effective circumference of the wheel tyres
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	tyreCircumference		the effective circumference of the wheel tyres
+	 * 									to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setLTyreCircumference(int tyreCircumference) {
+		lTyreCircumference = tyreCircumference;
+	}
+
+	/**
+	 * Returns the designation of the dimensions of the tyres mounted on the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the designation of the dimensions of the tyres mounted on the vehicle
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public TyreSize getTyreSize() {
+		return tyreSize;
+	}
+
+	/**
+	 * Sets the designation of the dimensions of the tyres mounted on the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	tyreSize	the designation of the dimensions of the tyres mounted on the vehicle
+	 * 						to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setTyreSize(TyreSize tyreSize) {
+		this.tyreSize = tyreSize;
+	}
+
+	/**
+	 * Returns the maximum authorised speed of the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the maximum authorised speed of the vehicle
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public short getAuthorisedSpeed() {
+		return authorisedSpeed;
+	}
+
+	/**
+	 * Sets the maximum authorised speed of the vehicle
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	authorisedSpeed		the maximum authorised speed of the vehicle
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setAuthorisedSpeed(short authorisedSpeed) {
+		this.authorisedSpeed = authorisedSpeed;
+	}
+
+	/**
+	 * Returns the old value of the odometer
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the old value of the odometer
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public int getOldOdometerValue() {
+		return oldOdometerValue;
+	}
+
+	/**
+	 * Sets the old value of the odometer
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	oldOdometerValue	the old value of the odometer
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setOldOdometerValue(int oldOdometerValue) {
+		this.oldOdometerValue = oldOdometerValue;
+	}
+
+	/**
+	 * Returns the new value of the odometer
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the new value of the odometer
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public int getNewOdometerValue() {
+		return newOdometerValue;
+	}
+
+	/**
+	 * Sets the new value of the odometer
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	newOdometerValue	the new value of the odometer
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setNewOdometerValue(int newOdometerValue) {
+		this.newOdometerValue = newOdometerValue;
+	}
+
+	/**
+	 * Returns the old value of date and time
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the old value of date and time
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public TimeReal getOldTimeValue() {
+		return oldTimeValue;
+	}
+
+	/**
+	 * Sets the old value of date and time
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	oldTimeValue		the old value of date and time
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setOldTimeValue(TimeReal oldTimeValue) {
+		this.oldTimeValue = oldTimeValue;
+	}
+
+	/**
+	 * Returns the new value of date and time
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the new value of date and time
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public TimeReal getNewTimeValue() {
+		return newTimeValue;
+	}
+
+	/**
+	 * Sets the new value of date and time
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	newTimeValue		the new value of date and time
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setNewTimeValue(TimeReal newTimeValue) {
+		this.newTimeValue = newTimeValue;
+	}
+
+	/**
+	 * Returns the date of the next calibration of the type specified in CalibrationPurpose
+	 * to be carried out by the authorised inspection authority of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the date of the next calibration of the type specified in CalibrationPurpose
+	 * 			to be carried out by the authorised inspection authority of the WorkshopCardCalibrationRecord object
+	 */
+	public TimeReal getNextCalibrationDate() {
+		return nextCalibrationDate;
+	}
+
+	/**
+	 * Sets the date of the next calibration of the type specified in CalibrationPurpose
+	 * to be carried out by the authorised inspection authority of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	nextCalibrationDate		the date of the next calibration of the type specified in CalibrationPurpose
+	 * 									to be carried out by the authorised inspection authority 
+	 * 									to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setNextCalibrationDate(TimeReal nextCalibrationDate) {
+		this.nextCalibrationDate = nextCalibrationDate;
+	}
+
+	/**
+	 * Returns the vehicle unit's part number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the vehicle unit's part number
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public VuPartNumber getVuPartNumber() {
+		return vuPartNumber;
+	}
+
+	/**
+	 * Sets the vehicle unit's part number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	vuPartNumber		the vehicle unit's part number
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setVuPartNumber(VuPartNumber vuPartNumber) {
+		this.vuPartNumber = vuPartNumber;
+	}
+
+	/**
+	 * Returns the vehicle unit's serial number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the vehicle unit's serial number
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public ExtendedSerialNumber getVuSerialNumber() {
+		return vuSerialNumber;
+	}
+
+	/**
+	 * Sets the vehicle unit's serial number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	vuSerialNumber		the vehicle unit's serial number
+	 * 								to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setVuSerialNumber(ExtendedSerialNumber vuSerialNumber) {
+		this.vuSerialNumber = vuSerialNumber;
+	}
+
+	/**
+	 * Returns the sensor's serial number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @return	the sensor's serial number
+	 * 			of the WorkshopCardCalibrationRecord object
+	 */
+	public ExtendedSerialNumber getSensorSerialNumber() {
+		return sensorSerialNumber;
+	}
+
+	/**
+	 * Sets the sensor's serial number
+	 * of a WorkshopCardCalibrationRecord object.
+	 * 
+	 * @param	sensorSerialNumber		the sensor's serial number
+	 * 									to be set for the WorkshopCardCalibrationRecord object
+	 */
+	public void setSensorSerialNumber(ExtendedSerialNumber sensorSerialNumber) {
+		this.sensorSerialNumber = sensorSerialNumber;
 	}
 
 	public Element generateXMLElement(String name){
@@ -256,13 +499,6 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 		Element novNode = new Element("newOdometerValue");
 		novNode.setText(Integer.toString(newOdometerValue));
 		node.addContent(novNode);
-		
-		
-/*		methode("oldTimeValue");
-		public methode(Sting name){
-			(name).generateXMLElement(name);
-		}
-*/
 		
 		Element otvNode = oldTimeValue.generateXMLElement("oldTimeValue");
 		node.addContent(otvNode);

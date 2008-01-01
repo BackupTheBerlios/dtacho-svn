@@ -53,7 +53,7 @@ public class CardActivityDailyRecord extends DataClass {
 	private int activityPreviousRecordLength;
 	private int activityRecordLength;
 	private TimeReal activityRecordDate;
-	private String activityDailyPresenceCounter;
+	private byte[] activityDailyPresenceCounter = new byte[2];
 	private int activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 	
@@ -76,7 +76,7 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2));
 		this.activityRecordLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 2, 2));
 		this.activityRecordDate = new TimeReal(arrayCopy(value, 4, 4));
-		this.activityDailyPresenceCounter = new String(convertIntoBCDString( arrayCopy(value, 8, 2)));
+		this.activityDailyPresenceCounter = arrayCopy(value, 8, 2);
 		this.activityDayDistance = convertIntoUnsigned2ByteInt(arrayCopy(value, 10, 2));
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
@@ -96,14 +96,13 @@ public class CardActivityDailyRecord extends DataClass {
 	}
 	
 	/**
-	 * Indicates if the CardActivityDailyRecord object is valid.
+	 * Indicates if the CardActivityDailyRecord object is a complete record.
 	 * 
-	 * @return			true if the CardActivityDailyRecord object is valid
+	 * @return			true if the CardActivityDailyRecord object is a complete record
 	 */
 	public boolean isComplete() {
 		return complete;
 	}
-
 	
 	/**
 	 * Returns the length of the previous CardActivityDailyRecord
@@ -113,7 +112,6 @@ public class CardActivityDailyRecord extends DataClass {
 	public int getActivityPreviousRecordLength() {
 		return activityPreviousRecordLength;
 	}
-	
 
 	/**
 	 * Returns the length of this CardActivityDailyRecord
@@ -123,7 +121,6 @@ public class CardActivityDailyRecord extends DataClass {
 	public int getActivityRecordLength() {
 		return activityRecordLength;
 	}
-
 
 	@Override
 	public Element generateXMLElement(String name) {
@@ -144,7 +141,7 @@ public class CardActivityDailyRecord extends DataClass {
 		node.addContent( activityRecordDate.generateXMLElement("activityRecordDate"));
 		
 		node.addContent(
-				new Element("activityDailyPresenceCounter").setText(activityDailyPresenceCounter)
+				new Element("activityDailyPresenceCounter").setText(convertBCDStringIntoString(activityDailyPresenceCounter))
 		);
 		
 		node.addContent(

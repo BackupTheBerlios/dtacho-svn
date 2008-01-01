@@ -21,6 +21,9 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
 public class Certificate extends DataClass {
+	/*
+	 * Certificate :== OCTET STRING(SIZE(194)), 194 bytes
+	 */
 	private byte[] certificate;
 
 	
@@ -33,15 +36,30 @@ public class Certificate extends DataClass {
 
 	/**
 	 * Constructor for a Certificate object
+	 * 
+	 * @param	certificate		byte array of a Certificate structure
+	 * 							whose data is used when the Certificate
+	 * 							object is created.
 	 */
 	public Certificate(byte[] certificate) {
 		this.certificate = certificate;
 	}
 	
+	/**
+	 * Returns the certificate of a Certificate object.
+	 * 
+	 * @return	byte array that contains the certificate of the Certificate object
+	 */
 	public byte[] getCertificate() {
 		return certificate;
 	}
 
+	/**
+	 * Sets the certificate of a Certificate object.
+	 * 
+	 * @param	certificate		byte array that contains the certificate
+	 *							to be set for the Certificate object
+	 */
 	public void setCertificate(byte[] certificate) {
 		this.certificate = certificate;
 	}

@@ -27,11 +27,11 @@ public class Address extends DataClass {
 	 * 	address OCTET STRING (SIZE(35)), 35 bytes
 	 * }
 	 * ---
-	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
+	 * codePage specifies the part of the ISO/IEC 8859 used to code the address
 	 */
 	
 	private short codePage;
-	private byte[] address;
+	private byte[] address = new byte[35];
 	
 	/**
 	 * Constructor for an Address object
@@ -64,15 +64,23 @@ public class Address extends DataClass {
 	}
 
 	/**
-	 * TODO
+	 * Returns the codepage of an Address object.
 	 * 
-	 * @return	empty string
+	 * @return	the codepage of the Address object
 	 */
-	public String toString(){
-		// TODO write me!!
-		return "";
+	public short getCodePage() {
+		return codePage;
 	}
 
+	/**
+	 * Sets the codepage of an Address object.
+	 * 
+	 * @param	codePage	the codepage to be set for the Address object
+	 */
+	public void setCodePage(short codePage) {
+		this.codePage = codePage;
+	}
+	
 	/**
 	 * Returns the address of an Address object.
 	 * 
@@ -92,23 +100,14 @@ public class Address extends DataClass {
 	}
 
 	/**
-	 * Returns the codepage of an Address object.
+	 * Returns the address as string of the Address object.
 	 * 
-	 * @return	codepage of the Address object
+	 * @return	the address as string of the Address object
 	 */
-	public short getCodePage() {
-		return codePage;
+	public String toString(){
+		return new String(address);
 	}
 
-	/**
-	 * Sets the codepage of an Address object.
-	 * 
-	 * @param	codePage	codepage to be set for the Address object
-	 */
-	public void setCodePage(short codePage) {
-		this.codePage = codePage;
-	}
-	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

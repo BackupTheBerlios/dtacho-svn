@@ -35,7 +35,6 @@ public class CardVehiclesUsed extends DataClass {
 	 * max.: 200
 	 */
 	
-	//private int vehiclePointerNewestRecord;
 	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>(84);
 
 	
@@ -47,8 +46,6 @@ public class CardVehiclesUsed extends DataClass {
 	 * 					object is created.
 	 */
 	public CardVehiclesUsed(byte[] value){
-		//vehiclePointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
-
 		for (int i = 2; i < value.length; i += 31) {
 			byte[] record = arrayCopy(value, i, 31);
 			CardVehicleRecord tmp = new CardVehicleRecord(record);
@@ -60,7 +57,6 @@ public class CardVehiclesUsed extends DataClass {
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		//node.addContent(new Element("vehiclePointerNewestRecord").setText(Integer.toString(vehiclePointerNewestRecord)));
 
 		Element recordsnode = new Element("cardVehicleRecords");
 		node.addContent(recordsnode);
@@ -72,5 +68,4 @@ public class CardVehiclesUsed extends DataClass {
 		}
 		return node;
 	}
-
 }

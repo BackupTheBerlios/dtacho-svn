@@ -27,6 +27,8 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 	drivingLicenceIssuingNation NationNumeric, 1 byte 
 	 * 	drivingLicenceNumber IA5String(SIZE(16)), 16 bytes
 	 * }
+	 * ---
+	 * NationNumeric ::= INTEGER(0.255)
 	 */
 	
 	private Name drivingLicenceIssuingAuthority;
@@ -35,39 +37,85 @@ public class CardDrivingLicenceInformation extends DataClass {
 
 	/**
 	 * Constructor for a CardDrivingLicenceInformation object
+	 */
+	public CardDrivingLicenceInformation() {
+
+	}
+
+	/**
+	 * Constructor for a CardDrivingLicenceInformation object
 	 * 
 	 * @param	value	byte array of a CardDrivingLicenceInformation structure
 	 * 					whose data is used when the CardDrivingLicenceInformation
 	 * 					object is created.
 	 */
-	public CardDrivingLicenceInformation(byte[] value){
+	public CardDrivingLicenceInformation(byte[] value) {
 		drivingLicenceIssuingAuthority = new Name( arrayCopy(value, 0, 36));
 		drivingLicenceIssuingNation = new NationNumeric(value[36]);
 		drivingLicenceNumber = new String( arrayCopy(value, 37, 16));
 	}
 
+	/**
+	 * Returns the authority responsible for issuing the driving licence
+	 * of a CardDrivingLicenceInformation object.
+	 * 
+	 * @return	the authority responsible for issuing the driving licence
+	 * 			of the CardDrivingLicenceInformation object
+	 */
 	public Name getDrivingLicenceIssuingAuthority() {
 		return drivingLicenceIssuingAuthority;
 	}
 
-	public void setDrivingLicenceIssuingAuthority(
-			Name drivingLicenceIssuingAuthority) {
+	/**
+	 * Sets the authority responsible for issuing the driving licence
+	 * of a CardDrivingLicenceInformation object.
+	 * 
+	 * @param	drivingLicenceIssuingAuthority		the authority responsible for issuing
+	 * 												the driving licence to be set for the
+	 * 												CardDrivingLicenceInformation object
+	 */
+	public void setDrivingLicenceIssuingAuthority(Name drivingLicenceIssuingAuthority) {
 		this.drivingLicenceIssuingAuthority = drivingLicenceIssuingAuthority;
 	}
 
+	/**
+	 * Returns the nationality of the authority that issued the driving licence
+	 * of a CardDrivingLicenceInformation object.
+	 * 
+	 * @return	the nationality of the authority that issued the driving licence
+	 * 			of the CardDrivingLicenceInformation object
+	 */
 	public NationNumeric getDrivingLicenceIssuingNation() {
 		return drivingLicenceIssuingNation;
 	}
 
-	public void setDrivingLicenceIssuingNation(
-			NationNumeric drivingLicenceIssuingNation) {
+	/**
+	 * Sets the nationality of the authority that issued the driving licence
+	 * of a CardDrivingLicenceInformation object.
+	 * 
+	 * @param	drivingLicenceIssuingNation		the nationality of the authority that
+	 * 											issued the driving licence to be set for the
+	 * 											CardDrivingLicenceInformation object
+	 */
+	public void setDrivingLicenceIssuingNation(NationNumeric drivingLicenceIssuingNation) {
 		this.drivingLicenceIssuingNation = drivingLicenceIssuingNation;
 	}
 
+	/**
+	 * Returns the number of the driving licence of a CardDrivingLicenceInformation object.
+	 * 
+	 * @return	the number of the driving licence of the CardDrivingLicenceInformation object
+	 */
 	public String getDrivingLicenceNumber() {
 		return drivingLicenceNumber;
 	}
 
+	/**
+	 * Sets number of the driving licence  of a CardDrivingLicenceInformation object.
+	 * 
+	 * @param	drivingLicenceNumber		number of the driving licence to be set for the
+	 * 										CardDrivingLicenceInformation object
+	 */
 	public void setDrivingLicenceNumber(String drivingLicenceNumber) {
 		this.drivingLicenceNumber = drivingLicenceNumber;
 	}

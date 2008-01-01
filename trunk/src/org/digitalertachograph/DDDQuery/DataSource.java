@@ -20,6 +20,24 @@ package org.digitalertachograph.DDDQuery;
 import org.digitalertachograph.DDDQuery.internalData.TachographData;
 
 public interface DataSource {
+	/**
+	 * Sets the byte array with the data of a DataSource object.
+	 * <br><br>
+	 * <b>Note</b>: the class that implements this interface must provide a method
+	 * that processes the data and generates a TachographData object of it.
+	 * 
+	 * @param	src		the byte array with the data of the DataSource object
+	 */
 	public void setSource(byte[] src);
+	
+	/**
+	 * Returns the TachographData object that has been generated with the data
+	 * that was set by {@link #setSource(byte[])}.
+	 * <br><br>
+	 * <b>Note</b>: the class that implements this interface must provide a method
+	 * that processes the data and generates a TachographData object of it.
+	 * 
+	 * @return	TachographData object that has been generated with the data
+	 */
 	public TachographData getTachographData();
 }

@@ -26,20 +26,20 @@ public class NationNumeric extends DataClass {
 	 * NationNumeric ::= INTEGER(0..255), 1 byte
 	 */
 
-	private short nationNumeric;
+	private short nationNumeric = 0;
 
 	
 	/**
 	 * Constructor for a NationNumeric object
 	 */
 	public NationNumeric(){
-		nationNumeric = 0;
+
 	}
 
 	/**
 	 * Constructor for a NationNumeric object
 	 * 
-	 * @param	nationNumeric	short value that indicates a numerical refernce to a country.
+	 * @param	nationNumeric	short value that indicates a numerical reference to a country.
 	 */
 	public NationNumeric(short nationNumeric){
 		this.nationNumeric = nationNumeric;
@@ -48,16 +48,26 @@ public class NationNumeric extends DataClass {
 	/**
 	 * Constructor for a NationNumeric object
 	 * 
-	 * @param	b	byte that indicates a numerical refernce to a country.
+	 * @param	b	byte that indicates a numerical reference to a country.
 	 */
 	public NationNumeric(byte b){
 		nationNumeric = convertIntoUnsigned1ByteInt(b);
 	}
 
+	/**
+	 * Returns the numerical reference to a country of a NationNumeric object.
+	 * 
+	 * @return	the numerical reference to a country of the NationNumeric object
+	 */
 	public short getNationNumeric() {
 		return nationNumeric;
 	}
 
+	/**
+	 * Sets the numerical reference to a country of a NationNumeric object.
+	 * 
+	 * @param	nationNumeric		the numerical reference to a country to be set for the NationNumeric object
+	 */
 	public void setNationNumeric(short nationNumeric) {
 		this.nationNumeric = nationNumeric;
 	}

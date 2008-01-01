@@ -26,7 +26,7 @@ import org.jdom.Element;
 public class CardPlaceDailyWorkPeriod extends DataClass {
 	/*
 	 * CardPlaceDailyWorkPeriod ::= SEQUENCE {
-	 * 	placePointerNewestRecord INTEGER(0..NoOfCardPlaceRecords-1), 1 byte;
+	 * 	placePointerNewestRecord INTEGER(0..NoOfCardPlaceRecords-1), 1 byte
 	 * 	placeRecords SET SIZE(NoOfCardPlaceRecords) OF PlaceRecord, 840..1120 bytes
 	 * }
 	 * ---
@@ -46,7 +46,7 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * 					whose data is used when the CardPlaceDailyWorkPeriod
 	 * 					object is created.
 	 */
-	public CardPlaceDailyWorkPeriod(byte[] value){
+	public CardPlaceDailyWorkPeriod(byte[] value) {
 		placePointerNewestRecord = convertIntoUnsigned1ByteInt(value[0]);
 		for (int i = 1; i < value.length; i+=10) {
 			byte[] record = arrayCopy(value, i, 10);

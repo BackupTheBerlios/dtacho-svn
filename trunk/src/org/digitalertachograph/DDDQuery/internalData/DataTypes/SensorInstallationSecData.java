@@ -35,8 +35,8 @@ public class SensorInstallationSecData extends DataClass {
 	 * }
 	 */
 
-	private byte[] tDesKeyA;
-	private byte[] tDesKeyB;
+	private byte[] tDesKeyA = new byte[8];
+	private byte[] tDesKeyB = new byte[8];
 	
 
 	/**
@@ -51,20 +51,40 @@ public class SensorInstallationSecData extends DataClass {
 		tDesKeyB = arrayCopy(value, 8, 8);
 	}
 
+	/**
+	 * Returns the TDesKeyA of a SensorInstallationSecData object.
+	 * 
+	 * @return	the TDesKeyA of the SensorInstallationSecData object
+	 */
 	public byte[] getTDesKeyA() {
 		return tDesKeyA;
 	}
 
-	public void setTDesKeyA(byte[] desKeyA) {
-		tDesKeyA = desKeyA;
+	/**
+	 * Sets the TDesKeyA of a SensorInstallationSecData object.
+	 * 
+	 * @param	tDesKeyA	the TDesKeyA to be set for the SensorInstallationSecData object
+	 */
+	public void setTDesKeyA(byte[] tDesKeyA) {
+		this.tDesKeyA = tDesKeyA;
 	}
 
+	/**
+	 * Returns the TDesKeyB of a SensorInstallationSecData object.
+	 * 
+	 * @return	the TDesKeyB of the SensorInstallationSecData object
+	 */
 	public byte[] getTDesKeyB() {
 		return tDesKeyB;
 	}
 
-	public void setTDesKeyB(byte[] desKeyB) {
-		tDesKeyB = desKeyB;
+	/**
+	 * Sets the TDesKeyB of a SensorInstallationSecData object.
+	 * 
+	 * @param	tDesKeyB	the TDesKeyB to be set for the SensorInstallationSecData object
+	 */
+	public void setTDesKeyB(byte[] tDesKeyB) {
+		this.tDesKeyB = tDesKeyB;
 	}
 	
 	@Override

@@ -18,7 +18,7 @@
 package org.digitalertachograph.DDDQuery.internalData;
 
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.EquipmentType;
-import org.digitalertachograph.DDDQuery.internalData.DataTypes.LastDownload;
+import org.digitalertachograph.DDDQuery.internalData.DataTypes.LastCardDownload;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.NoOfCalibrationsSinceDownload;
 import org.jdom.Element;
 
@@ -32,7 +32,7 @@ import org.jdom.Element;
 public class EF_Card_Download extends DataClass {
 	//public int size;
 	private int cardType;
-	private LastDownload lastDownload;
+	private LastCardDownload lastCardDownload;
 	private NoOfCalibrationsSinceDownload noOfCalibrationsSinceDownload;
 	
 	/**
@@ -48,7 +48,7 @@ public class EF_Card_Download extends DataClass {
 
 		switch (cardType) {
 			case EquipmentType.DRIVER_CARD :
-				lastDownload = new LastDownload(value);
+				lastCardDownload = new LastCardDownload(value);
 				break;
 				
 			case EquipmentType.WORKSHOP_CARD :
@@ -67,7 +67,7 @@ public class EF_Card_Download extends DataClass {
 
 		switch (cardType) {
 			case EquipmentType.DRIVER_CARD :
-				child = lastDownload.generateXMLElement("lastDownload");
+				child = lastCardDownload.generateXMLElement("lastCardDownload");
 				break;
 			
 			case EquipmentType.WORKSHOP_CARD :

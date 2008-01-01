@@ -38,50 +38,113 @@ public class ControlCardHolderIdentification extends DataClass {
 
 	/**
 	 * Constructor for a ControlCardHolderIdentification object
+	 */
+	public ControlCardHolderIdentification(){
+
+	}
+
+	/**
+	 * Constructor for a ControlCardHolderIdentification object
 	 * 
 	 * @param	value	byte array of a ControlCardHolderIdentification structure
 	 * 					whose data is used when the ControlCardHolderIdentification
 	 * 					object is created.
 	 */
 	public ControlCardHolderIdentification(byte[] value){
-		controlBodyName = new Name( arrayCopy(value, 0, 36));
-		controlBodyAddress = new Address( arrayCopy(value, 36, 36));
-		cardHolderName = new HolderName( arrayCopy(value, 72, 72));
+		controlBodyName = new Name(arrayCopy(value, 0, 36));
+		controlBodyAddress = new Address(arrayCopy(value, 36, 36));
+		cardHolderName = new HolderName(arrayCopy(value, 72, 72));
 		cardHolderPreferredLanguage = new Language(arrayCopy(value, 144, 2));
 	}
 
-	public HolderName getCardHolderName() {
-		return cardHolderName;
-	}
-
-	public void setCardHolderName(HolderName cardHolderName) {
-		this.cardHolderName = cardHolderName;
-	}
-
-	public Language getCardHolderPreferredLanguage() {
-		return cardHolderPreferredLanguage;
-	}
-
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
-		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
-	}
-
-	public Address getControlBodyAddress() {
-		return controlBodyAddress;
-	}
-
-	public void setControlBodyAddress(Address controlBodyAddress) {
-		this.controlBodyAddress = controlBodyAddress;
-	}
-
+	/**
+	 * Returns the name of the control body of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @return	the name of the control body of the card holder
+	 * 			of the ControlCardHolderIdentification object
+	 */
 	public Name getControlBodyName() {
 		return controlBodyName;
 	}
 
+	/**
+	 * Sets the name of the control body of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @param	controlBodyName		the name of the control body of the card holder
+	 * 								to be set for the ControlCardHolderIdentification object
+	 */
 	public void setControlBodyName(Name controlBodyName) {
 		this.controlBodyName = controlBodyName;
 	}
 	
+	/**
+	 * Returns the address of the control body of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @return	the address of the control body of the card holder
+	 * 			of the ControlCardHolderIdentification object
+	 */
+	public Address getControlBodyAddress() {
+		return controlBodyAddress;
+	}
+
+	/**
+	 * Sets the address of the control body of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @param	controlBodyAddress	the address of the control body of the card holder
+	 * 								to be set for the ControlCardHolderIdentification object
+	 */
+	public void setControlBodyAddress(Address controlBodyAddress) {
+		this.controlBodyAddress = controlBodyAddress;
+	}
+
+	/**
+	 * Returns the name and the first name(s) of the holder of the control card
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @return	the name and the first name(s) of the holder of the control card
+	 * 			of the ControlCardHolderIdentification object
+	 */
+	public HolderName getCardHolderName() {
+		return cardHolderName;
+	}
+
+	/**
+	 * Sets the name and the first name(s) of the holder of the control card
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderName	the name and the first name(s) of the holder of the control card
+	 * 							to be set for the ControlCardHolderIdentification object
+	 */
+	public void setCardHolderName(HolderName cardHolderName) {
+		this.cardHolderName = cardHolderName;
+	}
+
+	/**
+	 * Returns the preferred language of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @return	the preferred language of the card holder
+	 * 			of the ControlCardHolderIdentification object
+	 */
+	public Language getCardHolderPreferredLanguage() {
+		return cardHolderPreferredLanguage;
+	}
+
+	/**
+	 * Sets the preferred language of the card holder
+	 * of a ControlCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder
+	 * 											to be set for the ControlCardHolderIdentification object
+	 */
+	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

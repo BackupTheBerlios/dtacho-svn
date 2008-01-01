@@ -38,48 +38,105 @@ public class CardFaultRecord extends DataClass {
 	
 	/**
 	 * Constructor for a CardFaultRecord object
+	 */
+	public CardFaultRecord() {
+
+	}
+	
+	/**
+	 * Constructor for a CardFaultRecord object
 	 * 
 	 * @param	value	byte array of a CardFaultRecord structure
 	 * 					whose data is used when the CardFaultRecord
 	 * 					object is created.
 	 */
-	public CardFaultRecord(byte[] value){
+	public CardFaultRecord(byte[] value) {
 		faultType = new EventFaultType(value[0]);
 		faultBeginTime = new TimeReal(arrayCopy(value, 1, 4));
 		faultEndTime   = new TimeReal(arrayCopy(value, 5, 4));
-		faultVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 9, 15));
+		faultVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 9, 15));
 	}
 
-	public TimeReal getFaultBeginTime() {
-		return faultBeginTime;
-	}
-
-	public void setFaultBeginTime(TimeReal faultBeginTime) {
-		this.faultBeginTime = faultBeginTime;
-	}
-
-	public TimeReal getFaultEndTime() {
-		return faultEndTime;
-	}
-
-	public void setFaultEndTime(TimeReal faultEndTime) {
-		this.faultEndTime = faultEndTime;
-	}
-
+	/**
+	 * Returns the type of the fault of a CardFaultRecord object.
+	 * 
+	 * @return	the type of the fault of the CardFaultRecord object
+	 */
 	public EventFaultType getFaultType() {
 		return faultType;
 	}
 
+	/**
+	 * Sets the type of the fault of a CardFaultRecord object.
+	 * 
+	 * @param	faultType		the type of the fault to be set for the CardFaultRecord object
+	 */
 	public void setFaultType(EventFaultType faultType) {
 		this.faultType = faultType;
 	}
 
+	/**
+	 * Returns the timestamp (date and time) of beginning of fault
+	 * of a CardFaultRecord object.
+	 * 
+	 * @return	the timestamp of beginning of fault of the CardFaultRecord object
+	 */
+	public TimeReal getFaultBeginTime() {
+		return faultBeginTime;
+	}
+
+	/**
+	 * Sets the timestamp (date and time) of beginning of fault of
+	 * of a CardFaultRecord object.
+	 * 
+	 * @param	faultBeginTime		the timestamp (date and time) of beginning of fault
+	 * 								to be set for the CardFaultRecord object
+	 */
+	public void setFaultBeginTime(TimeReal faultBeginTime) {
+		this.faultBeginTime = faultBeginTime;
+	}
+
+	/**
+	 * Returns the timestamp (date and time) of end of fault
+	 * of a CardFaultRecord object.
+	 * 
+	 * @return	the timestamp of end of fault of the CardFaultRecord object
+	 */
+	public TimeReal getFaultEndTime() {
+		return faultEndTime;
+	}
+
+	/**
+	 * Sets the timestamp (date and time) of end of fault of
+	 * of a CardFaultRecord object.
+	 * 
+	 * @param	faultEndTime		the timestamp (date and time) of end of fault
+	 * 								to be set for the CardFaultRecord object
+	 */
+	public void setFaultEndTime(TimeReal faultEndTime) {
+		this.faultEndTime = faultEndTime;
+	}
+
+	/**
+	 * Returns the VRN and registering Member State of vehicle in which the fault happened
+	 * of a CardFaultRecord object.
+	 * 
+	 * @return	the VRN and registering Member State of vehicle in which the fault happened
+	 * 			of the CardFaultRecord object
+	 */
 	public VehicleRegistrationIdentification getFaultVehicleRegistration() {
 		return faultVehicleRegistration;
 	}
 
-	public void setFaultVehicleRegistration(
-			VehicleRegistrationIdentification faultVehicleRegistration) {
+	/**
+	 * Sets the VRN and registering Member State of vehicle in which the fault happened
+	 * of a CardFaultRecord object.
+	 * 
+	 * @param	faultVehicleRegistration		the VRN and registering Member State of vehicle
+	 * 											in which the fault happened	to be set for the
+	 * 											CardFaultRecord object
+	 */
+	public void setFaultVehicleRegistration(VehicleRegistrationIdentification faultVehicleRegistration) {
 		this.faultVehicleRegistration = faultVehicleRegistration;
 	}
 	

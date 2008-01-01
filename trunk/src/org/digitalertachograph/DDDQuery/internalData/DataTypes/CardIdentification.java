@@ -42,60 +42,158 @@ public class CardIdentification extends DataClass {
 	
 	/**
 	 * Constructor for a CardIdentification object
+	 */
+	public CardIdentification() {
+
+	}
+
+	/**
+	 * Constructor for a CardIdentification object
 	 * 
 	 * @param	value	byte array of a CardIdentification structure
 	 * 					whose data is used when the CardIdentification
 	 * 					object is created.
 	 */
-	public CardIdentification(byte[] value, int cardType){
+	public CardIdentification(byte[] value, int cardType) {
 		cardIssuingMemberState = new NationNumeric(value[0]);
-		cardNumber = new CardNumber( arrayCopy(value, 1, 16), cardType );
-		cardIssuingAuthorityName = new Name( arrayCopy(value, 17, 36));
-		cardIssueDate = new TimeReal( arrayCopy(value, 53, 4));
-		cardValidityBegin = new TimeReal( arrayCopy(value, 57, 4));
-		cardExpiryDate = new TimeReal( arrayCopy(value, 61, 4));
+		cardNumber = new CardNumber(arrayCopy(value, 1, 16), cardType );
+		cardIssuingAuthorityName = new Name(arrayCopy(value, 17, 36));
+		cardIssueDate = new TimeReal(arrayCopy(value, 53, 4));
+		cardValidityBegin = new TimeReal(arrayCopy(value, 57, 4));
+		cardExpiryDate = new TimeReal(arrayCopy(value, 61, 4));
 	}
 	
-	public TimeReal getCardExpiryDate() {
-		return cardExpiryDate;
-	}
-	public void setCardExpiryDate(TimeReal cardExpiryDate) {
-		this.cardExpiryDate = cardExpiryDate;
-	}
-	public TimeReal getCardIssueDate() {
-		return cardIssueDate;
-	}
-	public void setCardIssueDate(TimeReal cardIssueDate) {
-		this.cardIssueDate = cardIssueDate;
-	}
-	public Name getCardIssuingAuthorityName() {
-		return cardIssuingAuthorityName;
-	}
-	public void setCardIssuingAuthorityName(Name cardIssuingAuthorityName) {
-		this.cardIssuingAuthorityName = cardIssuingAuthorityName;
-	}
+	/**
+	 * Returns the code of the Member State issuing the card
+	 * of a CardIdentification object.
+	 * 
+	 * @return	the code of the Member State issuing the card
+	 * 			of the CardIdentification object
+	 */
 	public NationNumeric getCardIssuingMemberState() {
 		return cardIssuingMemberState;
 	}
+
+	/**
+	 * Sets the code of the Member State issuing the card
+	 * of a CardIdentification object.
+	 * 
+	 * @param	cardIssuingMemberState	the code of the Member State issuing the card
+	 * 									to be set for the CardIdentification object
+	 */
 	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
 		this.cardIssuingMemberState = cardIssuingMemberState;
 	}
+
+	/**
+	 * Sets the code of the Member State issuing the card
+	 * of a CardIdentification object.
+	 * 
+	 * @param	cardIssuingMemberState	the code of the Member State issuing the card
+	 * 									to be set for the CardIdentification object
+	 */
 	public void setCardIssuingMemberState(short cardIssuingMemberState) {
 		this.cardIssuingMemberState.setNationNumeric( cardIssuingMemberState);
 	}
+
+	/**
+	 * Returns the card number of the card of a CardIdentification object.
+	 * 
+	 * @return	the card number of the card	of the CardIdentification object
+	 */
 	public CardNumber getCardNumber() {
 		return cardNumber;
 	}
+
+	/**
+	 * Sets the card number of the card of a CardIdentification object.
+	 * 
+	 * @param	cardNumber	the card number of the card to be set
+	 * 						for the CardIdentification object
+	 */
 	public void setCardNumber(CardNumber cardNumber) {
 		this.cardNumber = cardNumber;
 	}
+
+	/**
+	 * Returns the name of the authority having issued the card
+	 * of a CardIdentification object.
+	 * 
+	 * @return	the name of the authority having issued the card
+	 * 			of the CardIdentification object
+	 */
+	public Name getCardIssuingAuthorityName() {
+		return cardIssuingAuthorityName;
+	}
+
+	/**
+	 * Sets the name of the authority having issued the card of a CardIdentification object.
+	 * 
+	 * @param	cardIssuingAuthorityName	the name of the authority having issued the card
+	 * 										to be set for the CardIdentification object
+	 */
+	public void setCardIssuingAuthorityName(Name cardIssuingAuthorityName) {
+		this.cardIssuingAuthorityName = cardIssuingAuthorityName;
+	}
+
+	/**
+	 * Returns the issue date of the card to the current holder
+	 * of a CardIdentification object.
+	 * 
+	 * @return	the issue date of the card to the current holder
+	 * 			of the CardIdentification object
+	 */
+	public TimeReal getCardIssueDate() {
+		return cardIssueDate;
+	}
+
+	/**
+	 * Sets the issue date of the card to the current holder of a CardIdentification object.
+	 * 
+	 * @param	cardIssueDate	the issue date of the card to the current holder
+	 * 							to be set for the CardIdentification object
+	 */
+	public void setCardIssueDate(TimeReal cardIssueDate) {
+		this.cardIssueDate = cardIssueDate;
+	}
+
+	/**
+	 * Returns the first date of validity of the card of a CardIdentification object.
+	 * 
+	 * @return	the first date of validity of the card of a CardIdentification object
+	 */
 	public TimeReal getCardValidityBegin() {
 		return cardValidityBegin;
 	}
+
+	/**
+	 * Sets the first date of validity of the card of a CardIdentification object.
+	 * 
+	 * @param	cardValidityBegin	the first date of validity of the card
+	 * 								to be set for the CardIdentification object
+	 */
 	public void setCardValidityBegin(TimeReal cardValidityBegin) {
 		this.cardValidityBegin = cardValidityBegin;
 	}
 	
+	/**
+	 * Returns the date when the validity of the card ends of a CardIdentification object.
+	 * 
+	 * @return	the date when the validity of the card ends of a CardIdentification object
+	 */
+	public TimeReal getCardExpiryDate() {
+		return cardExpiryDate;
+	}
+
+	/**
+	 * Sets the date when the validity of the card ends of a CardIdentification object.
+	 * 
+	 * @param	cardExpiryDate	the date when the validity of the card ends
+	 * 							to be set for the CardIdentification object
+	 */
+	public void setCardExpiryDate(TimeReal cardExpiryDate) {
+		this.cardExpiryDate = cardExpiryDate;
+	}
 	
 	@Override
 	public Element generateXMLElement(String name) {

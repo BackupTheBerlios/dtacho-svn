@@ -46,10 +46,21 @@ public class VuPartNumber extends DataClass {
 		vuPartNumber = new String(value);
 	}
 
+	/**
+	 * Returns the part number of the vehicle unit of a VuPartNumber object.
+	 * 
+	 * @return	the part number of the vehicle unit	of the VuPartNumber object
+	 */
 	public String getVuPartNumber() {
 		return vuPartNumber;
 	}
 
+	/**
+	 * Sets the part number of the vehicle unit of a VuPartNumber object.
+	 * 
+	 * @param	vuPartNumber		the part number of the vehicle unit
+	 * 								to be set for the VuPartNumber object
+	 */
 	public void setVuPartNumber(String vuPartNumber) {
 		this.vuPartNumber = vuPartNumber;
 	}

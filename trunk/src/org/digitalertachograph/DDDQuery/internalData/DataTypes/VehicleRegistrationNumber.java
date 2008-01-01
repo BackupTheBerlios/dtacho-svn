@@ -32,13 +32,15 @@ public class VehicleRegistrationNumber extends DataClass {
 	 */
 	
 	private short codePage;
-	private byte[] vehicleRegNumber;
+	private byte[] vehicleRegNumber = new byte[13];
 	
 
-	// public VehicleRegistrationNumber(){
-	//	
-	// }
+	/**
+	 * Constructor for a VehicleRegistrationNumber object
+	 */
+	public VehicleRegistrationNumber() {
 	
+	}
 
 	/**
 	 * Constructor for a VehicleRegistrationNumber object
@@ -47,36 +49,69 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 					whose data is used when the VehicleRegistrationNumber
 	 * 					object is created.
 	 */
-	public VehicleRegistrationNumber(byte[] value){
+	public VehicleRegistrationNumber(byte[] value) {
 		this(value[0], arrayCopy(value, 1, value.length - 1));
 	}
 	
-	public VehicleRegistrationNumber(byte codePage, byte[] vehicleRegNumber){
+	/**
+	 * Constructor for a VehicleRegistrationNumber object
+	 * 
+	 * @param	codePage			byte that specifies the part of the
+	 * 								ISO/IEC 8859 used to code the address
+	 * @param	vehicleRegNumber	byte array that contains the number of the vehicle (VRN)
+	 */
+	public VehicleRegistrationNumber(byte codePage, byte[] vehicleRegNumber) {
 		this.codePage = convertIntoUnsigned1ByteInt(codePage);
 		this.vehicleRegNumber = vehicleRegNumber;
 	}
 	
-//	public String toString(){
+//	public String toString() {
 		// TODO write me
 //		return "";
 //	}
 
+	/**
+	 * Returns the codepage of a VehicleRegistrationNumber object.
+	 * 
+	 * @return	the codepage of the VehicleRegistrationNumber object
+	 */
 	public short getCodePage() {
 		return codePage;
 	}
 
+	/**
+	 * Sets the codepage of a VehicleRegistrationNumber object.
+	 * 
+	 * @param	codePage	the codepage to be set for the VehicleRegistrationNumber object
+	 */
 	public void setCodePage(short codePage) {
 		this.codePage = codePage;
 	}
 
+	/**
+	 * Sets the codepage of a VehicleRegistrationNumber object.
+	 * 
+	 * @param	codePage	the codepage to be set for the VehicleRegistrationNumber object
+	 */
 	public void setCodePage(byte codePage) {
 		this.codePage = (short) (codePage & 0xff);
 	}
 
+	/**
+	 * Returns the number of the vehicle (VRN) of a VehicleRegistrationNumber object.
+	 * 
+	 * @return	the number of the vehicle (VRN) of the VehicleRegistrationNumber object
+	 */
 	public byte[] getVehicleRegNumber() {
 		return vehicleRegNumber;
 	}
 
+	/**
+	 * Sets the number of the vehicle (VRN) of a VehicleRegistrationNumber object.
+	 * 
+	 * @param	vehicleRegNumber	the number of the vehicle (VRN) to be set
+	 * 								for the VehicleRegistrationNumber object
+	 */
 	public void setVehicleRegNumber(byte[] vehicleRegNumber) {
 		this.vehicleRegNumber = vehicleRegNumber;
 	}
@@ -84,18 +119,19 @@ public class VehicleRegistrationNumber extends DataClass {
 	@Override
 	public Element generateXMLElement(String name) {
 		Controller c = Controller.getInstance();
-		
 
 		Element node = new Element(name);
 		node.addContent(new Element("codePage").setText(Short.toString(codePage)));
+
+		// anonymize data if required
 		if (c.isAnonymized()) {
 			byte [] tmp = new byte[13];
 			for (int i = 0; i < 13; i++)
-				tmp[i] = 0x41; // 'A'
+				tmp[i] = 'A';
 			
-			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString( tmp )));
+			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString( tmp )) );
 		}else{
-			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString(vehicleRegNumber)));
+			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString(vehicleRegNumber)) );
 		}
 		return node;
 	}	

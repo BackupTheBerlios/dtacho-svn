@@ -47,10 +47,20 @@ public class Language extends DataClass {
 		language = new String(value);
 	}
 
+	/**
+	 * Returns the code identifying the language of a Language object.
+	 * 
+	 * @return	the code identifying the language	of the Language object
+	 */
 	public String getLanguage() {
 		return language;
 	}
 
+	/**
+	 * Sets the code identifying the language of a Language object.
+	 * 
+	 * @param	language	the code identifying the language to be set for the Language object
+	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}

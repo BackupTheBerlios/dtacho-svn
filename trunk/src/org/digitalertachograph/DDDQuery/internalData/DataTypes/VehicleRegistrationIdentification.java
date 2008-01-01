@@ -26,12 +26,28 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * 	vehicleRegistrationNation NationNumeric, 1 byte
 	 * 	vehicleRegistrationNumber VehicleRegistrationNumber, 14 bytes
 	 * }
+	 * ---
+	 * NationNumeric ::= INTEGER(0..255), 1 byte
+	 * ---
+	 * VehicleRegistrationNumber ::= SEQUENCE {
+	 * 	codePage INTEGER (0..255), 1 byte
+	 * 	vehicleRegNumber OCTET STRING (SIZE(13)), 13 bytes
+	 * }
+	 * ---
+	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
 
-	private NationNumeric nationNumeric;
+	private NationNumeric vehicleRegistrationNation;
 	private VehicleRegistrationNumber vehicleRegistrationNumber;
 
 	
+	/**
+	 * Constructor for a VehicleRegistrationIdentification object
+	 */
+	public VehicleRegistrationIdentification() {
+
+	}
+
 	/**
 	 * Constructor for a VehicleRegistrationIdentification object
 	 * 
@@ -39,32 +55,57 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * 					whose data is used when the VehicleRegistrationIdentification
 	 * 					object is created.
 	 */
-	public VehicleRegistrationIdentification(byte [] value){
-		nationNumeric = new NationNumeric(value[0]);
-		vehicleRegistrationNumber = new VehicleRegistrationNumber( arrayCopy(value, 1, 14));
+	public VehicleRegistrationIdentification(byte [] value) {
+		vehicleRegistrationNation = new NationNumeric(value[0]);
+		vehicleRegistrationNumber = new VehicleRegistrationNumber(arrayCopy(value, 1, 14));
 	}
 
-	public NationNumeric getNationNumeric() {
-		return nationNumeric;
+	/**
+	 * Returns the nation where the vehicle is registered of a VehicleRegistrationIdentification object.
+	 * 
+	 * @return	the nation where the vehicle is registered 
+	 * 			of the VehicleRegistrationIdentification object
+	 */
+	public NationNumeric getVehicleRegistrationNation() {
+		return vehicleRegistrationNation;
 	}
 
-	public void setNationNumeric(NationNumeric nationNumeric) {
-		this.nationNumeric = nationNumeric;
+	/**
+	 * Sets the nation where the vehicle is registered
+	 * of a VehicleRegistrationIdentification object.
+	 * 
+	 * @param	vehicleRegistrationNation	the nation where the vehicle is registered
+	 * 										to be set for the VehicleRegistrationIdentification object
+	 */
+	public void setVehicleRegistrationNation(NationNumeric vehicleRegistrationNation) {
+		this.vehicleRegistrationNation = vehicleRegistrationNation;
 	}
 
+	/**
+	 * Returns the registration number of the vehicle (VRN) of a VehicleRegistrationIdentification object.
+	 * 
+	 * @return	the registration number of the vehicle (VRN)
+	 * 			of the VehicleRegistrationIdentification object
+	 */
 	public VehicleRegistrationNumber getVehicleRegistrationNumber() {
 		return vehicleRegistrationNumber;
 	}
 
-	public void setVehicleRegistrationNumber(
-			VehicleRegistrationNumber vehicleRegistrationNumber) {
+	/**
+	 * Sets the registration number of the vehicle (VRN)
+	 * of a VehicleRegistrationIdentification object.
+	 * 
+	 * @param	vehicleRegistrationNumber	the registration number of the vehicle (VRN)
+	 * 										to be set for the VehicleRegistrationIdentification object
+	 */
+	public void setVehicleRegistrationNumber(VehicleRegistrationNumber vehicleRegistrationNumber) {
 		this.vehicleRegistrationNumber = vehicleRegistrationNumber;
 	}
 	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);
-		node.addContent( nationNumeric.generateXMLElement("nationNumeric") );
+		node.addContent( vehicleRegistrationNation.generateXMLElement("vehicleRegistrationNation") );
 		node.addContent( vehicleRegistrationNumber.generateXMLElement("vehicleRegistrationNumber"));
 		
 		return node;

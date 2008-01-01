@@ -43,10 +43,21 @@ public class SpecificConditionType extends DataClass {
 		this.specificConditionType = specificConditionType;
 	}
 
+	/**
+	 * Returns the code identifying the specific condition of a SpecificConditionRecord object.
+	 * 
+	 * @return	the code identifying the specific condition of the SpecificConditionRecord object
+	 */
 	public byte getSpecificConditionType() {
 		return specificConditionType;
 	}
 
+	/**
+	 * Sets the code identifying the specific condition of a SpecificConditionRecord object.
+	 * 
+	 * @param	specificConditionType	the code identifying the specific condition to be set
+	 * 									for the SpecificConditionRecord object
+	 */
 	public void setSpecificConditionType(byte specificConditionType) {
 		this.specificConditionType = specificConditionType;
 	}

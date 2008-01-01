@@ -17,6 +17,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Vector;
 import java.util.Arrays;
@@ -59,7 +60,20 @@ public class TachographData extends DataClass {
 	private byte[] tag2;
 
 	
-	public boolean isValidTag(byte[] tag){
+	/**
+	 * Constructor for a TachographData object
+	 */
+	public TachographData() {
+
+	}
+
+	/**
+	 * Indicates if the given tag in the first two bytes of the byte array is a valid File ID
+	 * of a driver card, workshop card, control card or company card.
+	 * 
+	 * @return	true if the given tag is a valid File ID 
+	 */
+	public boolean isValidFileID(byte[] tag){
 		if ((Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x02})) |		//	EF_ICC
 			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x00,0x05})) |		//	EF_IC
 			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{(byte)0xc1,0x00})) |		//	EF_Card_Certificate
@@ -82,14 +96,22 @@ public class TachographData extends DataClass {
 			(Arrays.equals(new byte[]{tag[0],tag[1]}, new byte[]{      0x05,0x0c})) )	{	//	EF_Controller_Activity_Data
 
 			return true;
-		}
-		else {
+		} else {
 			return false;
-
 		}
 	}
 
+	/**
+	 * Tries to identify the given data by tag/file id and to parse the given data (value).
+	 * If successful the data is added internally to the TachographData for XML
+	 * dump. 
+	 * 
+	 * @param tag		byte array with tag value & data/signature indicator (2 + 1 bytes)
+	 * @param length	byte array that contains the length of the value (2 bytes)
+	 * @param value		byte array with data
 
+	 * @return			true if parsing of the given byte array was successful
+	 */
 	public boolean add(byte[] tag, byte[] length, byte[] value){
 		boolean parseresult = false;
 		Object[] tmp = {tag, value};
@@ -284,11 +306,18 @@ public class TachographData extends DataClass {
 	}
 	
 	
+	/**
+	 * Sets the type of the tachograph card.
+	 * 
+	 * @param	cardType	the type of the tachograph card 
+	 */
 	public void setCardType(int cardType) {
 		this.cardType = cardType;
 	}
 
-
+	/**
+	 * Dumps all tags/file ids collected.
+	 */
 	public void printT(){
 		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
@@ -300,6 +329,9 @@ public class TachographData extends DataClass {
 		}
 	}
 	
+	/**
+	 * Dumps all tags/file ids collected with its lengths.
+	 */
 	public void printTL(){
 		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
@@ -312,12 +344,29 @@ public class TachographData extends DataClass {
 		}
 	}
 	
+	/**
+	 * Dumps all tags/file ids collected with its lengths and values (data) as combined
+	 * hex/ASCII dump with 16 bytes per line.
+	 */
 	public void printTV() {
 		printTV( 16 );
 	}
-		
+
+	private int hexdumpwidth;
+	private byte[] hexdumpbyte;
+	private int hexdumpcount;
+
+	/**
+	 * Dumps all tags/file ids collected with its lengths and values (data) as combined
+	 * hex/ASCII dump with the given bytesperline bytes per line.
+	 * 
+	 * @param	bytesperline	number of bytes dumped per line
+	 */
 	public void printTV( int bytesperline ) {
 		hexdumpwidth = bytesperline;
+		hexdumpbyte = new byte[hexdumpwidth];
+		hexdumpcount = 0;
+		
 		Iterator<Object> it = data.iterator();
 		while(it.hasNext()){
 			Object [] tmp = (Object[]) it.next();
@@ -341,10 +390,6 @@ public class TachographData extends DataClass {
 		}
 	}
 
-	private static int hexdumpwidth = 16;
-	private static int hexdumpcount = 0;
-	private static byte[] hexdumpbyte = new byte[hexdumpwidth];
-
 	private void hexdump( byte b ) {
 		hexdumpbyte[ hexdumpcount ] = b;
 		hexdumpcount += 1;
@@ -365,10 +410,11 @@ public class TachographData extends DataClass {
 				System.out.print("   ");		
 
 			for(int i = 0; i < hexdumpcount; i++) {
-				// print visible chars only
-				if ( hexdumpbyte[i] >= 32)
+				if ( ( hexdumpbyte[i] >= 0x20) && ( hexdumpbyte[i] < 0x7f) )
+					// print visible chars only
 					System.out.print((char)hexdumpbyte[i]);		
 				else
+					// otherwise print a dot
 					System.out.print(".");		
 			}
 			
@@ -377,9 +423,25 @@ public class TachographData extends DataClass {
 		}
 	}
 
+	private String dddfilename;
+
+	/**
+	 * Sets the source file name that is written as reference to the XML output.
+	 * Note that the source file name can be given with full path. The leading
+	 * path will be omitted for the XML output.
+	 * 
+	 * @param	dddfilename		the source file name
+	 */
+	public void setDDDFileName(String dddfilename) {
+		this.dddfilename = dddfilename;
+	}
 	
 	public Element generateXMLElement(String name){
 		Element root = new Element(name);
+
+		// write source file name without leading path
+		root.addContent( new Element("sourceFileName").setText( new File(this.dddfilename ).getName() ) );
+		
 		Iterator<DataClass> dispaterIterator = dispatcherQueue.iterator();
 		while(dispaterIterator.hasNext()){
 			DataClass dc = (DataClass) dispaterIterator.next();
@@ -390,6 +452,11 @@ public class TachographData extends DataClass {
 		return root;
 	}
 
+	/**
+	 * Dumps the collected tags as XML.
+	 * 
+	 * @return		the dumped XML string
+	 */
 	public String generateXML(){
 		Document doc = new Document();
 		Element root = generateXMLElement(this.getClass().getSimpleName());
@@ -399,8 +466,14 @@ public class TachographData extends DataClass {
 		return serializer.outputString(doc);
 	}
 	
+	/**
+	 * Dumps the collected tags as XML file.
+	 * 
+	 * @param	file		name of the XML file
+	 */
 	public void generateXML(String file){
 		Document doc = new Document();
+
 		Element root = generateXMLElement(this.getClass().getSimpleName());
 		doc.setRootElement(root);
 

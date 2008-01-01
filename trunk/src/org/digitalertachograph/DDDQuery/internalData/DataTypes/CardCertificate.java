@@ -18,7 +18,9 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 public class CardCertificate extends Certificate {
-
+	/*
+	 * CardCertificate ::= Certificate, 194 bytes
+	 */
 
 	/**
 	 * Constructor for a CardCertificate object

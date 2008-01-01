@@ -36,40 +36,79 @@ public class FullCardNumber extends DataClass {
 	
 	/**
 	 * Constructor for a FullCardNumber object
+	 */
+	public FullCardNumber() {
+
+	}
+
+	/**
+	 * Constructor for a FullCardNumber object
 	 * 
 	 * @param	value	byte array of a FullCardNumber structure
 	 * 					whose data is used when the FullCardNumber
 	 * 					object is created.
 	 */
-	public FullCardNumber(byte[] value){
+	public FullCardNumber(byte[] value) {
 		cardType = new EquipmentType(value[0]);
 		cardIssuingMemberState = new NationNumeric(value[1]);
 		// TODO not sure bout this solution.
 		cardNumber = new CardNumber( arrayCopy(value, 2, 16), cardType.getEquipmentType() );
 	}
 
-	public NationNumeric getCardIssuingMemberState() {
-		return cardIssuingMemberState;
-	}
-	
-	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
-		this.cardIssuingMemberState = cardIssuingMemberState;
-	}
-	
-	public CardNumber getCardNumber() {
-		return cardNumber;
-	}
-	
-	public void setCardNumber(CardNumber cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-	
+	/**
+	 * Returns the type of the tachograph card of a FullCardNumber object.
+	 * 
+	 * @return	the type of the tachograph card of the FullCardNumber object
+	 */
 	public EquipmentType getCardType() {
 		return cardType;
 	}
 	
+	/**
+	 * Sets the type of the tachograph card of a FullCardNumber object.
+	 * 
+	 * @param	cardType	the type of the tachograph card	to be set for
+	 * 						the FullCardNumber object
+	 */
 	public void setCardType(EquipmentType cardType) {
 		this.cardType = cardType;
+	}
+	
+	/**
+	 * Returns the code of the Member State having issued the card of a FullCardNumber object.
+	 * 
+	 * @return	the code of the Member State having issued the card of the FullCardNumber object
+	 */
+	public NationNumeric getCardIssuingMemberState() {
+		return cardIssuingMemberState;
+	}
+	
+	/**
+	 * Sets the code of the Member State having issued the card of a FullCardNumber object.
+	 * 
+	 * @param	cardIssuingMemberState		the code of the Member State having issued the card to be set for
+	 * 										the FullCardNumber object
+	 */
+	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
+		this.cardIssuingMemberState = cardIssuingMemberState;
+	}
+	
+	/**
+	 * Returns the card number of a FullCardNumber object.
+	 * 
+	 * @return	the card number of the FullCardNumber object
+	 */
+	public CardNumber getCardNumber() {
+		return cardNumber;
+	}
+	
+	/**
+	 * Sets the card number of a FullCardNumber object.
+	 * 
+	 * @param	cardNumber		the card number to be set for the FullCardNumber object
+	 */
+	public void setCardNumber(CardNumber cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 	
 	@Override

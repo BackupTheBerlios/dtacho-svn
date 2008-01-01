@@ -38,7 +38,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
-	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>();
+	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88);
 
 	
 	/**
@@ -59,41 +59,44 @@ public class WorkshopCardCalibrationData extends DataClass {
 		}
 	}
 
-	public int getCalibrationPointerNewestRecord() {
-		return calibrationPointerNewestRecord;
-	}
-
-	public void setCalibrationPointerNewestRecord(int calibrationPointerNewestRecord) {
-		this.calibrationPointerNewestRecord = calibrationPointerNewestRecord;
-	}
-
-	public Vector<WorkshopCardCalibrationRecord> getCalibrationRecords() {
-		return calibrationRecords;
-	}
-
-	public void setCalibrationRecords(
-			Vector<WorkshopCardCalibrationRecord> calibrationRecords) {
-		this.calibrationRecords = calibrationRecords;
-	}
-
+	/**
+	 * Returns the total number of calibrations performed with the card
+	 * of a WorkshopCardCalibrationData object.
+	 * 
+	 * @return	the total number of calibrations performed with the card
+	 * 			of the WorkshopCardCalibrationData object
+	 */
 	public int getCalibrationTotalNumber() {
 		return calibrationTotalNumber;
 	}
 
-	public void setCalibrationTotalNumber(int calibrationTotalNumber) {
-		this.calibrationTotalNumber = calibrationTotalNumber;
+	/**
+	 * Returns the index of the last updated calibration record
+	 * of a WorkshopCardCalibrationData object.
+	 * 
+	 * @return	the index of the last updated calibration record
+	 * 			of the WorkshopCardCalibrationData object
+	 */
+	public int getCalibrationPointerNewestRecord() {
+		return calibrationPointerNewestRecord;
 	}
-	
+
+	/**
+	 * Returns the set of records containing calibration and/or time adjustment information
+	 * of a WorkshopCardCalibrationData object.
+	 * 
+	 * @return	the set of records containing calibration and/or time adjustment information
+	 * 			of the WorkshopCardCalibrationData object
+	 */
+	public Vector<WorkshopCardCalibrationRecord> getCalibrationRecords() {
+		return calibrationRecords;
+	}
+
 	public Element generateXMLElement(String name){
-				Element node = new Element(name);
-		
-		Element ctnNode = new Element("calibrationTotalNumber");
-		ctnNode.setText(Integer.toString(calibrationTotalNumber)); 
-		Element cpnrNode = new Element("calibrationPointerNewestRecord");
-		cpnrNode.setText(Integer.toString(calibrationPointerNewestRecord));
-		
-		node.addContent( ctnNode );
-		node.addContent( cpnrNode );
+		Element node = new Element(name);
+
+		node.addContent( new Element("calibrationTotalNumber").setText(Integer.toString(calibrationTotalNumber)) );
+		node.addContent( new Element("calibrationPointerNewestRecord").setText(Integer.toString(calibrationPointerNewestRecord)) );
 		
 		Iterator<WorkshopCardCalibrationRecord> it = calibrationRecords.iterator();
 		while(it.hasNext()){

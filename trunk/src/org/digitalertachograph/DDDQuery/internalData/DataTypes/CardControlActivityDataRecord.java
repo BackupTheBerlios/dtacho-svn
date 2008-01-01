@@ -42,67 +42,150 @@ public class CardControlActivityDataRecord extends DataClass {
 
 	/**
 	 * Constructor for a CardControlActivityDataRecord object
+	 */
+	public CardControlActivityDataRecord() {
+		
+	}
+
+	/**
+	 * Constructor for a CardControlActivityDataRecord object
 	 * 
 	 * @param	value	byte array of a CardControlActivityDataRecord structure
 	 * 					whose data is used when the CardControlActivityDataRecord
 	 * 					object is created.
 	 */
-	public CardControlActivityDataRecord(byte[] value){
+	public CardControlActivityDataRecord(byte[] value) {
 		controlType = new ControlType(value[0]);
-		controlTime = new TimeReal( arrayCopy(value, 1, 4));
-		controlCardNumber = new FullCardNumber( arrayCopy(value, 5, 18));
-		controlVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 23, 15));
-		controlDownloadPeriodBegin = new TimeReal( arrayCopy(value, 38, 4));
-		controlDownloadPeriodEnd = new TimeReal( arrayCopy(value, 42, 4));
+		controlTime = new TimeReal(arrayCopy(value, 1, 4));
+		controlCardNumber = new FullCardNumber(arrayCopy(value, 5, 18));
+		controlVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 23, 15));
+		controlDownloadPeriodBegin = new TimeReal(arrayCopy(value, 38, 4));
+		controlDownloadPeriodEnd = new TimeReal(arrayCopy(value, 42, 4));
 	}
 
-	public FullCardNumber getControlCardNumber() {
-		return controlCardNumber;
-	}
-
-	public void setControlCardNumber(FullCardNumber controlCardNumber) {
-		this.controlCardNumber = controlCardNumber;
-	}
-
-	public TimeReal getControlDownloadPeriodBegin() {
-		return controlDownloadPeriodBegin;
-	}
-
-	public void setControlDownloadPeriodBegin(TimeReal controlDownloadPeriodBegin) {
-		this.controlDownloadPeriodBegin = controlDownloadPeriodBegin;
-	}
-
-	public TimeReal getControlDownloadPeriodEnd() {
-		return controlDownloadPeriodEnd;
-	}
-
-	public void setControlDownloadPeriodEnd(TimeReal controlDownloadPeriodEnd) {
-		this.controlDownloadPeriodEnd = controlDownloadPeriodEnd;
-	}
-
-	public TimeReal getControlTime() {
-		return controlTime;
-	}
-
-	public void setControlTime(TimeReal controlTime) {
-		this.controlTime = controlTime;
-	}
-
+	/**
+	 * Returns the type of a control of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the type of the control of the CardControlActivityDataRecord object
+	 */
 	public ControlType getControlType() {
 		return controlType;
 	}
 
+	/**
+	 * Sets the type of a control of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlType		the type of the control to be set for the
+	 * 							CardControlActivityDataRecord object
+	 */
 	public void setControlType(ControlType controlType) {
 		this.controlType = controlType;
 	}
 
+	/**
+	 * Returns the timestamp (date and time) of a control of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the timestamp of the control of the CardControlActivityDataRecord object
+	 */
+	public TimeReal getControlTime() {
+		return controlTime;
+	}
+
+	/**
+	 * Sets the timestamp (date and time) of a control of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlTime		timestamp of the control to be set for the
+	 * 							CardControlActivityDataRecord object
+	 */
+	public void setControlTime(TimeReal controlTime) {
+		this.controlTime = controlTime;
+	}
+
+	/**
+	 * Returns the control card number of the control officer having performed the control
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the control card number of the control officer having performed the control
+	 * 			of the CardControlActivityDataRecord object
+	 */
+	public FullCardNumber getControlCardNumber() {
+		return controlCardNumber;
+	}
+
+	/**
+	 * Sets the control card number of the control officer having performed the control
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlCardNumber	control card number to be set for the
+	 * 								CardControlActivityDataRecord object
+	 */
+	public void setControlCardNumber(FullCardNumber controlCardNumber) {
+		this.controlCardNumber = controlCardNumber;
+	}
+
+	/**
+	 * Returns the VRN and registering Member State of the vehicle in which the control
+	 * happened of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the VRN and registering Member State of the vehicle in which the control
+	 * 			happened of the CardControlActivityDataRecord object
+	 */
 	public VehicleRegistrationIdentification getControlVehicleRegistration() {
 		return controlVehicleRegistration;
 	}
 
-	public void setControlVehicleRegistration(
-			VehicleRegistrationIdentification controlVehicleRegistration) {
+	/**
+	 * Sets the VRN and registering Member State of the vehicle in which the control
+	 * happened of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlVehicleRegistration		the VRN and registering Member State of the vehicle
+	 *				 							in which the control happened to be set for the
+	 * 											CardControlActivityDataRecord object
+	 */
+	public void setControlVehicleRegistration(VehicleRegistrationIdentification controlVehicleRegistration) {
 		this.controlVehicleRegistration = controlVehicleRegistration;
+	}
+
+	/**
+	 * Returns the timestamp (date and time) of a download period beginning
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the timestamp of the download period beginning of the CardControlActivityDataRecord object
+	 */
+	public TimeReal getControlDownloadPeriodBegin() {
+		return controlDownloadPeriodBegin;
+	}
+
+	/**
+	 * Sets the timestamp (date and time) of a download period beginning
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlDownloadPeriodBegin	timestamp of the download period beginning to be set for the
+	 * 										CardControlActivityDataRecord object
+	 */
+	public void setControlDownloadPeriodBegin(TimeReal controlDownloadPeriodBegin) {
+		this.controlDownloadPeriodBegin = controlDownloadPeriodBegin;
+	}
+
+	/**
+	 * Returns the timestamp (date and time) of a download period end
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @return	the timestamp of the download period end of the CardControlActivityDataRecord object
+	 */
+	public TimeReal getControlDownloadPeriodEnd() {
+		return controlDownloadPeriodEnd;
+	}
+
+	/**
+	 * Sets the timestamp (date and time) of a download period end
+	 * of a CardControlActivityDataRecord object.
+	 * 
+	 * @param	controlDownloadPeriodEnd	timestamp of the download period end to be set for the
+	 * 										CardControlActivityDataRecord object
+	 */
+	public void setControlDownloadPeriodEnd(TimeReal controlDownloadPeriodEnd) {
+		this.controlDownloadPeriodEnd = controlDownloadPeriodEnd;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 public class NoOfCalibrationsSinceDownload extends DataClass {
 	/* 
-	 * NoOfCalibrationsSinceDownload ::= INTEGER(0..2^16-1)
+	 * NoOfCalibrationsSinceDownload ::= INTEGER(0..2^16-1), 2 bytes
 	 * min.: n/a
 	 * max.: n/a
 	 */
@@ -41,10 +41,24 @@ public class NoOfCalibrationsSinceDownload extends DataClass {
 		this.noOfCalibrationsSinceDownload = convertIntoUnsigned2ByteInt(value);
 	}
 
+	/**
+	 * Returns the number of calibration records a workshop card can store
+	 * of a NoOfCalibrationsSinceDownload object.
+	 * 
+	 * @return	the number of calibration records a workshop card can store
+	 * 			of the NoOfCalibrationsSinceDownload object
+	 */
 	public int getNoOfCalibrationsSinceDownload() {
 		return noOfCalibrationsSinceDownload;
 	}
 
+	/**
+	 * Sets the number of calibration records a workshop card can store
+	 * of a NoOfCalibrationsSinceDownload object.
+	 * 
+	 * @param	noOfCalibrationsSinceDownload	the number of calibration records a workshop card can store
+	 * 											to be set for the NoOfCalibrationsSinceDownload object
+	 */
 	public void setNoOfCalibrationsSinceDownload(int noOfCalibrationsSinceDownload) {
 		this.noOfCalibrationsSinceDownload = noOfCalibrationsSinceDownload;
 	}

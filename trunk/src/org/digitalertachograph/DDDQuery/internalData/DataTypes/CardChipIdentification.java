@@ -29,15 +29,35 @@ public class CardChipIdentification extends DataClass {
 	 * }
 	 */
 
-	private byte[] icSerialNumber;
-	private byte[] icManufacturingReferences;
+	private byte[] icSerialNumber = new byte[4];
+	private byte[] icManufacturingReferences = new byte[4];
 
 
 	/**
 	 * Constructor for a CardChipIdentification object
 	 */
-	public CardChipIdentification(){
+	public CardChipIdentification() {
 
+	}
+	
+	/**
+	 * Returns the IC serial number of a CardChipIdentification object.
+	 * 
+	 * @return	byte array that contains the IC serial number of the CardChipIdentification object
+	 * 			as defined in EN 726-3
+	 */
+	public byte[] getIcSerialNumber() {
+		return icSerialNumber;
+	}
+
+	/**
+	 * Sets the IC serial number of a CardChipIdentification object.
+	 * 
+	 * @param	icSerialNumber		byte array that contains the IC serial number to be set for the
+	 * 								CardChipIdentification object
+	 */
+	public void setIcSerialNumber(byte[] icSerialNumber) {
+		this.icSerialNumber = icSerialNumber;
 	}
 	
 	/**
@@ -61,26 +81,6 @@ public class CardChipIdentification extends DataClass {
 		this.icManufacturingReferences = icManufacturingReferences;
 	}
 
-	/**
-	 * Returns the IC serial number of a CardChipIdentification object.
-	 * 
-	 * @return	byte array that contains the IC serial number of the CardChipIdentification object
-	 * 			as defined in EN 726-3
-	 */
-	public byte[] getIcSerialNumber() {
-		return icSerialNumber;
-	}
-
-	/**
-	 * Sets the IC serial number of a CardChipIdentification object.
-	 * 
-	 * @param	icSerialNumber		byte array that contains the IC serial number to be set for the
-	 * 								CardChipIdentification object
-	 */
-	public void setIcSerialNumber(byte[] icSerialNumber) {
-		this.icSerialNumber = icSerialNumber;
-	}
-	
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

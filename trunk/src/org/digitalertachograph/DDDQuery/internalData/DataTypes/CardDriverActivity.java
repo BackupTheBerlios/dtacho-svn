@@ -51,19 +51,20 @@ public class CardDriverActivity extends DataClass {
 	 * 					whose data is used when the CardDriverActivity
 	 * 					object is created.
 	 */
-	public CardDriverActivity(byte[] value){
-		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
-		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 2, 2));
+	public CardDriverActivity(byte[] value) {
+		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2)); // = first CardActivityDailyRecord
+		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 2, 2)); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
 
 		System.out.printf(" activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
 		
 		// reorganize ringbuffer (=records)
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
-		// records can be accessed linearly
+		// records can be accessed linearly from the oldest record (at the beginning
+		// of the array) to the newest record.
 
-		// length of destination CardActivityDailyRecord array
-		// = CardDriverActivity length without offsets for oldest/newest CardActivityDailyRecord 
+		// length of destination CardActivityDailyRecord array (records) is CardDriverActivity length
+		// without offsets for oldest/newest CardActivityDailyRecord (2 * 2 bytes)
 		byte[] records = new byte[ value.length - 4 ];
 
 		int lengthToEnd = (records.length - activityPointerOldestDayRecord);
@@ -84,59 +85,71 @@ public class CardDriverActivity extends DataClass {
 			activityPointerLastRecordOffset = records.length - activityPointerOldestDayRecord + activityPointerNewestRecord;
 		}
 
-		// processing of the CardActivityDailyRecord array
+		// process the CardActivityDailyRecord array
 		int cardActivityDailyRecordsOffset = 0;
-		int cardActivityDailyRecordsPreviousLength = 0;
+
+		int cadrActivityPreviousRecordLength = 0;
+		int cadrActivityRecordLength = 0;
+
+		int cadrIntegrityCheckActivityPreviousRecordLength = 0;
 		
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
 			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy(records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy(records, cardActivityDailyRecordsOffset + 2, 2)) ) );
 
+			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength();
+			cadrActivityRecordLength = cadr.getActivityRecordLength();
+			
 			// break when empty CardActivityDailyRecord is found
-			if ( cadr.getActivityRecordLength() == 0 )
+			if ( cadrActivityRecordLength == 0 )
 				break;
 
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
-				if ( cadr.getActivityPreviousRecordLength() == 0 ) {
+				if ( cadrActivityPreviousRecordLength == 0 ) {
 					System.out.println( "   [INFO] this is the first record");
 				} else {
 					System.out.println( "   [ERROR] this should be the first record but previous length is not 0(?!)");
 				}
 			} else {
-				if ( cadr.getActivityPreviousRecordLength() == cardActivityDailyRecordsPreviousLength ) {
-					System.out.println("   [INFO] integrity check ok: ActivityDailyRecordsPreviousLength matches");
+				if ( cadrActivityPreviousRecordLength == cadrIntegrityCheckActivityPreviousRecordLength ) {
+					System.out.println("   [INFO] integrity check ok: ActivityPreviousRecordLength matches");
 				} else {
-					System.out.println("   [ERROR] integrity check failed: ActivityDailyRecordsPreviousLength does NOT match");
+					System.out.println("   [ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match");
 				}
 			}
 			
-			cardActivityDailyRecordsOffset += cadr.getActivityRecordLength(); // next 
+			cardActivityDailyRecordsOffset += cadrActivityRecordLength; // next CardActivityDailyRecord
 
-			cardActivityDailyRecordsPreviousLength = cadr.getActivityRecordLength();
+			cadrIntegrityCheckActivityPreviousRecordLength = cadrActivityRecordLength; // save record length for integrity check
 			
 			activityDailyRecords.add(cadr);
 		}
 	}
 
-	public int getActivityPointerNewestRecord() {
-		return activityPointerNewestRecord;
-	}
 
-
-	public void setActivityPointerNewestRecord(int activityPointerNewestRecord) {
-		this.activityPointerNewestRecord = activityPointerNewestRecord;
-	}
-
-
+	/**
+	 * Returns the begin of the storage place (number of bytes from the beginning
+	 * of the activityDailyRecords string) of the most recent complete day record
+	 * of a CardDriverActivity object.
+	 * 
+	 * @return	the begin of the storage place of the most recent complete day record
+	 * 			of the CardDriverActivity object
+	 */
 	public int getActivityPointerOldestDayRecord() {
 		return activityPointerOldestDayRecord;
 	}
 
-
-	public void setActivityPointerOldestDayRecord(int activityPointerOldestDayRecord) {
-		this.activityPointerOldestDayRecord = activityPointerOldestDayRecord;
+	/**
+	 * Returns the begin of the storage place (number of bytes from the beginning
+	 * of the activityDailyRecords string) of the oldest complete day record
+	 * of a CardDriverActivity object.
+	 * 
+	 * @return	the begin of the storage place of the oldest complete day record
+	 * 			of the CardDriverActivity object
+	 */
+	public int getActivityPointerNewestRecord() {
+		return activityPointerNewestRecord;
 	}
-
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

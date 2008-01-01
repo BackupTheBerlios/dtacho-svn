@@ -32,7 +32,8 @@ public class Name extends DataClass{
 	 */
 	
 	private short codePage;
-	private byte[] name;
+	private byte[] name = new byte[35];
+
 	
 	/**
 	 * Constructor for a Name object
@@ -40,7 +41,6 @@ public class Name extends DataClass{
 	public Name(){
 
 	}
-	
 
 	/**
 	 * Constructor for a Name object
@@ -53,36 +53,72 @@ public class Name extends DataClass{
 		this(value[0], arrayCopy(value, 1, value.length - 1));
 	}
 	
+	/**
+	 * Constructor for a Name object
+	 * 
+	 * @param	codePage	byte that specifies the part of the
+	 * 						ISO/IEC 8859 used to code the address
+	 * @param	name		byte array that contains the name
+	 */
 	public Name(byte codePage, byte[] name){
 		this.codePage = convertIntoUnsigned1ByteInt(codePage);
 		this.name = name;
 	}
 	
-	public String toString(){
-		// TODO write me!!
-		return "";
-	}
-
+	/**
+	 * Returns the codepage of a Name object.
+	 * 
+	 * @return	the codepage of the Name object
+	 */
 	public short getCodePage() {
 		return codePage;
 	}
 
+	/**
+	 * Sets the codepage of a Name object.
+	 * 
+	 * @param	codePage	the codepage to be set for the Name object
+	 */
 	public void setCodePage(short codePage) {
 		this.codePage = codePage;
 	}
 
+	/**
+	 * Sets the codepage of a Name object.
+	 * 
+	 * @param	codePage	the codepage to be set for the Name object
+	 */
 	public void setCodePage(byte codePage) {
 		this.codePage = (short) (codePage & 0xff);
 	}
 	
+	/**
+	 * Returns the name of a Name object.
+	 * 
+	 * @return	the name of the Name object
+	 */
 	public byte[] getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the Name of a Name object.
+	 * 
+	 * @param	name		the name to be set for the name object
+	 */
 	public void setName(byte[] name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Returns the names as string of the Name object.
+	 * 
+	 * @return	the namr as string of the Name object
+	 */
+	public String toString(){
+		return new String(name);
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Controller c = Controller.getInstance();
@@ -93,7 +129,7 @@ public class Name extends DataClass{
 		if(c.isAnonymized()){
 			byte [] tmp = new byte[35];
 			for(int i = 0; i < 35; i++)
-				tmp[i] = 0x41; // 'A'
+				tmp[i] = 'A';
 			nameElement = new Element("name").setText( convertIntoHexString( tmp ));
 		}else{
 			nameElement = new Element("name").setText( convertIntoHexString( this.name ));

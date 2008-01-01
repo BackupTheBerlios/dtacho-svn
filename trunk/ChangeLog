@@ -1,9 +1,29 @@
+2008-01-01
+-VehicleRegistrationIdentification:
+ -fixed vehicleRegistrationNation
+-javadoc documentation
+
+
+2007-12-31
+-javadoc documentation
+
+
+2007-12-30
+-CardDriverActivity:
+ -optimized processing of CardActivityDailyRecords 
+-TachographData:
+ -renamed method isValidTag() to isValidFileID()
+-DDDDataSource:
+ -parser fixes
+
+
 2007-12-27
 -CardDriverActivity:
  -fixed bug when parsing empty CardDriverActivity data
 -DDDDataSource:
  -fixed parsing of .DDD files that are created by OPTAC download tool
   with firmware < v2.3... 
+
 
 2007-12-26
 -EF_Card_Download, TachographData:

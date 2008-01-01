@@ -37,6 +37,13 @@ public class CalibrationPurpose extends DataClass {
 
 	/**
 	 * Constructor for a CalibrationPurpose object
+	 */
+	public CalibrationPurpose() {
+
+	}
+
+	/**
+	 * Constructor for a CalibrationPurpose object
 	 * 
 	 * @param	value	byte array of a CalibrationPurpose structure
 	 * 					whose data is used when the CalibrationPurpose
@@ -46,6 +53,28 @@ public class CalibrationPurpose extends DataClass {
 		calibrationPurpose = value;
 	}
 	
+	/**
+	 * Returns the code explaining why a set of calibration parameters were recorded
+	 * of a CalibrationPurpose object.
+	 * 
+	 * @return	the code explaining why a set of calibration parameters were recorded
+	 * 			of the CalibrationPurpose object
+	 */
+	public byte getCalibrationPurpose() {
+		return calibrationPurpose;
+	}
+
+	/**
+	 * Sets the code explaining why a set of calibration parameters were recorded
+	 * of a CalibrationPurpose object.
+	 * 
+	 * @param	calibrationPurpose	the code explaining why a set of calibration parameters were recorded
+	 * 								to be set for the CalibrationPurpose object
+	 */
+	public void setCalibrationPurpose(byte calibrationPurpose) {
+		this.calibrationPurpose = calibrationPurpose;
+	}
+
 	@Override
 	public Element generateXMLElement(String name) {
 		Element node = new Element(name);

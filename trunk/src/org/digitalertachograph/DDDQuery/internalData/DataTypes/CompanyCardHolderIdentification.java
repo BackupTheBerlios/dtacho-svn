@@ -35,6 +35,13 @@ public class CompanyCardHolderIdentification extends DataClass {
 	
 	/**
 	 * Constructor for a CompanyCardHolderIdentification object
+	 */
+	public CompanyCardHolderIdentification(){
+		
+	}
+
+	/**
+	 * Constructor for a CompanyCardHolderIdentification object
 	 * 
 	 * @param	value	byte array of a CompanyCardHolderIdentification structure
 	 * 					whose data is used when the CompanyCardHolderIdentification
@@ -46,28 +53,61 @@ public class CompanyCardHolderIdentification extends DataClass {
 		cardHolderPreferredLanguage = new Language( arrayCopy(value, 72, 2));
 	}
 
-	public Language getCardHolderPreferredLanguage() {
-		return cardHolderPreferredLanguage;
-	}
-
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
-		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
-	}
-
-	public Address getCompanyAddress() {
-		return companyAddress;
-	}
-
-	public void setCompanyAddress(Address companyAddress) {
-		this.companyAddress = companyAddress;
-	}
-
+	/**
+	 * Returns the name of the holder company of a CompanyCardHolderIdentification object.
+	 * 
+	 * @return	the name of the holder company of the CompanyCardHolderIdentification object
+	 */
 	public Name getCompanyName() {
 		return companyName;
 	}
 
+	/**
+	 * Sets the name of the holder company of a CompanyCardHolderIdentification object.
+	 * 
+	 * @param	companyName		the name of the holder companyto be set
+	 * 							for the CompanyCardHolderIdentification object
+	 */
 	public void setCompanyName(Name companyName) {
 		this.companyName = companyName;
+	}
+
+	/**
+	 * Returns the address of the holder company of a CompanyCardHolderIdentification object.
+	 * 
+	 * @return	the address of the holder company of the CompanyCardHolderIdentification object
+	 */
+	public Address getCompanyAddress() {
+		return companyAddress;
+	}
+
+	/**
+	 * Sets the address of the holder company of a CompanyCardHolderIdentification object.
+	 * 
+	 * @param	companyAddress	the address of the holder company to be set
+	 * 							for the CompanyCardHolderIdentification object
+	 */
+	public void setCompanyAddress(Address companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+
+	/**
+	 * Returns the preferred language of the card holder of a CompanyCardHolderIdentification object.
+	 * 
+	 * @return	the preferred language of the card holder of the CompanyCardHolderIdentification object
+	 */
+	public Language getCardHolderPreferredLanguage() {
+		return cardHolderPreferredLanguage;
+	}
+
+	/**
+	 * Sets the preferred language of the card holder of a CompanyCardHolderIdentification object.
+	 * 
+	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder to be set
+	 * 											for the CompanyCardHolderIdentification object
+	 */
+	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}
 
 	@Override

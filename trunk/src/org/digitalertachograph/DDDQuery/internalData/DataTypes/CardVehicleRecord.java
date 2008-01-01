@@ -23,13 +23,15 @@ import org.jdom.Element;
 public class CardVehicleRecord extends DataClass {
 	/*
 	 * CardVehicleRecord ::= SEQUENCE {
-	 * 	vehicleOdometerBegin OdometerShort,	3 bytes
-	 * 	vehicleOdometerEnd OdometerShort,	3 bytes
-	 * 	vehicleFirstUse TimeReal,			4 bytes
-	 * 	vehicleLastUse TimeReal,			4 bytes
-	 * 	vehicleRegistration VehicleRegistrationIdentification,	15 bytes
+	 * 	vehicleOdometerBegin OdometerShort, 3 bytes
+	 * 	vehicleOdometerEnd OdometerShort, 3 bytes
+	 * 	vehicleFirstUse TimeReal, 4 bytes
+	 * 	vehicleLastUse TimeReal, 4 bytes
+	 * 	vehicleRegistration VehicleRegistrationIdentification, 15 bytes
 	 * 	vuDataBlockCounter VuDataBlockCounter, 2 bytes
 	 * }
+	 * ---
+	 * OdometerShort ::= INTEGER(0..2^24-1)
 	 */
 	
 	private int vehicleOdometerBegin;
@@ -37,9 +39,16 @@ public class CardVehicleRecord extends DataClass {
 	private TimeReal vehicleFirstUse;
 	private TimeReal vehicleLastUse;
 	private VehicleRegistrationIdentification vehicleRegistration;
-	private String vuDataBlockCounter;
+	private byte[] vuDataBlockCounter = new byte[2];
 	
 	
+	/**
+	 * Constructor for a CardVehicleRecord object
+	 */
+	public CardVehicleRecord() {
+
+	}
+
 	/**
 	 * Constructor for a CardVehicleRecord object
 	 * 
@@ -47,88 +56,158 @@ public class CardVehicleRecord extends DataClass {
 	 * 					whose data is used when the CardVehicleRecord
 	 * 					object is created.
 	 */
-	public CardVehicleRecord(byte[] value){
+	public CardVehicleRecord(byte[] value) {
 		vehicleOdometerBegin = convertIntoUnsigned3ByteInt( arrayCopy(value, 0, 3));
 		vehicleOdometerEnd = convertIntoUnsigned3ByteInt( arrayCopy(value, 3, 3));
 		vehicleFirstUse = new TimeReal( arrayCopy(value, 6, 4));
 		vehicleLastUse = new TimeReal( arrayCopy(value, 10, 4));
 		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 14, 15));
-		vuDataBlockCounter = convertIntoBCDString( arrayCopy(value, 29, 2));
+		vuDataBlockCounter = arrayCopy(value, 29, 2);
 	}
 
-
-	public TimeReal getVehicleFirstUse() {
-		return vehicleFirstUse;
-	}
-
-
-	public void setVehicleFirstUse(TimeReal vehicleFirstUse) {
-		this.vehicleFirstUse = vehicleFirstUse;
-	}
-
-
-	public TimeReal getVehicleLastUse() {
-		return vehicleLastUse;
-	}
-
-
-	public void setVehicleLastUse(TimeReal vehicleLastUse) {
-		this.vehicleLastUse = vehicleLastUse;
-	}
-
-
+	/**
+	 * Returns the vehicle odometer value at the beginning of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the vehicle odometer value at the beginning of the period of use of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
 	public int getVehicleOdometerBegin() {
 		return vehicleOdometerBegin;
 	}
 
-
+	/**
+	 * Sets the vehicle odometer value at the beginning of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vehicleOdometerBegin	the vehicle odometer value at the beginning of the period
+	 * 									of use of the vehicle to be set for the CardVehicleRecord object
+	 */
 	public void setVehicleOdometerBegin(int vehicleOdometerBegin) {
 		this.vehicleOdometerBegin = vehicleOdometerBegin;
 	}
 
-
+	/**
+	 * Returns the vehicle odometer value at the end of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the vehicle odometer value at the end of the period of use of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
 	public int getVehicleOdometerEnd() {
 		return vehicleOdometerEnd;
 	}
 
-
+	/**
+	 * Sets the vehicle odometer value at the end of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vehicleOdometerEnd	the vehicle odometer value at the end of the period
+	 * 								of use of the vehicle to be set for the CardVehicleRecord object
+	 */
 	public void setVehicleOdometerEnd(int vehicleOdometerEnd) {
 		this.vehicleOdometerEnd = vehicleOdometerEnd;
 	}
 
+	/**
+	 * Returns the date and time of the beginning of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the date and time of the beginning of the period of use of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
+	public TimeReal getVehicleFirstUse() {
+		return vehicleFirstUse;
+	}
 
+	/**
+	 * Sets the date and time of the beginning of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vehicleFirstUse		the date and time of the beginning of the period of use of the vehicle
+	 * 								to be set for the CardVehicleRecord object
+	 */
+	public void setVehicleFirstUse(TimeReal vehicleFirstUse) {
+		this.vehicleFirstUse = vehicleFirstUse;
+	}
+
+	/**
+	 * Returns the date and time of the end of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the date and time of the end of the period of use of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
+	public TimeReal getVehicleLastUse() {
+		return vehicleLastUse;
+	}
+
+	/**
+	 * Sets the date and time of the end of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vehicleLastUse	the date and time of the end of the period of use of the vehicle
+	 * 							to be set for the CardVehicleRecord object
+	 */
+	public void setVehicleLastUse(TimeReal vehicleLastUse) {
+		this.vehicleLastUse = vehicleLastUse;
+	}
+
+	/**
+	 * Returns the VRN and the registering Member State of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the VRN and the registering Member State of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
 	public VehicleRegistrationIdentification getVehicleRegistration() {
 		return vehicleRegistration;
 	}
 
-
+	/**
+	 * Sets the VRN and the registering Member State of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vehicleRegistration		the VRN and the registering Member State of the vehicle
+	 * 									to be set for the CardVehicleRecord object
+	 */
 	public void setVehicleRegistration(
 			VehicleRegistrationIdentification vehicleRegistration) {
 		this.vehicleRegistration = vehicleRegistration;
 	}
 
-
-	public String getVuDataBlockCounter() {
+	/**
+	 * Returns the value of the VuDataBlockCounter at last extraction of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @return	the value of the VuDataBlockCounter at last extraction of the period of use of the vehicle
+	 * 			of the CardVehicleRecord object
+	 */
+	public byte[] getVuDataBlockCounter() {
 		return vuDataBlockCounter;
 	}
 
-
-	public void setVuDataBlockCounter(String vuDataBlockCounter) {
+	/**
+	 * Sets the value of the VuDataBlockCounter at last extraction of the period of use of the vehicle
+	 * of a CardVehicleRecord object.
+	 * 
+	 * @param	vuDataBlockCounter	the value of the VuDataBlockCounter at last extraction of the period
+	 * 								of use of the vehicle to be set for the CardVehicleRecord object
+	 */
+	public void setVuDataBlockCounter(byte[] vuDataBlockCounter) {
 		this.vuDataBlockCounter = vuDataBlockCounter;
 	}
 	
 	@Override
 	public Element generateXMLElement(String name) {
-		
 		Element node = new Element(name);
 		node.addContent( new Element("vehicleOdometerBegin").setText(Integer.toString(vehicleOdometerBegin)));
 		node.addContent( new Element("vehicleOdometerEnd").setText(Integer.toString(vehicleOdometerEnd)));
 		node.addContent( vehicleFirstUse.generateXMLElement("vehicleFirstUse"));
 		node.addContent( vehicleLastUse.generateXMLElement("vehicleLastUse"));
 		node.addContent( vehicleRegistration.generateXMLElement("vehicleRegistration"));
-		node.addContent( new Element("vuDataBlockCounter").setText(vuDataBlockCounter));
+		node.addContent( new Element("vuDataBlockCounter").setText(convertBCDStringIntoString(vuDataBlockCounter)));
 		
 		return node;
 	}
-
 }

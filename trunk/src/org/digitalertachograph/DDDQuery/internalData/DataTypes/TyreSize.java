@@ -33,19 +33,36 @@ public class TyreSize extends DataClass {
 
 	/**
 	 * Constructor for a TyreSize object
+	 */
+	public TyreSize() {
+
+	}
+
+	/**
+	 * Constructor for a TyreSize object
 	 * 
 	 * @param	value	byte array of a TyreSize structure
 	 * 					whose data is used when the TyreSize
 	 * 					object is created.
 	 */
-	public TyreSize(byte[] value){
+	public TyreSize(byte[] value) {
 		tyreSize = new String(value);
 	}
 
+	/**
+	 * Returns the designation of tyre dimensions of a TyreSize object.
+	 * 
+	 * @return	the designation of tyre dimensions of the TyreSize object
+	 */
 	public String getTyreSize() {
 		return tyreSize;
 	}
 
+	/**
+	 * Sets the designation of tyre dimensions of a TyreSize object.
+	 * 
+	 * @param	tyreSize		the designation of tyre dimensions of a TyreSize object
+	 */
 	public void setTyreSize(String tyreSize) {
 		this.tyreSize = tyreSize;
 	}

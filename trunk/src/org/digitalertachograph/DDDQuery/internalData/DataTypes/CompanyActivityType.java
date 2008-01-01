@@ -31,11 +31,30 @@ public class CompanyActivityType extends DataClass {
 	 */
 	private short companyActivityType;
 
+	/**
+	 * Company activity type: CARD_DOWNLOADING
+	 */
 	public static final short CARD_DOWNLOADING = 1;
+	/**
+	 * Company activity type: VU_DOWNLOADING
+	 */
 	public static final short VU_DOWNLOADING = 2;
+	/**
+	 * Company activity type: VU_LOCK_IN
+	 */
 	public static final short VU_LOCK_IN = 3;
+	/**
+	 * Company activity type: VU_LOCK_OUT
+	 */
 	public static final short VU_LOCK_OUT = 4;
 
+
+	/**
+	 * Constructor for a CompanyActivityType object
+	 */
+	public CompanyActivityType(){
+
+	}
 
 	/**
 	 * Constructor for a CompanyActivityType object
@@ -47,10 +66,24 @@ public class CompanyActivityType extends DataClass {
 		companyActivityType = convertIntoUnsigned1ByteInt(value);
 	}
 
+	/**
+	 * Returns the activity carried out by a company using its company card
+	 * of a CompanyActivityType object.
+	 * 
+	 * @return	the activity carried out by a company using its company card
+	 * 			of the CompanyActivityType object
+	 */
 	public short getCompanyActivityType() {
 		return companyActivityType;
 	}
 
+	/**
+	 * Sets the activity carried out by a company using its company card
+	 * of a CompanyActivityType object.
+	 * 
+	 * @param	companyActivityType		the activity carried out by a company using its company card
+	 * 									to be set for the CompanyActivityType object
+	 */
 	public void setCompanyActivityType(short companyActivityType) {
 		this.companyActivityType = companyActivityType;
 	}
