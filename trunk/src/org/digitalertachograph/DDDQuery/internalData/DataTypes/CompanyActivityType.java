@@ -53,7 +53,7 @@ public class CompanyActivityType extends DataClass {
 	 * Constructor for a CompanyActivityType object
 	 */
 	public CompanyActivityType(){
-
+		companyActivityType = 0;
 	}
 
 	/**

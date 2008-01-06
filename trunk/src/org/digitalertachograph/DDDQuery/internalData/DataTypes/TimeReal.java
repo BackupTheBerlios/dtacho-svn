@@ -34,13 +34,13 @@ public class TimeReal extends DataClass{
 	 * TimeRealRange ::= 2^32-1
 	 */
 	
-	private long timereal = 0;
+	private long timereal;
 	
 	/**
 	 * Constructor for a TimeReal object
 	 */
 	public TimeReal(){
-	
+		timereal = 0;
 	}
 
 	/**

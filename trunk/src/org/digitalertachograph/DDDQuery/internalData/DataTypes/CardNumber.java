@@ -66,6 +66,40 @@ public class CardNumber extends DataClass {
 	
 	/**
 	 * Constructor for a CardNumber object
+	 */
+	public CardNumber() {
+		cardType = 0;
+		driverIdentification = new String();
+		cardReplacementIndex = '\0';
+		cardRenewalIndex = '\0';
+		ownerIdentification = new String();
+		cardConsecutiveIndex = '\0';
+	}
+
+	/**
+	 * Constructor for a CardNumber object
+	 */
+	public CardNumber(int cardType) {
+		this.cardType = cardType;
+		if(cardType == EquipmentType.DRIVER_CARD){
+			driverIdentification = new String();
+			cardReplacementIndex = '\0';
+			cardRenewalIndex = ' ';
+
+			ownerIdentification = new String();
+			cardConsecutiveIndex = '\0';
+		}else{
+			ownerIdentification = new String();
+			cardConsecutiveIndex = '\0';
+			cardReplacementIndex = '\0';
+			cardRenewalIndex = '\0';
+
+			driverIdentification = new String();
+		}
+	}
+
+	/**
+	 * Constructor for a CardNumber object
 	 * 
 	 * @param	value		byte array of a CardNumber structure
 	 * 						whose data is used when the CardNumber
@@ -78,18 +112,36 @@ public class CardNumber extends DataClass {
 	public CardNumber(byte[] value, int cardType) {
 		this.cardType = cardType;
 		if(cardType == EquipmentType.DRIVER_CARD){
-			driverIdentification = new String( arrayCopy(value, 0, 14));
+			driverIdentification = new String(arrayCopy(value, 0, 14));
 			cardReplacementIndex = (char) value[14];
 			cardRenewalIndex = (char) value[15];
 		}else{
-			ownerIdentification = new String( arrayCopy(value, 0, 13));
+			ownerIdentification = new String(arrayCopy(value, 0, 13));
 			cardConsecutiveIndex = (char) value[13];
 			cardReplacementIndex = (char) value[14];
 			cardRenewalIndex = (char) value[15];
 		}
 	}
 
-
+	/**
+	 * Returns the type of the tachograph card of a FullCardNumber object.
+	 * 
+	 * @return	the type of the tachograph card of the FullCardNumber object
+	 */
+	public int getCardType() {
+		return cardType;
+	}
+	
+	/**
+	 * Sets the type of the tachograph card of a FullCardNumber object.
+	 * 
+	 * @param	cardType	the type of the tachograph card	to be set for
+	 * 						the FullCardNumber object
+	 */
+	public void setCardType(int cardType) {
+		this.cardType = cardType;
+	}
+	
 	/**
 	 * Returns the unique identification of a driver in a Member State
 	 * of a CardNumber object.

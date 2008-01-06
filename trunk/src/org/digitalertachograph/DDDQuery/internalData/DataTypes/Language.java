@@ -33,7 +33,7 @@ public class Language extends DataClass {
 	 * Constructor for a Language object
 	 */
 	public Language(){
-
+		language = new String();
 	}
 
 	/**

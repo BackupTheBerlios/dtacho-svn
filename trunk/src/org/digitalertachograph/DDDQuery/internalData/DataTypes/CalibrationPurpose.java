@@ -39,7 +39,7 @@ public class CalibrationPurpose extends DataClass {
 	 * Constructor for a CalibrationPurpose object
 	 */
 	public CalibrationPurpose() {
-
+		calibrationPurpose = 0;
 	}
 
 	/**

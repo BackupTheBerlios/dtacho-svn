@@ -45,15 +45,20 @@ public class CardIccIdentification extends DataClass {
 	private ExtendedSerialNumber cardExtendedSerialNumber;
 	private String cardApprovalNumber;
 	private byte cardPersonaliserID;
-	private byte[] embedderIcAssemblerID = new byte[5];
-	private byte[] icIdentifier = new byte[2];
+	private byte[] embedderIcAssemblerID;
+	private byte[] icIdentifier;
 
 	
 	/**
 	 * Constructor for a CardIccIdentification object
 	 */
 	public CardIccIdentification() {
-
+		clockStop = 0;
+		cardExtendedSerialNumber = new ExtendedSerialNumber();
+		cardApprovalNumber = new String();
+		cardPersonaliserID = 0;
+		embedderIcAssemblerID = new byte[5];
+		icIdentifier = new byte[2];
 	}
 
 	/**

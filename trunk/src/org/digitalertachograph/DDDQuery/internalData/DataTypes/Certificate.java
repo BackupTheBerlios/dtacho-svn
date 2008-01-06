@@ -31,7 +31,7 @@ public class Certificate extends DataClass {
 	 * Constructor for a Certificate object
 	 */
 	public Certificate(){
-
+		certificate = new byte[194];
 	}
 
 	/**

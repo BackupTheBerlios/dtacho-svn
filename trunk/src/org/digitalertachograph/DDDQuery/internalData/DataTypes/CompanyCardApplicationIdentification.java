@@ -34,7 +34,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 */
 
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion = new byte[2];
+	private byte[] cardStructureVersion;
 	private int noOfCompanyActivityRecords;
 	
 
@@ -42,7 +42,9 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * Constructor for a CompanyCardApplicationIdentification object
 	 */
 	public CompanyCardApplicationIdentification() {
-
+		typeOfTachographCardId = new EquipmentType();
+		cardStructureVersion = new byte[2];
+		noOfCompanyActivityRecords = 0;
 	}
 
 	/**

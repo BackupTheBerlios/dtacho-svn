@@ -39,7 +39,9 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * Constructor for a CardDrivingLicenceInformation object
 	 */
 	public CardDrivingLicenceInformation() {
-
+		drivingLicenceIssuingAuthority = new Name();
+		drivingLicenceIssuingNation = new NationNumeric();
+		drivingLicenceNumber = new String();
 	}
 
 	/**
@@ -50,9 +52,9 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 					object is created.
 	 */
 	public CardDrivingLicenceInformation(byte[] value) {
-		drivingLicenceIssuingAuthority = new Name( arrayCopy(value, 0, 36));
+		drivingLicenceIssuingAuthority = new Name(arrayCopy(value, 0, 36));
 		drivingLicenceIssuingNation = new NationNumeric(value[36]);
-		drivingLicenceNumber = new String( arrayCopy(value, 37, 16));
+		drivingLicenceNumber = new String(arrayCopy(value, 37, 16));
 	}
 
 	/**

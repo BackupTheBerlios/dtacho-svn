@@ -44,7 +44,12 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * Constructor for a CardControlActivityDataRecord object
 	 */
 	public CardControlActivityDataRecord() {
-		
+		controlType = new ControlType();
+		controlTime = new TimeReal();
+		controlCardNumber = new FullCardNumber();
+		controlVehicleRegistration = new VehicleRegistrationIdentification();
+		controlDownloadPeriodBegin = new TimeReal();
+		controlDownloadPeriodEnd = new TimeReal();
 	}
 
 	/**

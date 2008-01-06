@@ -29,15 +29,16 @@ public class CardChipIdentification extends DataClass {
 	 * }
 	 */
 
-	private byte[] icSerialNumber = new byte[4];
-	private byte[] icManufacturingReferences = new byte[4];
+	private byte[] icSerialNumber;
+	private byte[] icManufacturingReferences;
 
 
 	/**
 	 * Constructor for a CardChipIdentification object
 	 */
 	public CardChipIdentification() {
-
+		icSerialNumber = new byte[4];
+		icManufacturingReferences = new byte[4];
 	}
 	
 	/**

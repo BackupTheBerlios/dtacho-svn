@@ -35,9 +35,17 @@ public class SensorInstallationSecData extends DataClass {
 	 * }
 	 */
 
-	private byte[] tDesKeyA = new byte[8];
-	private byte[] tDesKeyB = new byte[8];
+	private byte[] tDesKeyA;
+	private byte[] tDesKeyB;
 	
+
+	/**
+	 * Constructor for a SensorInstallationSecData object
+	 */
+	public SensorInstallationSecData(){
+		tDesKeyA = new byte[8];
+		tDesKeyB = new byte[8];
+	}
 
 	/**
 	 * Constructor for a SensorInstallationSecData object

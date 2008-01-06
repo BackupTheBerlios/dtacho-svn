@@ -35,7 +35,7 @@ public class CardVehiclesUsed extends DataClass {
 	 * max.: 200
 	 */
 	
-	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>(84);
+	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>(84); // min. 84; will be automatically expanded at run time if required!
 
 	
 	/**

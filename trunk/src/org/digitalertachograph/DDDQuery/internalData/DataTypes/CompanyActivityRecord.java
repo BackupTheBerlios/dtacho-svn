@@ -45,7 +45,12 @@ public class CompanyActivityRecord extends DataClass {
 	 * Constructor for a CompanyActivityRecord object
 	 */
 	public CompanyActivityRecord() {
-
+		companyActivityType = new CompanyActivityType();
+		companyActivityTime = new TimeReal();
+		cardNumberInformation = new FullCardNumber();
+		vehicleRegistrationInformation = new VehicleRegistrationIdentification();
+		downloadPeriodBegin = new TimeReal();
+		downloadPeriodEnd = new TimeReal();
 	}
 
 	/**

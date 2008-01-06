@@ -40,7 +40,10 @@ public class ExtendedSerialNumber extends DataClass {
 	 * Constructor for an ExtendedSerialNumber object
 	 */
 	public ExtendedSerialNumber() {
-
+		serialNumber = 0;
+		monthYear = new byte[2];
+		type = 0; 
+		manufacturerCode = 0; 
 	}
 
 	/**

@@ -45,7 +45,8 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * Constructor for a VehicleRegistrationIdentification object
 	 */
 	public VehicleRegistrationIdentification() {
-
+		vehicleRegistrationNation = new NationNumeric();
+		vehicleRegistrationNumber = new VehicleRegistrationNumber();
 	}
 
 	/**

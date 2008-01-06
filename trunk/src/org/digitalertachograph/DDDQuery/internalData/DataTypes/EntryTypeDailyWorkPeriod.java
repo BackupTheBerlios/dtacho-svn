@@ -39,7 +39,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * Constructor for an EntryTypeDailyWorkPeriod object
 	 */
 	public EntryTypeDailyWorkPeriod() {
-
+		entryTypeDailyWorkPeriod = 0;
 	}
 
 	/**

@@ -38,7 +38,9 @@ public class FullCardNumber extends DataClass {
 	 * Constructor for a FullCardNumber object
 	 */
 	public FullCardNumber() {
-
+		cardType = new EquipmentType();
+		cardIssuingMemberState = new NationNumeric();
+		cardNumber = new CardNumber( null, EquipmentType.DRIVER_CARD );
 	}
 
 	/**

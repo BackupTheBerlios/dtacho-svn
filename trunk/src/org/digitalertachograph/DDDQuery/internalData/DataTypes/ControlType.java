@@ -46,7 +46,7 @@ public class ControlType extends DataClass {
 	 * 00010000 = 0x10
 	 */
 
-	private byte controlType = 0;
+	private byte controlType;
 	
 	private boolean card_downloading = false;
 	private static final byte CARD_DOWNLOADING_MASK = (byte)0x80;
@@ -62,7 +62,7 @@ public class ControlType extends DataClass {
 	 * Constructor for a ControlType object
 	 */
 	public ControlType() {
-
+		controlType = 0;
 	}
 
 	/**

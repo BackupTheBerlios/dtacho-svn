@@ -79,7 +79,21 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * Constructor for a WorkshopCardCalibrationRecord object
 	 */
 	public WorkshopCardCalibrationRecord() {
-
+		calibrationPurpose = new CalibrationPurpose();
+		vehicleIdentificationNumber = new VehicleIdentificationNumber();
+		vehicleRegistration = new VehicleRegistrationIdentification();
+		wVehicleCharacteristicConstant = 0;
+		kConstantOfRecordingEquipment = 0;
+		lTyreCircumference = 0;
+		tyreSize = new TyreSize();
+		authorisedSpeed = 0;
+		oldOdometerValue = 0;
+		newOdometerValue = 0;
+		oldTimeValue = new TimeReal();
+		newTimeValue = new TimeReal();
+		vuPartNumber = new VuPartNumber();
+		vuSerialNumber = new ExtendedSerialNumber();
+		sensorSerialNumber = new ExtendedSerialNumber();
 	}
 
 	/**

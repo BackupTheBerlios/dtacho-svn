@@ -114,10 +114,18 @@ public class EventFaultType extends DataClass {
 	
 	/**
 	 * Constructor for an EventFaultType object
+	 */
+	public EventFaultType() {
+		eventFaultType = 0;
+		category = 0;
+	}
+
+	/**
+	 * Constructor for an EventFaultType object
 	 * 
 	 * @param	eventFaultType		byte that qualifies an event or fault
 	 */
-	public EventFaultType(byte eventFaultType){
+	public EventFaultType(byte eventFaultType) {
 		this.eventFaultType = eventFaultType;
 		category = (byte) ((eventFaultType & 0xF0) >> 4);
 

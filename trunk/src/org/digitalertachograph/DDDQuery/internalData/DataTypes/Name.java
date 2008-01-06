@@ -32,14 +32,15 @@ public class Name extends DataClass{
 	 */
 	
 	private short codePage;
-	private byte[] name = new byte[35];
+	private byte[] name;
 
 	
 	/**
 	 * Constructor for a Name object
 	 */
 	public Name(){
-
+		codePage = 0;
+		name = new byte[35];
 	}
 
 	/**

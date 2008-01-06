@@ -38,7 +38,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
-	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88);
+	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88); // min. 88; will be automatically expanded at run time if required!
 
 	
 	/**

@@ -36,7 +36,8 @@ public class HolderName extends DataClass {
 	 * Constructor for a HolderName object
 	 */
 	public HolderName(){
-
+		holderSurname = new Name();
+		holderFirstNames = new Name();
 	}
 
 	/**

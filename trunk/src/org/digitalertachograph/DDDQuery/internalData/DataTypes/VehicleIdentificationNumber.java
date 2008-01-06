@@ -32,6 +32,13 @@ public class VehicleIdentificationNumber extends DataClass {
 
 	/**
 	 * Constructor for a VehicleIdentificationNumber object
+	 */
+	public VehicleIdentificationNumber(){
+		vehicleIdentificationNumber = new String();
+	}
+
+	/**
+	 * Constructor for a VehicleIdentificationNumber object
 	 * 
 	 * @param	value	byte array of a VehicleIdentificationNumber structure
 	 * 					whose data is used when the VehicleIdentificationNumber

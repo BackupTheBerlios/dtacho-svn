@@ -34,7 +34,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * }
 	 */
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion = new byte[2];
+	private byte[] cardStructureVersion;
 	private short noOfEventsPerType;
 	private short noOfFaultsPerType;
 	private int activityStructureLength;
@@ -47,7 +47,14 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * Constructor for a WorkshopCardApplicationIdentification object
 	 */
 	public WorkshopCardApplicationIdentification(){
-
+		typeOfTachographCardId = new EquipmentType();
+		cardStructureVersion = new byte[2];
+		noOfEventsPerType = 0;
+		noOfFaultsPerType = 0;
+		activityStructureLength = 0;
+		noOfCardVehicleRecords = 0;
+		noOfCardPlaceRecords = 0;
+		noOfCalibrationRecords = 0;
 	}
 
 	/**

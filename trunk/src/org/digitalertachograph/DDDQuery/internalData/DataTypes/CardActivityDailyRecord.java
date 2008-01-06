@@ -53,7 +53,7 @@ public class CardActivityDailyRecord extends DataClass {
 	private int activityPreviousRecordLength;
 	private int activityRecordLength;
 	private TimeReal activityRecordDate;
-	private byte[] activityDailyPresenceCounter = new byte[2];
+	private byte[] activityDailyPresenceCounter;
 	private int activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 	

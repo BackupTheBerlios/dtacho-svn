@@ -38,7 +38,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 */
 
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion = new byte[2];
+	private byte[] cardStructureVersion;
 	private int noOfControlActivityRecords;
 	
 	
@@ -46,7 +46,9 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * Constructor for a ControlCardApplicationIdentification object
 	 */
 	public ControlCardApplicationIdentification() {
-
+		typeOfTachographCardId = new EquipmentType();
+		cardStructureVersion = new byte[2];
+		noOfControlActivityRecords = 0;
 	}
 
 	/**
@@ -59,7 +61,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	public ControlCardApplicationIdentification(byte[] value) {
 		typeOfTachographCardId = new EquipmentType(value[0]);
 		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfControlActivityRecords = convertIntoUnsigned2ByteInt( arrayCopy(value, 3, 2));
+		noOfControlActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 3, 2));
 	}
 
 	/**

@@ -48,7 +48,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 */
 	
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion = new byte[2];
+	private byte[] cardStructureVersion;
 	private short noOfEventsPerType;
 	private short noOfFaultsPerType;
 	private int activityStructureLength;
@@ -60,7 +60,13 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * Constructor for a DriverCardApplicationIdentification object
 	 */
 	public DriverCardApplicationIdentification() {
-
+		typeOfTachographCardId = new EquipmentType();
+		cardStructureVersion = new byte[2];
+		noOfEventsPerType = 0;
+		noOfFaultsPerType = 0;
+		activityStructureLength = 0;
+		noOfCardVehicleRecords = 0;
+		noOfCardPlaceRecords = 0;
 	}
 
 	/**

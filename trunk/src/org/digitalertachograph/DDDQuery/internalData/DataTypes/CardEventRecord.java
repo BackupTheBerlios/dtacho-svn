@@ -42,7 +42,10 @@ public class CardEventRecord extends DataClass {
 	 * Constructor for a CardEventRecord object
 	 */
 	public CardEventRecord() {
-
+		eventType = new EventFaultType();
+		eventBeginTime = new TimeReal();
+		eventEndTime = new TimeReal();
+		eventVehicleRegistration = new VehicleRegistrationIdentification();
 	}
 
 	/**
@@ -55,8 +58,8 @@ public class CardEventRecord extends DataClass {
 	public CardEventRecord(byte[] value) {
 		eventType = new EventFaultType(value[0]);
 		eventBeginTime = new TimeReal(arrayCopy(value, 1, 4));
-		eventEndTime   = new TimeReal(arrayCopy(value, 5, 4));
-		eventVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 9, 15));
+		eventEndTime = new TimeReal(arrayCopy(value, 5, 4));
+		eventVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 9, 15));
 	}
 
 	/**

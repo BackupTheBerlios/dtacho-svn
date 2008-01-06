@@ -33,6 +33,14 @@ public class SpecificConditionRecord extends DataClass {
 	
 	/**
 	 * Constructor for a SpecificConditionRecord object
+	 */
+	public SpecificConditionRecord() {
+		entryTime = new TimeReal();
+		specificConditionType = new SpecificConditionType();
+	}
+
+	/**
+	 * Constructor for a SpecificConditionRecord object
 	 * 
 	 * @param	value	byte array of a SpecificConditionRecord structure
 	 * 					whose data is used when the SpecificConditionRecord

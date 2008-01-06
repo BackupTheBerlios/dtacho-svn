@@ -32,14 +32,15 @@ public class VehicleRegistrationNumber extends DataClass {
 	 */
 	
 	private short codePage;
-	private byte[] vehicleRegNumber = new byte[13];
+	private byte[] vehicleRegNumber;
 	
 
 	/**
 	 * Constructor for a VehicleRegistrationNumber object
 	 */
 	public VehicleRegistrationNumber() {
-	
+		codePage = 0;
+		vehicleRegNumber = new byte[13];
 	}
 
 	/**

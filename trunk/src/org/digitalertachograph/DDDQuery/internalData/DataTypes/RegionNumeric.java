@@ -50,10 +50,17 @@ public class RegionNumeric extends DataClass {
 	
 	/**
 	 * Constructor for a RegionNumeric object
+	 */
+	public RegionNumeric() {
+		regionNumeric = 0;
+	}
+
+	/**
+	 * Constructor for a RegionNumeric object
 	 * 
 	 * @param	regionNumeric		byte with the numerical reference to a region within a specified country
 	 */
-	public RegionNumeric(byte regionNumeric){
+	public RegionNumeric(byte regionNumeric) {
 		this.regionNumeric = regionNumeric;
 	}
 

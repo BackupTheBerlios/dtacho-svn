@@ -52,8 +52,8 @@ public class CardDriverActivity extends DataClass {
 	 * 					object is created.
 	 */
 	public CardDriverActivity(byte[] value) {
-		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2)); // = first CardActivityDailyRecord
-		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 2, 2)); // = last CardActivityDailyRecord
+		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2)); // = first CardActivityDailyRecord
+		activityPointerNewestRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 2, 2)); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
 
 		System.out.printf(" activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );

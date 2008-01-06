@@ -32,7 +32,7 @@ public class VuPartNumber extends DataClass {
 	 * Constructor for a VuPartNumber object
 	 */
 	public VuPartNumber(){
-
+		vuPartNumber = new String();
 	}
 
 	/**

@@ -36,7 +36,7 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 */
 	
 	private short placePointerNewestRecord;
-	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>(84);
+	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>(84); // min. 84; will be automatically expanded at run time if required!
 	
 
 	/**

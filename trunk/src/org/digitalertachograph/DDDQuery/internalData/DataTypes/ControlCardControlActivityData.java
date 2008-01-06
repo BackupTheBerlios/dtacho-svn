@@ -43,7 +43,7 @@ public class ControlCardControlActivityData extends DataClass {
 	 */
 
 	private int controlPointerNewestRecord;
-	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>(230);
+	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>(230); // min. 230; will be automatically expanded at run time if required!
 
 	
 	/**
@@ -54,7 +54,7 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public ControlCardControlActivityData(byte[] value) {
-		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
+		controlPointerNewestRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2));
 		for (int i = 2; i < value.length; i += 46) {
 			byte[] record = arrayCopy(value, i, 46);
 			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord(record);

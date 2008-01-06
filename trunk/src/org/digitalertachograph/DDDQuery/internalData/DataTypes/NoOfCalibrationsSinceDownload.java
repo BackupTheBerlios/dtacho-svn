@@ -32,6 +32,13 @@ public class NoOfCalibrationsSinceDownload extends DataClass {
 	
 	/**
 	 * Constructor for a NoOfCalibrationsSinceDownload object
+	 */
+	public NoOfCalibrationsSinceDownload() {
+		noOfCalibrationsSinceDownload = 0;
+	}
+
+	/**
+	 * Constructor for a NoOfCalibrationsSinceDownload object
 	 * 
 	 * @param	value	byte array of a NoOfCalibrationsSinceDownload structure
 	 * 					whose data is used when the NoOfCalibrationsSinceDownload

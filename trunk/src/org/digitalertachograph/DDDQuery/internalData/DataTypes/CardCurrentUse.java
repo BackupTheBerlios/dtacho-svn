@@ -34,8 +34,9 @@ public class CardCurrentUse extends DataClass{
 	/**
 	 * Constructor for a CardCurrentUse object
 	 */
-	public CardCurrentUse(){
-
+	public CardCurrentUse() {
+		sessionOpenTime = new TimeReal();
+		sessionOpenVehicle = new VehicleRegistrationIdentification();
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class CardCurrentUse extends DataClass{
 	 * 					whose data is used when the CardCurrentUse
 	 * 					object is created.
 	 */
-	public CardCurrentUse(byte[] value){
+	public CardCurrentUse(byte[] value) {
 		sessionOpenTime = new TimeReal( arrayCopy(value, 0, 4));
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy(value, 4, 15));
 	}

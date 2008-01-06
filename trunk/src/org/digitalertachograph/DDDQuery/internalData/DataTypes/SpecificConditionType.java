@@ -36,6 +36,13 @@ public class SpecificConditionType extends DataClass {
 	
 	/**
 	 * Constructor for an SpecificConditionType object
+	 */
+	public SpecificConditionType() {
+		specificConditionType = 0;
+	}
+
+	/**
+	 * Constructor for an SpecificConditionType object
 	 * 
 	 * @param	specificConditionType	byte that identifies a specific condition.
 	 */

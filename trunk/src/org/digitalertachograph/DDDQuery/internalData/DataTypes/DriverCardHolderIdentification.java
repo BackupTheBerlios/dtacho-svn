@@ -36,15 +36,24 @@ public class DriverCardHolderIdentification extends DataClass {
 
 	/**
 	 * Constructor for a DriverCardHolderIdentification object
+	 */
+	public DriverCardHolderIdentification() {
+		cardHolderName = new HolderName();
+		cardHolderBirthDate = new Datef();
+		cardHolderPreferredLanguage = new Language();
+	}
+
+	/**
+	 * Constructor for a DriverCardHolderIdentification object
 	 * 
 	 * @param	value	byte array of a DriverCardHolderIdentification structure
 	 * 					whose data is used when the DriverCardHolderIdentification
 	 * 					object is created.
 	 */
-	public DriverCardHolderIdentification(byte[] value){
-		cardHolderName = new HolderName( arrayCopy(value, 0, 72));
-		cardHolderBirthDate = new Datef( arrayCopy(value, 72, 4));
-		cardHolderPreferredLanguage = new Language( arrayCopy(value, 76, 2));
+	public DriverCardHolderIdentification(byte[] value) {
+		cardHolderName = new HolderName(arrayCopy(value, 0, 72));
+		cardHolderBirthDate = new Datef(arrayCopy(value, 72, 4));
+		cardHolderPreferredLanguage = new Language(arrayCopy(value, 76, 2));
 	}
 	
 	/**

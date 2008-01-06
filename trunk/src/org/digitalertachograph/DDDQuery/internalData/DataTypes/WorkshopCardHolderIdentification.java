@@ -38,6 +38,16 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	
 	/**
 	 * Constructor for a WorkshopCardHolderIdentification object
+	 */
+	public WorkshopCardHolderIdentification(){
+		workshopName = new Name();
+		workshopAddress = new Address();
+		cardHolderName = new HolderName();
+		cardHolderPreferredLanguage = new Language();
+	}
+
+	/**
+	 * Constructor for a WorkshopCardHolderIdentification object
 	 * 
 	 * @param	value	byte array of a WorkshopCardHolderIdentification structure
 	 * 					whose data is used when the WorkshopCardHolderIdentification

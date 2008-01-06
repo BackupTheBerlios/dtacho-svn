@@ -40,6 +40,17 @@ public class PlaceRecord extends DataClass {
 
 	/**
 	 * Constructor for a PlaceRecord object
+	 */
+	public PlaceRecord() {
+		entryTime = new TimeReal();
+		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod();
+		dailyWorkPeriodCountry = new NationNumeric();
+		dailyWorkPeriodRegion = new RegionNumeric();
+		vehicleOdometerValue = 0;
+	}
+
+	/**
+	 * Constructor for a PlaceRecord object
 	 * 
 	 * @param	record	byte array of a PlaceRecord structure
 	 * 					whose data is used when the PlaceRecord

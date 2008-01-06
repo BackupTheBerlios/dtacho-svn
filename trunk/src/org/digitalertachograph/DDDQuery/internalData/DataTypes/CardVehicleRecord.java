@@ -39,14 +39,19 @@ public class CardVehicleRecord extends DataClass {
 	private TimeReal vehicleFirstUse;
 	private TimeReal vehicleLastUse;
 	private VehicleRegistrationIdentification vehicleRegistration;
-	private byte[] vuDataBlockCounter = new byte[2];
+	private byte[] vuDataBlockCounter;
 	
 	
 	/**
 	 * Constructor for a CardVehicleRecord object
 	 */
 	public CardVehicleRecord() {
-
+		vehicleOdometerBegin = 0;
+		vehicleOdometerEnd = 0;
+		vehicleFirstUse = new TimeReal();
+		vehicleLastUse = new TimeReal();
+		vehicleRegistration = new VehicleRegistrationIdentification();
+		vuDataBlockCounter = new byte[2];
 	}
 
 	/**
@@ -57,11 +62,11 @@ public class CardVehicleRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public CardVehicleRecord(byte[] value) {
-		vehicleOdometerBegin = convertIntoUnsigned3ByteInt( arrayCopy(value, 0, 3));
-		vehicleOdometerEnd = convertIntoUnsigned3ByteInt( arrayCopy(value, 3, 3));
-		vehicleFirstUse = new TimeReal( arrayCopy(value, 6, 4));
-		vehicleLastUse = new TimeReal( arrayCopy(value, 10, 4));
-		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy(value, 14, 15));
+		vehicleOdometerBegin = convertIntoUnsigned3ByteInt(arrayCopy(value, 0, 3));
+		vehicleOdometerEnd = convertIntoUnsigned3ByteInt(arrayCopy(value, 3, 3));
+		vehicleFirstUse = new TimeReal(arrayCopy(value, 6, 4));
+		vehicleLastUse = new TimeReal(arrayCopy(value, 10, 4));
+		vehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 14, 15));
 		vuDataBlockCounter = arrayCopy(value, 29, 2);
 	}
 

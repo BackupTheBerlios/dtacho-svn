@@ -33,7 +33,7 @@ public class CardIdentification extends DataClass {
 	 */
 	
 	private NationNumeric cardIssuingMemberState;
-	private CardNumber cardNumber; // size 16bytes 
+	private CardNumber cardNumber; 
 	private Name cardIssuingAuthorityName;
 	private TimeReal cardIssueDate;
 	private TimeReal cardValidityBegin;
@@ -44,7 +44,12 @@ public class CardIdentification extends DataClass {
 	 * Constructor for a CardIdentification object
 	 */
 	public CardIdentification() {
-
+		cardIssuingMemberState = new NationNumeric();
+		cardNumber = new CardNumber();
+		cardIssuingAuthorityName = new Name();
+		cardIssueDate = new TimeReal();
+		cardValidityBegin = new TimeReal();
+		cardExpiryDate = new TimeReal();
 	}
 
 	/**

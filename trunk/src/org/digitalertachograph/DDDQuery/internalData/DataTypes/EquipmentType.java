@@ -74,8 +74,8 @@ public class EquipmentType extends DataClass {
 	/**
 	 * Constructor for an EquipmentType object
 	 */
-	public EquipmentType(){
-
+	public EquipmentType() {
+		equipmentType = 0;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class EquipmentType extends DataClass {
 	 * @param	value	byte that indicates the type of equipment for the
 	 * 					tachograph application
 	 */
-	public EquipmentType(byte value){
+	public EquipmentType(byte value) {
 		equipmentType = value;
 	}
 

@@ -35,7 +35,7 @@ public class TyreSize extends DataClass {
 	 * Constructor for a TyreSize object
 	 */
 	public TyreSize() {
-
+		tyreSize = new String();
 	}
 
 	/**

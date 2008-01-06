@@ -39,8 +39,11 @@ public class ControlCardHolderIdentification extends DataClass {
 	/**
 	 * Constructor for a ControlCardHolderIdentification object
 	 */
-	public ControlCardHolderIdentification(){
-
+	public ControlCardHolderIdentification() {
+		controlBodyName = new Name();
+		controlBodyAddress = new Address();
+		cardHolderName = new HolderName();
+		cardHolderPreferredLanguage = new Language();
 	}
 
 	/**
@@ -50,7 +53,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * 					whose data is used when the ControlCardHolderIdentification
 	 * 					object is created.
 	 */
-	public ControlCardHolderIdentification(byte[] value){
+	public ControlCardHolderIdentification(byte[] value) {
 		controlBodyName = new Name(arrayCopy(value, 0, 36));
 		controlBodyAddress = new Address(arrayCopy(value, 36, 36));
 		cardHolderName = new HolderName(arrayCopy(value, 72, 72));

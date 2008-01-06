@@ -44,7 +44,7 @@ public class CompanyActivityData extends DataClass {
 	 */
 
 	private int companyPointerNewestRecord;
-	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>(230);
+	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>(230); // min. 230; will be automatically expanded at run time if required!
 	
 
 	/**

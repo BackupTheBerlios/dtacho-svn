@@ -28,7 +28,7 @@ public class Datef extends DataClass {
 	 * 	day BCDString(SIZE(1)), 1 byte
 	 * }
 	 */
-	private byte[] year = new byte[2];
+	private byte[] year;
 	private byte month;
 	private byte day;
 
@@ -37,7 +37,9 @@ public class Datef extends DataClass {
 	 * Constructor for a Datef object
 	 */
 	public Datef() {
-	
+		year = new byte[2];
+		month = 0;
+		day = 0;
 	}
 
 	/**

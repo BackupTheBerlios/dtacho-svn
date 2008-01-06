@@ -40,7 +40,10 @@ public class CardFaultRecord extends DataClass {
 	 * Constructor for a CardFaultRecord object
 	 */
 	public CardFaultRecord() {
-
+		faultType = new EventFaultType();
+		faultBeginTime = new TimeReal();
+		faultEndTime   = new TimeReal();
+		faultVehicleRegistration = new VehicleRegistrationIdentification();
 	}
 	
 	/**

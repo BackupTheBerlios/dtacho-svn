@@ -31,13 +31,14 @@ public class Address extends DataClass {
 	 */
 	
 	private short codePage;
-	private byte[] address = new byte[35];
+	private byte[] address;
 	
 	/**
 	 * Constructor for an Address object
 	 */ 
 	public Address(){
-		
+		codePage = 0;
+		address = new byte[35];
 	}
 
 	/**
