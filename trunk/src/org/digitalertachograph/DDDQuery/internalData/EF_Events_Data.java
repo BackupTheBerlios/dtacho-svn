@@ -39,9 +39,9 @@ public class EF_Events_Data extends DataClass {
 	 * 					whose data is used when the EF_Events_Data
 	 * 					object is created.
 	 */
-	public EF_Events_Data(byte[] value){
+	public EF_Events_Data(byte[] value, short noofeventspertype){
 		// size = value.length;
-		cardEventData = new CardEventData(value);
+		cardEventData = new CardEventData(value, noofeventspertype);
 	}
 	
 	public Element generateXMLElement(String name){

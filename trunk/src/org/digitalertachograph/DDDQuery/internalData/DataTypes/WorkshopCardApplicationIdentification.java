@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a workshop card related to the identification
+ * of the application of the card.
+ */
 public class WorkshopCardApplicationIdentification extends DataClass {
 	/*
 	 * WorkshopCardApplicationIdentification ::= SEQUENCE {
@@ -32,7 +36,36 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 	noOfCardPlaceRecords NoOfCardPlaceRecords, 1 byte
 	 * 	noOfCalibrationRecords NoOfCalibrationRecords, 1 byte
 	 * }
+	 * ---
+	 * EquipmentType ::= INTEGER(0..255) 
+	 * ---
+	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
+	 * ---
+	 * NoOfEventsPerType ::=  INTEGER(0..255)
+	 * min.: 3
+	 * max.: 3
+	 * ---
+	 * NoOfFaultsPerType ::= INTEGER(0..255)
+	 * min.: 6
+	 * max.: 6
+	 * ---
+	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
+	 * min.: 198 bytes (1 day * 93 activity changes)
+	 * max.: 492 bytes (1 day * 240 activity changes)
+	 * ---
+	 * NoOfCardVehicleRecords ::= INTEGER(0..2^16-1)
+	 * min.: 4
+	 * max.: 8
+	 * ---
+	 * NoOfCardPlaceRecords ::= INTEGER(0..255)
+	 * min.: 6
+	 * max.: 8
+	 * ---
+	 * NoOfCalibrationsRecords ::= INTEGER(0..255)
+	 * min.:  88
+	 * max.: 255
 	 */
+
 	private EquipmentType typeOfTachographCardId;
 	private byte[] cardStructureVersion;
 	private short noOfEventsPerType;

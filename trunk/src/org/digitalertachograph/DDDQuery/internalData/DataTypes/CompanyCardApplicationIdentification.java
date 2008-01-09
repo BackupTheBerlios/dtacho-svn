@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a company card related to the identification
+ * of the application of the card.
+ */
 public class CompanyCardApplicationIdentification extends DataClass {
 	/*
 	 * CompanyCardApplicationIdentification ::= SEQUENCE {
@@ -28,7 +32,11 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * 	noOfCompanyActivityRecords NoOfCompanyActivityRecords, 2 bytes
 	 * }
 	 * ---
-	 * noOfCompanyActivityRecords ::= INTEGER(0..2^16-1)
+	 * EquipmentType ::= INTEGER(0..255) 
+	 * ---
+	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
+	 * ---
+	 * NoOfCompanyActivityRecords ::= INTEGER(0..2^16-1)
 	 * min.: 230
 	 * max.: 520
 	 */

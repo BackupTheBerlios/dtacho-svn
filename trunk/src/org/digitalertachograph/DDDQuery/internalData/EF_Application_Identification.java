@@ -33,7 +33,26 @@ public class EF_Application_Identification extends DataClass {
 	private WorkshopCardApplicationIdentification workshopCardApplicationIdentification;
 	private ControlCardApplicationIdentification controlCardApplicationIdentification;
 	private CompanyCardApplicationIdentification companyCardApplicationIdentification;
+
+	// all cards
 	private int cardType;
+	private byte[] cardStructureVersion;
+	
+	// driver card, workshop card
+	private short noOfEventsPerType;
+	private short noOfFaultsPerType;
+	private int activityStructureLength;
+	private int noOfCardVehicleRecords;
+	private short noOfCardPlaceRecords;
+
+	// workshop card
+	private short noOfCalibrationRecords;
+
+	// control card
+	private int noOfControlActivityRecords;
+
+	// company card
+	private int noOfCompanyActivityRecords;
 	
 	
 	/**
@@ -45,27 +64,156 @@ public class EF_Application_Identification extends DataClass {
 	 */
 	public EF_Application_Identification(byte[] value) {
 		// size = value.length;
-		switch (cardType = value[0]) {
-			case EquipmentType.DRIVER_CARD :
+		cardType = value[0];
+
+		switch (cardType) {
+			case EquipmentType.DRIVER_CARD:
 				driverCardApplicationIdentification = new DriverCardApplicationIdentification(value);
+
+				cardStructureVersion = driverCardApplicationIdentification.getCardStructureVersion();
+				noOfEventsPerType = driverCardApplicationIdentification.getNoOfEventsPerType();
+				noOfFaultsPerType = driverCardApplicationIdentification.getNoOfFaultsPerType();
+				activityStructureLength = driverCardApplicationIdentification.getActivityStructureLength();
+				noOfCardVehicleRecords = driverCardApplicationIdentification.getNoOfCardVehicleRecords();
+				noOfCardPlaceRecords = driverCardApplicationIdentification.getNoOfCardPlaceRecords();
 				break;
-			case EquipmentType.WORKSHOP_CARD :
+			case EquipmentType.WORKSHOP_CARD:
 				workshopCardApplicationIdentification = new WorkshopCardApplicationIdentification(value);
+
+				cardStructureVersion = workshopCardApplicationIdentification.getCardStructureVersion();
+				noOfEventsPerType = workshopCardApplicationIdentification.getNoOfEventsPerType();
+				noOfFaultsPerType = workshopCardApplicationIdentification.getNoOfFaultsPerType();
+				activityStructureLength = workshopCardApplicationIdentification.getActivityStructureLength();
+				noOfCardVehicleRecords = workshopCardApplicationIdentification.getNoOfCardVehicleRecords();
+				noOfCardPlaceRecords = workshopCardApplicationIdentification.getNoOfCardPlaceRecords();
+				noOfCalibrationRecords = workshopCardApplicationIdentification.getNoOfCalibrationRecords();
 				break;
-			case EquipmentType.CONTROL_CARD :
+			case EquipmentType.CONTROL_CARD:
 				controlCardApplicationIdentification = new ControlCardApplicationIdentification(value);
+
+				cardStructureVersion = controlCardApplicationIdentification.getCardStructureVersion();
+				noOfControlActivityRecords = controlCardApplicationIdentification.getNoOfControlActivityRecords();
 				break;
-			case EquipmentType.COMPANY_CARD :
+			case EquipmentType.COMPANY_CARD:
 				companyCardApplicationIdentification = new CompanyCardApplicationIdentification(value);
+
+				cardStructureVersion = companyCardApplicationIdentification.getCardStructureVersion();
+				noOfCompanyActivityRecords = companyCardApplicationIdentification.getNoOfCompanyActivityRecords();
 				break;
 				
-			default :
+			default:
 				break;
 		}
 	}
 
+	/**
+	 * Returns the card type of an EF_Application_Identification object.
+	 * 
+	 * @return	card type of the EF_Application_Identification object,
+	 * 			{@link EquipmentType#DRIVER_CARD}, {@link EquipmentType#WORKSHOP_CARD},
+	 * 			{@link EquipmentType#CONTROL_CARD}, {@link EquipmentType#COMPANY_CARD},
+	 */
 	public int getCardType() {
 		return cardType;
+	}
+	
+	/**
+	 * Returns the version of the structure that is implemented in the card
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the version of the structure that is implemented in the card
+	 * 			of the EF_Application_Identification object
+	 */
+	public byte[] getCardStructureVersion() {
+		return cardStructureVersion;
+	}
+
+	/**
+	 * Returns the number of events per type of event the card can record
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of events per type of event the card can record
+	 * 			of the EF_Application_Identification object
+	 */
+	public short getNoOfEventsPerType() {
+		return noOfEventsPerType;
+	}
+	
+	/**
+	 * Returns the number of faults per type of fault the card can record
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of faults per type of fault the card can record
+	 * 			of the EF_Application_Identification object
+	 */
+	public short getNoOfFaultsPerType() {
+		return noOfFaultsPerType;
+	}
+	
+	/**
+	 * Returns the number of bytes available for storing activity records
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of bytes available for storing activity records
+	 * 			of the EF_Application_Identification object
+	 */
+	public int getActivityStructureLength() {
+		return activityStructureLength;
+	}
+	
+	/**
+	 * Returns the number of vehicle records the card can contain
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of vehicle records the card can contain
+	 * 			of the EF_Application_Identification object
+	 */
+	public int getNoOfCardVehicleRecords() {
+		return noOfCardVehicleRecords;
+	}
+
+	/**
+	 * Returns the number of places the card can record
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of places the card can record
+	 * 			of the EF_Application_Identification object
+	 */
+	public short getNoOfCardPlaceRecords() {
+		return noOfCardPlaceRecords;
+	}
+
+	/**
+	 * Returns the number of calibration records the card can store
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of calibration records the card can store
+	 * 			of the EF_Application_Identification object
+	 */
+	public short getNoOfCalibrationRecords() {
+		return noOfCalibrationRecords;
+	}
+
+	/**
+	 * Returns the number of company activity records the card can store
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of company activity records the card can store
+	 * 			of the EF_Application_Identification object
+	 */
+	public int getNoOfControlActivityRecords() {
+		return noOfControlActivityRecords;
+	}
+
+	/**
+	 * Returns the number of company activity records the card can store
+	 * of an EF_Application_Identification object.
+	 * 
+	 * @return	the number of company activity records the card can store
+	 * 			of the EF_Application_Identification object
+	 */
+	public int getNoOfCompanyActivityRecords() {
+		return noOfCompanyActivityRecords;
 	}
 	
 	public Element generateXMLElement(String name){

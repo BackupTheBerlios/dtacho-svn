@@ -18,9 +18,11 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
-//import org.jdom.Attribute;
 import org.jdom.Element;
 
+/**
+ * Code indicating the activities carried out during a control.
+ */
 public class ControlType extends DataClass {
 	/*
 	 * ControlType ::= OCTET STRING (SIZE(1)), 1 byte

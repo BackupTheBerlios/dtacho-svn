@@ -39,9 +39,9 @@ public class EF_Faults_Data extends DataClass {
 	 * 					whose data is used when the EF_Faults_Data
 	 * 					object is created.
 	 */
-	public EF_Faults_Data(byte[] value){
+	public EF_Faults_Data(byte[] value, short nooffaultspertype){
 		// size = value.length;
-		cardFaultData = new CardFaultData(value);
+		cardFaultData = new CardFaultData(value, nooffaultspertype);
 	}
 	
 	public Element generateXMLElement(String name){

@@ -22,6 +22,10 @@ import java.util.Iterator;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or workshop card, related to the events associated
+ * with the card holder.
+ */
 public class CardEventData extends DataClass{
 	/*
 	 * CardEventData ::= SEQUENCE SIZE(6) OF {
@@ -57,11 +61,11 @@ public class CardEventData extends DataClass{
 	 * 					whose data is used when the CardEventData
 	 * 					object is created.
 	 */
-	public CardEventData(byte[] value) {
+	public CardEventData(byte[] value, short noofeventspertype) {
 
 		// we assume NoOfEventsPerType is constant for all sets of event records
 		// within the cardeventdata sequence
-		int noofeventspertype = value.length / (sequencesize * 24);
+		//int noofeventspertype = value.length / (sequencesize * 24);
 
 		System.out.println(" [INFO] no of events per type: " + noofeventspertype);	
 

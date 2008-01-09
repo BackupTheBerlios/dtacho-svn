@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.util.Vector;
 import java.util.Arrays;
 import java.util.Iterator;
+
 import org.jdom.*;
 import org.jdom.output.XMLOutputter;
 
@@ -49,7 +50,9 @@ public class TachographData extends DataClass {
 	
 	
 	public Vector<Object> data = new Vector<Object>(); // deprecated
+
 	private int cardType;
+	
 	private Vector<DataClass> dispatcherQueue = new Vector<DataClass>();
 
 	
@@ -180,14 +183,14 @@ public class TachographData extends DataClass {
 				}
 				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x02, 0x00} )){
 					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_EVENTS_DATA, 05 02 00");
-					ef_events_data = new EF_Events_Data(value);
+					ef_events_data = new EF_Events_Data(value, ef_application_identification.getNoOfEventsPerType());
 					dispatcherQueue.add(ef_events_data);
 					tag2 = new byte[]{0x05,0x02};
 					efstate = EF_WITH_SIGNATURE;
 				}
 				else if(Arrays.equals(tag, new byte[]{ (byte)0x05, 0x03, 0x00} )){
 					System.out.println( this.getClass().getSimpleName() + ":\n [TAG] EF_FAULTS_DATA, 05 03 00");
-					ef_faults_data = new EF_Faults_Data(value);
+					ef_faults_data = new EF_Faults_Data(value, ef_application_identification.getNoOfFaultsPerType());
 					dispatcherQueue.add(ef_faults_data);
 					tag2 = new byte[]{0x05,0x03};
 					efstate = EF_WITH_SIGNATURE;
@@ -305,16 +308,6 @@ public class TachographData extends DataClass {
 		return parseresult;
 	}
 	
-	
-	/**
-	 * Sets the type of the tachograph card.
-	 * 
-	 * @param	cardType	the type of the tachograph card 
-	 */
-	public void setCardType(int cardType) {
-		this.cardType = cardType;
-	}
-
 	/**
 	 * Dumps all tags/file ids collected.
 	 */

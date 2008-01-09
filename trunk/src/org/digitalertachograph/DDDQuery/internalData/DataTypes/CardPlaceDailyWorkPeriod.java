@@ -23,6 +23,10 @@ import java.util.Vector;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to the places where
+ * daily work periods begin and/or end.
+ */
 public class CardPlaceDailyWorkPeriod extends DataClass {
 	/*
 	 * CardPlaceDailyWorkPeriod ::= SEQUENCE {
@@ -52,7 +56,6 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 			byte[] record = arrayCopy(value, i, 10);
 			PlaceRecord tmp = new PlaceRecord(record);
 			placeRecords.add( tmp );
-			
 		}
 	}
 	
@@ -69,5 +72,4 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 		}
 		return node;
 	}
-
 }

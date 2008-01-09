@@ -78,8 +78,6 @@ public class Controller {
 		}
 	}
 
-
-
 	public void manual(){
 		String pwd = "org_daten";	
 

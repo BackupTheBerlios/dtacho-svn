@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver card related to the identification of the application
+ * of the card.
+ */
 public 	class DriverCardApplicationIdentification extends DataClass{
 	/*
 	 * DriverCardApplicationIdentification ::= SEQUENCE {
@@ -32,7 +36,17 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 *  noOfCardPlaceRecords NoOfCardPlaceRecords, 1 byte,			0x00
 	 * }
 	 * ---
+	 * EquipmentType ::= INTEGER(0..255) 
+	 * ---
 	 * CardStructureVersion ::= OCTET STRING (SIZE(2))
+	 * ---
+	 * NoOfEventsPerType ::=  INTEGER(0..255)
+	 * min.:  6
+	 * max.: 12
+	 * ---
+	 * NoOfFaultsPerType ::= INTEGER(0..255)
+	 * min.: 12
+	 * max.: 24
 	 * ---
 	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
 	 * min.:  5544 bytes (28 days * 93 activity changes)

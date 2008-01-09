@@ -22,6 +22,10 @@ import java.util.Iterator;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to the faults associated
+ * to the card holder.
+ */
 public class CardFaultData extends DataClass {
 	/*
 	 * CardFaultData ::= SEQUENCE SIZE(2) OF {
@@ -47,11 +51,11 @@ public class CardFaultData extends DataClass {
 	 * 					whose data is used when the CardFaultData
 	 * 					object is created.
 	 */
-	public CardFaultData(byte[] value) {
+	public CardFaultData(byte[] value, short nooffaultspertype) {
 
 		// we assume NoOfFaultsPerType is constant for all sets of fault records
 		// within the cardfaultdata sequence
-		int nooffaultspertype = value.length / (sequencesize * 24);
+		//int nooffaultspertype = value.length / (sequencesize * 24);
 
 		System.out.println("  nooffaultspertype: " + nooffaultspertype);	
 
