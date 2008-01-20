@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,9 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+/**
+ * Certificate of the public key of a card.
+ */
 public class CardCertificate extends Certificate {
 	/*
 	 * CardCertificate ::= Certificate, 194 bytes
@@ -32,7 +35,7 @@ public class CardCertificate extends Certificate {
 	/**
 	 * Constructor for a CardCertificate object
 	 */
-	public CardCertificate(byte[] certificate) {
-		super(certificate);
+	public CardCertificate( byte[] certificate ) {
+		super( certificate );
 	}
 }

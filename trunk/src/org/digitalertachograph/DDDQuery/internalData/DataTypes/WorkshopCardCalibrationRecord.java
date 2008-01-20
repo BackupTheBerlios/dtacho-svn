@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
 
+/**
+ * Information, stored in a workshop card, related to a calibration performed
+ * with the card.
+ */
 public class WorkshopCardCalibrationRecord extends DataClass {
 	/*
 	 * WorkshopCardCalibrationRecord ::= SEQUENCE {
@@ -103,22 +107,22 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * 					whose data is used when the WorkshopCardCalibrationRecord
 	 * 					object is created.
 	 */
-	public WorkshopCardCalibrationRecord(byte[] value) {
-		calibrationPurpose = new CalibrationPurpose(value[0]);
-		vehicleIdentificationNumber = new VehicleIdentificationNumber(arrayCopy(value, 1, 17));
-		vehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 18, 15));
-		wVehicleCharacteristicConstant = convertIntoUnsigned2ByteInt(arrayCopy(value, 33, 2));
-		kConstantOfRecordingEquipment = convertIntoUnsigned2ByteInt(arrayCopy(value, 35, 2));
-		lTyreCircumference = convertIntoUnsigned2ByteInt( arrayCopy(value, 37, 2));
-		tyreSize = new TyreSize( arrayCopy(value, 39, 15));
+	public WorkshopCardCalibrationRecord( byte[] value ) {
+		calibrationPurpose = new CalibrationPurpose( value[ 0 ] );
+		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy( value, 1, 17 ) );
+		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 18, 15 ) );
+		wVehicleCharacteristicConstant = convertIntoUnsigned2ByteInt( arrayCopy( value, 33, 2 ) );
+		kConstantOfRecordingEquipment = convertIntoUnsigned2ByteInt( arrayCopy( value, 35, 2 ) );
+		lTyreCircumference = convertIntoUnsigned2ByteInt( arrayCopy( value, 37, 2 ) );
+		tyreSize = new TyreSize( arrayCopy( value, 39, 15 ) );
 		authorisedSpeed = convertIntoUnsigned1ByteInt( value[54] );
-		oldOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy(value, 55, 3));
-		newOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy(value, 58, 3));
-		oldTimeValue = new TimeReal(arrayCopy(value, 61, 4));
-		newTimeValue = new TimeReal(arrayCopy(value, 65, 4));
-		vuPartNumber = new VuPartNumber(arrayCopy(value, 69, 16));
-		vuSerialNumber = new ExtendedSerialNumber(arrayCopy(value, 85, 8));
-		sensorSerialNumber = new ExtendedSerialNumber(arrayCopy(value, 93, 8));
+		oldOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy( value, 55, 3 ) );
+		newOdometerValue = convertIntoUnsigned3ByteInt(arrayCopy( value, 58, 3 ) );
+		oldTimeValue = new TimeReal( arrayCopy( value, 61, 4 ) );
+		newTimeValue = new TimeReal( arrayCopy( value, 65, 4 ) );
+		vuPartNumber = new VuPartNumber( arrayCopy( value, 69, 16 ) );
+		vuSerialNumber = new ExtendedSerialNumber( arrayCopy( value, 85, 8 ) );
+		sensorSerialNumber = new ExtendedSerialNumber( arrayCopy( value, 93, 8 ) );
 	}
 
 	/**
@@ -139,7 +143,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	calibrationPurpose	the code explaining why a set of calibration parameters were recorded
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setCalibrationPurpose(CalibrationPurpose calibrationPurpose) {
+	public void setCalibrationPurpose( CalibrationPurpose calibrationPurpose ) {
 		this.calibrationPurpose = calibrationPurpose;
 	}
 
@@ -162,7 +166,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * 											normally chassis serial number or frame number to be set for the
 	 * 											WorkshopCardCalibrationRecord object
 	 */
-	public void setVehicleIdentificationNumber(VehicleIdentificationNumber vehicleIdentificationNumber) {
+	public void setVehicleIdentificationNumber( VehicleIdentificationNumber vehicleIdentificationNumber ) {
 		this.vehicleIdentificationNumber = vehicleIdentificationNumber;
 	}
 
@@ -184,7 +188,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	vehicleRegistration		the Vehicle Registration Number (VRN) and registering Member State
 	 * 									to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setVehicleRegistration(VehicleRegistrationIdentification vehicleRegistration) {
+	public void setVehicleRegistration( VehicleRegistrationIdentification vehicleRegistration ) {
 		this.vehicleRegistration = vehicleRegistration;
 	}
 
@@ -206,7 +210,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	vehicleCharacteristicConstant	the characteristic coefficient of the vehicle
 	 * 											to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setWVehicleCharacteristicConstant(int vehicleCharacteristicConstant) {
+	public void setWVehicleCharacteristicConstant( int vehicleCharacteristicConstant ) {
 		wVehicleCharacteristicConstant = vehicleCharacteristicConstant;
 	}
 
@@ -228,7 +232,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	constantOfRecordingEquipment	the constant of the recording equipment
 	 * 											to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setKConstantOfRecordingEquipment(int constantOfRecordingEquipment) {
+	public void setKConstantOfRecordingEquipment( int constantOfRecordingEquipment ) {
 		kConstantOfRecordingEquipment = constantOfRecordingEquipment;
 	}
 
@@ -250,7 +254,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	tyreCircumference		the effective circumference of the wheel tyres
 	 * 									to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setLTyreCircumference(int tyreCircumference) {
+	public void setLTyreCircumference( int tyreCircumference ) {
 		lTyreCircumference = tyreCircumference;
 	}
 
@@ -272,7 +276,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	tyreSize	the designation of the dimensions of the tyres mounted on the vehicle
 	 * 						to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setTyreSize(TyreSize tyreSize) {
+	public void setTyreSize( TyreSize tyreSize ) {
 		this.tyreSize = tyreSize;
 	}
 
@@ -294,7 +298,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	authorisedSpeed		the maximum authorised speed of the vehicle
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setAuthorisedSpeed(short authorisedSpeed) {
+	public void setAuthorisedSpeed( short authorisedSpeed ) {
 		this.authorisedSpeed = authorisedSpeed;
 	}
 
@@ -316,7 +320,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	oldOdometerValue	the old value of the odometer
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setOldOdometerValue(int oldOdometerValue) {
+	public void setOldOdometerValue( int oldOdometerValue ) {
 		this.oldOdometerValue = oldOdometerValue;
 	}
 
@@ -338,7 +342,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	newOdometerValue	the new value of the odometer
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setNewOdometerValue(int newOdometerValue) {
+	public void setNewOdometerValue( int newOdometerValue ) {
 		this.newOdometerValue = newOdometerValue;
 	}
 
@@ -360,7 +364,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	oldTimeValue		the old value of date and time
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setOldTimeValue(TimeReal oldTimeValue) {
+	public void setOldTimeValue( TimeReal oldTimeValue ) {
 		this.oldTimeValue = oldTimeValue;
 	}
 
@@ -382,7 +386,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	newTimeValue		the new value of date and time
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setNewTimeValue(TimeReal newTimeValue) {
+	public void setNewTimeValue( TimeReal newTimeValue ) {
 		this.newTimeValue = newTimeValue;
 	}
 
@@ -405,7 +409,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * 									to be carried out by the authorised inspection authority 
 	 * 									to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setNextCalibrationDate(TimeReal nextCalibrationDate) {
+	public void setNextCalibrationDate( TimeReal nextCalibrationDate ) {
 		this.nextCalibrationDate = nextCalibrationDate;
 	}
 
@@ -427,7 +431,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	vuPartNumber		the vehicle unit's part number
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setVuPartNumber(VuPartNumber vuPartNumber) {
+	public void setVuPartNumber( VuPartNumber vuPartNumber ) {
 		this.vuPartNumber = vuPartNumber;
 	}
 
@@ -449,7 +453,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	vuSerialNumber		the vehicle unit's serial number
 	 * 								to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setVuSerialNumber(ExtendedSerialNumber vuSerialNumber) {
+	public void setVuSerialNumber( ExtendedSerialNumber vuSerialNumber ) {
 		this.vuSerialNumber = vuSerialNumber;
 	}
 
@@ -471,66 +475,66 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * @param	sensorSerialNumber		the sensor's serial number
 	 * 									to be set for the WorkshopCardCalibrationRecord object
 	 */
-	public void setSensorSerialNumber(ExtendedSerialNumber sensorSerialNumber) {
+	public void setSensorSerialNumber( ExtendedSerialNumber sensorSerialNumber ) {
 		this.sensorSerialNumber = sensorSerialNumber;
 	}
 
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 		
-		Element cpNode = calibrationPurpose.generateXMLElement("calibrationPurpose");
-		node.addContent(cpNode);
+		Element cpNode = calibrationPurpose.generateXMLElement( "calibrationPurpose" );
+		node.addContent( cpNode );
 		
-		Element vinNode = vehicleIdentificationNumber.generateXMLElement("vehicleIdentificationNumber");
-		node.addContent(vinNode);
+		Element vinNode = vehicleIdentificationNumber.generateXMLElement( "vehicleIdentificationNumber" );
+		node.addContent( vinNode );
 		
-		Element vrNode = vehicleRegistration.generateXMLElement("vehicleRegistration");
-		node.addContent(vrNode);
+		Element vrNode = vehicleRegistration.generateXMLElement( "vehicleRegistration" );
+		node.addContent( vrNode );
 		
-		Element wvccNode = new Element("wVehicleCharacteristicConstant");
-		wvccNode.setText(Integer.toString(wVehicleCharacteristicConstant));
-		node.addContent(wvccNode);
+		Element wvccNode = new Element( "wVehicleCharacteristicConstant" );
+		wvccNode.setText( Integer.toString( wVehicleCharacteristicConstant ) );
+		node.addContent( wvccNode );
 		
-		Element kcoreNode = new Element("kConstantOfRecordingEquipment");
-		kcoreNode.setText(Integer.toString(kConstantOfRecordingEquipment));
-		node.addContent(kcoreNode);
+		Element kcoreNode = new Element( "kConstantOfRecordingEquipment" );
+		kcoreNode.setText( Integer.toString( kConstantOfRecordingEquipment ) );
+		node.addContent( kcoreNode );
 		
-		Element ltcNode = new Element("lTyreCircumference");
-		ltcNode.setText(Integer.toString(lTyreCircumference));
-		node.addContent(ltcNode);
+		Element ltcNode = new Element( "lTyreCircumference" );
+		ltcNode.setText( Integer.toString( lTyreCircumference ) );
+		node.addContent( ltcNode );
 		
-		Element tsNode = tyreSize.generateXMLElement("tyreSize");
-		node.addContent(tsNode);
+		Element tsNode = tyreSize.generateXMLElement( "tyreSize" );
+		node.addContent( tsNode );
 		
-		Element asNode = new Element("authorisedSpeed");
-		asNode.setText(Short.toString(authorisedSpeed));
-		node.addContent(asNode);
+		Element asNode = new Element( "authorisedSpeed" );
+		asNode.setText( Short.toString( authorisedSpeed ) );
+		node.addContent( asNode );
 		
-		Element oovNode = new Element("oldOdometerValue");
-		oovNode.setText(Integer.toString(oldOdometerValue));
-		node.addContent(oovNode);
+		Element oovNode = new Element( "oldOdometerValue" );
+		oovNode.setText( Integer.toString(oldOdometerValue ) );
+		node.addContent( oovNode );
 		
-		Element novNode = new Element("newOdometerValue");
-		novNode.setText(Integer.toString(newOdometerValue));
-		node.addContent(novNode);
+		Element novNode = new Element( "newOdometerValue" );
+		novNode.setText( Integer.toString( newOdometerValue ) );
+		node.addContent( novNode );
 		
-		Element otvNode = oldTimeValue.generateXMLElement("oldTimeValue");
-		node.addContent(otvNode);
+		Element otvNode = oldTimeValue.generateXMLElement( "oldTimeValue" );
+		node.addContent( otvNode );
 		
-		Element ntvNode = newTimeValue.generateXMLElement("newTimeValue");
-		node.addContent(ntvNode);
+		Element ntvNode = newTimeValue.generateXMLElement( "newTimeValue" );
+		node.addContent( ntvNode );
 		
-		Element ncdNode = nextCalibrationDate.generateXMLElement("nextCalibrationDate");
-		node.addContent(ncdNode);
+		Element ncdNode = nextCalibrationDate.generateXMLElement( "nextCalibrationDate" );
+		node.addContent( ncdNode );
 
-		Element vupnNode = vuPartNumber.generateXMLElement("vuPartNumber");
-		node.addContent(vupnNode);
+		Element vupnNode = vuPartNumber.generateXMLElement( "vuPartNumber" );
+		node.addContent( vupnNode );
 		
-		Element vusnNode = vuSerialNumber.generateXMLElement("vuSerialNumber");
-		node.addContent(vusnNode);
+		Element vusnNode = vuSerialNumber.generateXMLElement( "vuSerialNumber" );
+		node.addContent( vusnNode );
 		
-		Element ssnNode = sensorSerialNumber.generateXMLElement("sensorSerialNumber");
-		node.addContent(ssnNode);
+		Element ssnNode = sensorSerialNumber.generateXMLElement( "sensorSerialNumber" );
+		node.addContent( ssnNode );
 		
 		return node;
 	}

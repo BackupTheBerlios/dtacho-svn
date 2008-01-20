@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardFaultData;
 import org.jdom.Element;
 
-
 /**
  * EF_Faults_Data,
  * 
@@ -39,16 +38,17 @@ public class EF_Faults_Data extends DataClass {
 	 * 					whose data is used when the EF_Faults_Data
 	 * 					object is created.
 	 */
-	public EF_Faults_Data(byte[] value, short nooffaultspertype){
+	public EF_Faults_Data( byte[] value, short nooffaultspertype ) {
 		// size = value.length;
-		cardFaultData = new CardFaultData(value, nooffaultspertype);
+		cardFaultData = new CardFaultData( value, nooffaultspertype );
 	}
 	
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
-		Element child = cardFaultData.generateXMLElement("cardFaultData");
-		node.addContent(child);
+		Element node = new Element( this.getClass().getSimpleName() );
+		Element child = cardFaultData.generateXMLElement( "cardFaultData" );
+		node.addContent( child );
+
 		return node;
 	}
 }

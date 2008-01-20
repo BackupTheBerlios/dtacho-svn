@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to a fault associated
+ * to the card holder.
+ */
 public class CardFaultRecord extends DataClass {
 	/*
 	 * CardFaultRecord ::= SEQUENCE {
@@ -53,11 +57,11 @@ public class CardFaultRecord extends DataClass {
 	 * 					whose data is used when the CardFaultRecord
 	 * 					object is created.
 	 */
-	public CardFaultRecord(byte[] value) {
-		faultType = new EventFaultType(value[0]);
-		faultBeginTime = new TimeReal(arrayCopy(value, 1, 4));
-		faultEndTime   = new TimeReal(arrayCopy(value, 5, 4));
-		faultVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 9, 15));
+	public CardFaultRecord( byte[] value ) {
+		faultType = new EventFaultType( value[ 0 ] );
+		faultBeginTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+		faultEndTime   = new TimeReal( arrayCopy( value, 5, 4 ) );
+		faultVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 9, 15 ) );
 	}
 
 	/**
@@ -74,7 +78,7 @@ public class CardFaultRecord extends DataClass {
 	 * 
 	 * @param	faultType		the type of the fault to be set for the CardFaultRecord object
 	 */
-	public void setFaultType(EventFaultType faultType) {
+	public void setFaultType( EventFaultType faultType ) {
 		this.faultType = faultType;
 	}
 
@@ -95,7 +99,7 @@ public class CardFaultRecord extends DataClass {
 	 * @param	faultBeginTime		the timestamp (date and time) of beginning of fault
 	 * 								to be set for the CardFaultRecord object
 	 */
-	public void setFaultBeginTime(TimeReal faultBeginTime) {
+	public void setFaultBeginTime( TimeReal faultBeginTime ) {
 		this.faultBeginTime = faultBeginTime;
 	}
 
@@ -116,7 +120,7 @@ public class CardFaultRecord extends DataClass {
 	 * @param	faultEndTime		the timestamp (date and time) of end of fault
 	 * 								to be set for the CardFaultRecord object
 	 */
-	public void setFaultEndTime(TimeReal faultEndTime) {
+	public void setFaultEndTime( TimeReal faultEndTime ) {
 		this.faultEndTime = faultEndTime;
 	}
 
@@ -139,18 +143,19 @@ public class CardFaultRecord extends DataClass {
 	 * 											in which the fault happened	to be set for the
 	 * 											CardFaultRecord object
 	 */
-	public void setFaultVehicleRegistration(VehicleRegistrationIdentification faultVehicleRegistration) {
+	public void setFaultVehicleRegistration( VehicleRegistrationIdentification faultVehicleRegistration ) {
 		this.faultVehicleRegistration = faultVehicleRegistration;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 
-		node.addContent( faultType.generateXMLElement("faultType") );
-		node.addContent( faultBeginTime.generateXMLElement("faultBeginTime") );
-		node.addContent( faultEndTime.generateXMLElement("faultEndTime") );
-		node.addContent( faultVehicleRegistration.generateXMLElement("faultVehicleRegistration") );
+		node.addContent( faultType.generateXMLElement( "faultType" ) );
+		node.addContent( faultBeginTime.generateXMLElement( "faultBeginTime" ) );
+		node.addContent( faultEndTime.generateXMLElement( "faultEndTime" ) );
+		node.addContent( faultVehicleRegistration.generateXMLElement( "faultVehicleRegistration" ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,9 @@ import java.util.Vector;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a company card, related to activities performed with the card.
+ */
 public class CompanyActivityData extends DataClass {
 	/*
 	 * CompanyActivityData ::= SEQUENCE {
@@ -44,7 +47,9 @@ public class CompanyActivityData extends DataClass {
 	 */
 
 	private int companyPointerNewestRecord;
-	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>(230); // min. 230; will be automatically expanded at run time if required!
+	
+	// create min. 230 vectors; will be automatically expanded at run time if required!
+	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>( 230 );
 	
 
 	/**
@@ -54,23 +59,23 @@ public class CompanyActivityData extends DataClass {
 	 * 					whose data is used when the CompanyActivityData
 	 * 					object is created.
 	 */
-	public CompanyActivityData(byte[] value) {
-		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
-		for (int i = 2; i < value.length; i+= 46) {
-			byte[] record = arrayCopy(value, i, 46);
-			CompanyActivityRecord tmp = new CompanyActivityRecord(record);
+	public CompanyActivityData( byte[] value, int noOfCompanyActivityRecords ) {
+		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
+		for ( int i = 0; i < noOfCompanyActivityRecords; i += 1 ) {
+			byte[] record = arrayCopy( value, 2 + ( i * 46 ), 46 );
+			CompanyActivityRecord tmp = new CompanyActivityRecord( record );
 			companyActivityRecords.add( tmp );
 		}
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("companyPointerNewestRecord").setText(Integer.toString(companyPointerNewestRecord)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "companyPointerNewestRecord" ).setText(Integer.toString( companyPointerNewestRecord ) ) );
 		Iterator<CompanyActivityRecord> iter = companyActivityRecords.iterator();
-		while (iter.hasNext()) {
-			CompanyActivityRecord car = (CompanyActivityRecord) iter.next();
-			node.addContent( car.generateXMLElement("companyActivityRecord"));
+		while ( iter.hasNext() ) {
+			CompanyActivityRecord car = (CompanyActivityRecord)iter.next();
+			node.addContent( car.generateXMLElement( "companyActivityRecord" ) );
 		}
 		
 		return node;

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Identification of a vehicle, unique for Europe (VRN and Member State).
+ */
 public class VehicleRegistrationIdentification extends DataClass {
 	/*
 	 * VehicleRegistrationIdentification ::= SEQUENCE {
@@ -56,9 +59,9 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * 					whose data is used when the VehicleRegistrationIdentification
 	 * 					object is created.
 	 */
-	public VehicleRegistrationIdentification(byte [] value) {
-		vehicleRegistrationNation = new NationNumeric(value[0]);
-		vehicleRegistrationNumber = new VehicleRegistrationNumber(arrayCopy(value, 1, 14));
+	public VehicleRegistrationIdentification( byte [] value ) {
+		vehicleRegistrationNation = new NationNumeric( value[ 0 ] );
+		vehicleRegistrationNumber = new VehicleRegistrationNumber( arrayCopy( value, 1, 14 ) );
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * @param	vehicleRegistrationNation	the nation where the vehicle is registered
 	 * 										to be set for the VehicleRegistrationIdentification object
 	 */
-	public void setVehicleRegistrationNation(NationNumeric vehicleRegistrationNation) {
+	public void setVehicleRegistrationNation( NationNumeric vehicleRegistrationNation ) {
 		this.vehicleRegistrationNation = vehicleRegistrationNation;
 	}
 
@@ -99,15 +102,15 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * @param	vehicleRegistrationNumber	the registration number of the vehicle (VRN)
 	 * 										to be set for the VehicleRegistrationIdentification object
 	 */
-	public void setVehicleRegistrationNumber(VehicleRegistrationNumber vehicleRegistrationNumber) {
+	public void setVehicleRegistrationNumber( VehicleRegistrationNumber vehicleRegistrationNumber ) {
 		this.vehicleRegistrationNumber = vehicleRegistrationNumber;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( vehicleRegistrationNation.generateXMLElement("vehicleRegistrationNation") );
-		node.addContent( vehicleRegistrationNumber.generateXMLElement("vehicleRegistrationNumber"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( vehicleRegistrationNation.generateXMLElement( "vehicleRegistrationNation" ) );
+		node.addContent( vehicleRegistrationNumber.generateXMLElement( "vehicleRegistrationNumber" ) );
 		
 		return node;
 	}

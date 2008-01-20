@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code indicating an activity carried out by a company using its company card.
+ */
 public class CompanyActivityType extends DataClass {
 	/*
 	 * CompanyActivityType ::= INTEGER {
@@ -52,7 +55,7 @@ public class CompanyActivityType extends DataClass {
 	/**
 	 * Constructor for a CompanyActivityType object
 	 */
-	public CompanyActivityType(){
+	public CompanyActivityType() {
 		companyActivityType = 0;
 	}
 
@@ -62,8 +65,8 @@ public class CompanyActivityType extends DataClass {
 	 * @param	value	byte that indicates an activity carried out by a
 	 * 					company using its company card.
 	 */
-	public CompanyActivityType(byte value){
-		companyActivityType = convertIntoUnsigned1ByteInt(value);
+	public CompanyActivityType( byte value ){
+		companyActivityType = convertIntoUnsigned1ByteInt( value );
 	}
 
 	/**
@@ -84,14 +87,15 @@ public class CompanyActivityType extends DataClass {
 	 * @param	companyActivityType		the activity carried out by a company using its company card
 	 * 									to be set for the CompanyActivityType object
 	 */
-	public void setCompanyActivityType(short companyActivityType) {
+	public void setCompanyActivityType( short companyActivityType ) {
 		this.companyActivityType = companyActivityType;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("companyActivityType").setText(Short.toString(companyActivityType)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "companyActivityType" ).setText( Short.toString( companyActivityType ) ) );
+
 		return node;
 	}
 }

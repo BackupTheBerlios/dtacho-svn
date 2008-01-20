@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code identifying a specific condition.
+ */
 public class SpecificConditionType extends DataClass {
 	/*
 	 * SpecificConditionType ::= INTEGER(0..255), 1 byte
@@ -46,7 +49,7 @@ public class SpecificConditionType extends DataClass {
 	 * 
 	 * @param	specificConditionType	byte that identifies a specific condition.
 	 */
-	public SpecificConditionType(byte specificConditionType) {
+	public SpecificConditionType( byte specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
 
@@ -65,14 +68,15 @@ public class SpecificConditionType extends DataClass {
 	 * @param	specificConditionType	the code identifying the specific condition to be set
 	 * 									for the SpecificConditionRecord object
 	 */
-	public void setSpecificConditionType(byte specificConditionType) {
+	public void setSpecificConditionType( byte specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("specificConditionType").setText( Byte.toString( specificConditionType )));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "specificConditionType" ).setText( Byte.toString( specificConditionType ) ) );
+
 		return node;
 	}
 }

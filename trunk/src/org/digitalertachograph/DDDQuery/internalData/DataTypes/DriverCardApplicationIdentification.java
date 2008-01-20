@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import org.jdom.Element;
  * Information, stored in a driver card related to the identification of the application
  * of the card.
  */
-public 	class DriverCardApplicationIdentification extends DataClass{
+public class DriverCardApplicationIdentification extends DataClass{
 	/*
 	 * DriverCardApplicationIdentification ::= SEQUENCE {
 	 *  typeOfTachographCardId EquipmentType, 1 byte,				0x00
@@ -75,7 +75,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 */
 	public DriverCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[2];
+		cardStructureVersion = new byte[ 2 ];
 		noOfEventsPerType = 0;
 		noOfFaultsPerType = 0;
 		activityStructureLength = 0;
@@ -90,14 +90,14 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * 					whose data is used when the DriverCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public DriverCardApplicationIdentification(byte[] value) {
-		typeOfTachographCardId = new EquipmentType( value[0] );
-		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfEventsPerType = convertIntoUnsigned1ByteInt(value[3]);
-		noOfFaultsPerType = convertIntoUnsigned1ByteInt(value[4]);
-		activityStructureLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 5, 2));
-		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 7, 2));
-		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt(value[9]);
+	public DriverCardApplicationIdentification( byte[] value ) {
+		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
+		cardStructureVersion = arrayCopy( value, 1, 2 );
+		noOfEventsPerType = convertIntoUnsigned1ByteInt( value[ 3 ] );
+		noOfFaultsPerType = convertIntoUnsigned1ByteInt( value[ 4 ] );
+		activityStructureLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 5, 2 ) );
+		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt( arrayCopy( value, 7, 2 ) );
+		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt( value[ 9 ] );
 	}
 
 	/**
@@ -115,7 +115,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	typeOfTachographCardId	the implemented type of card to be set
 	 * 									for the DriverCardApplicationIdentification object
 	 */
-	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
+	public void setTypeOfTachographCardId( EquipmentType typeOfTachographCardId ) {
 		this.typeOfTachographCardId = typeOfTachographCardId;
 	}
 
@@ -137,7 +137,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card to be set
 	 * 									for the DriverCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion(byte[] cardStructureVersion) {
+	public void setCardStructureVersion( byte[] cardStructureVersion ) {
 		this.cardStructureVersion = cardStructureVersion;
 	}
 
@@ -159,7 +159,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfEventsPerType	the number of events per type of event the card can record to be set
 	 * 								for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfEventsPerType(short noOfEventsPerType) {
+	public void setNoOfEventsPerType( short noOfEventsPerType ) {
 		this.noOfEventsPerType = noOfEventsPerType;
 	}
 
@@ -181,7 +181,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfFaultsPerType	the number of faults per type of fault the card can record to be set
 	 * 								for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfFaultsPerType(short noOfFaultsPerType) {
+	public void setNoOfFaultsPerType( short noOfFaultsPerType ) {
 		this.noOfFaultsPerType = noOfFaultsPerType;
 	}
 
@@ -203,7 +203,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	activityStructureLength		the number of bytes available for storing activity records to be set
 	 * 										for the DriverCardApplicationIdentification object
 	 */
-	public void setActivityStructureLength(int activityStructureLength) {
+	public void setActivityStructureLength( int activityStructureLength ) {
 		this.activityStructureLength = activityStructureLength;
 	}
 
@@ -225,7 +225,7 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfCardVehicleRecords		the number of vehicle records the card can contain to be set
 	 * 										for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfCardVehicleRecords(int noOfCardVehicleRecords) {
+	public void setNoOfCardVehicleRecords( int noOfCardVehicleRecords ) {
 		this.noOfCardVehicleRecords = noOfCardVehicleRecords;
 	}
 
@@ -247,20 +247,21 @@ public 	class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfCardPlaceRecords	the number of places the card can record to be set
 	 * 									for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfCardPlaceRecords(short noOfCardPlaceRecords) {
+	public void setNoOfCardPlaceRecords( short noOfCardPlaceRecords ) {
 		this.noOfCardPlaceRecords = noOfCardPlaceRecords;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( typeOfTachographCardId.generateXMLElement("typeOfTachographCardId"));
-		node.addContent( new Element("cardStructureVersion").setText( convertIntoHexString(cardStructureVersion)));
-		node.addContent( new Element("noOfEventsPerType").setText( Short.toString( noOfEventsPerType)));
-		node.addContent( new Element("noOfFaultsPerType").setText( Short.toString( noOfFaultsPerType)));
-		node.addContent( new Element("activityStructureLength").setText( Integer.toString( activityStructureLength)));
-		node.addContent( new Element("noOfCardVehicleRecords").setText( Integer.toString(noOfCardVehicleRecords)));
-		node.addContent( new Element("noOfCardPlaceRecords").setText( Short.toString(noOfCardPlaceRecords)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
+		node.addContent( new Element( "cardStructureVersion" ).setText( convertIntoHexString( cardStructureVersion ) ) );
+		node.addContent( new Element( "noOfEventsPerType" ).setText( Short.toString( noOfEventsPerType ) ) );
+		node.addContent( new Element( "noOfFaultsPerType" ).setText( Short.toString( noOfFaultsPerType ) ) );
+		node.addContent( new Element( "activityStructureLength" ).setText( Integer.toString( activityStructureLength ) ) );
+		node.addContent( new Element( "noOfCardVehicleRecords" ).setText( Integer.toString(noOfCardVehicleRecords ) ) );
+		node.addContent( new Element( "noOfCardPlaceRecords" ).setText( Short.toString(noOfCardPlaceRecords ) ) );
+
 		return node;
 	}
 }

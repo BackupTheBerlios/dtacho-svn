@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,10 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
 import java.util.Iterator;
 
+/**
+ * Information, stored in a workshop card, related to workshop activity performed with
+ * the card.
+ */
 public class WorkshopCardCalibrationData extends DataClass {
 	/*
 	 * WorkshopCardCalibrationData ::= SEQUENCE {
@@ -38,7 +42,9 @@ public class WorkshopCardCalibrationData extends DataClass {
 
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
-	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88); // min. 88; will be automatically expanded at run time if required!
+
+	// create min. 88 vectors; will be automatically expanded at run time if required!
+	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88);
 
 	
 	/**
@@ -48,14 +54,14 @@ public class WorkshopCardCalibrationData extends DataClass {
 	 * 					whose data is used when the WorkshopCardCalibrationData
 	 * 					object is created.
 	 */
-	public WorkshopCardCalibrationData(byte[] value){
-		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy(value, 0, 2));
-		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt(value[2]);
+	public WorkshopCardCalibrationData( byte[] value, short noOfCalibrationRecords ) {
+		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
+		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 2 ] );
 		
-		for (int i = 3; i < value.length; i += 105) {
-			byte[] record = arrayCopy(value, i, 105);
-			WorkshopCardCalibrationRecord tmp = new WorkshopCardCalibrationRecord(record);
-			calibrationRecords.add(tmp);
+		for ( int i = 0; i < noOfCalibrationRecords; i += 1 ) {
+			byte[] record = arrayCopy( value, 3 + ( i * 105 ), 105 );
+			WorkshopCardCalibrationRecord tmp = new WorkshopCardCalibrationRecord( record );
+			calibrationRecords.add( tmp );
 		}
 	}
 
@@ -92,17 +98,17 @@ public class WorkshopCardCalibrationData extends DataClass {
 		return calibrationRecords;
 	}
 
-	public Element generateXMLElement(String name){
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ){
+		Element node = new Element( name );
 
-		node.addContent( new Element("calibrationTotalNumber").setText(Integer.toString(calibrationTotalNumber)) );
-		node.addContent( new Element("calibrationPointerNewestRecord").setText(Integer.toString(calibrationPointerNewestRecord)) );
+		node.addContent( new Element( "calibrationTotalNumber" ).setText( Integer.toString( calibrationTotalNumber ) ) );
+		node.addContent( new Element( "calibrationPointerNewestRecord" ).setText( Integer.toString( calibrationPointerNewestRecord ) ) );
 		
 		Iterator<WorkshopCardCalibrationRecord> it = calibrationRecords.iterator();
-		while(it.hasNext()){
-			WorkshopCardCalibrationRecord wccr = (WorkshopCardCalibrationRecord) it.next();
-			Element wccrNode = wccr.generateXMLElement("WorkshopCardCalibrationRecord");
-			node.addContent(wccrNode);
+		while ( it.hasNext() ) {
+			WorkshopCardCalibrationRecord wccr = (WorkshopCardCalibrationRecord)it.next();
+			Element wccrNode = wccr.generateXMLElement( "WorkshopCardCalibrationRecord" );
+			node.addContent( wccrNode );
 		}
 		
 		return node;

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to an event associated
+ * to the card holder.
+ */
 public class CardEventRecord extends DataClass {
 	/*
 	 * CardEventRecord ::= SEQUENCE {
@@ -55,11 +59,11 @@ public class CardEventRecord extends DataClass {
 	 * 					whose data is used when the CardEventRecord
 	 * 					object is created.
 	 */
-	public CardEventRecord(byte[] value) {
-		eventType = new EventFaultType(value[0]);
-		eventBeginTime = new TimeReal(arrayCopy(value, 1, 4));
-		eventEndTime = new TimeReal(arrayCopy(value, 5, 4));
-		eventVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 9, 15));
+	public CardEventRecord( byte[] value ) {
+		eventType = new EventFaultType( value[ 0 ] );
+		eventBeginTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+		eventEndTime = new TimeReal( arrayCopy( value, 5, 4 ) );
+		eventVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 9, 15 ) );
 	}
 
 	/**
@@ -76,7 +80,7 @@ public class CardEventRecord extends DataClass {
 	 * 
 	 * @param	eventType		the type of the event to be set for the CardEventRecord object
 	 */
-	public void setEventType(EventFaultType eventType) {
+	public void setEventType( EventFaultType eventType ) {
 		this.eventType = eventType;
 	}
 
@@ -97,7 +101,7 @@ public class CardEventRecord extends DataClass {
 	 * @param	eventBeginTime		the timestamp (date and time) of beginning of event
 	 * 								to be set for the CardEventRecord object
 	 */
-	public void setEventBeginTime(TimeReal eventBeginTime) {
+	public void setEventBeginTime( TimeReal eventBeginTime ) {
 		this.eventBeginTime = eventBeginTime;
 	}
 
@@ -118,7 +122,7 @@ public class CardEventRecord extends DataClass {
 	 * @param	eventEndTime		the timestamp (date and time) of end of event
 	 * 								to be set for the CardEventRecord object
 	 */
-	public void setEventEndTime(TimeReal eventEndTime) {
+	public void setEventEndTime( TimeReal eventEndTime ) {
 		this.eventEndTime = eventEndTime;
 	}
 
@@ -141,17 +145,18 @@ public class CardEventRecord extends DataClass {
 	 * 											in which the event happened	to be set for the
 	 * 											CardEventRecord object
 	 */
-	public void setEventVehicleRegistration(VehicleRegistrationIdentification eventVehicleRegistration) {
+	public void setEventVehicleRegistration( VehicleRegistrationIdentification eventVehicleRegistration ) {
 		this.eventVehicleRegistration = eventVehicleRegistration;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( eventType.generateXMLElement("eventType") );
-		node.addContent( eventBeginTime.generateXMLElement("eventBeginTime"));
-		node.addContent( eventEndTime.generateXMLElement("eventEndTime"));
-		node.addContent( eventVehicleRegistration.generateXMLElement("eventVehicleRegistration"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( eventType.generateXMLElement( "eventType" ) );
+		node.addContent( eventBeginTime.generateXMLElement( "eventBeginTime" ) );
+		node.addContent( eventEndTime.generateXMLElement( "eventEndTime" ) );
+		node.addContent( eventVehicleRegistration.generateXMLElement( "eventVehicleRegistration" ) );
+
 		return node;
 	}
 }

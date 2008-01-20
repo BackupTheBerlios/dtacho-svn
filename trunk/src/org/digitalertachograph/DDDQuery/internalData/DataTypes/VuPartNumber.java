@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Part number of the vehicle unit.
+ */
 public class VuPartNumber extends DataClass {
 	/*
 	 * VuPartNumber ::= IA5String((SIZE(16)), 16 bytes
@@ -31,7 +34,7 @@ public class VuPartNumber extends DataClass {
 	/**
 	 * Constructor for a VuPartNumber object
 	 */
-	public VuPartNumber(){
+	public VuPartNumber() {
 		vuPartNumber = new String();
 	}
 
@@ -42,8 +45,8 @@ public class VuPartNumber extends DataClass {
 	 * 					whose data is used when the VuPartNumber
 	 * 					object is created.
 	 */
-	public VuPartNumber(byte[]value){
-		vuPartNumber = new String(value);
+	public VuPartNumber( byte[]value ) {
+		vuPartNumber = new String( value );
 	}
 
 	/**
@@ -61,14 +64,15 @@ public class VuPartNumber extends DataClass {
 	 * @param	vuPartNumber		the part number of the vehicle unit
 	 * 								to be set for the VuPartNumber object
 	 */
-	public void setVuPartNumber(String vuPartNumber) {
+	public void setVuPartNumber( String vuPartNumber ) {
 		this.vuPartNumber = vuPartNumber;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("vuPartNumber").setText(vuPartNumber));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "vuPartNumber" ).setText( vuPartNumber ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to a period of use
+ * of a vehicle during a calendar day.
+ */
 public class CardVehicleRecord extends DataClass {
 	/*
 	 * CardVehicleRecord ::= SEQUENCE {
@@ -51,7 +55,7 @@ public class CardVehicleRecord extends DataClass {
 		vehicleFirstUse = new TimeReal();
 		vehicleLastUse = new TimeReal();
 		vehicleRegistration = new VehicleRegistrationIdentification();
-		vuDataBlockCounter = new byte[2];
+		vuDataBlockCounter = new byte[ 2 ];
 	}
 
 	/**
@@ -61,13 +65,21 @@ public class CardVehicleRecord extends DataClass {
 	 * 					whose data is used when the CardVehicleRecord
 	 * 					object is created.
 	 */
-	public CardVehicleRecord(byte[] value) {
-		vehicleOdometerBegin = convertIntoUnsigned3ByteInt(arrayCopy(value, 0, 3));
-		vehicleOdometerEnd = convertIntoUnsigned3ByteInt(arrayCopy(value, 3, 3));
-		vehicleFirstUse = new TimeReal(arrayCopy(value, 6, 4));
-		vehicleLastUse = new TimeReal(arrayCopy(value, 10, 4));
-		vehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 14, 15));
-		vuDataBlockCounter = arrayCopy(value, 29, 2);
+	public CardVehicleRecord( byte[] value ) {
+		vehicleOdometerBegin = convertIntoUnsigned3ByteInt( arrayCopy( value, 0, 3 ) );
+		vehicleOdometerEnd = convertIntoUnsigned3ByteInt( arrayCopy( value, 3, 3 ) );
+		vehicleFirstUse = new TimeReal( arrayCopy( value, 6, 4 ) );
+		vehicleLastUse = new TimeReal( arrayCopy( value, 10, 4) );
+		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 14, 15 ) );
+		vuDataBlockCounter = arrayCopy( value, 29, 2 );
+		if ( vehicleFirstUse.getTimereal() != 0 ) {
+			System.out.print( "  vehicle registration number: " );
+			byte[] vr = vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumber();
+			for ( int i = 0; i < vr.length; i++ ) {
+				System.out.printf( "%c", vr[ i ] );
+			}
+			System.out.println();
+		}
 	}
 
 	/**
@@ -88,7 +100,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleOdometerBegin	the vehicle odometer value at the beginning of the period
 	 * 									of use of the vehicle to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleOdometerBegin(int vehicleOdometerBegin) {
+	public void setVehicleOdometerBegin( int vehicleOdometerBegin ) {
 		this.vehicleOdometerBegin = vehicleOdometerBegin;
 	}
 
@@ -110,7 +122,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleOdometerEnd	the vehicle odometer value at the end of the period
 	 * 								of use of the vehicle to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleOdometerEnd(int vehicleOdometerEnd) {
+	public void setVehicleOdometerEnd( int vehicleOdometerEnd ) {
 		this.vehicleOdometerEnd = vehicleOdometerEnd;
 	}
 
@@ -132,7 +144,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleFirstUse		the date and time of the beginning of the period of use of the vehicle
 	 * 								to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleFirstUse(TimeReal vehicleFirstUse) {
+	public void setVehicleFirstUse( TimeReal vehicleFirstUse ) {
 		this.vehicleFirstUse = vehicleFirstUse;
 	}
 
@@ -154,7 +166,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleLastUse	the date and time of the end of the period of use of the vehicle
 	 * 							to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleLastUse(TimeReal vehicleLastUse) {
+	public void setVehicleLastUse( TimeReal vehicleLastUse ) {
 		this.vehicleLastUse = vehicleLastUse;
 	}
 
@@ -176,8 +188,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleRegistration		the VRN and the registering Member State of the vehicle
 	 * 									to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleRegistration(
-			VehicleRegistrationIdentification vehicleRegistration) {
+	public void setVehicleRegistration( VehicleRegistrationIdentification vehicleRegistration ) {
 		this.vehicleRegistration = vehicleRegistration;
 	}
 
@@ -199,19 +210,19 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vuDataBlockCounter	the value of the VuDataBlockCounter at last extraction of the period
 	 * 								of use of the vehicle to be set for the CardVehicleRecord object
 	 */
-	public void setVuDataBlockCounter(byte[] vuDataBlockCounter) {
+	public void setVuDataBlockCounter( byte[] vuDataBlockCounter ) {
 		this.vuDataBlockCounter = vuDataBlockCounter;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("vehicleOdometerBegin").setText(Integer.toString(vehicleOdometerBegin)));
-		node.addContent( new Element("vehicleOdometerEnd").setText(Integer.toString(vehicleOdometerEnd)));
-		node.addContent( vehicleFirstUse.generateXMLElement("vehicleFirstUse"));
-		node.addContent( vehicleLastUse.generateXMLElement("vehicleLastUse"));
-		node.addContent( vehicleRegistration.generateXMLElement("vehicleRegistration"));
-		node.addContent( new Element("vuDataBlockCounter").setText(convertBCDStringIntoString(vuDataBlockCounter)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "vehicleOdometerBegin" ).setText( Integer.toString( vehicleOdometerBegin ) ) );
+		node.addContent( new Element( "vehicleOdometerEnd" ).setText( Integer.toString( vehicleOdometerEnd ) ) );
+		node.addContent( vehicleFirstUse.generateXMLElement( "vehicleFirstUse" ) );
+		node.addContent( vehicleLastUse.generateXMLElement( "vehicleLastUse" ) );
+		node.addContent( vehicleRegistration.generateXMLElement( "vehicleRegistration" ) );
+		node.addContent( new Element( "vuDataBlockCounter" ).setText( convertBCDStringIntoString( vuDataBlockCounter ) ) );
 		
 		return node;
 	}

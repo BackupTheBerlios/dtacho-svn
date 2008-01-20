@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -79,9 +79,9 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	/**
 	 * Constructor for a WorkshopCardApplicationIdentification object
 	 */
-	public WorkshopCardApplicationIdentification(){
+	public WorkshopCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[2];
+		cardStructureVersion = new byte[ 2 ];
 		noOfEventsPerType = 0;
 		noOfFaultsPerType = 0;
 		activityStructureLength = 0;
@@ -97,15 +97,15 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 					whose data is used when the WorkshopCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public WorkshopCardApplicationIdentification(byte[] value){
-		typeOfTachographCardId = new EquipmentType( value[0] );
-		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfEventsPerType = convertIntoUnsigned1ByteInt(value[3]);
-		noOfFaultsPerType = convertIntoUnsigned1ByteInt(value[4]);
-		activityStructureLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 5, 2));
-		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 7, 2));
-		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt( value[9] );
-		noOfCalibrationRecords = convertIntoUnsigned1ByteInt( value[10] );
+	public WorkshopCardApplicationIdentification( byte[] value ){
+		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
+		cardStructureVersion = arrayCopy( value, 1, 2 );
+		noOfEventsPerType = convertIntoUnsigned1ByteInt( value[ 3 ] );
+		noOfFaultsPerType = convertIntoUnsigned1ByteInt( value[ 4 ] );
+		activityStructureLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 5, 2 ) );
+		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt( arrayCopy( value, 7, 2 ) );
+		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt( value[ 9 ] );
+		noOfCalibrationRecords = convertIntoUnsigned1ByteInt( value[ 10 ] );
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	typeOfTachographCardId	the implemented type of card to be set for the
 	 * 									WorkshopCardApplicationIdentification object
 	 */
-	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
+	public void setTypeOfTachographCardId( EquipmentType typeOfTachographCardId ) {
 		this.typeOfTachographCardId = typeOfTachographCardId;
 	}
 
@@ -145,7 +145,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
 	 * 									to be set for the WorkshopCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion(byte[] cardStructureVersion) {
+	public void setCardStructureVersion( byte[] cardStructureVersion ) {
 		this.cardStructureVersion = cardStructureVersion;
 	}
 
@@ -167,7 +167,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	noOfEventsPerType	the number of events per type of event the card can record to be set
 	 * 								for the WorkshopCardApplicationIdentification object
 	 */
-	public void setNoOfEventsPerType(short noOfEventsPerType) {
+	public void setNoOfEventsPerType( short noOfEventsPerType ) {
 		this.noOfEventsPerType = noOfEventsPerType;
 	}
 
@@ -189,7 +189,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	noOfFaultsPerType	the number of faults per type of fault the card can record to be set
 	 * 								for the WorkshopCardApplicationIdentification object
 	 */
-	public void setNoOfFaultsPerType(short noOfFaultsPerType) {
+	public void setNoOfFaultsPerType( short noOfFaultsPerType ) {
 		this.noOfFaultsPerType = noOfFaultsPerType;
 	}
 
@@ -211,7 +211,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	activityStructureLength		the number of bytes available for storing activity records to be set
 	 * 										for the WorkshopCardApplicationIdentification object
 	 */
-	public void setActivityStructureLength(int activityStructureLength) {
+	public void setActivityStructureLength( int activityStructureLength ) {
 		this.activityStructureLength = activityStructureLength;
 	}
 
@@ -233,7 +233,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	noOfCardVehicleRecords		the number of vehicle records the card can contain to be set
 	 * 										for the WorkshopCardApplicationIdentification object
 	 */
-	public void setNoOfCardVehicleRecords(int noOfCardVehicleRecords) {
+	public void setNoOfCardVehicleRecords( int noOfCardVehicleRecords ) {
 		this.noOfCardVehicleRecords = noOfCardVehicleRecords;
 	}
 
@@ -255,7 +255,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	noOfCardPlaceRecords	the number of places the card can record to be set
 	 * 									for the WorkshopCardApplicationIdentification object
 	 */
-	public void setNoOfCardPlaceRecords(short noOfCardPlaceRecords) {
+	public void setNoOfCardPlaceRecords( short noOfCardPlaceRecords ) {
 		this.noOfCardPlaceRecords = noOfCardPlaceRecords;
 	}
 
@@ -277,32 +277,32 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * @param	noOfCalibrationRecords	the number of calibration records the card can store to be set
 	 * 									for the WorkshopCardApplicationIdentification object
 	 */
-	public void setNoOfCalibrationRecords(short noOfCalibrationRecords) {
+	public void setNoOfCalibrationRecords( short noOfCalibrationRecords ) {
 		this.noOfCalibrationRecords = noOfCalibrationRecords;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 		
-		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ));
+		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
 		
-		Element cardStructureVersionElement = new Element("cardStructureVersion");
-		cardStructureVersionElement.setText( convertIntoHexString( cardStructureVersion ));
+		Element cardStructureVersionElement = new Element( "cardStructureVersion");
+		cardStructureVersionElement.setText( convertIntoHexString( cardStructureVersion ) );
 		node.addContent(cardStructureVersionElement);
 		
-		Element noOfEventsPerTypElement = new Element("noOfEventsPerType");
-		noOfEventsPerTypElement.setText( Short.toString( noOfEventsPerType ));
+		Element noOfEventsPerTypElement = new Element( "noOfEventsPerType" );
+		noOfEventsPerTypElement.setText( Short.toString( noOfEventsPerType ) );
 		node.addContent( noOfEventsPerTypElement );
 		
-		Element noOfFaultsPerTypElement = new Element("noOfFaultsPerType");
-		noOfFaultsPerTypElement.setText( Short.toString( noOfFaultsPerType));
+		Element noOfFaultsPerTypElement = new Element( "noOfFaultsPerType" );
+		noOfFaultsPerTypElement.setText( Short.toString( noOfFaultsPerType ) );
 		node.addContent( noOfFaultsPerTypElement );
 		
-		node.addContent( new Element("activityStructureLength").setText( Integer.toString(activityStructureLength)));
-		node.addContent( new Element("noOfCardVehicleRecords").setText( Integer.toString(noOfCardVehicleRecords)));
-		node.addContent( new Element("noOfCardPlaceRecords").setText( Short.toString(noOfCardPlaceRecords)));
-		node.addContent( new Element("noOfCalibrationRecords").setText( Short.toString(noOfCalibrationRecords)));
+		node.addContent( new Element( "activityStructureLength" ).setText( Integer.toString( activityStructureLength ) ) );
+		node.addContent( new Element( "noOfCardVehicleRecords" ).setText( Integer.toString( noOfCardVehicleRecords ) ) );
+		node.addContent( new Element( "noOfCardPlaceRecords" ).setText( Short.toString( noOfCardPlaceRecords ) ) );
+		node.addContent( new Element( "noOfCalibrationRecords" ).setText( Short.toString( noOfCalibrationRecords ) ) );
 		
 		return node;
 	}

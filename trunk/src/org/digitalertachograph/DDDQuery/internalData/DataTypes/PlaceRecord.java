@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information related to a place where a daily work period begins or ends.
+ */
 public class PlaceRecord extends DataClass {
 	/*
 	 * PlaceRecord ::= SEQUENCE {
@@ -56,12 +59,12 @@ public class PlaceRecord extends DataClass {
 	 * 					whose data is used when the PlaceRecord
 	 * 					object is created.
 	 */
-	public PlaceRecord(byte[] record) {
-		entryTime = new TimeReal( arrayCopy(record, 0, 4));
-		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod(record[4]);
-		dailyWorkPeriodCountry = new NationNumeric(record[5]);
-		dailyWorkPeriodRegion = new RegionNumeric(record[6]);
-		vehicleOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy(record, 7, 3));
+	public PlaceRecord( byte[] record ) {
+		entryTime = new TimeReal( arrayCopy( record, 0, 4 ) );
+		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod( record[ 4 ] );
+		dailyWorkPeriodCountry = new NationNumeric( record[ 5 ] );
+		dailyWorkPeriodRegion = new RegionNumeric( record[ 6 ] );
+		vehicleOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy( record, 7, 3 ) );
 	}
 	
 	/**
@@ -79,7 +82,7 @@ public class PlaceRecord extends DataClass {
 	 * 
 	 * @param	entryTime		the timestamp related to the entry to be set for the PlaceRecord object
 	 */
-	public void setEntryTime(TimeReal entryTime) {
+	public void setEntryTime( TimeReal entryTime ) {
 		this.entryTime = entryTime;
 	}
 	
@@ -97,7 +100,7 @@ public class PlaceRecord extends DataClass {
 	 * 
 	 * @param	entryTypeDailyWorkPeriod	the type of entry to be set for the PlaceRecord object
 	 */
-	public void setEntryTypeDailyWorkPeriod(EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod) {
+	public void setEntryTypeDailyWorkPeriod( EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod ) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
 	
@@ -115,7 +118,7 @@ public class PlaceRecord extends DataClass {
 	 * 
 	 * @param	dailyWorkPeriodCountry		the country entered to be set for the PlaceRecord object
 	 */
-	public void setDailyWorkPeriodCountry(NationNumeric dailyWorkPeriodCountry) {
+	public void setDailyWorkPeriodCountry( NationNumeric dailyWorkPeriodCountry ) {
 		this.dailyWorkPeriodCountry = dailyWorkPeriodCountry;
 	}
 	
@@ -133,7 +136,7 @@ public class PlaceRecord extends DataClass {
 	 * 
 	 * @param	dailyWorkPeriodRegion		the region entered to be set for the PlaceRecord object
 	 */
-	public void setDailyWorkPeriodRegion(RegionNumeric dailyWorkPeriodRegion) {
+	public void setDailyWorkPeriodRegion( RegionNumeric dailyWorkPeriodRegion ) {
 		this.dailyWorkPeriodRegion = dailyWorkPeriodRegion;
 	}
 	
@@ -152,24 +155,25 @@ public class PlaceRecord extends DataClass {
 	 * @param	vehicleOdometerValue		the odometer value at the time of place entry
 	 * 										to be set for the PlaceRecord object
 	 */
-	public void setVehicleOdometerValue(int vehicleOdometerValue) {
+	public void setVehicleOdometerValue( int vehicleOdometerValue ) {
 		this.vehicleOdometerValue = vehicleOdometerValue;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 //		private TimeReal entryTime;
 //		private EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod;
 //		private NationNumeric dailyWorkPeriodCountry;
 //		private RegionNumeric dailyWorkPeriodRegion;
 //		private int vehicleOdometerValue;
 		
-		node.addContent( entryTime.generateXMLElement("entryTime"));
-		node.addContent( entryTypeDailyWorkPeriod.generateXMLElement("entryTypeDailyWorkPeriod"));
-		node.addContent( dailyWorkPeriodCountry.generateXMLElement("dailyWorkPeriodCountry"));
-		node.addContent( dailyWorkPeriodRegion.generateXMLElement("dailyWorkPeriodRegion"));
-		node.addContent( new Element("vehicleOdometerValue").setText(Integer.toString(vehicleOdometerValue)));	
+		node.addContent( entryTime.generateXMLElement( "entryTime" ) );
+		node.addContent( entryTypeDailyWorkPeriod.generateXMLElement( "entryTypeDailyWorkPeriod" ) );
+		node.addContent( dailyWorkPeriodCountry.generateXMLElement( "dailyWorkPeriodCountry" ) );
+		node.addContent( dailyWorkPeriodRegion.generateXMLElement( "dailyWorkPeriodRegion" ) );
+		node.addContent( new Element( "vehicleOdometerValue" ).setText( Integer.toString( vehicleOdometerValue ) ) );	
+
 		return node;
 	}
 }

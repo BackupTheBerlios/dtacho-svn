@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,6 @@ import org.digitalertachograph.DDDQuery.internalData.DataTypes.LastCardDownload;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.NoOfCalibrationsSinceDownload;
 import org.jdom.Element;
 
-
 /**
  * EF_Card_Download,
  * 
@@ -42,17 +41,17 @@ public class EF_Card_Download extends DataClass {
 	 * 					whose data is used when the EF_Card_Download
 	 * 					object is created.
 	 */
-	public EF_Card_Download(byte[] value, int cardType){
+	public EF_Card_Download( byte[] value, int cardType ) {
 		//size = value.length;
 		this.cardType = cardType; 
 
-		switch (cardType) {
+		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD :
-				lastCardDownload = new LastCardDownload(value);
+				lastCardDownload = new LastCardDownload( value );
 				break;
 				
 			case EquipmentType.WORKSHOP_CARD :
-				noOfCalibrationsSinceDownload = new NoOfCalibrationsSinceDownload(value);
+				noOfCalibrationsSinceDownload = new NoOfCalibrationsSinceDownload( value );
 				break;
 
 			default :
@@ -60,26 +59,27 @@ public class EF_Card_Download extends DataClass {
 		}
 	}
 
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
+		Element node = new Element( this.getClass().getSimpleName() );
 		Element child;
 
-		switch (cardType) {
+		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD :
-				child = lastCardDownload.generateXMLElement("lastCardDownload");
+				child = lastCardDownload.generateXMLElement( "lastCardDownload" );
 				break;
 			
 			case EquipmentType.WORKSHOP_CARD :
-				child = noOfCalibrationsSinceDownload.generateXMLElement("noOfCalibrationsSinceDownload");
+				child = noOfCalibrationsSinceDownload.generateXMLElement( "noOfCalibrationsSinceDownload" );
 				break;
 
 			default:
-				child = new Element("default");
+				child = new Element( "default" );
 				break;
 		}
 
-		node.addContent(child);
+		node.addContent( child );
+
 		return node;
 	}
 }

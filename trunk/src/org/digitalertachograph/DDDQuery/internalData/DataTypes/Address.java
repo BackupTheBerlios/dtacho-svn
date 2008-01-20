@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * An address.
+ */
 public class Address extends DataClass {
 	/*
 	 * address ::= SEQUENCE {
@@ -36,9 +39,9 @@ public class Address extends DataClass {
 	/**
 	 * Constructor for an Address object
 	 */ 
-	public Address(){
+	public Address() {
 		codePage = 0;
-		address = new byte[35];
+		address = new byte[ 35 ];
 	}
 
 	/**
@@ -47,8 +50,8 @@ public class Address extends DataClass {
 	 * @param	value	byte array of an Address structure whose data
 	 * 					is used when the Address object is created
 	 */
-	public Address(byte[] value) {
-		this(value[0], arrayCopy(value, 1, 35));
+	public Address( byte[] value ) {
+		this( value[ 0 ], arrayCopy( value, 1, 35 ) );
 	}
 	
 	/**
@@ -59,7 +62,7 @@ public class Address extends DataClass {
 	 * 
 	 * @param	address		byte array that contains an address
 	 */
-	public Address(byte codePage, byte[] address) {
+	public Address( byte codePage, byte[] address ) {
 		this.codePage = codePage;
 		this.address = address;
 	}
@@ -78,7 +81,7 @@ public class Address extends DataClass {
 	 * 
 	 * @param	codePage	the codepage to be set for the Address object
 	 */
-	public void setCodePage(short codePage) {
+	public void setCodePage( short codePage ) {
 		this.codePage = codePage;
 	}
 	
@@ -96,7 +99,7 @@ public class Address extends DataClass {
 	 * 
 	 * @param	address		byte array with address to be set for the Address object
 	 */
-	public void setAddress(byte[] address) {
+	public void setAddress( byte[] address ) {
 		this.address = address;
 	}
 
@@ -105,15 +108,15 @@ public class Address extends DataClass {
 	 * 
 	 * @return	the address as string of the Address object
 	 */
-	public String toString(){
-		return new String(address);
+	public String toString() {
+		return new String( address );
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("codePage").setText( Integer.toString(codePage) ));
-		node.addContent(new Element("address").setText( convertIntoHexString(address) ));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "codePage").setText( Integer.toString( codePage ) ) );
+		node.addContent( new Element( "address").setText( convertIntoHexString( address ) ) );
 		
 		return node;
 	}

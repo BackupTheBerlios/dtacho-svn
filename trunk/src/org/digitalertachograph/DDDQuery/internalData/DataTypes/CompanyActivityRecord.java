@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a company card, related to activities performed with the card.
+ */
 public class CompanyActivityRecord extends DataClass {
 
 	/*
@@ -60,13 +63,13 @@ public class CompanyActivityRecord extends DataClass {
 	 * 					whose data is used when the CompanyActivityRecord
 	 * 					object is created.
 	 */
-	public CompanyActivityRecord(byte[] value) {
-		companyActivityType = new CompanyActivityType( value[0] );
-		companyActivityTime = new TimeReal(arrayCopy(value, 1, 4));
-		cardNumberInformation = new FullCardNumber(arrayCopy(value, 5, 18));
-		vehicleRegistrationInformation = new VehicleRegistrationIdentification(arrayCopy(value, 23, 15));
-		downloadPeriodBegin = new TimeReal(arrayCopy(value, 38, 4));
-		downloadPeriodEnd = new TimeReal(arrayCopy(value, 42, 4));
+	public CompanyActivityRecord( byte[] value ) {
+		companyActivityType = new CompanyActivityType( value[ 0 ] );
+		companyActivityTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+		cardNumberInformation = new FullCardNumber( arrayCopy( value, 5, 18 ) );
+		vehicleRegistrationInformation = new VehicleRegistrationIdentification( arrayCopy( value, 23, 15 ) );
+		downloadPeriodBegin = new TimeReal( arrayCopy( value, 38, 4 ) );
+		downloadPeriodEnd = new TimeReal( arrayCopy( value, 42, 4 ) );
 	}
 	
 	/**
@@ -84,7 +87,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * @param	companyActivityType		the type of the company activity
 	 * 									to be set for the CompanyActivityRecord object
 	 */
-	public void setCompanyActivityType(CompanyActivityType companyActivityType) {
+	public void setCompanyActivityType( CompanyActivityType companyActivityType ) {
 		this.companyActivityType = companyActivityType;
 	}
 
@@ -103,7 +106,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * @param	companyActivityTime		the date and time of the company activity
 	 * 									to be set for the CompanyActivityRecord object
 	 */
-	public void setCompanyActivityTime(TimeReal companyActivityTime) {
+	public void setCompanyActivityTime( TimeReal companyActivityTime ) {
 		this.companyActivityTime = companyActivityTime;
 	}
 
@@ -125,7 +128,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * @param	cardNumberInformation	the card number and the card issuing Member State of the card downloaded
 	 * 									to be set for the CompanyActivityRecord object
 	 */
-	public void setCardNumberInformation(FullCardNumber cardNumberInformation) {
+	public void setCardNumberInformation( FullCardNumber cardNumberInformation ) {
 		this.cardNumberInformation = cardNumberInformation;
 	}
 
@@ -136,7 +139,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * @return	the registration number of the vehicle (VRN) and registering Member State
 	 * 			of the vehicle downloaded or locked in or out of the CompanyActivityRecord object
 	 */
-	public VehicleRegistrationIdentification getVehicleRegistrationInformationn() {
+	public VehicleRegistrationIdentification getVehicleRegistrationInformation() {
 		return vehicleRegistrationInformation;
 	}
 
@@ -149,7 +152,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * 											or locked in or out to be set for the
 	 * 											CompanyActivityRecord object
 	 */
-	public void setVehicleRegistrationInformation(VehicleRegistrationIdentification vehicleRegistrationInformation) {
+	public void setVehicleRegistrationInformation( VehicleRegistrationIdentification vehicleRegistrationInformation ) {
 		this.vehicleRegistrationInformation = vehicleRegistrationInformation;
 	}
 
@@ -171,7 +174,7 @@ public class CompanyActivityRecord extends DataClass {
 	 * @param	downloadPeriodBegin		the date and time of the beginning of a download period
 	 * 									to be set for the CompanyActivityRecord object
 	 */
-	public void setDownloadPeriodBegin(TimeReal downloadPeriodBegin) {
+	public void setDownloadPeriodBegin( TimeReal downloadPeriodBegin ) {
 		this.downloadPeriodBegin = downloadPeriodBegin;
 	}
 
@@ -193,19 +196,20 @@ public class CompanyActivityRecord extends DataClass {
 	 * @param	downloadPeriodEnd		the date and time of the end of a download period
 	 * 									to be set for the CompanyActivityRecord object
 	 */
-	public void setDownloadPeriodEnd(TimeReal downloadPeriodEnd) {
+	public void setDownloadPeriodEnd( TimeReal downloadPeriodEnd ) {
 		this.downloadPeriodEnd = downloadPeriodEnd;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( companyActivityType.generateXMLElement("companyActivityType"));
-		node.addContent( companyActivityTime.generateXMLElement("companyActivityTime"));
-		node.addContent( cardNumberInformation.generateXMLElement("cardNumberInformation"));
-		node.addContent( vehicleRegistrationInformation.generateXMLElement("vehicleRegistrationInformation"));
-		node.addContent( downloadPeriodBegin.generateXMLElement("downloadPeriodBegin"));
-		node.addContent( downloadPeriodEnd.generateXMLElement("downloadPeriodEnd"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( companyActivityType.generateXMLElement( "companyActivityType" ) );
+		node.addContent( companyActivityTime.generateXMLElement( "companyActivityTime" ) );
+		node.addContent( cardNumberInformation.generateXMLElement( "cardNumberInformation" ) );
+		node.addContent( vehicleRegistrationInformation.generateXMLElement( "vehicleRegistrationInformation" ) );
+		node.addContent( downloadPeriodBegin.generateXMLElement( "downloadPeriodBegin" ) );
+		node.addContent( downloadPeriodEnd.generateXMLElement( "downloadPeriodEnd" ) );
+
 		return node;
 	}
 }

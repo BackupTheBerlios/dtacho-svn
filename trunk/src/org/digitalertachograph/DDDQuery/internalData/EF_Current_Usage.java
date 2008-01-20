@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardCurrentUse;
 import org.jdom.Element;
 
-
 /**
  * EF_Current_Usage,
  * 
@@ -39,7 +38,7 @@ public class EF_Current_Usage extends DataClass {
 	 * 					whose data is used when the EF_Current_Usage
 	 * 					object is created.
 	 */
-	public EF_Current_Usage(byte[] value){
+	public EF_Current_Usage( byte[] value ) {
 		cardCurrentUse = new CardCurrentUse(value);
 	}
 
@@ -47,16 +46,17 @@ public class EF_Current_Usage extends DataClass {
 		return cardCurrentUse;
 	}
 
-	public void setCardCurrentUse(CardCurrentUse cardCurrentUse) {
+	public void setCardCurrentUse( CardCurrentUse cardCurrentUse ) {
 		this.cardCurrentUse = cardCurrentUse;
 	}
 	
 
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ){
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
-		Element child = cardCurrentUse.generateXMLElement("cardCurrentUse");
-		node.addContent(child);
+		Element node = new Element( this.getClass().getSimpleName() );
+		Element child = cardCurrentUse.generateXMLElement( "cardCurrentUse" );
+		node.addContent( child );
+
 		return node;
 	}
 }

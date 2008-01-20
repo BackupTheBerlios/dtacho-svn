@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ public class CardEventData extends DataClass{
 
 
 	private static final int sequencesize = 6;
-	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>(sequencesize);
+	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>( sequencesize );
 
 	
 	/**
@@ -61,72 +61,67 @@ public class CardEventData extends DataClass{
 	 * 					whose data is used when the CardEventData
 	 * 					object is created.
 	 */
-	public CardEventData(byte[] value, short noofeventspertype) {
-
-		// we assume NoOfEventsPerType is constant for all sets of event records
-		// within the cardeventdata sequence
-		//int noofeventspertype = value.length / (sequencesize * 24);
-
-		System.out.println(" [INFO] no of events per type: " + noofeventspertype);	
+	public CardEventData( byte[] value, short noofeventspertype ) {
+		System.out.println( " [INFO] no of events per type: " + noofeventspertype );	
 
 		// loops are beautiful. cantaloop... funky, funky...
-		for (int j = 0; j < sequencesize; j++ ) {
+		for ( int j = 0; j < sequencesize; j++ ) {
 
-			cardEventRecords.add(new Vector<CardEventRecord>(12));
+			cardEventRecords.add( new Vector<CardEventRecord>( 12 ) );
 
-			for (int i = (noofeventspertype * 24 * j); i < (noofeventspertype * 24 * (j + 1)); i += 24) {
-				byte[] record = arrayCopy(value, i, 24);
-				CardEventRecord tmp = new CardEventRecord(record);
+			for ( int i = ( noofeventspertype * 24 * j ); i < ( noofeventspertype * 24 * ( j + 1 ) ); i += 24 ) {
+				byte[] record = arrayCopy( value, i, 24 );
+				CardEventRecord tmp = new CardEventRecord( record );
 
-				if (tmp.getEventBeginTime().getTimereal() != 0) {
-					switch(j) {
-					case 0:
-						System.out.printf("  time overlap, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+				if ( tmp.getEventBeginTime().getTimereal() != 0 ) {
+					switch( j ) {
+						case 0:
+							System.out.printf( "  time overlap, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					case 1:
-						System.out.printf("  card insertion while driving, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+						case 1:
+							System.out.printf( "  card insertion while driving, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					case 2:
-						System.out.printf("  last card session not correctly closed, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+						case 2:
+							System.out.printf( "  last card session not correctly closed, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					case 3:
-						System.out.printf("  power supply interruption, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+						case 3:
+							System.out.printf( "  power supply interruption, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					case 4:
-						System.out.printf("  motion data error, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+						case 4:
+							System.out.printf( "  motion data error, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					case 5:
-						System.out.printf("  security breach attempt, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType());
-						break;
+						case 5:
+							System.out.printf( "  security breach attempt, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							break;
 
-					default:
-						break;
+						default:
+							break;
 					}
 				}
 
-				cardEventRecords.get(j).add(tmp);
+				cardEventRecords.get( j ).add( tmp );
 			}
 		}
 	}
 
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		for (int i = 0; i < sequencesize; i++) {
-			Element recordsnode = new Element("cardEventRecords");
-			node.addContent(recordsnode);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		for ( int i = 0; i < sequencesize; i++ ) {
+			Element recordsnode = new Element( "cardEventRecords" );
+			node.addContent( recordsnode );
 			
-			Iterator<CardEventRecord> it = cardEventRecords.get(i).iterator();
-			while(it.hasNext()){
-				CardEventRecord cer = (CardEventRecord) it.next();
-				Element cerElement = cer.generateXMLElement("cardEventRecord");
-				recordsnode.addContent(cerElement);
+			Iterator<CardEventRecord> it = cardEventRecords.get( i ).iterator();
+			while ( it.hasNext() ) {
+				CardEventRecord cer = (CardEventRecord)it.next();
+				Element cerElement = cer.generateXMLElement( "cardEventRecord" );
+				recordsnode.addContent( cerElement );
 			}
 		}
 

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information about the actual usage of the card.
+ */
 public class CardCurrentUse extends DataClass{
 	/*
 	 * CardCurrentUse ::= SEQUENCE {
@@ -46,9 +49,9 @@ public class CardCurrentUse extends DataClass{
 	 * 					whose data is used when the CardCurrentUse
 	 * 					object is created.
 	 */
-	public CardCurrentUse(byte[] value) {
-		sessionOpenTime = new TimeReal( arrayCopy(value, 0, 4));
-		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy(value, 4, 15));
+	public CardCurrentUse( byte[] value ) {
+		sessionOpenTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy( value, 4, 15 ) );
 	}
 
 	/**
@@ -69,7 +72,7 @@ public class CardCurrentUse extends DataClass{
 	 * @param	sessionOpenTime		the timestamp when the card is inserted for the current usage
 	 * 								to be set for the CardCurrentUse object
 	 */
-	public void setSessionOpenTime(TimeReal sessionOpenTime) {
+	public void setSessionOpenTime( TimeReal sessionOpenTime ) {
 		this.sessionOpenTime = sessionOpenTime;
 	}
 
@@ -91,15 +94,16 @@ public class CardCurrentUse extends DataClass{
 	 * @param	sessionOpenVehicle	the identification of the current used vehicle, set at card insertion
 	 * 								to be set for the CardCurrentUse object
 	 */
-	public void setSessionOpenVehicle( VehicleRegistrationIdentification sessionOpenVehicle) {
+	public void setSessionOpenVehicle( VehicleRegistrationIdentification sessionOpenVehicle ) {
 		this.sessionOpenVehicle = sessionOpenVehicle;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(sessionOpenTime.generateXMLElement("sessionOpenTime") );
-		node.addContent(sessionOpenVehicle.generateXMLElement("sessionOpenVehicle") );
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( sessionOpenTime.generateXMLElement( "sessionOpenTime" ) );
+		node.addContent( sessionOpenVehicle.generateXMLElement( "sessionOpenVehicle" ) );
+
 		return node;
 	}
 }

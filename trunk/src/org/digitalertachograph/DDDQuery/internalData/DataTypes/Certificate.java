@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * The certificate of a public key issued by a Certification Authority.
+ */
 public class Certificate extends DataClass {
 	/*
 	 * Certificate :== OCTET STRING(SIZE(194)), 194 bytes
@@ -30,8 +33,8 @@ public class Certificate extends DataClass {
 	/**
 	 * Constructor for a Certificate object
 	 */
-	public Certificate(){
-		certificate = new byte[194];
+	public Certificate() {
+		certificate = new byte[ 194 ];
 	}
 
 	/**
@@ -41,7 +44,7 @@ public class Certificate extends DataClass {
 	 * 							whose data is used when the Certificate
 	 * 							object is created.
 	 */
-	public Certificate(byte[] certificate) {
+	public Certificate( byte[] certificate ) {
 		this.certificate = certificate;
 	}
 	
@@ -60,14 +63,15 @@ public class Certificate extends DataClass {
 	 * @param	certificate		byte array that contains the certificate
 	 *							to be set for the Certificate object
 	 */
-	public void setCertificate(byte[] certificate) {
+	public void setCertificate( byte[] certificate ) {
 		this.certificate = certificate;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(convertIntoHexString(certificate));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( convertIntoHexString( certificate ) );
+
 		return node;
 	}
 }

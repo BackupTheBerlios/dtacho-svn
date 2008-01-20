@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,7 +41,7 @@ public class CardFaultData extends DataClass {
 	 */
 
 	private static final int sequencesize = 2;
-	private Vector<Vector<CardFaultRecord>> cardFaultRecords = new Vector<Vector<CardFaultRecord>>(sequencesize);
+	private Vector<Vector<CardFaultRecord>> cardFaultRecords = new Vector<Vector<CardFaultRecord>>( sequencesize );
 
 	
 	/**
@@ -51,56 +51,51 @@ public class CardFaultData extends DataClass {
 	 * 					whose data is used when the CardFaultData
 	 * 					object is created.
 	 */
-	public CardFaultData(byte[] value, short nooffaultspertype) {
-
-		// we assume NoOfFaultsPerType is constant for all sets of fault records
-		// within the cardfaultdata sequence
-		//int nooffaultspertype = value.length / (sequencesize * 24);
-
-		System.out.println("  nooffaultspertype: " + nooffaultspertype);	
+	public CardFaultData( byte[] value, short nooffaultspertype ) {
+		System.out.println("  nooffaultspertype: " + nooffaultspertype );	
 
 		// loops are beautiful. cantaloop... funky, funky...
-		for (int j = 0; j < sequencesize; j++ ) {
+		for ( int j = 0; j < sequencesize; j++ ) {
 
-			cardFaultRecords.add(new Vector<CardFaultRecord>(24));
+			cardFaultRecords.add( new Vector<CardFaultRecord>( 24 ) );
 
-			for (int i = (nooffaultspertype * 24 * j); i < (nooffaultspertype * 24 * (j + 1)); i += 24) {
-				byte[] record = arrayCopy(value, i, 24);
-				CardFaultRecord tmp = new CardFaultRecord(record);
+			for ( int i = ( nooffaultspertype * 24 * j ); i < ( nooffaultspertype * 24 * ( j + 1 ) ); i += 24 ) {
+				byte[] record = arrayCopy( value, i, 24 );
+				CardFaultRecord tmp = new CardFaultRecord( record );
 
-				if (tmp.getFaultBeginTime().getTimereal() != 0) {
-					switch(j) {
-					case 0:
-						System.out.printf("  recording eq. fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType());
-						break;
+				if ( tmp.getFaultBeginTime().getTimereal() != 0 ) {
+					switch( j ) {
+						case 0:
+							System.out.printf( "  recording eq. fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							break;
 
-					case 1:
-						System.out.printf("  card fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType());
-						break;
+						case 1:
+							System.out.printf( "  card fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							break;
 
-					default:
-						break;
+						default:
+							break;
 					}
 				}
 
-				cardFaultRecords.get(j).add(tmp);
+				cardFaultRecords.get( j ).add( tmp );
 			}
 		}
 	}
 
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		for (int i = 0; i < sequencesize; i++) {
-			Element recordsnode = new Element("cardFaultRecords");
-			node.addContent(recordsnode);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		for ( int i = 0; i < sequencesize; i++ ) {
+			Element recordsnode = new Element( "cardFaultRecords" );
+			node.addContent( recordsnode );
 
-			Iterator<CardFaultRecord> it = cardFaultRecords.get(i).iterator();
-			while(it.hasNext()){
-				CardFaultRecord cfr = (CardFaultRecord) it.next();
-				Element cfrElement = cfr.generateXMLElement("cardFaultRecord");
-				recordsnode.addContent(cfrElement);
+			Iterator<CardFaultRecord> it = cardFaultRecords.get( i ).iterator();
+			while ( it.hasNext() ) {
+				CardFaultRecord cfr = (CardFaultRecord)it.next();
+				Element cfrElement = cfr.generateXMLElement( "cardFaultRecord" );
+				recordsnode.addContent( cfrElement );
 			}
 		}
 

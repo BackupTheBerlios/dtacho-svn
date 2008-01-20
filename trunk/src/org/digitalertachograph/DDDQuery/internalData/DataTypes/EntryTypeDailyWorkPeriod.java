@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code to distinguish between begin and end for an entry of a daily work period
+ * place and condition of the entry.
+ */
 public class EntryTypeDailyWorkPeriod extends DataClass {
 	/*
 	 * EntryTypeDailyWorkPeriod ::= INTEGER, 1 byte
@@ -49,7 +53,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * 					whose data is used when the EntryTypeDailyWorkPeriod
 	 * 					object is created.
 	 */
-	public EntryTypeDailyWorkPeriod(byte value) {
+	public EntryTypeDailyWorkPeriod( byte value ) {
 		entryTypeDailyWorkPeriod = value;
 	}
 
@@ -72,14 +76,15 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * 										work period place and condition of the entry to be set for the
 	 * 										EntryTypeDailyWorkPeriod object
 	 */
-	public void setEntryTypeDailyWorkPeriod(byte entryTypeDailyWorkPeriod) {
+	public void setEntryTypeDailyWorkPeriod( byte entryTypeDailyWorkPeriod ) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("entryTypeDailyWorkPeriod").setText( Byte.toString(entryTypeDailyWorkPeriod)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "entryTypeDailyWorkPeriod" ).setText( Byte.toString( entryTypeDailyWorkPeriod ) ) );
+
 		return node;
 	}
 }

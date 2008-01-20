@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@ package org.digitalertachograph.DDDQuery.internalData;
 
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
-
 
 /**
  * EF_Application_Identification,
@@ -62,13 +61,13 @@ public class EF_Application_Identification extends DataClass {
 	 * 					whose data is used when the EF_Application_Identification
 	 * 					object is created.
 	 */
-	public EF_Application_Identification(byte[] value) {
+	public EF_Application_Identification( byte[] value ) {
 		// size = value.length;
-		cardType = value[0];
+		cardType = value[ 0 ];
 
-		switch (cardType) {
+		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD:
-				driverCardApplicationIdentification = new DriverCardApplicationIdentification(value);
+				driverCardApplicationIdentification = new DriverCardApplicationIdentification( value );
 
 				cardStructureVersion = driverCardApplicationIdentification.getCardStructureVersion();
 				noOfEventsPerType = driverCardApplicationIdentification.getNoOfEventsPerType();
@@ -76,9 +75,11 @@ public class EF_Application_Identification extends DataClass {
 				activityStructureLength = driverCardApplicationIdentification.getActivityStructureLength();
 				noOfCardVehicleRecords = driverCardApplicationIdentification.getNoOfCardVehicleRecords();
 				noOfCardPlaceRecords = driverCardApplicationIdentification.getNoOfCardPlaceRecords();
+				System.out.println( " [INFO] this is a driver card" );
 				break;
+
 			case EquipmentType.WORKSHOP_CARD:
-				workshopCardApplicationIdentification = new WorkshopCardApplicationIdentification(value);
+				workshopCardApplicationIdentification = new WorkshopCardApplicationIdentification( value );
 
 				cardStructureVersion = workshopCardApplicationIdentification.getCardStructureVersion();
 				noOfEventsPerType = workshopCardApplicationIdentification.getNoOfEventsPerType();
@@ -87,18 +88,23 @@ public class EF_Application_Identification extends DataClass {
 				noOfCardVehicleRecords = workshopCardApplicationIdentification.getNoOfCardVehicleRecords();
 				noOfCardPlaceRecords = workshopCardApplicationIdentification.getNoOfCardPlaceRecords();
 				noOfCalibrationRecords = workshopCardApplicationIdentification.getNoOfCalibrationRecords();
+				System.out.println( " [INFO] this is a workshop card" );
 				break;
+
 			case EquipmentType.CONTROL_CARD:
-				controlCardApplicationIdentification = new ControlCardApplicationIdentification(value);
+				controlCardApplicationIdentification = new ControlCardApplicationIdentification( value );
 
 				cardStructureVersion = controlCardApplicationIdentification.getCardStructureVersion();
 				noOfControlActivityRecords = controlCardApplicationIdentification.getNoOfControlActivityRecords();
+				System.out.println( " [INFO] this is a control card" );
 				break;
+
 			case EquipmentType.COMPANY_CARD:
-				companyCardApplicationIdentification = new CompanyCardApplicationIdentification(value);
+				companyCardApplicationIdentification = new CompanyCardApplicationIdentification( value );
 
 				cardStructureVersion = companyCardApplicationIdentification.getCardStructureVersion();
 				noOfCompanyActivityRecords = companyCardApplicationIdentification.getNoOfCompanyActivityRecords();
+				System.out.println( " [INFO] this is a company card" );
 				break;
 				
 			default:
@@ -216,35 +222,40 @@ public class EF_Application_Identification extends DataClass {
 		return noOfCompanyActivityRecords;
 	}
 	
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
+		Element node = new Element( this.getClass().getSimpleName() );
 		Element child;
 		String child_name;
-		switch (cardType) {
-		case EquipmentType.DRIVER_CARD :
-			child_name = driverCardApplicationIdentification.getClass().getSimpleName();
-			child = driverCardApplicationIdentification.generateXMLElement(child_name);
-			break;
-		case EquipmentType.WORKSHOP_CARD :
-			child_name = workshopCardApplicationIdentification.getClass().getSimpleName(); 
-			child = workshopCardApplicationIdentification.generateXMLElement(child_name);
-			break;
-		case EquipmentType.CONTROL_CARD :
-			child_name = controlCardApplicationIdentification.getClass().getSimpleName();
-			child = controlCardApplicationIdentification.generateXMLElement(child_name);
-			break;
-		case EquipmentType.COMPANY_CARD :
-			child_name = companyCardApplicationIdentification.getClass().getSimpleName();
-			child = companyCardApplicationIdentification.generateXMLElement(child_name);
-			break;
+
+		switch ( cardType ) {
+			case EquipmentType.DRIVER_CARD :
+				child_name = driverCardApplicationIdentification.getClass().getSimpleName();
+				child = driverCardApplicationIdentification.generateXMLElement( child_name );
+				break;
+
+			case EquipmentType.WORKSHOP_CARD :
+				child_name = workshopCardApplicationIdentification.getClass().getSimpleName(); 
+				child = workshopCardApplicationIdentification.generateXMLElement( child_name );
+				break;
+
+			case EquipmentType.CONTROL_CARD :
+				child_name = controlCardApplicationIdentification.getClass().getSimpleName();
+				child = controlCardApplicationIdentification.generateXMLElement( child_name );
+				break;
+
+			case EquipmentType.COMPANY_CARD :
+				child_name = companyCardApplicationIdentification.getClass().getSimpleName();
+				child = companyCardApplicationIdentification.generateXMLElement( child_name );
+				break;
 			
-		default :
-			child = new Element("default");
-			break;
+			default :
+				child = new Element( "default" );
+				break;
 		}
 		
-		node.addContent(child);
+		node.addContent( child );
+
 		return node;
 	}
 }

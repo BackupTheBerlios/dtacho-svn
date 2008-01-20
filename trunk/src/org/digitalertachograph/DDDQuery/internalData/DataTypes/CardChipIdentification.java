@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a card, related to the identification of the card's
+ * Integrated Circuit (IC).
+ */
 public class CardChipIdentification extends DataClass {
 
 	/*
@@ -37,8 +41,8 @@ public class CardChipIdentification extends DataClass {
 	 * Constructor for a CardChipIdentification object
 	 */
 	public CardChipIdentification() {
-		icSerialNumber = new byte[4];
-		icManufacturingReferences = new byte[4];
+		icSerialNumber = new byte[ 4 ];
+		icManufacturingReferences = new byte[ 4 ];
 	}
 	
 	/**
@@ -57,7 +61,7 @@ public class CardChipIdentification extends DataClass {
 	 * @param	icSerialNumber		byte array that contains the IC serial number to be set for the
 	 * 								CardChipIdentification object
 	 */
-	public void setIcSerialNumber(byte[] icSerialNumber) {
+	public void setIcSerialNumber( byte[] icSerialNumber ) {
 		this.icSerialNumber = icSerialNumber;
 	}
 	
@@ -78,15 +82,16 @@ public class CardChipIdentification extends DataClass {
 	 * 										and fabrication elements to be set for the
 	 * 										CardChipIdentification object
 	 */
-	public void setIcManufacturingReferences(byte[] icManufacturingReferences) {
+	public void setIcManufacturingReferences( byte[] icManufacturingReferences ) {
 		this.icManufacturingReferences = icManufacturingReferences;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("icSerialNumber").setText(convertIntoHexString(icSerialNumber)) );
-		node.addContent(new Element("icManufacturingReferences").setText(convertIntoHexString(icManufacturingReferences)) );
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "icSerialNumber" ).setText( convertIntoHexString( icSerialNumber ) ) );
+		node.addContent( new Element( "icManufacturingReferences" ).setText(convertIntoHexString( icManufacturingReferences ) ) );
+
 		return node;
 	}
 }

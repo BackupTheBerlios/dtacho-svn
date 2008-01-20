@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code identifying a language.
+ */
 public class Language extends DataClass {
 	/* 
 	 * Language ::= IA5String(SIZE(2)), 2 bytes
@@ -32,7 +35,7 @@ public class Language extends DataClass {
 	/**
 	 * Constructor for a Language object
 	 */
-	public Language(){
+	public Language() {
 		language = new String();
 	}
 
@@ -43,8 +46,8 @@ public class Language extends DataClass {
 	 * 					whose data is used when the Language
 	 * 					object is created.
 	 */
-	public Language(byte[] value){
-		language = new String(value);
+	public Language( byte[] value ){
+		language = new String( value );
 	}
 
 	/**
@@ -61,14 +64,15 @@ public class Language extends DataClass {
 	 * 
 	 * @param	language	the code identifying the language to be set for the Language object
 	 */
-	public void setLanguage(String language) {
+	public void setLanguage( String language ) {
 		this.language = language;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("language").setText(language));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "language" ).setText( language ) );
+
 		return node;
 	}
 }

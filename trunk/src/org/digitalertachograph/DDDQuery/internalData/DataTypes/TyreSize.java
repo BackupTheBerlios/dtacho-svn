@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Designation of tyre dimensions.
+ */
 public class TyreSize extends DataClass {
 	/*
 	 * TyreSize ::= IA5String(SIZE(15)), 15 bytes
@@ -45,8 +48,8 @@ public class TyreSize extends DataClass {
 	 * 					whose data is used when the TyreSize
 	 * 					object is created.
 	 */
-	public TyreSize(byte[] value) {
-		tyreSize = new String(value);
+	public TyreSize( byte[] value) {
+		tyreSize = new String( value );
 	}
 
 	/**
@@ -63,12 +66,12 @@ public class TyreSize extends DataClass {
 	 * 
 	 * @param	tyreSize		the designation of tyre dimensions of a TyreSize object
 	 */
-	public void setTyreSize(String tyreSize) {
+	public void setTyreSize( String tyreSize ) {
 		this.tyreSize = tyreSize;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		return new Element(name).addContent(new Element("tyreSize").setText(tyreSize));
+	public Element generateXMLElement( String name ) {
+		return new Element( name ).addContent( new Element( "tyreSize" ).setText( tyreSize ) );
 	}
 }

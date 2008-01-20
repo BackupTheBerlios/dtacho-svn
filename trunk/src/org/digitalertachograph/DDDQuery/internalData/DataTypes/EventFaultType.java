@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code qualifying an event or a fault.
+ */
 public class EventFaultType extends DataClass {
 	/*
 	 * EventFaultType ::= OCTET STRING (SIZE(1)), 1 byte
@@ -125,16 +128,18 @@ public class EventFaultType extends DataClass {
 	 * 
 	 * @param	eventFaultType		byte that qualifies an event or fault
 	 */
-	public EventFaultType(byte eventFaultType) {
+	public EventFaultType( byte eventFaultType ) {
 		this.eventFaultType = eventFaultType;
-		category = (byte) ((eventFaultType & 0xF0) >> 4);
+		category = (byte)( ( eventFaultType & 0xf0 ) >> 4 );
 
-		if (category >= 5 && category < 8)
+		if ( ( category >= 5 ) && ( category < 8) ) {
 			// 0x50 ... 0x7F
 			category = RFU;
-		else if (category >= 8)
+		}
+		else if ( category >= 8 ) {
 			// 0x80 ... 0xFF
 			category = MANUFACTURER_SPECIFIC;
+		}
 	}
 
 	/**
@@ -155,7 +160,7 @@ public class EventFaultType extends DataClass {
 	 * @param	category	the category of the code qualifying an event or a fault
 	 * 						to be set for the EventFaultType object
 	 */
-	public void setCategory(byte category) {
+	public void setCategory( byte category ) {
 		this.category = category;
 	}
 
@@ -177,15 +182,16 @@ public class EventFaultType extends DataClass {
 	 * @param	eventFaultType		the code qualifying an event or a fault
 	 * 								to be set for the EventFaultType object
 	 */
-	public void setEventFaultType(byte eventFaultType) {
+	public void setEventFaultType( byte eventFaultType ) {
 		this.eventFaultType = eventFaultType;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("category").setText( Byte.toString(category)));
-		node.addContent( new Element("eventFaultType").setText( Byte.toString(eventFaultType)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "category" ).setText( Byte.toString( category ) ) );
+		node.addContent( new Element( "eventFaultType" ).setText( Byte.toString( eventFaultType ) ) );
+
 		return node;
 	}
 }

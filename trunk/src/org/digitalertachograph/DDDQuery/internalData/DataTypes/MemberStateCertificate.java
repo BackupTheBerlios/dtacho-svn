@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+/**
+ * The certificate of the public key of a Member State issued by the European
+ * certification authority.
+ */
 public class MemberStateCertificate extends Certificate {
 	/*
 	 * MemberStateCertificate ::= Certificate, 194 bytes
@@ -32,8 +36,8 @@ public class MemberStateCertificate extends Certificate {
 	/**
 	 * Constructor for a MemberStateCertificate object
 	 */
-	public MemberStateCertificate(byte[] certificate) {
-		super(certificate);
+	public MemberStateCertificate( byte[] certificate ) {
+		super( certificate );
 	}
 }
 

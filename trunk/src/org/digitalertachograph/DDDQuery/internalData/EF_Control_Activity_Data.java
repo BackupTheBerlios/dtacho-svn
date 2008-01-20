@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,15 +38,16 @@ public class EF_Control_Activity_Data extends DataClass {
 	 * 					whose data is used when the EF_Control_Activity_Data
 	 * 					object is created.
 	 */
-	public EF_Control_Activity_Data(byte[] value){
+	public EF_Control_Activity_Data( byte[] value ) {
 		//size = value.length;
-		cardControlActivityDataRecord = new CardControlActivityDataRecord(value);
+		cardControlActivityDataRecord = new CardControlActivityDataRecord( value );
 	}
 	
-	public Element generateXMLElement(String name){
-		Element node = new Element(name);
-		Element child = cardControlActivityDataRecord.generateXMLElement("cardControlActivityDataRecord");
-		node.addContent(child);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		Element child = cardControlActivityDataRecord.generateXMLElement( "cardControlActivityDataRecord" );
+		node.addContent( child );
+
 		return node;
 	}
 }

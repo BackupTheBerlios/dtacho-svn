@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Numerical reference to a region within a specified country.
+ */
 public class RegionNumeric extends DataClass {
 	/*
 	 * RegionNumeric ::= OCTET STRING (SIZE(1)), 1 byte
@@ -60,7 +63,7 @@ public class RegionNumeric extends DataClass {
 	 * 
 	 * @param	regionNumeric		byte with the numerical reference to a region within a specified country
 	 */
-	public RegionNumeric(byte regionNumeric) {
+	public RegionNumeric( byte regionNumeric ) {
 		this.regionNumeric = regionNumeric;
 	}
 
@@ -82,14 +85,15 @@ public class RegionNumeric extends DataClass {
 	 * @param	regionNumeric	the numerical reference to a region within a specified country
 	 * 							to be set for the RegionNumeric object
 	 */
-	public void setRegionNumeric(byte regionNumeric) {
+	public void setRegionNumeric( byte regionNumeric ) {
 		this.regionNumeric = regionNumeric;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("regionNumeric").setText( Byte.toString( regionNumeric )));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "regionNumeric" ).setText( Byte.toString( regionNumeric ) ) );
+
 		return node;
 	}
 }

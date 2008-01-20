@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or workshop card, related to the last control
+ * the driver has been subject to.
+ */
 public class CardControlActivityDataRecord extends DataClass {
 	/*
 	 * CardControlActivityDataRecord ::= SEQUENCE {
@@ -59,13 +63,13 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * 					whose data is used when the CardControlActivityDataRecord
 	 * 					object is created.
 	 */
-	public CardControlActivityDataRecord(byte[] value) {
-		controlType = new ControlType(value[0]);
-		controlTime = new TimeReal(arrayCopy(value, 1, 4));
-		controlCardNumber = new FullCardNumber(arrayCopy(value, 5, 18));
-		controlVehicleRegistration = new VehicleRegistrationIdentification(arrayCopy(value, 23, 15));
-		controlDownloadPeriodBegin = new TimeReal(arrayCopy(value, 38, 4));
-		controlDownloadPeriodEnd = new TimeReal(arrayCopy(value, 42, 4));
+	public CardControlActivityDataRecord( byte[] value ) {
+		controlType = new ControlType( value[ 0 ] );
+		controlTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+		controlCardNumber = new FullCardNumber( arrayCopy( value, 5, 18 ) );
+		controlVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 23, 15 ) );
+		controlDownloadPeriodBegin = new TimeReal( arrayCopy( value, 38, 4 ) );
+		controlDownloadPeriodEnd = new TimeReal( arrayCopy( value, 42, 4 ) );
 	}
 
 	/**
@@ -83,7 +87,7 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * @param	controlType		the type of the control to be set for the
 	 * 							CardControlActivityDataRecord object
 	 */
-	public void setControlType(ControlType controlType) {
+	public void setControlType( ControlType controlType ) {
 		this.controlType = controlType;
 	}
 
@@ -102,7 +106,7 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * @param	controlTime		timestamp of the control to be set for the
 	 * 							CardControlActivityDataRecord object
 	 */
-	public void setControlTime(TimeReal controlTime) {
+	public void setControlTime( TimeReal controlTime ) {
 		this.controlTime = controlTime;
 	}
 
@@ -124,7 +128,7 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * @param	controlCardNumber	control card number to be set for the
 	 * 								CardControlActivityDataRecord object
 	 */
-	public void setControlCardNumber(FullCardNumber controlCardNumber) {
+	public void setControlCardNumber( FullCardNumber controlCardNumber ) {
 		this.controlCardNumber = controlCardNumber;
 	}
 
@@ -147,7 +151,7 @@ public class CardControlActivityDataRecord extends DataClass {
 	 *				 							in which the control happened to be set for the
 	 * 											CardControlActivityDataRecord object
 	 */
-	public void setControlVehicleRegistration(VehicleRegistrationIdentification controlVehicleRegistration) {
+	public void setControlVehicleRegistration( VehicleRegistrationIdentification controlVehicleRegistration ) {
 		this.controlVehicleRegistration = controlVehicleRegistration;
 	}
 
@@ -168,7 +172,7 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * @param	controlDownloadPeriodBegin	timestamp of the download period beginning to be set for the
 	 * 										CardControlActivityDataRecord object
 	 */
-	public void setControlDownloadPeriodBegin(TimeReal controlDownloadPeriodBegin) {
+	public void setControlDownloadPeriodBegin( TimeReal controlDownloadPeriodBegin ) {
 		this.controlDownloadPeriodBegin = controlDownloadPeriodBegin;
 	}
 
@@ -189,12 +193,12 @@ public class CardControlActivityDataRecord extends DataClass {
 	 * @param	controlDownloadPeriodEnd	timestamp of the download period end to be set for the
 	 * 										CardControlActivityDataRecord object
 	 */
-	public void setControlDownloadPeriodEnd(TimeReal controlDownloadPeriodEnd) {
+	public void setControlDownloadPeriodEnd( TimeReal controlDownloadPeriodEnd ) {
 		this.controlDownloadPeriodEnd = controlDownloadPeriodEnd;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
+	public Element generateXMLElement( String name ) {
 		/*
 		 * CardControlActivityDataRecord ::= SEQUENCE {
 		 * 	controlType ControlType, 1 byte
@@ -206,13 +210,13 @@ public class CardControlActivityDataRecord extends DataClass {
 		 * }
 		 */
 
-		Element node = new Element(name);
-		node.addContent( controlType.generateXMLElement("controlType") );
-		node.addContent( controlTime.generateXMLElement("controlTime") );
-		node.addContent( controlCardNumber.generateXMLElement("controlCardNumber") );
-		node.addContent( controlVehicleRegistration.generateXMLElement("controlVehicleRegistration") );
-		node.addContent( controlDownloadPeriodBegin.generateXMLElement("controlDownloadPeriodBegin") );
-		node.addContent( controlDownloadPeriodEnd.generateXMLElement("controlDownloadPeriodEnd") );
+		Element node = new Element( name );
+		node.addContent( controlType.generateXMLElement( "controlType" ) );
+		node.addContent( controlTime.generateXMLElement( "controlTime" ) );
+		node.addContent( controlCardNumber.generateXMLElement( "controlCardNumber" ) );
+		node.addContent( controlVehicleRegistration.generateXMLElement( "controlVehicleRegistration" ) );
+		node.addContent( controlDownloadPeriodBegin.generateXMLElement( "controlDownloadPeriodBegin" ) );
+		node.addContent( controlDownloadPeriodEnd.generateXMLElement( "controlDownloadPeriodEnd" ) );
 
 		return node;
 	}	

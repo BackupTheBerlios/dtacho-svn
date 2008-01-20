@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a card, related to the identification of the integrated
+ * circuit (IC) card.
+ */
 public class CardIccIdentification extends DataClass {
 	/*
 	 * CardIccIdentification ::= SEQUENCE {
@@ -57,8 +61,8 @@ public class CardIccIdentification extends DataClass {
 		cardExtendedSerialNumber = new ExtendedSerialNumber();
 		cardApprovalNumber = new String();
 		cardPersonaliserID = 0;
-		embedderIcAssemblerID = new byte[5];
-		icIdentifier = new byte[2];
+		embedderIcAssemblerID = new byte[ 5 ];
+		icIdentifier = new byte[ 2 ];
 	}
 
 	/**
@@ -68,13 +72,13 @@ public class CardIccIdentification extends DataClass {
 	 * 					whose data is used when the CardIccIdentification
 	 * 					object is created.
 	 */
-	public CardIccIdentification(byte[] value) {
-		clockStop = value[0];
-		cardExtendedSerialNumber = new ExtendedSerialNumber(arrayCopy(value, 1, 8));
-		cardApprovalNumber = new String(arrayCopy(value, 9, 8));
-		cardPersonaliserID = value[17];
-		embedderIcAssemblerID = arrayCopy(value, 18, 5);
-		icIdentifier = arrayCopy(value, 23, 2);
+	public CardIccIdentification( byte[] value ) {
+		clockStop = value[ 0 ];
+		cardExtendedSerialNumber = new ExtendedSerialNumber( arrayCopy( value, 1, 8 ) );
+		cardApprovalNumber = new String( arrayCopy( value, 9, 8 ) );
+		cardPersonaliserID = value[ 17 ];
+		embedderIcAssemblerID = arrayCopy( value, 18, 5 );
+		icIdentifier = arrayCopy( value, 23, 2 );
 	}
 	
 	/**
@@ -95,7 +99,7 @@ public class CardIccIdentification extends DataClass {
 	 * @param	clockStop	the Clockstop mode as defined in EN 726-3
 	 * 						to be set for the CardIccIdentification object
 	 */
-	public void setClockStop(byte clockStop) {
+	public void setClockStop( byte clockStop ) {
 		this.clockStop = clockStop;
 	}
 
@@ -137,7 +141,7 @@ public class CardIccIdentification extends DataClass {
 	 * @param	cardApprovalNumber	the type approval number of the card of a CardIccIdentification object
 	 * 								to be set for the CardIccIdentification object
 	 */
-	public void setCardApprovalNumber(String cardApprovalNumber) {
+	public void setCardApprovalNumber( String cardApprovalNumber ) {
 		this.cardApprovalNumber = cardApprovalNumber;
 	}
 
@@ -157,7 +161,7 @@ public class CardIccIdentification extends DataClass {
 	 * @param	cardPersonaliserID	the card personaliser ID as defined in EN 726-3 of a CardIccIdentification object
 	 * 								to be set for the CardIccIdentification object
 	 */
-	public void setCardPersonaliserID(byte cardPersonaliserID) {
+	public void setCardPersonaliserID( byte cardPersonaliserID ) {
 		this.cardPersonaliserID = cardPersonaliserID;
 	}
 
@@ -179,7 +183,7 @@ public class CardIccIdentification extends DataClass {
 	 * @param	embedderIcAssemblerID	the embedder/IC assembler identifier as defined in EN 726-3
 	 * 									to be set for the CardIccIdentification object
 	 */
-	public void setEmbedderIcAssemblerID(byte[] embedderIcAssemblerID) {
+	public void setEmbedderIcAssemblerID( byte[] embedderIcAssemblerID ) {
 		this.embedderIcAssemblerID = embedderIcAssemblerID;
 	}
 
@@ -201,19 +205,20 @@ public class CardIccIdentification extends DataClass {
 	 * @param	icIdentifier	the identifier of the IC on the card and its IC manufacturer as defined
 	 * 							to be set for the CardIccIdentification object
 	 */
-	public void setIcIdentifier(byte[] icIdentifier) {
+	public void setIcIdentifier( byte[] icIdentifier ) {
 		this.icIdentifier = icIdentifier;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("clockStop").setText( Byte.toString(clockStop) ));
-		node.addContent( cardExtendedSerialNumber.generateXMLElement("cardExtendedSerialNumber"));
-		node.addContent( new Element("cardApprovalNumber").setText(cardApprovalNumber));
-		node.addContent( new Element("cardPersonaliserID").setText( convertIntoHexString(cardPersonaliserID)));
-		node.addContent( new Element("embedderIcAssemblerID").setText( convertIntoHexString(embedderIcAssemblerID)));
-		node.addContent( new Element("icIdentifier").setText( convertIntoHexString(icIdentifier)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "clockStop" ).setText( Byte.toString( clockStop ) ) );
+		node.addContent( cardExtendedSerialNumber.generateXMLElement( "cardExtendedSerialNumber" ) );
+		node.addContent( new Element( "cardApprovalNumber" ).setText( cardApprovalNumber ) );
+		node.addContent( new Element( "cardPersonaliserID" ).setText( convertIntoHexString( cardPersonaliserID ) ) );
+		node.addContent( new Element( "embedderIcAssemblerID" ).setText( convertIntoHexString( embedderIcAssemblerID ) ) );
+		node.addContent( new Element( "icIdentifier" ).setText( convertIntoHexString( icIdentifier ) ) );
+
 		return node;
 	}
 }

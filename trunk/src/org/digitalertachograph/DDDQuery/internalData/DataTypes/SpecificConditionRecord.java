@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver card, a workshop card or a vehicle unit, related to
+ * a specific condition.
+ */
 public class SpecificConditionRecord extends DataClass {
 	/*
 	 * SpecificConditionRecord ::= SEQUENCE {
@@ -46,9 +50,9 @@ public class SpecificConditionRecord extends DataClass {
 	 * 					whose data is used when the SpecificConditionRecord
 	 * 					object is created.
 	 */
-	public SpecificConditionRecord(byte[] value) {
-		entryTime = new TimeReal(arrayCopy(value, 0, 4));
-		specificConditionType = new SpecificConditionType(value[4]);
+	public SpecificConditionRecord( byte[] value ) {
+		entryTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+		specificConditionType = new SpecificConditionType( value[ 4 ] );
 	}
 
 	/**
@@ -65,7 +69,7 @@ public class SpecificConditionRecord extends DataClass {
 	 * 
 	 * @param	entryTime	the timestamp of the entry to be set for the SpecificConditionRecord object
 	 */
-	public void setEntryTime(TimeReal entryTime) {
+	public void setEntryTime( TimeReal entryTime ) {
 		this.entryTime = entryTime;
 	}
 
@@ -87,15 +91,16 @@ public class SpecificConditionRecord extends DataClass {
 	 * @param	specificConditionType	the SpecificConditionType object with the code identifying the
 	 * 									specific condition to be set for the SpecificConditionRecord object
 	 */
-	public void setSpecificConditionType(SpecificConditionType specificConditionType) {
+	public void setSpecificConditionType( SpecificConditionType specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( entryTime.generateXMLElement("entryTime"));
-		node.addContent( specificConditionType.generateXMLElement("specificConditionType"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( entryTime.generateXMLElement( "entryTime" ) );
+		node.addContent( specificConditionType.generateXMLElement( "specificConditionType" ) );
+
 		return node;
 	}
 }

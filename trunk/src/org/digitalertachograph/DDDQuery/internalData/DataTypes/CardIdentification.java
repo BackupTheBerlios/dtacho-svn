@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.*;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a card, related to the identification of the card.
+ */
 public class CardIdentification extends DataClass {
 	/*
 	 * CardIdentification ::= SEQUENCE {
@@ -59,13 +62,13 @@ public class CardIdentification extends DataClass {
 	 * 					whose data is used when the CardIdentification
 	 * 					object is created.
 	 */
-	public CardIdentification(byte[] value, int cardType) {
-		cardIssuingMemberState = new NationNumeric(value[0]);
-		cardNumber = new CardNumber(arrayCopy(value, 1, 16), cardType );
-		cardIssuingAuthorityName = new Name(arrayCopy(value, 17, 36));
-		cardIssueDate = new TimeReal(arrayCopy(value, 53, 4));
-		cardValidityBegin = new TimeReal(arrayCopy(value, 57, 4));
-		cardExpiryDate = new TimeReal(arrayCopy(value, 61, 4));
+	public CardIdentification( byte[] value, int cardType ) {
+		cardIssuingMemberState = new NationNumeric( value[ 0 ] );
+		cardNumber = new CardNumber( arrayCopy( value, 1, 16 ), cardType );
+		cardIssuingAuthorityName = new Name( arrayCopy( value, 17, 36 ) );
+		cardIssueDate = new TimeReal( arrayCopy( value, 53, 4 ) );
+		cardValidityBegin = new TimeReal( arrayCopy( value, 57, 4 ) );
+		cardExpiryDate = new TimeReal( arrayCopy( value, 61, 4 ) );
 	}
 	
 	/**
@@ -86,7 +89,7 @@ public class CardIdentification extends DataClass {
 	 * @param	cardIssuingMemberState	the code of the Member State issuing the card
 	 * 									to be set for the CardIdentification object
 	 */
-	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
+	public void setCardIssuingMemberState( NationNumeric cardIssuingMemberState ) {
 		this.cardIssuingMemberState = cardIssuingMemberState;
 	}
 
@@ -97,8 +100,8 @@ public class CardIdentification extends DataClass {
 	 * @param	cardIssuingMemberState	the code of the Member State issuing the card
 	 * 									to be set for the CardIdentification object
 	 */
-	public void setCardIssuingMemberState(short cardIssuingMemberState) {
-		this.cardIssuingMemberState.setNationNumeric( cardIssuingMemberState);
+	public void setCardIssuingMemberState( short cardIssuingMemberState ) {
+		this.cardIssuingMemberState.setNationNumeric( cardIssuingMemberState );
 	}
 
 	/**
@@ -116,7 +119,7 @@ public class CardIdentification extends DataClass {
 	 * @param	cardNumber	the card number of the card to be set
 	 * 						for the CardIdentification object
 	 */
-	public void setCardNumber(CardNumber cardNumber) {
+	public void setCardNumber( CardNumber cardNumber ) {
 		this.cardNumber = cardNumber;
 	}
 
@@ -137,7 +140,7 @@ public class CardIdentification extends DataClass {
 	 * @param	cardIssuingAuthorityName	the name of the authority having issued the card
 	 * 										to be set for the CardIdentification object
 	 */
-	public void setCardIssuingAuthorityName(Name cardIssuingAuthorityName) {
+	public void setCardIssuingAuthorityName( Name cardIssuingAuthorityName ) {
 		this.cardIssuingAuthorityName = cardIssuingAuthorityName;
 	}
 
@@ -158,7 +161,7 @@ public class CardIdentification extends DataClass {
 	 * @param	cardIssueDate	the issue date of the card to the current holder
 	 * 							to be set for the CardIdentification object
 	 */
-	public void setCardIssueDate(TimeReal cardIssueDate) {
+	public void setCardIssueDate( TimeReal cardIssueDate ) {
 		this.cardIssueDate = cardIssueDate;
 	}
 
@@ -177,7 +180,7 @@ public class CardIdentification extends DataClass {
 	 * @param	cardValidityBegin	the first date of validity of the card
 	 * 								to be set for the CardIdentification object
 	 */
-	public void setCardValidityBegin(TimeReal cardValidityBegin) {
+	public void setCardValidityBegin( TimeReal cardValidityBegin ) {
 		this.cardValidityBegin = cardValidityBegin;
 	}
 	
@@ -196,19 +199,19 @@ public class CardIdentification extends DataClass {
 	 * @param	cardExpiryDate	the date when the validity of the card ends
 	 * 							to be set for the CardIdentification object
 	 */
-	public void setCardExpiryDate(TimeReal cardExpiryDate) {
+	public void setCardExpiryDate( TimeReal cardExpiryDate ) {
 		this.cardExpiryDate = cardExpiryDate;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( cardIssuingMemberState.generateXMLElement("cardIssuingMemberState"));
-		node.addContent( cardNumber.generateXMLElement("cardNumber"));
-		node.addContent( cardIssuingAuthorityName.generateXMLElement("cardIssuingAuthorityName"));
-		node.addContent( cardIssueDate.generateXMLElement("cardIssueDate"));
-		node.addContent( cardValidityBegin.generateXMLElement("cardValidityBegin"));
-		node.addContent( cardExpiryDate.generateXMLElement("cardExpiryDate"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( cardIssuingMemberState.generateXMLElement( "cardIssuingMemberState" ) );
+		node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );
+		node.addContent( cardIssuingAuthorityName.generateXMLElement( "cardIssuingAuthorityName" ) );
+		node.addContent( cardIssueDate.generateXMLElement( "cardIssueDate" ) );
+		node.addContent( cardValidityBegin.generateXMLElement( "cardValidityBegin" ) );
+		node.addContent( cardExpiryDate.generateXMLElement( "cardExpiryDate" ) );
 		
 		return node;
 	}

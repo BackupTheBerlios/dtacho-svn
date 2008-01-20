@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 */
 	public CompanyCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[2];
+		cardStructureVersion = new byte[ 2 ];
 		noOfCompanyActivityRecords = 0;
 	}
 
@@ -62,10 +62,10 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * 					whose data is used when the CompanyCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public CompanyCardApplicationIdentification(byte[] value) {
-		typeOfTachographCardId = new EquipmentType(value[0]);
-		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfCompanyActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 3, 2));
+	public CompanyCardApplicationIdentification( byte[] value ) {
+		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
+		cardStructureVersion = arrayCopy( value, 1, 2 );
+		noOfCompanyActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy( value, 3, 2 ) );
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @param	typeOfTachographCardId	the implemented type of card to be set
 	 * 									for the CompanyCardApplicationIdentification object
 	 */
-	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
+	public void setTypeOfTachographCardId( EquipmentType typeOfTachographCardId ) {
 		this.typeOfTachographCardId = typeOfTachographCardId;
 	}
 
@@ -105,7 +105,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
 	 * 									to be set for the CompanyCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion(byte[] cardStructureVersion) {
+	public void setCardStructureVersion( byte[] cardStructureVersion ) {
 		this.cardStructureVersion = cardStructureVersion;
 	}
 
@@ -127,16 +127,17 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @param	noOfCompanyActivityRecords	the number of company activity records the card can store
 	 * 										to be set for the CompanyCardApplicationIdentification object
 	 */
-	public void setNoOfCompanyActivityRecords(int noOfCompanyActivityRecords) {
+	public void setNoOfCompanyActivityRecords( int noOfCompanyActivityRecords ) {
 		this.noOfCompanyActivityRecords = noOfCompanyActivityRecords;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( typeOfTachographCardId.generateXMLElement("typeOfTachographCardId"));
-		node.addContent( new Element("cardStructureVersion").setText( convertIntoHexString(cardStructureVersion)));
-		node.addContent( new Element("noOfCompanyActivityRecords").setText(Integer.toString(noOfCompanyActivityRecords)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
+		node.addContent( new Element( "cardStructureVersion" ).setText( convertIntoHexString( cardStructureVersion ) ) );
+		node.addContent( new Element( "noOfCompanyActivityRecords" ).setText( Integer.toString( noOfCompanyActivityRecords ) ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,13 +19,16 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 //import org.digitalertachograph.DDDQuery.internalData.DataClass;
 
+/**
+ * Date and time, stored on a driver card, of last card download (for other purposes
+ * than control). This date is updateable by a VU or any card reader.
+ */
 public class LastCardDownload extends TimeReal {
-
 	
 	/**
 	 * Constructor for a LastDownload object
 	 */
-	public LastCardDownload(){
+	public LastCardDownload() {
 		super();
 	}
 
@@ -36,8 +39,8 @@ public class LastCardDownload extends TimeReal {
 	 * 					whose data is used when the LastCardDownload
 	 * 					object is created.
 	 */
-	public LastCardDownload(byte[] value){
-		super(value);
+	public LastCardDownload( byte[] value ) {
+		super( value );
 	}
 
 	/**
@@ -46,7 +49,7 @@ public class LastCardDownload extends TimeReal {
 	 * @param	i		the code for a combined date and time field, where the date and time
 	 * 					are expressed as seconds past 00h.00m.00s on January 1970 GMT.
 	 */
-	public LastCardDownload(long i){
-		super(i);
+	public LastCardDownload( long i ) {
+		super( i );
 	}
 }

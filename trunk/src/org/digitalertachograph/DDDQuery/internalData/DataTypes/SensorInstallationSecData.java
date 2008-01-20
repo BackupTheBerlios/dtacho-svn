@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information stored in a workshop card, related to the security data needed for
+ * pairing motion sensors to vehicle units.
+ */
 public class SensorInstallationSecData extends DataClass {
 	/*
 	 * Information, stored in a workshop card, related to the security data needed for
@@ -42,9 +46,9 @@ public class SensorInstallationSecData extends DataClass {
 	/**
 	 * Constructor for a SensorInstallationSecData object
 	 */
-	public SensorInstallationSecData(){
-		tDesKeyA = new byte[8];
-		tDesKeyB = new byte[8];
+	public SensorInstallationSecData() {
+		tDesKeyA = new byte[ 8 ];
+		tDesKeyB = new byte[ 8 ];
 	}
 
 	/**
@@ -54,9 +58,9 @@ public class SensorInstallationSecData extends DataClass {
 	 * 					whose data is used when the SensorInstallationSecData
 	 * 					object is created.
 	 */
-	public SensorInstallationSecData(byte[] value){
-		tDesKeyA = arrayCopy(value, 0, 8);
-		tDesKeyB = arrayCopy(value, 8, 8);
+	public SensorInstallationSecData( byte[] value ){
+		tDesKeyA = arrayCopy( value, 0, 8 );
+		tDesKeyB = arrayCopy( value, 8, 8 );
 	}
 
 	/**
@@ -73,7 +77,7 @@ public class SensorInstallationSecData extends DataClass {
 	 * 
 	 * @param	tDesKeyA	the TDesKeyA to be set for the SensorInstallationSecData object
 	 */
-	public void setTDesKeyA(byte[] tDesKeyA) {
+	public void setTDesKeyA( byte[] tDesKeyA ) {
 		this.tDesKeyA = tDesKeyA;
 	}
 
@@ -91,15 +95,16 @@ public class SensorInstallationSecData extends DataClass {
 	 * 
 	 * @param	tDesKeyB	the TDesKeyB to be set for the SensorInstallationSecData object
 	 */
-	public void setTDesKeyB(byte[] tDesKeyB) {
+	public void setTDesKeyB( byte[] tDesKeyB ) {
 		this.tDesKeyB = tDesKeyB;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("tDesKeyA").setText( convertIntoHexString( tDesKeyA )));
-		node.addContent( new Element("tDesKeyB").setText( convertIntoHexString( tDesKeyB )));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "tDesKeyA" ).setText( convertIntoHexString( tDesKeyA ) ) );
+		node.addContent( new Element( "tDesKeyB" ).setText( convertIntoHexString( tDesKeyB ) ) );
+
 		return node;
 	}
 }

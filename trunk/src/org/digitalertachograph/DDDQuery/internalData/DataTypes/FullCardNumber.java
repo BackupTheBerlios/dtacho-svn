@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code fully identifying a tachograph card.
+ */
 public class FullCardNumber extends DataClass {
 	/*
 	 * FullCardNumber ::= SEQUENCE {
@@ -50,11 +53,11 @@ public class FullCardNumber extends DataClass {
 	 * 					whose data is used when the FullCardNumber
 	 * 					object is created.
 	 */
-	public FullCardNumber(byte[] value) {
-		cardType = new EquipmentType(value[0]);
-		cardIssuingMemberState = new NationNumeric(value[1]);
+	public FullCardNumber( byte[] value ) {
+		cardType = new EquipmentType( value[ 0 ] );
+		cardIssuingMemberState = new NationNumeric( value[ 1 ] );
 		// TODO not sure bout this solution.
-		cardNumber = new CardNumber( arrayCopy(value, 2, 16), cardType.getEquipmentType() );
+		cardNumber = new CardNumber( arrayCopy( value, 2, 16 ), cardType.getEquipmentType() );
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class FullCardNumber extends DataClass {
 	 * @param	cardType	the type of the tachograph card	to be set for
 	 * 						the FullCardNumber object
 	 */
-	public void setCardType(EquipmentType cardType) {
+	public void setCardType( EquipmentType cardType ) {
 		this.cardType = cardType;
 	}
 	
@@ -91,7 +94,7 @@ public class FullCardNumber extends DataClass {
 	 * @param	cardIssuingMemberState		the code of the Member State having issued the card to be set for
 	 * 										the FullCardNumber object
 	 */
-	public void setCardIssuingMemberState(NationNumeric cardIssuingMemberState) {
+	public void setCardIssuingMemberState( NationNumeric cardIssuingMemberState ) {
 		this.cardIssuingMemberState = cardIssuingMemberState;
 	}
 	
@@ -109,16 +112,17 @@ public class FullCardNumber extends DataClass {
 	 * 
 	 * @param	cardNumber		the card number to be set for the FullCardNumber object
 	 */
-	public void setCardNumber(CardNumber cardNumber) {
+	public void setCardNumber( CardNumber cardNumber ) {
 		this.cardNumber = cardNumber;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( cardType.generateXMLElement("cardType"));
-		node.addContent( cardIssuingMemberState.generateXMLElement("cardIssuingMemberState"));
-		node.addContent( cardNumber.generateXMLElement("cardNumber"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( cardType.generateXMLElement( "cardType" ) );
+		node.addContent( cardIssuingMemberState.generateXMLElement( "cardIssuingMemberState" ) );
+		node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );
+
 		return node;
 	}
 }

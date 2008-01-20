@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.text.DateFormat;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Vector;
 
 import java.util.Date;
@@ -27,6 +26,10 @@ import java.util.Date;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a card, related to the driver activities for a
+ * particular calendar day.
+ */
 public class CardActivityDailyRecord extends DataClass {
 	/*
 	 * CardActivityDailyRecord ::= SEQUENCE {
@@ -67,30 +70,51 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 					whose data is used when the CardActivityDailyRecord
 	 * 					object is created
 	 */
-	public CardActivityDailyRecord(byte[] value) {
+	public CardActivityDailyRecord( byte[] value ) {
 
 		// if we get so less bytes we have just a part of an old CardActivityDailyRecord.
-		if (value.length <= 12)
+		if ( value.length <= 12 )
 			return;
 		
-		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2));
-		this.activityRecordLength = convertIntoUnsigned2ByteInt(arrayCopy(value, 2, 2));
-		this.activityRecordDate = new TimeReal(arrayCopy(value, 4, 4));
-		this.activityDailyPresenceCounter = arrayCopy(value, 8, 2);
-		this.activityDayDistance = convertIntoUnsigned2ByteInt(arrayCopy(value, 10, 2));
+		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
+		this.activityRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) );
+		this.activityRecordDate = new TimeReal( arrayCopy( value, 4, 4 ) );
+		this.activityDailyPresenceCounter = arrayCopy( value, 8, 2 );
+		this.activityDayDistance = convertIntoUnsigned2ByteInt( arrayCopy( value, 10, 2) );
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
 		System.out.printf("  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / 2 );
 		
 		// TODO wie haben wir length in den anderen Klassen genannt?!?
 		int length = 12; // we have 12 bytes so far
-		for(;length < activityRecordLength; length += 2){
+		for ( ;length < activityRecordLength; length += 2 ) {
 			// ActivityChangeInfo <- 2 bytes
-			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy(value, length, 2) );
+			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, 2 ) );
 			activityChangeInfo.add( aci );
 
 			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
-			System.out.printf( "   %s, activity %02x\n", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.GERMANY).format(d), aci.getActivity() );
+			System.out.printf( "   %s, activity %02x ", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getActivity() );
+			switch ( aci.getActivity() ) {
+				case ActivityChangeInfo.BREAK:
+					System.out.println( "- break" );
+					break;
+
+				case ActivityChangeInfo.AVAILABILITY:
+					System.out.println( "- availability" );
+					break;
+
+				case ActivityChangeInfo.WORK:
+					System.out.println( "- work" );
+					break;
+
+				case ActivityChangeInfo.DRIVING:
+					System.out.println( "- driving" );
+					break;
+
+				default:
+					System.out.println( "- ???" );
+					break;
+			}
 		}
 		this.complete = true;
 	}
@@ -123,38 +147,24 @@ public class CardActivityDailyRecord extends DataClass {
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 		
-		node.addContent(
-				new Element("activityPreviousRecordLength").setText( 
-						Integer.toString(activityPreviousRecordLength)
-				)
-		);
+		node.addContent( new Element( "activityPreviousRecordLength" ).setText( Integer.toString( activityPreviousRecordLength ) ) );
 		
-		node.addContent(
-				new Element("activityRecordLength").setText(
-						Integer.toString(activityRecordLength)
-				)
-		);
+		node.addContent( new Element( "activityRecordLength" ).setText( Integer.toString( activityRecordLength ) ) );
 		
-		node.addContent( activityRecordDate.generateXMLElement("activityRecordDate"));
+		node.addContent( activityRecordDate.generateXMLElement( "activityRecordDate" ) );
 		
-		node.addContent(
-				new Element("activityDailyPresenceCounter").setText(convertBCDStringIntoString(activityDailyPresenceCounter))
-		);
+		node.addContent( new Element( "activityDailyPresenceCounter" ).setText( convertBCDStringIntoString( activityDailyPresenceCounter ) ) );
 		
-		node.addContent(
-				new Element("activityDayDistance").setText(
-						Integer.toString(activityDayDistance)
-				)
-		);
+		node.addContent( new Element( "activityDayDistance" ).setText( Integer.toString( activityDayDistance ) ) );
 
 		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();
-		Element activityChangeInfoElement = new Element("activityChangeInfoSet");
-		while (it.hasNext()) {
-			ActivityChangeInfo aci = (ActivityChangeInfo) it.next();
-			activityChangeInfoElement.addContent( aci.generateXMLElement("activityChangeInfo"));
+		Element activityChangeInfoElement = new Element( "activityChangeInfoSet" );
+		while ( it.hasNext() ) {
+			ActivityChangeInfo aci = (ActivityChangeInfo)it.next();
+			activityChangeInfoElement.addContent( aci.generateXMLElement( "activityChangeInfo" ) );
 		}
 		node.addContent( activityChangeInfoElement );
 

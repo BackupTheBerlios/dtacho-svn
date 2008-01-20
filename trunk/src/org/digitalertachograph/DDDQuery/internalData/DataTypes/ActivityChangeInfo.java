@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Slot status at 00.00 and/or a driver status at 00.00 and/or changes of activity
+ *  and/or changes of driving status and/or changes of card status for a driver or a co-driver.
+ */
 public class ActivityChangeInfo extends DataClass {
 	/*	
 	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2)), 2 bytes
@@ -125,17 +129,17 @@ public class ActivityChangeInfo extends DataClass {
 	 * 					whose data is used when the ActivityChangeInfo
 	 * 					object is created
 	 */
-	public ActivityChangeInfo(byte[] value) {
+	public ActivityChangeInfo( byte[] value ) {
 		this.value = value;
-		slot = ((value[0] & SLOT_MASK) == SLOT_MASK);
-		drivingStatus = ((value[0] & DRIVINGSTATUS_MASK) == DRIVINGSTATUS_MASK);
-		cardStatus = ((value[0] & CARDSTATUS_MASK) == CARDSTATUS_MASK);
+		slot = ( ( value[ 0 ] & SLOT_MASK ) == SLOT_MASK );
+		drivingStatus = ((value[ 0 ] & DRIVINGSTATUS_MASK ) == DRIVINGSTATUS_MASK );
+		cardStatus = ( ( value[ 0 ] & CARDSTATUS_MASK ) == CARDSTATUS_MASK );
 
-		activity = (byte) (value[0] & ACTIVITY_MASK);
-		activity = (byte) (activity >> 3);
+		activity = (byte)( value[ 0 ] & ACTIVITY_MASK );
+		activity = (byte)( activity >> 3);
 		
-		byte tmp = (byte) (value[0] & TIME_UPPERBYTE_MASK);
-		time = convertIntoUnsigned2ByteInt( new byte[] { tmp, (byte) (value[1] & TIME_LOWERBYTE_MASK)});
+		byte tmp = (byte)( value[ 0 ] & TIME_UPPERBYTE_MASK );
+		time = convertIntoUnsigned2ByteInt( new byte[] { tmp, (byte)( value[ 1 ] & TIME_LOWERBYTE_MASK ) } );
 	}
 
 	/**
@@ -184,17 +188,17 @@ public class ActivityChangeInfo extends DataClass {
 	public int getTime() {
 		return time;
 	}
-	
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("value").setText( convertIntoHexString(this.value)));
-		node.addContent( new Element("slot").setText( Boolean.toString( slot )));
-		node.addContent( new Element("drivingStatus").setText( Boolean.toString( drivingStatus )));
-		node.addContent( new Element("cardStatus").setText( Boolean.toString( cardStatus )));
-		node.addContent( new Element("activity").setText( convertIntoHexString( activity )));
-		node.addContent( new Element("time").setText(Integer.toString( time )));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "value" ).setText( convertIntoHexString( this.value ) ) );
+		node.addContent( new Element( "slot" ).setText( Boolean.toString( slot ) ) );
+		node.addContent( new Element( "drivingStatus" ).setText( Boolean.toString( drivingStatus ) ) );
+		node.addContent( new Element( "cardStatus" ).setText( Boolean.toString( cardStatus ) ) );
+		node.addContent( new Element( "activity" ).setText( convertIntoHexString( activity ) ) );
+		node.addContent( new Element( "time" ).setText( Integer.toString( time ) ) );
+
 		return node;
 	}
 }

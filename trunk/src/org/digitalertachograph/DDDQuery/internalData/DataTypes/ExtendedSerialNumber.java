@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code explaining why an event or a fault has been recorded.
+ */
 public class ExtendedSerialNumber extends DataClass {
 	/*
 	 * ExtendedSerialNumber ::= SEQUENCE {
@@ -31,7 +34,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 */
 
 	private long serialNumber; // 4 bytes int unsigned
-	private byte[] monthYear = new byte[2];
+	private byte[] monthYear;
 	private byte type;
 	private short manufacturerCode;
 
@@ -41,7 +44,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 */
 	public ExtendedSerialNumber() {
 		serialNumber = 0;
-		monthYear = new byte[2];
+		monthYear = new byte[ 2 ];
 		type = 0; 
 		manufacturerCode = 0; 
 	}
@@ -53,11 +56,11 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 										whose data is used when the ExtendedSerialNumber
 	 * 										object is created.
 	 */
-	public ExtendedSerialNumber(byte[] cardExtendedSerialNumber ) {
-		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy(cardExtendedSerialNumber, 0 , 4));
-		monthYear = arrayCopy(cardExtendedSerialNumber, 4, 2);
-		type = cardExtendedSerialNumber[6]; 
-		manufacturerCode = convertIntoUnsigned1ByteInt(cardExtendedSerialNumber[7]); 
+	public ExtendedSerialNumber( byte[] cardExtendedSerialNumber ) {
+		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy( cardExtendedSerialNumber, 0 , 4 ) );
+		monthYear = arrayCopy( cardExtendedSerialNumber, 4, 2 );
+		type = cardExtendedSerialNumber[ 6 ]; 
+		manufacturerCode = convertIntoUnsigned1ByteInt( cardExtendedSerialNumber[ 7 ] ); 
 	}
 
 	/**
@@ -79,7 +82,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 							the equipment's type and the month below to be set for the
 	 * 							ExtendedSerialNumber object
 	 */
-	public void setSerialNumber(long serialNumber) {
+	public void setSerialNumber( long serialNumber ) {
 		this.serialNumber = serialNumber;
 	}
 
@@ -101,7 +104,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * @param	monthYear	the identification of the month and the year of manufacturing (or of serial
 	 * 						assignment) to be set for the ExtendedSerialNumber object
 	 */
-	public void setMonthYear(byte[] monthYear) {
+	public void setMonthYear( byte[] monthYear ) {
 		this.monthYear = monthYear;
 	}
 
@@ -119,7 +122,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 
 	 * @param	type	the identifier of the type of equipment to be set for the ExtendedSerialNumber object.
 	 */
-	public void setType(byte type) {
+	public void setType( byte type ) {
 		this.type = type;
 	}
 
@@ -138,16 +141,17 @@ public class ExtendedSerialNumber extends DataClass {
 	 * @param	manufacturerCode	the numerical code of the manufacturer of the equipment to be set
 	 * 								for the ExtendedSerialNumber object.
 	 */
-	public void setManufacturerCode(short manufacturerCode) {
+	public void setManufacturerCode( short manufacturerCode ) {
 		this.manufacturerCode = manufacturerCode;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("serialNumber").setText(Long.toString(serialNumber)));
-		node.addContent(new Element("monthYear").setText(convertBCDStringIntoString(monthYear)));
-		node.addContent(new Element("manufacturerCode").setText(Short.toString(manufacturerCode)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "serialNumber" ).setText( Long.toString( serialNumber ) ) );
+		node.addContent( new Element( "monthYear" ).setText( convertBCDStringIntoString( monthYear ) ) );
+		node.addContent( new Element( "manufacturerCode" ).setText( Short.toString( manufacturerCode ) ) );
+
 		return node;
 	}
 }

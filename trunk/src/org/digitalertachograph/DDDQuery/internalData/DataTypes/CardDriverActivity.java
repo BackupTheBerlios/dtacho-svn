@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,10 @@ import java.util.Vector;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to the activities
+ * of the driver.
+ */
 public class CardDriverActivity extends DataClass {
 	/*
 	 * CardDriverActivity ::= SEQUENCE {
@@ -51,12 +55,12 @@ public class CardDriverActivity extends DataClass {
 	 * 					whose data is used when the CardDriverActivity
 	 * 					object is created.
 	 */
-	public CardDriverActivity(byte[] value) {
-		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2)); // = first CardActivityDailyRecord
-		activityPointerNewestRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 2, 2)); // = last CardActivityDailyRecord
+	public CardDriverActivity( byte[] value ) {
+		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) ); // = first CardActivityDailyRecord
+		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) ); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
 
-		System.out.printf(" activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
+		System.out.printf( " activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
 		
 		// reorganize ringbuffer (=records)
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
@@ -67,21 +71,22 @@ public class CardDriverActivity extends DataClass {
 		// without offsets for oldest/newest CardActivityDailyRecord (2 * 2 bytes)
 		byte[] records = new byte[ value.length - 4 ];
 
-		int lengthToEnd = (records.length - activityPointerOldestDayRecord);
-		System.arraycopy(value, 4 + activityPointerOldestDayRecord, records, 0, lengthToEnd);
+		int lengthToEnd = records.length - activityPointerOldestDayRecord;
+		System.arraycopy( value, 4 + activityPointerOldestDayRecord, records, 0, lengthToEnd );
 
-		if (activityPointerOldestDayRecord != 0) {
-			System.arraycopy(value, 4, records, lengthToEnd, activityPointerOldestDayRecord);
+		if ( activityPointerOldestDayRecord != 0 ) {
+			System.arraycopy( value, 4, records, lengthToEnd, activityPointerOldestDayRecord );
 		}
 
-		System.out.println(" records.length: " + records.length);
+		System.out.println( " records.length: " + records.length );
 
 		int activityPointerLastRecordOffset;
 
 		// offset of newest/last CardActivityDailyRecord
 		if ( activityPointerNewestRecord >= activityPointerOldestDayRecord ) {
 			activityPointerLastRecordOffset = activityPointerNewestRecord - activityPointerOldestDayRecord;
-		} else {
+		}
+		else {
 			activityPointerLastRecordOffset = records.length - activityPointerOldestDayRecord + activityPointerNewestRecord;
 		}
 
@@ -94,7 +99,7 @@ public class CardDriverActivity extends DataClass {
 		int cadrIntegrityCheckActivityPreviousRecordLength = 0;
 		
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
-			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy(records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy(records, cardActivityDailyRecordsOffset + 2, 2)) ) );
+			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy( records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy( records, cardActivityDailyRecordsOffset + 2, 2 ) ) ) );
 
 			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength();
 			cadrActivityRecordLength = cadr.getActivityRecordLength();
@@ -106,15 +111,18 @@ public class CardDriverActivity extends DataClass {
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
 				if ( cadrActivityPreviousRecordLength == 0 ) {
-					System.out.println( "   [INFO] this is the first record");
-				} else {
-					System.out.println( "   [ERROR] this should be the first record but previous length is not 0(?!)");
+					System.out.println( "   [INFO] this is the first record" );
 				}
-			} else {
+				else {
+					System.out.println( "   [ERROR] this should be the first record but previous length is not 0(?!)" );
+				}
+			}
+			else {
 				if ( cadrActivityPreviousRecordLength == cadrIntegrityCheckActivityPreviousRecordLength ) {
-					System.out.println("   [INFO] integrity check ok: ActivityPreviousRecordLength matches");
-				} else {
-					System.out.println("   [ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match");
+					System.out.println( "   [INFO] integrity check ok: ActivityPreviousRecordLength matches" );
+				}
+				else {
+					System.out.println( "   [ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
 				}
 			}
 			
@@ -122,7 +130,7 @@ public class CardDriverActivity extends DataClass {
 
 			cadrIntegrityCheckActivityPreviousRecordLength = cadrActivityRecordLength; // save record length for integrity check
 			
-			activityDailyRecords.add(cadr);
+			activityDailyRecords.add( cadr );
 		}
 	}
 
@@ -150,9 +158,10 @@ public class CardDriverActivity extends DataClass {
 	public int getActivityPointerNewestRecord() {
 		return activityPointerNewestRecord;
 	}
+
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 		
 		//Element activityPointerOldestDayRecordElement = new Element("activityPointerOldestDayRecord");
 		//activityPointerOldestDayRecordElement.setText(Integer.toString(activityPointerOldestDayRecord));
@@ -163,10 +172,10 @@ public class CardDriverActivity extends DataClass {
 		//node.addContent(activityPointerNewestRecordElement);
 		
 		Iterator<CardActivityDailyRecord> it = activityDailyRecords.iterator();
-		Element cardActivityDailyRecordsElement = new Element("cardActivityDailyRecords");
-		while(it.hasNext()){
-			CardActivityDailyRecord cadr = (CardActivityDailyRecord) it.next();
-			Element cadrElement = cadr.generateXMLElement("cardActivityDailyRecord");
+		Element cardActivityDailyRecordsElement = new Element( "cardActivityDailyRecords" );
+		while ( it.hasNext() ) {
+			CardActivityDailyRecord cadr = (CardActivityDailyRecord)it.next();
+			Element cadrElement = cadr.generateXMLElement( "cardActivityDailyRecord" );
 			cardActivityDailyRecordsElement.addContent( cadrElement );
 		}
 		

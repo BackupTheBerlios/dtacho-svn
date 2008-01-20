@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a company card, related to the cardholder identification.
+ */
 public class CompanyCardHolderIdentification extends DataClass {
 	/*
 	 * CompanyCardHolderIdentification ::= SEQUENCE {
@@ -49,10 +52,10 @@ public class CompanyCardHolderIdentification extends DataClass {
 	 * 					whose data is used when the CompanyCardHolderIdentification
 	 * 					object is created.
 	 */
-	public CompanyCardHolderIdentification(byte[] value) {
-		companyName = new Name(arrayCopy(value, 0, 36));
-		companyAddress = new Address(arrayCopy(value, 36, 36));
-		cardHolderPreferredLanguage = new Language(arrayCopy(value, 72, 2));
+	public CompanyCardHolderIdentification( byte[] value ) {
+		companyName = new Name( arrayCopy( value, 0, 36 ) );
+		companyAddress = new Address( arrayCopy( value, 36, 36 ) );
+		cardHolderPreferredLanguage = new Language( arrayCopy( value, 72, 2 ) );
 	}
 
 	/**
@@ -70,7 +73,7 @@ public class CompanyCardHolderIdentification extends DataClass {
 	 * @param	companyName		the name of the holder companyto be set
 	 * 							for the CompanyCardHolderIdentification object
 	 */
-	public void setCompanyName(Name companyName) {
+	public void setCompanyName( Name companyName ) {
 		this.companyName = companyName;
 	}
 
@@ -89,7 +92,7 @@ public class CompanyCardHolderIdentification extends DataClass {
 	 * @param	companyAddress	the address of the holder company to be set
 	 * 							for the CompanyCardHolderIdentification object
 	 */
-	public void setCompanyAddress(Address companyAddress) {
+	public void setCompanyAddress( Address companyAddress ) {
 		this.companyAddress = companyAddress;
 	}
 
@@ -108,16 +111,17 @@ public class CompanyCardHolderIdentification extends DataClass {
 	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder to be set
 	 * 											for the CompanyCardHolderIdentification object
 	 */
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+	public void setCardHolderPreferredLanguage( Language cardHolderPreferredLanguage ) {
 		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( companyName.generateXMLElement("companyName"));
-		node.addContent( companyAddress.generateXMLElement("companyAddress"));
-		node.addContent( cardHolderPreferredLanguage.generateXMLElement("cardHolderPreferredLanguage"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( companyName.generateXMLElement( "companyName" ) );
+		node.addContent( companyAddress.generateXMLElement( "companyAddress" ) );
+		node.addContent( cardHolderPreferredLanguage.generateXMLElement( "cardHolderPreferredLanguage" ) );
+
 		return node;
 	}
 }

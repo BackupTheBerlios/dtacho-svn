@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a control card, related to the identification of the cardholder.
+ */
 public class ControlCardHolderIdentification extends DataClass {
 	/*
 	 * ControlCardHolderIdentification ::= SEQUENCE {
@@ -53,11 +56,11 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * 					whose data is used when the ControlCardHolderIdentification
 	 * 					object is created.
 	 */
-	public ControlCardHolderIdentification(byte[] value) {
-		controlBodyName = new Name(arrayCopy(value, 0, 36));
-		controlBodyAddress = new Address(arrayCopy(value, 36, 36));
-		cardHolderName = new HolderName(arrayCopy(value, 72, 72));
-		cardHolderPreferredLanguage = new Language(arrayCopy(value, 144, 2));
+	public ControlCardHolderIdentification( byte[] value ) {
+		controlBodyName = new Name( arrayCopy( value, 0, 36 ) );
+		controlBodyAddress = new Address( arrayCopy( value, 36, 36 ) );
+		cardHolderName = new HolderName( arrayCopy( value, 72, 72 ) );
+		cardHolderPreferredLanguage = new Language( arrayCopy( value, 144, 2 ) );
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * @param	controlBodyName		the name of the control body of the card holder
 	 * 								to be set for the ControlCardHolderIdentification object
 	 */
-	public void setControlBodyName(Name controlBodyName) {
+	public void setControlBodyName( Name controlBodyName ) {
 		this.controlBodyName = controlBodyName;
 	}
 	
@@ -100,7 +103,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * @param	controlBodyAddress	the address of the control body of the card holder
 	 * 								to be set for the ControlCardHolderIdentification object
 	 */
-	public void setControlBodyAddress(Address controlBodyAddress) {
+	public void setControlBodyAddress( Address controlBodyAddress ) {
 		this.controlBodyAddress = controlBodyAddress;
 	}
 
@@ -122,7 +125,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * @param	cardHolderName	the name and the first name(s) of the holder of the control card
 	 * 							to be set for the ControlCardHolderIdentification object
 	 */
-	public void setCardHolderName(HolderName cardHolderName) {
+	public void setCardHolderName( HolderName cardHolderName ) {
 		this.cardHolderName = cardHolderName;
 	}
 
@@ -144,17 +147,18 @@ public class ControlCardHolderIdentification extends DataClass {
 	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder
 	 * 											to be set for the ControlCardHolderIdentification object
 	 */
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+	public void setCardHolderPreferredLanguage( Language cardHolderPreferredLanguage ) {
 		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( controlBodyName.generateXMLElement("controlBodyName"));
-		node.addContent( controlBodyAddress.generateXMLElement("controlBodyAddress"));
-		node.addContent( cardHolderName.generateXMLElement("cardHolderName"));
-		node.addContent( cardHolderPreferredLanguage.generateXMLElement("cardHolderPreferredLanguage"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( controlBodyName.generateXMLElement( "controlBodyName" ) );
+		node.addContent( controlBodyAddress.generateXMLElement( "controlBodyAddress" ) );
+		node.addContent( cardHolderName.generateXMLElement( "cardHolderName" ) );
+		node.addContent( cardHolderPreferredLanguage.generateXMLElement( "cardHolderPreferredLanguage" ) );
+
 		return node;
 	}
 }

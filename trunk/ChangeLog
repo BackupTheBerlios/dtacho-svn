@@ -1,9 +1,40 @@
+2008-01-19
+-deciphering of certificates and signatures added if the EC Public Key (EC_PK.bin)
+ is found. This allows to check the integrity of data/signatures.
+ Some new classes added:
+ ByteArrayTools
+ CAPublicKey
+ CertificateCheck
+ CertificateContent
+ CertificationAuthority
+ DataSignatureCheck 
+
+
+2008-01-12
+-honour properties of EF_Application_Identification in other classes:
+ -noOfEventsPerType: EF_Events_Data, CardEventData
+ -noOfFaultsPerType: EF_Faults_Data, CardFaultData
+ -noOfCardVehicleRecords: EF_Vehicles_Used , CardVehiclesUsed
+ -noOfControlActivityRecords: EF_Controller_Activity_Data, ControlCardControlActivityData
+ -noOfCompanyActivityRecords: EF_Company_Activity_Data, CompanyActivityData 
+ -noOfCardPlaceRecords. EF_Places, CardPlaceDailyWorkPeriod
+ -noOfCalibrationRecords: EF_Calibration, WorkshopCardCalibrationData
+-EF_CA_Certificate:
+ -fixed output of wrong XML tag
+
+
+2008-01-10
+-readable output of activities 
+
+
 2008-01-09
 -ApplicationIdentification related changes
 -javadoc update
 
+
 2008-01-07
 -set default values in constructors
+
 
 2008-01-01
 -VehicleRegistrationIdentification:

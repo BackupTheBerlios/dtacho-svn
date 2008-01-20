@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,10 @@ import java.util.Vector;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver or a workshop card, related to the vehicles used by the
+ * card holder.
+ */
 public class CardVehiclesUsed extends DataClass {
 	/*
 	 * CardVehiclesUsed := SEQUENCE {
@@ -34,8 +38,9 @@ public class CardVehiclesUsed extends DataClass {
 	 * min.:  84
 	 * max.: 200
 	 */
-	
-	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>(84); // min. 84; will be automatically expanded at run time if required!
+
+	// create min. 84 vectors; will be automatically expanded at run time if required!
+	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>( 84 );
 
 	
 	/**
@@ -45,27 +50,28 @@ public class CardVehiclesUsed extends DataClass {
 	 * 					whose data is used when the CardVehiclesUsed
 	 * 					object is created.
 	 */
-	public CardVehiclesUsed(byte[] value){
-		for (int i = 2; i < value.length; i += 31) {
-			byte[] record = arrayCopy(value, i, 31);
-			CardVehicleRecord tmp = new CardVehicleRecord(record);
+	public CardVehiclesUsed( byte[] value, int noOfCardVehicleRecords ) {
+		for ( int i = 0; i < noOfCardVehicleRecords; i += 1 ) {
+			byte[] record = arrayCopy( value, 2 + ( i * 31 ), 31 );
+			CardVehicleRecord tmp = new CardVehicleRecord( record );
 
 			cardVehicleRecords.add( tmp );
 		}
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
 
-		Element recordsnode = new Element("cardVehicleRecords");
-		node.addContent(recordsnode);
+		Element recordsnode = new Element( "cardVehicleRecords" );
+		node.addContent( recordsnode );
 		
 		Iterator<CardVehicleRecord> iter = cardVehicleRecords.iterator();
-		while (iter.hasNext()) {
-			CardVehicleRecord cvr = (CardVehicleRecord) iter.next();
-			recordsnode.addContent( cvr.generateXMLElement("cardVehicleRecord"));
+		while ( iter.hasNext() ) {
+			CardVehicleRecord cvr = (CardVehicleRecord)iter.next();
+			recordsnode.addContent( cvr.generateXMLElement( "cardVehicleRecord" ) );
 		}
+
 		return node;
 	}
 }

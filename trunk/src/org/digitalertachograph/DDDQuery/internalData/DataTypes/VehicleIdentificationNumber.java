@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Vehicle Identification Number (VIN) referring to the vehicle as a whole,
+ * normally chassis serial number or frame number.
+ */
 public class VehicleIdentificationNumber extends DataClass {
 	/*
 	 * VehicleIdentificationNumber ::= IA5String(SIZE(17)), 17 bytes
@@ -33,7 +37,7 @@ public class VehicleIdentificationNumber extends DataClass {
 	/**
 	 * Constructor for a VehicleIdentificationNumber object
 	 */
-	public VehicleIdentificationNumber(){
+	public VehicleIdentificationNumber() {
 		vehicleIdentificationNumber = new String();
 	}
 
@@ -44,8 +48,8 @@ public class VehicleIdentificationNumber extends DataClass {
 	 * 					whose data is used when the VehicleIdentificationNumber
 	 * 					object is created.
 	 */
-	public VehicleIdentificationNumber(byte[]value){
-		vehicleIdentificationNumber = new String(value);
+	public VehicleIdentificationNumber( byte[]value ){
+		vehicleIdentificationNumber = new String( value );
 	}
 
 	/**
@@ -67,14 +71,15 @@ public class VehicleIdentificationNumber extends DataClass {
 	 * 											normally chassis serial number or frame number to be set for the
 	 * 											VehicleIdentificationNumber object
 	 */
-	public void setVehicleIdentificationNumber(String vehicleIdentificationNumber) {
+	public void setVehicleIdentificationNumber( String vehicleIdentificationNumber ) {
 		this.vehicleIdentificationNumber = vehicleIdentificationNumber;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("vehicleIdentificationNumber").setText( vehicleIdentificationNumber) );
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "vehicleIdentificationNumber" ).setText( vehicleIdentificationNumber ) );
+
 		return node;
 	}
 }

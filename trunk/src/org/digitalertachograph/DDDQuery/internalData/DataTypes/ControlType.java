@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -73,8 +73,8 @@ public class ControlType extends DataClass {
 	 * @param	value	byte that contains the code indicating the activities carried out during
 	 * 					a control.
 	 */
-	public ControlType(byte value) {
-		this.setControlType(value);
+	public ControlType( byte value ) {
+		this.setControlType( value );
 	}
 
 	/**
@@ -95,13 +95,13 @@ public class ControlType extends DataClass {
 	 * @param	controlType		the code indicating the activities carried out during a control
 	 * 							to be set for the ControlType object
 	 */
-	public void setControlType(byte controlType) {
+	public void setControlType( byte controlType ) {
 		this.controlType = controlType;
 		
-		card_downloading = ((controlType & CARD_DOWNLOADING_MASK) == CARD_DOWNLOADING_MASK);
-		vu_downloading = ((controlType & VU_DOWNLOADING_MASK) == VU_DOWNLOADING_MASK);
-		printing = ((controlType & PRINTING_MASK) == PRINTING_MASK);
-		display = ((controlType & DISPLAY_MASK) == DISPLAY_MASK);
+		card_downloading = ( ( controlType & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
+		vu_downloading = ( ( controlType & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
+		printing = ( ( controlType & PRINTING_MASK ) == PRINTING_MASK );
+		display = ( ( controlType & DISPLAY_MASK ) == DISPLAY_MASK );
 	}
 
 	/**
@@ -119,13 +119,15 @@ public class ControlType extends DataClass {
 	 * @param	value		the card downloading status
 	 * 							to be set for the ControlType object
 	 */
-	public void setCardDownloading(boolean value) {
-		if ( value == true )
+	public void setCardDownloading( boolean value ) {
+		if ( value == true ) {
 			this.controlType |= CARD_DOWNLOADING_MASK;
-		else
+		}
+		else {
 			this.controlType &= ~CARD_DOWNLOADING_MASK;
+		}
 		
-		card_downloading = ((controlType & CARD_DOWNLOADING_MASK) == CARD_DOWNLOADING_MASK);
+		card_downloading = ( ( controlType & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
 	}
 	
 	/**
@@ -143,13 +145,15 @@ public class ControlType extends DataClass {
 	 * @param	value		the VU downloading status
 	 * 							to be set for the ControlType object
 	 */
-	public void setVuDownloading(boolean value) {
-		if ( value == true )
+	public void setVuDownloading( boolean value ) {
+		if ( value == true ) {
 			this.controlType |= VU_DOWNLOADING_MASK;
-		else
+		}
+		else {
 			this.controlType &= ~VU_DOWNLOADING_MASK;
+		}
 
-		vu_downloading = ((controlType & VU_DOWNLOADING_MASK) == VU_DOWNLOADING_MASK);
+		vu_downloading = ( ( controlType & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
 	}
 	
 	/**
@@ -167,13 +171,15 @@ public class ControlType extends DataClass {
 	 * @param	value		the printing status
 	 * 						to be set for the ControlType object
 	 */
-	public void setPrinting(boolean value) {
-		if ( value == true )
+	public void setPrinting( boolean value ) {
+		if ( value == true ) {
 			this.controlType |= PRINTING_MASK;
-		else
+		}
+		else {
 			this.controlType &= ~PRINTING_MASK;
+		}
 
-		printing = ((controlType & PRINTING_MASK) == PRINTING_MASK);
+		printing = ( ( controlType & PRINTING_MASK ) == PRINTING_MASK );
 	}
 	
 	/**
@@ -191,22 +197,25 @@ public class ControlType extends DataClass {
 	 * @param	value		the display status
 	 * 						to be set for the ControlType object
 	 */
-	public void setDisplay(boolean value) {
-		if ( value == true )
+	public void setDisplay( boolean value ) {
+		if ( value == true ) {
 			this.controlType |= DISPLAY_MASK;
-		else
+		}
+		else {
 			this.controlType &= ~DISPLAY_MASK;
+		}
 
-		display = ((controlType & DISPLAY_MASK) == DISPLAY_MASK);
+		display = ( ( controlType & DISPLAY_MASK ) == DISPLAY_MASK );
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.setAttribute("card_downloading", Boolean.toString(card_downloading));
-		node.setAttribute("vu_downloading", Boolean.toString(vu_downloading));
-		node.setAttribute("display", Boolean.toString(display));
-		node.setAttribute("printing", Boolean.toString(printing));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.setAttribute( "card_downloading", Boolean.toString( card_downloading ) );
+		node.setAttribute( "vu_downloading", Boolean.toString( vu_downloading ) );
+		node.setAttribute( "display", Boolean.toString( display ) );
+		node.setAttribute( "printing", Boolean.toString( printing ) );
+
 		return node;
 	}
 }

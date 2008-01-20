@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardDrivingLicenceInformation;
 import org.jdom.Element;
 
-
 /**
  * EF_Driving_Licence_Info,
  * 
@@ -39,15 +38,16 @@ public class EF_Driving_Licence_Info extends DataClass {
 	 * 					whose data is used when the EF_Driving_Licence_Info
 	 * 					object is created.
 	 */
-	public EF_Driving_Licence_Info(byte[] value){
-		cardDrivingLicenceInformation = new CardDrivingLicenceInformation(value);
+	public EF_Driving_Licence_Info( byte[] value ) {
+		cardDrivingLicenceInformation = new CardDrivingLicenceInformation( value );
 	}
 	
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
-		Element child = cardDrivingLicenceInformation.generateXMLElement("cardDrivingLicenceInformation");
-		node.addContent(child);
+		Element node = new Element( this.getClass().getSimpleName() );
+		Element child = cardDrivingLicenceInformation.generateXMLElement( "cardDrivingLicenceInformation" );
+		node.addContent( child );
+
 		return node;
 	}
 }

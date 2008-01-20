@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code explaining why a set of calibration parameters was recorded.
+ */
 public class CalibrationPurpose extends DataClass {
 	/*
 	 * CalibrationPurpose ::= OCTET STRING (SIZE(1)), 1 byte
@@ -49,7 +52,7 @@ public class CalibrationPurpose extends DataClass {
 	 * 					whose data is used when the CalibrationPurpose
 	 * 					object is created
 	 */
-	public CalibrationPurpose(byte value) {
+	public CalibrationPurpose( byte value ) {
 		calibrationPurpose = value;
 	}
 	
@@ -71,14 +74,15 @@ public class CalibrationPurpose extends DataClass {
 	 * @param	calibrationPurpose	the code explaining why a set of calibration parameters were recorded
 	 * 								to be set for the CalibrationPurpose object
 	 */
-	public void setCalibrationPurpose(byte calibrationPurpose) {
+	public void setCalibrationPurpose( byte calibrationPurpose ) {
 		this.calibrationPurpose = calibrationPurpose;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("calibrationPurpose").setText(Byte.toString(calibrationPurpose) ));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "calibrationPurpose" ).setText( Byte.toString( calibrationPurpose ) ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a driver card, related to the card holder driver licence data.
+ */
 public class CardDrivingLicenceInformation extends DataClass {
 	/*
 	 * CardDrivingLicenceInformation ::= SEQUENCE {
@@ -51,10 +54,10 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 					whose data is used when the CardDrivingLicenceInformation
 	 * 					object is created.
 	 */
-	public CardDrivingLicenceInformation(byte[] value) {
-		drivingLicenceIssuingAuthority = new Name(arrayCopy(value, 0, 36));
-		drivingLicenceIssuingNation = new NationNumeric(value[36]);
-		drivingLicenceNumber = new String(arrayCopy(value, 37, 16));
+	public CardDrivingLicenceInformation( byte[] value ) {
+		drivingLicenceIssuingAuthority = new Name( arrayCopy( value, 0, 36 ) );
+		drivingLicenceIssuingNation = new NationNumeric( value[ 36 ] );
+		drivingLicenceNumber = new String( arrayCopy( value, 37, 16 ) );
 	}
 
 	/**
@@ -76,7 +79,7 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 												the driving licence to be set for the
 	 * 												CardDrivingLicenceInformation object
 	 */
-	public void setDrivingLicenceIssuingAuthority(Name drivingLicenceIssuingAuthority) {
+	public void setDrivingLicenceIssuingAuthority( Name drivingLicenceIssuingAuthority ) {
 		this.drivingLicenceIssuingAuthority = drivingLicenceIssuingAuthority;
 	}
 
@@ -99,7 +102,7 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 											issued the driving licence to be set for the
 	 * 											CardDrivingLicenceInformation object
 	 */
-	public void setDrivingLicenceIssuingNation(NationNumeric drivingLicenceIssuingNation) {
+	public void setDrivingLicenceIssuingNation( NationNumeric drivingLicenceIssuingNation ) {
 		this.drivingLicenceIssuingNation = drivingLicenceIssuingNation;
 	}
 
@@ -118,18 +121,18 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * @param	drivingLicenceNumber		number of the driving licence to be set for the
 	 * 										CardDrivingLicenceInformation object
 	 */
-	public void setDrivingLicenceNumber(String drivingLicenceNumber) {
+	public void setDrivingLicenceNumber( String drivingLicenceNumber ) {
 		this.drivingLicenceNumber = drivingLicenceNumber;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( drivingLicenceIssuingAuthority.generateXMLElement("drivingLicenceIssuingAuthority") );
-		node.addContent( drivingLicenceIssuingNation.generateXMLElement("drivingLicenceIssuingNation") );
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( drivingLicenceIssuingAuthority.generateXMLElement( "drivingLicenceIssuingAuthority" ) );
+		node.addContent( drivingLicenceIssuingNation.generateXMLElement( "drivingLicenceIssuingNation" ) );
 
-		Element drivingLicenceNumberElement = new Element("drivingLicenceNumber");
-		drivingLicenceNumberElement.setText(drivingLicenceNumber);
+		Element drivingLicenceNumberElement = new Element( "drivingLicenceNumber" );
+		drivingLicenceNumberElement.setText( drivingLicenceNumber );
 		node.addContent( drivingLicenceNumberElement );
 		
 		return node;

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Data expressed in a readily printable numeric format.
+ */
 public class Datef extends DataClass {
 	/*
 	 * Datef ::= SEQUENCE {
@@ -37,7 +40,7 @@ public class Datef extends DataClass {
 	 * Constructor for a Datef object
 	 */
 	public Datef() {
-		year = new byte[2];
+		year = new byte[ 2 ];
 		month = 0;
 		day = 0;
 	}
@@ -49,10 +52,10 @@ public class Datef extends DataClass {
 	 * 					whose data is used when the Datef
 	 * 					object is created.
 	 */
-	public Datef(byte[] value) {
-		year = arrayCopy(value, 0, 2);
-		month = value[2];
-		day = value[3];
+	public Datef( byte[] value ) {
+		year = arrayCopy( value, 0, 2 );
+		month = value[ 2 ];
+		day = value[ 3 ];
 	}
 
 	/**
@@ -70,7 +73,7 @@ public class Datef extends DataClass {
 	 * @return	the year of the Datef object
 	 */
 	public String getYearString() {
-		return convertBCDStringIntoString(year);
+		return convertBCDStringIntoString( year );
 	}
 	
 	/**
@@ -78,7 +81,7 @@ public class Datef extends DataClass {
 	 * 
 	 * @param	year	the year as BCD to be set for the Datef object
 	 */
-	public void setYear(byte[] year) {
+	public void setYear( byte[] year ) {
 		this.year = year;
 	}
 	
@@ -97,7 +100,7 @@ public class Datef extends DataClass {
 	 * @return	the month of the Datef object
 	 */
 	public String getMonthString() {
-		return convertBCDStringIntoString(new byte[]{month});
+		return convertBCDStringIntoString( new byte[]{ month } );
 	}
 	
 	/**
@@ -105,7 +108,7 @@ public class Datef extends DataClass {
 	 * 
 	 * @param	month	the month as BCD to be set for the Datef object
 	 */
-	public void setMonth(byte month) {
+	public void setMonth( byte month ) {
 		this.month = month;
 	}
 
@@ -124,7 +127,7 @@ public class Datef extends DataClass {
 	 * @return	the day of the Datef object
 	 */
 	public String getDayString() {
-		return convertBCDStringIntoString(new byte[]{day});
+		return convertBCDStringIntoString( new byte[]{ day } );
 	}
 	
 	/**
@@ -132,16 +135,17 @@ public class Datef extends DataClass {
 	 * 
 	 * @param	day		the day as BCD to be set for the Datef object
 	 */
-	public void setDay(byte day){
+	public void setDay( byte day ) {
 		this.day = day; 
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent(new Element("year").setText( getYearString() ));
-		node.addContent(new Element("month").setText( getMonthString() ));
-		node.addContent(new Element("day").setText( getDayString() ));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "year" ).setText( getYearString() ) );
+		node.addContent( new Element( "month" ).setText( getMonthString() ) );
+		node.addContent( new Element( "day" ).setText( getDayString() ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.digitalertachograph.DDDQuery.Controller;
 import org.jdom.Element;
 
+/**
+ * A name.
+ */
 public class Name extends DataClass{
 	/*
 	 * Name ::= SEQUENCE {
@@ -38,9 +41,9 @@ public class Name extends DataClass{
 	/**
 	 * Constructor for a Name object
 	 */
-	public Name(){
+	public Name() {
 		codePage = 0;
-		name = new byte[35];
+		name = new byte[ 35 ];
 	}
 
 	/**
@@ -50,8 +53,8 @@ public class Name extends DataClass{
 	 * 					whose data is used when the Name
 	 * 					object is created.
 	 */
-	public Name(byte[] value){
-		this(value[0], arrayCopy(value, 1, value.length - 1));
+	public Name( byte[] value ){
+		this( value[ 0 ], arrayCopy( value, 1, value.length - 1 ) );
 	}
 	
 	/**
@@ -61,8 +64,8 @@ public class Name extends DataClass{
 	 * 						ISO/IEC 8859 used to code the address
 	 * @param	name		byte array that contains the name
 	 */
-	public Name(byte codePage, byte[] name){
-		this.codePage = convertIntoUnsigned1ByteInt(codePage);
+	public Name( byte codePage, byte[] name ){
+		this.codePage = convertIntoUnsigned1ByteInt( codePage );
 		this.name = name;
 	}
 	
@@ -80,7 +83,7 @@ public class Name extends DataClass{
 	 * 
 	 * @param	codePage	the codepage to be set for the Name object
 	 */
-	public void setCodePage(short codePage) {
+	public void setCodePage( short codePage ) {
 		this.codePage = codePage;
 	}
 
@@ -89,8 +92,8 @@ public class Name extends DataClass{
 	 * 
 	 * @param	codePage	the codepage to be set for the Name object
 	 */
-	public void setCodePage(byte codePage) {
-		this.codePage = (short) (codePage & 0xff);
+	public void setCodePage( byte codePage ) {
+		this.codePage = (short)( codePage & 0xff );
 	}
 	
 	/**
@@ -107,7 +110,7 @@ public class Name extends DataClass{
 	 * 
 	 * @param	name		the name to be set for the name object
 	 */
-	public void setName(byte[] name) {
+	public void setName( byte[] name ) {
 		this.name = name;
 	}
 	
@@ -116,26 +119,28 @@ public class Name extends DataClass{
 	 * 
 	 * @return	the namr as string of the Name object
 	 */
-	public String toString(){
-		return new String(name);
+	public String toString() {
+		return new String( name );
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
+	public Element generateXMLElement( String name ) {
 		Controller c = Controller.getInstance();
 		
-		Element node = new Element(name);
-		node.addContent( new Element("codePage").setText( Short.toString(codePage)));
+		Element node = new Element( name );
+		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage) ) );
 		Element nameElement;
-		if(c.isAnonymized()){
-			byte [] tmp = new byte[35];
-			for(int i = 0; i < 35; i++)
-				tmp[i] = 'A';
-			nameElement = new Element("name").setText( convertIntoHexString( tmp ));
-		}else{
-			nameElement = new Element("name").setText( convertIntoHexString( this.name ));
+		if ( c.isAnonymized() ) {
+			byte[] tmp = new byte[ 35 ];
+			for ( int i = 0; i < 35; i++ )
+				tmp[ i ] = 'A';
+			nameElement = new Element( "name" ).setText( convertIntoHexString( tmp ) );
+		}
+		else {
+			nameElement = new Element( "name" ).setText( convertIntoHexString( this.name ) );
 		}
 		node.addContent( nameElement );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,9 @@ import java.util.Vector;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a control card, related to the control activity performed with the card.
+ */
 public class ControlCardControlActivityData extends DataClass {
 	/*
 	 * ControlCardControlActivityData ::= SEQUENCE {	
@@ -43,7 +46,9 @@ public class ControlCardControlActivityData extends DataClass {
 	 */
 
 	private int controlPointerNewestRecord;
-	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>(230); // min. 230; will be automatically expanded at run time if required!
+	
+	// create min. 230 vectors; will be automatically expanded at run time if required!
+	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>( 230 );
 
 	
 	/**
@@ -53,42 +58,27 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 					whose data is used when the ControlCardControlActivityData
 	 * 					object is created.
 	 */
-	public ControlCardControlActivityData(byte[] value) {
-		controlPointerNewestRecord = convertIntoUnsigned2ByteInt(arrayCopy(value, 0, 2));
-		for (int i = 2; i < value.length; i += 46) {
-			byte[] record = arrayCopy(value, i, 46);
-			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord(record);
-			controlActivityRecords.add(tmp);
+	public ControlCardControlActivityData( byte[] value, int noOfControlActivityRecords ) {
+		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
+		for ( int i = 0; i < noOfControlActivityRecords; i += 1 ) {
+			byte[] record = arrayCopy( value, 2 + ( i * 46 ), 46 );
+			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord( record );
+			controlActivityRecords.add( tmp );
 		}
 	}
-
-	// public Vector<CardControlActivityDataRecord> getControlActivityRecords() {
-	// 	return controlActivityRecords;
-	// }
-
-	// public void setControlActivityRecords(Vector<CardControlActivityDataRecord> controlActivityRecords) {
-	// 	this.controlActivityRecords = controlActivityRecords;
-	// }
-
-	// public int getControlPointerNewestRecord() {
-	// 	return controlPointerNewestRecord;
-	// }
-
-	// public void setControlPointerNewestRecord(int controlPointerNewestRecord) {
-	// 	this.controlPointerNewestRecord = controlPointerNewestRecord;
-	// }
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("controlActivityRecords").setText( Integer.toString( controlPointerNewestRecord)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name);
+		node.addContent( new Element( "controlActivityRecords" ).setText( Integer.toString( controlPointerNewestRecord ) ) );
 		
 		Iterator<CardControlActivityDataRecord> it = controlActivityRecords.iterator();
-		while (it.hasNext()) {
-			CardControlActivityDataRecord ccadr = (CardControlActivityDataRecord) it.next();
-			Element ccadrElement = ccadr.generateXMLElement("controlActivityRecord");
-			node.addContent(ccadrElement);
+		while ( it.hasNext() ) {
+			CardControlActivityDataRecord ccadr = (CardControlActivityDataRecord)it.next();
+			Element ccadrElement = ccadr.generateXMLElement( "controlActivityRecord" );
+			node.addContent( ccadrElement );
 		}
+
 		return node;
 	}
 }

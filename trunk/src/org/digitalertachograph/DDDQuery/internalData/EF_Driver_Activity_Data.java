@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,6 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.CardDriverActivity;
 import org.jdom.Element;
 
-
 /**
  * EF_Driver_Activity_Data,
  * 
@@ -39,16 +38,17 @@ public class EF_Driver_Activity_Data extends DataClass {
 	 * 					whose data is used when the EF_Driver_Activity
 	 * 					object is created.
 	 */
-	public EF_Driver_Activity_Data(byte[] value){
+	public EF_Driver_Activity_Data( byte[] value ) {
 		//size = value.length;
-		cardDriverActivity = new CardDriverActivity(value);
+		cardDriverActivity = new CardDriverActivity( value );
 	}
 	
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
-		Element child = cardDriverActivity.generateXMLElement("cardDriverActivity");
-		node.addContent(child);
+		Element node = new Element( this.getClass().getSimpleName() );
+		Element child = cardDriverActivity.generateXMLElement( "cardDriverActivity" );
+		node.addContent( child );
+		
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@ import org.digitalertachograph.DDDQuery.Controller;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Card number of a driver card or a workshop/control/company card.
+ */
 public class CardNumber extends DataClass {
 	
 	// Abhängig vom Kartentyp (cardType) wird eine andere Wahl getroffen!
@@ -79,16 +82,20 @@ public class CardNumber extends DataClass {
 	/**
 	 * Constructor for a CardNumber object
 	 */
-	public CardNumber(int cardType) {
+	public CardNumber( int cardType ) {
 		this.cardType = cardType;
-		if(cardType == EquipmentType.DRIVER_CARD){
+		
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			// driver card
 			driverIdentification = new String();
 			cardReplacementIndex = '\0';
 			cardRenewalIndex = ' ';
 
 			ownerIdentification = new String();
 			cardConsecutiveIndex = '\0';
-		}else{
+		}
+		else {
+			// workshop, control or company card
 			ownerIdentification = new String();
 			cardConsecutiveIndex = '\0';
 			cardReplacementIndex = '\0';
@@ -109,17 +116,18 @@ public class CardNumber extends DataClass {
 	 * 						{@link EquipmentType#CONTROL_CARD CONTROL_CARD},
 	 * 						{@link EquipmentType#COMPANY_CARD COMPANY_CARD},)
 	 */
-	public CardNumber(byte[] value, int cardType) {
+	public CardNumber( byte[] value, int cardType ) {
 		this.cardType = cardType;
-		if(cardType == EquipmentType.DRIVER_CARD){
-			driverIdentification = new String(arrayCopy(value, 0, 14));
-			cardReplacementIndex = (char) value[14];
-			cardRenewalIndex = (char) value[15];
-		}else{
-			ownerIdentification = new String(arrayCopy(value, 0, 13));
-			cardConsecutiveIndex = (char) value[13];
-			cardReplacementIndex = (char) value[14];
-			cardRenewalIndex = (char) value[15];
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			driverIdentification = new String( arrayCopy( value, 0, 14 ) );
+			cardReplacementIndex = (char)value[ 14 ];
+			cardRenewalIndex = (char)value[ 15 ];
+		}
+		else {
+			ownerIdentification = new String( arrayCopy( value, 0, 13 ) );
+			cardConsecutiveIndex = (char)value[ 13 ];
+			cardReplacementIndex = (char)value[ 14 ];
+			cardRenewalIndex = (char)value[ 15 ];
 		}
 	}
 
@@ -138,7 +146,7 @@ public class CardNumber extends DataClass {
 	 * @param	cardType	the type of the tachograph card	to be set for
 	 * 						the FullCardNumber object
 	 */
-	public void setCardType(int cardType) {
+	public void setCardType( int cardType ) {
 		this.cardType = cardType;
 	}
 	
@@ -161,7 +169,7 @@ public class CardNumber extends DataClass {
 	 * @param	driverIdentification	the unique identification of a driver in a Member State
 	 * 									to be set for the CardNumber object
 	 */
-	public void setDriverIdentification(String driverIdentification) {
+	public void setDriverIdentification( String driverIdentification ) {
 		this.driverIdentification = driverIdentification;
 	}
 
@@ -180,7 +188,7 @@ public class CardNumber extends DataClass {
 	 * @param	cardReplacementIndex	the card replacement index
 	 * 									to be set for the CardNumber object
 	 */
-	public void setCardReplacementIndex(char cardReplacementIndex) {
+	public void setCardReplacementIndex( char cardReplacementIndex ) {
 		this.cardReplacementIndex = cardReplacementIndex;
 	}
 
@@ -199,7 +207,7 @@ public class CardNumber extends DataClass {
 	 * @param	cardRenewalIndex	the card renewal index
 	 * 									to be set for the CardNumber object
 	 */
-	public void setCardRenewalIndex(char cardRenewalIndex) {
+	public void setCardRenewalIndex( char cardRenewalIndex ) {
 		this.cardRenewalIndex = cardRenewalIndex;
 	}
 
@@ -222,7 +230,7 @@ public class CardNumber extends DataClass {
 	 *									or a control body within a Member State
 	 * 									to be set for the CardNumber object
 	 */
-	public void setOwnerIdentification(String ownerIdentification) {
+	public void setOwnerIdentification( String ownerIdentification ) {
 		this.ownerIdentification = ownerIdentification;
 	}
 
@@ -241,43 +249,46 @@ public class CardNumber extends DataClass {
 	 * @param	cardConsecutiveIndex	the card consecutive index
 	 * 									to be set for the CardNumber object
 	 */
-	public void setCardConsecutiveIndex(char cardConsecutiveIndex) {
+	public void setCardConsecutiveIndex( char cardConsecutiveIndex ) {
 		this.cardConsecutiveIndex = cardConsecutiveIndex;
 	}
 
 
 	@Override
-	public Element generateXMLElement(String name) {
+	public Element generateXMLElement( String name ) {
 		Controller c = Controller.getInstance();
 		
-		Element node = new Element(name);
+		Element node = new Element( name );
 		
-		if(c.isAnonymized()){
-			if(cardType == EquipmentType.DRIVER_CARD){
-				node.addContent( new Element("driverIdentification").setText("1anonymous0123"));
+		if ( c.isAnonymized() ) {
+			if ( cardType == EquipmentType.DRIVER_CARD ) {
+				node.addContent( new Element( "driverIdentification" ).setText( "1anonymous0123" ) );
 				
-				node.addContent( new Element("cardReplacementIndex").setText("x"));
-				node.addContent( new Element("cardRenewalIndex").setText("y"));
-			}else{
-				node.addContent( new Element("ownerIdentification").setText("1anonymous012"));
-
-				node.addContent( new Element("cardConsecutiveIndex").setText("y"));
-				node.addContent( new Element("cardReplacementIndex").setText("x"));
-				node.addContent( new Element("cardRenewalIndex").setText("y"));
+				node.addContent( new Element( "cardReplacementIndex" ).setText( "x" ) );
+				node.addContent( new Element( "cardRenewalIndex" ).setText( "y" ) );
 			}
-		}else{
-		
-			if(cardType == EquipmentType.DRIVER_CARD){
-				node.addContent( new Element("driverIdentification").setText(driverIdentification));
-				node.addContent( new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
-				node.addContent( new Element("cardRenewalIndex").setText(Character.toString(cardRenewalIndex)));
-			}else{
-				node.addContent( new Element("ownerIdentification").setText(ownerIdentification));
-				node.addContent( new Element("cardConsecutiveIndex").setText(Character.toString(cardConsecutiveIndex)));
-				node.addContent( new Element("cardReplacementIndex").setText(Character.toString(cardReplacementIndex)));
-				node.addContent( new Element("cardRenewalIndex").setText(Character.toString(cardRenewalIndex)));
+			else {
+				node.addContent( new Element( "ownerIdentification" ).setText( "1anonymous012" ) );
+
+				node.addContent( new Element( "cardConsecutiveIndex" ).setText( "y" ) );
+				node.addContent( new Element( "cardReplacementIndex" ).setText( "x" ) );
+				node.addContent( new Element( "cardRenewalIndex" ).setText( "y" ) );
 			}
 		}
+		else {
+			if ( cardType == EquipmentType.DRIVER_CARD ) {
+				node.addContent( new Element( "driverIdentification" ).setText( driverIdentification ) );
+				node.addContent( new Element( "cardReplacementIndex" ).setText(Character.toString( cardReplacementIndex ) ) );
+				node.addContent( new Element( "cardRenewalIndex" ).setText(Character.toString( cardRenewalIndex ) ) );
+			}
+			else {
+				node.addContent( new Element( "ownerIdentification" ).setText( ownerIdentification ) );
+				node.addContent( new Element( "cardConsecutiveIndex" ).setText( Character.toString( cardConsecutiveIndex ) ) );
+				node.addContent( new Element( "cardReplacementIndex" ).setText( Character.toString( cardReplacementIndex ) ) );
+				node.addContent( new Element( "cardRenewalIndex" ).setText( Character.toString( cardRenewalIndex ) ) );
+			}
+		}
+
 		return node;
 	}
 }

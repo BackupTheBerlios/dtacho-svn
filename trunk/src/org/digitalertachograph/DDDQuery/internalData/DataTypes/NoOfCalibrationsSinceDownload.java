@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Counter indicating the number of calibrations performed with a workshop card
+ * since its last download.
+ */
 public class NoOfCalibrationsSinceDownload extends DataClass {
 	/* 
 	 * NoOfCalibrationsSinceDownload ::= INTEGER(0..2^16-1), 2 bytes
@@ -44,8 +48,8 @@ public class NoOfCalibrationsSinceDownload extends DataClass {
 	 * 					whose data is used when the NoOfCalibrationsSinceDownload
 	 * 					object is created.
 	 */
-	public NoOfCalibrationsSinceDownload(byte[] value) {
-		this.noOfCalibrationsSinceDownload = convertIntoUnsigned2ByteInt(value);
+	public NoOfCalibrationsSinceDownload( byte[] value ) {
+		this.noOfCalibrationsSinceDownload = convertIntoUnsigned2ByteInt( value );
 	}
 
 	/**
@@ -66,14 +70,15 @@ public class NoOfCalibrationsSinceDownload extends DataClass {
 	 * @param	noOfCalibrationsSinceDownload	the number of calibration records a workshop card can store
 	 * 											to be set for the NoOfCalibrationsSinceDownload object
 	 */
-	public void setNoOfCalibrationsSinceDownload(int noOfCalibrationsSinceDownload) {
+	public void setNoOfCalibrationsSinceDownload( int noOfCalibrationsSinceDownload ) {
 		this.noOfCalibrationsSinceDownload = noOfCalibrationsSinceDownload;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("noOfCalibrationsSinceDownload").setText(Integer.toString( noOfCalibrationsSinceDownload )));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "noOfCalibrationsSinceDownload" ).setText(Integer.toString( noOfCalibrationsSinceDownload ) ) );
+
 		return node;
 	}
 }

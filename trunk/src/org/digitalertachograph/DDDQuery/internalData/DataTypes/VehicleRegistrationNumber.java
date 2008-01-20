@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@ import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 import org.digitalertachograph.DDDQuery.Controller;
 
+/**
+ * Registration number of the vehicle (VRN). The registration number is assigned by the
+ * vehicle licensing authority.
+ */
 public class VehicleRegistrationNumber extends DataClass {
 	/*
 	 * VehicleRegistrationNumber ::= SEQUENCE {
@@ -40,7 +44,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	 */
 	public VehicleRegistrationNumber() {
 		codePage = 0;
-		vehicleRegNumber = new byte[13];
+		vehicleRegNumber = new byte[ 13 ];
 	}
 
 	/**
@@ -50,8 +54,8 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 					whose data is used when the VehicleRegistrationNumber
 	 * 					object is created.
 	 */
-	public VehicleRegistrationNumber(byte[] value) {
-		this(value[0], arrayCopy(value, 1, value.length - 1));
+	public VehicleRegistrationNumber( byte[] value ) {
+		this( value[ 0 ], arrayCopy( value, 1, value.length - 1 ) );
 	}
 	
 	/**
@@ -61,8 +65,8 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 								ISO/IEC 8859 used to code the address
 	 * @param	vehicleRegNumber	byte array that contains the number of the vehicle (VRN)
 	 */
-	public VehicleRegistrationNumber(byte codePage, byte[] vehicleRegNumber) {
-		this.codePage = convertIntoUnsigned1ByteInt(codePage);
+	public VehicleRegistrationNumber( byte codePage, byte[] vehicleRegNumber ) {
+		this.codePage = convertIntoUnsigned1ByteInt( codePage );
 		this.vehicleRegNumber = vehicleRegNumber;
 	}
 	
@@ -85,7 +89,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 
 	 * @param	codePage	the codepage to be set for the VehicleRegistrationNumber object
 	 */
-	public void setCodePage(short codePage) {
+	public void setCodePage( short codePage ) {
 		this.codePage = codePage;
 	}
 
@@ -94,8 +98,8 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 
 	 * @param	codePage	the codepage to be set for the VehicleRegistrationNumber object
 	 */
-	public void setCodePage(byte codePage) {
-		this.codePage = (short) (codePage & 0xff);
+	public void setCodePage( byte codePage ) {
+		this.codePage = (short)( codePage & 0xff );
 	}
 
 	/**
@@ -113,26 +117,27 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * @param	vehicleRegNumber	the number of the vehicle (VRN) to be set
 	 * 								for the VehicleRegistrationNumber object
 	 */
-	public void setVehicleRegNumber(byte[] vehicleRegNumber) {
+	public void setVehicleRegNumber( byte[] vehicleRegNumber ) {
 		this.vehicleRegNumber = vehicleRegNumber;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
+	public Element generateXMLElement( String name ) {
 		Controller c = Controller.getInstance();
 
-		Element node = new Element(name);
-		node.addContent(new Element("codePage").setText(Short.toString(codePage)));
+		Element node = new Element( name );
+		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage ) ) );
 
 		// anonymize data if required
-		if (c.isAnonymized()) {
-			byte [] tmp = new byte[13];
-			for (int i = 0; i < 13; i++)
-				tmp[i] = 'A';
+		if ( c.isAnonymized() ) {
+			byte[] tmp = new byte[ 13 ];
+			for ( int i = 0; i < 13; i++ )
+				tmp[ i ] = 'A';
 			
-			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString( tmp )) );
-		}else{
-			node.addContent(new Element("vehicleRegNumber").setText( convertIntoHexString(vehicleRegNumber)) );
+			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoHexString( tmp ) ) );
+		}
+		else {
+			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoHexString( vehicleRegNumber ) ) );
 		}
 		return node;
 	}	

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
-
+/**
+ * Numerical reference to a country.
+ */
 public class NationNumeric extends DataClass {
 	/*
 	 * NationNumeric ::= INTEGER(0..255), 1 byte
@@ -50,8 +52,8 @@ public class NationNumeric extends DataClass {
 	 * 
 	 * @param	b	byte that indicates a numerical reference to a country.
 	 */
-	public NationNumeric(byte b) {
-		nationNumeric = convertIntoUnsigned1ByteInt(b);
+	public NationNumeric( byte b ) {
+		nationNumeric = convertIntoUnsigned1ByteInt( b );
 	}
 
 	/**
@@ -68,13 +70,13 @@ public class NationNumeric extends DataClass {
 	 * 
 	 * @param	nationNumeric		the numerical reference to a country to be set for the NationNumeric object
 	 */
-	public void setNationNumeric(short nationNumeric) {
+	public void setNationNumeric( short nationNumeric ) {
 		this.nationNumeric = nationNumeric;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		return new Element(name).setText(Short.toString(nationNumeric));
+	public Element generateXMLElement( String name ) {
+		return new Element( name ).setText( Short.toString( nationNumeric ) );
 	}
 
 	/*  TODO toString();

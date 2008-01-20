@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Code to distinguish different types of equipment for the tachograph application.
+ */
 public class EquipmentType extends DataClass {
 	private byte equipmentType;
 	
@@ -84,7 +87,7 @@ public class EquipmentType extends DataClass {
 	 * @param	value	byte that indicates the type of equipment for the
 	 * 					tachograph application
 	 */
-	public EquipmentType(byte value) {
+	public EquipmentType( byte value ) {
 		equipmentType = value;
 	}
 
@@ -105,14 +108,15 @@ public class EquipmentType extends DataClass {
 	 * @param	equipmentType		byte that contains the equipment type to be set for
 	 * 								the EquipmentType object
 	 */
-	public void setEquipmentType(byte equipmentType) {
+	public void setEquipmentType( byte equipmentType ) {
 		this.equipmentType = equipmentType;
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("equipmentType").setText( Byte.toString(equipmentType)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "equipmentType" ).setText( Byte.toString( equipmentType ) ) );
+
 		return node;
 	}
 }

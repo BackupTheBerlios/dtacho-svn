@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,7 +40,9 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 */
 	
 	private short placePointerNewestRecord;
-	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>(84); // min. 84; will be automatically expanded at run time if required!
+	
+	// create min. 84 vectors; will be automatically expanded at run time if required!
+	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>( 84 );
 	
 
 	/**
@@ -50,26 +52,28 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * 					whose data is used when the CardPlaceDailyWorkPeriod
 	 * 					object is created.
 	 */
-	public CardPlaceDailyWorkPeriod(byte[] value) {
-		placePointerNewestRecord = convertIntoUnsigned1ByteInt(value[0]);
-		for (int i = 1; i < value.length; i+=10) {
-			byte[] record = arrayCopy(value, i, 10);
-			PlaceRecord tmp = new PlaceRecord(record);
+	public CardPlaceDailyWorkPeriod( byte[] value, short noOfCardPlaceRecords ) {
+		placePointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 0 ] );
+		for ( int i = 1; i < value.length; i += 10 ) {
+			byte[] record = arrayCopy( value, i, 10 );
+			PlaceRecord tmp = new PlaceRecord( record );
+
 			placeRecords.add( tmp );
 		}
 	}
 	
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( new Element("placePointerNewestRecord").setText( Short.toString(placePointerNewestRecord)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( new Element( "placePointerNewestRecord" ).setText( Short.toString( placePointerNewestRecord ) ) );
 
 		Iterator<PlaceRecord> it = placeRecords.iterator();
-		while(it.hasNext()){
-			PlaceRecord pr = (PlaceRecord) it.next();
-			Element prElement = pr.generateXMLElement("placeRecord");
+		while ( it.hasNext() ) {
+			PlaceRecord pr = (PlaceRecord)it.next();
+			Element prElement = pr.generateXMLElement( "placeRecord" );
 			node.addContent( prElement );
 		}
+
 		return node;
 	}
 }

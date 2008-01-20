@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a workshop card, related to the identification
+ * of the cardholder.
+ */
 public class WorkshopCardHolderIdentification extends DataClass {
 	/*
 	 * WorkshopCardHolderIdentification ::= SEQUENCE {
@@ -39,7 +43,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	/**
 	 * Constructor for a WorkshopCardHolderIdentification object
 	 */
-	public WorkshopCardHolderIdentification(){
+	public WorkshopCardHolderIdentification() {
 		workshopName = new Name();
 		workshopAddress = new Address();
 		cardHolderName = new HolderName();
@@ -53,11 +57,11 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * 					whose data is used when the WorkshopCardHolderIdentification
 	 * 					object is created.
 	 */
-	public WorkshopCardHolderIdentification(byte[] value){
-		workshopName = new Name( arrayCopy(value, 0, 36));
-		workshopAddress = new Address( arrayCopy(value, 36, 36));
-		cardHolderName = new HolderName( arrayCopy(value, 72, 72));
-		cardHolderPreferredLanguage = new Language( arrayCopy(value, 142, 2));
+	public WorkshopCardHolderIdentification( byte[] value ) {
+		workshopName = new Name( arrayCopy( value, 0, 36 ) );
+		workshopAddress = new Address( arrayCopy( value, 36, 36 ) );
+		cardHolderName = new HolderName( arrayCopy( value, 72, 72 ) );
+		cardHolderPreferredLanguage = new Language( arrayCopy( value, 142, 2 ) );
 	}
 
 	/**
@@ -78,7 +82,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * @param	workshopName		the name of the workshop of the card holder
 	 * 								to be set for the WorkshopCardHolderIdentification object
 	 */
-	public void setWorkshopName(Name workshopName) {
+	public void setWorkshopName( Name workshopName ) {
 		this.workshopName = workshopName;
 	}
 
@@ -100,7 +104,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * @param	workshopAddress		the address of the workshop of the card holder
 	 * 								to be set for the WorkshopCardHolderIdentification object
 	 */
-	public void setWorkshopAddress(Address workshopAddress) {
+	public void setWorkshopAddress( Address workshopAddress ) {
 		this.workshopAddress = workshopAddress;
 	}
 
@@ -122,7 +126,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * @param	cardHolderName		the name and the first name(s) of the holder (e.g. name of the mechanic)
 	 * 								to be set for the WorkshopCardHolderIdentification object
 	 */
-	public void setCardHolderName(HolderName cardHolderName) {
+	public void setCardHolderName( HolderName cardHolderName ) {
 		this.cardHolderName = cardHolderName;
 	}
 
@@ -144,17 +148,18 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * @param	cardHolderPreferredLanguage		the preferred language of the card holder
 	 *			 								to be set for the WorkshopCardHolderIdentification object
 	 */
-	public void setCardHolderPreferredLanguage(Language cardHolderPreferredLanguage) {
+	public void setCardHolderPreferredLanguage( Language cardHolderPreferredLanguage ) {
 		this.cardHolderPreferredLanguage = cardHolderPreferredLanguage;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( workshopName.generateXMLElement("workshopName") );
-		node.addContent( workshopAddress.generateXMLElement("workshopAddress"));
-		node.addContent( cardHolderName.generateXMLElement("cardHolderName"));
-		node.addContent( cardHolderPreferredLanguage.generateXMLElement("cardHolderPreferredLanguage"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( workshopName.generateXMLElement( "workshopName" ) );
+		node.addContent( workshopAddress.generateXMLElement( "workshopAddress" ) );
+		node.addContent( cardHolderName.generateXMLElement( "cardHolderName" ) );
+		node.addContent( cardHolderPreferredLanguage.generateXMLElement( "cardHolderPreferredLanguage" ) );
+
 		return node;
 	}
 }

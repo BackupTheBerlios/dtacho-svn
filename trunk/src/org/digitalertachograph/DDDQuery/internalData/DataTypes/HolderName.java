@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,9 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * The surname and first name(s) of a card holder.
+ */
 public class HolderName extends DataClass {
 	/*
 	 * HolderName ::= SEQUENCE {
@@ -47,10 +50,10 @@ public class HolderName extends DataClass {
 	 * 					whose data is used when the HolderName
 	 * 					object is created.
 	 */
-	public HolderName(byte[] value){
+	public HolderName( byte[] value ) {
 		// 2x 36 bytes
-		holderSurname = new Name( arrayCopy(value, 0, 36));
-		holderFirstNames = new Name( arrayCopy(value, 36, 36));
+		holderSurname = new Name( arrayCopy( value, 0, 36 ) );
+		holderFirstNames = new Name( arrayCopy( value, 36, 36 ) );
 	}
 	
 	/**
@@ -68,7 +71,7 @@ public class HolderName extends DataClass {
 	 * @param	holderSurname		the surname (family name) of the holder
 	 * 								to be set for the HolderName object
 	 */
-	public void setHolderSurname(Name holderSurname) {
+	public void setHolderSurname( Name holderSurname ) {
 		this.holderSurname = holderSurname;
 	}
 
@@ -87,15 +90,16 @@ public class HolderName extends DataClass {
 	 * @param	holderFirstNames	the first name(s) and initials of the holder
 	 * 								to be set for the HolderName object
 	 */
-	public void setHolderFirstNames(Name holderFirstNames) {
+	public void setHolderFirstNames( Name holderFirstNames ) {
 		this.holderFirstNames = holderFirstNames;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( holderSurname.generateXMLElement("holderSurname"));
-		node.addContent( holderFirstNames.generateXMLElement("holderFirstNames"));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( holderSurname.generateXMLElement( "holderSurname" ) );
+		node.addContent( holderFirstNames.generateXMLElement( "holderFirstNames" ) );
+
 		return node;
 	}
 }

@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,14 +20,13 @@ package org.digitalertachograph.DDDQuery.internalData;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.WorkshopCardCalibrationData;
 import org.jdom.*;
 
-
 /**
  * EF_Calibration,
  * 
  * Council Regulation (EEC) No 3821/85 File ID: 050A
  * 
  */
-public class EF_Calibration extends DataClass{
+public class EF_Calibration extends DataClass {
 	//public int size;
 	private WorkshopCardCalibrationData workshopCardCalibrationData;
 	
@@ -39,16 +38,17 @@ public class EF_Calibration extends DataClass{
 	 * 					whose data is used when the EF_Calibration
 	 * 					object is created.
 	 */
-	public EF_Calibration(byte[] value){
+	public EF_Calibration( byte[] value, short noOfCalibrationRecords ) {
 		//size = value.length;
-		workshopCardCalibrationData = new WorkshopCardCalibrationData(value);
+		workshopCardCalibrationData = new WorkshopCardCalibrationData( value, noOfCalibrationRecords );
 	}
 	
-	public Element generateXMLElement(String name){
+	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
-		Element node = new Element(this.getClass().getSimpleName());
-		Element child = workshopCardCalibrationData.generateXMLElement("workshopCardCalibrationData");
-		node.addContent(child);
+		Element node = new Element( this.getClass().getSimpleName() );
+		Element child = workshopCardCalibrationData.generateXMLElement( "workshopCardCalibrationData" );
+		node.addContent( child );
+
 		return node;
 	}
 }

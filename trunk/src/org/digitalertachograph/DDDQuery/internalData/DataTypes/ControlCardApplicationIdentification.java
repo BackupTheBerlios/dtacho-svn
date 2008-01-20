@@ -1,4 +1,4 @@
-/*   Copyright (C) 2007, Martin Barth, Gerald Schnabel
+/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
+/**
+ * Information, stored in a control card, related to the identification of the
+ * application of the card.
+ */
 public class ControlCardApplicationIdentification extends DataClass {
 	/*
 	 * ControlCardApplicationIdentification ::= SEQUENCE {
@@ -47,7 +51,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 */
 	public ControlCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[2];
+		cardStructureVersion = new byte[ 2 ];
 		noOfControlActivityRecords = 0;
 	}
 
@@ -58,10 +62,10 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * 					whose data is used when the ControlCardApplicationIdentification
 	 * 					object is created.
 	 */
-	public ControlCardApplicationIdentification(byte[] value) {
-		typeOfTachographCardId = new EquipmentType(value[0]);
-		cardStructureVersion = arrayCopy(value, 1, 2);
-		noOfControlActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy(value, 3, 2));
+	public ControlCardApplicationIdentification( byte[] value ) {
+		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
+		cardStructureVersion = arrayCopy( value, 1, 2 );
+		noOfControlActivityRecords = convertIntoUnsigned2ByteInt( arrayCopy( value, 3, 2 ) );
 	}
 
 	/**
@@ -79,7 +83,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @param	typeOfTachographCardId	the implemented type of card to be set for the
 	 * 									ControlCardApplicationIdentification object
 	 */
-	public void setTypeOfTachographCardId(EquipmentType typeOfTachographCardId) {
+	public void setTypeOfTachographCardId( EquipmentType typeOfTachographCardId ) {
 		this.typeOfTachographCardId = typeOfTachographCardId;
 	}
 	
@@ -101,7 +105,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
 	 * 									to be set for the ControlCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion(byte[] cardStructureVersion) {
+	public void setCardStructureVersion( byte[] cardStructureVersion ) {
 		this.cardStructureVersion = cardStructureVersion;
 	}
 
@@ -123,16 +127,17 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @param	noOfControlActivityRecords	the number of company activity records the card can store
 	 * 										to be set for the ControlCardApplicationIdentification object
 	 */
-	public void setNoOfControlActivityRecords(int noOfControlActivityRecords) {
+	public void setNoOfControlActivityRecords( int noOfControlActivityRecords ) {
 		this.noOfControlActivityRecords = noOfControlActivityRecords;
 	}
 
 	@Override
-	public Element generateXMLElement(String name) {
-		Element node = new Element(name);
-		node.addContent( typeOfTachographCardId.generateXMLElement("typeOfTachographCardId"));
-		node.addContent( new Element("cardStructureVersion").setText(new String(cardStructureVersion)));
-		node.addContent( new Element("noOfControlActivityRecords").setText( Integer.toString(noOfControlActivityRecords)));
+	public Element generateXMLElement( String name ) {
+		Element node = new Element( name );
+		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
+		node.addContent( new Element( "cardStructureVersion" ).setText( new String( cardStructureVersion ) ) );
+		node.addContent( new Element( "noOfControlActivityRecords" ).setText( Integer.toString( noOfControlActivityRecords ) ) );
+
 		return node;
 	}
 }
