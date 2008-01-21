@@ -35,10 +35,10 @@ dtacho ist alpha. Es kann passieren, dass die Software nicht unter allen
 Bedingungen funktioniert und dass falsche oder unerwartete Ergebnisse auftreten.
 
 16.12.2007
-Momentan konvertiert diese Software die Daten einer .DDD-Datei (C_*.DDD), die
-von einer DTCO-Fahrerkarte stammen, zu einer XML-Datei. Der Code wurde von
-Martin Barth in seiner Diplomarbeit entwickelt. Die Entwicklung wird von
-Gerald Schnabel fortgesetzt.
+Momentan konvertiert diese Software die Daten von .DDD-Datei (C_*.DDD), die
+von DTCO-Fahrerkarte stammen, zu XML-Dateien. Der Code wurde von Martin Barth
+in seiner Diplomarbeit entwickelt. Die Entwicklung wird von Gerald Schnabel
+fortgesetzt.
 
 
 BEMERKUNGEN
@@ -71,6 +71,53 @@ Die jars wurden von folgenden Quellen bezogen:
 STARTEN DES PROGRAMMS
 ---------------------
 
+Es gibt zwei Möglichkeiten, eine lauffähige Version des Programms zu
+erhalten.
+
+1. Einen Code-Snapshot herunterladen
+
+Code-Snapshots (JAR archives) sind unter http://dtacho.berlios.de/jar/
+verfügbar.
+
+Um das Programm zu starten wird ein aktuelles Java Runtime Environment (JRE)
+6 benötigt.
+
+Die Syntax von der Kommandozeile aus ist
+java -jar dtacho-yyyymmdd.jar <drivercardfile.DDD>
+
+Um die Datenintergrität der Dateien von Fahrerkarten überprüfen zu können
+muss der europäische öffentliche Schlüssel im aktuellen Verzeichnis
+vorhanden sein, oder die Umgebungsvariable EURPKPATH muss den Pfad enthalten,
+unter dem der Schlüssel gefunden werden kann.
+
+Siehe Kapitel DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL.
+
+
+Beispiele:
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ C_driver_card.DDD
+
+ Es wird die Datei C_driver_card.DDD einer Fahrerkarte gelesen, einige
+ (Debug-) Informationen ausgegeben und die Datei C_driver_card.DDD.xml
+ erstellt.
+
+
+ Mehrere Dateien/Wildcards werden über die Kommandozeile unterstützt, z.B.
+
+ gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ C_*.DDD
+
+ konvertiert alle Dateien von Fahrerkarten (C_*.DDD) im aktuellen Verzeichnis
+ zu XML-Dateien.
+
+
+ BEMERKUNG: momentan werden nur Dateien von Fahrerkarten (C_*.DDD)
+            unterstützt! Siehe Kapitel STATUS.
+
+
+2. Den aktuellen Quellcode aus dem SVN-Repository compilieren
+
 -Den Quellcode beziehen
 
  Der Quellcode kann von Berlios.de via SVN ausgecheckt werden.
@@ -81,7 +128,7 @@ STARTEN DES PROGRAMMS
 -Den Quellcode compilieren
 
  Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
- sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u3.
+ sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u4.
  Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
 
  -in das Verzeichnis trunk/src wechseln
@@ -117,6 +164,13 @@ STARTEN DES PROGRAMMS
 
  Dies erfolgt mit der Option -cp.
 
+ Um die Datenintergrität von Dateien von Fahrerkarten überprüfen zu können
+ muss der europäische öffentliche Schlüssel im aktuellen Verzeichnis
+ vorhanden sein, oder die Umgebunsvariable muss den Pfad enthalten, unter
+ dem der Schlüssel gefunden werden kann.
+
+ Siehe Kapitel DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL.
+
 
  Beispiele:
 
@@ -139,6 +193,21 @@ STARTEN DES PROGRAMMS
 
  BEMERKUNG: momentan werden nur Dateien von Fahrerkarten (C_*.DDD)
             unterstützt! Siehe Kapitel STATUS.
+
+
+DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL
+-------------------------------------
+
+Der europäische öffentliche Schlüssel ist auf der Web-Site der European
+Root Certification Authority (ERCA) unter http://dtc.jrc.it/text/erca.html
+erhältlich.
+
+Der Byte-Daten nach XML Konvertierer benötigt die Datei EC_PK.bin aus dem
+Archiv EC_PK.zip.
+
+Der Konvertierer lädt die Datei EC_PK.bin aus dem Pfad, der in der Umgebungs-
+variable EURPKPATH gesetzt ist (oder aus dem aktuellen Verzeichnis, wenn
+EURPKPATH nicht gesetzt ist).
 
 
 SPEZIFIKATIONEN
@@ -174,3 +243,10 @@ dieses Projekt von besonderem Interesse:
 
  -Bücher/Referenzen
   http://www.asn1.org/books/
+
+
+LINKS
+-----
+
+-European Root Certification Authority (ERCA)
+ http://dtc.jrc.it/text/erca.html

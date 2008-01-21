@@ -107,17 +107,50 @@ public class TachographData extends DataClass {
 	}
 
 	/**
-	 * Tries to load and initialise the European Pubic Key. If the key
-	 * could be successfully initialised, signatures of data will be checked.
+	 * Tries to load and initialise the European Public Key. If the key
+	 * could be successfully initialised, it will be used for deccphering
+	 * the CA certificate.
 	 * 
 	 * @return	true if the EC public key could be initialised
 	 * 			false otherwise
 	 * 	
 	 */
 	public boolean initECPublicKey() {
+		String eur_pk_path = "";
+		FileInputStream ecPubKeyFIS;
+
 		try {
-			// try to open EC Public Key
-			FileInputStream ecPubKeyFIS = new FileInputStream( "EC_PK.bin" );
+			eur_pk_path = System.getenv( "EURPKPATH" );
+
+			if ( eur_pk_path.length() > 0 ) {
+				if ( eur_pk_path.charAt( eur_pk_path.length() - 1 ) != '/' ) {
+					eur_pk_path = eur_pk_path + "/";
+				}
+			}
+		}
+		catch ( NullPointerException npe ) {
+
+		}
+		catch ( SecurityException se ) {
+
+		}
+		
+		try {
+			// try to open the EC Public Key
+			System.out.println( " [INFO] trying to open the European Public Key:" );
+			System.out.print( " [INFO] " );
+			if ( eur_pk_path != null ) {
+				System.out.print( eur_pk_path );
+			}
+			System.out.println( "EC_PK.bin" );
+
+			if ( eur_pk_path != null ) {
+				ecPubKeyFIS = new FileInputStream( eur_pk_path + "EC_PK.bin" );
+			}
+			else {
+				ecPubKeyFIS = new FileInputStream( "EC_PK.bin" );
+			}
+
 			int ecPKLength = ecPubKeyFIS.available();
 
 			if ( ecPKLength != 144 ) {
@@ -696,7 +729,7 @@ public class TachographData extends DataClass {
 						System.out.println( " [INFO] signature belongs to previous tag" );
 						parseresult = true;
 						
-						if ( Arrays.equals(tag, new byte[]{ 0x05, 0x01, 0x01 } ) ) {
+						if ( Arrays.equals( tag, new byte[]{ 0x05, 0x01, 0x01 } ) && ( ecPublicKeyAvailable == true ) ) {
 							// save application identification signature
 							System.out.println( " [INFO] saving this signature for later checking when required certificates are available" );
 							ef_application_identification_signature = value;
