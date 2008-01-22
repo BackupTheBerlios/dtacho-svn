@@ -24,7 +24,7 @@ import org.jdom.Element;
  * Code to distinguish different types of equipment for the tachograph application.
  */
 public class EquipmentType extends DataClass {
-	private byte equipmentType;
+	private short equipmentType;
 	
 	/*
 	 * EquipmentType ::= INTEGER(0..255), 1 byte
@@ -88,7 +88,7 @@ public class EquipmentType extends DataClass {
 	 * 					tachograph application
 	 */
 	public EquipmentType( byte value ) {
-		equipmentType = value;
+		equipmentType = convertIntoUnsigned1ByteInt( value );
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class EquipmentType extends DataClass {
 	 * 			{@link #WORKSHOP_CARD}, {@link #CONTROL_CARD}, {@link #COMPANY_CARD}, {@link #MANUFACTURING_CARD},
 	 * 			{@link #VEHICLE_UNIT}, {@link #MOTION_SENSOR})
 	 */
-	public byte getEquipmentType() {
+	public short getEquipmentType() {
 		return equipmentType;
 	}
 
@@ -108,14 +108,14 @@ public class EquipmentType extends DataClass {
 	 * @param	equipmentType		byte that contains the equipment type to be set for
 	 * 								the EquipmentType object
 	 */
-	public void setEquipmentType( byte equipmentType ) {
+	public void setEquipmentType( short equipmentType ) {
 		this.equipmentType = equipmentType;
 	}
 	
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		node.addContent( new Element( "equipmentType" ).setText( Byte.toString( equipmentType ) ) );
+		node.addContent( new Element( "equipmentType" ).setText( Short.toString( equipmentType ) ) );
 
 		return node;
 	}

@@ -42,6 +42,9 @@ public class CardNumber extends DataClass {
 	 * 		cardRenewalIndex CardRenewalIndex, 1 byte
 	 * 	}
 	 * }
+	 * The first sequence of the choice is suitable to code a driver
+	 * card number, the second sequence of the choice is suitable to
+	 * code workshop, control and company card numbers. 
 	 * ---
 	 * CardReplacementIndex ::= IA5String(SIZE(1)), 1 byte
 	 * ---
