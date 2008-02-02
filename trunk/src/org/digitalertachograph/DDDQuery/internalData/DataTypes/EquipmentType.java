@@ -24,8 +24,6 @@ import org.jdom.Element;
  * Code to distinguish different types of equipment for the tachograph application.
  */
 public class EquipmentType extends DataClass {
-	private short equipmentType;
-	
 	/*
 	 * EquipmentType ::= INTEGER(0..255), 1 byte
 	 * ---
@@ -39,6 +37,9 @@ public class EquipmentType extends DataClass {
 	 * - - Motion Sensor (7),
 	 * - - RFU (8..255)
 	 */
+
+	private short equipmentType;
+
 
 	/**
 	 * Equipment type: RESERVED
@@ -72,8 +73,8 @@ public class EquipmentType extends DataClass {
 	 * Equipment type: MOTION_SENSOR
 	 */
 	public final static byte MOTION_SENSOR = 7;
-	
-	
+
+
 	/**
 	 * Constructor for an EquipmentType object
 	 */
@@ -111,12 +112,9 @@ public class EquipmentType extends DataClass {
 	public void setEquipmentType( short equipmentType ) {
 		this.equipmentType = equipmentType;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "equipmentType" ).setText( Short.toString( equipmentType ) ) );
-
-		return node;
+		return new Element( name ).setText( Short.toString( equipmentType ) );
 	}
 }

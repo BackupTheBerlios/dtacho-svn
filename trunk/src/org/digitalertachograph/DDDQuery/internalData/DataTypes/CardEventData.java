@@ -113,6 +113,7 @@ public class CardEventData extends DataClass{
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		for ( int i = 0; i < sequencesize; i++ ) {
 			Element recordsnode = new Element( "cardEventRecords" );
 			node.addContent( recordsnode );

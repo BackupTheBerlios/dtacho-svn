@@ -82,7 +82,7 @@ public class Datef extends DataClass {
 	 * @param	year	the year as BCD to be set for the Datef object
 	 */
 	public void setYear( byte[] year ) {
-		this.year = year;
+		this.year = arrayCopy( year, 0, 2 );
 	}
 	
 	/**
@@ -142,6 +142,7 @@ public class Datef extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "year" ).setText( getYearString() ) );
 		node.addContent( new Element( "month" ).setText( getMonthString() ) );
 		node.addContent( new Element( "day" ).setText( getDayString() ) );

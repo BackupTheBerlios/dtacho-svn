@@ -32,7 +32,7 @@ public class TyreSize extends DataClass {
 	 */
 	
 	private String tyreSize;
-	
+
 
 	/**
 	 * Constructor for a TyreSize object
@@ -44,12 +44,21 @@ public class TyreSize extends DataClass {
 	/**
 	 * Constructor for a TyreSize object
 	 * 
-	 * @param	value	byte array of a TyreSize structure
-	 * 					whose data is used when the TyreSize
+	 * @param	value	byte array of a TyreSize structure whose data is used when the TyreSize
 	 * 					object is created.
 	 */
-	public TyreSize( byte[] value) {
-		tyreSize = new String( value );
+	public TyreSize( byte[] value ) {
+		tyreSize = new String( arrayCopy( value, 0, 15 ) );
+	}
+
+	/**
+	 * Constructor for a TyreSize object
+	 * 
+	 * @param	tyreSize	byte array of a TyreSize structure whose data is used when the TyreSize
+	 * 						object is created.
+	 */
+	public TyreSize( String tyreSize ) {
+		setTyreSize( tyreSize );
 	}
 
 	/**
@@ -67,11 +76,17 @@ public class TyreSize extends DataClass {
 	 * @param	tyreSize		the designation of tyre dimensions of a TyreSize object
 	 */
 	public void setTyreSize( String tyreSize ) {
-		this.tyreSize = tyreSize;
+		int tyreSizeLength = tyreSize.length();
+
+		if ( tyreSizeLength > 15 ) {
+			tyreSizeLength = 15;
+		}
+
+		this.tyreSize = tyreSize.substring( 0, tyreSizeLength );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).addContent( new Element( "tyreSize" ).setText( tyreSize ) );
+		return new Element( name ).setText( tyreSize );
 	}
 }

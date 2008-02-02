@@ -105,7 +105,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 						assignment) to be set for the ExtendedSerialNumber object
 	 */
 	public void setMonthYear( byte[] monthYear ) {
-		this.monthYear = monthYear;
+		this.monthYear = arrayCopy( monthYear, 0, 2 );
 	}
 
 	/**
@@ -148,8 +148,10 @@ public class ExtendedSerialNumber extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "serialNumber" ).setText( Long.toString( serialNumber ) ) );
 		node.addContent( new Element( "monthYear" ).setText( convertBCDStringIntoString( monthYear ) ) );
+		node.addContent( new Element( "type" ).setText( convertIntoHexString( type ) ) );
 		node.addContent( new Element( "manufacturerCode" ).setText( Short.toString( manufacturerCode ) ) );
 
 		return node;

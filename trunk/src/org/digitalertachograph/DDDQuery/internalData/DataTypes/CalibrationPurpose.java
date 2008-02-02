@@ -55,7 +55,7 @@ public class CalibrationPurpose extends DataClass {
 	public CalibrationPurpose( byte value ) {
 		calibrationPurpose = value;
 	}
-	
+
 	/**
 	 * Returns the code explaining why a set of calibration parameters were recorded
 	 * of a CalibrationPurpose object.
@@ -80,9 +80,6 @@ public class CalibrationPurpose extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "calibrationPurpose" ).setText( Byte.toString( calibrationPurpose ) ) );
-
-		return node;
+		return new Element( name ).setText( Byte.toString( calibrationPurpose ) );
 	}
 }

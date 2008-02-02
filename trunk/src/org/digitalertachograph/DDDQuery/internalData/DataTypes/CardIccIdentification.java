@@ -47,9 +47,9 @@ public class CardIccIdentification extends DataClass {
 	
 	private byte clockStop;
 	private ExtendedSerialNumber cardExtendedSerialNumber;
-	private String cardApprovalNumber;
+	private CardApprovalNumber cardApprovalNumber;
 	private byte cardPersonaliserID;
-	private byte[] embedderIcAssemblerID;
+	private byte[] embedderIcAssemblerId;
 	private byte[] icIdentifier;
 
 	
@@ -59,9 +59,9 @@ public class CardIccIdentification extends DataClass {
 	public CardIccIdentification() {
 		clockStop = 0;
 		cardExtendedSerialNumber = new ExtendedSerialNumber();
-		cardApprovalNumber = new String();
+		cardApprovalNumber = new CardApprovalNumber();
 		cardPersonaliserID = 0;
-		embedderIcAssemblerID = new byte[ 5 ];
+		embedderIcAssemblerId = new byte[ 5 ];
 		icIdentifier = new byte[ 2 ];
 	}
 
@@ -75,9 +75,9 @@ public class CardIccIdentification extends DataClass {
 	public CardIccIdentification( byte[] value ) {
 		clockStop = value[ 0 ];
 		cardExtendedSerialNumber = new ExtendedSerialNumber( arrayCopy( value, 1, 8 ) );
-		cardApprovalNumber = new String( arrayCopy( value, 9, 8 ) );
+		cardApprovalNumber = new CardApprovalNumber( arrayCopy( value, 9, 8 ) );
 		cardPersonaliserID = value[ 17 ];
-		embedderIcAssemblerID = arrayCopy( value, 18, 5 );
+		embedderIcAssemblerId = arrayCopy( value, 18, 5 );
 		icIdentifier = arrayCopy( value, 23, 2 );
 	}
 	
@@ -131,7 +131,7 @@ public class CardIccIdentification extends DataClass {
 	 * @return	the type approval number of the card of the CardIccIdentification object
 	 */
 	public String getCardApprovalNumber() {
-		return cardApprovalNumber;
+		return cardApprovalNumber.getCardApprovalNumber();
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class CardIccIdentification extends DataClass {
 	 * 								to be set for the CardIccIdentification object
 	 */
 	public void setCardApprovalNumber( String cardApprovalNumber ) {
-		this.cardApprovalNumber = cardApprovalNumber;
+		this.cardApprovalNumber.setCardApprovalNumber( cardApprovalNumber );
 	}
 
 	/**
@@ -172,19 +172,19 @@ public class CardIccIdentification extends DataClass {
 	 * @return	the embedder/IC assembler identifier as defined in EN 726-3
 	 * 			of the CardIccIdentification object
 	 */
-	public byte[] getEmbedderIcAssemblerID() {
-		return embedderIcAssemblerID;
+	public byte[] getEmbedderIcAssemblerId() {
+		return embedderIcAssemblerId;
 	}
 
 	/**
 	 * Sets the embedder/IC assembler identifier as defined in EN 726-3
 	 * of a CardIccIdentification object.
 	 * 
-	 * @param	embedderIcAssemblerID	the embedder/IC assembler identifier as defined in EN 726-3
+	 * @param	embedderIcAssemblerId	the embedder/IC assembler identifier as defined in EN 726-3
 	 * 									to be set for the CardIccIdentification object
 	 */
-	public void setEmbedderIcAssemblerID( byte[] embedderIcAssemblerID ) {
-		this.embedderIcAssemblerID = embedderIcAssemblerID;
+	public void setEmbedderIcAssemblerId( byte[] embedderIcAssemblerId ) {
+		this.embedderIcAssemblerId = arrayCopy( embedderIcAssemblerId, 0, 5 );
 	}
 
 	/**
@@ -206,17 +206,18 @@ public class CardIccIdentification extends DataClass {
 	 * 							to be set for the CardIccIdentification object
 	 */
 	public void setIcIdentifier( byte[] icIdentifier ) {
-		this.icIdentifier = icIdentifier;
+		this.icIdentifier = arrayCopy( icIdentifier, 0, 2 );
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "clockStop" ).setText( Byte.toString( clockStop ) ) );
 		node.addContent( cardExtendedSerialNumber.generateXMLElement( "cardExtendedSerialNumber" ) );
-		node.addContent( new Element( "cardApprovalNumber" ).setText( cardApprovalNumber ) );
+		node.addContent( cardApprovalNumber.generateXMLElement( "cardApprovalNumber" ) );
 		node.addContent( new Element( "cardPersonaliserID" ).setText( convertIntoHexString( cardPersonaliserID ) ) );
-		node.addContent( new Element( "embedderIcAssemblerID" ).setText( convertIntoHexString( embedderIcAssemblerID ) ) );
+		node.addContent( new Element( "embedderIcAssemblerId" ).setText( convertIntoHexString( embedderIcAssemblerId ) ) );
 		node.addContent( new Element( "icIdentifier" ).setText( convertIntoHexString( icIdentifier ) ) );
 
 		return node;

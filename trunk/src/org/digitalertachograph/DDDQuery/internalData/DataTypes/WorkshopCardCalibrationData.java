@@ -46,7 +46,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 	// create min. 88 vectors; will be automatically expanded at run time if required!
 	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88);
 
-	
+
 	/**
 	 * Constructor for a WorkshopCardCalibrationData object
 	 * 
@@ -103,14 +103,14 @@ public class WorkshopCardCalibrationData extends DataClass {
 
 		node.addContent( new Element( "calibrationTotalNumber" ).setText( Integer.toString( calibrationTotalNumber ) ) );
 		node.addContent( new Element( "calibrationPointerNewestRecord" ).setText( Integer.toString( calibrationPointerNewestRecord ) ) );
-		
+
 		Iterator<WorkshopCardCalibrationRecord> it = calibrationRecords.iterator();
 		while ( it.hasNext() ) {
 			WorkshopCardCalibrationRecord wccr = (WorkshopCardCalibrationRecord)it.next();
 			Element wccrNode = wccr.generateXMLElement( "WorkshopCardCalibrationRecord" );
 			node.addContent( wccrNode );
 		}
-		
+
 		return node;
 	}
 }

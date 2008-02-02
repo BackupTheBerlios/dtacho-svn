@@ -90,10 +90,11 @@ public class CompanyActivityType extends DataClass {
 	public void setCompanyActivityType( short companyActivityType ) {
 		this.companyActivityType = companyActivityType;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "companyActivityType" ).setText( Short.toString( companyActivityType ) ) );
 
 		return node;

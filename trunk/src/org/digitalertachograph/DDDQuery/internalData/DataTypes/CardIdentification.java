@@ -62,7 +62,7 @@ public class CardIdentification extends DataClass {
 	 * 					whose data is used when the CardIdentification
 	 * 					object is created.
 	 */
-	public CardIdentification( byte[] value, int cardType ) {
+	public CardIdentification( byte[] value, short cardType ) {
 		cardIssuingMemberState = new NationNumeric( value[ 0 ] );
 		cardNumber = new CardNumber( arrayCopy( value, 1, 16 ), cardType );
 		cardIssuingAuthorityName = new Name( arrayCopy( value, 17, 36 ) );
@@ -206,6 +206,7 @@ public class CardIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( cardIssuingMemberState.generateXMLElement( "cardIssuingMemberState" ) );
 		node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );
 		node.addContent( cardIssuingAuthorityName.generateXMLElement( "cardIssuingAuthorityName" ) );

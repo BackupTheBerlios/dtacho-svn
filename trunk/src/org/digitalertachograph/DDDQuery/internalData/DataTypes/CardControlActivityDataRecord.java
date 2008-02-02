@@ -211,6 +211,7 @@ public class CardControlActivityDataRecord extends DataClass {
 		 */
 
 		Element node = new Element( name );
+
 		node.addContent( controlType.generateXMLElement( "controlType" ) );
 		node.addContent( controlTime.generateXMLElement( "controlTime" ) );
 		node.addContent( controlCardNumber.generateXMLElement( "controlCardNumber" ) );

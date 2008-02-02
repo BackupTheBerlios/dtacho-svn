@@ -32,10 +32,10 @@ public class Address extends DataClass {
 	 * ---
 	 * codePage specifies the part of the ISO/IEC 8859 used to code the address
 	 */
-	
+
 	private short codePage;
 	private byte[] address;
-	
+
 	/**
 	 * Constructor for an Address object
 	 */ 
@@ -53,7 +53,7 @@ public class Address extends DataClass {
 	public Address( byte[] value ) {
 		this( value[ 0 ], arrayCopy( value, 1, 35 ) );
 	}
-	
+
 	/**
 	 * Constructor for an Address object
 	 * 
@@ -64,7 +64,7 @@ public class Address extends DataClass {
 	 */
 	public Address( byte codePage, byte[] address ) {
 		this.codePage = codePage;
-		this.address = address;
+		setAddress( address );
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class Address extends DataClass {
 	public void setCodePage( short codePage ) {
 		this.codePage = codePage;
 	}
-	
+
 	/**
 	 * Returns the address of an Address object.
 	 * 
@@ -100,7 +100,7 @@ public class Address extends DataClass {
 	 * @param	address		byte array with address to be set for the Address object
 	 */
 	public void setAddress( byte[] address ) {
-		this.address = address;
+		this.address = arrayCopy( address, 0, 35 );
 	}
 
 	/**
@@ -115,8 +115,9 @@ public class Address extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		node.addContent( new Element( "codePage").setText( Integer.toString( codePage ) ) );
-		node.addContent( new Element( "address").setText( convertIntoHexString( address ) ) );
+
+		node.addContent( new Element( "codePage" ).setText( Integer.toString( codePage ) ) );
+		node.addContent( new Element( "address" ).setText( convertIntoHexString( address ) ) );
 		
 		return node;
 	}

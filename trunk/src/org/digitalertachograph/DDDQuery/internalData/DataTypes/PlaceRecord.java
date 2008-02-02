@@ -38,7 +38,7 @@ public class PlaceRecord extends DataClass {
 	private EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod;
 	private NationNumeric dailyWorkPeriodCountry;
 	private RegionNumeric dailyWorkPeriodRegion;
-	private int vehicleOdometerValue;
+	private OdometerShort vehicleOdometerValue;
 	
 
 	/**
@@ -49,7 +49,7 @@ public class PlaceRecord extends DataClass {
 		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod();
 		dailyWorkPeriodCountry = new NationNumeric();
 		dailyWorkPeriodRegion = new RegionNumeric();
-		vehicleOdometerValue = 0;
+		vehicleOdometerValue = new OdometerShort();
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class PlaceRecord extends DataClass {
 		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod( record[ 4 ] );
 		dailyWorkPeriodCountry = new NationNumeric( record[ 5 ] );
 		dailyWorkPeriodRegion = new RegionNumeric( record[ 6 ] );
-		vehicleOdometerValue = convertIntoUnsigned3ByteInt( arrayCopy( record, 7, 3 ) );
+		vehicleOdometerValue = new OdometerShort( arrayCopy( record, 7, 3 ) );
 	}
-	
+
 	/**
 	 * Returns the timestamp (date and time) related to the entry
 	 * of a PlaceRecord object.
@@ -76,7 +76,7 @@ public class PlaceRecord extends DataClass {
 	public TimeReal getEntryTime() {
 		return entryTime;
 	}
-	
+
 	/**
 	 * Sets the timestamp (date and time) related to the entry of a PlaceRecord object.
 	 * 
@@ -85,7 +85,7 @@ public class PlaceRecord extends DataClass {
 	public void setEntryTime( TimeReal entryTime ) {
 		this.entryTime = entryTime;
 	}
-	
+
 	/**
 	 * Returns the type of entry of a PlaceRecord object.
 	 * 
@@ -103,7 +103,7 @@ public class PlaceRecord extends DataClass {
 	public void setEntryTypeDailyWorkPeriod( EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod ) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
-	
+
 	/**
 	 * Returns the country entered of a PlaceRecord object.
 	 * 
@@ -112,7 +112,7 @@ public class PlaceRecord extends DataClass {
 	public NationNumeric getDailyWorkPeriodCountry() {
 		return dailyWorkPeriodCountry;
 	}
-	
+
 	/**
 	 * Sets the country entered of a PlaceRecord object.
 	 * 
@@ -121,7 +121,7 @@ public class PlaceRecord extends DataClass {
 	public void setDailyWorkPeriodCountry( NationNumeric dailyWorkPeriodCountry ) {
 		this.dailyWorkPeriodCountry = dailyWorkPeriodCountry;
 	}
-	
+
 	/**
 	 * Returns the region entered of a PlaceRecord object.
 	 * 
@@ -130,7 +130,7 @@ public class PlaceRecord extends DataClass {
 	public RegionNumeric getDailyWorkPeriodRegion() {
 		return dailyWorkPeriodRegion;
 	}
-	
+
 	/**
 	 * Sets the region entered of a PlaceRecord object.
 	 * 
@@ -139,16 +139,16 @@ public class PlaceRecord extends DataClass {
 	public void setDailyWorkPeriodRegion( RegionNumeric dailyWorkPeriodRegion ) {
 		this.dailyWorkPeriodRegion = dailyWorkPeriodRegion;
 	}
-	
+
 	/**
 	 * Returns the odometer value at the time of place entry of a PlaceRecord object.
 	 * 
 	 * @return	the odometer value at the time of place entry of the PlaceRecord object
 	 */
 	public int getVehicleOdometerValue() {
-		return vehicleOdometerValue;
+		return vehicleOdometerValue.getOdometerShort();
 	}
-	
+
 	/**
 	 * Sets the odometer value at the time of place entry of a PlaceRecord object.
 	 * 
@@ -156,23 +156,18 @@ public class PlaceRecord extends DataClass {
 	 * 										to be set for the PlaceRecord object
 	 */
 	public void setVehicleOdometerValue( int vehicleOdometerValue ) {
-		this.vehicleOdometerValue = vehicleOdometerValue;
+		this.vehicleOdometerValue.setOdometerShort( vehicleOdometerValue );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-//		private TimeReal entryTime;
-//		private EntryTypeDailyWorkPeriod entryTypeDailyWorkPeriod;
-//		private NationNumeric dailyWorkPeriodCountry;
-//		private RegionNumeric dailyWorkPeriodRegion;
-//		private int vehicleOdometerValue;
-		
+
 		node.addContent( entryTime.generateXMLElement( "entryTime" ) );
 		node.addContent( entryTypeDailyWorkPeriod.generateXMLElement( "entryTypeDailyWorkPeriod" ) );
 		node.addContent( dailyWorkPeriodCountry.generateXMLElement( "dailyWorkPeriodCountry" ) );
 		node.addContent( dailyWorkPeriodRegion.generateXMLElement( "dailyWorkPeriodRegion" ) );
-		node.addContent( new Element( "vehicleOdometerValue" ).setText( Integer.toString( vehicleOdometerValue ) ) );	
+		node.addContent( vehicleOdometerValue.generateXMLElement( "vehicleOdometerValue" ) );	
 
 		return node;
 	}

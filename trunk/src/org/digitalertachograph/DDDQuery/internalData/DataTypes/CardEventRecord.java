@@ -152,6 +152,7 @@ public class CardEventRecord extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( eventType.generateXMLElement( "eventType" ) );
 		node.addContent( eventBeginTime.generateXMLElement( "eventBeginTime" ) );
 		node.addContent( eventEndTime.generateXMLElement( "eventEndTime" ) );

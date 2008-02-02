@@ -109,9 +109,10 @@ public class VehicleRegistrationIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( vehicleRegistrationNation.generateXMLElement( "vehicleRegistrationNation" ) );
 		node.addContent( vehicleRegistrationNumber.generateXMLElement( "vehicleRegistrationNumber" ) );
-		
+
 		return node;
 	}
 }

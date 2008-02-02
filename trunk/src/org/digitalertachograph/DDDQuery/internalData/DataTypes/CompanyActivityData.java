@@ -50,7 +50,7 @@ public class CompanyActivityData extends DataClass {
 	
 	// create min. 230 vectors; will be automatically expanded at run time if required!
 	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>( 230 );
-	
+
 
 	/**
 	 * Constructor for a CompanyActivityData object
@@ -71,13 +71,14 @@ public class CompanyActivityData extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "companyPointerNewestRecord" ).setText(Integer.toString( companyPointerNewestRecord ) ) );
 		Iterator<CompanyActivityRecord> iter = companyActivityRecords.iterator();
 		while ( iter.hasNext() ) {
 			CompanyActivityRecord car = (CompanyActivityRecord)iter.next();
 			node.addContent( car.generateXMLElement( "companyActivityRecord" ) );
 		}
-		
+
 		return node;
 	}
 }

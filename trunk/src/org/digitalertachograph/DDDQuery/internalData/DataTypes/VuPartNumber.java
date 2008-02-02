@@ -25,11 +25,11 @@ import org.jdom.Element;
  */
 public class VuPartNumber extends DataClass {
 	/*
-	 * VuPartNumber ::= IA5String((SIZE(16)), 16 bytes
+	 * VuPartNumber ::= IA5String(SIZE(16)), 16 bytes
 	 */
-	
+
 	private String vuPartNumber;
-	
+
 
 	/**
 	 * Constructor for a VuPartNumber object
@@ -41,18 +41,27 @@ public class VuPartNumber extends DataClass {
 	/**
 	 * Constructor for a VuPartNumber object
 	 * 
-	 * @param	value	byte array of a VuPartNumber structure
-	 * 					whose data is used when the VuPartNumber
+	 * @param	value	byte array of a VuPartNumber that is used when the VuPartNumber
 	 * 					object is created.
 	 */
-	public VuPartNumber( byte[]value ) {
-		vuPartNumber = new String( value );
+	public VuPartNumber( byte[] value ) {
+		vuPartNumber = new String( arrayCopy( value, 0, 16 ) );
+	}
+
+	/**
+	 * Constructor for a VuPartNumber object
+	 * 
+	 * @param	vuPartNumber	String that contains the part number of a vehicle unit
+	 * 							that is used when the VuPartNumber object is created.
+	 */
+	public VuPartNumber( String vuPartNumber ) {
+		setVuPartNumber( vuPartNumber );
 	}
 
 	/**
 	 * Returns the part number of the vehicle unit of a VuPartNumber object.
 	 * 
-	 * @return	the part number of the vehicle unit	of the VuPartNumber object
+	 * @return	the part number of the vehicle unit of the VuPartNumber object
 	 */
 	public String getVuPartNumber() {
 		return vuPartNumber;
@@ -65,14 +74,17 @@ public class VuPartNumber extends DataClass {
 	 * 								to be set for the VuPartNumber object
 	 */
 	public void setVuPartNumber( String vuPartNumber ) {
-		this.vuPartNumber = vuPartNumber;
+		int vuPartNumberLength = vuPartNumber.length(); 
+
+		if ( vuPartNumberLength > 16 ) {
+			vuPartNumberLength = 16;
+		}
+
+		this.vuPartNumber = vuPartNumber.substring( 0, vuPartNumberLength );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "vuPartNumber" ).setText( vuPartNumber ) );
-
-		return node;
+		return new Element( name ).setText( vuPartNumber );
 	}
 }

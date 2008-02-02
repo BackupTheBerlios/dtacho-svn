@@ -43,7 +43,7 @@ public class EF_Identification extends DataClass {
 	 * 					whose data is used when the EF_Identification
 	 * 					object is created.
 	 */
-	public EF_Identification( byte[] value, int cardType ) {
+	public EF_Identification( byte[] value, short cardType ) {
 		//size = value.length;
 		// 65 bytes
 		this.cardType = cardType;

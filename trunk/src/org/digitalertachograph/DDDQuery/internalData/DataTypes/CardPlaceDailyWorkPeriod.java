@@ -54,6 +54,7 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 */
 	public CardPlaceDailyWorkPeriod( byte[] value, short noOfCardPlaceRecords ) {
 		placePointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 0 ] );
+
 		for ( int i = 1; i < value.length; i += 10 ) {
 			byte[] record = arrayCopy( value, i, 10 );
 			PlaceRecord tmp = new PlaceRecord( record );
@@ -65,6 +66,7 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "placePointerNewestRecord" ).setText( Short.toString( placePointerNewestRecord ) ) );
 
 		Iterator<PlaceRecord> it = placeRecords.iterator();

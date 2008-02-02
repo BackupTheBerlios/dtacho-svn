@@ -25,7 +25,7 @@ public class MemberStateCertificate extends Certificate {
 	/*
 	 * MemberStateCertificate ::= Certificate, 194 bytes
 	 */
-	
+
 	/**
 	 * Constructor for a MemberStateCertificate object
 	 */
@@ -40,4 +40,3 @@ public class MemberStateCertificate extends Certificate {
 		super( certificate );
 	}
 }
-

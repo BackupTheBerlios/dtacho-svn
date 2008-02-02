@@ -76,9 +76,6 @@ public class NoOfCalibrationsSinceDownload extends DataClass {
 	
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "noOfCalibrationsSinceDownload" ).setText(Integer.toString( noOfCalibrationsSinceDownload ) ) );
-
-		return node;
+		return new Element( name ).setText( Integer.toString( noOfCalibrationsSinceDownload ) );
 	}
 }

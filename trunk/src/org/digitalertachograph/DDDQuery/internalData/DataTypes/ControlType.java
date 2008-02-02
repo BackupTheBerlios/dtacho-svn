@@ -211,6 +211,7 @@ public class ControlType extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.setAttribute( "card_downloading", Boolean.toString( card_downloading ) );
 		node.setAttribute( "vu_downloading", Boolean.toString( vu_downloading ) );
 		node.setAttribute( "display", Boolean.toString( display ) );

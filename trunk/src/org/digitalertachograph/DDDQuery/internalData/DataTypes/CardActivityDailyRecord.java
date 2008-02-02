@@ -17,11 +17,10 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import java.util.Date;
 import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.Vector;
-
-import java.util.Date;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
@@ -52,12 +51,12 @@ public class CardActivityDailyRecord extends DataClass {
    	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2))
    	 * ---
 	 */
-	
+
 	private int activityPreviousRecordLength;
 	private int activityRecordLength;
 	private TimeReal activityRecordDate;
 	private byte[] activityDailyPresenceCounter;
-	private int activityDayDistance;
+	private Distance activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 	
 	private boolean complete = false;
@@ -80,7 +79,7 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) );
 		this.activityRecordDate = new TimeReal( arrayCopy( value, 4, 4 ) );
 		this.activityDailyPresenceCounter = arrayCopy( value, 8, 2 );
-		this.activityDayDistance = convertIntoUnsigned2ByteInt( arrayCopy( value, 10, 2) );
+		this.activityDayDistance = new Distance( arrayCopy( value, 10, 2 ) );
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
 		System.out.printf("  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / 2 );
@@ -149,16 +148,12 @@ public class CardActivityDailyRecord extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		
+
 		node.addContent( new Element( "activityPreviousRecordLength" ).setText( Integer.toString( activityPreviousRecordLength ) ) );
-		
 		node.addContent( new Element( "activityRecordLength" ).setText( Integer.toString( activityRecordLength ) ) );
-		
 		node.addContent( activityRecordDate.generateXMLElement( "activityRecordDate" ) );
-		
 		node.addContent( new Element( "activityDailyPresenceCounter" ).setText( convertBCDStringIntoString( activityDailyPresenceCounter ) ) );
-		
-		node.addContent( new Element( "activityDayDistance" ).setText( Integer.toString( activityDayDistance ) ) );
+		node.addContent( activityDayDistance.generateXMLElement( "activityDayDistance" ) );
 
 		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();
 		Element activityChangeInfoElement = new Element( "activityChangeInfoSet" );

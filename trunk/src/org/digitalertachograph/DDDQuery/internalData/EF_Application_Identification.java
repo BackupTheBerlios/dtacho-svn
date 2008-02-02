@@ -34,7 +34,7 @@ public class EF_Application_Identification extends DataClass {
 	private CompanyCardApplicationIdentification companyCardApplicationIdentification;
 
 	// all cards
-	private int cardType;
+	private short cardType;
 	private byte[] cardStructureVersion;
 	
 	// driver card, workshop card
@@ -63,7 +63,7 @@ public class EF_Application_Identification extends DataClass {
 	 */
 	public EF_Application_Identification( byte[] value ) {
 		// size = value.length;
-		cardType = value[ 0 ];
+		cardType = convertIntoUnsigned1ByteInt( value[ 0 ] );
 
 		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD:
@@ -119,7 +119,7 @@ public class EF_Application_Identification extends DataClass {
 	 * 			{@link EquipmentType#DRIVER_CARD}, {@link EquipmentType#WORKSHOP_CARD},
 	 * 			{@link EquipmentType#CONTROL_CARD}, {@link EquipmentType#COMPANY_CARD},
 	 */
-	public int getCardType() {
+	public short getCardType() {
 		return cardType;
 	}
 	

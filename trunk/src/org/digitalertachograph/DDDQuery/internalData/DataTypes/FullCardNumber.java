@@ -36,7 +36,7 @@ public class FullCardNumber extends DataClass {
 	private NationNumeric cardIssuingMemberState;
 	private CardNumber cardNumber;
 
-	
+
 	/**
 	 * Constructor for a FullCardNumber object
 	 */
@@ -56,7 +56,6 @@ public class FullCardNumber extends DataClass {
 	public FullCardNumber( byte[] value ) {
 		cardType = new EquipmentType( value[ 0 ] );
 		cardIssuingMemberState = new NationNumeric( value[ 1 ] );
-		// TODO not sure bout this solution.
 		cardNumber = new CardNumber( arrayCopy( value, 2, 16 ), cardType.getEquipmentType() );
 	}
 
@@ -68,7 +67,7 @@ public class FullCardNumber extends DataClass {
 	public EquipmentType getCardType() {
 		return cardType;
 	}
-	
+
 	/**
 	 * Sets the type of the tachograph card of a FullCardNumber object.
 	 * 
@@ -78,7 +77,7 @@ public class FullCardNumber extends DataClass {
 	public void setCardType( EquipmentType cardType ) {
 		this.cardType = cardType;
 	}
-	
+
 	/**
 	 * Returns the code of the Member State having issued the card of a FullCardNumber object.
 	 * 
@@ -87,7 +86,7 @@ public class FullCardNumber extends DataClass {
 	public NationNumeric getCardIssuingMemberState() {
 		return cardIssuingMemberState;
 	}
-	
+
 	/**
 	 * Sets the code of the Member State having issued the card of a FullCardNumber object.
 	 * 
@@ -97,7 +96,7 @@ public class FullCardNumber extends DataClass {
 	public void setCardIssuingMemberState( NationNumeric cardIssuingMemberState ) {
 		this.cardIssuingMemberState = cardIssuingMemberState;
 	}
-	
+
 	/**
 	 * Returns the card number of a FullCardNumber object.
 	 * 
@@ -106,7 +105,7 @@ public class FullCardNumber extends DataClass {
 	public CardNumber getCardNumber() {
 		return cardNumber;
 	}
-	
+
 	/**
 	 * Sets the card number of a FullCardNumber object.
 	 * 
@@ -115,10 +114,11 @@ public class FullCardNumber extends DataClass {
 	public void setCardNumber( CardNumber cardNumber ) {
 		this.cardNumber = cardNumber;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( cardType.generateXMLElement( "cardType" ) );
 		node.addContent( cardIssuingMemberState.generateXMLElement( "cardIssuingMemberState" ) );
 		node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );

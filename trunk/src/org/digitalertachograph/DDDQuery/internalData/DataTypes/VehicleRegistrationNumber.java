@@ -67,7 +67,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	 */
 	public VehicleRegistrationNumber( byte codePage, byte[] vehicleRegNumber ) {
 		this.codePage = convertIntoUnsigned1ByteInt( codePage );
-		this.vehicleRegNumber = vehicleRegNumber;
+		this.vehicleRegNumber = arrayCopy( vehicleRegNumber, 0, 13 );
 	}
 	
 //	public String toString() {
@@ -118,7 +118,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * 								for the VehicleRegistrationNumber object
 	 */
 	public void setVehicleRegNumber( byte[] vehicleRegNumber ) {
-		this.vehicleRegNumber = vehicleRegNumber;
+		this.vehicleRegNumber = arrayCopy( vehicleRegNumber, 0, 13 );
 	}
 
 	@Override

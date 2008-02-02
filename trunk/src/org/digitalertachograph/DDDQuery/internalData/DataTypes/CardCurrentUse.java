@@ -97,10 +97,11 @@ public class CardCurrentUse extends DataClass{
 	public void setSessionOpenVehicle( VehicleRegistrationIdentification sessionOpenVehicle ) {
 		this.sessionOpenVehicle = sessionOpenVehicle;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( sessionOpenTime.generateXMLElement( "sessionOpenTime" ) );
 		node.addContent( sessionOpenVehicle.generateXMLElement( "sessionOpenVehicle" ) );
 

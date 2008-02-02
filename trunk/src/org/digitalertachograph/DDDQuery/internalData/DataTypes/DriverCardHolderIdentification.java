@@ -128,6 +128,7 @@ public class DriverCardHolderIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( cardHolderName.generateXMLElement( "cardHolderName" ) );
 		node.addContent( cardHolderBirthDate.generateXMLElement( "cardHolderBirthDate" ) );
 		node.addContent( cardHolderPreferredLanguage.generateXMLElement( "cardHolderPreferredLanguage" ) );

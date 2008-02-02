@@ -44,7 +44,15 @@ public class CardChipIdentification extends DataClass {
 		icSerialNumber = new byte[ 4 ];
 		icManufacturingReferences = new byte[ 4 ];
 	}
-	
+
+	/**
+	 * Constructor for a CardChipIdentification object
+	 */
+	public CardChipIdentification( byte[] value ) {
+		icSerialNumber = arrayCopy( value, 0, 4 );
+		icManufacturingReferences = arrayCopy( value, 4, 4 );
+	}
+
 	/**
 	 * Returns the IC serial number of a CardChipIdentification object.
 	 * 
@@ -62,9 +70,9 @@ public class CardChipIdentification extends DataClass {
 	 * 								CardChipIdentification object
 	 */
 	public void setIcSerialNumber( byte[] icSerialNumber ) {
-		this.icSerialNumber = icSerialNumber;
+		this.icSerialNumber = arrayCopy( icSerialNumber, 0, 4 );
 	}
-	
+
 	/**
 	 * Returns the IC manufacturer identifier and fabrication elements of a CardChipIdentification object.
 	 * 
@@ -83,12 +91,13 @@ public class CardChipIdentification extends DataClass {
 	 * 										CardChipIdentification object
 	 */
 	public void setIcManufacturingReferences( byte[] icManufacturingReferences ) {
-		this.icManufacturingReferences = icManufacturingReferences;
+		this.icManufacturingReferences = arrayCopy( icManufacturingReferences, 0, 4 );
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "icSerialNumber" ).setText( convertIntoHexString( icSerialNumber ) ) );
 		node.addContent( new Element( "icManufacturingReferences" ).setText(convertIntoHexString( icManufacturingReferences ) ) );
 

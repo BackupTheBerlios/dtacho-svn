@@ -17,14 +17,11 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
-import org.digitalertachograph.DDDQuery.internalData.DataClass;
-import org.jdom.Element;
-
 /**
  * Information stored in a workshop card, related to the security data needed for
  * pairing motion sensors to vehicle units.
  */
-public class SensorInstallationSecData extends DataClass {
+public class SensorInstallationSecData extends TDesSessionKey {
 	/*
 	 * Information, stored in a workshop card, related to the security data needed for
 	 * pairing motion sensors to vehicle units (requirement 214).
@@ -32,23 +29,19 @@ public class SensorInstallationSecData extends DataClass {
 	 * SensorInstallationSecData ::= TDesSessionKey
 	 * 
 	 * Value assignment: in accordance with ISO 16844-3.
-	 * ----
+	 * ---
 	 * TDesSessionKey ::= SEQUENCE {
 	 * 	tDesKeyA OCTET STRING (SIZE(8)), 8 bytes
 	 * 	tDesKeyB OCTET STRING (SIZE(8)), 8 bytes
 	 * }
 	 */
 
-	private byte[] tDesKeyA;
-	private byte[] tDesKeyB;
-	
 
 	/**
 	 * Constructor for a SensorInstallationSecData object
 	 */
 	public SensorInstallationSecData() {
-		tDesKeyA = new byte[ 8 ];
-		tDesKeyB = new byte[ 8 ];
+		super();
 	}
 
 	/**
@@ -58,53 +51,7 @@ public class SensorInstallationSecData extends DataClass {
 	 * 					whose data is used when the SensorInstallationSecData
 	 * 					object is created.
 	 */
-	public SensorInstallationSecData( byte[] value ){
-		tDesKeyA = arrayCopy( value, 0, 8 );
-		tDesKeyB = arrayCopy( value, 8, 8 );
-	}
-
-	/**
-	 * Returns the TDesKeyA of a SensorInstallationSecData object.
-	 * 
-	 * @return	the TDesKeyA of the SensorInstallationSecData object
-	 */
-	public byte[] getTDesKeyA() {
-		return tDesKeyA;
-	}
-
-	/**
-	 * Sets the TDesKeyA of a SensorInstallationSecData object.
-	 * 
-	 * @param	tDesKeyA	the TDesKeyA to be set for the SensorInstallationSecData object
-	 */
-	public void setTDesKeyA( byte[] tDesKeyA ) {
-		this.tDesKeyA = tDesKeyA;
-	}
-
-	/**
-	 * Returns the TDesKeyB of a SensorInstallationSecData object.
-	 * 
-	 * @return	the TDesKeyB of the SensorInstallationSecData object
-	 */
-	public byte[] getTDesKeyB() {
-		return tDesKeyB;
-	}
-
-	/**
-	 * Sets the TDesKeyB of a SensorInstallationSecData object.
-	 * 
-	 * @param	tDesKeyB	the TDesKeyB to be set for the SensorInstallationSecData object
-	 */
-	public void setTDesKeyB( byte[] tDesKeyB ) {
-		this.tDesKeyB = tDesKeyB;
-	}
-	
-	@Override
-	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "tDesKeyA" ).setText( convertIntoHexString( tDesKeyA ) ) );
-		node.addContent( new Element( "tDesKeyB" ).setText( convertIntoHexString( tDesKeyB ) ) );
-
-		return node;
+	public SensorInstallationSecData( byte[] value ) {
+		super( value );
 	}
 }

@@ -46,8 +46,8 @@ public class Language extends DataClass {
 	 * 					whose data is used when the Language
 	 * 					object is created.
 	 */
-	public Language( byte[] value ){
-		language = new String( value );
+	public Language( byte[] value ) {
+		language = new String( arrayCopy( value, 0, 2 ) );
 	}
 
 	/**
@@ -65,14 +65,17 @@ public class Language extends DataClass {
 	 * @param	language	the code identifying the language to be set for the Language object
 	 */
 	public void setLanguage( String language ) {
-		this.language = language;
+		int languageLength = language.length(); 
+
+		if ( languageLength > 2 ) {
+			languageLength = 2;
+		}
+
+		this.language = language.substring( 0, languageLength );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "language" ).setText( language ) );
-
-		return node;
+		return new Element( name ).setText( language );
 	}
 }

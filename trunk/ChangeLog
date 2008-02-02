@@ -1,3 +1,82 @@
+2008-02-02
+-major code cleanup
+
+
+2008-02-01
+-new classes:
+ -CertificateContent
+ -K_ConstantOfRecordingEquipment
+ -L_TyreCircumference
+ -WorkshopCardCalibrationRecord
+ -W_VehicleCharacteristicConstant
+ -CertificationAuthorityKID
+ -KeyIdentifier
+
+
+2008-01-21
+-new classes:
+-VuDataBlockCounter
+
+
+2008-01-29
+-new classes:
+ -CardActivityLengthRange
+ -CardStructureVersion
+ -NoOfCalibrationRecords
+ -NoOfCardPlaceRecords
+ -NoOfCardVehicleRecords
+ -NoOfEventsPerType
+ -NoOfFaultsPerType
+ -OdometerValueMidnight
+ -OdometerShort
+ -OverspeedNumber
+ -SimilarEventsNumber
+ -Speed
+ -VuSoftwareVersion
+
+
+2008-01-28
+-new classes:
+ -TDesSessionKey
+ -VuPrivateKey
+ -VuPublicKey
+ -VuSerialNumber
+ -VuSoftInstallationDate
+
+
+2008-01-27
+-new classes:
+ -CardPrivateKey
+ -CardPublicKey
+ -CertificateHolderAuthorisation
+ -CertificateRequestID
+ -CertificationAuthorityKID
+ -CurrentDateTime
+ -EuropeanPublicKey
+ -ManufacturerCode
+ -MemberStatePublicKey
+ -PublicKey
+ -RSAKeyModulus
+ -RSAKeyPrivateExponent
+ -RSAKeyPublicExponent
+ -SensorPairingDate
+ -SensorSerialNumber
+ -Signature
+ -SpeedAuthorized
+ -SpeedAverage
+ -VuCertificate
+
+
+2008-01-26
+-new classes:
+ -CardRenewalIndex
+ -CardReplacementIndex
+ -NationAlpha
+ -RegionAlpha
+ -CardApprovalNumber
+ -CardConsecutiveIndex
+
+
 2008-01-19
 -deciphering of certificates and signatures added if the EC Public Key (EC_PK.bin)
  is found. This allows to check the integrity of data/signatures.

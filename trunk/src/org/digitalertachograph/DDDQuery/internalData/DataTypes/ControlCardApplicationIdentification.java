@@ -106,7 +106,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * 									to be set for the ControlCardApplicationIdentification object
 	 */
 	public void setCardStructureVersion( byte[] cardStructureVersion ) {
-		this.cardStructureVersion = cardStructureVersion;
+		this.cardStructureVersion = arrayCopy( cardStructureVersion, 0, 2 );
 	}
 
 	/**
@@ -134,6 +134,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
 		node.addContent( new Element( "cardStructureVersion" ).setText( new String( cardStructureVersion ) ) );
 		node.addContent( new Element( "noOfControlActivityRecords" ).setText( Integer.toString( noOfControlActivityRecords ) ) );

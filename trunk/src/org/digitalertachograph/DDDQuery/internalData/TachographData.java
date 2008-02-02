@@ -18,7 +18,10 @@
 package org.digitalertachograph.DDDQuery.internalData;
 
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
-
+import org.digitalertachograph.DDDQuery.internalData.Security.SecurityByteArrayTools;
+import org.digitalertachograph.DDDQuery.internalData.Security.SecurityCAPublicKey;
+import org.digitalertachograph.DDDQuery.internalData.Security.SecurityCertificateCheck;
+import org.digitalertachograph.DDDQuery.internalData.Security.SecurityDataSignatureCheck;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,7 +70,7 @@ public class TachographData extends DataClass {
 	
 	public Vector<Object> data;
 
-	private int cardType;
+	private short cardType;
 	
 	private Vector<DataClass> dispatcherQueue;
 
@@ -77,16 +80,16 @@ public class TachographData extends DataClass {
 	private int efstate = EF_DATA_ENTITY;
 	private byte[] tag2;
 
-	private CAPublicKey caPublicKey;
+	private SecurityCAPublicKey caPublicKey;
 	private String ecPubKeyModulus;
 	private String ecPubKeyExponent;
 
 	private boolean ecPublicKeyAvailable;
 
-	private CertificateCheck CACertificate;
+	private SecurityCertificateCheck CACertificate;
 	private boolean genuineCACertificate;
 
-	private CertificateCheck CardCertificate;
+	private SecurityCertificateCheck CardCertificate;
 	private boolean genuineCardCertificate;
 
 	private byte[] ef_application_identification_value;
@@ -108,7 +111,7 @@ public class TachographData extends DataClass {
 
 	/**
 	 * Tries to load and initialise the European Public Key. If the key
-	 * could be successfully initialised, it will be used for deccphering
+	 * could be successfully initialised, it will be used for deciphering
 	 * the CA certificate.
 	 * 
 	 * @return	true if the EC public key could be initialised
@@ -165,7 +168,7 @@ public class TachographData extends DataClass {
 			ecPubKeyFIS.read( ecPublicKey );
 			ecPubKeyFIS.close();
 
-			caPublicKey = new CAPublicKey( ecPublicKey );
+			caPublicKey = new SecurityCAPublicKey( ecPublicKey );
 			ecPubKeyModulus = caPublicKey.getPublicKeyModulusHexString();
 			ecPubKeyExponent = caPublicKey.getPublicKeyExponentHexString();
 			
@@ -200,7 +203,7 @@ public class TachographData extends DataClass {
 	private boolean verifiyDataSignatureIntegrity( byte[] signature, byte[] data, byte[] tag ) {
 		// check data/signature integrity
 		System.out.printf( " [INFO] verifying data/signature integrity of FID %02x %02x 00/01\n", tag[0], tag[1] );
-		DataSignatureCheck efDataSignatureCheck = new DataSignatureCheck();
+		SecurityDataSignatureCheck efDataSignatureCheck = new SecurityDataSignatureCheck();
 
 		try {
 			// set public key
@@ -451,9 +454,9 @@ public class TachographData extends DataClass {
 					efstate = EF_DATA_ENTITY;
 
 					if ( ecPublicKeyAvailable == true ) {
-						// check ca certificate
+						// check CA certificate
 						System.out.println( " [INFO] checking CA certificate" );
-						CACertificate = new CertificateCheck();
+						CACertificate = new SecurityCertificateCheck();
 
 						// set public key
 						try {
@@ -464,7 +467,7 @@ public class TachographData extends DataClass {
 							CACertificate.decipherCertificateSignature( value );
 							genuineCACertificate = CACertificate.isGenuineCertificate();
 							
-							System.out.printf( "  certificate          [%3d]: %s\n", value.length, new ByteArrayTools().ByteArrayToHexString( value ) );
+							System.out.printf( "  certificate          [%3d]: %s\n", value.length, new SecurityByteArrayTools().ByteArrayToHexString( value ) );
 							System.out.printf( "  signature            [%3d]: %s\n", CACertificate.getDecipheredSignatureByteArray().length, CACertificate.getDecipheredSignatureHexString() );
 							System.out.printf( "  valid signature?     [---]: %s\n", CACertificate.isValidSignature());
 							System.out.printf( "  c_n                  [%3d]: %s\n", CACertificate.getC_NByteArray().length, CACertificate.getC_NHexString() );
@@ -493,7 +496,7 @@ public class TachographData extends DataClass {
 							
 								// check card certificate
 								System.out.println( " [INFO] checking Card certificate" );
-								CardCertificate = new CertificateCheck();
+								CardCertificate = new SecurityCertificateCheck();
 
 								// set public key
 								try {
@@ -504,7 +507,7 @@ public class TachographData extends DataClass {
 									CardCertificate.decipherCertificateSignature( ef_card_value );
 									genuineCardCertificate = CardCertificate.isGenuineCertificate();
 
-									System.out.printf( "  certificate          [%3d]: %s\n", ef_card_value.length, new ByteArrayTools().ByteArrayToHexString( ef_card_value ) );
+									System.out.printf( "  certificate          [%3d]: %s\n", ef_card_value.length, new SecurityByteArrayTools().ByteArrayToHexString( ef_card_value ) );
 									System.out.printf( "  signature            [%3d]: %s\n", CardCertificate.getDecipheredSignatureByteArray().length, CardCertificate.getDecipheredSignatureHexString() );
 									System.out.printf( "  valid signature?     [---]: %s\n", CardCertificate.isValidSignature() );
 									System.out.printf( "  c_n                  [%3d]: %s\n", CardCertificate.getC_NByteArray().length, CardCertificate.getC_NHexString() );
@@ -528,7 +531,7 @@ public class TachographData extends DataClass {
 										System.out.println( " [INFO] Card certificate is valid" );
 										if ( CardCertificate.getCertificateContent().getEOVHexString().compareTo( "FFFFFFFF") != 0 ) {
 											System.out.print( " [INFO] Card certificate end of validity:\n " );
-											new TimeReal( convertIntoUnsigned4ByteInt(CardCertificate.getCertificateContent().getEOVByteArray() ) );
+											new TimeReal( convertIntoUnsigned4ByteInt( CardCertificate.getCertificateContent().getEOVByteArray() ) );
 										}
 
 										// check saved application identification signature now
@@ -570,7 +573,8 @@ public class TachographData extends DataClass {
 					tag2 = new byte[]{ 0x05, 0x01 };
 					efstate = EF_SIGNATURE_ENTITY;
 					
-					// save application identification signature
+					// save application identification for other
+					// classes that need information from it
 					ef_application_identification_value = value;
 				}
 				else if (Arrays.equals( tag, new byte[]{ (byte)0x05, 0x20, 0x00 } ) ) {
@@ -731,7 +735,7 @@ public class TachographData extends DataClass {
 						
 						if ( Arrays.equals( tag, new byte[]{ 0x05, 0x01, 0x01 } ) && ( ecPublicKeyAvailable == true ) ) {
 							// save application identification signature
-							System.out.println( " [INFO] saving this signature for later checking when required certificates are available" );
+							System.out.println( " [INFO] saving this signature. Checking will be done when the required certificates are available" );
 							ef_application_identification_signature = value;
 						}
 							

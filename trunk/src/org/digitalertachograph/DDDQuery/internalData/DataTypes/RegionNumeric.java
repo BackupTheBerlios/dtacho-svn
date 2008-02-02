@@ -88,12 +88,75 @@ public class RegionNumeric extends DataClass {
 	public void setRegionNumeric( byte regionNumeric ) {
 		this.regionNumeric = regionNumeric;
 	}
+
+	/**
+	 * Returns the region name of a RegionNumeric object.
+	 * 
+	 * @return	the region name of the RegionNumeric object
+	 */
+	public String toString() {
+		switch( regionNumeric ) {
+			case 0x00:
+				return "No information available";
+
+			case 0x01:
+				return "Andalucía";
+
+			case 0x02:
+				return "Aragón";
+
+			case 0x03:
+				return "Asturias";
+
+			case 0x04:
+				return "Cantabria";
+
+			case 0x05:
+				return "Cataluña";
+
+			case 0x06:
+				return "Castilla-León";
+
+			case 0x07:
+				return "Castilla-La-Mancha";
+
+			case 0x08:
+				return "Valencia";
+
+			case 0x09:
+				return "Extremadura";
+
+			case 0x0a:
+				return "Galicia";
+
+			case 0x0b:
+				return "Baleares";
+
+			case 0x0c:
+				return "Canarias";
+
+			case 0x0d:
+				return "La Rioja";
+
+			case 0x0e:
+				return "Madrid";
+
+			case 0x0f:
+				return "Murcia";
+
+			case 0x10:
+				return "Navarra";
+
+			case 0x011:
+				return "País Vasco";
+
+			default:
+				return "Invalid";
+		}
+	}
 	
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "regionNumeric" ).setText( Byte.toString( regionNumeric ) ) );
-
-		return node;
+		return new Element( name ).setText( Byte.toString( regionNumeric ) );
 	}
 }

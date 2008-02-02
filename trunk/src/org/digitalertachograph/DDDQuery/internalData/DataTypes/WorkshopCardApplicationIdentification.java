@@ -67,13 +67,13 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 */
 
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion;
-	private short noOfEventsPerType;
-	private short noOfFaultsPerType;
-	private int activityStructureLength;
-	private int noOfCardVehicleRecords;
-	private short noOfCardPlaceRecords;
-	private short noOfCalibrationRecords;
+	private CardStructureVersion cardStructureVersion;
+	private NoOfEventsPerType noOfEventsPerType;
+	private NoOfFaultsPerType noOfFaultsPerType;
+	private CardActivityLengthRange activityStructureLength;
+	private NoOfCardVehicleRecords noOfCardVehicleRecords;
+	private NoOfCardPlaceRecords noOfCardPlaceRecords;
+	private NoOfCalibrationRecords noOfCalibrationRecords;
 	
 
 	/**
@@ -81,13 +81,13 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 */
 	public WorkshopCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[ 2 ];
-		noOfEventsPerType = 0;
-		noOfFaultsPerType = 0;
-		activityStructureLength = 0;
-		noOfCardVehicleRecords = 0;
-		noOfCardPlaceRecords = 0;
-		noOfCalibrationRecords = 0;
+		cardStructureVersion = new CardStructureVersion();
+		noOfEventsPerType = new NoOfEventsPerType();
+		noOfFaultsPerType = new NoOfFaultsPerType();
+		activityStructureLength = new CardActivityLengthRange();
+		noOfCardVehicleRecords = new NoOfCardVehicleRecords();
+		noOfCardPlaceRecords = new NoOfCardPlaceRecords();
+		noOfCalibrationRecords = new NoOfCalibrationRecords();
 	}
 
 	/**
@@ -99,13 +99,13 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 */
 	public WorkshopCardApplicationIdentification( byte[] value ){
 		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
-		cardStructureVersion = arrayCopy( value, 1, 2 );
-		noOfEventsPerType = convertIntoUnsigned1ByteInt( value[ 3 ] );
-		noOfFaultsPerType = convertIntoUnsigned1ByteInt( value[ 4 ] );
-		activityStructureLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 5, 2 ) );
-		noOfCardVehicleRecords = convertIntoUnsigned2ByteInt( arrayCopy( value, 7, 2 ) );
-		noOfCardPlaceRecords = convertIntoUnsigned1ByteInt( value[ 9 ] );
-		noOfCalibrationRecords = convertIntoUnsigned1ByteInt( value[ 10 ] );
+		cardStructureVersion = new CardStructureVersion( arrayCopy( value, 1, 2 ) );
+		noOfEventsPerType = new NoOfEventsPerType( value[ 3 ] );
+		noOfFaultsPerType = new NoOfFaultsPerType( value[ 4 ] );
+		activityStructureLength = new CardActivityLengthRange( arrayCopy( value, 5, 2 ) );
+		noOfCardVehicleRecords = new NoOfCardVehicleRecords( arrayCopy( value, 7, 2 ) );
+		noOfCardPlaceRecords = new NoOfCardPlaceRecords( value[ 9 ] );
+		noOfCalibrationRecords = new NoOfCalibrationRecords( value[ 10 ] );
 	}
 
 	/**
@@ -135,7 +135,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public byte[] getCardStructureVersion() {
-		return cardStructureVersion;
+		return cardStructureVersion.getCardStructureVersion();
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 									to be set for the WorkshopCardApplicationIdentification object
 	 */
 	public void setCardStructureVersion( byte[] cardStructureVersion ) {
-		this.cardStructureVersion = cardStructureVersion;
+		this.cardStructureVersion.setCardStructureVersion( cardStructureVersion );
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public short getNoOfEventsPerType() {
-		return noOfEventsPerType;
+		return noOfEventsPerType.getNoOfEventsPerType();
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 								for the WorkshopCardApplicationIdentification object
 	 */
 	public void setNoOfEventsPerType( short noOfEventsPerType ) {
-		this.noOfEventsPerType = noOfEventsPerType;
+		this.noOfEventsPerType.setNoOfEventsPerType( noOfEventsPerType );
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public short getNoOfFaultsPerType() {
-		return noOfFaultsPerType;
+		return noOfFaultsPerType.getNoOfFaultsPerType();
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 								for the WorkshopCardApplicationIdentification object
 	 */
 	public void setNoOfFaultsPerType( short noOfFaultsPerType ) {
-		this.noOfFaultsPerType = noOfFaultsPerType;
+		this.noOfFaultsPerType.setNoOfFaultsPerType( noOfFaultsPerType );
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public int getActivityStructureLength() {
-		return activityStructureLength;
+		return activityStructureLength.getCardActivityLengthRange();
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 										for the WorkshopCardApplicationIdentification object
 	 */
 	public void setActivityStructureLength( int activityStructureLength ) {
-		this.activityStructureLength = activityStructureLength;
+		this.activityStructureLength.setCardActivityLengthRange( activityStructureLength );
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public int getNoOfCardVehicleRecords() {
-		return noOfCardVehicleRecords;
+		return noOfCardVehicleRecords.getNoOfCardVehicleRecords();
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 										for the WorkshopCardApplicationIdentification object
 	 */
 	public void setNoOfCardVehicleRecords( int noOfCardVehicleRecords ) {
-		this.noOfCardVehicleRecords = noOfCardVehicleRecords;
+		this.noOfCardVehicleRecords.setNoOfCardVehicleRecords( noOfCardVehicleRecords );
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public short getNoOfCardPlaceRecords() {
-		return noOfCardPlaceRecords;
+		return noOfCardPlaceRecords.getNoOfCardPlaceRecords();
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 									for the WorkshopCardApplicationIdentification object
 	 */
 	public void setNoOfCardPlaceRecords( short noOfCardPlaceRecords ) {
-		this.noOfCardPlaceRecords = noOfCardPlaceRecords;
+		this.noOfCardPlaceRecords.setNoOfCardPlaceRecords( noOfCardPlaceRecords );
 	}
 
 	/**
@@ -267,7 +267,7 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 			of the WorkshopCardApplicationIdentification object
 	 */
 	public short getNoOfCalibrationRecords() {
-		return noOfCalibrationRecords;
+		return noOfCalibrationRecords.getNoOfCalibrationRecords();
 	}
 
 	/**
@@ -278,32 +278,22 @@ public class WorkshopCardApplicationIdentification extends DataClass {
 	 * 									for the WorkshopCardApplicationIdentification object
 	 */
 	public void setNoOfCalibrationRecords( short noOfCalibrationRecords ) {
-		this.noOfCalibrationRecords = noOfCalibrationRecords;
+		this.noOfCalibrationRecords.setNoOfCalibrationRecords( noOfCalibrationRecords );
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		
+
 		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
-		
-		Element cardStructureVersionElement = new Element( "cardStructureVersion");
-		cardStructureVersionElement.setText( convertIntoHexString( cardStructureVersion ) );
-		node.addContent(cardStructureVersionElement);
-		
-		Element noOfEventsPerTypElement = new Element( "noOfEventsPerType" );
-		noOfEventsPerTypElement.setText( Short.toString( noOfEventsPerType ) );
-		node.addContent( noOfEventsPerTypElement );
-		
-		Element noOfFaultsPerTypElement = new Element( "noOfFaultsPerType" );
-		noOfFaultsPerTypElement.setText( Short.toString( noOfFaultsPerType ) );
-		node.addContent( noOfFaultsPerTypElement );
-		
-		node.addContent( new Element( "activityStructureLength" ).setText( Integer.toString( activityStructureLength ) ) );
-		node.addContent( new Element( "noOfCardVehicleRecords" ).setText( Integer.toString( noOfCardVehicleRecords ) ) );
-		node.addContent( new Element( "noOfCardPlaceRecords" ).setText( Short.toString( noOfCardPlaceRecords ) ) );
-		node.addContent( new Element( "noOfCalibrationRecords" ).setText( Short.toString( noOfCalibrationRecords ) ) );
-		
+		node.addContent( cardStructureVersion.generateXMLElement( "cardStructureVersion" ) );
+		node.addContent( noOfEventsPerType.generateXMLElement( "noOfEventsPerType" ) );
+		node.addContent( noOfFaultsPerType.generateXMLElement( "noOfFaultsPerType" ) );
+		node.addContent( activityStructureLength.generateXMLElement( "activityStructureLength" ) );
+		node.addContent( noOfCardVehicleRecords.generateXMLElement( "noOfCardVehicleRecords" ) );
+		node.addContent( noOfCardPlaceRecords.generateXMLElement( "noOfCardPlaceRecords" ) );
+		node.addContent( noOfCalibrationRecords.generateXMLElement( "noOfCalibrationRecords" ) );
+
 		return node;
 	}
 }

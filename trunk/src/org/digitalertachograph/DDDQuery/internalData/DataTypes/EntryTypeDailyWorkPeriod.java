@@ -36,9 +36,9 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * End, related time assumed by VU (5)
 	 */
 	
-	private byte entryTypeDailyWorkPeriod;
+	private short entryTypeDailyWorkPeriod;
 
-	
+
 	/**
 	 * Constructor for an EntryTypeDailyWorkPeriod object
 	 */
@@ -54,7 +54,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * 					object is created.
 	 */
 	public EntryTypeDailyWorkPeriod( byte value ) {
-		entryTypeDailyWorkPeriod = value;
+		entryTypeDailyWorkPeriod = convertIntoUnsigned1ByteInt( value );
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * @return	the code to distinguish between begin and end for an entry of a daily
 	 * 			work period place and condition of the entry of the EntryTypeDailyWorkPeriod object
 	 */
-	public byte getEntryTypeDailyWorkPeriod() {
+	public short getEntryTypeDailyWorkPeriod() {
 		return entryTypeDailyWorkPeriod;
 	}
 
@@ -76,14 +76,15 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * 										work period place and condition of the entry to be set for the
 	 * 										EntryTypeDailyWorkPeriod object
 	 */
-	public void setEntryTypeDailyWorkPeriod( byte entryTypeDailyWorkPeriod ) {
+	public void setEntryTypeDailyWorkPeriod( short entryTypeDailyWorkPeriod ) {
 		this.entryTypeDailyWorkPeriod = entryTypeDailyWorkPeriod;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		node.addContent( new Element( "entryTypeDailyWorkPeriod" ).setText( Byte.toString( entryTypeDailyWorkPeriod ) ) );
+
+		node.addContent( new Element( "entryTypeDailyWorkPeriod" ).setText( Short.toString( entryTypeDailyWorkPeriod ) ) );
 
 		return node;
 	}

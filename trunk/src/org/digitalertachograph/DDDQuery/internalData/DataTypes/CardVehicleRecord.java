@@ -43,7 +43,7 @@ public class CardVehicleRecord extends DataClass {
 	private TimeReal vehicleFirstUse;
 	private TimeReal vehicleLastUse;
 	private VehicleRegistrationIdentification vehicleRegistration;
-	private byte[] vuDataBlockCounter;
+	private VuDataBlockCounter vuDataBlockCounter;
 	
 	
 	/**
@@ -55,7 +55,7 @@ public class CardVehicleRecord extends DataClass {
 		vehicleFirstUse = new TimeReal();
 		vehicleLastUse = new TimeReal();
 		vehicleRegistration = new VehicleRegistrationIdentification();
-		vuDataBlockCounter = new byte[ 2 ];
+		vuDataBlockCounter = new VuDataBlockCounter();
 	}
 
 	/**
@@ -71,7 +71,8 @@ public class CardVehicleRecord extends DataClass {
 		vehicleFirstUse = new TimeReal( arrayCopy( value, 6, 4 ) );
 		vehicleLastUse = new TimeReal( arrayCopy( value, 10, 4) );
 		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 14, 15 ) );
-		vuDataBlockCounter = arrayCopy( value, 29, 2 );
+		vuDataBlockCounter = new VuDataBlockCounter( arrayCopy( value, 29, 2 ) );
+
 		if ( vehicleFirstUse.getTimereal() != 0 ) {
 			System.out.print( "  vehicle registration number: " );
 			byte[] vr = vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumber();
@@ -200,7 +201,7 @@ public class CardVehicleRecord extends DataClass {
 	 * 			of the CardVehicleRecord object
 	 */
 	public byte[] getVuDataBlockCounter() {
-		return vuDataBlockCounter;
+		return vuDataBlockCounter.getVuDataBlockCounter();
 	}
 
 	/**
@@ -211,18 +212,19 @@ public class CardVehicleRecord extends DataClass {
 	 * 								of use of the vehicle to be set for the CardVehicleRecord object
 	 */
 	public void setVuDataBlockCounter( byte[] vuDataBlockCounter ) {
-		this.vuDataBlockCounter = vuDataBlockCounter;
+		this.vuDataBlockCounter.setVuDataBlockCounter( vuDataBlockCounter );
 	}
 	
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "vehicleOdometerBegin" ).setText( Integer.toString( vehicleOdometerBegin ) ) );
 		node.addContent( new Element( "vehicleOdometerEnd" ).setText( Integer.toString( vehicleOdometerEnd ) ) );
 		node.addContent( vehicleFirstUse.generateXMLElement( "vehicleFirstUse" ) );
 		node.addContent( vehicleLastUse.generateXMLElement( "vehicleLastUse" ) );
 		node.addContent( vehicleRegistration.generateXMLElement( "vehicleRegistration" ) );
-		node.addContent( new Element( "vuDataBlockCounter" ).setText( convertBCDStringIntoString( vuDataBlockCounter ) ) );
+		node.addContent( vuDataBlockCounter.generateXMLElement( "vuDataBlockCounter" ) );
 		
 		return node;
 	}

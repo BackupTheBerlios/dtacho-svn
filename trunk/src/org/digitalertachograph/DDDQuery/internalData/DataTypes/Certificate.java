@@ -29,7 +29,7 @@ public class Certificate extends DataClass {
 	 */
 	private byte[] certificate;
 
-	
+
 	/**
 	 * Constructor for a Certificate object
 	 */
@@ -45,9 +45,9 @@ public class Certificate extends DataClass {
 	 * 							object is created.
 	 */
 	public Certificate( byte[] certificate ) {
-		this.certificate = certificate;
+		setCertificate ( certificate );
 	}
-	
+
 	/**
 	 * Returns the certificate of a Certificate object.
 	 * 
@@ -64,12 +64,13 @@ public class Certificate extends DataClass {
 	 *							to be set for the Certificate object
 	 */
 	public void setCertificate( byte[] certificate ) {
-		this.certificate = certificate;
+		this.certificate = arrayCopy( certificate, 0, 194 );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( convertIntoHexString( certificate ) );
 
 		return node;

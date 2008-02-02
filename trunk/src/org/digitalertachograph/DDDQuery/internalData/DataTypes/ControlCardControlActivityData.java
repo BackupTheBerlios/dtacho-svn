@@ -50,7 +50,7 @@ public class ControlCardControlActivityData extends DataClass {
 	// create min. 230 vectors; will be automatically expanded at run time if required!
 	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>( 230 );
 
-	
+
 	/**
 	 * Constructor for a ControlCardControlActivityData object
 	 * 
@@ -60,18 +60,20 @@ public class ControlCardControlActivityData extends DataClass {
 	 */
 	public ControlCardControlActivityData( byte[] value, int noOfControlActivityRecords ) {
 		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
+
 		for ( int i = 0; i < noOfControlActivityRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * 46 ), 46 );
 			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord( record );
 			controlActivityRecords.add( tmp );
 		}
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name);
+
 		node.addContent( new Element( "controlActivityRecords" ).setText( Integer.toString( controlPointerNewestRecord ) ) );
-		
+
 		Iterator<CardControlActivityDataRecord> it = controlActivityRecords.iterator();
 		while ( it.hasNext() ) {
 			CardControlActivityDataRecord ccadr = (CardControlActivityDataRecord)it.next();

@@ -34,6 +34,8 @@ public class CardCertificate extends Certificate {
 
 	/**
 	 * Constructor for a CardCertificate object
+	 * 
+	 * @param	certificate		certificate of the public key of a card.
 	 */
 	public CardCertificate( byte[] certificate ) {
 		super( certificate );

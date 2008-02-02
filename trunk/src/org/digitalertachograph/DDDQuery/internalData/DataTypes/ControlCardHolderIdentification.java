@@ -37,7 +37,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	private Address controlBodyAddress;
 	private HolderName cardHolderName;
 	private Language cardHolderPreferredLanguage;
-	
+
 
 	/**
 	 * Constructor for a ControlCardHolderIdentification object
@@ -154,6 +154,7 @@ public class ControlCardHolderIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( controlBodyName.generateXMLElement( "controlBodyName" ) );
 		node.addContent( controlBodyAddress.generateXMLElement( "controlBodyAddress" ) );
 		node.addContent( cardHolderName.generateXMLElement( "cardHolderName" ) );

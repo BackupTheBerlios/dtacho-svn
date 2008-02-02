@@ -38,7 +38,7 @@ public class HolderName extends DataClass {
 	/**
 	 * Constructor for a HolderName object
 	 */
-	public HolderName(){
+	public HolderName() {
 		holderSurname = new Name();
 		holderFirstNames = new Name();
 	}
@@ -97,6 +97,7 @@ public class HolderName extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( holderSurname.generateXMLElement( "holderSurname" ) );
 		node.addContent( holderFirstNames.generateXMLElement( "holderFirstNames" ) );
 

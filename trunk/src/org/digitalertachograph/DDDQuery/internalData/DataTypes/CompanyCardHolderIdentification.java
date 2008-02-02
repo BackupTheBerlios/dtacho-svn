@@ -118,6 +118,7 @@ public class CompanyCardHolderIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( companyName.generateXMLElement( "companyName" ) );
 		node.addContent( companyAddress.generateXMLElement( "companyAddress" ) );
 		node.addContent( cardHolderPreferredLanguage.generateXMLElement( "cardHolderPreferredLanguage" ) );

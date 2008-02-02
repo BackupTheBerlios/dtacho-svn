@@ -74,9 +74,6 @@ public class SpecificConditionType extends DataClass {
 	
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "specificConditionType" ).setText( Byte.toString( specificConditionType ) ) );
-
-		return node;
+		return new Element( name ).setText( Byte.toString( specificConditionType ) );
 	}
 }

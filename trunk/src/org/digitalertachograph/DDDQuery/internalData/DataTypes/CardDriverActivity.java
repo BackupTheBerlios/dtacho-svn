@@ -162,15 +162,15 @@ public class CardDriverActivity extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		
+
 		//Element activityPointerOldestDayRecordElement = new Element("activityPointerOldestDayRecord");
 		//activityPointerOldestDayRecordElement.setText(Integer.toString(activityPointerOldestDayRecord));
 		//node.addContent(activityPointerOldestDayRecordElement);
-		
+
 		//Element activityPointerNewestRecordElement = new Element("activityPointerNewestRecord");
 		//activityPointerNewestRecordElement.setText(Integer.toString(activityPointerNewestRecord));
 		//node.addContent(activityPointerNewestRecordElement);
-		
+
 		Iterator<CardActivityDailyRecord> it = activityDailyRecords.iterator();
 		Element cardActivityDailyRecordsElement = new Element( "cardActivityDailyRecords" );
 		while ( it.hasNext() ) {
@@ -178,13 +178,13 @@ public class CardDriverActivity extends DataClass {
 			Element cadrElement = cadr.generateXMLElement( "cardActivityDailyRecord" );
 			cardActivityDailyRecordsElement.addContent( cadrElement );
 		}
-		
+
 		node.addContent( cardActivityDailyRecordsElement );
-		
+
 		//Element lastPartOfActivityDailyRecordsElement = new Element("lastPartOfActivityDailyRecords");
 		//lastPartOfActivityDailyRecordsElement.setText( convertIntoHexString(lastPartOfActivityDailyRecords) );
 		//node.addContent(lastPartOfActivityDailyRecordsElement);
-		
+
 		return node;
 	}
 }

@@ -189,6 +189,7 @@ public class EventFaultType extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( new Element( "category" ).setText( Byte.toString( category ) ) );
 		node.addContent( new Element( "eventFaultType" ).setText( Byte.toString( eventFaultType ) ) );
 

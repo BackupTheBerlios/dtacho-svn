@@ -122,19 +122,26 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 										CardDrivingLicenceInformation object
 	 */
 	public void setDrivingLicenceNumber( String drivingLicenceNumber ) {
+		int drivingLicenceNumberLength = drivingLicenceNumber.length();
+
+		if ( drivingLicenceNumberLength > 16 ) {
+			drivingLicenceNumberLength = 16;
+		}
+
 		this.drivingLicenceNumber = drivingLicenceNumber;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( drivingLicenceIssuingAuthority.generateXMLElement( "drivingLicenceIssuingAuthority" ) );
 		node.addContent( drivingLicenceIssuingNation.generateXMLElement( "drivingLicenceIssuingNation" ) );
 
 		Element drivingLicenceNumberElement = new Element( "drivingLicenceNumber" );
 		drivingLicenceNumberElement.setText( drivingLicenceNumber );
 		node.addContent( drivingLicenceNumberElement );
-		
+
 		return node;
 	}
 }

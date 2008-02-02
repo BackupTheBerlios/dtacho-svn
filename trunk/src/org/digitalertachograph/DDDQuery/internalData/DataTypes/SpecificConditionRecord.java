@@ -98,6 +98,7 @@ public class SpecificConditionRecord extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( entryTime.generateXMLElement( "entryTime" ) );
 		node.addContent( specificConditionType.generateXMLElement( "specificConditionType" ) );
 

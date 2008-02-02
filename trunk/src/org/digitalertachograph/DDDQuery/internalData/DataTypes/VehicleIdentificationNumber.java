@@ -32,7 +32,7 @@ public class VehicleIdentificationNumber extends DataClass {
 	 */
 	
 	private String vehicleIdentificationNumber;
-	
+
 
 	/**
 	 * Constructor for a VehicleIdentificationNumber object
@@ -48,8 +48,19 @@ public class VehicleIdentificationNumber extends DataClass {
 	 * 					whose data is used when the VehicleIdentificationNumber
 	 * 					object is created.
 	 */
-	public VehicleIdentificationNumber( byte[]value ){
-		vehicleIdentificationNumber = new String( value );
+	public VehicleIdentificationNumber( byte[] value ) {
+		vehicleIdentificationNumber = new String( arrayCopy( value, 0, 17 ) );
+	}
+
+	/**
+	 * Constructor for a VehicleIdentificationNumber object
+	 * 
+	 * @param	vehicleIdentificationNumber		String that contains a Vehicle Identification Number (VIN)
+	 * 											that is used when the VehicleIdentificationNumber
+	 * 											object is created.
+	 */
+	public VehicleIdentificationNumber( String vehicleIdentificationNumber ) {
+		setVehicleIdentificationNumber( vehicleIdentificationNumber );
 	}
 
 	/**
@@ -72,14 +83,17 @@ public class VehicleIdentificationNumber extends DataClass {
 	 * 											VehicleIdentificationNumber object
 	 */
 	public void setVehicleIdentificationNumber( String vehicleIdentificationNumber ) {
-		this.vehicleIdentificationNumber = vehicleIdentificationNumber;
+		int vehicleIdentificationNumberLength = vehicleIdentificationNumber.length();
+
+		if ( vehicleIdentificationNumberLength > 17 ) {
+			vehicleIdentificationNumberLength = 17;
+		}
+
+		this.vehicleIdentificationNumber = vehicleIdentificationNumber.substring( 0, vehicleIdentificationNumberLength );
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-		node.addContent( new Element( "vehicleIdentificationNumber" ).setText( vehicleIdentificationNumber ) );
-
-		return node;
+		return new Element( name ).setText( vehicleIdentificationNumber );
 	}
 }

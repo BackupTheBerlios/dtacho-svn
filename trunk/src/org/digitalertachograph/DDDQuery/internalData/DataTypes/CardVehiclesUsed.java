@@ -42,7 +42,7 @@ public class CardVehiclesUsed extends DataClass {
 	// create min. 84 vectors; will be automatically expanded at run time if required!
 	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>( 84 );
 
-	
+
 	/**
 	 * Constructor for a CardVehiclesUsed object
 	 * 
@@ -58,7 +58,7 @@ public class CardVehiclesUsed extends DataClass {
 			cardVehicleRecords.add( tmp );
 		}
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );

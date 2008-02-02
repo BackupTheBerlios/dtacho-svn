@@ -155,6 +155,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
+
 		node.addContent( workshopName.generateXMLElement( "workshopName" ) );
 		node.addContent( workshopAddress.generateXMLElement( "workshopAddress" ) );
 		node.addContent( cardHolderName.generateXMLElement( "cardHolderName" ) );

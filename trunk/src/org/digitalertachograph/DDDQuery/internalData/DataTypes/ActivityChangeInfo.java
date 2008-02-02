@@ -22,7 +22,7 @@ import org.jdom.Element;
 
 /**
  * Slot status at 00.00 and/or a driver status at 00.00 and/or changes of activity
- *  and/or changes of driving status and/or changes of card status for a driver or a co-driver.
+ * and/or changes of driving status and/or changes of card status for a driver or a co-driver.
  */
 public class ActivityChangeInfo extends DataClass {
 	/*	
@@ -39,7 +39,7 @@ public class ActivityChangeInfo extends DataClass {
 	private static final byte SLOT_MASK = (byte)0x80;
 
 	/**
-	 * Slot: DRIVER  
+	 * Slot: DRIVER
 	 */
 	public static final boolean DRIVER = false;
 	/**
@@ -132,7 +132,7 @@ public class ActivityChangeInfo extends DataClass {
 	public ActivityChangeInfo( byte[] value ) {
 		this.value = value;
 		slot = ( ( value[ 0 ] & SLOT_MASK ) == SLOT_MASK );
-		drivingStatus = ((value[ 0 ] & DRIVINGSTATUS_MASK ) == DRIVINGSTATUS_MASK );
+		drivingStatus = ( (value[ 0 ] & DRIVINGSTATUS_MASK ) == DRIVINGSTATUS_MASK );
 		cardStatus = ( ( value[ 0 ] & CARDSTATUS_MASK ) == CARDSTATUS_MASK );
 
 		activity = (byte)( value[ 0 ] & ACTIVITY_MASK );
@@ -192,7 +192,8 @@ public class ActivityChangeInfo extends DataClass {
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
-		node.addContent( new Element( "value" ).setText( convertIntoHexString( this.value ) ) );
+
+		node.addContent( new Element( "value" ).setText( convertIntoHexString( value ) ) );
 		node.addContent( new Element( "slot" ).setText( Boolean.toString( slot ) ) );
 		node.addContent( new Element( "drivingStatus" ).setText( Boolean.toString( drivingStatus ) ) );
 		node.addContent( new Element( "cardStatus" ).setText( Boolean.toString( cardStatus ) ) );

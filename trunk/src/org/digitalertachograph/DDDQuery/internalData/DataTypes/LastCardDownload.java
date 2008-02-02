@@ -17,14 +17,16 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
-//import org.digitalertachograph.DDDQuery.internalData.DataClass;
-
 /**
  * Date and time, stored on a driver card, of last card download (for other purposes
  * than control). This date is updateable by a VU or any card reader.
  */
 public class LastCardDownload extends TimeReal {
-	
+	/*
+	 * LastCardDownload ::= TimeReal, 4 bytes
+	 */
+
+
 	/**
 	 * Constructor for a LastDownload object
 	 */

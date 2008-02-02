@@ -33,11 +33,11 @@ public class Name extends DataClass{
 	 * ---
 	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
-	
+
 	private short codePage;
 	private byte[] name;
 
-	
+
 	/**
 	 * Constructor for a Name object
 	 */
@@ -53,10 +53,10 @@ public class Name extends DataClass{
 	 * 					whose data is used when the Name
 	 * 					object is created.
 	 */
-	public Name( byte[] value ){
+	public Name( byte[] value ) {
 		this( value[ 0 ], arrayCopy( value, 1, value.length - 1 ) );
 	}
-	
+
 	/**
 	 * Constructor for a Name object
 	 * 
@@ -64,11 +64,11 @@ public class Name extends DataClass{
 	 * 						ISO/IEC 8859 used to code the address
 	 * @param	name		byte array that contains the name
 	 */
-	public Name( byte codePage, byte[] name ){
+	public Name( byte codePage, byte[] name ) {
 		this.codePage = convertIntoUnsigned1ByteInt( codePage );
-		this.name = name;
+		setName( name );
 	}
-	
+
 	/**
 	 * Returns the codepage of a Name object.
 	 * 
@@ -95,7 +95,7 @@ public class Name extends DataClass{
 	public void setCodePage( byte codePage ) {
 		this.codePage = (short)( codePage & 0xff );
 	}
-	
+
 	/**
 	 * Returns the name of a Name object.
 	 * 
@@ -111,13 +111,13 @@ public class Name extends DataClass{
 	 * @param	name		the name to be set for the name object
 	 */
 	public void setName( byte[] name ) {
-		this.name = name;
+		this.name = arrayCopy( name, 0, 35 );
 	}
-	
+
 	/**
 	 * Returns the names as string of the Name object.
 	 * 
-	 * @return	the namr as string of the Name object
+	 * @return	the name as string of the Name object
 	 */
 	public String toString() {
 		return new String( name );
@@ -129,7 +129,9 @@ public class Name extends DataClass{
 		
 		Element node = new Element( name );
 		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage) ) );
+
 		Element nameElement;
+
 		if ( c.isAnonymized() ) {
 			byte[] tmp = new byte[ 35 ];
 			for ( int i = 0; i < 35; i++ )
@@ -139,6 +141,7 @@ public class Name extends DataClass{
 		else {
 			nameElement = new Element( "name" ).setText( convertIntoHexString( this.name ) );
 		}
+
 		node.addContent( nameElement );
 
 		return node;
