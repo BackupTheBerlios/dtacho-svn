@@ -82,9 +82,8 @@ public class EventFaultType extends DataClass {
 	 */
 	
 	private byte eventFaultType;
-	private byte category;
 
-	
+
 	/**
 	 * EventFaultType: GENERAL_EVENT
 	 */
@@ -120,7 +119,6 @@ public class EventFaultType extends DataClass {
 	 */
 	public EventFaultType() {
 		eventFaultType = 0;
-		category = 0;
 	}
 
 	/**
@@ -130,38 +128,6 @@ public class EventFaultType extends DataClass {
 	 */
 	public EventFaultType( byte eventFaultType ) {
 		this.eventFaultType = eventFaultType;
-		category = (byte)( ( eventFaultType & 0xf0 ) >> 4 );
-
-		if ( ( category >= 5 ) && ( category < 8) ) {
-			// 0x50 ... 0x7F
-			category = RFU;
-		}
-		else if ( category >= 8 ) {
-			// 0x80 ... 0xFF
-			category = MANUFACTURER_SPECIFIC;
-		}
-	}
-
-	/**
-	 * Returns the category of the code qualifying an event or a fault
-	 * of a EventFaultType object.
-	 * 
-	 * @return	the category of the code qualifying an event or a fault
-	 * 			of the EventFaultType object
-	 */
-	public byte getCategory() {
-		return category;
-	}
-
-	/**
-	 * Sets the category of the code qualifying an event or a fault
-	 * of a EventFaultType object.
-	 * 
-	 * @param	category	the category of the code qualifying an event or a fault
-	 * 						to be set for the EventFaultType object
-	 */
-	public void setCategory( byte category ) {
-		this.category = category;
 	}
 
 	/**
@@ -188,11 +154,6 @@ public class EventFaultType extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-
-		node.addContent( new Element( "category" ).setText( Byte.toString( category ) ) );
-		node.addContent( new Element( "eventFaultType" ).setText( Byte.toString( eventFaultType ) ) );
-
-		return node;
+		return new Element( name ).setText( Byte.toString( eventFaultType ) );
 	}
 }

@@ -46,10 +46,10 @@ public class SecurityCertificateContent {
 	public SecurityCertificateContent( byte[] certificateContentByteArray ) {
 		certificateContent = new CertificateContent( certificateContentByteArray, KeyIdentifier.KIDTYPE_PK_MS );
 		
-		// cpi
+		// cpi, certificate profile identifier
 		cpi = (byte)( certificateContent.getCertificateProfileIdentifier() & 0x00ff );
 
-		// car
+		// car, certification authority reference
 		car = new byte[ 8 ];
 		try {
 			System.arraycopy( new byte[] {
@@ -67,12 +67,12 @@ public class SecurityCertificateContent {
 
 		}
 
-		// cha
+		// cha, certificate holder authorisation
 		cha = new byte[ 7 ];
 		System.arraycopy( certificateContent.getCertificateHolderAuthorisation().getTachographApplicationID(), 0, cha, 0, 6 );
 		System.arraycopy( new byte[] { (byte)( certificateContent.getCertificateHolderAuthorisation().getEquipmentType().getEquipmentType() & 0xff ) }, 0, cha, 6 , 1 );
 
-		// eov
+		// eov, certificate end of validity
 		eov = new byte[ 4 ];
 		System.arraycopy( new byte[] {
 				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimereal() >> 24 ) & 0x000000ff ),
@@ -81,7 +81,7 @@ public class SecurityCertificateContent {
 				(byte)(   certificateContent.getCertificateEndOfValidity().getTimereal()         & 0x000000ff )
 			}, 0, eov, 0, 4 );
 
-		// chr
+		// chr, certificate holder reference
 		chr = new byte[ 8 ];
 		try {
 			System.arraycopy( new byte[] {
@@ -99,11 +99,11 @@ public class SecurityCertificateContent {
 
 		}
 
-		// n
+		// n, public key modulus
 		n = new byte[ 128 ];
 		n = certificateContent.getPublicKey().getRSAKeyModulus().getRSAKeyModulus();
 
-		// e
+		// e, public key exponent
 		e = new byte[ 8 ];
 		e = certificateContent.getPublicKey().getRSAKeyPublicExponent().getRSAKeyPublicExponent();
 	}

@@ -38,12 +38,13 @@ public class CardFaultData extends DataClass {
 	 * zwei Folgen von Datensätzen, die jeweils "NoOfFaultsPerType"-fach CardFaultRecords enthalten.
 	 * -die erste Folge enthält Störungsdatensätze des Kontrollgeräts
 	 * -die zweite Folge enthält Störungsdatensätze der Karte
+	 * (req. 207 & 233).
 	 */
 
 	private static final int sequencesize = 2;
 	private Vector<Vector<CardFaultRecord>> cardFaultRecords = new Vector<Vector<CardFaultRecord>>( sequencesize );
 
-	
+
 	/**
 	 * Constructor for a CardFaultData object
 	 * 
@@ -95,8 +96,7 @@ public class CardFaultData extends DataClass {
 			Iterator<CardFaultRecord> it = cardFaultRecords.get( i ).iterator();
 			while ( it.hasNext() ) {
 				CardFaultRecord cfr = (CardFaultRecord)it.next();
-				Element cfrElement = cfr.generateXMLElement( "cardFaultRecord" );
-				recordsnode.addContent( cfrElement );
+				recordsnode.addContent( cfr.generateXMLElement( "cardFaultRecord" ) );
 			}
 		}
 

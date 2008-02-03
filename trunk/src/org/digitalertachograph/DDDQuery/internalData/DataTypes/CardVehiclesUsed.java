@@ -53,6 +53,7 @@ public class CardVehiclesUsed extends DataClass {
 	public CardVehiclesUsed( byte[] value, int noOfCardVehicleRecords ) {
 		for ( int i = 0; i < noOfCardVehicleRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * 31 ), 31 );
+
 			CardVehicleRecord tmp = new CardVehicleRecord( record );
 
 			cardVehicleRecords.add( tmp );
@@ -66,9 +67,9 @@ public class CardVehiclesUsed extends DataClass {
 		Element recordsnode = new Element( "cardVehicleRecords" );
 		node.addContent( recordsnode );
 		
-		Iterator<CardVehicleRecord> iter = cardVehicleRecords.iterator();
-		while ( iter.hasNext() ) {
-			CardVehicleRecord cvr = (CardVehicleRecord)iter.next();
+		Iterator<CardVehicleRecord> it = cardVehicleRecords.iterator();
+		while ( it.hasNext() ) {
+			CardVehicleRecord cvr = (CardVehicleRecord)it.next();
 			recordsnode.addContent( cvr.generateXMLElement( "cardVehicleRecord" ) );
 		}
 

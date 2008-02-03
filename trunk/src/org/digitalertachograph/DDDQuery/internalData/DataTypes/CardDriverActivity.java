@@ -55,7 +55,7 @@ public class CardDriverActivity extends DataClass {
 	 * 					whose data is used when the CardDriverActivity
 	 * 					object is created.
 	 */
-	public CardDriverActivity( byte[] value ) {
+	public CardDriverActivity( byte[] value, int activityStructureLength ) {
 		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) ); // = first CardActivityDailyRecord
 		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) ); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
@@ -69,7 +69,7 @@ public class CardDriverActivity extends DataClass {
 
 		// length of destination CardActivityDailyRecord array (records) is CardDriverActivity length
 		// without offsets for oldest/newest CardActivityDailyRecord (2 * 2 bytes)
-		byte[] records = new byte[ value.length - 4 ];
+		byte[] records = new byte[ activityStructureLength ];
 
 		int lengthToEnd = records.length - activityPointerOldestDayRecord;
 		System.arraycopy( value, 4 + activityPointerOldestDayRecord, records, 0, lengthToEnd );
@@ -171,15 +171,14 @@ public class CardDriverActivity extends DataClass {
 		//activityPointerNewestRecordElement.setText(Integer.toString(activityPointerNewestRecord));
 		//node.addContent(activityPointerNewestRecordElement);
 
-		Iterator<CardActivityDailyRecord> it = activityDailyRecords.iterator();
 		Element cardActivityDailyRecordsElement = new Element( "cardActivityDailyRecords" );
+		node.addContent( cardActivityDailyRecordsElement );
+
+		Iterator<CardActivityDailyRecord> it = activityDailyRecords.iterator();
 		while ( it.hasNext() ) {
 			CardActivityDailyRecord cadr = (CardActivityDailyRecord)it.next();
-			Element cadrElement = cadr.generateXMLElement( "cardActivityDailyRecord" );
-			cardActivityDailyRecordsElement.addContent( cadrElement );
+			cardActivityDailyRecordsElement.addContent( cadr.generateXMLElement( "cardActivityDailyRecord" ) );
 		}
-
-		node.addContent( cardActivityDailyRecordsElement );
 
 		//Element lastPartOfActivityDailyRecordsElement = new Element("lastPartOfActivityDailyRecords");
 		//lastPartOfActivityDailyRecordsElement.setText( convertIntoHexString(lastPartOfActivityDailyRecords) );

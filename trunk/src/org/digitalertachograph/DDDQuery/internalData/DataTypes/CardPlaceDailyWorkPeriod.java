@@ -38,12 +38,10 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * min.:  84
 	 * max.: 112
 	 */
-	
-	private short placePointerNewestRecord;
-	
+
 	// create min. 84 vectors; will be automatically expanded at run time if required!
 	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>( 84 );
-	
+
 
 	/**
 	 * Constructor for a CardPlaceDailyWorkPeriod object
@@ -53,27 +51,26 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * 					object is created.
 	 */
 	public CardPlaceDailyWorkPeriod( byte[] value, short noOfCardPlaceRecords ) {
-		placePointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 0 ] );
+		for ( int i = 0; i < noOfCardPlaceRecords; i += 1 ) {
+			byte[] record = arrayCopy( value, 1 + ( i * 10 ), 10 );
 
-		for ( int i = 1; i < value.length; i += 10 ) {
-			byte[] record = arrayCopy( value, i, 10 );
 			PlaceRecord tmp = new PlaceRecord( record );
 
 			placeRecords.add( tmp );
 		}
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "placePointerNewestRecord" ).setText( Short.toString( placePointerNewestRecord ) ) );
+		Element recordsnode = new Element( "placeRecords" );
+		node.addContent( recordsnode );
 
 		Iterator<PlaceRecord> it = placeRecords.iterator();
 		while ( it.hasNext() ) {
 			PlaceRecord pr = (PlaceRecord)it.next();
-			Element prElement = pr.generateXMLElement( "placeRecord" );
-			node.addContent( prElement );
+			recordsnode.addContent( pr.generateXMLElement( "placeRecord" ) );
 		}
 
 		return node;

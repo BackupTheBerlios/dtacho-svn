@@ -47,6 +47,8 @@ import org.jdom.output.XMLOutputter;
  * The data of a .DDD file.
  */
 public class TachographData extends DataClass {
+	private String dddfilename;
+
 	private EF_ICC ef_icc;
 	private EF_IC ef_ic;
 	private EF_Application_Identification ef_application_identification;
@@ -103,7 +105,6 @@ public class TachographData extends DataClass {
 	 * Constructor for a TachographData object
 	 */
 	public TachographData() {
-		super();
 		data = new Vector<Object>();
 		dispatcherQueue = new Vector<DataClass>();
 		invalid_data_found = false;
@@ -190,7 +191,7 @@ public class TachographData extends DataClass {
 			return ecPublicKeyAvailable;
 		}
 	}
-	
+
 	/**
 	 * Verifies the integrity of the given data against the given signature
 	 * 
@@ -353,7 +354,7 @@ public class TachographData extends DataClass {
 		
 		System.out.printf( this.getClass().getSimpleName() + ":\n [TAG] %s, FID %02x %02x %02x\n", tagInfo, tag[ 0 ], tag[ 1 ], tag[ 2 ] );
 	}
-	
+
 	/**
 	 * Indicates if the given tag in the first two bytes of the byte array is a valid File ID
 	 * of a driver card, workshop card, control card or company card.
@@ -620,7 +621,7 @@ public class TachographData extends DataClass {
 				else if ( Arrays.equals( tag, new byte[]{ (byte)0x05, 0x04, 0x00} ) ) {
 					// EF_Driver_Activity_Data
 					printTagInfo( tag );
-					ef_driver_activity = new EF_Driver_Activity_Data(value);
+					ef_driver_activity = new EF_Driver_Activity_Data( value, ef_application_identification.getActivityStructureLength() );
 					dispatcherQueue.add( ef_driver_activity );
 					tag2 = new byte[]{ 0x05, 0x04 };
 					efstate = EF_SIGNATURE_ENTITY;
@@ -877,8 +878,6 @@ public class TachographData extends DataClass {
 		}
 	}
 
-	private String dddfilename;
-
 	/**
 	 * Sets the source file name that is written as reference to the XML output.
 	 * Note that the source file name can be given with full path. The leading
@@ -893,9 +892,17 @@ public class TachographData extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element root = new Element( name );
 
-		// write source file name without leading path
-		root.addContent( new Element("sourceFileName").setText( new File( this.dddfilename ).getName() ) );
+		// write source
+		Element info = new Element( "Info");
+		root.addContent( info );
+
+		Element source = new Element("source");
+		info.addContent( source );
 		
+		if ( dddfilename.length() != 0 ) {
+			source.setText( new File( this.dddfilename ).getName() );
+		}
+			
 		Iterator<DataClass> dispaterIterator = dispatcherQueue.iterator();
 		while( dispaterIterator.hasNext() ){
 			DataClass dc = (DataClass)dispaterIterator.next();

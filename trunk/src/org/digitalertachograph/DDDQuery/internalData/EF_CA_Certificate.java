@@ -29,7 +29,7 @@ import org.jdom.Element;
 public class EF_CA_Certificate extends DataClass {
 	//public static final int size = 194;
 	private MemberStateCertificate cardCertificate;
-	
+
 
 	/**
 	 * Constructor for an EF_CA_Certificate object
@@ -41,10 +41,11 @@ public class EF_CA_Certificate extends DataClass {
 	public EF_CA_Certificate( byte [] value ) {
 		cardCertificate = new MemberStateCertificate( value );
 	}
-	
+
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
+
 		Element child = cardCertificate.generateXMLElement( "memberStateCertificate" );
 		node.addContent( child );
 

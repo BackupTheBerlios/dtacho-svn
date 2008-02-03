@@ -36,7 +36,7 @@ public class EF_Application_Identification extends DataClass {
 	// all cards
 	private short cardType;
 	private byte[] cardStructureVersion;
-	
+
 	// driver card, workshop card
 	private short noOfEventsPerType;
 	private short noOfFaultsPerType;
@@ -52,8 +52,8 @@ public class EF_Application_Identification extends DataClass {
 
 	// company card
 	private int noOfCompanyActivityRecords;
-	
-	
+
+
 	/**
 	 * Constructor for an EF_Application_Identification object
 	 * 
@@ -122,7 +122,7 @@ public class EF_Application_Identification extends DataClass {
 	public short getCardType() {
 		return cardType;
 	}
-	
+
 	/**
 	 * Returns the version of the structure that is implemented in the card
 	 * of an EF_Application_Identification object.
@@ -144,7 +144,7 @@ public class EF_Application_Identification extends DataClass {
 	public short getNoOfEventsPerType() {
 		return noOfEventsPerType;
 	}
-	
+
 	/**
 	 * Returns the number of faults per type of fault the card can record
 	 * of an EF_Application_Identification object.
@@ -155,7 +155,7 @@ public class EF_Application_Identification extends DataClass {
 	public short getNoOfFaultsPerType() {
 		return noOfFaultsPerType;
 	}
-	
+
 	/**
 	 * Returns the number of bytes available for storing activity records
 	 * of an EF_Application_Identification object.
@@ -166,7 +166,7 @@ public class EF_Application_Identification extends DataClass {
 	public int getActivityStructureLength() {
 		return activityStructureLength;
 	}
-	
+
 	/**
 	 * Returns the number of vehicle records the card can contain
 	 * of an EF_Application_Identification object.
@@ -225,8 +225,9 @@ public class EF_Application_Identification extends DataClass {
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
-		Element child;
+
 		String child_name;
+		Element child;
 
 		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD :
@@ -253,7 +254,7 @@ public class EF_Application_Identification extends DataClass {
 				child = new Element( "default" );
 				break;
 		}
-		
+
 		node.addContent( child );
 
 		return node;

@@ -35,7 +35,7 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 * Begin, related time assumed by VU (4),
 	 * End, related time assumed by VU (5)
 	 */
-	
+
 	private short entryTypeDailyWorkPeriod;
 
 
@@ -82,10 +82,6 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		Element node = new Element( name );
-
-		node.addContent( new Element( "entryTypeDailyWorkPeriod" ).setText( Short.toString( entryTypeDailyWorkPeriod ) ) );
-
-		return node;
+		return new Element( name ).setText( Short.toString( entryTypeDailyWorkPeriod ) );
 	}
 }

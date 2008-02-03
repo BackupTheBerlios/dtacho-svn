@@ -38,14 +38,15 @@ public class EF_Driver_Activity_Data extends DataClass {
 	 * 					whose data is used when the EF_Driver_Activity
 	 * 					object is created.
 	 */
-	public EF_Driver_Activity_Data( byte[] value ) {
+	public EF_Driver_Activity_Data( byte[] value, int activityStructureLength ) {
 		//size = value.length;
-		cardDriverActivity = new CardDriverActivity( value );
+		cardDriverActivity = new CardDriverActivity( value, activityStructureLength );
 	}
-	
+
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
+
 		Element child = cardDriverActivity.generateXMLElement( "cardDriverActivity" );
 		node.addContent( child );
 		

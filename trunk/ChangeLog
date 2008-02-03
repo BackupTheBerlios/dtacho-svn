@@ -1,3 +1,16 @@
+2008-02-03
+-new classes:
+ -CardSlotNumber
+ -PreviousVehicleInfo
+ -SensorApprovalNumber
+ -SensorPaired
+ -VuApprovalNumber
+ -VuDownloadActivityData
+ -VuSoftwareIdentification
+-honour properties of EF_Application_Identification in CardDriverActivity
+-misc changes
+
+
 2008-02-02
 -major code cleanup
 
@@ -81,12 +94,12 @@
 -deciphering of certificates and signatures added if the EC Public Key (EC_PK.bin)
  is found. This allows to check the integrity of data/signatures.
  Some new classes added:
- ByteArrayTools
- CAPublicKey
- CertificateCheck
- CertificateContent
- CertificationAuthority
- DataSignatureCheck 
+ -ByteArrayTools
+ -CAPublicKey
+ -CertificateCheck
+ -CertificateContent
+ -CertificationAuthority
+ -DataSignatureCheck 
 
 
 2008-01-12

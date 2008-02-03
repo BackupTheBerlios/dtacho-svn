@@ -46,14 +46,14 @@ public class CardEventData extends DataClass{
 	 * 						vehicle unit related & sensor related	'10'H...'2F'H
 	 * ---
 	 * sechs Folgen von Datensätzen (cardEventRecords[0..5]), die jeweils
-	 * "NoOfEventsPerType"-fach CardEventRecords der "EventFaultTypes" oben enthalten.
+	 * "NoOfEventsPerType"-fach CardEventRecords der "EventFaultTypes" oben enthalten
+	 * (req. 204 & 223).
 	 */
-
 
 	private static final int sequencesize = 6;
 	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>( sequencesize );
 
-	
+
 	/**
 	 * Constructor for a CardEventData object
 	 * 
@@ -109,7 +109,7 @@ public class CardEventData extends DataClass{
 		}
 	}
 
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
@@ -121,8 +121,7 @@ public class CardEventData extends DataClass{
 			Iterator<CardEventRecord> it = cardEventRecords.get( i ).iterator();
 			while ( it.hasNext() ) {
 				CardEventRecord cer = (CardEventRecord)it.next();
-				Element cerElement = cer.generateXMLElement( "cardEventRecord" );
-				recordsnode.addContent( cerElement );
+				recordsnode.addContent( cer.generateXMLElement( "cardEventRecord" ) );
 			}
 		}
 

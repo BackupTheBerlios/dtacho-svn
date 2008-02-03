@@ -44,42 +44,42 @@ public class EquipmentType extends DataClass {
 	/**
 	 * Equipment type: RESERVED
 	 */
-	public final static byte RESERVED = 0;
+	public final static short RESERVED = 0;
 	/**
 	 * Equipment type: DRIVER_CARD
 	 */
-	public final static byte DRIVER_CARD = 1;
+	public final static short DRIVER_CARD = 1;
 	/**
 	 * Equipment type: WORKSHOP_CARD
 	 */
-	public final static byte WORKSHOP_CARD = 2;
+	public final static short WORKSHOP_CARD = 2;
 	/**
 	 * Equipment type: CONTROL_CARD
 	 */
-	public final static byte CONTROL_CARD = 3;
+	public final static short CONTROL_CARD = 3;
 	/**
 	 * Equipment type: COMPANY_CARD
 	 */
-	public final static byte COMPANY_CARD = 4;
+	public final static short COMPANY_CARD = 4;
 	/**
 	 * Equipment type: MANUFACTURING_CARD
 	 */
-	public final static byte MANUFACTURING_CARD = 5;
+	public final static short MANUFACTURING_CARD = 5;
 	/**
 	 * Equipment type: VEHICLE_UNIT
 	 */
-	public final static byte VEHICLE_UNIT = 6;
+	public final static short VEHICLE_UNIT = 6;
 	/**
 	 * Equipment type: MOTION_SENSOR
 	 */
-	public final static byte MOTION_SENSOR = 7;
+	public final static short MOTION_SENSOR = 7;
 
 
 	/**
 	 * Constructor for an EquipmentType object
 	 */
 	public EquipmentType() {
-		equipmentType = 0;
+		equipmentType = RESERVED;
 	}
 
 	/**

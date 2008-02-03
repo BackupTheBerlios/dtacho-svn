@@ -75,10 +75,13 @@ public class CardVehicleRecord extends DataClass {
 
 		if ( vehicleFirstUse.getTimereal() != 0 ) {
 			System.out.print( "  vehicle registration number: " );
+
 			byte[] vr = vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumber();
+
 			for ( int i = 0; i < vr.length; i++ ) {
 				System.out.printf( "%c", vr[ i ] );
 			}
+
 			System.out.println();
 		}
 	}

@@ -29,7 +29,7 @@ import org.jdom.Element;
 public class EF_Company_Activity_Data extends DataClass {
 	//public int size;
 	private CompanyActivityData companyActivityData;
-	
+
 
 	/**
 	 * Constructor for an EF_Company_Activity_Data object
@@ -42,10 +42,11 @@ public class EF_Company_Activity_Data extends DataClass {
 		//size = value.length;
 		companyActivityData = new CompanyActivityData( value, noOfCompanyActivityRecords );
 	}
-	
+
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
+
 		Element child = companyActivityData.generateXMLElement( "companyActivityData" );
 		node.addContent( child );
 
