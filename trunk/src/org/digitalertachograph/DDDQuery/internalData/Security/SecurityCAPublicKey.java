@@ -25,9 +25,8 @@ import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 public class SecurityCAPublicKey {
 
 	private CertificationAuthorityKID certificationAuthority;
-	private RSAKeyModulus publicKeyModulus;
-	private RSAKeyPublicExponent publicKeyExponent;
-
+	private PublicKey rsaPublicKey;
+	
 	
 	/**
 	 * Constructor for a CAPublicKey object
@@ -41,13 +40,9 @@ public class SecurityCAPublicKey {
 		System.arraycopy( caPublicKey, 0, CertificationAuthorityTemp, 0, 8 );
 		certificationAuthority = new CertificationAuthorityKID( CertificationAuthorityTemp );
 		
-		byte[] publicKeyModulusTemp = new byte[ 128 ];
-		System.arraycopy( caPublicKey, 8, publicKeyModulusTemp, 0, 128 );
-		publicKeyModulus = new RSAKeyModulus( publicKeyModulusTemp );
-
-		byte[] publicKeyExponentTemp = new byte[ 8 ];
-		System.arraycopy( caPublicKey, 136, publicKeyExponentTemp, 0, 8 );
-		publicKeyExponent = new RSAKeyPublicExponent( publicKeyExponentTemp );
+		byte[] rsaPublicKeyTemp = new byte[ 136 ];
+		System.arraycopy( caPublicKey, 8, rsaPublicKeyTemp, 0, 136 );
+		rsaPublicKey = new PublicKey( rsaPublicKeyTemp );
 	}
 
 	/**
@@ -65,7 +60,7 @@ public class SecurityCAPublicKey {
 	 * @return	the RSA public key modulus of the CAPublicKey object as byte array
 	 */
 	public byte[] getPublicKeyModulusByteArray() {
-		return publicKeyModulus.getRSAKeyModulus();
+		return rsaPublicKey.getRSAKeyModulus().getRSAKeyModulus();
 	}
 
 	/**
@@ -74,7 +69,7 @@ public class SecurityCAPublicKey {
 	 * @return	the RSA public key modulus of the CAPublicKey object as hex string
 	 */
 	public String getPublicKeyModulusHexString() {
-		return new SecurityByteArrayTools().ByteArrayToHexString( publicKeyModulus.getRSAKeyModulus() );
+		return new SecurityByteArrayTools().ByteArrayToHexString( rsaPublicKey.getRSAKeyModulus().getRSAKeyModulus() );
 	}
 
 	/**
@@ -83,7 +78,7 @@ public class SecurityCAPublicKey {
 	 * @return	the RSA public key exponent of the CAPublicKey object as byte array
 	 */
 	public byte[] getPublicKeyExponentByteArray() {
-		return publicKeyExponent.getRSAKeyPublicExponent();
+		return rsaPublicKey.getRSAKeyPublicExponent().getRSAKeyPublicExponent();
 	}
 
 	/**
@@ -92,6 +87,6 @@ public class SecurityCAPublicKey {
 	 * @return	the RSA public key exponent of the CAPublicKey object as hex string
 	 */
 	public String getPublicKeyExponentHexString() {
-		return new SecurityByteArrayTools().ByteArrayToHexString( publicKeyExponent.getRSAKeyPublicExponent() );
+		return new SecurityByteArrayTools().ByteArrayToHexString( rsaPublicKey.getRSAKeyPublicExponent().getRSAKeyPublicExponent() );
 	}
 }

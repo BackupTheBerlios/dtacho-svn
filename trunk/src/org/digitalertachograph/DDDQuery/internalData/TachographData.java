@@ -35,6 +35,7 @@ import java.security.*;
 import java.security.spec.*;
 
 import org.jdom.*;
+import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 
@@ -892,24 +893,25 @@ public class TachographData extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element root = new Element( name );
 
-		// write source
-		Element info = new Element( "Info");
+		// write info tag
+		Element info = new Element( "TachographDataInfo" );
 		root.addContent( info );
 
-		Element source = new Element("source");
+		// write source
+		Element source = new Element( "source" );
 		info.addContent( source );
-		
+
 		if ( dddfilename.length() != 0 ) {
 			source.setText( new File( this.dddfilename ).getName() );
 		}
-			
+
 		Iterator<DataClass> dispaterIterator = dispatcherQueue.iterator();
 		while( dispaterIterator.hasNext() ){
 			DataClass dc = (DataClass)dispaterIterator.next();
 			Element node = dc.generateXMLElement( dc.getClass().getSimpleName() );
 			root.addContent( node );
 		}
-		
+
 		return root;
 	}
 
@@ -920,13 +922,19 @@ public class TachographData extends DataClass {
 	 */
 	public String generateXML() {
 		Document doc = new Document();
+
 		Element root = generateXMLElement( this.getClass().getSimpleName() );
 		doc.setRootElement( root );
-		
-		XMLOutputter serializer = new XMLOutputter();
-		return serializer.outputString( doc );
+
+		Format fmt = Format.getPrettyFormat();
+		fmt.setLineSeparator( "\n" );
+		fmt.setEncoding( "UTF-8" );
+		fmt.setExpandEmptyElements( true );
+
+		XMLOutputter serializer = new XMLOutputter( fmt );
+		return serializer.outputString( new DocType( "TachographData", "C_Driver_Card.dtd" ) ) + serializer.outputString( doc );
 	}
-	
+
 	/**
 	 * Dumps the collected tags as XML file.
 	 * 
@@ -940,8 +948,18 @@ public class TachographData extends DataClass {
 
 		try { 
 			FileOutputStream fos = new FileOutputStream( file );
-			XMLOutputter serializer = new XMLOutputter();
+
+			Format fmt = Format.getPrettyFormat();
+			fmt.setLineSeparator( "\n" );
+			fmt.setEncoding( "UTF-8" );
+			fmt.setExpandEmptyElements( true );
+
+			XMLOutputter serializer = new XMLOutputter( fmt );
+
+			doc.setDocType( new DocType( "TachographData", "C_Driver_Card.dtd" ) );
+
 			serializer.output( doc, fos );
+
 			fos.flush();
 			fos.close();
 		}

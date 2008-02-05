@@ -1,3 +1,18 @@
+2008-02-04
+-ControlType:
+ attributes moved to content
+-TachographData:
+ XML output fixes
+-DTD for driver card XML files
+
+
+2008-02-04
+-SecurityCAPublicKey:
+ use PublicKey class
+-TachographData:
+ pretty XML output
+
+
 2008-02-03
 -new classes:
  -CardSlotNumber

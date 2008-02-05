@@ -212,10 +212,10 @@ public class ControlType extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.setAttribute( "card_downloading", Boolean.toString( card_downloading ) );
-		node.setAttribute( "vu_downloading", Boolean.toString( vu_downloading ) );
-		node.setAttribute( "display", Boolean.toString( display ) );
-		node.setAttribute( "printing", Boolean.toString( printing ) );
+		node.addContent( new Element( "card_downloading" ).setText( Boolean.toString( card_downloading ) ) );
+		node.addContent( new Element( "vu_downloading" ).setText( Boolean.toString( vu_downloading ) ) );
+		node.addContent( new Element( "display" ).setText( Boolean.toString( display ) ) );
+		node.addContent( new Element( "printing" ).setText( Boolean.toString( printing ) ) );
 
 		return node;
 	}

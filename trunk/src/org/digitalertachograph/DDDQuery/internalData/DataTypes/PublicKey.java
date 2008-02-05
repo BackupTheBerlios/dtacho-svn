@@ -41,7 +41,6 @@ public class PublicKey extends DataClass {
 	public PublicKey() {
 		rsaKeyModulus = new RSAKeyModulus();
 		rsaKeyPublicExponent = new RSAKeyPublicExponent();
-		
 	}
 
 	/**

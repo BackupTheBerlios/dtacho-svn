@@ -1,0 +1,154 @@
+<!ELEMENT TachographData ( TachographDataInfo, EF_ICC, EF_IC, EF_Application_Identification, EF_Card_Certificate, EF_CA_Certificate, EF_Identification, EF_Driving_Licence_Info, EF_Events_Data, EF_Faults_Data, EF_Driver_Activity_Data, EF_Vehicles_Used, EF_Places, EF_Current_Usage, EF_Control_Activity_Data, EF_Specific_Conditions )>
+
+<!ELEMENT TachographDataInfo ( source )>
+<!ELEMENT source ( #PCDATA )>
+
+<!ELEMENT EF_ICC (cardIccIdentification)>
+<!ELEMENT cardIccIdentification ( clockStop, cardExtendedSerialNumber, cardApprovalNumber, cardPersonaliserID, embedderIcAssemblerId, icIdentifier )>
+<!ELEMENT clockStop ( #PCDATA )>
+<!ELEMENT cardExtendedSerialNumber ( serialNumber, monthYear, type, manufacturerCode )>
+<!ELEMENT serialNumber ( #PCDATA )>
+<!ELEMENT monthYear ( #PCDATA )>
+<!ELEMENT type ( #PCDATA )>
+<!ELEMENT manufacturerCode ( #PCDATA )>
+<!ELEMENT cardApprovalNumber ( #PCDATA )>
+<!ELEMENT cardPersonaliserID ( #PCDATA )>
+<!ELEMENT embedderIcAssemblerId ( #PCDATA )>
+<!ELEMENT icIdentifier ( #PCDATA )>
+
+<!ELEMENT EF_IC (cardChipIdentification)>
+<!ELEMENT cardChipIdentification ( icSerialNumber, icManufacturingReferences )>
+<!ELEMENT icSerialNumber ( #PCDATA )>
+<!ELEMENT icManufacturingReferences ( #PCDATA )>
+
+<!ELEMENT EF_Application_Identification ( DriverCardApplicationIdentification )>
+<!ELEMENT DriverCardApplicationIdentification ( typeOfTachographCardId, cardStructureVersion, noOfEventsPerType, noOfFaultsPerType, activityStructureLength, noOfCardVehicleRecords, noOfCardPlaceRecords )>
+<!ELEMENT typeOfTachographCardId ( #PCDATA )>
+<!ELEMENT cardStructureVersion ( #PCDATA )>
+<!ELEMENT noOfEventsPerType ( #PCDATA )>
+<!ELEMENT noOfFaultsPerType ( #PCDATA )>
+<!ELEMENT activityStructureLength ( #PCDATA )>
+<!ELEMENT noOfCardVehicleRecords ( #PCDATA )>
+<!ELEMENT noOfCardPlaceRecords ( #PCDATA )>
+
+<!ELEMENT EF_Card_Certificate ( cardCertificate )>
+<!ELEMENT cardCertificate ( #PCDATA )>
+
+<!ELEMENT EF_CA_Certificate ( memberStateCertificate )>
+<!ELEMENT memberStateCertificate ( #PCDATA )>
+
+<!ELEMENT EF_Identification ( cardIdentification, driverCardHolderIdentification )>
+<!ELEMENT cardIdentification ( cardIssuingMemberState, cardNumber, cardIssuingAuthorityName, cardIssueDate, cardValidityBegin, cardExpiryDate )>
+<!ELEMENT cardIssuingMemberState ( #PCDATA )>
+<!ELEMENT cardNumber ( ( driverIdentification, cardReplacementIndex, cardRenewalIndex ) | ( ownerIdentification, cardConsecutiveIndex, cardReplacementIndex, cardRenewalIndex ) )>
+<!ELEMENT driverIdentification ( #PCDATA )>
+<!ELEMENT cardReplacementIndex ( #PCDATA )>
+<!ELEMENT cardRenewalIndex ( #PCDATA )>
+<!ELEMENT cardIssuingAuthorityName ( codePage, name )>
+<!ELEMENT codePage ( #PCDATA )>
+<!ELEMENT name  ( #PCDATA )>
+<!ELEMENT cardIssueDate ( #PCDATA )>
+<!ELEMENT cardValidityBegin ( #PCDATA )>
+<!ELEMENT cardExpiryDate ( #PCDATA )>
+<!ELEMENT driverCardHolderIdentification ( cardHolderName, cardHolderBirthDate, cardHolderPreferredLanguage )>
+<!ELEMENT cardHolderName ( holderSurname, holderFirstNames )>
+<!ELEMENT holderSurname ( codePage, name )>
+<!ELEMENT holderFirstNames ( codePage, name )>
+<!ELEMENT cardHolderBirthDate ( year, month, day )>
+<!ELEMENT year ( #PCDATA )>
+<!ELEMENT month ( #PCDATA )>
+<!ELEMENT day ( #PCDATA )>
+<!ELEMENT cardHolderPreferredLanguage ( #PCDATA )>
+<!ELEMENT ownerIdentification EMPTY>
+<!ELEMENT cardConsecutiveIndex EMPTY>
+
+<!ELEMENT EF_Driving_Licence_Info ( cardDrivingLicenceInformation )>
+<!ELEMENT cardDrivingLicenceInformation ( drivingLicenceIssuingAuthority, drivingLicenceIssuingNation, drivingLicenceNumber )>
+<!ELEMENT drivingLicenceIssuingAuthority ( codePage, name )>
+<!ELEMENT drivingLicenceIssuingNation ( #PCDATA )>
+<!ELEMENT drivingLicenceNumber ( #PCDATA )>
+
+<!ELEMENT EF_Events_Data ( cardEventData )>
+<!ELEMENT cardEventData ( cardEventRecords+ )>
+<!ELEMENT cardEventRecords ( cardEventRecord+ )>
+<!ELEMENT cardEventRecord ( eventType, eventBeginTime, eventEndTime, eventVehicleRegistration )>
+<!ELEMENT eventType ( #PCDATA )>
+<!ELEMENT eventBeginTime ( #PCDATA )>
+<!ELEMENT eventEndTime ( #PCDATA )>
+
+<!ELEMENT eventVehicleRegistration ( vehicleRegistrationNation,vehicleRegistrationNumber )>
+<!ELEMENT vehicleRegistrationNation ( #PCDATA )>
+<!ELEMENT vehicleRegistrationNumber ( codePage, vehicleRegNumber )>
+<!ELEMENT vehicleRegNumber ( #PCDATA )>
+
+<!ELEMENT EF_Faults_Data ( cardFaultData )>
+<!ELEMENT cardFaultData ( cardFaultRecords+ )>
+<!ELEMENT cardFaultRecords ( cardFaultRecord+ )>
+<!ELEMENT cardFaultRecord ( faultType, faultBeginTime, faultEndTime, faultVehicleRegistration )>
+<!ELEMENT faultType ( #PCDATA )>
+<!ELEMENT faultBeginTime ( #PCDATA )>
+<!ELEMENT faultEndTime ( #PCDATA )>
+
+<!ELEMENT faultVehicleRegistration ( vehicleRegistrationNation,vehicleRegistrationNumber )>
+
+<!ELEMENT EF_Driver_Activity_Data ( cardDriverActivity )>
+<!ELEMENT cardDriverActivity ( cardActivityDailyRecords )>
+<!ELEMENT cardActivityDailyRecords ( cardActivityDailyRecord+ )>
+<!ELEMENT cardActivityDailyRecord ( activityPreviousRecordLength, activityRecordLength, activityRecordDate, activityDailyPresenceCounter, activityDayDistance, activityChangeInfoSet )>
+<!ELEMENT activityPreviousRecordLength ( #PCDATA )>
+<!ELEMENT activityRecordLength ( #PCDATA )>
+<!ELEMENT activityRecordDate ( #PCDATA )>
+<!ELEMENT activityDailyPresenceCounter ( #PCDATA )>
+<!ELEMENT activityDayDistance ( #PCDATA )>
+<!ELEMENT activityChangeInfoSet ( activityChangeInfo+ )>
+<!ELEMENT activityChangeInfo ( value, slot, drivingStatus, cardStatus, activity, time )>
+<!ELEMENT value ( #PCDATA )>
+<!ELEMENT slot ( #PCDATA )>
+<!ELEMENT drivingStatus ( #PCDATA )>
+<!ELEMENT cardStatus ( #PCDATA )>
+<!ELEMENT activity ( #PCDATA )>
+<!ELEMENT time ( #PCDATA )>
+
+<!ELEMENT EF_Vehicles_Used ( cardVehiclesUsed )>
+<!ELEMENT cardVehiclesUsed ( cardVehicleRecords )>
+<!ELEMENT cardVehicleRecords ( cardVehicleRecord+ )>
+<!ELEMENT cardVehicleRecord ( vehicleOdometerBegin, vehicleOdometerEnd, vehicleFirstUse, vehicleLastUse, vehicleRegistration, vuDataBlockCounter )>
+<!ELEMENT vehicleOdometerBegin ( #PCDATA )>
+<!ELEMENT vehicleOdometerEnd ( #PCDATA )>
+<!ELEMENT vehicleFirstUse ( #PCDATA )>
+<!ELEMENT vehicleLastUse ( #PCDATA )>
+<!ELEMENT vehicleRegistration ( vehicleRegistrationNation, vehicleRegistrationNumber )>
+<!ELEMENT vuDataBlockCounter ( #PCDATA )>
+
+<!ELEMENT EF_Places ( cardPlaceDailyWorkPeriod )>
+<!ELEMENT cardPlaceDailyWorkPeriod ( placeRecords )>
+<!ELEMENT placeRecords ( placeRecord+ )>
+<!ELEMENT placeRecord ( entryTime, entryTypeDailyWorkPeriod, dailyWorkPeriodCountry, dailyWorkPeriodRegion, vehicleOdometerValue )>
+<!ELEMENT entryTime ( #PCDATA )>
+<!ELEMENT entryTypeDailyWorkPeriod ( #PCDATA )>
+<!ELEMENT dailyWorkPeriodCountry ( #PCDATA )>
+<!ELEMENT dailyWorkPeriodRegion ( #PCDATA )>
+<!ELEMENT vehicleOdometerValue ( #PCDATA )>
+
+<!ELEMENT EF_Current_Usage ( cardCurrentUse )>
+<!ELEMENT cardCurrentUse ( sessionOpenTime, sessionOpenVehicle )>
+<!ELEMENT sessionOpenTime ( #PCDATA )>
+<!ELEMENT sessionOpenVehicle ( vehicleRegistrationNation, vehicleRegistrationNumber )>
+
+<!ELEMENT EF_Control_Activity_Data ( cardControlActivityDataRecord )>
+<!ELEMENT cardControlActivityDataRecord ( controlType, controlTime, controlCardNumber, controlVehicleRegistration, controlDownloadPeriodBegin, controlDownloadPeriodEnd )>
+<!ELEMENT controlType ( card_downloading, vu_downloading, display, printing )>
+<!ELEMENT card_downloading ( #PCDATA )>
+<!ELEMENT vu_downloading ( #PCDATA )>
+<!ELEMENT display ( #PCDATA )>
+<!ELEMENT printing ( #PCDATA )>
+<!ELEMENT controlCardNumber ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT cardType ( #PCDATA )>
+<!ELEMENT controlVehicleRegistration ( vehicleRegistrationNation, vehicleRegistrationNumber )>
+<!ELEMENT controlTime ( #PCDATA )>
+<!ELEMENT controlDownloadPeriodBegin ( #PCDATA )>
+<!ELEMENT controlDownloadPeriodEnd ( #PCDATA )>
+
+<!ELEMENT EF_Specific_Conditions ( specificConditionRecord )>
+<!ELEMENT specificConditionRecord ( entryTime, specificConditionType )>
+<!ELEMENT specificConditionType ( #PCDATA )>
