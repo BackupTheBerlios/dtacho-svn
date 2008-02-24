@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +42,12 @@ public class CardVehiclesUsed extends DataClass {
 	 * max.: 200
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardVehiclesUsed object.
+	 */
+	public final int size;
+
 	// create min. 84 vectors; will be automatically expanded at run time if required!
 	private Vector<CardVehicleRecord> cardVehicleRecords = new Vector<CardVehicleRecord>( 84 );
 
@@ -52,12 +61,14 @@ public class CardVehiclesUsed extends DataClass {
 	 */
 	public CardVehiclesUsed( byte[] value, int noOfCardVehicleRecords ) {
 		for ( int i = 0; i < noOfCardVehicleRecords; i += 1 ) {
-			byte[] record = arrayCopy( value, 2 + ( i * 31 ), 31 );
+			byte[] record = arrayCopy( value, 2 + ( i * CardVehicleRecord.size ), CardVehicleRecord.size );
 
 			CardVehicleRecord tmp = new CardVehicleRecord( record );
 
 			cardVehicleRecords.add( tmp );
 		}
+
+		size = 2 + noOfCardVehicleRecords * CardVehicleRecord.size;
 	}
 
 	@Override

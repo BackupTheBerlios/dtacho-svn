@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +22,10 @@ package org.digitalertachograph.DDDQuery.internalData;
 
 import org.jdom.Element;
 
+/**
+ * The abstract DataClass class provides conversion routines for data conversion
+ * from byte/byte arrays to different data types and formats.
+ */
 public abstract class DataClass {
 
 	/**
@@ -38,9 +45,10 @@ public abstract class DataClass {
 	}
 
 	/**
+	 * Converts the byte <tt>b</tt> into a short value.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte to be converted to a short value
+	 * @return	the short value of byte <tt>b</tt>
 	 */
 	static protected short convertIntoUnsigned1ByteInt( byte b ) {
 		short s;
@@ -49,74 +57,72 @@ public abstract class DataClass {
 	}
 
 	/**
+	 * Converts the first byte of byte array <tt>b</tt> into a short value.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte array whose first byte is to be converted to a short value
+	 * @return	the short value of the first byte of byte array <tt>b</tt>
 	 */
 	static protected short convertIntoUnsigned1ByteInt( byte[] b ) {
-		return convertIntoUnsigned1ByteInt( b[0] );
+		return convertIntoUnsigned1ByteInt( b[ 0 ] );
 	}
-	
+
 	/**
+	 * Converts the first two bytes of byte array <tt>b</tt> into an int value.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte array whose first two bytes is to be converted to an int value
+	 * @return	the short value of the first two bytes of byte array <tt>b</tt>
 	 */
 	static protected int convertIntoUnsigned2ByteInt( byte[] b ) {
 		int i = 0;
 		
-		i += ( b[0] & 0xff ) << 8;
-		i += ( b[1] & 0xff );
+		i += ( b[ 0 ] & 0xff ) << 8;
+		i += ( b[ 1 ] & 0xff );
 
 		return i;
 	}
-	
+
 	/**
+	 * Converts the first three bytes of byte array <tt>b</tt> into an int value.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte array whose first three bytes is to be converted to an int value
+	 * @return	the short value of the first three bytes of byte array <tt>b</tt>
 	 */
 	static protected int convertIntoUnsigned3ByteInt( byte[] b ) {
 		int i = 0;
 
-		i += ( b[0] & 0xff ) << 16;
-		i += ( b[1] & 0xff ) << 8;
-		i += ( b[2] & 0xff );
+		i += ( b[ 0 ] & 0xff ) << 16;
+		i += ( b[ 1 ] & 0xff ) << 8;
+		i += ( b[ 2 ] & 0xff );
 
 		return i;
 	}
-	
+
 	/**
+	 * Converts the first four bytes of byte array <tt>b</tt> into a long value.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte array whose first four bytes is to be converted to a long value
+	 * @return	the short value of the first four bytes of byte array <tt>b</tt>
 	 */
 	static protected long convertIntoUnsigned4ByteInt( byte[] b ) {
 		long l = 0;
-		//long accum;
 
-		//accum |= ( (long)( b[i] & 0xff ) ) << shiftBy;
-		
-		long al = ( ( (long)b[0] ) & 0xff ) << 24 ;
-		long bl = ( ( (long)b[1] ) & 0xff ) << 16 ;
-		long cl = ( ( (long)b[2] ) & 0xff ) << 8 ;
-		
-		//long dl = ( ( (long)b[3] ) & 0xff ) << 0 ;
-		int di =  ( b[3] & 0xff );
-		//int a = 0xff;
-		//byte c = (byte)a;
+		long al = ( ( (long)b[ 0 ] ) & 0xff ) << 24 ;
+		long bl = ( ( (long)b[ 1 ] ) & 0xff ) << 16 ;
+		long cl = ( ( (long)b[ 2 ] ) & 0xff ) << 8 ;
+
+		int di =  ( b[ 3 ] & 0xff );
 		long dl = ( (long)di ) << 0;
-		
-		
+
 		l = al +  bl + cl + dl;
 
 		return l;
 	}
-	
+
 	/**
+	 * Converts the byte array <tt>b</tt> into a BCD string.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte array to be converted to a BCD string
+	 * @return	the BCD string of byte array <tt>b</tt>
 	 */
 	static protected String convertBCDStringIntoString( byte[] b ) {
 		String tmp = new String();
@@ -143,17 +149,18 @@ public abstract class DataClass {
 
 		return tmp;
 	}
-	
-    /**
-     * 
-     * @param	b
-     * @return	hex string, lower case characters
-     */
+
+	/**
+	 * Converts the byte array <tt>b</tt> into a hex string.
+	 * 
+	 * @param	b	the byte array to be converted to a hex string (lower case letters)
+	 * @return	the hex string (lower case letters) of byte array <tt>b</tt>
+	 */
 	static protected String convertIntoHexString( byte[] b ) {
-	    char[] digits = {
-	    	'0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' ,
-	    	'a' , 'b' , 'c' , 'd' , 'e' , 'f'   
-	    };	
+		char[] digits = {
+			'0' , '1' , '2' , '3' , '4' , '5' , '6' , '7' , '8' , '9' ,
+			'a' , 'b' , 'c' , 'd' , 'e' , 'f'   
+		};	
 
 		String str = new String();
 
@@ -164,22 +171,37 @@ public abstract class DataClass {
 			int radix = 1 << 4; // 1000(b)
 			int mask = radix - 1; // 0111(b)
 			for ( int c = 0; c < 2; c++ ) {
-			    buf[ --charPos ] = digits[ i & mask ];
-			    i >>>= 4;
+				buf[ --charPos ] = digits[ i & mask ];
+				i >>>= 4;
 			}
 
 			str += new String( buf );
 		}
 		return str;
 	}
-	
+
 	/**
+	 * Converts the byte <tt>b</tt> into a hex string.
 	 * 
-	 * @param b
-	 * @return
+	 * @param	b	the byte to be converted to a hex string (lower case letters)
+	 * @return	the hex string (lower case letters) of byte <tt>b</tt>
 	 */
 	static protected String convertIntoHexString( byte b ) {
 		return convertIntoHexString( new byte[]{ b } );
+	}
+
+	/**
+	 * Indicates if the given <tt>xmlString</tt> is a valid XML string,
+	 * i.e. it does not contain unprintable characters.
+	 */
+	static protected boolean isValidXMLString( String xmlString ) {
+		for ( int i = 0; i < xmlString.length(); i+= 1 ) {
+			if ( xmlString.charAt( i ) < ' ' ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**

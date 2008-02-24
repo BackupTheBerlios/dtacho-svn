@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,9 +44,14 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * max.: 520
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 5;
+
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion;
-	private int noOfCompanyActivityRecords;
+	private CardStructureVersion cardStructureVersion;
+	private NoOfCompanyActivityRecords noOfCompanyActivityRecords;
 	
 
 	/**
@@ -51,8 +59,8 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 */
 	public CompanyCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[ 2 ];
-		noOfCompanyActivityRecords = 0;
+		cardStructureVersion = new CardStructureVersion();
+		noOfCompanyActivityRecords = new NoOfCompanyActivityRecords();
 	}
 
 	/**
@@ -64,8 +72,8 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 */
 	public CompanyCardApplicationIdentification( byte[] value ) {
 		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
-		cardStructureVersion = arrayCopy( value, 1, 2 );
-		noOfCompanyActivityRecords = convertIntoUnsigned2ByteInt(arrayCopy( value, 3, 2 ) );
+		cardStructureVersion = new CardStructureVersion( arrayCopy( value, 1, 2 ) );
+		noOfCompanyActivityRecords = new NoOfCompanyActivityRecords( arrayCopy( value, 3, 2 ) );
 	}
 
 	/**
@@ -94,7 +102,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @return	the version of the structure that is implemented in the card
 	 * 			of the CompanyCardApplicationIdentification object
 	 */
-	public byte[] getCardStructureVersion() {
+	public CardStructureVersion getCardStructureVersion() {
 		return cardStructureVersion;
 	}
 
@@ -105,8 +113,8 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
 	 * 									to be set for the CompanyCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion( byte[] cardStructureVersion ) {
-		this.cardStructureVersion = arrayCopy( cardStructureVersion, 0, 2 );
+	public void setCardStructureVersion( CardStructureVersion cardStructureVersion ) {
+		this.cardStructureVersion = cardStructureVersion;
 	}
 
 	/**
@@ -116,7 +124,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @return	the number of company activity records the card can store
 	 * 			of the CompanyCardApplicationIdentification object
 	 */
-	public int getNoOfCompanyActivityRecords() {
+	public NoOfCompanyActivityRecords getNoOfCompanyActivityRecords() {
 		return noOfCompanyActivityRecords;
 	}
 
@@ -127,7 +135,7 @@ public class CompanyCardApplicationIdentification extends DataClass {
 	 * @param	noOfCompanyActivityRecords	the number of company activity records the card can store
 	 * 										to be set for the CompanyCardApplicationIdentification object
 	 */
-	public void setNoOfCompanyActivityRecords( int noOfCompanyActivityRecords ) {
+	public void setNoOfCompanyActivityRecords( NoOfCompanyActivityRecords noOfCompanyActivityRecords ) {
 		this.noOfCompanyActivityRecords = noOfCompanyActivityRecords;
 	}
 
@@ -136,8 +144,8 @@ public class CompanyCardApplicationIdentification extends DataClass {
 		Element node = new Element( name );
 
 		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
-		node.addContent( new Element( "cardStructureVersion" ).setText( convertIntoHexString( cardStructureVersion ) ) );
-		node.addContent( new Element( "noOfCompanyActivityRecords" ).setText( Integer.toString( noOfCompanyActivityRecords ) ) );
+		node.addContent( cardStructureVersion.generateXMLElement( "cardStructureVersion" ) );
+		node.addContent( noOfCompanyActivityRecords.generateXMLElement( "noOfCompanyActivityRecords" ) );
 
 		return node;
 	}

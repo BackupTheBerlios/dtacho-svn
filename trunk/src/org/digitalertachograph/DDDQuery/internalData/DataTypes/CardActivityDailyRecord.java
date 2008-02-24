@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,6 +25,7 @@ import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -52,14 +56,22 @@ public class CardActivityDailyRecord extends DataClass {
    	 * ---
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardActivityDailyRecord object.
+	 */
+	public final int size;
+
 	private int activityPreviousRecordLength;
 	private int activityRecordLength;
 	private TimeReal activityRecordDate;
 	private byte[] activityDailyPresenceCounter;
 	private Distance activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
-	
+
 	private boolean complete = false;
+
+	private DebugLogger debugLogger;
 
 
 	/**
@@ -70,11 +82,14 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 					object is created
 	 */
 	public CardActivityDailyRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
 
 		// if we get so less bytes we have just a part of an old CardActivityDailyRecord.
-		if ( value.length <= 12 )
+		if ( value.length <= 12 ) {
+			size = 0;
 			return;
-		
+		}
+
 		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		this.activityRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) );
 		this.activityRecordDate = new TimeReal( arrayCopy( value, 4, 4 ) );
@@ -82,42 +97,44 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityDayDistance = new Distance( arrayCopy( value, 10, 2 ) );
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
-		System.out.printf("  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / 2 );
-		
-		// TODO wie haben wir length in den anderen Klassen genannt?!?
-		int length = 12; // we have 12 bytes so far
-		for ( ;length < activityRecordLength; length += 2 ) {
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / ActivityChangeInfo.size );
+
+		for ( int length = 12; length < activityRecordLength; length += ActivityChangeInfo.size ) {
 			// ActivityChangeInfo <- 2 bytes
-			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, 2 ) );
+			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, ActivityChangeInfo.size ) );
 			activityChangeInfo.add( aci );
 
 			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
-			System.out.printf( "   %s, activity %02x ", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getActivity() );
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, activity %02x ", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getActivity() );
+
 			switch ( aci.getActivity() ) {
 				case ActivityChangeInfo.BREAK:
-					System.out.println( "- break" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- break" );
 					break;
 
 				case ActivityChangeInfo.AVAILABILITY:
-					System.out.println( "- availability" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- availability" );
 					break;
 
 				case ActivityChangeInfo.WORK:
-					System.out.println( "- work" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- work" );
 					break;
 
 				case ActivityChangeInfo.DRIVING:
-					System.out.println( "- driving" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- driving" );
 					break;
 
 				default:
-					System.out.println( "- ???" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- ???" );
 					break;
 			}
 		}
+
 		this.complete = true;
+
+		size = 12 + activityRecordLength;
 	}
-	
+
 	/**
 	 * Indicates if the CardActivityDailyRecord object is a complete record.
 	 * 

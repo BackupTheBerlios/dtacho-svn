@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +30,11 @@ public class RegionAlpha extends DataClass {
 	/*
 	 * RegionAlpha ::= IA5String(SIZE(3)), 3 bytes
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 3;
 
 	private String regionAlpha;
 
@@ -92,58 +100,58 @@ public class RegionAlpha extends DataClass {
 	 * @return	the alphabetic reference to a region within a specified country of a RegionAlpha object
 	 */
 	public String toString() {
-		if ( regionAlpha == "   " ) {
+		if ( regionAlpha.compareTo( "   " ) == 0 ) {
 			return "No information available";
 		}
-		else if ( regionAlpha == "AN " ) {
+		else if ( regionAlpha.compareTo( "AN " ) == 0 ) {
 			return "Andalucía";
 		}
-		else if ( regionAlpha == "AR " ) {
+		else if ( regionAlpha.compareTo( "AR " ) == 0 ) {
 			return "Aragón";
 			}
-		else if ( regionAlpha == "AST" ) {
+		else if ( regionAlpha.compareTo( "AST" ) == 0 ) {
 			return "Asturias";
 		}
-		else if ( regionAlpha == "C  " ) {
+		else if ( regionAlpha.compareTo( "C  " ) == 0 ) {
 			return "Cantabria";
 		}
-		else if ( regionAlpha == "CAT" ) {
+		else if ( regionAlpha.compareTo( "CAT" ) == 0 ) {
 			return "Cataluña";
 		}
-		else if ( regionAlpha == "CL " ) {
+		else if ( regionAlpha.compareTo( "CL " ) == 0 ) {
 			return "Castilla-León";
 		}
-		else if ( regionAlpha == "CM " ) {
+		else if ( regionAlpha.compareTo( "CM " ) == 0 ) {
 			return "Castilla-La-Mancha";
 		}
-		else if ( regionAlpha == "CV " ) {
+		else if ( regionAlpha.compareTo( "CV " ) == 0 ) {
 			return "Valencia";
 		}
-		else if ( regionAlpha == "EXT" ) {
+		else if ( regionAlpha.compareTo( "EXT" ) == 0 ) {
 			return "Extremadura";
 		}
-		else if ( regionAlpha == "G  " ) {
+		else if ( regionAlpha.compareTo( "G  " ) == 0 ) {
 			return "Galicia";
 		}
-		else if ( regionAlpha == "IB " ) {
+		else if ( regionAlpha.compareTo( "IB " ) == 0 ) {
 			return "Baleares";
 		}
-		else if ( regionAlpha == "IC " ) {
+		else if ( regionAlpha.compareTo( "IC " ) == 0 ) {
 			return "Canarias";
 		}
-		else if ( regionAlpha == "LR " ) {
+		else if ( regionAlpha.compareTo( "LR " ) == 0 ) {
 			return "La Rioja";
 		}
-		else if ( regionAlpha == "M  " ) {
+		else if ( regionAlpha.compareTo( "M  " ) == 0 ) {
 			return "Madrid";
 		}
-		else if ( regionAlpha == "MU " ) {
+		else if ( regionAlpha.compareTo( "MU " ) == 0 ) {
 			return "Murcia";
 		}
-		else if ( regionAlpha == "NA " ) {
+		else if ( regionAlpha.compareTo( "NA " ) == 0 ) {
 			return "Navarra";
 		}
-		else if ( regionAlpha == "PV " ) {
+		else if ( regionAlpha.compareTo( "PV " ) == 0 ) {
 			return "País Vasco";
 		}
 		else {
@@ -153,6 +161,11 @@ public class RegionAlpha extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( regionAlpha );
+		if ( isValidXMLString( regionAlpha ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( regionAlpha );
+		}
 	}
 }

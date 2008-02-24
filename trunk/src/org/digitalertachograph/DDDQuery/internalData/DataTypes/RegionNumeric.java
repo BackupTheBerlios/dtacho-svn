@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,6 +51,11 @@ public class RegionNumeric extends DataClass {
 	 *		'11'H País Vasco.
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
+
 	private byte regionNumeric;
 
 	
@@ -56,6 +64,17 @@ public class RegionNumeric extends DataClass {
 	 */
 	public RegionNumeric() {
 		regionNumeric = 0;
+	}
+
+	/**
+	 * Constructor for a RegionNumeric object
+	 * 
+	 * @param	value	byte array of a RegionNumeric structure
+	 * 					whose data is used when the RegionNumeric
+	 * 					object is created.
+	 */
+	public RegionNumeric( byte[] value ) {
+		this.regionNumeric = value[ 0 ];
 	}
 
 	/**
@@ -157,6 +176,6 @@ public class RegionNumeric extends DataClass {
 	
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( Byte.toString( regionNumeric ) );
+		return new Element( name ).setText( convertIntoHexString( regionNumeric ) );
 	}
 }

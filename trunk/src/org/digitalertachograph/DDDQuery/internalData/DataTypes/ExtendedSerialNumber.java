@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +35,11 @@ public class ExtendedSerialNumber extends DataClass {
 	 *  manufacturerCode ManufacturerCode, 1 byte
 	 * }
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 8;
 
 	private long serialNumber; // 4 bytes int unsigned
 	private byte[] monthYear;

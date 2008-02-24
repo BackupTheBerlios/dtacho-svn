@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,13 +28,18 @@ import org.jdom.Element;
  */
 public class SimilarEventsNumber extends DataClass {
 	/*
-	 * SimilarEventsNumber ::=  INTEGER(0..255)
+	 * SimilarEventsNumber ::= INTEGER(0..255), 1 byte
 	 * Value assignment:
 	 * 0 is not used,
 	 * 1 means that only one event of that type has occurred and has been stored on that day,
 	 * 2 means that 2 events of that type have occurred on that day (only one has been stored)...
 	 * 255 means that 255 or more events have occurred on that day.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short similarEventsNumber;
 

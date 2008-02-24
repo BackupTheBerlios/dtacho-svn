@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,10 +28,15 @@ import org.jdom.Element;
  */
 public class OdometerShort extends DataClass {
 	/* 
-	 * OdometerShort ::= INTEGER(0..2^24-1)
+	 * OdometerShort ::= INTEGER(0..2^24-1), 3 bytes
 	 * Value assignment:
 	 * Unsigned binary. Value in km in the operating range 0 to 9 999 999 km.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 3;
 
 	private int odometerShort;
 

@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +30,11 @@ public class VuPartNumber extends DataClass {
 	/*
 	 * VuPartNumber ::= IA5String(SIZE(16)), 16 bytes
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 16;
 
 	private String vuPartNumber;
 
@@ -85,6 +93,11 @@ public class VuPartNumber extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( vuPartNumber );
+		if ( isValidXMLString( vuPartNumber ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( vuPartNumber );
+		}
 	}
 }

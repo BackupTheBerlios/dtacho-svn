@@ -27,18 +27,26 @@ LIZENZ
 dtacho wird unter der GNU GENERAL PUBLIC LICENSE Version 2 veröffentlicht.
 
 
+
+
+FORMATWANDLER
+==============
+
 STATUS
 ------
 
-Der Byte-Daten nach XML Konvertierer ist in Java geschrieben. Der Status von
+Der Formwatwandler von Byte-Daten nach XML ist in Java geschrieben. Der Status von
 dtacho ist alpha. Es kann passieren, dass die Software nicht unter allen
 Bedingungen funktioniert und dass falsche oder unerwartete Ergebnisse auftreten.
 
-16.12.2007
-Momentan konvertiert diese Software die Daten von .DDD-Datei (C_*.DDD), die
-von DTCO-Fahrerkarte stammen, zu XML-Dateien. Der Code wurde von Martin Barth
-in seiner Diplomarbeit entwickelt. Die Entwicklung wird von Gerald Schnabel
-fortgesetzt.
+24.02.2008
+Diese Software konvertiert die Daten von .DDD-Dateien (C_*.DDD), die von
+DTCO-Fahrerkarten stammen, sowie die Daten von .DDD-Dateien (M_*.DDD), die
+von Fahrereinheiten stammen, zu XML-Dateien.
+
+Der Code zum Konvertieren von Kartendaten wurde von Martin Barth in seiner
+Diplomarbeit entwickelt und wurde von Gerald Schnabel erweitert, um auch die
+Daten von Fahrereinheiten umzuwandeln.
 
 
 BEMERKUNGEN
@@ -95,7 +103,7 @@ Siehe Kapitel DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL.
 
 Beispiele:
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
  C_driver_card.DDD
 
  Es wird die Datei C_driver_card.DDD einer Fahrerkarte gelesen, einige
@@ -105,15 +113,11 @@ Beispiele:
 
  Mehrere Dateien/Wildcards werden über die Kommandozeile unterstützt, z.B.
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
  C_*.DDD
 
  konvertiert alle Dateien von Fahrerkarten (C_*.DDD) im aktuellen Verzeichnis
  zu XML-Dateien.
-
-
- BEMERKUNG: momentan werden nur Dateien von Fahrerkarten (C_*.DDD)
-            unterstützt! Siehe Kapitel STATUS.
 
 
 2. Den aktuellen Quellcode aus dem SVN-Repository compilieren
@@ -141,6 +145,8 @@ Beispiele:
 
 
 -Starten des Programms
+
+ Die möglichen Umgebungsvariablen stehen im Kapitel UMGEBUNGSVARIABLEN.
 
  Wenn der Quellcode wie oben beschrieben compiliert wurde, befindet man sich
  schon im richtigen Verzeichnis.
@@ -191,8 +197,32 @@ Beispiele:
  zu XML-Dateien.
 
 
- BEMERKUNG: momentan werden nur Dateien von Fahrerkarten (C_*.DDD)
-            unterstützt! Siehe Kapitel STATUS.
+UMGEBUNGSVARIABLEN
+------------------
+
+-DEBUGLOGLEVEL:
+ Die Stufe für Debugmeldungen.
+ Standard ist ERROR.
+ Folgende Stufen, von der niedrigsten bis zur höchsten, sind möglich:
+ NOTHING > ERROR > INFO > INFO_EXTENDED > ALL
+
+ NOTHING: keine Debugmeldungen
+ ERROR: nur Meldungen ausgeben, wenn ein Fehler aufgetreten ist
+ INFO: Info-Meldungen ausgeben
+ INFO_EXTENDED: erweiterte Info-Meldungen ausgeben
+ ALL: alle Meldungen ausgeben
+
+ Eine gewählte Stufe schließt alle Stufen darunter mit ein!
+
+-DEBUGPRINTSTREAM:
+ Stream, an den Debugmeldungen ausgegeben werden.
+ Standard ist die Standardausgabe (System.out, stdout).
+ Ansonsten werden die Debugmeldungen in die über diese Umgebunsvariable
+ angegebene Datei ausgegeben.
+
+-EURPKPATH:
+ Pfad zum europäischen öffentlichen Schlüssel, siehe Kapitel
+ DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL.
 
 
 DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL

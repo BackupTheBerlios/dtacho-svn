@@ -1,0 +1,183 @@
+<!ELEMENT VehicleUnitData ( Info, PRDT_Overview, ( PRDT_Activities | PRDT_Events_And_Faults | PRDT_Detailed_Speed | PRDT_Technical_Data )* )>
+
+<!ELEMENT Info ( source )>
+<!ELEMENT source ( #PCDATA )>
+
+<!ELEMENT PRDT_Overview ( memberStateCertificate, vuCertificate, vehicleIdentificationNumber, vehicleRegistrationIdentification, currentDateTime, vuDownloadablePeriod, cardSlotsStatus, vuDownloadActivityData, vuCompanyLocksData, vuControlActivityData )>
+
+<!ELEMENT memberStateCertificate ( #PCDATA )>
+
+<!ELEMENT vuCertificate ( #PCDATA )>
+
+<!ELEMENT vehicleIdentificationNumber ( #PCDATA )>
+
+<!ELEMENT vehicleRegistrationIdentification ( vehicleRegistrationNation, vehicleRegistrationNumber )>
+<!ELEMENT vehicleRegistrationNation ( #PCDATA )>
+<!ELEMENT vehicleRegistrationNumber ( codePage, vehicleRegNumber )>
+<!ELEMENT vehicleRegNumber ( #PCDATA )>
+<!ELEMENT codePage ( #PCDATA )>
+
+<!ELEMENT currentDateTime ( #PCDATA )>
+
+<!ELEMENT vuDownloadablePeriod ( minDownloadableTime, maxDownloadableTime )> 
+<!ELEMENT minDownloadableTime ( #PCDATA )>
+<!ELEMENT maxDownloadableTime ( #PCDATA )>
+
+<!ELEMENT cardSlotsStatus ( #PCDATA )>
+
+<!ELEMENT vuDownloadActivityData ( downloadingTime, fullCardNumber, companyOrWorkshopName )>
+<!ELEMENT downloadingTime ( #PCDATA )>
+
+<!ELEMENT fullCardNumber ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT cardType ( #PCDATA )>
+<!ELEMENT cardIssuingMemberState ( #PCDATA )>
+<!ELEMENT cardNumber ( ( driverIdentification, cardReplacementIndex, cardRenewalIndex ) | ( ownerIdentification, cardConsecutiveIndex, cardReplacementIndex, cardRenewalIndex ) )>
+<!ELEMENT driverIdentification ( #PCDATA )>
+<!ELEMENT ownerIdentification ( #PCDATA )>
+<!ELEMENT cardConsecutiveIndex ( #PCDATA )>
+<!ELEMENT cardReplacementIndex ( #PCDATA )>
+<!ELEMENT cardRenewalIndex ( #PCDATA )>
+
+<!ELEMENT companyOrWorkshopName ( codePage, name )>
+<!ELEMENT name ( #PCDATA )>
+
+<!ELEMENT vuCompanyLocksData ( vuCompanyLocksRecord* )>
+<!ELEMENT vuCompanyLocksRecord ( lockInTime, lockOutTime, companyName, companyAddress, companyCardNumber )>
+<!ELEMENT lockInTime ( #PCDATA )>
+<!ELEMENT lockOutTime ( #PCDATA )>
+<!ELEMENT companyName ( codePage, name )>
+<!ELEMENT companyAddress ( codePage, address )>
+<!ELEMENT address ( #PCDATA )>
+<!ELEMENT companyCardNumber ( cardType, cardIssuingMemberState, cardNumber )>
+
+<!ELEMENT vuControlActivityData ( vuControlActivityRecord* )>
+<!ELEMENT vuControlActivityRecord ( controlType, controlTime, controlCardNumber, downloadPeriodBeginTime, downloadPeriodEndTime )>
+<!ELEMENT controlType ( card_downloading, vu_downloading, display, printing )>
+<!ELEMENT card_downloading ( #PCDATA )>
+<!ELEMENT vu_downloading ( #PCDATA )>
+<!ELEMENT display ( #PCDATA )>
+<!ELEMENT printing ( #PCDATA )>
+<!ELEMENT controlTime ( #PCDATA )>
+<!ELEMENT controlCardNumber ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT downloadPeriodBeginTime ( #PCDATA )>
+<!ELEMENT downloadPeriodEndTime ( #PCDATA )>
+
+<!ELEMENT PRDT_Activities ( downloadedDayDate, odoMeterValueMidnight, vuCardIWData, vuActivityDailyData, vuPlaceDailyWorkPeriodData, vuSpecificConditionData )>
+
+<!ELEMENT downloadedDayDate ( #PCDATA )>
+
+<!ELEMENT odoMeterValueMidnight ( #PCDATA )>
+
+<!ELEMENT vuCardIWData ( vuCardIWRecord* )>
+<!ELEMENT vuCardIWRecord ( cardHolderName, fullCardNumber, cardExpiryDate, cardInsertionTime, vehicleOdometerValueAtInsertion, cardSlotNumber, cardWithdrawalTime, vehicleOdometerValueAtWithdrawal, previousVehicleInfo, manualInputFlag )>
+<!ELEMENT cardHolderName ( holderSurname, holderFirstNames )>
+<!ELEMENT holderSurname ( codePage, name )>
+<!ELEMENT holderFirstNames ( codePage, name )>
+<!ELEMENT cardExpiryDate ( #PCDATA )>
+<!ELEMENT cardInsertionTime ( #PCDATA )>
+<!ELEMENT vehicleOdometerValueAtInsertion ( #PCDATA )>
+<!ELEMENT cardSlotNumber ( #PCDATA )>
+<!ELEMENT cardWithdrawalTime ( #PCDATA )>
+<!ELEMENT vehicleOdometerValueAtWithdrawal ( #PCDATA )>
+<!ELEMENT previousVehicleInfo ( vehicleRegistrationIdentification, cardWithdrawalTime )>
+<!ELEMENT manualInputFlag ( #PCDATA )>
+
+<!ELEMENT vuActivityDailyData ( activityChangeInfo* )>
+<!ELEMENT activityChangeInfo ( value, slot, drivingStatus, cardStatus, activity, time )>
+<!ELEMENT value ( #PCDATA )>
+<!ELEMENT slot ( #PCDATA )>
+<!ELEMENT drivingStatus ( #PCDATA )>
+<!ELEMENT cardStatus ( #PCDATA )>
+<!ELEMENT activity ( #PCDATA )>
+<!ELEMENT time ( #PCDATA )>
+
+<!ELEMENT vuPlaceDailyWorkPeriodData ( vuPlaceDailyWorkPeriodRecord* )>
+<!ELEMENT vuPlaceDailyWorkPeriodRecord ( fullCardNumber, placeRecord )>
+<!ELEMENT placeRecord ( entryTime, entryTypeDailyWorkPeriod, dailyWorkPeriodCountry, dailyWorkPeriodRegion, vehicleOdometerValue )>
+<!ELEMENT entryTypeDailyWorkPeriod ( #PCDATA )>
+<!ELEMENT dailyWorkPeriodCountry ( #PCDATA )>
+<!ELEMENT dailyWorkPeriodRegion ( #PCDATA )>
+<!ELEMENT vehicleOdometerValue ( #PCDATA )>
+
+<!ELEMENT vuSpecificConditionData ( SpecificConditionRecord* )>
+<!ELEMENT SpecificConditionRecord ( entryTime, specificConditionType )>
+<!ELEMENT entryTime ( #PCDATA )>
+<!ELEMENT specificConditionType ( #PCDATA )>
+
+<!ELEMENT PRDT_Events_And_Faults ( vuFaultData, vuEventData, vuOverSpeedingControlData, vuOverSpeedingEventData, vuTimeAdjustmentData )>
+<!ELEMENT vuFaultData ( vuFaultRecord* )>
+<!ELEMENT vuFaultRecord ( faultType, faultRecordPurpose, faultBeginTime, faultEndTime, cardNumberDriverSlotBegin, cardNumberCodriverSlotBegin, cardNumberDriverSlotEnd, cardNumberCodriverSlotEnd )>
+<!ELEMENT faultType ( #PCDATA )>
+<!ELEMENT faultRecordPurpose ( #PCDATA )>
+<!ELEMENT faultBeginTime ( #PCDATA )>
+<!ELEMENT faultEndTime ( #PCDATA )>
+<!ELEMENT cardNumberDriverSlotBegin ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT cardNumberCodriverSlotBegin ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT cardNumberDriverSlotEnd ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT cardNumberCodriverSlotEnd ( cardType, cardIssuingMemberState, cardNumber )>
+
+<!ELEMENT vuEventData ( vuEventRecord* )>
+<!ELEMENT vuEventRecord ( eventType, eventRecordPurpose, eventBeginTime, eventEndTime, cardNumberDriverSlotBegin, cardNumberCodriverSlotBegin, cardNumberDriverSlotEnd, cardNumberCodriverSlotEnd, similarEventsNumber )>
+<!ELEMENT eventType ( #PCDATA )>
+<!ELEMENT eventRecordPurpose ( #PCDATA )>
+<!ELEMENT eventBeginTime ( #PCDATA )>
+<!ELEMENT eventEndTime ( #PCDATA )>
+<!ELEMENT similarEventsNumber ( #PCDATA )>
+
+<!ELEMENT vuOverSpeedingControlData ( lastOverspeedControlTime, firstOverspeedSince, numberOfOverspeedSince )>
+<!ELEMENT lastOverspeedControlTime ( #PCDATA )>
+<!ELEMENT firstOverspeedSince ( #PCDATA )>
+<!ELEMENT numberOfOverspeedSince ( #PCDATA )>
+
+<!ELEMENT vuOverSpeedingEventData ( vuOverSpeedingEventRecord* )>
+<!ELEMENT vuOverSpeedingEventRecord ( eventType, eventRecordPurpose, eventBeginTime, eventEndTime, maxSpeedValue, averageSpeedValue, cardNumberDriverSlotBegin, similarEventsNumber )>
+<!ELEMENT maxSpeedValue ( #PCDATA )>
+<!ELEMENT averageSpeedValue ( #PCDATA )>
+
+<!ELEMENT vuTimeAdjustmentData ( vuTimeAdjustmentRecord* )>
+<!ELEMENT vuTimeAdjustmentRecord ( oldTimeValue, newTimeValue, workshopName, workshopAddress, workshopCardNumber )>
+
+<!ELEMENT PRDT_Detailed_Speed ( vuDetailedSpeedData )>
+<!ELEMENT vuDetailedSpeedData ( vuDetailedSpeedBlock* )>
+<!ELEMENT vuDetailedSpeedBlock ( speedBlockBeginDate, speedsPerSecond+ )>
+<!ELEMENT speedBlockBeginDate ( #PCDATA )>
+<!ELEMENT speedsPerSecond ( #PCDATA )>
+
+<!ELEMENT PRDT_Technical_Data ( vuIdentification, sensorPaired, vuCalibrationData )>
+<!ELEMENT vuIdentification ( vuManufacturerName, vuManufacturerAddress, vuPartNumber, vuSerialNumber, vuSoftwareIdentification, vuManufacturingDate, vuApprovalNumber )>
+<!ELEMENT vuManufacturerName ( codePage, name )>
+<!ELEMENT vuManufacturerAddress ( codePage, address )>
+<!ELEMENT vuPartNumber ( #PCDATA )>
+<!ELEMENT vuSerialNumber ( serialNumber, monthYear, type, manufacturerCode )>
+<!ELEMENT serialNumber ( #PCDATA )>
+<!ELEMENT monthYear ( #PCDATA )>
+<!ELEMENT type ( #PCDATA )>
+<!ELEMENT manufacturerCode ( #PCDATA )>
+<!ELEMENT vuSoftwareIdentification ( vuSoftwareVersion, vuSoftInstallationDate )>
+<!ELEMENT vuSoftwareVersion ( #PCDATA )>
+<!ELEMENT vuSoftInstallationDate ( #PCDATA )>
+<!ELEMENT vuManufacturingDate ( #PCDATA )>
+<!ELEMENT vuApprovalNumber ( #PCDATA )>
+
+<!ELEMENT sensorPaired ( sensorSerialNumber, sensorApprovalNumber, sensorPairingDateFirst )>
+<!ELEMENT sensorSerialNumber ( serialNumber, monthYear, type, manufacturerCode )>
+<!ELEMENT sensorApprovalNumber ( #PCDATA )>
+<!ELEMENT sensorPairingDateFirst ( #PCDATA )>
+
+<!ELEMENT vuCalibrationData ( vuCalibrationRecord* )>
+<!ELEMENT vuCalibrationRecord ( calibrationPurpose, workshopName, workshopAddress, workshopCardNumber, workshopCardExpiryDate, vehicleIdentificationNumber, vehicleRegistrationIdentification, wVehicleCharacteristicConstant, kConstantOfRecordingEquipment, lTyreCircumference, tyreSize, authorisedSpeed, oldOdometerValue, newOdometerValue, oldTimeValue, newTimeValue, nextCalibrationDate )>
+<!ELEMENT calibrationPurpose ( #PCDATA )>
+<!ELEMENT workshopName ( codePage, name )>
+<!ELEMENT workshopAddress ( codePage, address )>
+<!ELEMENT workshopCardNumber ( cardType, cardIssuingMemberState, cardNumber )>
+<!ELEMENT workshopCardExpiryDate ( #PCDATA )>
+<!ELEMENT wVehicleCharacteristicConstant ( #PCDATA )>
+<!ELEMENT kConstantOfRecordingEquipment ( #PCDATA )>
+<!ELEMENT lTyreCircumference ( #PCDATA )>
+<!ELEMENT tyreSize ( #PCDATA )>
+<!ELEMENT authorisedSpeed ( #PCDATA )>
+<!ELEMENT oldOdometerValue ( #PCDATA )>
+<!ELEMENT newOdometerValue ( #PCDATA )>
+<!ELEMENT oldTimeValue ( #PCDATA )>
+<!ELEMENT newTimeValue ( #PCDATA )>
+<!ELEMENT nextCalibrationDate ( #PCDATA )>

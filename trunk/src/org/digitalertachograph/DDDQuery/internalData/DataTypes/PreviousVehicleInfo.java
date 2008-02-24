@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,6 +34,11 @@ public class PreviousVehicleInfo extends DataClass {
 	 * 	cardWithdrawalTime TimeReal, 4 bytes
 	 * }
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 19;
 
 	private VehicleRegistrationIdentification vehicleRegistrationIdentification;
 	private TimeReal cardWithdrawalTime;

@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,14 +30,20 @@ import org.jdom.Element;
 public class ActivityChangeInfo extends DataClass {
 	/*	
 	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2)), 2 bytes
-	 * Value assignment  Octet Aligned:                     (16 bits)
+	 * Value assignment  Octet Aligned: (16 bits)
 	 * 'scpaattttttttttt'B
 	 *  For Data Memory recordings (or slot status):
-                    Slot: 's'B
-                      DRIVER, '0'B:
-                      CO-DRIVER, '1'B:
-                      B:1000_0000 = 0x80
+	 *	Slot: 's'B
+	 *	DRIVER, '0'B:
+	 *	CO-DRIVER, '1'B:
+	 *	B:1000_0000 = 0x80
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
+
 	private boolean slot;
 	private static final byte SLOT_MASK = (byte)0x80;
 

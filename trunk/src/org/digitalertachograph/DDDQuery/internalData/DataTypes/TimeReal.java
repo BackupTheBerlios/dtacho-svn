@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +23,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import java.text.DateFormat;
 import java.util.Date;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.*;
 
@@ -36,14 +40,21 @@ public class TimeReal extends DataClass {
 	 * ---
 	 * TimeRealRange ::= 2^32-1
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 4;
+
 	private long timereal;
-	
+	private DebugLogger debugLogger;
+
 	/**
 	 * Constructor for a TimeReal object
 	 */
-	public TimeReal(){
+	public TimeReal() {
 		timereal = 0;
+		debugLogger = new DebugLogger();
 	}
 
 	/**
@@ -53,23 +64,24 @@ public class TimeReal extends DataClass {
 	 * 					whose data is used when the TimeReal
 	 * 					object is created.
 	 */
-	public TimeReal( byte[] value ){
+	public TimeReal( byte[] value ) {
 		this( convertIntoUnsigned4ByteInt( value ) );
 	}
-	
+
 	/**
 	 * Constructor for a TimeReal object
 	 * 
 	 * @param	i		the code for a combined date and time field, where the date and time
 	 * 					are expressed as seconds past 00h.00m.00s on January 1970 GMT.
 	 */
-	public TimeReal( long i ){
+	public TimeReal( long i ) {
 		this.timereal = i;
+		debugLogger = new DebugLogger();
 
-		if (i != 0){
-			System.out.print( " timestamp: " + i );
+		if ( i != 0 ) {
+			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, " timestamp: " + i );
 			Date d = new Date( i * 1000 );
-			System.out.println( " - " + DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format(d) );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " - " + DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format(d) );
 		}
 	}
 
@@ -94,7 +106,7 @@ public class TimeReal extends DataClass {
 	public void setTimereal( long timereal ) {
 		this.timereal = timereal;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		return new Element( name ).setText( Long.toString( timereal ) );

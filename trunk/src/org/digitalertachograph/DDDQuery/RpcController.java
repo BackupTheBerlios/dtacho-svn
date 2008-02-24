@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,8 +22,8 @@ package org.digitalertachograph.DDDQuery;
 
 public class RpcController {
 
-	public String process(byte[] data){
-		String xml = Controller.getInstance().process(data);
+	public String process( byte[] data, short srcType ){
+		String xml = Controller.getInstance().process( data, srcType );
 		return xml;
 	}	
 }

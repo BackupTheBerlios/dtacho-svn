@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +37,12 @@ public class CardIdentification extends DataClass {
 	 * 	cardExpiryDate TimeReal, 4 bytes
 	 * }
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 65;
+
 	private NationNumeric cardIssuingMemberState;
 	private CardNumber cardNumber; 
 	private Name cardIssuingAuthorityName;
@@ -202,7 +210,7 @@ public class CardIdentification extends DataClass {
 	public void setCardExpiryDate( TimeReal cardExpiryDate ) {
 		this.cardExpiryDate = cardExpiryDate;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );

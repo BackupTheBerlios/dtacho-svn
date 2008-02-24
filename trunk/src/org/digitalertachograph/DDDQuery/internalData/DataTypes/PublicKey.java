@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +33,11 @@ public class PublicKey extends DataClass {
 	 * 	rsaKeyPublicExponent RSAKeyPublicExponent, 8 bytes
 	 * }
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 136;
 
 	private RSAKeyModulus rsaKeyModulus;
 	private RSAKeyPublicExponent rsaKeyPublicExponent;

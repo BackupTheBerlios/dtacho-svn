@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,7 +37,12 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * ---
 	 * codePage specifies the part of the ISO/IEC 8859 used to code the vehicleRegNumber
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 14;
+
 	private short codePage;
 	private byte[] vehicleRegNumber;
 	
@@ -69,11 +77,6 @@ public class VehicleRegistrationNumber extends DataClass {
 		this.codePage = convertIntoUnsigned1ByteInt( codePage );
 		this.vehicleRegNumber = arrayCopy( vehicleRegNumber, 0, 13 );
 	}
-	
-//	public String toString() {
-		// TODO write me
-//		return "";
-//	}
 
 	/**
 	 * Returns the codepage of a VehicleRegistrationNumber object.

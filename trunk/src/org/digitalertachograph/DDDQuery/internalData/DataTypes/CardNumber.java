@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -58,6 +61,10 @@ public class CardNumber extends DataClass {
 	 * Order for increase: "0..9, A..Z".
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 16;
 
 	// card type
 	private short cardType;
@@ -289,12 +296,21 @@ public class CardNumber extends DataClass {
 		}
 		else {
 			if ( cardType == EquipmentType.DRIVER_CARD ) {
-				node.addContent( new Element( "driverIdentification" ).setText( driverIdentification ) );
+				if ( isValidXMLString( driverIdentification ) == false ) {
+					node.addContent( new Element( "driverIdentification" ) );
+				} else {
+					node.addContent( new Element( "driverIdentification" ).setText( driverIdentification ) );
+				}
 				node.addContent( cardReplacementIndex.generateXMLElement( "cardReplacementIndex" ) );
 				node.addContent( cardRenewalIndex.generateXMLElement( "cardRenewalIndex" ) );
 			}
 			else {
-				node.addContent( new Element( "ownerIdentification" ).setText( ownerIdentification ) );
+				if ( isValidXMLString( ownerIdentification ) == false ) {
+					node.addContent( new Element( "ownerIdentification" ) );
+				}
+				else {
+					node.addContent( new Element( "ownerIdentification" ).setText( ownerIdentification ) );
+				}
 				node.addContent( cardConsecutiveIndex.generateXMLElement( "cardConsecutiveIndex" ) );
 				node.addContent( cardReplacementIndex.generateXMLElement( "cardReplacementIndex" ) );
 				node.addContent( cardRenewalIndex.generateXMLElement( "cardRenewalIndex" ) );

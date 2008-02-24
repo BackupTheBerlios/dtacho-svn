@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +23,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
-/*
+/**
  * The (clear) content of the certificate of a public key.
  */
 public class CertificateContent extends DataClass {
@@ -33,6 +36,11 @@ public class CertificateContent extends DataClass {
 	 *  certificateHolderReference KeyIdentifier, 8 bytes
 	 *  publicKey PublicKey, 136 bytes 
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 164;
 
 	private short certificateProfileIdentifier;
 	private KeyIdentifier certificationAuthorityReference;

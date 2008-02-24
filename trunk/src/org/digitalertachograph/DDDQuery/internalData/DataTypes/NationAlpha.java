@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,6 +32,11 @@ public class NationAlpha extends DataClass {
 	/*
 	 * NationAlpha ::= IA5String(SIZE(3)), 3 bytes
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 3;
 
 	private String nationAlpha;
 
@@ -90,172 +98,172 @@ public class NationAlpha extends DataClass {
 	 * @return	the full country name of a NationAlpha object
 	 */
 	public String toString() {
-		if ( nationAlpha == "   " ) {
+		if ( nationAlpha.compareTo( "   " ) == 0 ) {
 			return "No information available";
 		}
-		else if ( nationAlpha == "A  " ) {
+		else if ( nationAlpha.compareTo( "A  " ) == 0 ) {
 			return "Austria";
 		}
-		else if ( nationAlpha == "AL " ) {
+		else if ( nationAlpha.compareTo( "AL " ) == 0 ) {
 			return "Albania";
 		}
-		else if ( nationAlpha == "AND" ) {
+		else if ( nationAlpha.compareTo( "AND" ) == 0 ) {
 			return "Andorra";
 		}
-		else if ( nationAlpha == "ARM" ) {
+		else if ( nationAlpha.compareTo( "ARM" ) == 0 ) {
 			return "Armenia";
 		}
-		else if ( nationAlpha == "AZ " ) {
+		else if ( nationAlpha.compareTo( "AZ " ) == 0 ) {
 			return "Azerbaijan";
 		}
-		else if ( nationAlpha == "B  " ) {
+		else if ( nationAlpha.compareTo( "B  " ) == 0 ) {
 			return "Belgium";
 		}
-		else if ( nationAlpha == "BG " ) {
+		else if ( nationAlpha.compareTo( "BG " ) == 0 ) {
 			return "Bulgaria";
 		}
-		else if ( nationAlpha == "BIH" ) {
+		else if ( nationAlpha.compareTo( "BIH" ) == 0 ) {
 			return "Bosnia and Herzegovina";
 		}
-		else if ( nationAlpha == "BY " ) {
+		else if ( nationAlpha.compareTo( "BY " ) == 0 ) {
 			return "Belarus";
 		}
-		else if ( nationAlpha == "CH " ) {
+		else if ( nationAlpha.compareTo( "CH " ) == 0 ) {
 			return "Switzerland";
 		}
-		else if ( nationAlpha == "CY " ) {
+		else if ( nationAlpha.compareTo( "CY " ) == 0 ) {
 			return "Cyprus";
 		}
-		else if ( nationAlpha == "CZ " ) {
+		else if ( nationAlpha.compareTo( "CZ " ) == 0 ) {
 			return "Czech Republic";
 		}
-		else if ( nationAlpha == "D  " ) {
+		else if ( nationAlpha.compareTo( "D  " ) == 0 ) {
 			return "Germany";
 		}
-		else if ( nationAlpha == "DK " ) {
+		else if ( nationAlpha.compareTo( "DK " ) == 0 ) {
 			return "Denmark";
 		}
-		else if ( nationAlpha == "E  " ) {
+		else if ( nationAlpha.compareTo( "E  " ) == 0 ) {
 			return "Spain";
 		}
-		else if ( nationAlpha == "EST" ) {
+		else if ( nationAlpha.compareTo( "EST" ) == 0 ) {
 			return "Estonia";
 		}
-		else if ( nationAlpha == "F  " ) {
+		else if ( nationAlpha.compareTo( "F  " ) == 0 ) {
 			return "France";
 		}
-		else if ( nationAlpha == "FIN" ) {
+		else if ( nationAlpha.compareTo( "FIN" ) == 0 ) {
 			return "Finland";
 		}
-		else if ( nationAlpha == "FL " ) {
+		else if ( nationAlpha.compareTo( "FL " ) == 0 ) {
 			return "Liechtenstein";
 		}
-		else if ( nationAlpha == "FR " ) {
+		else if ( nationAlpha.compareTo( "FR " ) == 0 ) {
 			return "Faeroe Islands";
 		}
-		else if ( nationAlpha == "UK " ) {
+		else if ( nationAlpha.compareTo( "UK " ) == 0 ) {
 			return "United Kingdom";
 		}
-		else if ( nationAlpha == "GE " ) {
+		else if ( nationAlpha.compareTo( "GE " ) == 0 ) {
 			return "Georgia";
 		}
-		else if ( nationAlpha == "GR " ) {
+		else if ( nationAlpha.compareTo( "GR " ) == 0 ) {
 			return "Greece";
 		}
-		else if ( nationAlpha == "H  " ) {
+		else if ( nationAlpha.compareTo( "H  " ) == 0 ) {
 			return "Hungary";
 		}
-		else if ( nationAlpha == "HR " ) {
+		else if ( nationAlpha.compareTo( "HR " ) == 0 ) {
 			return "Croatia";
 		}
-		else if ( nationAlpha == "I  " ) {
+		else if ( nationAlpha.compareTo( "I  " ) == 0 ) {
 			return "Italy";
 		}
-		else if ( nationAlpha == "IRL" ) {
+		else if ( nationAlpha.compareTo( "IRL" ) == 0 ) {
 			return "Ireland";
 		}
-		else if ( nationAlpha == "IS " ) {
+		else if ( nationAlpha.compareTo( "IS " ) == 0 ) {
 			return "Iceland";
 		}
-		else if ( nationAlpha == "KZ " ) {
+		else if ( nationAlpha.compareTo( "KZ " ) == 0 ) {
 			return "Kazakhstan";
 		}
-		else if ( nationAlpha == "L  " ) {
+		else if ( nationAlpha.compareTo( "L  " ) == 0 ) {
 			return "Luxembourg";
 		}
-		else if ( nationAlpha == "LT " ) {
+		else if ( nationAlpha.compareTo( "LT " ) == 0 ) {
 			return "Lithuania";
 		}
-		else if ( nationAlpha == "LV " ) {
+		else if ( nationAlpha.compareTo( "LV " ) == 0 ) {
 			return "Latvia";
 		}
-		else if ( nationAlpha == "M  " ) {
+		else if ( nationAlpha.compareTo( "M  " ) == 0 ) {
 			return "Malta";
 		}
-		else if ( nationAlpha == "MC " ) {
+		else if ( nationAlpha.compareTo( "MC " ) == 0 ) {
 			return "Monaco";
 		}
-		else if ( nationAlpha == "MD " ) {
+		else if ( nationAlpha.compareTo( "MD " ) == 0 ) {
 			return "Republic of Moldova";
 		}
-		else if ( nationAlpha == "MK " ) {
+		else if ( nationAlpha.compareTo( "MK " ) == 0 ) {
 			return "Macedonia";
 		}
-		else if ( nationAlpha == "N  " ) {
+		else if ( nationAlpha.compareTo( "N  " ) == 0 ) {
 			return "Norway";
 		}
-		else if ( nationAlpha == "NL " ) {
+		else if ( nationAlpha.compareTo( "NL " ) == 0 ) {
 			return "The Netherlands";
 		}
-		else if ( nationAlpha == "P  " ) {
+		else if ( nationAlpha.compareTo( "P  " ) == 0 ) {
 			return "Portugal";
 		}
-		else if ( nationAlpha == "PL " ) {
+		else if ( nationAlpha.compareTo( "PL " ) == 0 ) {
 			return "Poland";
 		}
-		else if ( nationAlpha == "RO " ) {
+		else if ( nationAlpha.compareTo( "RO " ) == 0 ) {
 			return "Romania";
 		}
-		else if ( nationAlpha == "RSM" ) {
+		else if ( nationAlpha.compareTo( "RSM" ) == 0 ) {
 			return "San Marino";
 		}
-		else if ( nationAlpha == "RUS" ) {
+		else if ( nationAlpha.compareTo( "RUS" ) == 0 ) {
 			return "Russian Federation";
 		}
-		else if ( nationAlpha == "S  " ) {
+		else if ( nationAlpha.compareTo( "S  " ) == 0 ) {
 			return "Sweden";
 		}
-		else if ( nationAlpha == "SK " ) {
+		else if ( nationAlpha.compareTo( "SK " ) == 0 ) {
 			return "Slovakia";
 		}
-		else if ( nationAlpha == "SLO" ) {
+		else if ( nationAlpha.compareTo( "SLO" ) == 0 ) {
 			return "Slovenia";
 		}
-		else if ( nationAlpha == "TM " ) {
+		else if ( nationAlpha.compareTo( "TM " ) == 0 ) {
 			return "Turkmenistan";
 		}
-		else if ( nationAlpha == "TR " ) {
+		else if ( nationAlpha.compareTo( "TR " ) == 0 ) {
 			return "Turkey";
 		}
-		else if ( nationAlpha == "UA " ) {
+		else if ( nationAlpha.compareTo( "UA " ) == 0 ) {
 			return "Ukraine";
 		}
-		else if ( nationAlpha == "V  " ) {
+		else if ( nationAlpha.compareTo( "V  " ) == 0 ) {
 			return "Vatican City";
 		}
-		else if ( nationAlpha == "YU " ) {
+		else if ( nationAlpha.compareTo( "YU " ) == 0 ) {
 			return "Yugoslavia";
 		}
-		else if ( nationAlpha == "UNK" ) {
+		else if ( nationAlpha.compareTo( "UNK" ) == 0 ) {
 			return "Unknown";
 		}
-		else if ( nationAlpha == "EC " ) {
+		else if ( nationAlpha.compareTo( "EC " ) == 0 ) {
 			return "European Community";
 		}
-		else if ( nationAlpha == "EUR" ) {
+		else if ( nationAlpha.compareTo( "EUR" ) == 0 ) {
 			return "Rest of Europe";
 		}
-		else if ( nationAlpha == "WLD" ) {
+		else if ( nationAlpha.compareTo( "WLD" ) == 0 ) {
 			return "Rest of the world";
 		}
 		else {
@@ -265,6 +273,11 @@ public class NationAlpha extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( nationAlpha );
+		if ( isValidXMLString( nationAlpha ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( nationAlpha );
+		}
 	}
 }

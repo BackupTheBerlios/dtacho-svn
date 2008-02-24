@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,6 +41,11 @@ public class CertificationAuthorityKID extends DataClass {
 	 * ---
 	 * NationAlpha ::= IA5String(SIZE(3))
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 8;
 
 	private NationNumeric nationNumeric;
 	private NationAlpha nationAlpha;

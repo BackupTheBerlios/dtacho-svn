@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +22,8 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.util.Vector;
 import java.util.Iterator;
+
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -50,8 +55,16 @@ public class CardEventData extends DataClass{
 	 * (req. 204 & 223).
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardEventData object.
+	 */
+	public final int size;
+
 	private static final int sequencesize = 6;
 	private Vector<Vector<CardEventRecord>> cardEventRecords = new Vector<Vector<CardEventRecord>>( sequencesize );
+
+	private DebugLogger debugLogger;
 
 
 	/**
@@ -62,41 +75,46 @@ public class CardEventData extends DataClass{
 	 * 					object is created.
 	 */
 	public CardEventData( byte[] value, short noofeventspertype ) {
-		System.out.println( " [INFO] no of events per type: " + noofeventspertype );	
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noofeventspertype );	
+
+		size = 6 * noofeventspertype * CardEventRecord.size;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
 
+			// max. NoOfEventsPerType = 12
 			cardEventRecords.add( new Vector<CardEventRecord>( 12 ) );
 
-			for ( int i = ( noofeventspertype * 24 * j ); i < ( noofeventspertype * 24 * ( j + 1 ) ); i += 24 ) {
-				byte[] record = arrayCopy( value, i, 24 );
+			for ( int i = ( noofeventspertype * CardEventRecord.size * j ); i < ( noofeventspertype * CardEventRecord.size * ( j + 1 ) ); i += CardEventRecord.size ) {
+				byte[] record = arrayCopy( value, i, CardEventRecord.size );
 				CardEventRecord tmp = new CardEventRecord( record );
 
 				if ( tmp.getEventBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							System.out.printf( "  time overlap, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  time overlap, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						case 1:
-							System.out.printf( "  card insertion while driving, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  card insertion while driving, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						case 2:
-							System.out.printf( "  last card session not correctly closed, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  last card session not correctly closed, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						case 3:
-							System.out.printf( "  power supply interruption, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  power supply interruption, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						case 4:
-							System.out.printf( "  motion data error, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  motion data error, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						case 5:
-							System.out.printf( "  security breach attempt, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  security breach attempt, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
 							break;
 
 						default:
@@ -108,7 +126,6 @@ public class CardEventData extends DataClass{
 			}
 		}
 	}
-
 
 	@Override
 	public Element generateXMLElement( String name ) {

@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,11 +28,16 @@ import org.jdom.Element;
  */
 public class L_TyreCircumference extends DataClass {
 	/* 
-	 * LTyreCircumference ::= INTEGER(0..2^16-1)
+	 * LTyreCircumference ::= INTEGER(0..2^16-1), 2 bytes
 	 *
 	 * value assignment:
 	 * Unsigned binary, value in 1/8 mm in the operating range 0 to 8031 mm.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
 
 	private int lTyreCircumference;
 

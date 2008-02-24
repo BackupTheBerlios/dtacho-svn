@@ -1,3 +1,100 @@
+2008-02-24
+-debug logger added
+
+
+2008-02-22
+-C_Driver_Card.dtd fixes
+-M_Vehicle_Unit.dtd
+
+
+2008-02-20
+-bug fixes
+
+
+2008-02-19
+-size attribute added for most classes
+
+
+2008-02-18
+-Javadoc update
+-fixed XML output of some OCTET STRING elements
+
+
+2008-02-17
+-new classes:
+ -NoOfCompanyActivityRecords
+ -NoOfControlActivityRecords
+
+
+2008-02-16
+-new classes:
+ -VuTimeAdjustmentRecord
+
+
+2008-02-15
+-new classes:
+ -VuFaultData
+ -VuFaultRecord
+ -VuEventData
+ -VuEventRecord
+ -VuOverSpeedingEventData
+ -VuOverSpeedingEventRecord
+ -VuTimeAdjustmentData
+
+
+2008-02-14
+-new classes:
+ -ManualInputFlag
+ -VuActivityDailyData
+ -VuCardIWData
+ -VuCardIWRecord
+ -VuPlaceDailyWorkPeriodData
+ -VuPlaceDailyWorkPeriodRecord
+ -VuSpecificConditionData
+
+
+2008-02-13
+-new classes:
+ -VuCalibrationData
+ -VuCalibrationRecord
+-signature check of vehicle unit data added
+
+
+2008-02-12
+-new classes:
+ -VuIdentification
+ -VuManufacturingAddress
+ -VuManufacturingName
+ -VuManufacturingDate
+ -VuOverSpeedingControlData
+
+
+2008-02-11
+-new classes:
+ -VuCompanyLocksData
+ -VuCompanyLocksRecords
+ -VuControlActivityData
+ -VuControlActivityRecord
+
+
+2008-02-10
+-new classes:
+ -CardSlotStatus
+ -VehicleUnitData
+ -VuDetailedSpeedBlock
+ -VuDetailedSpeedData
+ -VuDownloadablePeriod
+-renamed classes:
+ -TachographData -> CardData
+
+
+2008-02-09
+-source restructured/architectural changes
+-NationAlpha, RegionAlpha:
+ fixed string comparisons
+-parser framework for vehicle unit data .DDD files
+
+
 2008-02-04
 -ControlType:
  attributes moved to content

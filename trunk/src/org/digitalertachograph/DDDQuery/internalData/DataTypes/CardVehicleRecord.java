@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -37,15 +41,22 @@ public class CardVehicleRecord extends DataClass {
 	 * ---
 	 * OdometerShort ::= INTEGER(0..2^24-1)
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 31;
+
 	private int vehicleOdometerBegin;
 	private int vehicleOdometerEnd;
 	private TimeReal vehicleFirstUse;
 	private TimeReal vehicleLastUse;
 	private VehicleRegistrationIdentification vehicleRegistration;
 	private VuDataBlockCounter vuDataBlockCounter;
-	
-	
+
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a CardVehicleRecord object
 	 */
@@ -56,6 +67,8 @@ public class CardVehicleRecord extends DataClass {
 		vehicleLastUse = new TimeReal();
 		vehicleRegistration = new VehicleRegistrationIdentification();
 		vuDataBlockCounter = new VuDataBlockCounter();
+
+		debugLogger = new DebugLogger();
 	}
 
 	/**
@@ -73,16 +86,18 @@ public class CardVehicleRecord extends DataClass {
 		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 14, 15 ) );
 		vuDataBlockCounter = new VuDataBlockCounter( arrayCopy( value, 29, 2 ) );
 
+		debugLogger = new DebugLogger();
+
 		if ( vehicleFirstUse.getTimereal() != 0 ) {
-			System.out.print( "  vehicle registration number: " );
+			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  vehicle registration number: " );
 
 			byte[] vr = vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumber();
 
 			for ( int i = 0; i < vr.length; i++ ) {
-				System.out.printf( "%c", vr[ i ] );
+				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "%c", vr[ i ] );
 			}
 
-			System.out.println();
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED );
 		}
 	}
 

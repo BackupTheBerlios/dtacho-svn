@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,8 +48,12 @@ public class ControlCardControlActivityData extends DataClass {
 	 * max.: 520
 	 */
 
-	private int controlPointerNewestRecord;
-	
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the ControlCardControlActivityData object.
+	 */
+	public final int size;
+
 	// create min. 230 vectors; will be automatically expanded at run time if required!
 	private Vector<CardControlActivityDataRecord> controlActivityRecords = new Vector<CardControlActivityDataRecord>( 230 );
 
@@ -59,26 +66,23 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public ControlCardControlActivityData( byte[] value, int noOfControlActivityRecords ) {
-		controlPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
-
 		for ( int i = 0; i < noOfControlActivityRecords; i += 1 ) {
-			byte[] record = arrayCopy( value, 2 + ( i * 46 ), 46 );
+			byte[] record = arrayCopy( value, 2 + ( i * CardControlActivityDataRecord.size ), CardControlActivityDataRecord.size );
 			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord( record );
 			controlActivityRecords.add( tmp );
 		}
+
+		size = 2 + noOfControlActivityRecords * CardControlActivityDataRecord.size;
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name);
 
-		node.addContent( new Element( "controlActivityRecords" ).setText( Integer.toString( controlPointerNewestRecord ) ) );
-
 		Iterator<CardControlActivityDataRecord> it = controlActivityRecords.iterator();
 		while ( it.hasNext() ) {
 			CardControlActivityDataRecord ccadr = (CardControlActivityDataRecord)it.next();
-			Element ccadrElement = ccadr.generateXMLElement( "controlActivityRecord" );
-			node.addContent( ccadrElement );
+			node.addContent( ccadr.generateXMLElement( "controlActivityRecord" ) );
 		}
 
 		return node;

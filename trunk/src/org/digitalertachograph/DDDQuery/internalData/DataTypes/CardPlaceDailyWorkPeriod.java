@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -39,6 +42,12 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * max.: 112
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardPlaceDailyWorkPeriod object.
+	 */
+	public final int size;
+
 	// create min. 84 vectors; will be automatically expanded at run time if required!
 	private Vector<PlaceRecord> placeRecords = new Vector<PlaceRecord>( 84 );
 
@@ -52,12 +61,14 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 */
 	public CardPlaceDailyWorkPeriod( byte[] value, short noOfCardPlaceRecords ) {
 		for ( int i = 0; i < noOfCardPlaceRecords; i += 1 ) {
-			byte[] record = arrayCopy( value, 1 + ( i * 10 ), 10 );
+			byte[] record = arrayCopy( value, 1 + ( i * PlaceRecord.size ), PlaceRecord.size );
 
 			PlaceRecord tmp = new PlaceRecord( record );
 
 			placeRecords.add( tmp );
 		}
+
+		size = 1 + noOfCardPlaceRecords * PlaceRecord.size;
 	}
 
 	@Override

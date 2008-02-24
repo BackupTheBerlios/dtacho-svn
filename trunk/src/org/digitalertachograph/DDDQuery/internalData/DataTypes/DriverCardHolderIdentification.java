@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,6 +34,11 @@ public class DriverCardHolderIdentification extends DataClass {
 	 * 	cardHolderPreferredLanguage Language, 2 bytes
 	 * }
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 78;
 
 	private HolderName cardHolderName;
 	private Datef cardHolderBirthDate;

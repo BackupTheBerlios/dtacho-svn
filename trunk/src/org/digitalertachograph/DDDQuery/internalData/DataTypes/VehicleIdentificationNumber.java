@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +33,12 @@ public class VehicleIdentificationNumber extends DataClass {
 	 * 
 	 * Value assignment: As defined in ISO 3779.
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 17;
+
 	private String vehicleIdentificationNumber;
 
 
@@ -94,6 +102,11 @@ public class VehicleIdentificationNumber extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( vehicleIdentificationNumber );
+		if ( isValidXMLString( vehicleIdentificationNumber ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( vehicleIdentificationNumber );
+		}
 	}
 }

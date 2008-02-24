@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -60,7 +63,12 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * min.:  84
 	 * max.: 112
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 10;
+
 	private EquipmentType typeOfTachographCardId;
 	private CardStructureVersion cardStructureVersion;
 	private NoOfEventsPerType noOfEventsPerType;
@@ -126,8 +134,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the version of the structure that is implemented in the card
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public byte[] getCardStructureVersion() {
-		return cardStructureVersion.getCardStructureVersion();
+	public CardStructureVersion getCardStructureVersion() {
+		return cardStructureVersion;
 	}
 
 	/**
@@ -137,8 +145,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card to be set
 	 * 									for the DriverCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion( byte[] cardStructureVersion ) {
-		this.cardStructureVersion.setCardStructureVersion( cardStructureVersion );
+	public void setCardStructureVersion( CardStructureVersion cardStructureVersion ) {
+		this.cardStructureVersion = cardStructureVersion;
 	}
 
 	/**
@@ -148,8 +156,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the number of events per type of event the card can record
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public short getNoOfEventsPerType() {
-		return noOfEventsPerType.getNoOfEventsPerType();
+	public NoOfEventsPerType getNoOfEventsPerType() {
+		return noOfEventsPerType;
 	}
 
 	/**
@@ -159,8 +167,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfEventsPerType	the number of events per type of event the card can record to be set
 	 * 								for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfEventsPerType( short noOfEventsPerType ) {
-		this.noOfEventsPerType.setNoOfEventsPerType( noOfEventsPerType );
+	public void setNoOfEventsPerType( NoOfEventsPerType noOfEventsPerType ) {
+		this.noOfEventsPerType = noOfEventsPerType;
 	}
 
 	/**
@@ -170,8 +178,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the number of faults per type of fault the card can record
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public short getNoOfFaultsPerType() {
-		return noOfFaultsPerType.getNoOfFaultsPerType();
+	public NoOfFaultsPerType getNoOfFaultsPerType() {
+		return noOfFaultsPerType;
 	}
 
 	/**
@@ -181,8 +189,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfFaultsPerType	the number of faults per type of fault the card can record to be set
 	 * 								for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfFaultsPerType( short noOfFaultsPerType ) {
-		this.noOfFaultsPerType.setNoOfFaultsPerType( noOfFaultsPerType );
+	public void setNoOfFaultsPerType( NoOfFaultsPerType noOfFaultsPerType ) {
+		this.noOfFaultsPerType = noOfFaultsPerType;
 	}
 
 	/**
@@ -192,8 +200,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the number of bytes available for storing activity records
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public int getActivityStructureLength() {
-		return activityStructureLength.getCardActivityLengthRange();
+	public CardActivityLengthRange getActivityStructureLength() {
+		return activityStructureLength;
 	}
 
 	/**
@@ -203,8 +211,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	activityStructureLength		the number of bytes available for storing activity records to be set
 	 * 										for the DriverCardApplicationIdentification object
 	 */
-	public void setActivityStructureLength( int activityStructureLength ) {
-		this.activityStructureLength.setCardActivityLengthRange( activityStructureLength );
+	public void setActivityStructureLength( CardActivityLengthRange activityStructureLength ) {
+		this.activityStructureLength = activityStructureLength;
 	}
 
 	/**
@@ -214,8 +222,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the number of vehicle records the card can contain
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public int getNoOfCardVehicleRecords() {
-		return noOfCardVehicleRecords.getNoOfCardVehicleRecords();
+	public NoOfCardVehicleRecords getNoOfCardVehicleRecords() {
+		return noOfCardVehicleRecords;
 	}
 
 	/**
@@ -225,8 +233,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfCardVehicleRecords		the number of vehicle records the card can contain to be set
 	 * 										for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfCardVehicleRecords( int noOfCardVehicleRecords ) {
-		this.noOfCardVehicleRecords.setNoOfCardVehicleRecords( noOfCardVehicleRecords );
+	public void setNoOfCardVehicleRecords( NoOfCardVehicleRecords noOfCardVehicleRecords ) {
+		this.noOfCardVehicleRecords = noOfCardVehicleRecords;
 	}
 
 	/**
@@ -236,8 +244,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @return	the number of places the card can record
 	 * 			of the DriverCardApplicationIdentification object
 	 */
-	public short getNoOfCardPlaceRecords() {
-		return noOfCardPlaceRecords.getNoOfCardPlaceRecords();
+	public NoOfCardPlaceRecords getNoOfCardPlaceRecords() {
+		return noOfCardPlaceRecords;
 	}
 
 	/**
@@ -247,8 +255,8 @@ public class DriverCardApplicationIdentification extends DataClass{
 	 * @param	noOfCardPlaceRecords	the number of places the card can record to be set
 	 * 									for the DriverCardApplicationIdentification object
 	 */
-	public void setNoOfCardPlaceRecords( short noOfCardPlaceRecords ) {
-		this.noOfCardPlaceRecords.setNoOfCardPlaceRecords( noOfCardPlaceRecords );
+	public void setNoOfCardPlaceRecords( NoOfCardPlaceRecords noOfCardPlaceRecords ) {
+		this.noOfCardPlaceRecords = noOfCardPlaceRecords;
 	}
 	
 	@Override

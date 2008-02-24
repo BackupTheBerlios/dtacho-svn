@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +30,12 @@ public class Certificate extends DataClass {
 	/*
 	 * Certificate :== OCTET STRING(SIZE(194)), 194 bytes
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 194;
+
 	private byte[] certificate;
 
 

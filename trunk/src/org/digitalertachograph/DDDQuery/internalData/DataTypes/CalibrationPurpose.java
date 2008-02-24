@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,8 +36,13 @@ public class CalibrationPurpose extends DataClass {
 	 * "02"H first installation: first calibration of the VU after its activation,
 	 * "03"H installation: first calibration of the VU in the current vehicle,
 	 * "04"H periodic inspection.
-	 * TODO konstanten?
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
+
 	private byte calibrationPurpose;
 
 
@@ -52,8 +60,18 @@ public class CalibrationPurpose extends DataClass {
 	 * 					whose data is used when the CalibrationPurpose
 	 * 					object is created
 	 */
-	public CalibrationPurpose( byte value ) {
-		calibrationPurpose = value;
+	public CalibrationPurpose( byte[] value ) {
+		calibrationPurpose = value[ 0 ];
+	}
+
+	/**
+	 * Constructor for a CalibrationPurpose object
+	 * 
+	 * @param	calibrationPurpose		byte with the code explaining why a set of calibration
+	 * 									parameters was recorded
+	 */
+	public CalibrationPurpose( byte calibrationPurpose ) {
+		this.calibrationPurpose = calibrationPurpose;
 	}
 
 	/**

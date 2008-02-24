@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +23,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -43,25 +47,39 @@ public class CardDriverActivity extends DataClass {
 	 * (data structure: CardActivityDailyRecord) for each calendar day where the card
 	 * has been used.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardEventData object.
+	 */
+	public final int size;
+
 	private int activityPointerOldestDayRecord;
 	private int activityPointerNewestRecord;
 	private Vector<CardActivityDailyRecord> activityDailyRecords;
-	
-	
+
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a CardDriverActivity object
 	 * 
-	 * @param	value	byte array of a CardDriverActivity structure
-	 * 					whose data is used when the CardDriverActivity
-	 * 					object is created.
+	 * @param	value						byte array of a CardDriverActivity structure
+	 * 										whose data is used when the CardDriverActivity
+	 * 										object is created.
+	 * @param	activityStructureLength		length of activity structure
 	 */
 	public CardDriverActivity( byte[] value, int activityStructureLength ) {
+		debugLogger = new DebugLogger();
+
+		size = 2 + 2 + activityStructureLength;
+
 		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) ); // = first CardActivityDailyRecord
 		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) ); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
 
-		System.out.printf( " activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
-		
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
+
 		// reorganize ringbuffer (=records)
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
 		// records can be accessed linearly from the oldest record (at the beginning
@@ -78,7 +96,7 @@ public class CardDriverActivity extends DataClass {
 			System.arraycopy( value, 4, records, lengthToEnd, activityPointerOldestDayRecord );
 		}
 
-		System.out.println( " records.length: " + records.length );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " records.length: " + records.length );
 
 		int activityPointerLastRecordOffset;
 
@@ -111,29 +129,36 @@ public class CardDriverActivity extends DataClass {
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
 				if ( cadrActivityPreviousRecordLength == 0 ) {
-					System.out.println( "   [INFO] this is the first record" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO] this is the first record" );
 				}
 				else {
-					System.out.println( "   [ERROR] this should be the first record but previous length is not 0(?!)" );
+					// indent output if log level >= LOGLEVEL_INFO_EXTENDED
+					if ( DebugLogger.logLevel >= DebugLogger.LOGLEVEL_INFO_EXTENDED ) {
+						debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "   " );
+					}
+					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] this should be the first record but previous length is not 0(?!)" );
 				}
 			}
 			else {
 				if ( cadrActivityPreviousRecordLength == cadrIntegrityCheckActivityPreviousRecordLength ) {
-					System.out.println( "   [INFO] integrity check ok: ActivityPreviousRecordLength matches" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO] integrity check ok: ActivityPreviousRecordLength matches" );
 				}
 				else {
-					System.out.println( "   [ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
+					// indent output if log level >= LOGLEVEL_INFO_EXTENDED
+					if ( DebugLogger.logLevel > DebugLogger.LOGLEVEL_INFO_EXTENDED ) {
+						debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "   " );
+					}
+					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
 				}
 			}
-			
+
 			cardActivityDailyRecordsOffset += cadrActivityRecordLength; // next CardActivityDailyRecord
 
 			cadrIntegrityCheckActivityPreviousRecordLength = cadrActivityRecordLength; // save record length for integrity check
-			
+
 			activityDailyRecords.add( cadr );
 		}
 	}
-
 
 	/**
 	 * Returns the begin of the storage place (number of bytes from the beginning
@@ -163,14 +188,6 @@ public class CardDriverActivity extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		//Element activityPointerOldestDayRecordElement = new Element("activityPointerOldestDayRecord");
-		//activityPointerOldestDayRecordElement.setText(Integer.toString(activityPointerOldestDayRecord));
-		//node.addContent(activityPointerOldestDayRecordElement);
-
-		//Element activityPointerNewestRecordElement = new Element("activityPointerNewestRecord");
-		//activityPointerNewestRecordElement.setText(Integer.toString(activityPointerNewestRecord));
-		//node.addContent(activityPointerNewestRecordElement);
-
 		Element cardActivityDailyRecordsElement = new Element( "cardActivityDailyRecords" );
 		node.addContent( cardActivityDailyRecordsElement );
 
@@ -179,10 +196,6 @@ public class CardDriverActivity extends DataClass {
 			CardActivityDailyRecord cadr = (CardActivityDailyRecord)it.next();
 			cardActivityDailyRecordsElement.addContent( cadr.generateXMLElement( "cardActivityDailyRecord" ) );
 		}
-
-		//Element lastPartOfActivityDailyRecordsElement = new Element("lastPartOfActivityDailyRecords");
-		//lastPartOfActivityDailyRecordsElement.setText( convertIntoHexString(lastPartOfActivityDailyRecords) );
-		//node.addContent(lastPartOfActivityDailyRecordsElement);
 
 		return node;
 	}

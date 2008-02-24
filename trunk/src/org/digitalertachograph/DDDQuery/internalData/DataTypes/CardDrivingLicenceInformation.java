@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,7 +36,12 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * ---
 	 * NationNumeric ::= INTEGER(0.255)
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 53;
+
 	private Name drivingLicenceIssuingAuthority;
 	private NationNumeric drivingLicenceIssuingNation;
 	private String drivingLicenceNumber;
@@ -138,9 +146,12 @@ public class CardDrivingLicenceInformation extends DataClass {
 		node.addContent( drivingLicenceIssuingAuthority.generateXMLElement( "drivingLicenceIssuingAuthority" ) );
 		node.addContent( drivingLicenceIssuingNation.generateXMLElement( "drivingLicenceIssuingNation" ) );
 
-		Element drivingLicenceNumberElement = new Element( "drivingLicenceNumber" );
-		drivingLicenceNumberElement.setText( drivingLicenceNumber );
-		node.addContent( drivingLicenceNumberElement );
+		if ( isValidXMLString( drivingLicenceNumber ) == false ) {
+			node.addContent( new Element( "drivingLicenceNumber" ) );
+		}
+		else {
+			node.addContent( new Element( "drivingLicenceNumber" ).setText( drivingLicenceNumber ) );
+		}
 
 		return node;
 	}

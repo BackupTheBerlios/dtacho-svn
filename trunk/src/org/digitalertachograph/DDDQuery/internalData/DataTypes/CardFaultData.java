@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +22,8 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.util.Vector;
 import java.util.Iterator;
+
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -41,8 +46,16 @@ public class CardFaultData extends DataClass {
 	 * (req. 207 & 233).
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardFaultData object.
+	 */
+	public final int size;
+
 	private static final int sequencesize = 2;
 	private Vector<Vector<CardFaultRecord>> cardFaultRecords = new Vector<Vector<CardFaultRecord>>( sequencesize );
+
+	private DebugLogger debugLogger;
 
 
 	/**
@@ -53,25 +66,30 @@ public class CardFaultData extends DataClass {
 	 * 					object is created.
 	 */
 	public CardFaultData( byte[] value, short nooffaultspertype ) {
-		System.out.println("  nooffaultspertype: " + nooffaultspertype );	
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of faults per type: " + nooffaultspertype );
+
+		size = 2 * nooffaultspertype * CardFaultRecord.size;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
 
+			// max. NoOfFaultsPerType = 24
 			cardFaultRecords.add( new Vector<CardFaultRecord>( 24 ) );
 
-			for ( int i = ( nooffaultspertype * 24 * j ); i < ( nooffaultspertype * 24 * ( j + 1 ) ); i += 24 ) {
-				byte[] record = arrayCopy( value, i, 24 );
+			for ( int i = ( nooffaultspertype * CardFaultRecord.size * j ); i < ( nooffaultspertype * CardFaultRecord.size * ( j + 1 ) ); i += CardFaultRecord.size ) {
+				byte[] record = arrayCopy( value, i, CardFaultRecord.size );
 				CardFaultRecord tmp = new CardFaultRecord( record );
 
 				if ( tmp.getFaultBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							System.out.printf( "  recording eq. fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  recording eq. fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
 							break;
 
 						case 1:
-							System.out.printf( "  card fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  card fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
 							break;
 
 						default:
@@ -83,7 +101,6 @@ public class CardFaultData extends DataClass {
 			}
 		}
 	}
-
 
 	@Override
 	public Element generateXMLElement( String name ) {

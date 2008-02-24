@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +35,11 @@ public class CardChipIdentification extends DataClass {
 	 *  icManufacturingReferences	0x00..0x00	OCTET STRING (SIZE(4)), 4 bytes
 	 * }
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 8;
 
 	private byte[] icSerialNumber;
 	private byte[] icManufacturingReferences;
@@ -99,7 +107,7 @@ public class CardChipIdentification extends DataClass {
 		Element node = new Element( name );
 
 		node.addContent( new Element( "icSerialNumber" ).setText( convertIntoHexString( icSerialNumber ) ) );
-		node.addContent( new Element( "icManufacturingReferences" ).setText(convertIntoHexString( icManufacturingReferences ) ) );
+		node.addContent( new Element( "icManufacturingReferences" ).setText( convertIntoHexString( icManufacturingReferences ) ) );
 
 		return node;
 	}

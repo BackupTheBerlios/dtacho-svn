@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +30,11 @@ public class CardApprovalNumber extends DataClass {
 	/*
 	 * CardApprovalNumber ::= IA5String(SIZE(8)), 8 bytes
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 8;
 
 	private String cardApprovalNumber;
 
@@ -85,6 +93,11 @@ public class CardApprovalNumber extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( cardApprovalNumber );
+		if ( isValidXMLString( cardApprovalNumber ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( cardApprovalNumber );
+		}
 	}
 }

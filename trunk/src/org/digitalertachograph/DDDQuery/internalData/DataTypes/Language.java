@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +31,11 @@ public class Language extends DataClass {
 	 * Language ::= IA5String(SIZE(2)), 2 bytes
 	 * Value assignment: Two-letter lower-case coding according to ISO 639.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
 
 	private String language;
 	
@@ -76,6 +84,11 @@ public class Language extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( language );
+		if ( isValidXMLString( language ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( language );
+		}
 	}
 }

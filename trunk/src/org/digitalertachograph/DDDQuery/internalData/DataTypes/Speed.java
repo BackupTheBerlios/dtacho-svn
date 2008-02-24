@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +33,11 @@ public class Speed extends DataClass {
 	 * Value assignment:
 	 * kilometre per hour in the operational range 0 to 220 km/h
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short speed;
 

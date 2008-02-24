@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +35,11 @@ public class Address extends DataClass {
 	 * ---
 	 * codePage specifies the part of the ISO/IEC 8859 used to code the address
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 36;
 
 	private short codePage;
 	private byte[] address;

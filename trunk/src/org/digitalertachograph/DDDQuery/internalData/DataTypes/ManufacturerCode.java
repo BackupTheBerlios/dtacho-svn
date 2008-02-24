@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +30,11 @@ public class ManufacturerCode extends DataClass {
 	/*
 	 * ManufacturerCode ::= INTEGER(0..255), 1 byte
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short manufacturerCode;
 
@@ -80,7 +88,7 @@ public class ManufacturerCode extends DataClass {
 	 * 
 	 * @return	the name of the manufacturer of the ManufacturerCode object
 	 * 
-	 * Manufacturer codes list as of 22/01/2008
+	 * Manufacturer codes list as of 15/02/2008
 	 * http://dtc.jrc.it/text/cm.html
 	 */
 	public String toString() {

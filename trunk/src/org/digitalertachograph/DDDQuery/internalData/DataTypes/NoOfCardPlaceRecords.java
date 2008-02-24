@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,10 +28,15 @@ import org.jdom.Element;
  */
 public class NoOfCardPlaceRecords extends DataClass {
 	/*
-	 * NoOfCardPlaceRecords ::=  INTEGER(0..255)
+	 * NoOfCardPlaceRecords ::=  INTEGER(0..255), 1 byte
 	 * min.:  84
 	 * max.: 112
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short noOfCardPlaceRecords;
 

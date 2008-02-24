@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -34,6 +37,11 @@ public class WorkshopCardHolderIdentification extends DataClass {
 	 * }
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 146;
+
 	private Name workshopName;
 	private Address workshopAddress;
 	private HolderName cardHolderName;
@@ -61,7 +69,7 @@ public class WorkshopCardHolderIdentification extends DataClass {
 		workshopName = new Name( arrayCopy( value, 0, 36 ) );
 		workshopAddress = new Address( arrayCopy( value, 36, 36 ) );
 		cardHolderName = new HolderName( arrayCopy( value, 72, 72 ) );
-		cardHolderPreferredLanguage = new Language( arrayCopy( value, 142, 2 ) );
+		cardHolderPreferredLanguage = new Language( arrayCopy( value, 144, 2 ) );
 	}
 
 	/**

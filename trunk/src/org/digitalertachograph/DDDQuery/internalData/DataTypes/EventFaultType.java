@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -80,7 +83,12 @@ public class EventFaultType extends DataClass {
 	 *
 	 * '80'H to 'FF'H Manufacturer specific.
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
+
 	private byte eventFaultType;
 
 
@@ -124,6 +132,17 @@ public class EventFaultType extends DataClass {
 	/**
 	 * Constructor for an EventFaultType object
 	 * 
+	 * @param	value	byte array of a EventFaultType structure
+	 * 					whose data is used when the EventFaultType
+	 * 					object is created.
+	 */
+	public EventFaultType( byte[] value ) {
+		this.eventFaultType = value[ 0 ];
+	}
+
+	/**
+	 * Constructor for an EventFaultType object
+	 * 
 	 * @param	eventFaultType		byte that qualifies an event or fault
 	 */
 	public EventFaultType( byte eventFaultType ) {
@@ -154,6 +173,6 @@ public class EventFaultType extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( Byte.toString( eventFaultType ) );
+		return new Element( name ).setText( convertIntoHexString( eventFaultType ) );
 	}
 }

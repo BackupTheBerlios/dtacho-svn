@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -46,8 +49,12 @@ public class CompanyActivityData extends DataClass {
 	 * max.: 520
 	 */
 
-	private int companyPointerNewestRecord;
-	
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CompanyActivityData object.
+	 */
+	public final int size;
+
 	// create min. 230 vectors; will be automatically expanded at run time if required!
 	private Vector<CompanyActivityRecord> companyActivityRecords = new Vector<CompanyActivityRecord>( 230 );
 
@@ -60,19 +67,19 @@ public class CompanyActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public CompanyActivityData( byte[] value, int noOfCompanyActivityRecords ) {
-		companyPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		for ( int i = 0; i < noOfCompanyActivityRecords; i += 1 ) {
-			byte[] record = arrayCopy( value, 2 + ( i * 46 ), 46 );
+			byte[] record = arrayCopy( value, 2 + ( i * CompanyActivityRecord.size ), CompanyActivityRecord.size );
 			CompanyActivityRecord tmp = new CompanyActivityRecord( record );
 			companyActivityRecords.add( tmp );
 		}
+
+		size = 2 + noOfCompanyActivityRecords * CompanyActivityRecord.size;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "companyPointerNewestRecord" ).setText(Integer.toString( companyPointerNewestRecord ) ) );
 		Iterator<CompanyActivityRecord> iter = companyActivityRecords.iterator();
 		while ( iter.hasNext() ) {
 			CompanyActivityRecord car = (CompanyActivityRecord)iter.next();

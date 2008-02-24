@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,27 +20,30 @@
 
 package org.digitalertachograph.DDDQuery;
 
-import org.digitalertachograph.DDDQuery.internalData.TachographData;
+import org.digitalertachograph.DDDQuery.XMLDumper;
 
+/**
+ * The DataSource interface defines methods for a data source.
+ */
 public interface DataSource {
 	/**
 	 * Sets the byte array with the data of a DataSource object.
 	 * <br><br>
 	 * <b>Note</b>: the class that implements this interface must provide a method
-	 * that processes the data and generates a TachographData object of it.
+	 * that processes the data and generates a XMLDumper object of it.
 	 * 
 	 * @param	src		the byte array with the data of the DataSource object
 	 */
-	public void setSource(byte[] src);
+	public void setSource( byte[] src );
 	
 	/**
-	 * Returns the TachographData object that has been generated with the data
-	 * that was set by {@link #setSource(byte[])}.
+	 * Returns the XMLDumper object that dumps the data provided by {@link #setSource(byte[])}
+	 * as XML.
 	 * <br><br>
 	 * <b>Note</b>: the class that implements this interface must provide a method
-	 * that processes the data and generates a TachographData object of it.
+	 * that processes the data and generates a XMLDumper object of it.
 	 * 
-	 * @return	TachographData object that has been generated with the data
+	 * @return	XMLDumper object that has been generated with the data
 	 */
-	public TachographData getTachographData();
+	public XMLDumper getXMLDumper();
 }

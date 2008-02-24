@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +35,11 @@ public class CardStructureVersion extends DataClass {
 	 * 'bb'H	Index for changes concerning the use of the data elements defined
 	 * 			for the strucure given by the high byte, '00h' for this version.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
 
 	private byte[] cardStructureVersion;
 

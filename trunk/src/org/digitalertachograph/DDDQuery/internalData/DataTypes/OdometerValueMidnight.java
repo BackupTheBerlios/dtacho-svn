@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +25,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
  */
 public class OdometerValueMidnight extends OdometerShort {
 	/*
-	 * VuPublicKey ::= PublicKey, 136 bytes
+	 * OdometerValueMidnight ::= OdometerShort, 3 bytes
 	 */
 
 

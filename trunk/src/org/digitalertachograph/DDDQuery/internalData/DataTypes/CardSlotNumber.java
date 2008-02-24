@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,8 +31,13 @@ public class CardSlotNumber extends DataClass {
 	 * CardSlotNumber ::= INTEGER {
 	 * 	driverSlot (0),
 	 * 	co-driverSlot (1)
-	 * }
+	 * }, 1 byte
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short cardSlotNumber;
 
@@ -48,6 +56,17 @@ public class CardSlotNumber extends DataClass {
 	 */
 	public CardSlotNumber() {
 		cardSlotNumber = DRIVER_SLOT;
+	}
+
+	/**
+	 * Constructor for a CardSlotNumber object
+	 * 
+	 * @param	value	byte array of a CardSlotNumber structure
+	 * 					whose data is used when the CardSlotNumber
+	 * 					object is created.
+	 */
+	public CardSlotNumber( byte[] value ) {
+		cardSlotNumber = convertIntoUnsigned1ByteInt( value[ 0 ] );
 	}
 
 	/**

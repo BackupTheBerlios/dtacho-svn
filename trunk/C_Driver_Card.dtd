@@ -1,9 +1,9 @@
-<!ELEMENT TachographData ( TachographDataInfo, EF_ICC, EF_IC, EF_Application_Identification, EF_Card_Certificate, EF_CA_Certificate, EF_Identification, EF_Driving_Licence_Info, EF_Events_Data, EF_Faults_Data, EF_Driver_Activity_Data, EF_Vehicles_Used, EF_Places, EF_Current_Usage, EF_Control_Activity_Data, EF_Specific_Conditions )>
+<!ELEMENT CardData ( Info, EF_ICC, EF_IC, EF_Application_Identification, EF_Card_Certificate, EF_CA_Certificate, EF_Identification, EF_Driving_Licence_Info, EF_Events_Data, EF_Faults_Data, EF_Driver_Activity_Data, EF_Vehicles_Used, EF_Places, EF_Current_Usage, EF_Control_Activity_Data, EF_Specific_Conditions )>
 
-<!ELEMENT TachographDataInfo ( source )>
+<!ELEMENT Info ( source )>
 <!ELEMENT source ( #PCDATA )>
 
-<!ELEMENT EF_ICC (cardIccIdentification)>
+<!ELEMENT EF_ICC ( cardIccIdentification )>
 <!ELEMENT cardIccIdentification ( clockStop, cardExtendedSerialNumber, cardApprovalNumber, cardPersonaliserID, embedderIcAssemblerId, icIdentifier )>
 <!ELEMENT clockStop ( #PCDATA )>
 <!ELEMENT cardExtendedSerialNumber ( serialNumber, monthYear, type, manufacturerCode )>
@@ -16,7 +16,7 @@
 <!ELEMENT embedderIcAssemblerId ( #PCDATA )>
 <!ELEMENT icIdentifier ( #PCDATA )>
 
-<!ELEMENT EF_IC (cardChipIdentification)>
+<!ELEMENT EF_IC ( cardChipIdentification )>
 <!ELEMENT cardChipIdentification ( icSerialNumber, icManufacturingReferences )>
 <!ELEMENT icSerialNumber ( #PCDATA )>
 <!ELEMENT icManufacturingReferences ( #PCDATA )>
@@ -46,7 +46,7 @@
 <!ELEMENT cardRenewalIndex ( #PCDATA )>
 <!ELEMENT cardIssuingAuthorityName ( codePage, name )>
 <!ELEMENT codePage ( #PCDATA )>
-<!ELEMENT name  ( #PCDATA )>
+<!ELEMENT name ( #PCDATA )>
 <!ELEMENT cardIssueDate ( #PCDATA )>
 <!ELEMENT cardValidityBegin ( #PCDATA )>
 <!ELEMENT cardExpiryDate ( #PCDATA )>
@@ -59,8 +59,8 @@
 <!ELEMENT month ( #PCDATA )>
 <!ELEMENT day ( #PCDATA )>
 <!ELEMENT cardHolderPreferredLanguage ( #PCDATA )>
-<!ELEMENT ownerIdentification EMPTY>
-<!ELEMENT cardConsecutiveIndex EMPTY>
+<!ELEMENT ownerIdentification ( #PCDATA )>
+<!ELEMENT cardConsecutiveIndex ( #PCDATA )>
 
 <!ELEMENT EF_Driving_Licence_Info ( cardDrivingLicenceInformation )>
 <!ELEMENT cardDrivingLicenceInformation ( drivingLicenceIssuingAuthority, drivingLicenceIssuingNation, drivingLicenceNumber )>
@@ -76,7 +76,7 @@
 <!ELEMENT eventBeginTime ( #PCDATA )>
 <!ELEMENT eventEndTime ( #PCDATA )>
 
-<!ELEMENT eventVehicleRegistration ( vehicleRegistrationNation,vehicleRegistrationNumber )>
+<!ELEMENT eventVehicleRegistration ( vehicleRegistrationNation, vehicleRegistrationNumber )>
 <!ELEMENT vehicleRegistrationNation ( #PCDATA )>
 <!ELEMENT vehicleRegistrationNumber ( codePage, vehicleRegNumber )>
 <!ELEMENT vehicleRegNumber ( #PCDATA )>
@@ -89,7 +89,7 @@
 <!ELEMENT faultBeginTime ( #PCDATA )>
 <!ELEMENT faultEndTime ( #PCDATA )>
 
-<!ELEMENT faultVehicleRegistration ( vehicleRegistrationNation,vehicleRegistrationNumber )>
+<!ELEMENT faultVehicleRegistration ( vehicleRegistrationNation, vehicleRegistrationNumber )>
 
 <!ELEMENT EF_Driver_Activity_Data ( cardDriverActivity )>
 <!ELEMENT cardDriverActivity ( cardActivityDailyRecords )>

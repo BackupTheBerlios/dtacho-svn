@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,13 +28,18 @@ import org.jdom.Element;
  */
 public class OverspeedNumber extends DataClass {
 	/*
-	 * OverspeedNumber ::=  INTEGER(0..255)
+	 * OverspeedNumber ::= INTEGER(0..255), 1 byte
 	 * Value assignment:
 	 * 0 means that no over speeding event has occurred since the last over speeding control,
 	 * 1 means that one over speeding event has occurred since the last over speeding control...
 	 * 255 means that 255 or more over speeding events have occurred since the last over speeding control.
 	 * 
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private short overspeedNumber;
 

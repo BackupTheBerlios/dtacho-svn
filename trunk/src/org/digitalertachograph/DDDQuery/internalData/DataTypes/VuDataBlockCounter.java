@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,11 +29,16 @@ import org.jdom.Element;
  */
 public class VuDataBlockCounter extends DataClass {
 	/* 
-	 * VuDataBlockCounter ::= BCDString(SIZE(2))
+	 * VuDataBlockCounter ::= BCDString(SIZE(2)), 2 bytes
 	 * ---
 	 * Value assignment:
 	 * Consecutive number with max. value 9 999, starting again with 0.
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
 
 	private byte[] vuDataBlockCounter;
 

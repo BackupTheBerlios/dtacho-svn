@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,16 +20,26 @@
 
 package org.digitalertachograph.DDDQuery;
 
-import org.digitalertachograph.DDDQuery.internalData.TachographData;
+import org.digitalertachograph.DDDQuery.internalData.Cards.CardData;
 
+/**
+ * A dummy data source.
+ */
 public class DummyDataSource implements DataSource {
+
+	/**
+	 * Constructor for a DummyDataSource object
+	 */
+	public DummyDataSource() {
+
+	}
 
 	public void setSource(byte[] src) {
 		return;
 	}
 
-	public TachographData getTachographData(){
-		TachographData td = new TachographData();
+	public XMLDumper getXMLDumper(){
+		CardData td = new CardData();
 		return td;
 	}
 }

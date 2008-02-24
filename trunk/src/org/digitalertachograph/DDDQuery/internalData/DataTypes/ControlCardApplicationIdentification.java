@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,9 +44,14 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * max.: 520
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 5;
+
 	private EquipmentType typeOfTachographCardId;
-	private byte[] cardStructureVersion;
-	private int noOfControlActivityRecords;
+	private CardStructureVersion cardStructureVersion;
+	private NoOfControlActivityRecords noOfControlActivityRecords;
 	
 	
 	/**
@@ -51,8 +59,8 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 */
 	public ControlCardApplicationIdentification() {
 		typeOfTachographCardId = new EquipmentType();
-		cardStructureVersion = new byte[ 2 ];
-		noOfControlActivityRecords = 0;
+		cardStructureVersion = new CardStructureVersion();
+		noOfControlActivityRecords = new NoOfControlActivityRecords();
 	}
 
 	/**
@@ -64,8 +72,8 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 */
 	public ControlCardApplicationIdentification( byte[] value ) {
 		typeOfTachographCardId = new EquipmentType( value[ 0 ] );
-		cardStructureVersion = arrayCopy( value, 1, 2 );
-		noOfControlActivityRecords = convertIntoUnsigned2ByteInt( arrayCopy( value, 3, 2 ) );
+		cardStructureVersion = new CardStructureVersion( arrayCopy( value, 1, 2 ) );
+		noOfControlActivityRecords = new NoOfControlActivityRecords( arrayCopy( value, 3, 2 ) );
 	}
 
 	/**
@@ -94,7 +102,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @return	the version of the structure that is implemented in the card
 	 * 			of the ControlCardApplicationIdentification object
 	 */
-	public byte[] getCardStructureVersion() {
+	public CardStructureVersion getCardStructureVersion() {
 		return cardStructureVersion;
 	}
 
@@ -105,8 +113,8 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @param	cardStructureVersion	the version of the structure that is implemented in the card
 	 * 									to be set for the ControlCardApplicationIdentification object
 	 */
-	public void setCardStructureVersion( byte[] cardStructureVersion ) {
-		this.cardStructureVersion = arrayCopy( cardStructureVersion, 0, 2 );
+	public void setCardStructureVersion( CardStructureVersion cardStructureVersion ) {
+		this.cardStructureVersion = cardStructureVersion;
 	}
 
 	/**
@@ -116,7 +124,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @return	the number of company activity records the card can store
 	 * 			of the ControlCardApplicationIdentification object
 	 */
-	public int getNoOfControlActivityRecords() {
+	public NoOfControlActivityRecords getNoOfControlActivityRecords() {
 		return noOfControlActivityRecords;
 	}
 
@@ -127,7 +135,7 @@ public class ControlCardApplicationIdentification extends DataClass {
 	 * @param	noOfControlActivityRecords	the number of company activity records the card can store
 	 * 										to be set for the ControlCardApplicationIdentification object
 	 */
-	public void setNoOfControlActivityRecords( int noOfControlActivityRecords ) {
+	public void setNoOfControlActivityRecords( NoOfControlActivityRecords noOfControlActivityRecords ) {
 		this.noOfControlActivityRecords = noOfControlActivityRecords;
 	}
 
@@ -136,8 +144,8 @@ public class ControlCardApplicationIdentification extends DataClass {
 		Element node = new Element( name );
 
 		node.addContent( typeOfTachographCardId.generateXMLElement( "typeOfTachographCardId" ) );
-		node.addContent( new Element( "cardStructureVersion" ).setText( new String( cardStructureVersion ) ) );
-		node.addContent( new Element( "noOfControlActivityRecords" ).setText( Integer.toString( noOfControlActivityRecords ) ) );
+		node.addContent( cardStructureVersion.generateXMLElement( "cardStructureVersion" ) );
+		node.addContent( noOfControlActivityRecords.generateXMLElement( "noOfControlActivityRecords" ) );
 
 		return node;
 	}

@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +33,12 @@ public class TyreSize extends DataClass {
 	 * Value assignment: in accordance with Directive 92/23 (EEC) 31.3.1992,
 	 * OJ L129, p. 95
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 15;
+
 	private String tyreSize;
 
 
@@ -87,6 +95,11 @@ public class TyreSize extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( tyreSize );
+		if ( isValidXMLString( tyreSize ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( tyreSize );
+		}
 	}
 }

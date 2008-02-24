@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,7 +21,7 @@
 package org.digitalertachograph.DDDQuery.internalData.Security;
 
 /**
- * The ByteArrayTools class provides methods to convert
+ * The SecurityByteArrayTools class provides methods to convert
  * byte arrays to hex strings and vice versa.
  */
 public class SecurityByteArrayTools {

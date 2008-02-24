@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +23,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
-/*
+/**
  * A unique identifier of a Public Key used to reference and select the key.
  * It also identifies the holder of the key.
  */
@@ -42,6 +45,10 @@ public class KeyIdentifier extends DataClass {
 	 * The third choice is suitable to reference the public key of a Member State.
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 8;
 
 	private short kidType;
 

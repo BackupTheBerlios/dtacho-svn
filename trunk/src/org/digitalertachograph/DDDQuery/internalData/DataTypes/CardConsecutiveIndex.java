@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +33,11 @@ public class CardConsecutiveIndex extends DataClass {
 	 * Value assignment: (see Annex Chapter VII)
 	 * Order for increase: "0..9, A..Z, a..z"
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
 
 	private String cardConsecutiveIndex;
 
@@ -87,6 +95,11 @@ public class CardConsecutiveIndex extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( cardConsecutiveIndex );
+		if ( isValidXMLString( cardConsecutiveIndex ) == false ) {
+			return new Element( name );
+		}
+		else {
+			return new Element( name ).setText( cardConsecutiveIndex );
+		}
 	}
 }

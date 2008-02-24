@@ -1,4 +1,6 @@
 org.digitalertachograph.DDDQuery
 org.digitalertachograph.DDDQuery.internalData
+org.digitalertachograph.DDDQuery.internalData.Cards
 org.digitalertachograph.DDDQuery.internalData.DataTypes
 org.digitalertachograph.DDDQuery.internalData.Security
+org.digitalertachograph.DDDQuery.internalData.VehicleUnit

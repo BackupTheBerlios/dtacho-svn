@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -40,6 +43,12 @@ public class WorkshopCardCalibrationData extends DataClass {
 	 * max.: 255
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 * Only valid after instantiation of the WorkshopCardCalibrationData object.
+	 */
+	public final int size;
+
 	private int calibrationTotalNumber;
 	private int calibrationPointerNewestRecord;
 
@@ -57,9 +66,10 @@ public class WorkshopCardCalibrationData extends DataClass {
 	public WorkshopCardCalibrationData( byte[] value, short noOfCalibrationRecords ) {
 		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 2 ] );
+		size = 3 + calibrationTotalNumber * WorkshopCardCalibrationRecord.size;
 		
 		for ( int i = 0; i < noOfCalibrationRecords; i += 1 ) {
-			byte[] record = arrayCopy( value, 3 + ( i * 105 ), 105 );
+			byte[] record = arrayCopy( value, 3 + ( i * WorkshopCardCalibrationRecord.size ), WorkshopCardCalibrationRecord.size );
 			WorkshopCardCalibrationRecord tmp = new WorkshopCardCalibrationRecord( record );
 			calibrationRecords.add( tmp );
 		}
@@ -102,7 +112,6 @@ public class WorkshopCardCalibrationData extends DataClass {
 		Element node = new Element( name );
 
 		node.addContent( new Element( "calibrationTotalNumber" ).setText( Integer.toString( calibrationTotalNumber ) ) );
-		node.addContent( new Element( "calibrationPointerNewestRecord" ).setText( Integer.toString( calibrationPointerNewestRecord ) ) );
 
 		Iterator<WorkshopCardCalibrationRecord> it = calibrationRecords.iterator();
 		while ( it.hasNext() ) {

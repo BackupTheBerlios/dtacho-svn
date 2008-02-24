@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,6 +34,11 @@ public class HolderName extends DataClass {
 	 * }
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 72;
+
 	private Name holderSurname;
 	private Name holderFirstNames;
 	
@@ -55,7 +63,7 @@ public class HolderName extends DataClass {
 		holderSurname = new Name( arrayCopy( value, 0, 36 ) );
 		holderFirstNames = new Name( arrayCopy( value, 36, 36 ) );
 	}
-	
+
 	/**
 	 * Returns the surname (family name) of the holder of a HolderName object.
 	 * 

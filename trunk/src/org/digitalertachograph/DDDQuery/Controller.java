@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,26 +29,33 @@ import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServer;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
-import org.digitalertachograph.DDDQuery.internalData.TachographData;
 
 
 public class Controller {
 	private static Controller self;
 	private boolean anonymized = false;
-
+	private static DebugLogger debugLogger;
+	
 	public boolean isAnonymized() {
 		return anonymized;
 	}
 
 	public static void main ( String[] args ) {
+		debugLogger = new DebugLogger();
+
+		DebugLogger.InitEnv();
+		//DebugLogger.printStream = System.out;
+		//DebugLogger.logLevel = DebugLogger.LOGLEVEL_NOTHING;
+
 		Controller c = Controller.getInstance();
 		c.setupWebserver();
 		//c.manual();
 		for ( int i = 0; i < args.length; i++ ) {
+			debugLogger.resetPrintDelayed();
 			c.process( args[ i ] );
 		}
 
-		System.out.println( "done!" );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] done!" );
 		System.exit(0);
 	}
 
@@ -53,12 +63,12 @@ public class Controller {
 		if ( self == null ) {
 			self = new Controller();
 		}
-			
-		return self;	
+
+		return self;
 	}
 
 	private Controller() {
-		super();
+
 	}
 
 	public static void sendXML( String xml ) {
@@ -89,39 +99,55 @@ public class Controller {
 
 		process( org_file1 );
 		process( org_file2 );
-
 	}
 
 	public void process( String file ) {
-		System.out.println( "\n" + file + "\n" );	
+		debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "\n" + file + "\n", true );
+
 		DDDDataSource ds = new DDDDataSource();
 		ds.setSourceFile( file );
+
 		if ( ds.processSourceFile() == true ) {
-			TachographData td1 = ds.getTachographData();
-			System.out.println( "dumping XML..." );
-			td1.setDDDFileName( file );
-			td1.generateXML( file + ".xml" );	
+			XMLDumper xmld = ds.getXMLDumper();
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] dumping XML..." );
+
+			XMLInfo xmli = new XMLInfo();
+			xmli.setSourceFilename( file );
+			xmld.setXMLInfo( xmli );
+
+			xmld.generateXML( file + ".xml" );	
 		}
 		else {
-			System.out.println( "there was an error while parsing data" );
-			System.out.println( "NOT dumping XML!" );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO | DebugLogger.LOGLEVEL_ERROR, "[ERROR] there was an error while parsing data" );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO | DebugLogger.LOGLEVEL_ERROR, "[ERROR] NOT dumping XML!" );
 		}
 	}
 
-	public String process( byte[] data ) {
+	/**
+	 * 
+	 * @param data			byte array of DDD data
+	 * @param srcType		the type of DDD data ({@link DDDDataSource#SRC_TYPE_CARD}, {@link DDDDataSource#SRC_TYPE_VU})
+	 * @return				the parsed DDD data as XML stream
+	 */
+	public String process( byte[] data, short srcType ) {
 		DDDDataSource ds = new DDDDataSource();
-		for ( int i = 0; i< data.length; i++ )
-			System.out.print( (char)data[ i ] );
 
+		for ( int i = 0; i< data.length; i++ )
+			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, (char)data[ i ] );
+
+		ds.setSrcType( srcType );
 		ds.setSource( data );
+
 		if ( ds.processSource() == true ) {
-			TachographData td = ds.getTachographData();
-			String xml = td.generateXML();
-			// System.out.println("pre sendXML");
+			XMLDumper xmld = ds.getXMLDumper();
+
+			String xml = xmld.generateXML();
+			// System.out.println( "pre sendXML" );
 			sendXML( xml );
-			//	System.out.println("post sendXML");
+			//	System.out.println( "post sendXML" );
 			return xml;
 		}
+
 		return "";
 	}
 

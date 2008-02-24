@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +28,7 @@ import org.jdom.Element;
  */
 public class CardActivityLengthRange extends DataClass {
 	/* 
-	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
+	 * CardActivityLengthRange ::= INTEGER(0..2^16-1), 2 bytes
 	 *
 	 * driver card:
 	 * min.:  5544 bytes (28 days * 93 activity changes)
@@ -35,6 +38,11 @@ public class CardActivityLengthRange extends DataClass {
 	 * min.:   198 bytes (1 day * 93 activity changes)
 	 * max.:   492 bytes (1 day * 240 activity changes)
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 2;
 
 	private int cardActivityLengthRange;
 

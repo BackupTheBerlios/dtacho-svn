@@ -26,17 +26,25 @@ LICENSE
 dtacho is released under the GNU GENERAL PUBLIC LICENSE Version 2.
 
 
+
+
+FORMAT CONVERTER
+================
+
 STATUS
 ------
 
-The byte data to XML converter is written in Java. The status of dtacho is
-alpha. It may not work under all circumstances and may produce false or
-unexpected results.
+The format converter from byte data to XML is written in Java. The status of
+dtacho is alpha. It may not work under all circumstances and may produce false
+or unexpected results.
 
-16.12.2007
-Currently this software converts the data of DTCO driver card .DDD files
-(C_*.DDD) to XML files. The code was developed by Martin Barth in his diploma
-thesis. Development is continued by Gerald Schnabel.
+24.02.2008
+This software converts both the data of DTCO driver card .DDD files (C_*.DDD)
+and the data of vehicle unit .DDD files to XML files.
+
+The code for converting driver card .DDD files was developed by Martin Barth
+in his diploma thesis.and was extended by Gerald Schnabel to also convert the
+data of vehicle unit files.
 
 
 NOTES
@@ -45,7 +53,7 @@ NOTES
 This software depends on some additional components (jars) that can be found
 in the classes directory.
 
-The jars were obtained from the following sources:
+These jars were obtained from the following sources:
 
 * xmlrpc
 
@@ -80,6 +88,8 @@ To run the program you will need a recent Java Runtime Environment (JRE) 6.
 The syntax from command line is
 java -jar dtacho-yyyymmdd.jar <drivercardfile.DDD>
 
+For environment variables see chapter ENVIRONMENT.
+
 To have the data integrity of driver card files checked you need the
 European Public Key EC_PK.bin in the current directory or you have to set
 the environment variable EURPKPATH to the path where the key can be found.
@@ -89,7 +99,7 @@ See section THE EUROPEAN PUBLIC KEY.
 
 Examples:
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
  C_driver_card.DDD
 
  This will read the driver card file C_driver_card.DDD, print some (debug)
@@ -98,15 +108,11 @@ Examples:
 
  Multiple files/wildcards are supported via command line, e.g.
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -jar dtacho-20080122.jar \
  C_*.DDD
 
  will convert all driver card files (C_*.DDD) in the current directory
  to XML files.
-
-
- NOTE: currently only driver card files (C_*.DDD) are supported! See
-       chapter STATUS.
 
 
 2. Build from latest source from SVN repository
@@ -134,6 +140,8 @@ Examples:
 
 
 -Running the program
+
+ For environment variables see chapter ENVIRONMENT.
 
  If you have compiled the source as described above you are already in the
  correct directory.
@@ -182,8 +190,31 @@ Examples:
  to XML files.
 
 
- NOTE: currently only driver card files (C_*.DDD) are supported! See
-       chapter STATUS.
+ENVIRONMENT
+-----------
+
+-DEBUGLOGLEVEL:
+ The level for debug messages.
+ Standard is ERROR.
+ The following levels, from the lowset to the highest, are possible:
+ NOTHING > ERROR > INFO > INFO_EXTENDED > ALL
+
+ NOTHING: no debug messages
+ ERROR: only output messages when there was an error
+ INFO: output info messages
+ INFO_EXTENDED: output extended info messages
+ ALL: output all messages
+
+ A selected level includes all levels below!
+
+-DEBUGPRINTSTREAM:
+ Stream, where the debug messages are put.
+ Standard is the standard output (System.out, stdout).
+ Otherwise the debug messages are put in the file given by this environment
+ variable.
+
+-EURPKPATH:
+ Path to the European Public Key, see chapter THE EUROPEAN PUBLIC KEY.
 
 
 THE EUROPEAN PUBLIC KEY

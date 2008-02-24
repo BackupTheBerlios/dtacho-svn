@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -61,6 +64,12 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 	 * ---
 	 * SensorSerialNumber ::= ExtendedSerialNumber:
 	 */
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 105;
+
 	private CalibrationPurpose calibrationPurpose;
 	private VehicleIdentificationNumber vehicleIdentificationNumber;
 	private VehicleRegistrationIdentification vehicleRegistration;
@@ -115,7 +124,7 @@ public class WorkshopCardCalibrationRecord extends DataClass {
 		kConstantOfRecordingEquipment = new K_ConstantOfRecordingEquipment( arrayCopy( value, 35, 2 ) );
 		lTyreCircumference = new L_TyreCircumference( arrayCopy( value, 37, 2 ) );
 		tyreSize = new TyreSize( arrayCopy( value, 39, 15 ) );
-		authorisedSpeed = new SpeedAuthorised( value[54] );
+		authorisedSpeed = new SpeedAuthorised( value[ 54 ] );
 		oldOdometerValue = new OdometerShort( arrayCopy( value, 55, 3 ) );
 		newOdometerValue = new OdometerShort( arrayCopy( value, 58, 3 ) );
 		oldTimeValue = new TimeReal( arrayCopy( value, 61, 4 ) );

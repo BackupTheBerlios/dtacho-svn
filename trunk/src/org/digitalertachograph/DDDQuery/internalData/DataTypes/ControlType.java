@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -48,17 +51,37 @@ public class ControlType extends DataClass {
 	 * 00010000 = 0x10
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 1;
+
 	private byte controlType;
-	
-	private boolean card_downloading = false;
+
+	/*
+	 * Control type: card downloading mask
+	 */
 	private static final byte CARD_DOWNLOADING_MASK = (byte)0x80;
-	private boolean vu_downloading = false;
+	private boolean card_downloading = false;
+
+	/*
+	 * Control type: VU downloading mask
+	 */
 	private static final byte VU_DOWNLOADING_MASK = (byte)0x40;
-	private boolean printing = false;
+	private boolean vu_downloading = false;
+
+	/*
+	 * Control type: printing mask
+	 */
 	private static final byte PRINTING_MASK = (byte)0x20;
-	private boolean display = false;
+	private boolean printing = false;
+
+	/*
+	 * Control type: card display mask
+	 */
 	private static final byte DISPLAY_MASK = (byte)0x10;
-		
+	private boolean display = false;
+
 
 	/**
 	 * Constructor for a ControlType object
@@ -70,11 +93,22 @@ public class ControlType extends DataClass {
 	/**
 	 * Constructor for a ControlType object
 	 * 
-	 * @param	value	byte that contains the code indicating the activities carried out during
-	 * 					a control.
+	 * @param	value	byte array of a ControlType structure
+	 * 					whose data is used when the ControlType
+	 * 					object is created.
 	 */
-	public ControlType( byte value ) {
-		this.setControlType( value );
+	public ControlType( byte[] value ) {
+		this.setControlType( value[ 0 ] );
+	}
+
+	/**
+	 * Constructor for a ControlType object
+	 * 
+	 * @param	controlType		byte that contains the code indicating the activities carried out during
+	 * 							a control.
+	 */
+	public ControlType( byte controlType ) {
+		this.setControlType( controlType );
 	}
 
 	/**
@@ -97,7 +131,7 @@ public class ControlType extends DataClass {
 	 */
 	public void setControlType( byte controlType ) {
 		this.controlType = controlType;
-		
+
 		card_downloading = ( ( controlType & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
 		vu_downloading = ( ( controlType & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
 		printing = ( ( controlType & PRINTING_MASK ) == PRINTING_MASK );

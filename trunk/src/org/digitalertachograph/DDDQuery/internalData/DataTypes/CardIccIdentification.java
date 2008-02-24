@@ -1,4 +1,7 @@
-/*   Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -44,7 +47,12 @@ public class CardIccIdentification extends DataClass {
 	 * ---
 	 * CardApprovalNumber ::= IA5String(SIZE(8))
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 25;
+
 	private byte clockStop;
 	private ExtendedSerialNumber cardExtendedSerialNumber;
 	private CardApprovalNumber cardApprovalNumber;
@@ -213,7 +221,7 @@ public class CardIccIdentification extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "clockStop" ).setText( Byte.toString( clockStop ) ) );
+		node.addContent( new Element( "clockStop" ).setText( convertIntoHexString( clockStop ) ) );
 		node.addContent( cardExtendedSerialNumber.generateXMLElement( "cardExtendedSerialNumber" ) );
 		node.addContent( cardApprovalNumber.generateXMLElement( "cardApprovalNumber" ) );
 		node.addContent( new Element( "cardPersonaliserID" ).setText( convertIntoHexString( cardPersonaliserID ) ) );

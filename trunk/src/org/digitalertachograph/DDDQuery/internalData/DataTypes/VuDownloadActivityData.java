@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +35,11 @@ public class VuDownloadActivityData extends DataClass {
 	 * }
 	 */
 
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 40;
+
 	private TimeReal downloadingTime;
 	private FullCardNumber fullCardNumber;
 	private Name companyOrWorkshopName;
@@ -56,7 +64,7 @@ public class VuDownloadActivityData extends DataClass {
 	public VuDownloadActivityData( byte[] value ) {
 		downloadingTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 		fullCardNumber = new FullCardNumber( arrayCopy( value, 4, 18 ) );
-		companyOrWorkshopName = new Name( arrayCopy( value, 22, 18 ) );
+		companyOrWorkshopName = new Name( arrayCopy( value, 22, 36 ) );
 	}
 
 	/**

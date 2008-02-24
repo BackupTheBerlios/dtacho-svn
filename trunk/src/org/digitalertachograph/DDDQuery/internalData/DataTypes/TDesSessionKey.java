@@ -1,4 +1,7 @@
-/*   Copyright (C) 2008, Gerald Schnabel
+/*
+    $Id$
+
+    Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -29,7 +32,12 @@ public class TDesSessionKey extends DataClass {
 	 *  	tDesKeyA OCTET STRING(SIZE(8)), 8 bytes
 	 *  	tDesKeyB OCTET STRING(SIZE(8)), 8 bytes
 	 */
-	
+
+	/**
+	 * Size of structure in bytes.
+	 */
+	public final static int size = 16;
+
 	private byte[] tDesKeyA;
 	private byte[] tDesKeyB;
 	
