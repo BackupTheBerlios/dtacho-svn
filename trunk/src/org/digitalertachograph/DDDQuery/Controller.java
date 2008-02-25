@@ -44,8 +44,6 @@ public class Controller {
 		debugLogger = new DebugLogger();
 
 		DebugLogger.InitEnv();
-		//DebugLogger.printStream = System.out;
-		//DebugLogger.logLevel = DebugLogger.LOGLEVEL_NOTHING;
 
 		Controller c = Controller.getInstance();
 		c.setupWebserver();
@@ -53,10 +51,10 @@ public class Controller {
 		for ( int i = 0; i < args.length; i++ ) {
 			debugLogger.resetPrintDelayed();
 			c.process( args[ i ] );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] done!" );
-		System.exit(0);
+		System.exit( 0 );
 	}
 
 	public static Controller getInstance(){
@@ -118,8 +116,8 @@ public class Controller {
 			xmld.generateXML( file + ".xml" );	
 		}
 		else {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO | DebugLogger.LOGLEVEL_ERROR, "[ERROR] there was an error while parsing data" );
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO | DebugLogger.LOGLEVEL_ERROR, "[ERROR] NOT dumping XML!" );
+			debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] there was an error while parsing data" );
+			debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] NOT dumping XML!" );
 		}
 	}
 
@@ -132,8 +130,9 @@ public class Controller {
 	public String process( byte[] data, short srcType ) {
 		DDDDataSource ds = new DDDDataSource();
 
-		for ( int i = 0; i< data.length; i++ )
+		for ( int i = 0; i< data.length; i++ ) {
 			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, (char)data[ i ] );
+		}
 
 		ds.setSrcType( srcType );
 		ds.setSource( data );
@@ -148,7 +147,7 @@ public class Controller {
 			return xml;
 		}
 
-		return "";
+		return null;
 	}
 
 	public void setupWebserver() {

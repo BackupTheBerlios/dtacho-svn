@@ -121,10 +121,12 @@ public class CardDriverActivity extends DataClass {
 
 			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength();
 			cadrActivityRecordLength = cadr.getActivityRecordLength();
-			
-			// break when empty CardActivityDailyRecord is found
-			if ( cadrActivityRecordLength == 0 )
+
+			// break loop when empty CardActivityDailyRecord is found
+			// = when default values for structure is used
+			if ( cadrActivityRecordLength == 0 ) {
 				break;
+			}
 
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {

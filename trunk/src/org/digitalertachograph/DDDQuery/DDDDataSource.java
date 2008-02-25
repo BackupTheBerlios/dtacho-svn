@@ -226,6 +226,7 @@ public class DDDDataSource implements DataSource {
 
 				if ( cardData.invalidDataFound() == true ) {
 					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
+					return false;
 				}
 
 				return true;
@@ -464,6 +465,7 @@ public class DDDDataSource implements DataSource {
 
 				if ( vehicleUnitData.invalidDataFound() == true ) {
 					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
+					return false;
 				}
 
 				return true;
