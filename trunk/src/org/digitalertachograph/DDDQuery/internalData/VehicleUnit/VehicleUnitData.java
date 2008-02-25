@@ -205,7 +205,7 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 								}
 							}
 							else {
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] Vehicle Unit certificate is invalid" );
+								debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] Vehicle Unit certificate is invalid" );
 								invalid_data_found = true;
 							}
 						}

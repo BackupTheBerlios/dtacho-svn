@@ -402,7 +402,7 @@ public class CardData extends DTCODataClass implements XMLDumper {
 										}
 									}
 									else {
-										debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] Card certificate is invalid" );
+										debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] Card certificate is invalid" );
 										invalid_data_found = true;
 									}
 								}
