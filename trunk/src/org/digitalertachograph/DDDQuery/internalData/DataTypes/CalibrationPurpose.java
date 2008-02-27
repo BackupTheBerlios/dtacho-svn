@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:CalibrationPurpose.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -98,6 +98,6 @@ public class CalibrationPurpose extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( Byte.toString( calibrationPurpose ) );
+		return new Element( name ).setText( convertIntoHexString( calibrationPurpose ) );
 	}
 }

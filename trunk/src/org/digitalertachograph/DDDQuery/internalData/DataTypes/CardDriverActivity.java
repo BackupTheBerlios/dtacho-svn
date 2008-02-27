@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:CardDriverActivity.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -119,8 +119,8 @@ public class CardDriverActivity extends DataClass {
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
 			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy( records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy( records, cardActivityDailyRecordsOffset + 2, 2 ) ) ) );
 
-			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength();
-			cadrActivityRecordLength = cadr.getActivityRecordLength();
+			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength().getCardActivityLengthRange();
+			cadrActivityRecordLength = cadr.getActivityRecordLength().getCardActivityLengthRange();
 
 			// break loop when empty CardActivityDailyRecord is found
 			// = when default values for structure is used

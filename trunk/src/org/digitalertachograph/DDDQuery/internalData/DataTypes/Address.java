@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:Address.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -124,9 +124,9 @@ public class Address extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "codePage" ).setText( Integer.toString( codePage ) ) );
+		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage ) ) );
 		node.addContent( new Element( "address" ).setText( convertIntoHexString( address ) ) );
-		
+
 		return node;
 	}
 }

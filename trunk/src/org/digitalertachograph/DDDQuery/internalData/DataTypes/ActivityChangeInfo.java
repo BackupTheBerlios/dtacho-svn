@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:ActivityChangeInfo.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -43,6 +43,8 @@ public class ActivityChangeInfo extends DataClass {
 	 * Size of structure in bytes.
 	 */
 	public final static int size = 2;
+
+	private byte[] value;
 
 	private boolean slot;
 	private static final byte SLOT_MASK = (byte)0x80;
@@ -127,8 +129,6 @@ public class ActivityChangeInfo extends DataClass {
 	private int time;
 	private static final byte TIME_UPPERBYTE_MASK = (byte)0x07;
 	private static final byte TIME_LOWERBYTE_MASK = (byte)0xff;
-	
-	private byte[] value;
 
 
 	/**

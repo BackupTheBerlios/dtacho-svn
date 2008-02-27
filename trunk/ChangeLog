@@ -1,3 +1,8 @@
+2008-02-27
+-new classes:
+ -DailyPresenceCounter
+
+
 2008-02-25
 -don't dump XML if there was a problem with certificates/data/signatures
 

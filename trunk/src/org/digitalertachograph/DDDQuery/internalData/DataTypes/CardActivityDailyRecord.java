@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:CardActivityDailyRecord.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -62,10 +62,10 @@ public class CardActivityDailyRecord extends DataClass {
 	 */
 	public final int size;
 
-	private int activityPreviousRecordLength;
-	private int activityRecordLength;
+	private CardActivityLengthRange activityPreviousRecordLength;
+	private CardActivityLengthRange activityRecordLength;
 	private TimeReal activityRecordDate;
-	private byte[] activityDailyPresenceCounter;
+	private DailyPresenceCounter activityDailyPresenceCounter;
 	private Distance activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 
@@ -90,16 +90,16 @@ public class CardActivityDailyRecord extends DataClass {
 			return;
 		}
 
-		this.activityPreviousRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
-		this.activityRecordLength = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) );
+		this.activityPreviousRecordLength = new CardActivityLengthRange( arrayCopy( value, 0, 2 ) );
+		this.activityRecordLength = new CardActivityLengthRange( arrayCopy( value, 2, 2 ) );
 		this.activityRecordDate = new TimeReal( arrayCopy( value, 4, 4 ) );
-		this.activityDailyPresenceCounter = arrayCopy( value, 8, 2 );
+		this.activityDailyPresenceCounter = new DailyPresenceCounter( arrayCopy( value, 8, 2 ) );
 		this.activityDayDistance = new Distance( arrayCopy( value, 10, 2 ) );
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength - 12 ) / ActivityChangeInfo.size );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength.getCardActivityLengthRange() - 12 ) / ActivityChangeInfo.size );
 
-		for ( int length = 12; length < activityRecordLength; length += ActivityChangeInfo.size ) {
+		for ( int length = 12; length < activityRecordLength.getCardActivityLengthRange(); length += ActivityChangeInfo.size ) {
 			// ActivityChangeInfo <- 2 bytes
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, ActivityChangeInfo.size ) );
 			activityChangeInfo.add( aci );
@@ -132,7 +132,7 @@ public class CardActivityDailyRecord extends DataClass {
 
 		this.complete = true;
 
-		size = 12 + activityRecordLength;
+		size = 12 + activityRecordLength.getCardActivityLengthRange();
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 
 	 * @return			length (number of bytes) of the previous CardActivityDailyRecord
 	 */
-	public int getActivityPreviousRecordLength() {
+	public CardActivityLengthRange getActivityPreviousRecordLength() {
 		return activityPreviousRecordLength;
 	}
 
@@ -158,7 +158,7 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 
 	 * @return			length (number of bytes) of this CardActivityDailyRecord
 	 */
-	public int getActivityRecordLength() {
+	public CardActivityLengthRange getActivityRecordLength() {
 		return activityRecordLength;
 	}
 
@@ -166,10 +166,10 @@ public class CardActivityDailyRecord extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "activityPreviousRecordLength" ).setText( Integer.toString( activityPreviousRecordLength ) ) );
-		node.addContent( new Element( "activityRecordLength" ).setText( Integer.toString( activityRecordLength ) ) );
+		node.addContent( activityPreviousRecordLength.generateXMLElement( "activityPreviousRecordLength" ) );
+		node.addContent( activityRecordLength.generateXMLElement( "activityRecordLength" ) );
 		node.addContent( activityRecordDate.generateXMLElement( "activityRecordDate" ) );
-		node.addContent( new Element( "activityDailyPresenceCounter" ).setText( convertBCDStringIntoString( activityDailyPresenceCounter ) ) );
+		node.addContent( activityDailyPresenceCounter.generateXMLElement( "activityDailyPresenceCounter" ) );
 		node.addContent( activityDayDistance.generateXMLElement( "activityDayDistance" ) );
 
 		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();

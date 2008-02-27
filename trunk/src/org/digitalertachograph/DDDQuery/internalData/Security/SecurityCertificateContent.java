@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:SecurityCertificateContent.java 26 2008-02-25 22:28:27Z deetee $
 
     Copyright (C) 2008, Gerald Schnabel
 
