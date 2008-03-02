@@ -1,5 +1,9 @@
+2008-03-02
+-bug fixes
+
+
 2008-02-27
--new classes:
+-new class:
  -DailyPresenceCounter
 
 
@@ -36,7 +40,7 @@
 
 
 2008-02-16
--new classes:
+-new class:
  -VuTimeAdjustmentRecord
 
 

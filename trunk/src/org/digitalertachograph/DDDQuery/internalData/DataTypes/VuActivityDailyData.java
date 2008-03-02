@@ -48,7 +48,7 @@ public class VuActivityDailyData extends DataClass {
 	public final int size;
 
 	private int noOfActivityChanges;
-	
+
 	// create min. 720 vectors; will be automatically expanded at run time if required!
 	private Vector<ActivityChangeInfo> activityChangeInfos = new Vector<ActivityChangeInfo>( 720 );
 
@@ -66,7 +66,7 @@ public class VuActivityDailyData extends DataClass {
 
 		if ( noOfActivityChanges != 0 ) {
 			for ( int i = 0; i < noOfActivityChanges; i++ ) {
-				byte[] record = arrayCopy( value, 2 + ( i * 2 ), 2 );
+				byte[] record = arrayCopy( value, 2 + ( i * ActivityChangeInfo.size ), ActivityChangeInfo.size );
 				ActivityChangeInfo tmp = new ActivityChangeInfo( record );
 				activityChangeInfos.add( tmp );
 			}

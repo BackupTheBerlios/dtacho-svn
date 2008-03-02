@@ -50,7 +50,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 	public final int size;
 
 	private int calibrationTotalNumber;
-	private int calibrationPointerNewestRecord;
+	private short calibrationPointerNewestRecord;
 
 	// create min. 88 vectors; will be automatically expanded at run time if required!
 	private Vector<WorkshopCardCalibrationRecord> calibrationRecords = new Vector<WorkshopCardCalibrationRecord>(88);
@@ -67,7 +67,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 2 ] );
 		size = 3 + calibrationTotalNumber * WorkshopCardCalibrationRecord.size;
-		
+
 		for ( int i = 0; i < noOfCalibrationRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 3 + ( i * WorkshopCardCalibrationRecord.size ), WorkshopCardCalibrationRecord.size );
 			WorkshopCardCalibrationRecord tmp = new WorkshopCardCalibrationRecord( record );

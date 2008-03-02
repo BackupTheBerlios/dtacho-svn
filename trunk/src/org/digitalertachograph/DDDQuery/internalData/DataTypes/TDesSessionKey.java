@@ -40,7 +40,7 @@ public class TDesSessionKey extends DataClass {
 
 	private byte[] tDesKeyA;
 	private byte[] tDesKeyB;
-	
+
 	/**
 	 * Constructor for a TDesSessionKey object
 	 */

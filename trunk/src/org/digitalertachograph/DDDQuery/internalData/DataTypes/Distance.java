@@ -42,7 +42,7 @@ public class Distance extends DataClass {
 
 	private int distance;
 
-	
+
 	/**
 	 * Constructor for a Distance object
 	 */

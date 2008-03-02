@@ -46,7 +46,7 @@ public class CardActivityLengthRange extends DataClass {
 
 	private int cardActivityLengthRange;
 
-	
+
 	/**
 	 * Constructor for a CardActivityLengthRange object
 	 */

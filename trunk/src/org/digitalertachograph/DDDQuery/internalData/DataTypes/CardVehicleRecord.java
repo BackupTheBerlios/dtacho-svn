@@ -47,8 +47,8 @@ public class CardVehicleRecord extends DataClass {
 	 */
 	public final static int size = 31;
 
-	private int vehicleOdometerBegin;
-	private int vehicleOdometerEnd;
+	private OdometerShort vehicleOdometerBegin;
+	private OdometerShort vehicleOdometerEnd;
 	private TimeReal vehicleFirstUse;
 	private TimeReal vehicleLastUse;
 	private VehicleRegistrationIdentification vehicleRegistration;
@@ -61,8 +61,8 @@ public class CardVehicleRecord extends DataClass {
 	 * Constructor for a CardVehicleRecord object
 	 */
 	public CardVehicleRecord() {
-		vehicleOdometerBegin = 0;
-		vehicleOdometerEnd = 0;
+		vehicleOdometerBegin = new OdometerShort();
+		vehicleOdometerEnd = new OdometerShort();
 		vehicleFirstUse = new TimeReal();
 		vehicleLastUse = new TimeReal();
 		vehicleRegistration = new VehicleRegistrationIdentification();
@@ -79,8 +79,8 @@ public class CardVehicleRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public CardVehicleRecord( byte[] value ) {
-		vehicleOdometerBegin = convertIntoUnsigned3ByteInt( arrayCopy( value, 0, 3 ) );
-		vehicleOdometerEnd = convertIntoUnsigned3ByteInt( arrayCopy( value, 3, 3 ) );
+		vehicleOdometerBegin = new OdometerShort( arrayCopy( value, 0, 3 ) );
+		vehicleOdometerEnd = new OdometerShort( arrayCopy( value, 3, 3 ) );
 		vehicleFirstUse = new TimeReal( arrayCopy( value, 6, 4 ) );
 		vehicleLastUse = new TimeReal( arrayCopy( value, 10, 4) );
 		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 14, 15 ) );
@@ -108,7 +108,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @return	the vehicle odometer value at the beginning of the period of use of the vehicle
 	 * 			of the CardVehicleRecord object
 	 */
-	public int getVehicleOdometerBegin() {
+	public OdometerShort getVehicleOdometerBegin() {
 		return vehicleOdometerBegin;
 	}
 
@@ -119,7 +119,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleOdometerBegin	the vehicle odometer value at the beginning of the period
 	 * 									of use of the vehicle to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleOdometerBegin( int vehicleOdometerBegin ) {
+	public void setVehicleOdometerBegin( OdometerShort vehicleOdometerBegin ) {
 		this.vehicleOdometerBegin = vehicleOdometerBegin;
 	}
 
@@ -130,7 +130,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @return	the vehicle odometer value at the end of the period of use of the vehicle
 	 * 			of the CardVehicleRecord object
 	 */
-	public int getVehicleOdometerEnd() {
+	public OdometerShort getVehicleOdometerEnd() {
 		return vehicleOdometerEnd;
 	}
 
@@ -141,7 +141,7 @@ public class CardVehicleRecord extends DataClass {
 	 * @param	vehicleOdometerEnd	the vehicle odometer value at the end of the period
 	 * 								of use of the vehicle to be set for the CardVehicleRecord object
 	 */
-	public void setVehicleOdometerEnd( int vehicleOdometerEnd ) {
+	public void setVehicleOdometerEnd( OdometerShort vehicleOdometerEnd ) {
 		this.vehicleOdometerEnd = vehicleOdometerEnd;
 	}
 
@@ -237,8 +237,8 @@ public class CardVehicleRecord extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "vehicleOdometerBegin" ).setText( Integer.toString( vehicleOdometerBegin ) ) );
-		node.addContent( new Element( "vehicleOdometerEnd" ).setText( Integer.toString( vehicleOdometerEnd ) ) );
+		node.addContent( vehicleOdometerBegin.generateXMLElement( "vehicleOdometerBegin" ) );
+		node.addContent( vehicleOdometerEnd.generateXMLElement( "vehicleOdometerEnd" ) );
 		node.addContent( vehicleFirstUse.generateXMLElement( "vehicleFirstUse" ) );
 		node.addContent( vehicleLastUse.generateXMLElement( "vehicleLastUse" ) );
 		node.addContent( vehicleRegistration.generateXMLElement( "vehicleRegistration" ) );

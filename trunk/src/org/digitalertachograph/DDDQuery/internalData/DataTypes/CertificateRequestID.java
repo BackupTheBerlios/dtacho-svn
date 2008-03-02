@@ -32,7 +32,7 @@ public class CertificateRequestID extends DataClass {
 	/*
 	 * CertificateRequestID ::= SEQUENCE {
 	 * 	requestSerialNumber INTEGER(0..2^32-1), 4 bytes
-	 * 	requestMonthYear BDCString(SIZE(2)), 2 bytes
+	 * 	requestMonthYear BCDString(SIZE(2)), 2 bytes
 	 * 	crIdentifier OCTET STRING(SIZE(1)), 1 byte
 	 * 	manufacturerCode ManufacturerCode, 1 byte
 	 * }
@@ -49,8 +49,8 @@ public class CertificateRequestID extends DataClass {
 	private byte[] requestMonthYear;
 	private byte crIdentifier;
 	private ManufacturerCode manufacturerCode;
-	
-	
+
+
 	/**
 	 * Constructor for a CertificateRequestID object
 	 */

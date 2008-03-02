@@ -41,7 +41,7 @@ public class W_VehicleCharacteristicConstant extends DataClass {
 
 	private int wVehicleCharacteristicConstant;
 
-	
+
 	/**
 	 * Constructor for a WVehicleCharacteristicConstant object
 	 */

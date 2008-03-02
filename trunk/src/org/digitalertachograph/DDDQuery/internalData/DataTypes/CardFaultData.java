@@ -65,12 +65,12 @@ public class CardFaultData extends DataClass {
 	 * 					whose data is used when the CardFaultData
 	 * 					object is created.
 	 */
-	public CardFaultData( byte[] value, short nooffaultspertype ) {
+	public CardFaultData( byte[] value, short noOfFaultsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of faults per type: " + nooffaultspertype );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of faults per type: " + noOfFaultsPerType );
 
-		size = 2 * nooffaultspertype * CardFaultRecord.size;
+		size = 2 * noOfFaultsPerType * CardFaultRecord.size;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
@@ -78,7 +78,7 @@ public class CardFaultData extends DataClass {
 			// max. NoOfFaultsPerType = 24
 			cardFaultRecords.add( new Vector<CardFaultRecord>( 24 ) );
 
-			for ( int i = ( nooffaultspertype * CardFaultRecord.size * j ); i < ( nooffaultspertype * CardFaultRecord.size * ( j + 1 ) ); i += CardFaultRecord.size ) {
+			for ( int i = ( noOfFaultsPerType * CardFaultRecord.size * j ); i < ( noOfFaultsPerType * CardFaultRecord.size * ( j + 1 ) ); i += CardFaultRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardFaultRecord.size );
 				CardFaultRecord tmp = new CardFaultRecord( record );
 

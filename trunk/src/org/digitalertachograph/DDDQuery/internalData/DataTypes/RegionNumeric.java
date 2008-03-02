@@ -58,7 +58,7 @@ public class RegionNumeric extends DataClass {
 
 	private byte regionNumeric;
 
-	
+
 	/**
 	 * Constructor for a RegionNumeric object
 	 */

@@ -56,7 +56,7 @@ public class ControlType extends DataClass {
 	 */
 	public final static int size = 1;
 
-	private byte controlType;
+	private byte value;
 
 	/*
 	 * Control type: card downloading mask
@@ -87,7 +87,7 @@ public class ControlType extends DataClass {
 	 * Constructor for a ControlType object
 	 */
 	public ControlType() {
-		controlType = 0;
+		value = 0;
 	}
 
 	/**
@@ -119,23 +119,23 @@ public class ControlType extends DataClass {
 	 * 			of the ControlType object
 	 */
 	public byte getControlType() {
-		return controlType;
+		return value;
 	}
 
 	/**
 	 * Sets the code indicating the activities carried out during a control
 	 * of a ControlType object.
 	 * 
-	 * @param	controlType		the code indicating the activities carried out during a control
+	 * @param	value			the code indicating the activities carried out during a control
 	 * 							to be set for the ControlType object
 	 */
-	public void setControlType( byte controlType ) {
-		this.controlType = controlType;
+	public void setControlType( byte value ) {
+		this.value = value;
 
-		card_downloading = ( ( controlType & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
-		vu_downloading = ( ( controlType & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
-		printing = ( ( controlType & PRINTING_MASK ) == PRINTING_MASK );
-		display = ( ( controlType & DISPLAY_MASK ) == DISPLAY_MASK );
+		card_downloading = ( ( value & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
+		vu_downloading = ( ( value & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
+		printing = ( ( value & PRINTING_MASK ) == PRINTING_MASK );
+		display = ( ( value & DISPLAY_MASK ) == DISPLAY_MASK );
 	}
 
 	/**
@@ -155,15 +155,15 @@ public class ControlType extends DataClass {
 	 */
 	public void setCardDownloading( boolean value ) {
 		if ( value == true ) {
-			this.controlType |= CARD_DOWNLOADING_MASK;
+			this.value |= CARD_DOWNLOADING_MASK;
 		}
 		else {
-			this.controlType &= ~CARD_DOWNLOADING_MASK;
+			this.value &= ~CARD_DOWNLOADING_MASK;
 		}
-		
-		card_downloading = ( ( controlType & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
+
+		card_downloading = ( ( this.value & CARD_DOWNLOADING_MASK ) == CARD_DOWNLOADING_MASK );
 	}
-	
+
 	/**
 	 * Returns the VU downloading status of a ControlType object.
 	 * 
@@ -172,7 +172,7 @@ public class ControlType extends DataClass {
 	public boolean isVuDownloading() {
 		return vu_downloading;
 	}
-	
+
 	/**
 	 * Sets the VU downloading status of a ControlType object.
 	 * 
@@ -181,13 +181,13 @@ public class ControlType extends DataClass {
 	 */
 	public void setVuDownloading( boolean value ) {
 		if ( value == true ) {
-			this.controlType |= VU_DOWNLOADING_MASK;
+			this.value |= VU_DOWNLOADING_MASK;
 		}
 		else {
-			this.controlType &= ~VU_DOWNLOADING_MASK;
+			this.value &= ~VU_DOWNLOADING_MASK;
 		}
 
-		vu_downloading = ( ( controlType & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
+		vu_downloading = ( ( this.value & VU_DOWNLOADING_MASK ) == VU_DOWNLOADING_MASK );
 	}
 	
 	/**
@@ -207,13 +207,13 @@ public class ControlType extends DataClass {
 	 */
 	public void setPrinting( boolean value ) {
 		if ( value == true ) {
-			this.controlType |= PRINTING_MASK;
+			this.value |= PRINTING_MASK;
 		}
 		else {
-			this.controlType &= ~PRINTING_MASK;
+			this.value &= ~PRINTING_MASK;
 		}
 
-		printing = ( ( controlType & PRINTING_MASK ) == PRINTING_MASK );
+		printing = ( ( this.value & PRINTING_MASK ) == PRINTING_MASK );
 	}
 	
 	/**
@@ -233,19 +233,20 @@ public class ControlType extends DataClass {
 	 */
 	public void setDisplay( boolean value ) {
 		if ( value == true ) {
-			this.controlType |= DISPLAY_MASK;
+			this.value |= DISPLAY_MASK;
 		}
 		else {
-			this.controlType &= ~DISPLAY_MASK;
+			this.value &= ~DISPLAY_MASK;
 		}
 
-		display = ( ( controlType & DISPLAY_MASK ) == DISPLAY_MASK );
+		display = ( ( this.value & DISPLAY_MASK ) == DISPLAY_MASK );
 	}
 	
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
+		node.addContent( new Element( "value" ).setText( convertIntoHexString( value ) ) );
 		node.addContent( new Element( "card_downloading" ).setText( Boolean.toString( card_downloading ) ) );
 		node.addContent( new Element( "vu_downloading" ).setText( Boolean.toString( vu_downloading ) ) );
 		node.addContent( new Element( "display" ).setText( Boolean.toString( display ) ) );

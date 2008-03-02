@@ -43,7 +43,7 @@ public class SpecificConditionType extends DataClass {
 	 */
 	public final static int size = 1;
 
-	private byte specificConditionType;
+	private short specificConditionType;
 
 	
 	/**
@@ -58,7 +58,7 @@ public class SpecificConditionType extends DataClass {
 	 * 
 	 * @param	specificConditionType	byte that identifies a specific condition.
 	 */
-	public SpecificConditionType( byte specificConditionType ) {
+	public SpecificConditionType( short specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
 
@@ -67,7 +67,7 @@ public class SpecificConditionType extends DataClass {
 	 * 
 	 * @return	the code identifying the specific condition of the SpecificConditionRecord object
 	 */
-	public byte getSpecificConditionType() {
+	public short getSpecificConditionType() {
 		return specificConditionType;
 	}
 
@@ -83,6 +83,6 @@ public class SpecificConditionType extends DataClass {
 	
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( Byte.toString( specificConditionType ) );
+		return new Element( name ).setText( Short.toString( specificConditionType ) );
 	}
 }

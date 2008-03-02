@@ -74,12 +74,12 @@ public class CardEventData extends DataClass{
 	 * 					whose data is used when the CardEventData
 	 * 					object is created.
 	 */
-	public CardEventData( byte[] value, short noofeventspertype ) {
+	public CardEventData( byte[] value, short noOfEventsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noofeventspertype );	
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noOfEventsPerType );	
 
-		size = 6 * noofeventspertype * CardEventRecord.size;
+		size = 6 * noOfEventsPerType * CardEventRecord.size;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
@@ -87,7 +87,7 @@ public class CardEventData extends DataClass{
 			// max. NoOfEventsPerType = 12
 			cardEventRecords.add( new Vector<CardEventRecord>( 12 ) );
 
-			for ( int i = ( noofeventspertype * CardEventRecord.size * j ); i < ( noofeventspertype * CardEventRecord.size * ( j + 1 ) ); i += CardEventRecord.size ) {
+			for ( int i = ( noOfEventsPerType * CardEventRecord.size * j ); i < ( noOfEventsPerType * CardEventRecord.size * ( j + 1 ) ); i += CardEventRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardEventRecord.size );
 				CardEventRecord tmp = new CardEventRecord( record );
 
@@ -134,7 +134,7 @@ public class CardEventData extends DataClass{
 		for ( int i = 0; i < sequencesize; i++ ) {
 			Element recordsnode = new Element( "cardEventRecords" );
 			node.addContent( recordsnode );
-			
+
 			Iterator<CardEventRecord> it = cardEventRecords.get( i ).iterator();
 			while ( it.hasNext() ) {
 				CardEventRecord cer = (CardEventRecord)it.next();

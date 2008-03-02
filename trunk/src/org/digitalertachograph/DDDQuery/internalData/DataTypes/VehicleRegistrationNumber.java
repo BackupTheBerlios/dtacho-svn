@@ -65,7 +65,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	public VehicleRegistrationNumber( byte[] value ) {
 		this( value[ 0 ], arrayCopy( value, 1, value.length - 1 ) );
 	}
-	
+
 	/**
 	 * Constructor for a VehicleRegistrationNumber object
 	 * 
@@ -143,5 +143,5 @@ public class VehicleRegistrationNumber extends DataClass {
 			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoHexString( vehicleRegNumber ) ) );
 		}
 		return node;
-	}	
+	}
 }
