@@ -128,7 +128,7 @@ public abstract class DTCODataClass extends DataClass {
 				ecPubKeyFIS.close();
 				ecPublicKeyAvailable = false;
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] EC public key not found. Will skip signature checks." );
-				
+
 				return ecPublicKeyAvailable;
 			}
 
@@ -139,9 +139,11 @@ public abstract class DTCODataClass extends DataClass {
 			caPublicKey = new SecurityCAPublicKey( ecPublicKey );
 			ecPubKeyModulus = caPublicKey.getPublicKeyModulusHexString();
 			ecPubKeyExponent = caPublicKey.getPublicKeyExponentHexString();
-			
+
 			ecPublicKeyAvailable = true;
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] EC public key found. Signatures will be checked." );
+
+			XMLInfo.setDataValidatedWithEURPK( true );
 
 			return ecPublicKeyAvailable;
 		}

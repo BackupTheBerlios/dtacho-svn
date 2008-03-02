@@ -2,6 +2,7 @@
 
 <!ELEMENT Info ( source )>
 <!ELEMENT source ( #PCDATA )>
+<!ELEMENT dataValidatedWithEURPK ( #PCDATA )>
 
 <!ELEMENT EF_ICC ( cardIccIdentification )>
 <!ELEMENT cardIccIdentification ( clockStop, cardExtendedSerialNumber, cardApprovalNumber, cardPersonaliserID, embedderIcAssemblerId, icIdentifier )>

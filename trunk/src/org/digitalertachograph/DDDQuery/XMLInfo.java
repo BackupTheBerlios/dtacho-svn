@@ -30,38 +30,60 @@ import org.jdom.Element;
  */
 public class XMLInfo extends DataClass {
 
-	private String sourceFilename;
+	private static String sourceFilename;
+	private static boolean dataValidatedWithEURPK;
 
 	/**
 	 * Constructor for a XMLInfo object.
 	 */
 	public XMLInfo() {
-		sourceFilename = new String();
+
 	}
 
 	/**
-	 * Returns the source file name of an XMLInfo object.
+	 * Returns the source file name of a XMLInfo object.
 	 * 
 	 * @return	the source file name of the XMLInfo object
 	 */
-	public String getSourceFilename() {
+	public static String getSourceFilename() {
 		return sourceFilename;
 	}
 
 	/**
-	 * Sets the source file name of an XMLInfo object.
+	 * Sets the source file name of a XMLInfo object.
 	 * 
-	 * @param	sourceFilename		the source file name to be set for the XMLInfo object
+	 * @param	sourceFile		the source file name to be set for the XMLInfo object
 	 */
-	public void setSourceFilename( String sourceFilename ) {
-		this. sourceFilename = sourceFilename;
+	public static void setSourceFilename( String sourceFile ) {
+		sourceFilename = sourceFile;
+	}
+
+	/**
+	 * Indicates if the data is validated with the European Public Key
+	 * of a XMLInfo object.
+	 * 
+	 * @return	true if the data is validated with the European Public Key
+	 */
+	public static boolean isDataValidatedWithEURPK() {
+		return dataValidatedWithEURPK;
+	}
+
+	/**
+	 * Sets the status of validating data with the European Public Key
+	 * of a XMLInfo object.
+	 * 
+	 * @param	dataValidated		the status of validating data with the European Public Key
+	 */
+	public static void setDataValidatedWithEURPK( boolean dataValidated ) {
+		dataValidatedWithEURPK = dataValidated;
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "source" ).setText( new File( this.sourceFilename ).getName() ) );
+		node.addContent( new Element( "source" ).setText( new File( sourceFilename ).getName() ) );
+		node.addContent( new Element( "dataValidatedWithEURPK" ).setText( Boolean.toString( dataValidatedWithEURPK ) ) );
 
 		return node;
 	}

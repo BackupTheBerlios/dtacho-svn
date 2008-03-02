@@ -109,10 +109,9 @@ public class Controller {
 			XMLDumper xmld = ds.getXMLDumper();
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] dumping XML..." );
 
-			XMLInfo xmli = new XMLInfo();
-			xmli.setSourceFilename( file );
-			xmld.setXMLInfo( xmli );
+			XMLInfo.setSourceFilename( file );
 
+			xmld.setXMLInfo( new XMLInfo() );
 			xmld.generateXML( file + ".xml" );	
 		}
 		else {

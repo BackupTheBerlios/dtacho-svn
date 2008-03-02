@@ -2,6 +2,7 @@
 
 <!ELEMENT Info ( source )>
 <!ELEMENT source ( #PCDATA )>
+<!ELEMENT dataValidatedWithEURPK ( #PCDATA )>
 
 <!ELEMENT PRDT_Overview ( memberStateCertificate, vuCertificate, vehicleIdentificationNumber, vehicleRegistrationIdentification, currentDateTime, vuDownloadablePeriod, cardSlotsStatus, vuDownloadActivityData, vuCompanyLocksData, vuControlActivityData )>
 
