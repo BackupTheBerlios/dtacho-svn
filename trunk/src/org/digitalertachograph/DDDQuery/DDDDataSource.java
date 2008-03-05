@@ -41,6 +41,8 @@ public class DDDDataSource implements DataSource {
 
 	private DebugLogger debugLogger;
 
+	enum tagInfoOutput { TAG, TAGLENGTH, TAGVALUE };
+
 	/**
 	 * Source type: Card
 	 */
@@ -222,8 +224,48 @@ public class DDDDataSource implements DataSource {
 
 			if ( parseresult == true ) {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
-				cardData.printTL();
 
+				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
+				String tagInfoEnv = System.getenv( "TAGINFO" );
+
+				if ( ( tagInfoEnv != null ) && ( tagInfoEnv.length() > 0 ) ) {
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAG" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAG;
+					}
+
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAGLENGTH;
+					}
+
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAGVALUE;
+					}
+				}
+
+				if ( tagInfo == tagInfoOutput.TAG ) {
+					cardData.printT();
+				}
+
+				if ( tagInfo == tagInfoOutput.TAGLENGTH ) {
+					cardData.printTL();
+				}
+
+				if ( tagInfo == tagInfoOutput.TAGVALUE ) {
+					int hexDumpWidth = 16;
+					String hexDumpWidthEnv = System.getenv( "HEXDUMPWIDTH" );
+
+					if ( ( hexDumpWidthEnv != null ) && ( hexDumpWidthEnv.length() > 0 ) ) {
+						int hexDumpWidthTemp = Integer.parseInt( hexDumpWidthEnv, 10 );
+
+						if ( ( hexDumpWidthTemp >= 16 ) && ( hexDumpWidthTemp <= 64 ) ) {
+							hexDumpWidth = hexDumpWidthTemp;
+						}
+					}
+
+					cardData.printTV( hexDumpWidth );
+				}
+
+				
 				if ( cardData.invalidDataFound() == true ) {
 					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
 					return false;
@@ -461,7 +503,46 @@ public class DDDDataSource implements DataSource {
 
 			if ( parseresult == true ) {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
-				vehicleUnitData.printTL();
+
+				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
+				String tagInfoEnv = System.getenv( "TAGINFO" );
+
+				if ( ( tagInfoEnv != null ) && ( tagInfoEnv.length() > 0 ) ) {
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAG" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAG;
+					}
+
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAGLENGTH;
+					}
+
+					if ( tagInfoEnv.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
+						tagInfo = tagInfoOutput.TAGVALUE;
+					}
+				}
+
+				if ( tagInfo == tagInfoOutput.TAG ) {
+					vehicleUnitData.printT();
+				}
+
+				if ( tagInfo == tagInfoOutput.TAGLENGTH ) {
+					vehicleUnitData.printTL();
+				}
+
+				if ( tagInfo == tagInfoOutput.TAGVALUE ) {
+					int hexDumpWidth = 16;
+					String hexDumpWidthEnv = System.getenv( "HEXDUMPWIDTH" );
+
+					if ( ( hexDumpWidthEnv != null ) && ( hexDumpWidthEnv.length() > 0 ) ) {
+						int hexDumpWidthTemp = Integer.parseInt( hexDumpWidthEnv, 10 );
+
+						if ( ( hexDumpWidthTemp >= 16 ) && ( hexDumpWidthTemp <= 64 ) ) {
+							hexDumpWidth = hexDumpWidthTemp;
+						}
+					}
+
+					vehicleUnitData.printTV( hexDumpWidth );
+				}
 
 				if ( vehicleUnitData.invalidDataFound() == true ) {
 					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );

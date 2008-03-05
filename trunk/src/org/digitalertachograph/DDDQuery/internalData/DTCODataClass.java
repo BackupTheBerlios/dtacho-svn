@@ -44,8 +44,6 @@ public abstract class DTCODataClass extends DataClass {
 
 	private boolean ecPublicKeyAvailable;
 
-	public Vector<Object> data;
-
 	private int hexdumpwidth;
 	private byte[] hexdumpbyte;
 	private int hexdumpcount;
@@ -55,6 +53,11 @@ public abstract class DTCODataClass extends DataClass {
 	protected Vector<DataClass> dispatcherQueue;
 
 	private DebugLogger debugLogger;
+
+	/**
+	 * The data (tag & value objects) of an inherited DTCODataClass data class.
+	 */
+	public Vector<Object> data;
 
 
 	/**
@@ -85,17 +88,15 @@ public abstract class DTCODataClass extends DataClass {
 	 * 	
 	 */
 	public boolean initECPublicKey() {
-		String eur_pk_path = new String();
+		String eurPKPath = new String();
 		FileInputStream ecPubKeyFIS;
 
 		try {
-			eur_pk_path = System.getenv( "EURPKPATH" );
+			eurPKPath = System.getenv( "EURPKPATH" );
 
-			if ( eur_pk_path != null ) {
-				if ( eur_pk_path.length() > 0 ) {
-					if ( eur_pk_path.charAt( eur_pk_path.length() - 1 ) != '/' ) {
-						eur_pk_path = eur_pk_path + "/";
-					}
+			if ( ( eurPKPath != null ) && ( eurPKPath.length() > 0 ) ) {
+				if ( eurPKPath.charAt( eurPKPath.length() - 1 ) != '/' ) {
+					eurPKPath = eurPKPath + "/";
 				}
 			}
 		}
@@ -110,13 +111,13 @@ public abstract class DTCODataClass extends DataClass {
 			// try to open the EC Public Key
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] trying to open the European Public Key:" );
 			debugLogger.print( DebugLogger.LOGLEVEL_INFO, "[INFO] " );
-			if ( eur_pk_path != null ) {
-				debugLogger.print( DebugLogger.LOGLEVEL_INFO, eur_pk_path );
+			if ( eurPKPath != null ) {
+				debugLogger.print( DebugLogger.LOGLEVEL_INFO, eurPKPath );
 			}
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "EC_PK.bin" );
 
-			if ( eur_pk_path != null ) {
-				ecPubKeyFIS = new FileInputStream( eur_pk_path + "EC_PK.bin" );
+			if ( eurPKPath != null ) {
+				ecPubKeyFIS = new FileInputStream( eurPKPath + "EC_PK.bin" );
 			}
 			else {
 				ecPubKeyFIS = new FileInputStream( "EC_PK.bin" );

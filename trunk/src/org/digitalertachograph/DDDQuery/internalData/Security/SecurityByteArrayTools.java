@@ -32,7 +32,7 @@ public class SecurityByteArrayTools {
 	public SecurityByteArrayTools() {
 
 	}
-	 
+
 
 	/**
 	 * Converts a hex string to its corresponding byte array
@@ -49,9 +49,9 @@ public class SecurityByteArrayTools {
 		byte[] byteArray = new byte[ hexString.length() / 2 ];
 
 		for ( int i = 0; i < byteArray.length; i++ ) {
-			byteArray[ i ] = (byte)Integer.parseInt( hexString.substring( 2*i, 2*i+2 ), 16 );
+			byteArray[ i ] = (byte)Integer.parseInt( hexString.substring( 2 * i, 2 * i + 2 ), 16 );
 		}
-		
+
 		return byteArray;
 	}
 
@@ -64,27 +64,27 @@ public class SecurityByteArrayTools {
 	 * 			chars 'A-F' output is upper case.
 	 */
 	public String ByteArrayToHexString( byte[] byteArray ) {
-	    if ( ( byteArray == null ) || ( byteArray.length <= 0 ) )
-	        return null;
+		if ( ( byteArray == null ) || ( byteArray.length <= 0 ) )
+			return null;
 
-	    String hexchar[] = { "0", "1", "2", "3",
-	    					 "4", "5", "6", "7",
-	    					 "8", "9", "A", "B",
-	    					 "C", "D", "E", "F" };
+		String hexchar[] = { "0", "1", "2", "3",
+							 "4", "5", "6", "7",
+							 "8", "9", "A", "B",
+							 "C", "D", "E", "F" };
 
-	    StringBuffer out = new StringBuffer( byteArray.length * 2 );
-	    int i = 0; 
-	    byte hchr;
+		StringBuffer out = new StringBuffer( byteArray.length * 2 );
+		int i = 0; 
+		byte hchr;
 
-	    while ( i < byteArray.length ) {
-	        hchr = (byte)( ( byteArray[ i ] >> 4 ) & 0x0f );
-	        out.append( hexchar[ (int)hchr ] );
+		while ( i < byteArray.length ) {
+			hchr = (byte)( ( byteArray[ i ] >> 4 ) & 0x0f );
+			out.append( hexchar[ (int)hchr ] );
 
-	        hchr = (byte)( byteArray[ i ] & 0x0f ); 
-	        out.append( hexchar[ (int)hchr ] );
+			hchr = (byte)( byteArray[ i ] & 0x0f ); 
+			out.append( hexchar[ (int)hchr ] );
 
-	        i++;
-	    }
+			i++;
+		}
 
 		return new String( out );
 	}

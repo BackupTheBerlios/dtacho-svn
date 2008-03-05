@@ -90,7 +90,7 @@ public class Controller {
 	}
 
 	public void manual() {
-		String pwd = "org_daten";	
+		String pwd = "org_daten";
 
 		String org_file1 = pwd + "/VDO/" + "vdo.DDD";
 		String org_file2 = pwd + "/OPTAC/" + "optac.DDD";
@@ -129,7 +129,7 @@ public class Controller {
 	public String process( byte[] data, short srcType ) {
 		DDDDataSource ds = new DDDDataSource();
 
-		for ( int i = 0; i< data.length; i++ ) {
+		for ( int i = 0; i < data.length; i++ ) {
 			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, (char)data[ i ] );
 		}
 

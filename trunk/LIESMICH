@@ -217,7 +217,7 @@ UMGEBUNGSVARIABLEN
 -DEBUGPRINTSTREAM:
  Stream, an den Debugmeldungen ausgegeben werden.
  Standard ist die Standardausgabe (System.out, stdout).
- Ansonsten werden die Debugmeldungen in die über diese Umgebunsvariable
+ Ansonsten werden die Debugmeldungen in die über diese Umgebungsvariable
  angegebene Datei ausgegeben.
 
 -EURPKPATH:

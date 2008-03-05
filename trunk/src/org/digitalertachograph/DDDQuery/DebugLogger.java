@@ -123,23 +123,23 @@ public class DebugLogger {
 
 			if ( envLogLevel != null ) {
 				// LOGLEVEL_NOTHING
-				if ( envLogLevel.compareTo( new String( "NOTHING" ).toUpperCase() ) == 0 ) {
+				if ( envLogLevel.toUpperCase().compareTo( "NOTHING" ) == 0 ) {
 					logLevel = LOGLEVEL_NOTHING;
 				}
 				// LOGLEVEL_ERROR
-				if ( envLogLevel.compareTo( new String( "ERROR" ).toUpperCase() ) == 0 ) {
+				if ( envLogLevel.toUpperCase().compareTo( "ERROR" ) == 0 ) {
 					logLevel = LOGLEVEL_ERROR;
 				}
 				// LOGLEVEL_INFO
-				if ( envLogLevel.compareTo( new String( "INFO" ).toUpperCase() ) == 0 ) {
+				if ( envLogLevel.toUpperCase().compareTo( "INFO" ) == 0 ) {
 					logLevel = LOGLEVEL_INFO;
 				}
 				// LOGLEVEL_INFO_EXTENDED
-				if ( envLogLevel.compareTo( new String( "INFO_EXTENDED" ).toUpperCase() ) == 0 ) {
+				if ( envLogLevel.toUpperCase().compareTo( "INFO_EXTENDED" ) == 0 ) {
 					logLevel = LOGLEVEL_INFO_EXTENDED;
 				}
 				// LOGLEVEL_ALL
-				if ( envLogLevel.compareTo( new String( "ALL" ).toUpperCase() ) == 0 ) {
+				if ( envLogLevel.toUpperCase().compareTo( "ALL" ) == 0 ) {
 					logLevel = LOGLEVEL_ALL;
 				}
 			}
@@ -268,7 +268,7 @@ public class DebugLogger {
 	}
 
 	private void printDelayed() {
-		if ( ( printDelayedOnHold == true ) & ( printDelayedDone == false ) ) {
+		if ( ( printDelayedOnHold == true ) && ( printDelayedDone == false ) ) {
 			printDelayedDone = true;
 			this.println( printDelayedLevel, printDelayedString );
 		}
