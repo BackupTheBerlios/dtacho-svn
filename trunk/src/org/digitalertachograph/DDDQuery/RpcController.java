@@ -1,5 +1,5 @@
 /*
-    $Id:RpcController.java 26 2008-02-25 22:28:27Z deetee $
+    $Id$
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 
@@ -25,5 +25,5 @@ public class RpcController {
 	public String process( byte[] data, short srcType ){
 		String xml = Controller.getInstance().process( data, srcType );
 		return xml;
-	}	
+	}
 }
