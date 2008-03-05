@@ -1,5 +1,5 @@
 /*
-    $Id:CompanyActivityRecord.java 26 2008-02-25 22:28:27Z deetee $
+    $Id$
 
     Copyright (C) 2007-2008, Martin Barth, Gerald Schnabel
 

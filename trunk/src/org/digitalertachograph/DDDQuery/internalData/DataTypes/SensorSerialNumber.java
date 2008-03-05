@@ -1,5 +1,5 @@
 /*
-    $Id:SensorSerialNumber.java 26 2008-02-25 22:28:27Z deetee $
+    $Id$
 
     Copyright (C) 2008, Gerald Schnabel
 
