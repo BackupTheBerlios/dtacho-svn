@@ -1,4 +1,6 @@
 /*
+    $Id$
+
     Copyright (C) 2008, Gerald Schnabel
 
     This program is free software; you can redistribute it and/or modify
