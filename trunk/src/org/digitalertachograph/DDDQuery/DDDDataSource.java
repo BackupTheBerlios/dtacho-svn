@@ -226,18 +226,18 @@ public class DDDDataSource implements DataSource {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
 
 				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
-				String tagInfoEnv = System.getenv( "TAGINFO" );
+				String envTagInfo = System.getenv( "TAGINFO" );
 
-				if ( ( tagInfoEnv != null ) && ( tagInfoEnv.length() > 0 ) ) {
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAG" ) == 0 ) {
+				if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAG" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAG;
 					}
 
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAGLENGTH;
 					}
 
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAGVALUE;
 					}
 				}
@@ -505,18 +505,18 @@ public class DDDDataSource implements DataSource {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
 
 				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
-				String tagInfoEnv = System.getenv( "TAGINFO" );
+				String envTagInfo = System.getenv( "TAGINFO" );
 
-				if ( ( tagInfoEnv != null ) && ( tagInfoEnv.length() > 0 ) ) {
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAG" ) == 0 ) {
+				if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAG" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAG;
 					}
 
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAGLENGTH;
 					}
 
-					if ( tagInfoEnv.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
+					if ( envTagInfo.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
 						tagInfo = tagInfoOutput.TAGVALUE;
 					}
 				}
@@ -531,10 +531,10 @@ public class DDDDataSource implements DataSource {
 
 				if ( tagInfo == tagInfoOutput.TAGVALUE ) {
 					int hexDumpWidth = 16;
-					String hexDumpWidthEnv = System.getenv( "HEXDUMPWIDTH" );
+					String envHexDumpWidth = System.getenv( "HEXDUMPWIDTH" );
 
-					if ( ( hexDumpWidthEnv != null ) && ( hexDumpWidthEnv.length() > 0 ) ) {
-						int hexDumpWidthTemp = Integer.parseInt( hexDumpWidthEnv, 10 );
+					if ( ( envHexDumpWidth != null ) && ( envHexDumpWidth.length() > 0 ) ) {
+						int hexDumpWidthTemp = Integer.parseInt( envHexDumpWidth, 10 );
 
 						if ( ( hexDumpWidthTemp >= 16 ) && ( hexDumpWidthTemp <= 64 ) ) {
 							hexDumpWidth = hexDumpWidthTemp;

@@ -132,7 +132,7 @@ Beispiele:
 -Den Quellcode compilieren
 
  Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
- sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u4.
+ sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u5.
  Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
 
  -in das Verzeichnis trunk/src wechseln
@@ -217,8 +217,9 @@ UMGEBUNGSVARIABLEN
 -DEBUGPRINTSTREAM:
  Stream, an den Debugmeldungen ausgegeben werden.
  Standard ist die Standardausgabe (System.out, stdout).
- Ansonsten werden die Debugmeldungen in die über diese Umgebungsvariable
- angegebene Datei ausgegeben.
+ Ansonsten werden die Debugmeldungen an die über diese Umgebungsvariable
+ angegebene Datei angehängt. Das Anhängen an die Datei lässt sich über
+ DEBUGPRINTSTREAMAPPEND=false abschalten.
 
 -EURPKPATH:
  Pfad zum europäischen öffentlichen Schlüssel, siehe Kapitel

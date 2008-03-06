@@ -88,15 +88,15 @@ public abstract class DTCODataClass extends DataClass {
 	 * 	
 	 */
 	public boolean initECPublicKey() {
-		String eurPKPath = new String();
+		String envEURPKPath = new String();
 		FileInputStream ecPubKeyFIS;
 
 		try {
-			eurPKPath = System.getenv( "EURPKPATH" );
+			envEURPKPath = System.getenv( "EURPKPATH" );
 
-			if ( ( eurPKPath != null ) && ( eurPKPath.length() > 0 ) ) {
-				if ( eurPKPath.charAt( eurPKPath.length() - 1 ) != '/' ) {
-					eurPKPath = eurPKPath + "/";
+			if ( ( envEURPKPath != null ) && ( envEURPKPath.length() > 0 ) ) {
+				if ( envEURPKPath.charAt( envEURPKPath.length() - 1 ) != '/' ) {
+					envEURPKPath = envEURPKPath + "/";
 				}
 			}
 		}
@@ -111,13 +111,13 @@ public abstract class DTCODataClass extends DataClass {
 			// try to open the EC Public Key
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] trying to open the European Public Key:" );
 			debugLogger.print( DebugLogger.LOGLEVEL_INFO, "[INFO] " );
-			if ( eurPKPath != null ) {
-				debugLogger.print( DebugLogger.LOGLEVEL_INFO, eurPKPath );
+			if ( envEURPKPath != null ) {
+				debugLogger.print( DebugLogger.LOGLEVEL_INFO, envEURPKPath );
 			}
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "EC_PK.bin" );
 
-			if ( eurPKPath != null ) {
-				ecPubKeyFIS = new FileInputStream( eurPKPath + "EC_PK.bin" );
+			if ( envEURPKPath != null ) {
+				ecPubKeyFIS = new FileInputStream( envEURPKPath + "EC_PK.bin" );
 			}
 			else {
 				ecPubKeyFIS = new FileInputStream( "EC_PK.bin" );

@@ -151,14 +151,23 @@ public class DebugLogger {
 			se.printStackTrace();
 		}
 
-		// try to read printstream for logging from environment variable
+		// try to read DEBUGPRINTSTREAM environment variable for logging
 		// defaults to System.out
 		logPrintStream = System.out;
 		try {
-			String envPrintStream = System.getenv( "DEBUGPRINTSTREAM" );
+			String envDebugPrintStream = System.getenv( "DEBUGPRINTSTREAM" );
 
-			if ( envPrintStream != null ) {
-				FileOutputStream envPrintStreamFile = new FileOutputStream( envPrintStream );
+			if ( ( envDebugPrintStream != null ) && ( envDebugPrintStream.length() > 0 ) ) {
+				boolean DebugPrintStreamAppend = true;
+				String envDebugPrintStreamAppend = System.getenv( "DEBUGPRINTSTREAMAPPEND" );
+
+				if ( ( envDebugPrintStreamAppend != null ) && ( envDebugPrintStreamAppend.length() > 0 ) ) {
+					if ( envDebugPrintStreamAppend.toLowerCase().compareTo( "false" ) == 0 ) {
+						DebugPrintStreamAppend = false;
+					}
+				}
+
+				FileOutputStream envPrintStreamFile = new FileOutputStream( envDebugPrintStream, DebugPrintStreamAppend );
 				logPrintStream = new PrintStream( envPrintStreamFile, true );
 			}
 		}
