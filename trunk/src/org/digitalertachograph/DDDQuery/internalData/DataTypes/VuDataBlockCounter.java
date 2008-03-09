@@ -73,6 +73,17 @@ public class VuDataBlockCounter extends DataClass {
 	}
 
 	/**
+	 * Returns the counter, stored in a card, identifying sequentially the insertion withdrawal
+	 * cycles of the card in vehicle units of a VuDataBlockCounter object.
+	 * 
+	 * @return	the counter, stored in a card, identifying sequentially the insertion withdrawal
+	 * 			cycles of the card in vehicle units of the VuDataBlockCounter object
+	 */
+	public String getVuDataBlockCounterString() {
+		return convertBCDStringIntoString( vuDataBlockCounter );
+	}
+
+	/**
 	 * Sets the counter, stored in a card, identifying sequentially the insertion withdrawal
 	 * cycles of the card in vehicle units of a VuDataBlockCounter object.
 	 * 

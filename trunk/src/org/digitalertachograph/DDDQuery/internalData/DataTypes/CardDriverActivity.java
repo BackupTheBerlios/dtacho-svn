@@ -131,7 +131,7 @@ public class CardDriverActivity extends DataClass {
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
 				if ( cadrActivityPreviousRecordLength == 0 ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO] this is the first record" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] this is the first record" );
 				}
 				else {
 					// indent output if log level >= LOGLEVEL_INFO_EXTENDED
@@ -143,7 +143,7 @@ public class CardDriverActivity extends DataClass {
 			}
 			else {
 				if ( cadrActivityPreviousRecordLength == cadrIntegrityCheckActivityPreviousRecordLength ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO] integrity check ok: ActivityPreviousRecordLength matches" );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] integrity check ok: ActivityPreviousRecordLength matches" );
 				}
 				else {
 					// indent output if log level >= LOGLEVEL_INFO_EXTENDED

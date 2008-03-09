@@ -44,7 +44,7 @@ public class ExtendedSerialNumber extends DataClass {
 	private long serialNumber; // 4 bytes int unsigned
 	private byte[] monthYear;
 	private byte type;
-	private short manufacturerCode;
+	private ManufacturerCode manufacturerCode;
 
 	
 	/**
@@ -54,21 +54,21 @@ public class ExtendedSerialNumber extends DataClass {
 		serialNumber = 0;
 		monthYear = new byte[ 2 ];
 		type = 0; 
-		manufacturerCode = 0; 
+		manufacturerCode = new ManufacturerCode(); 
 	}
 
 	/**
 	 * Constructor for an ExtendedSerialNumber object
 	 * 
-	 * @param	cardExtendedSerialNumber	byte array of an ExtendedSerialNumber structure
-	 * 										whose data is used when the ExtendedSerialNumber
-	 * 										object is created.
+	 * @param	value		byte array of an ExtendedSerialNumber structure
+	 * 						whose data is used when the ExtendedSerialNumber
+	 * 						object is created.
 	 */
-	public ExtendedSerialNumber( byte[] cardExtendedSerialNumber ) {
-		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy( cardExtendedSerialNumber, 0 , 4 ) );
-		monthYear = arrayCopy( cardExtendedSerialNumber, 4, 2 );
-		type = cardExtendedSerialNumber[ 6 ]; 
-		manufacturerCode = convertIntoUnsigned1ByteInt( cardExtendedSerialNumber[ 7 ] ); 
+	public ExtendedSerialNumber( byte[] value ) {
+		serialNumber = convertIntoUnsigned4ByteInt( arrayCopy( value, 0 , 4 ) );
+		monthYear = arrayCopy( value, 4, 2 );
+		type = value[ 6 ]; 
+		manufacturerCode = new ManufacturerCode( value[ 7 ] ); 
 	}
 
 	/**
@@ -106,6 +106,17 @@ public class ExtendedSerialNumber extends DataClass {
 	}
 
 	/**
+	 * Returns the identification of the month and the year of manufacturing (or of serial
+	 * assignment) of an ExtendedSerialNumber object.
+	 * 
+	 * @return	the identification of the month and the year of manufacturing (or of serial
+	 * 			assignment) of the ExtendedSerialNumber object
+	 */
+	public String getMonthYearString() {
+		return convertBCDStringIntoString( monthYear );
+	}
+
+	/**
 	 * Sets the identification of the month and the year of manufacturing (or of serial
 	 * assignment) of an ExtendedSerialNumber object.
 	 * 
@@ -139,7 +150,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * 
 	 * @return	the numerical code of the manufacturer of the equipment of the ExtendedSerialNumber object
 	 */
-	public short getManufacturerCode() {
+	public ManufacturerCode getManufacturerCode() {
 		return manufacturerCode;
 	}
 
@@ -149,7 +160,7 @@ public class ExtendedSerialNumber extends DataClass {
 	 * @param	manufacturerCode	the numerical code of the manufacturer of the equipment to be set
 	 * 								for the ExtendedSerialNumber object.
 	 */
-	public void setManufacturerCode( short manufacturerCode ) {
+	public void setManufacturerCode( ManufacturerCode manufacturerCode ) {
 		this.manufacturerCode = manufacturerCode;
 	}
 
@@ -160,7 +171,7 @@ public class ExtendedSerialNumber extends DataClass {
 		node.addContent( new Element( "serialNumber" ).setText( Long.toString( serialNumber ) ) );
 		node.addContent( new Element( "monthYear" ).setText( convertBCDStringIntoString( monthYear ) ) );
 		node.addContent( new Element( "type" ).setText( convertIntoHexString( type ) ) );
-		node.addContent( new Element( "manufacturerCode" ).setText( Short.toString( manufacturerCode ) ) );
+		node.addContent( manufacturerCode.generateXMLElement( "manufacturerCode" ) );
 
 		return node;
 	}

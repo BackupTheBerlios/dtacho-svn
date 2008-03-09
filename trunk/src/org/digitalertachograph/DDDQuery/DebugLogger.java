@@ -172,7 +172,7 @@ public class DebugLogger {
 			}
 		}
 		catch ( FileNotFoundException fnfe ) {
-
+			// nothing to do here
 		}
 		catch ( NullPointerException npe ) {
 			npe.printStackTrace();
@@ -180,7 +180,6 @@ public class DebugLogger {
 		catch ( SecurityException se ) {
 			se.printStackTrace();
 		}
-
 	}
 
 	/**

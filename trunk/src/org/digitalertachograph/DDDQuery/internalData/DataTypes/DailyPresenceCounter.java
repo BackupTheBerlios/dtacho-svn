@@ -76,6 +76,19 @@ public class DailyPresenceCounter extends DataClass {
 	}
 
 	/**
+	 * Returns the counter, stored in a driver or workshop card, increased by one
+	 * for each calendar day the card has been inserted in a VU
+	 * of a DailyPresenceCounter object.
+	 * 
+	 * @return	the counter, stored in a driver or workshop card, increased by one
+	 * 			for each calendar day the card has been inserted in a VU
+	 * 			of the DailyPresenceCounter object
+	 */
+	public String getDailyPresenceCounterString() {
+		return convertBCDStringIntoString( dailyPresenceCounter );
+	}
+
+	/**
 	 * Sets the counter, stored in a driver or workshop card, increased by one for each calendar day
 	 * the card has been inserted in a VU of a DailyPresenceCounter object.
 	 * 

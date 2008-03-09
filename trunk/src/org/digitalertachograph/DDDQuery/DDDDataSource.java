@@ -223,7 +223,7 @@ public class DDDDataSource implements DataSource {
 			}// end data parser
 
 			if ( parseresult == true ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
 				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
 				String envTagInfo = System.getenv( "TAGINFO" );
@@ -502,7 +502,7 @@ public class DDDDataSource implements DataSource {
 			}// end data parser
 
 			if ( parseresult == true ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "internal tag structure:" );
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
 				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
 				String envTagInfo = System.getenv( "TAGINFO" );

@@ -51,11 +51,11 @@ public class CardConsecutiveIndex extends DataClass {
 	/**
 	 * Constructor for a CardConsecutiveIndex object
 	 * 
-	 * @param	value	byte array of a card consecutive index that is used when the CardConsecutiveIndex
-	 * 					object is created.
+	 * @param	cardConsecutiveIndex	byte array of a card consecutive index that is used when the CardConsecutiveIndex
+	 * 									object is created.
 	 */
-	public CardConsecutiveIndex( byte[] value ) {
-		cardConsecutiveIndex = new String( arrayCopy( value, 0, 1 ) );
+	public CardConsecutiveIndex( byte cardConsecutiveIndex ) {
+		this.cardConsecutiveIndex = Byte.toString( cardConsecutiveIndex );
 	}
 
 	/**

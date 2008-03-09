@@ -118,7 +118,7 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 
 			byte[] memberStateCertificateValue = arrayCopy( value, 0, 194 );
 			byte[] vuCertificateValue = arrayCopy( value, 194, 194 );
-			
+
 			if ( super.isECPublicKeyAvailable() == true ) {
 				// check member state certificate
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] checking Member State certificate" );

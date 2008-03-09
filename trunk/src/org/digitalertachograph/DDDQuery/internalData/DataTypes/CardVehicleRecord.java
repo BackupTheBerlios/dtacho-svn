@@ -89,15 +89,7 @@ public class CardVehicleRecord extends DataClass {
 		debugLogger = new DebugLogger();
 
 		if ( vehicleFirstUse.getTimereal() != 0 ) {
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  vehicle registration number: " );
-
-			byte[] vr = vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumber();
-
-			for ( int i = 0; i < vr.length; i++ ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "%c", vr[ i ] );
-			}
-
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED );
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  vehicle registration number: %s\n", vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 		}
 	}
 

@@ -52,11 +52,11 @@ public class CardRenewalIndex extends DataClass {
 	/**
 	 * Constructor for a CardRenewalIndex object
 	 * 
-	 * @param	value	byte array of a card renewal index that is used when the CardRenewalIndex
-	 * 					object is created.
+	 * @param	cardRenewalIndex	byte array of a card renewal index that is used when the CardRenewalIndex
+	 * 								object is created.
 	 */
-	public CardRenewalIndex( byte[] value ) {
-		cardRenewalIndex = new String( arrayCopy( value, 0, 1 ) );
+	public CardRenewalIndex( byte cardRenewalIndex ) {
+		this.cardRenewalIndex = Byte.toString( cardRenewalIndex );
 	}
 
 	/**

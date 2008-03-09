@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -43,7 +44,9 @@ public class DriverCardHolderIdentification extends DataClass {
 	private HolderName cardHolderName;
 	private Datef cardHolderBirthDate;
 	private Language cardHolderPreferredLanguage;
-	
+
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a DriverCardHolderIdentification object
@@ -62,11 +65,18 @@ public class DriverCardHolderIdentification extends DataClass {
 	 * 					object is created.
 	 */
 	public DriverCardHolderIdentification( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		cardHolderName = new HolderName( arrayCopy( value, 0, 72 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Holder name: %s %s\n", cardHolderName.getHolderFirstNames(), cardHolderName.getHolderSurname() );
+
 		cardHolderBirthDate = new Datef( arrayCopy( value, 72, 4 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card holder birth date: %s.%s.%s\n", cardHolderBirthDate.getDayString(), cardHolderBirthDate.getMonthString(), cardHolderBirthDate.getYearString() );
+
 		cardHolderPreferredLanguage = new Language( arrayCopy( value, 76, 2 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card holder preferred language: %s\n", cardHolderPreferredLanguage.getLanguage() );
 	}
-	
+
 	/**
 	 * Returns the name and the first name(s) of the holder of the driver card
 	 * of a DriverCardHolderIdentification object.

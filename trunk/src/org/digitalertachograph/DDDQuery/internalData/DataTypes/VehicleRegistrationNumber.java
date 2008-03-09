@@ -115,6 +115,15 @@ public class VehicleRegistrationNumber extends DataClass {
 	}
 
 	/**
+	 * Returns the number of the vehicle (VRN) of a VehicleRegistrationNumber object.
+	 * 
+	 * @return	the number of the vehicle (VRN) of the VehicleRegistrationNumber object
+	 */
+	public String getVehicleRegNumberString() {
+		return new String( vehicleRegNumber );
+	}
+
+	/**
 	 * Sets the number of the vehicle (VRN) of a VehicleRegistrationNumber object.
 	 * 
 	 * @param	vehicleRegNumber	the number of the vehicle (VRN) to be set

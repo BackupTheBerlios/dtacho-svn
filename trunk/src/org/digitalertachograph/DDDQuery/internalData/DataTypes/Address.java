@@ -44,6 +44,7 @@ public class Address extends DataClass {
 	private short codePage;
 	private byte[] address;
 
+
 	/**
 	 * Constructor for an Address object
 	 */ 
@@ -100,6 +101,15 @@ public class Address extends DataClass {
 	 */
 	public byte[] getAddress() {
 		return address;
+	}
+
+	/**
+	 * Returns the address of an Address object.
+	 * 
+	 * @return	byte array that contains the address of the Address object
+	 */
+	public String getAddressString() {
+		return new String( address );
 	}
 
 	/**

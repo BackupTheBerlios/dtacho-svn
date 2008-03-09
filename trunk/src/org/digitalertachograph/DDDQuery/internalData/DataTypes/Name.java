@@ -114,6 +114,15 @@ public class Name extends DataClass{
 	}
 
 	/**
+	 * Returns the name of a Name object.
+	 * 
+	 * @return	the name of the Name object
+	 */
+	public String getNameString() {
+		return new String( name );
+	}
+
+	/**
 	 * Sets the Name of a Name object.
 	 * 
 	 * @param	name		the name to be set for the name object

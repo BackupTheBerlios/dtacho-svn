@@ -152,7 +152,7 @@ public class CertificationAuthorityKID extends DataClass {
 
 	/**
 	 * Returns the additional coding (Certification Authority specific)
-	 * CertificationAuthorityKID object.
+	 * of a CertificationAuthorityKID object.
 	 * 
 	 * @return	the additional coding (Certification Authority specific)
 	 * 			of the CertificationAuthorityKID object

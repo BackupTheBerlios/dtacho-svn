@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -52,6 +53,8 @@ public class VuIdentification extends DataClass {
 	private VuManufacturingDate vuManufacturingDate;
 	private VuApprovalNumber vuApprovalNumber;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuIdentification object
@@ -74,13 +77,30 @@ public class VuIdentification extends DataClass {
 	 * 					object is created.
 	 */
 	public VuIdentification( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		vuManufacturerName = new VuManufacturerName( arrayCopy( value, 0, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit manufacturer name: %s\n", vuManufacturerName.getNameString() );
+
 		vuManufacturerAddress = new VuManufacturerAddress( arrayCopy( value, 36, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit manufacturer address: %s\n", vuManufacturerAddress.getAddressString() );
+
 		vuPartNumber = new VuPartNumber( arrayCopy( value, 72, 16 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit part number: %s\n", vuPartNumber.getVuPartNumber() );
+
 		vuSerialNumber = new VuSerialNumber( arrayCopy( value, 88, 8 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit serial number: %d\n", vuSerialNumber.getSerialNumber() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit month and year of manufacturing: %s\n", vuSerialNumber.getMonthYearString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit equipment type: %d\n", vuSerialNumber.getType() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit manufacturer code: %02x - %s\n", vuSerialNumber.getManufacturerCode().getManufacturerCode(), vuSerialNumber.getManufacturerCode().toString() );
+
 		vuSoftwareIdentification = new VuSoftwareIdentification( arrayCopy( value, 96, 8 ) );
 		vuManufacturingDate = new VuManufacturingDate( arrayCopy( value, 104, 4 ) );
 		vuApprovalNumber = new VuApprovalNumber( arrayCopy( value, 108, 8 ) );
+
+		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit part number: %s\n", vuPartNumber.getVuPartNumber() );
+		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit serial number: %d\n", vuSerialNumber.getSerialNumber() );
+		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit software identification: %s\n", vuSoftwareIdentification.getVuSoftwareVersion().getVuSoftwareVersion() );
 	}
 
 	/**

@@ -69,17 +69,6 @@ public class RegionNumeric extends DataClass {
 	/**
 	 * Constructor for a RegionNumeric object
 	 * 
-	 * @param	value	byte array of a RegionNumeric structure
-	 * 					whose data is used when the RegionNumeric
-	 * 					object is created.
-	 */
-	public RegionNumeric( byte[] value ) {
-		this.regionNumeric = value[ 0 ];
-	}
-
-	/**
-	 * Constructor for a RegionNumeric object
-	 * 
 	 * @param	regionNumeric		byte with the numerical reference to a region within a specified country
 	 */
 	public RegionNumeric( byte regionNumeric ) {

@@ -131,14 +131,14 @@ public class CardNumber extends DataClass {
 
 		if ( cardType == EquipmentType.DRIVER_CARD ) {
 			driverIdentification = new String( arrayCopy( value, 0, 14 ) );
-			cardReplacementIndex = new CardReplacementIndex( arrayCopy( value, 14, 1 ) );
-			cardRenewalIndex = new CardRenewalIndex( arrayCopy( value, 15, 1 ) );
+			cardReplacementIndex = new CardReplacementIndex( value[ 14 ] );
+			cardRenewalIndex = new CardRenewalIndex( value[ 15 ] );
 		}
 		else {
 			ownerIdentification = new String( arrayCopy( value, 0, 13 ) );
-			cardConsecutiveIndex = new CardConsecutiveIndex( arrayCopy( value, 13, 1 ) );
-			cardReplacementIndex = new CardReplacementIndex( arrayCopy( value, 14, 1 ) );
-			cardRenewalIndex = new CardRenewalIndex( arrayCopy( value, 15, 1 ) );
+			cardConsecutiveIndex = new CardConsecutiveIndex( value[ 13 ] );
+			cardReplacementIndex = new CardReplacementIndex( value[ 14 ] );
+			cardRenewalIndex = new CardRenewalIndex( value[ 15 ] );
 		}
 	}
 

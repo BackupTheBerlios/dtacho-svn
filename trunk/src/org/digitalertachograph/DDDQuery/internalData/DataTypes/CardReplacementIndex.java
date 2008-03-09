@@ -52,11 +52,11 @@ public class CardReplacementIndex extends DataClass {
 	/**
 	 * Constructor for a CardReplacementIndex object
 	 * 
-	 * @param	value	byte array of a card replacement index that is used when the CardReplacementIndex
-	 * 					object is created.
+	 * @param	cardReplacementIndex	byte array of a card replacement index that is used when the CardReplacementIndex
+	 * 									object is created.
 	 */
-	public CardReplacementIndex( byte[] value ) {
-		cardReplacementIndex = new String( arrayCopy( value, 0, 1 ) );
+	public CardReplacementIndex( byte cardReplacementIndex ) {
+		this.cardReplacementIndex = Byte.toString( cardReplacementIndex );
 	}
 
 	/**

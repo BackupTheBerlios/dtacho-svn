@@ -79,7 +79,7 @@ public class TimeReal extends DataClass {
 		debugLogger = new DebugLogger();
 
 		if ( i != 0 ) {
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, " timestamp: " + i );
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " timestamp: %04x / %d", i, i );
 			Date d = new Date( i * 1000 );
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " - " + DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format(d) );
 		}

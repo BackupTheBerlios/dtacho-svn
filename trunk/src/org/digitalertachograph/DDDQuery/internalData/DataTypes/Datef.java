@@ -79,12 +79,12 @@ public class Datef extends DataClass {
 	/**
 	 * Returns the year of a Datef object.
 	 * 
-	 * @return	the year of the Datef object
+	 * @return	the year of the Datef object as string
 	 */
 	public String getYearString() {
 		return convertBCDStringIntoString( year );
 	}
-	
+
 	/**
 	 * Sets the year of a Datef object.
 	 * 
@@ -106,12 +106,12 @@ public class Datef extends DataClass {
 	/**
 	 * Returns the month of a Datef object.
 	 * 
-	 * @return	the month of the Datef object
+	 * @return	the month of the Datef object as string
 	 */
 	public String getMonthString() {
 		return convertBCDStringIntoString( new byte[]{ month } );
 	}
-	
+
 	/**
 	 * Sets the month of a Datef object.
 	 * 
@@ -133,12 +133,12 @@ public class Datef extends DataClass {
 	/**
 	 * Returns the day of a Datef object.
 	 * 
-	 * @return	the day of the Datef object
+	 * @return	the day of the Datef object as string
 	 */
 	public String getDayString() {
 		return convertBCDStringIntoString( new byte[]{ day } );
 	}
-	
+
 	/**
 	 * Sets the day of a Datef object.
 	 * 

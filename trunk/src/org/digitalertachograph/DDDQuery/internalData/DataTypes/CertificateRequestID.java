@@ -109,6 +109,17 @@ public class CertificateRequestID extends DataClass {
 	}
 
 	/**
+	 * Returns the identification of the month and the year of the certificate request
+	 * of a CertificateRequestID object.
+	 * 
+	 * @return	the identification of the month and the year of the certificate request
+	 * 			of the CertificateRequestID object
+	 */
+	public String getRequestMonthYearString() {
+		return convertBCDStringIntoString( requestMonthYear );
+	}
+
+	/**
 	 * Sets the identification of the month and the year of the certificate request
 	 * of a CertificateRequestID object.
 	 * 

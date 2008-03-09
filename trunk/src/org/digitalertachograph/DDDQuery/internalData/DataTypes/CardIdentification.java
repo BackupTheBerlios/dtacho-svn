@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.*;
 import org.jdom.Element;
 
@@ -49,8 +50,10 @@ public class CardIdentification extends DataClass {
 	private TimeReal cardIssueDate;
 	private TimeReal cardValidityBegin;
 	private TimeReal cardExpiryDate;
-	
-	
+
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a CardIdentification object
 	 */
@@ -71,14 +74,27 @@ public class CardIdentification extends DataClass {
 	 * 					object is created.
 	 */
 	public CardIdentification( byte[] value, short cardType ) {
+		debugLogger = new DebugLogger();
+
 		cardIssuingMemberState = new NationNumeric( value[ 0 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", cardIssuingMemberState.toString() );
+
 		cardNumber = new CardNumber( arrayCopy( value, 1, 16 ), cardType );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s\n", cardNumber.getDriverIdentification() );
+
 		cardIssuingAuthorityName = new Name( arrayCopy( value, 17, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing authority name: %s\n", cardIssuingAuthorityName.getNameString() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issue date:" );
 		cardIssueDate = new TimeReal( arrayCopy( value, 53, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card validity begin:" );
 		cardValidityBegin = new TimeReal( arrayCopy( value, 57, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card expiry date:" );
 		cardExpiryDate = new TimeReal( arrayCopy( value, 61, 4 ) );
 	}
-	
+
 	/**
 	 * Returns the code of the Member State issuing the card
 	 * of a CardIdentification object.
