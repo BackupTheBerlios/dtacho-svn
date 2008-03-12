@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -42,6 +43,8 @@ public class VuDownloadablePeriod extends DataClass {
 	private TimeReal minDownloadableTime;
 	private TimeReal maxDownloadableTime;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuDownloadablePeriod object
@@ -59,7 +62,11 @@ public class VuDownloadablePeriod extends DataClass {
 	 * 					object is created.
 	 */
 	public VuDownloadablePeriod( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Oldest card insertion date and time:" );
 		minDownloadableTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Latest card withdrawal date and time:" );
 		maxDownloadableTime = new TimeReal( arrayCopy( value, 4, 4 ) );
 	}
 

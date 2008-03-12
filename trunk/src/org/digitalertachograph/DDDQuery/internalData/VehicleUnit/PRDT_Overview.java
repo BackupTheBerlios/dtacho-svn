@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.VehicleUnit;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
@@ -53,6 +54,8 @@ public class PRDT_Overview extends DataClass {
 
 	private VuControlActivityData vuControlActivityData;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a PRDT_Overview object
@@ -62,19 +65,23 @@ public class PRDT_Overview extends DataClass {
 	 * 					object is created.
 	 */
 	public PRDT_Overview( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		int offset1 = 194 + 194 + 17 + 1 + 14 + 4 + 4 + 4 + 1 + 4 + 18 + 36;
 		memberStateCertificate = new MemberStateCertificate( arrayCopy( value, 0, 194 ) );
 		vuCertificate = new VuCertificate( arrayCopy( value, 194, 194 ) );
 
 		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy( value, 388, 17 ) );
 		vehicleRegistrationIdentification = new VehicleRegistrationIdentification( arrayCopy( value, 405, 15 ) );
-		
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Current date and time:" );
 		currentDateTime = new CurrentDateTime( arrayCopy( value, 420, 4 ) );
 
 		vuDownloadablePeriod = new VuDownloadablePeriod( arrayCopy( value, 424, 8 ) );
 
 		cardSlotsStatus = new CardSlotsStatus( value[ 432 ] );
 
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Previous VU download:" );
 		vuDownloadActivityData = new VuDownloadActivityData( arrayCopy( value, 433, 58 ) );
 
 		int offset2 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 ] ) * VuCompanyLocksRecord.size;

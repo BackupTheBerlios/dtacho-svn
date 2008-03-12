@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -44,6 +45,8 @@ public class VuDownloadActivityData extends DataClass {
 	private FullCardNumber fullCardNumber;
 	private Name companyOrWorkshopName;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuDownloadActivityData object
@@ -62,9 +65,16 @@ public class VuDownloadActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public VuDownloadActivityData( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Downloading time:" );
 		downloadingTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+
 		fullCardNumber = new FullCardNumber( arrayCopy( value, 4, 18 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card used to authorize the download: %s\n", fullCardNumber.getCardNumber().getOwnerIdentification() );
+
 		companyOrWorkshopName = new Name( arrayCopy( value, 22, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company or workshop name: %s\n", companyOrWorkshopName.getNameString() );
 	}
 
 	/**

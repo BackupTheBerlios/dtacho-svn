@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -51,7 +52,9 @@ public class VehicleRegistrationIdentification extends DataClass {
 	private NationNumeric vehicleRegistrationNation;
 	private VehicleRegistrationNumber vehicleRegistrationNumber;
 
-	
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a VehicleRegistrationIdentification object
 	 */
@@ -68,8 +71,13 @@ public class VehicleRegistrationIdentification extends DataClass {
 	 * 					object is created.
 	 */
 	public VehicleRegistrationIdentification( byte [] value ) {
+		debugLogger = new DebugLogger();
+
 		vehicleRegistrationNation = new NationNumeric( value[ 0 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationNation.toString() );
+
 		vehicleRegistrationNumber = new VehicleRegistrationNumber( arrayCopy( value, 1, 14 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Registration Number: %s\n", vehicleRegistrationNumber.getVehicleRegNumberString() );
 	}
 
 	/**

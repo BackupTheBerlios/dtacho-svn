@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -48,6 +49,8 @@ public class VuControlActivityRecord extends DataClass {
 	private TimeReal downloadPeriodBeginTime;
 	private TimeReal downloadPeriodEndTime;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuControlActivityRecord object
@@ -68,10 +71,20 @@ public class VuControlActivityRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public VuControlActivityRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		controlType = new ControlType( value[ 0 ] );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control time:" );
 		controlTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+
 		controlCardNumber = new FullCardNumber( arrayCopy( value, 5, 18 ) ); 
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card number: %s\n", controlCardNumber.getCardNumber().getOwnerIdentification() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period begin time:" );
 		downloadPeriodBeginTime = new TimeReal( arrayCopy( value, 23, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period end time:" );
 		downloadPeriodEndTime = new TimeReal( arrayCopy( value, 27, 4 ) );
 	}
 

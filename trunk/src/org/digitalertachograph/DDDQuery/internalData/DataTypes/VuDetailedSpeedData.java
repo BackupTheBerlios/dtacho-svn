@@ -23,6 +23,7 @@ package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -53,6 +54,8 @@ public class VuDetailedSpeedData extends DataClass {
 	// create min. 1440 vectors; will be automatically expanded at run time if required!
 	private Vector<VuDetailedSpeedBlock> vuDetailedSpeedBlocks = new Vector<VuDetailedSpeedBlock>( 1440 );
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuDetailedSpeedData object
@@ -62,11 +65,16 @@ public class VuDetailedSpeedData extends DataClass {
 	 * 					object is created.
 	 */
 	public VuDetailedSpeedData( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		noOfSpeedBlocks = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		size = 2 + noOfSpeedBlocks * VuDetailedSpeedBlock.size;
 
 		if ( noOfSpeedBlocks != 0 ) {
 			for ( int i = 0; i < noOfSpeedBlocks; i++ ) {
+
+				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] SpeedBlock #%05d:\n", i + 1 );
+
 				byte[] record = arrayCopy( value, 2 + ( i * VuDetailedSpeedBlock.size ), VuDetailedSpeedBlock.size );
 				VuDetailedSpeedBlock tmp = new VuDetailedSpeedBlock( record );
 				vuDetailedSpeedBlocks.add( tmp );

@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -47,6 +48,8 @@ public class VuCompanyLocksRecord extends DataClass {
 	private Address companyAddress;
 	private FullCardNumber companyCardNumber;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuCompanyLocksRecord object
@@ -67,11 +70,22 @@ public class VuCompanyLocksRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public VuCompanyLocksRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-in time:" );
 		lockInTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-out time:" );
 		lockOutTime = new TimeReal( arrayCopy( value, 4, 4 ) );
+
 		companyName = new Name( arrayCopy( value, 8, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company name: %s\n", companyName.getNameString() );
+
 		companyAddress = new Address( arrayCopy( value, 44, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company address: %s\n", companyAddress.getAddressString() );
+
 		companyCardNumber = new FullCardNumber( arrayCopy( value, 80, 18 ) ); 
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company card number: %s\n", companyCardNumber.getCardNumber().getOwnerIdentification() );
 	}
 
 	/**

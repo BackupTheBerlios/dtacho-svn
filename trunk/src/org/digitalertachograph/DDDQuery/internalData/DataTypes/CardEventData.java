@@ -77,7 +77,7 @@ public class CardEventData extends DataClass{
 	public CardEventData( byte[] value, short noOfEventsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noOfEventsPerType );	
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noOfEventsPerType );
 
 		size = 6 * noOfEventsPerType * CardEventRecord.size;
 
