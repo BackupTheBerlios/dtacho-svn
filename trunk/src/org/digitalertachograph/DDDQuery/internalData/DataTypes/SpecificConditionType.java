@@ -80,7 +80,29 @@ public class SpecificConditionType extends DataClass {
 	public void setSpecificConditionType( byte specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
-	
+
+	/**
+	 * Returns the specific condition type as string of an SpecificConditionType object.
+	 * 
+	 * @return	the specific condition type as string of the SpecificConditionType object
+	 */
+	public String toString() {
+		if ( specificConditionType == 0x00 ) {
+			return "RFU";
+		}
+		if ( specificConditionType == 0x01 ) {
+			return "Out of scope begin";
+		}
+		if ( specificConditionType == 0x02 ) {
+			return "Out of scope end";
+		}
+		if ( specificConditionType == 0x03 ) {
+			return "Ferry/Train crossing";
+		}
+
+		return "RFU";
+	}
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		return new Element( name ).setText( Short.toString( specificConditionType ) );

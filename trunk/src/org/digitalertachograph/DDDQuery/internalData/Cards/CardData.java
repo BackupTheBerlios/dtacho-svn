@@ -515,15 +515,15 @@ public class CardData extends DTCODataClass implements XMLDumper {
 					// EF_Control_Activity_Data
 					printTagInfo( tag );
 					ef_control_activity_data = new EF_Control_Activity_Data( value );
-					dispatcherQueue.add(ef_control_activity_data);
+					dispatcherQueue.add( ef_control_activity_data );
 					tag2 = new byte[]{ 0x05, 0x08 };
 					efstate = EF_SIGNATURE_ENTITY;
 				}
 				else if ( Arrays.equals( tag, new byte[]{ (byte)0x05, 0x22, 0x00 } ) ) {
 					// EF_Specific_Conditions
 					printTagInfo( tag );
-					ef_specific_conditions = new EF_Specific_Conditions( value );
-					dispatcherQueue.add(ef_specific_conditions);
+					ef_specific_conditions = new EF_Specific_Conditions( value, cardType );
+					dispatcherQueue.add( ef_specific_conditions );
 					tag2 = new byte[]{ 0x05, 0x22 };
 					efstate = EF_SIGNATURE_ENTITY;
 				}

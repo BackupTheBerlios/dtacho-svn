@@ -88,122 +88,124 @@ public class ManufacturerCode extends DataClass {
 	 * 
 	 * @return	the name of the manufacturer of the ManufacturerCode object
 	 * 
-	 * Manufacturer codes list as of 21/02/2008
+	 * Manufacturer codes list as of 12/03/2008
 	 * http://dtc.jrc.it/text/cm.html
 	 */
 	public String toString() {
+		// invalid manufacturer codes > 0xdf
 		if ( manufacturerCode > 0xdf ) {
 			return "???";
 		}
 
+		// valid manufacturer codes
 		if ( manufacturerCode == 0x00 ) {
 			return "No information available";
 		}
-		else if ( manufacturerCode == 0x01 ) {
+		if ( manufacturerCode == 0x01 ) {
 			return "Reserved value";
 		}
-		else if ( manufacturerCode == 0x10 ) {
+		if ( manufacturerCode == 0x10 ) {
 			return "Actia S.A.";
 		}
-		else if ( manufacturerCode == 0x11 ) {
+		if ( manufacturerCode == 0x11 ) {
 			return "Autoguard & Insurance";
 		}
-		else if ( manufacturerCode == 0x12 ) {
+		if ( manufacturerCode == 0x12 ) {
 			return "Austria Card Plastikkarten und Ausweissysteme GmbH";
 		}
-		else if ( manufacturerCode == 0x20 ) {
+		if ( manufacturerCode == 0x20 ) {
 			return "CETIS d.d.";
 		}
-		else if ( manufacturerCode == 0x21 ) {
+		if ( manufacturerCode == 0x21 ) {
 			return "certSIGN";
 		}
-		else if ( manufacturerCode == 0x30 ) {
+		if ( manufacturerCode == 0x30 ) {
 			return "Sdu Identification B.V. (formerly Enschedé/Sdu B.V.)";
 		}
-		else if ( manufacturerCode == 0x31 ) {
+		if ( manufacturerCode == 0x31 ) {
 			return "Electricfil Industries";
 		}
-		else if ( manufacturerCode == 0x32 ) {
+		if ( manufacturerCode == 0x32 ) {
 			return "EFKON AG.";
 		}
-		else if ( manufacturerCode == 0x38 ) {
+		if ( manufacturerCode == 0x38 ) {
 			return "Fábrica Nacional de Moneda y Timbre";
 		}
-		else if ( manufacturerCode == 0x40 ) {
+		if ( manufacturerCode == 0x40 ) {
 			return "Giesecke & Devrient GmbH";
 		}
-		else if ( manufacturerCode == 0x41 ) {
+		if ( manufacturerCode == 0x41 ) {
 			return "GEM plus";
 		}
-		else if ( manufacturerCode == 0x42 ) {
+		if ( manufacturerCode == 0x42 ) {
 			return "Grundig Car InterMedia System GmbH";
 		}
-		else if ( manufacturerCode == 0x43 ) {
+		if ( manufacturerCode == 0x43 ) {
 			return "Giesecke & Devrient GB Ltd.";
 		}
-		else if ( manufacturerCode == 0x48 ) {
+		if ( manufacturerCode == 0x48 ) {
 			return "Hungarian Banknote Printing Co. Ltd.";
 		}
-		else if ( manufacturerCode == 0x50 ) {
+		if ( manufacturerCode == 0x50 ) {
 			return "Imprimerie Nationale";
 		}
-		else if ( manufacturerCode == 0x51 ) {
+		if ( manufacturerCode == 0x51 ) {
 			return "Imprensa Nacional-Casa da Moeda, SA";
 		}
-		else if ( manufacturerCode == 0x52 ) {
+		if ( manufacturerCode == 0x52 ) {
 			return "InfoCamere S.C.p.A.";
 		}
-		else if ( manufacturerCode == 0x80 ) {
+		if ( manufacturerCode == 0x80 ) {
 			return "OSCard";
 		}
-		else if ( manufacturerCode == 0x81 ) {
+		if ( manufacturerCode == 0x81 ) {
 			return "Sagem Orga (formerly ORGA Kartensysteme GmbH)";
 		}
-		else if ( manufacturerCode == 0x82 ) {
+		if ( manufacturerCode == 0x82 ) {
 			return "Österreichische Staatsdruckerei GmbH";
 		}
-		else if ( manufacturerCode == 0x88 ) {
+		if ( manufacturerCode == 0x88 ) {
 			return "PVT a.s.";
 		}
-		else if ( manufacturerCode == 0xa0 ) {
+		if ( manufacturerCode == 0xa0 ) {
 			return "Setec";
 		}
-		else if ( manufacturerCode == 0xa1 ) {
+		if ( manufacturerCode == 0xa1 ) {
 			return "Siemens";
 		}
-		else if ( manufacturerCode == 0xa2 ) {
+		if ( manufacturerCode == 0xa2 ) {
 			return "Stoneridge";
 		}
-		else if ( manufacturerCode == 0xa3 ) {
+		if ( manufacturerCode == 0xa3 ) {
 			return "Axalto (formerly SchlumbergerSEMA)";
 		}
-		else if ( manufacturerCode == 0xa4 ) {
+		if ( manufacturerCode == 0xa4 ) {
 			return "Security Printing and Systems Ltd.";
 		}
-		else if ( manufacturerCode == 0xa5 ) {
+		if ( manufacturerCode == 0xa5 ) {
 			return "ST Incard S.r.l.";
 		}
-		else if ( manufacturerCode == 0xaa ) {
+		if ( manufacturerCode == 0xaa ) {
 			return "Tachocontrol";
 		}
-		else if ( manufacturerCode == 0xab ) {
+		if ( manufacturerCode == 0xab ) {
 			return "T-Systems International GmbH";
 		}
-		else if ( manufacturerCode == 0xac ) {
+		if ( manufacturerCode == 0xac ) {
 			return "Trüb AG";
 		}
-		else if ( manufacturerCode == 0xad ) {
+		if ( manufacturerCode == 0xad ) {
 			return "Trüb Baltic AS";
 		}
-		else if ( manufacturerCode == 0xae ) {
+		if ( manufacturerCode == 0xae ) {
 			return "TEMPEST a.s.";
 		}
-		else if ( manufacturerCode == 0xaf ) {
+		if ( manufacturerCode == 0xaf ) {
 			return "Trueb - DEMAX PLC";
 		}
-		else {
-			return "???";
-		}
+
+		// unknown manufacturer codes
+		return "???";
 	}
 
 	@Override

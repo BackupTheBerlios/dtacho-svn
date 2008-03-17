@@ -101,174 +101,174 @@ public class NationAlpha extends DataClass {
 		if ( nationAlpha.compareTo( "   " ) == 0 ) {
 			return "No information available";
 		}
-		else if ( nationAlpha.compareTo( "A  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "A  " ) == 0 ) {
 			return "Austria";
 		}
-		else if ( nationAlpha.compareTo( "AL " ) == 0 ) {
+		if ( nationAlpha.compareTo( "AL " ) == 0 ) {
 			return "Albania";
 		}
-		else if ( nationAlpha.compareTo( "AND" ) == 0 ) {
+		if ( nationAlpha.compareTo( "AND" ) == 0 ) {
 			return "Andorra";
 		}
-		else if ( nationAlpha.compareTo( "ARM" ) == 0 ) {
+		if ( nationAlpha.compareTo( "ARM" ) == 0 ) {
 			return "Armenia";
 		}
-		else if ( nationAlpha.compareTo( "AZ " ) == 0 ) {
+		if ( nationAlpha.compareTo( "AZ " ) == 0 ) {
 			return "Azerbaijan";
 		}
-		else if ( nationAlpha.compareTo( "B  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "B  " ) == 0 ) {
 			return "Belgium";
 		}
-		else if ( nationAlpha.compareTo( "BG " ) == 0 ) {
+		if ( nationAlpha.compareTo( "BG " ) == 0 ) {
 			return "Bulgaria";
 		}
-		else if ( nationAlpha.compareTo( "BIH" ) == 0 ) {
+		if ( nationAlpha.compareTo( "BIH" ) == 0 ) {
 			return "Bosnia and Herzegovina";
 		}
-		else if ( nationAlpha.compareTo( "BY " ) == 0 ) {
+		if ( nationAlpha.compareTo( "BY " ) == 0 ) {
 			return "Belarus";
 		}
-		else if ( nationAlpha.compareTo( "CH " ) == 0 ) {
+		if ( nationAlpha.compareTo( "CH " ) == 0 ) {
 			return "Switzerland";
 		}
-		else if ( nationAlpha.compareTo( "CY " ) == 0 ) {
+		if ( nationAlpha.compareTo( "CY " ) == 0 ) {
 			return "Cyprus";
 		}
-		else if ( nationAlpha.compareTo( "CZ " ) == 0 ) {
+		if ( nationAlpha.compareTo( "CZ " ) == 0 ) {
 			return "Czech Republic";
 		}
-		else if ( nationAlpha.compareTo( "D  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "D  " ) == 0 ) {
 			return "Germany";
 		}
-		else if ( nationAlpha.compareTo( "DK " ) == 0 ) {
+		if ( nationAlpha.compareTo( "DK " ) == 0 ) {
 			return "Denmark";
 		}
-		else if ( nationAlpha.compareTo( "E  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "E  " ) == 0 ) {
 			return "Spain";
 		}
-		else if ( nationAlpha.compareTo( "EST" ) == 0 ) {
+		if ( nationAlpha.compareTo( "EST" ) == 0 ) {
 			return "Estonia";
 		}
-		else if ( nationAlpha.compareTo( "F  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "F  " ) == 0 ) {
 			return "France";
 		}
-		else if ( nationAlpha.compareTo( "FIN" ) == 0 ) {
+		if ( nationAlpha.compareTo( "FIN" ) == 0 ) {
 			return "Finland";
 		}
-		else if ( nationAlpha.compareTo( "FL " ) == 0 ) {
+		if ( nationAlpha.compareTo( "FL " ) == 0 ) {
 			return "Liechtenstein";
 		}
-		else if ( nationAlpha.compareTo( "FR " ) == 0 ) {
+		if ( nationAlpha.compareTo( "FR " ) == 0 ) {
 			return "Faeroe Islands";
 		}
-		else if ( nationAlpha.compareTo( "UK " ) == 0 ) {
+		if ( nationAlpha.compareTo( "UK " ) == 0 ) {
 			return "United Kingdom";
 		}
-		else if ( nationAlpha.compareTo( "GE " ) == 0 ) {
+		if ( nationAlpha.compareTo( "GE " ) == 0 ) {
 			return "Georgia";
 		}
-		else if ( nationAlpha.compareTo( "GR " ) == 0 ) {
+		if ( nationAlpha.compareTo( "GR " ) == 0 ) {
 			return "Greece";
 		}
-		else if ( nationAlpha.compareTo( "H  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "H  " ) == 0 ) {
 			return "Hungary";
 		}
-		else if ( nationAlpha.compareTo( "HR " ) == 0 ) {
+		if ( nationAlpha.compareTo( "HR " ) == 0 ) {
 			return "Croatia";
 		}
-		else if ( nationAlpha.compareTo( "I  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "I  " ) == 0 ) {
 			return "Italy";
 		}
-		else if ( nationAlpha.compareTo( "IRL" ) == 0 ) {
+		if ( nationAlpha.compareTo( "IRL" ) == 0 ) {
 			return "Ireland";
 		}
-		else if ( nationAlpha.compareTo( "IS " ) == 0 ) {
+		if ( nationAlpha.compareTo( "IS " ) == 0 ) {
 			return "Iceland";
 		}
-		else if ( nationAlpha.compareTo( "KZ " ) == 0 ) {
+		if ( nationAlpha.compareTo( "KZ " ) == 0 ) {
 			return "Kazakhstan";
 		}
-		else if ( nationAlpha.compareTo( "L  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "L  " ) == 0 ) {
 			return "Luxembourg";
 		}
-		else if ( nationAlpha.compareTo( "LT " ) == 0 ) {
+		if ( nationAlpha.compareTo( "LT " ) == 0 ) {
 			return "Lithuania";
 		}
-		else if ( nationAlpha.compareTo( "LV " ) == 0 ) {
+		if ( nationAlpha.compareTo( "LV " ) == 0 ) {
 			return "Latvia";
 		}
-		else if ( nationAlpha.compareTo( "M  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "M  " ) == 0 ) {
 			return "Malta";
 		}
-		else if ( nationAlpha.compareTo( "MC " ) == 0 ) {
+		if ( nationAlpha.compareTo( "MC " ) == 0 ) {
 			return "Monaco";
 		}
-		else if ( nationAlpha.compareTo( "MD " ) == 0 ) {
+		if ( nationAlpha.compareTo( "MD " ) == 0 ) {
 			return "Republic of Moldova";
 		}
-		else if ( nationAlpha.compareTo( "MK " ) == 0 ) {
+		if ( nationAlpha.compareTo( "MK " ) == 0 ) {
 			return "Macedonia";
 		}
-		else if ( nationAlpha.compareTo( "N  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "N  " ) == 0 ) {
 			return "Norway";
 		}
-		else if ( nationAlpha.compareTo( "NL " ) == 0 ) {
+		if ( nationAlpha.compareTo( "NL " ) == 0 ) {
 			return "The Netherlands";
 		}
-		else if ( nationAlpha.compareTo( "P  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "P  " ) == 0 ) {
 			return "Portugal";
 		}
-		else if ( nationAlpha.compareTo( "PL " ) == 0 ) {
+		if ( nationAlpha.compareTo( "PL " ) == 0 ) {
 			return "Poland";
 		}
-		else if ( nationAlpha.compareTo( "RO " ) == 0 ) {
+		if ( nationAlpha.compareTo( "RO " ) == 0 ) {
 			return "Romania";
 		}
-		else if ( nationAlpha.compareTo( "RSM" ) == 0 ) {
+		if ( nationAlpha.compareTo( "RSM" ) == 0 ) {
 			return "San Marino";
 		}
-		else if ( nationAlpha.compareTo( "RUS" ) == 0 ) {
+		if ( nationAlpha.compareTo( "RUS" ) == 0 ) {
 			return "Russian Federation";
 		}
-		else if ( nationAlpha.compareTo( "S  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "S  " ) == 0 ) {
 			return "Sweden";
 		}
-		else if ( nationAlpha.compareTo( "SK " ) == 0 ) {
+		if ( nationAlpha.compareTo( "SK " ) == 0 ) {
 			return "Slovakia";
 		}
-		else if ( nationAlpha.compareTo( "SLO" ) == 0 ) {
+		if ( nationAlpha.compareTo( "SLO" ) == 0 ) {
 			return "Slovenia";
 		}
-		else if ( nationAlpha.compareTo( "TM " ) == 0 ) {
+		if ( nationAlpha.compareTo( "TM " ) == 0 ) {
 			return "Turkmenistan";
 		}
-		else if ( nationAlpha.compareTo( "TR " ) == 0 ) {
+		if ( nationAlpha.compareTo( "TR " ) == 0 ) {
 			return "Turkey";
 		}
-		else if ( nationAlpha.compareTo( "UA " ) == 0 ) {
+		if ( nationAlpha.compareTo( "UA " ) == 0 ) {
 			return "Ukraine";
 		}
-		else if ( nationAlpha.compareTo( "V  " ) == 0 ) {
+		if ( nationAlpha.compareTo( "V  " ) == 0 ) {
 			return "Vatican City";
 		}
-		else if ( nationAlpha.compareTo( "YU " ) == 0 ) {
+		if ( nationAlpha.compareTo( "YU " ) == 0 ) {
 			return "Yugoslavia";
 		}
-		else if ( nationAlpha.compareTo( "UNK" ) == 0 ) {
+		if ( nationAlpha.compareTo( "UNK" ) == 0 ) {
 			return "Unknown";
 		}
-		else if ( nationAlpha.compareTo( "EC " ) == 0 ) {
+		if ( nationAlpha.compareTo( "EC " ) == 0 ) {
 			return "European Community";
 		}
-		else if ( nationAlpha.compareTo( "EUR" ) == 0 ) {
+		if ( nationAlpha.compareTo( "EUR" ) == 0 ) {
 			return "Rest of Europe";
 		}
-		else if ( nationAlpha.compareTo( "WLD" ) == 0 ) {
+		if ( nationAlpha.compareTo( "WLD" ) == 0 ) {
 			return "Rest of the world";
 		}
-		else {
-			return "Invalid";
-		}
+
+		// invalid nation alpha
+		return "Invalid";
 	}
 
 	@Override

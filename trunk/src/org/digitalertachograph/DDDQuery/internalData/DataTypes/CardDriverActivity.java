@@ -115,7 +115,7 @@ public class CardDriverActivity extends DataClass {
 		int cadrActivityRecordLength = 0;
 
 		int cadrIntegrityCheckActivityPreviousRecordLength = 0;
-		
+
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
 			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy( records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy( records, cardActivityDailyRecordsOffset + 2, 2 ) ) ) );
 

@@ -215,7 +215,7 @@ public class ControlType extends DataClass {
 
 		printing = ( ( this.value & PRINTING_MASK ) == PRINTING_MASK );
 	}
-	
+
 	/**
 	 * Returns the display status of a ControlType object.
 	 * 
@@ -241,7 +241,7 @@ public class ControlType extends DataClass {
 
 		display = ( ( this.value & DISPLAY_MASK ) == DISPLAY_MASK );
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );

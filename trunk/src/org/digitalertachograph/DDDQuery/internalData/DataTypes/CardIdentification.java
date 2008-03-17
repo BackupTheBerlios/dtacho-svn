@@ -80,7 +80,12 @@ public class CardIdentification extends DataClass {
 		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", cardIssuingMemberState.toString() );
 
 		cardNumber = new CardNumber( arrayCopy( value, 1, 16 ), cardType );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s\n", cardNumber.getDriverIdentification() );
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s\n", cardNumber.getDriverIdentification(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", cardNumber.getOwnerIdentification(), cardNumber.getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
+		}
 
 		cardIssuingAuthorityName = new Name( arrayCopy( value, 17, 36 ) );
 		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing authority name: %s\n", cardIssuingAuthorityName.getNameString() );
@@ -237,7 +242,7 @@ public class CardIdentification extends DataClass {
 		node.addContent( cardIssueDate.generateXMLElement( "cardIssueDate" ) );
 		node.addContent( cardValidityBegin.generateXMLElement( "cardValidityBegin" ) );
 		node.addContent( cardExpiryDate.generateXMLElement( "cardExpiryDate" ) );
-		
+
 		return node;
 	}
 }

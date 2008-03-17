@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -35,8 +36,6 @@ public class CardEventRecord extends DataClass {
 	 * 	eventEndTime TimeReal, 4 bytes
 	 * 	eventVehicleRegistration VehicleRegistrationIdentification, 15 bytes
 	 * }
-	 * -- 
-	 * 
 	 */
 
 	/**
@@ -48,6 +47,8 @@ public class CardEventRecord extends DataClass {
 	private TimeReal eventBeginTime;
 	private TimeReal eventEndTime;
 	private VehicleRegistrationIdentification eventVehicleRegistration;
+
+	private DebugLogger debugLogger;
 
 
 	/**
@@ -68,9 +69,23 @@ public class CardEventRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public CardEventRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		eventType = new EventFaultType( value[ 0 ] );
+
+		long eventBeginTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 1, 4 ) );
+		if ( eventBeginTimeTmp != 0 ) {
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT]" );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
+		}
 		eventBeginTime = new TimeReal( arrayCopy( value, 1, 4 ) );
+
+		long eventEndTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 5, 4 ) );
+		if ( eventEndTimeTmp != 0 ) {
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
+		}
 		eventEndTime = new TimeReal( arrayCopy( value, 5, 4 ) );
+
 		eventVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 9, 15 ) );
 	}
 

@@ -68,7 +68,7 @@ public class CardFaultData extends DataClass {
 	public CardFaultData( byte[] value, short noOfFaultsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of faults per type: " + noOfFaultsPerType );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of faults per type: " + noOfFaultsPerType );
 
 		size = 2 * noOfFaultsPerType * CardFaultRecord.size;
 
@@ -78,6 +78,21 @@ public class CardFaultData extends DataClass {
 			// max. NoOfFaultsPerType = 24
 			cardFaultRecords.add( new Vector<CardFaultRecord>( 24 ) );
 
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+
+			switch( j ) {
+			case 0:
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] recording eq. faults:" );
+				break;
+
+			case 1:
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card faults:" );
+				break;
+
+			default:
+				break;
+		}
+
 			for ( int i = ( noOfFaultsPerType * CardFaultRecord.size * j ); i < ( noOfFaultsPerType * CardFaultRecord.size * ( j + 1 ) ); i += CardFaultRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardFaultRecord.size );
 				CardFaultRecord tmp = new CardFaultRecord( record );
@@ -85,11 +100,11 @@ public class CardFaultData extends DataClass {
 				if ( tmp.getFaultBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  recording eq. fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getFaultType().getEventFaultType(), tmp.getFaultType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  card fault, event fault type: 0x%02x\n", tmp.getFaultType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getFaultType().getEventFaultType(), tmp.getFaultType().toString() );
 							break;
 
 						default:

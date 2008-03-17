@@ -52,7 +52,7 @@ public class EF_Driver_Activity_Data extends DataClass {
 
 		Element child = cardDriverActivity.generateXMLElement( "cardDriverActivity" );
 		node.addContent( child );
-		
+
 		return node;
 	}
 }

@@ -56,7 +56,7 @@ public class CardRenewalIndex extends DataClass {
 	 * 								object is created.
 	 */
 	public CardRenewalIndex( byte cardRenewalIndex ) {
-		this.cardRenewalIndex = Byte.toString( cardRenewalIndex );
+		this.cardRenewalIndex = new String( new byte[]{ cardRenewalIndex } );
 	}
 
 	/**

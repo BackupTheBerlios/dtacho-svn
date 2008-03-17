@@ -56,7 +56,7 @@ public class CardReplacementIndex extends DataClass {
 	 * 									object is created.
 	 */
 	public CardReplacementIndex( byte cardReplacementIndex ) {
-		this.cardReplacementIndex = Byte.toString( cardReplacementIndex );
+		this.cardReplacementIndex = new String( new byte[]{ cardReplacementIndex } );
 	}
 
 	/**

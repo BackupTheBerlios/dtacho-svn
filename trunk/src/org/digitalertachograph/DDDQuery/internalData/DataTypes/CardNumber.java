@@ -94,7 +94,7 @@ public class CardNumber extends DataClass {
 	 */
 	public CardNumber( short cardType ) {
 		this.cardType = cardType;
-		
+
 		if ( cardType == EquipmentType.DRIVER_CARD ) {
 			// driver card
 			driverIdentification = new String();
@@ -194,8 +194,8 @@ public class CardNumber extends DataClass {
 	 * 
 	 * @return	the card replacement index of the CardNumber object
 	 */
-	public String getCardReplacementIndex() {
-		return cardReplacementIndex.getCardReplacementIndex();
+	public CardReplacementIndex getCardReplacementIndex() {
+		return cardReplacementIndex;
 	}
 
 	/**
@@ -204,8 +204,8 @@ public class CardNumber extends DataClass {
 	 * @param	cardReplacementIndex	the card replacement index
 	 * 									to be set for the CardNumber object
 	 */
-	public void setCardReplacementIndex( String cardReplacementIndex ) {
-		this.cardReplacementIndex.setCardReplacementIndex( cardReplacementIndex );
+	public void setCardReplacementIndex( CardReplacementIndex cardReplacementIndex ) {
+		this.cardReplacementIndex = cardReplacementIndex;
 	}
 
 	/**
@@ -213,18 +213,18 @@ public class CardNumber extends DataClass {
 	 * 
 	 * @return	the card renewal index of the CardNumber object
 	 */
-	public String getCardRenewalIndex() {
-		return cardRenewalIndex.getCardRenewalIndex();
+	public CardRenewalIndex getCardRenewalIndex() {
+		return cardRenewalIndex;
 	}
 
 	/**
 	 * Sets the card renewal index of a CardNumber object.
 	 * 
 	 * @param	cardRenewalIndex	the card renewal index
-	 * 									to be set for the CardNumber object
+	 * 								to be set for the CardNumber object
 	 */
-	public void setCardRenewalIndex( String cardRenewalIndex ) {
-		this.cardRenewalIndex.setCardRenewalIndex( cardRenewalIndex );
+	public void setCardRenewalIndex( CardRenewalIndex cardRenewalIndex ) {
+		this.cardRenewalIndex = cardRenewalIndex;
 	}
 
 	/**
@@ -261,8 +261,8 @@ public class CardNumber extends DataClass {
 	 * 
 	 * @return	the card consecutive index of the CardNumber object
 	 */
-	public String getCardConsecutiveIndex() {
-		return cardConsecutiveIndex.getCardConsecutiveIndex();
+	public CardConsecutiveIndex getCardConsecutiveIndex() {
+		return cardConsecutiveIndex;
 	}
 
 	/**
@@ -271,8 +271,8 @@ public class CardNumber extends DataClass {
 	 * @param	cardConsecutiveIndex	the card consecutive index
 	 * 									to be set for the CardNumber object
 	 */
-	public void setCardConsecutiveIndex( String cardConsecutiveIndex ) {
-		this.cardConsecutiveIndex.setCardConsecutiveIndex( cardConsecutiveIndex );
+	public void setCardConsecutiveIndex( CardConsecutiveIndex cardConsecutiveIndex ) {
+		this.cardConsecutiveIndex = cardConsecutiveIndex;
 	}
 
 	@Override

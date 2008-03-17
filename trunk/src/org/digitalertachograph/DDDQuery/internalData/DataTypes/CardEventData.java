@@ -77,7 +77,7 @@ public class CardEventData extends DataClass{
 	public CardEventData( byte[] value, short noOfEventsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  no of events per type: " + noOfEventsPerType );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of events per type: " + noOfEventsPerType );
 
 		size = 6 * noOfEventsPerType * CardEventRecord.size;
 
@@ -87,6 +87,37 @@ public class CardEventData extends DataClass{
 			// max. NoOfEventsPerType = 12
 			cardEventRecords.add( new Vector<CardEventRecord>( 12 ) );
 
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+
+			switch( j ) {
+				case 0:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] time overlap events:" );
+					break;
+
+				case 1:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card insertion while driving events:" );
+					break;
+
+				case 2:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] last card session not correctly closed events:" );
+					break;
+
+				case 3:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] power supply interruption events:" );
+					break;
+
+				case 4:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] motion data error events:" );
+					break;
+
+				case 5:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] security breach attempt events:" );
+					break;
+
+				default:
+					break;
+			}
+
 			for ( int i = ( noOfEventsPerType * CardEventRecord.size * j ); i < ( noOfEventsPerType * CardEventRecord.size * ( j + 1 ) ); i += CardEventRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardEventRecord.size );
 				CardEventRecord tmp = new CardEventRecord( record );
@@ -94,27 +125,27 @@ public class CardEventData extends DataClass{
 				if ( tmp.getEventBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  time overlap, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  card insertion while driving, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						case 2:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  last card session not correctly closed, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						case 3:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  power supply interruption, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						case 4:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  motion data error, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						case 5:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  security breach attempt, event fault type: 0x%02x\n", tmp.getEventType().getEventFaultType() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
 							break;
 
 						default:

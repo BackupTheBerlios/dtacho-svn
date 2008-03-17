@@ -40,6 +40,31 @@ public class EntryTypeDailyWorkPeriod extends DataClass {
 	 */
 
 	/**
+	 * EntryTypeDailyWorkPeriod type: CARD_INSERTION_TIME_OR_TIME_OF_ENTRY
+	 */
+	public final static short CARD_INSERTION_TIME_OR_TIME_OF_ENTRY = 0;
+	/**
+	 * EntryTypeDailyWorkPeriod type: CARD_WITHDRAWAL_TIME_OR_TIME_OF_ENTRY
+	 */
+	public final static short CARD_WITHDRAWAL_TIME_OR_TIME_OF_ENTRY = 1;
+	/**
+	 * EntryTypeDailyWorkPeriod type: MANUALLY_ENTERED_START_TIME
+	 */
+	public final static short MANUALLY_ENTERED_START_TIME = 2;
+	/**
+	 * EntryTypeDailyWorkPeriod type: MANUALLY_ENTERED_END_TIME
+	 */
+	public final static short MANUALLY_ENTERED_END_TIME = 3;
+	/**
+	 * EntryTypeDailyWorkPeriod type: START_TIME_ASSUMED_BY_VU
+	 */
+	public final static short START_TIME_ASSUMED_BY_VU = 4;
+	/**
+	 * EntryTypeDailyWorkPeriod type: END_TIME_ASSUMED_BY_VU
+	 */
+	public final static short END_TIME_ASSUMED_BY_VU = 5;
+
+	/**
 	 * Size of structure in bytes.
 	 */
 	public final static int size = 1;

@@ -121,6 +121,40 @@ public class EquipmentType extends DataClass {
 		this.equipmentType = equipmentType;
 	}
 
+	/**
+	 * Returns the type of equipment as string.
+	 * 
+	 * @return	the type of equipment as string
+	 */
+	public String toString() {
+		if ( equipmentType == RESERVED ) {
+			return "reserved";
+		}
+		if ( equipmentType == DRIVER_CARD ) {
+			return "driver card";
+		}
+		if ( equipmentType == WORKSHOP_CARD ) {
+			return "workshop card";
+		}
+		if ( equipmentType == CONTROL_CARD ) {
+			return "control card";
+		}
+		if ( equipmentType == COMPANY_CARD ) {
+			return "company card";
+		}
+		if ( equipmentType == MANUFACTURING_CARD ) {
+			return "manufacturing card";
+		}
+		if ( equipmentType == VEHICLE_UNIT ) {
+			return "vehicle unit";
+		}
+		if ( equipmentType == MOTION_SENSOR ) {
+			return "motion sensor";
+		}
+
+		return "????";
+	}
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		return new Element( name ).setText( Short.toString( equipmentType ) );

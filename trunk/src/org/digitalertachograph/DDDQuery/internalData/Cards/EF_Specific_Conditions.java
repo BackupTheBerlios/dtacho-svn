@@ -21,8 +21,12 @@
 package org.digitalertachograph.DDDQuery.internalData.Cards;
 
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
+import org.digitalertachograph.DDDQuery.internalData.DataTypes.EquipmentType;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.SpecificConditionRecord;
 import org.jdom.Element;
+
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * EF_Specific_Conditions,
@@ -36,9 +40,9 @@ public class EF_Specific_Conditions extends DataClass {
 	 */
 	public final static int size = SpecificConditionRecord.size;
 
-	private SpecificConditionRecord specificConditionRecord;
+	private Vector<SpecificConditionRecord> specificConditionRecords;
 
-	
+
 	/**
 	 * Constructor for an EF_Specific_Conditions object
 	 * 
@@ -46,16 +50,34 @@ public class EF_Specific_Conditions extends DataClass {
 	 * 					whose data is used when the EF_Specific_Conditions
 	 * 					object is created.
 	 */
-	public EF_Specific_Conditions( byte[] value ) {
-		specificConditionRecord = new SpecificConditionRecord( value );
+	public EF_Specific_Conditions( byte[] value, short cardType ) {
+		short numberOfSpecificConditionRecords;
+
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			// driver card
+			numberOfSpecificConditionRecords = 56;
+		}
+		else {
+			// workshop card
+			numberOfSpecificConditionRecords = 2;
+		}
+
+		specificConditionRecords = new Vector<SpecificConditionRecord>( numberOfSpecificConditionRecords );
+
+		for ( int i = 0; i < numberOfSpecificConditionRecords; i++ ) {
+			specificConditionRecords.add( new SpecificConditionRecord( arrayCopy( value, i * SpecificConditionRecord.size, SpecificConditionRecord.size ) ) );
+		}
 	}
 
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
 
-		Element child = specificConditionRecord.generateXMLElement( "specificConditionRecord" );
-		node.addContent( child );
+		Iterator<SpecificConditionRecord> iter = specificConditionRecords.iterator();
+		while ( iter.hasNext() ) {
+			SpecificConditionRecord scr = (SpecificConditionRecord)iter.next();
+			node.addContent( scr.generateXMLElement( "specificConditionRecord" ) );
+		}
 
 		return node;
 	}

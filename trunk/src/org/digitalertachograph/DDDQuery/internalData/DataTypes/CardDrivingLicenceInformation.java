@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -46,6 +47,9 @@ public class CardDrivingLicenceInformation extends DataClass {
 	private NationNumeric drivingLicenceIssuingNation;
 	private String drivingLicenceNumber;
 
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a CardDrivingLicenceInformation object
 	 */
@@ -63,9 +67,16 @@ public class CardDrivingLicenceInformation extends DataClass {
 	 * 					object is created.
 	 */
 	public CardDrivingLicenceInformation( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		drivingLicenceIssuingAuthority = new Name( arrayCopy( value, 0, 36 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing authority: %s\n", drivingLicenceIssuingAuthority.getNameString() );
+
 		drivingLicenceIssuingNation = new NationNumeric( value[ 36 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing nation: %s\n", drivingLicenceIssuingNation.toString() );
+
 		drivingLicenceNumber = new String( arrayCopy( value, 37, 16 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence number: %s\n", drivingLicenceNumber );
 	}
 
 	/**

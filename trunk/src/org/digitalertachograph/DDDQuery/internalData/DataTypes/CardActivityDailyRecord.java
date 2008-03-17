@@ -90,6 +90,8 @@ public class CardActivityDailyRecord extends DataClass {
 			return;
 		}
 
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+
 		this.activityPreviousRecordLength = new CardActivityLengthRange( arrayCopy( value, 0, 2 ) );
 		this.activityRecordLength = new CardActivityLengthRange( arrayCopy( value, 2, 2 ) );
 		this.activityRecordDate = new TimeReal( arrayCopy( value, 4, 4 ) );

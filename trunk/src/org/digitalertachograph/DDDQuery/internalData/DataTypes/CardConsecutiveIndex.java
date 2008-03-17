@@ -55,7 +55,7 @@ public class CardConsecutiveIndex extends DataClass {
 	 * 									object is created.
 	 */
 	public CardConsecutiveIndex( byte cardConsecutiveIndex ) {
-		this.cardConsecutiveIndex = Byte.toString( cardConsecutiveIndex );
+		this.cardConsecutiveIndex = new String( new byte[]{ cardConsecutiveIndex } );
 	}
 
 	/**

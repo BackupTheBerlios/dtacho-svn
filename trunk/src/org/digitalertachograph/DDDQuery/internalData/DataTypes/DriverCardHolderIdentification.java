@@ -68,7 +68,9 @@ public class DriverCardHolderIdentification extends DataClass {
 		debugLogger = new DebugLogger();
 
 		cardHolderName = new HolderName( arrayCopy( value, 0, 72 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Holder name: %s %s\n", cardHolderName.getHolderFirstNames(), cardHolderName.getHolderSurname() );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Holder name:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Prenames: %s\n", cardHolderName.getHolderFirstNames() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Surname: %s\n", cardHolderName.getHolderSurname() );
 
 		cardHolderBirthDate = new Datef( arrayCopy( value, 72, 4 ) );
 		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card holder birth date: %s.%s.%s\n", cardHolderBirthDate.getDayString(), cardHolderBirthDate.getMonthString(), cardHolderBirthDate.getYearString() );

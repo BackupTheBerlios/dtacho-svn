@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -43,6 +44,8 @@ public class SpecificConditionRecord extends DataClass {
 	private TimeReal entryTime;
 	private SpecificConditionType specificConditionType;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a SpecificConditionRecord object
@@ -60,8 +63,18 @@ public class SpecificConditionRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public SpecificConditionRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		long entryTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 0, 4 ) );
+		if ( entryTimeTmp != 0 ) {
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Place record date and time:" );
+		}
 		entryTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+
 		specificConditionType = new SpecificConditionType( value[ 4 ] );
+		if ( entryTimeTmp != 0 ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition type: %s\n", specificConditionType.toString() );
+		}
 	}
 
 	/**

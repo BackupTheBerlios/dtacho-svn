@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -42,6 +43,8 @@ public class CardCurrentUse extends DataClass{
 	private TimeReal sessionOpenTime;
 	private VehicleRegistrationIdentification sessionOpenVehicle;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a CardCurrentUse object
@@ -59,8 +62,14 @@ public class CardCurrentUse extends DataClass{
 	 * 					object is created.
 	 */
 	public CardCurrentUse( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card insertion time:" );
 		sessionOpenTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy( value, 4, 15 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration nation: %s\n", sessionOpenVehicle.getVehicleRegistrationNation().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration number: %s\n", sessionOpenVehicle.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 	}
 
 	/**
