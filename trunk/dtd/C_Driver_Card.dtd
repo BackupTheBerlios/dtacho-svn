@@ -1,6 +1,6 @@
 <!ELEMENT CardData ( Info, EF_ICC, EF_IC, EF_Application_Identification, EF_Card_Certificate, EF_CA_Certificate, EF_Identification, EF_Driving_Licence_Info, EF_Events_Data, EF_Faults_Data, EF_Driver_Activity_Data, EF_Vehicles_Used, EF_Places, EF_Current_Usage, EF_Control_Activity_Data, EF_Specific_Conditions )>
 
-<!ELEMENT Info ( source )>
+<!ELEMENT Info ( source, dataValidatedWithEURPK )>
 <!ELEMENT source ( #PCDATA )>
 <!ELEMENT dataValidatedWithEURPK ( #PCDATA )>
 
@@ -138,7 +138,7 @@
 
 <!ELEMENT EF_Control_Activity_Data ( cardControlActivityDataRecord )>
 <!ELEMENT cardControlActivityDataRecord ( controlType, controlTime, controlCardNumber, controlVehicleRegistration, controlDownloadPeriodBegin, controlDownloadPeriodEnd )>
-<!ELEMENT controlType ( card_downloading, vu_downloading, display, printing )>
+<!ELEMENT controlType ( value, card_downloading, vu_downloading, display, printing )>
 <!ELEMENT card_downloading ( #PCDATA )>
 <!ELEMENT vu_downloading ( #PCDATA )>
 <!ELEMENT display ( #PCDATA )>
@@ -150,6 +150,6 @@
 <!ELEMENT controlDownloadPeriodBegin ( #PCDATA )>
 <!ELEMENT controlDownloadPeriodEnd ( #PCDATA )>
 
-<!ELEMENT EF_Specific_Conditions ( specificConditionRecord )>
+<!ELEMENT EF_Specific_Conditions ( specificConditionRecord+ )>
 <!ELEMENT specificConditionRecord ( entryTime, specificConditionType )>
 <!ELEMENT specificConditionType ( #PCDATA )>

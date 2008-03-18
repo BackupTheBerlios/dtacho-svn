@@ -1,6 +1,6 @@
 <!ELEMENT VehicleUnitData ( Info, PRDT_Overview, ( PRDT_Activities | PRDT_Events_And_Faults | PRDT_Detailed_Speed | PRDT_Technical_Data )* )>
 
-<!ELEMENT Info ( source )>
+<!ELEMENT Info ( source, dataValidatedWithEURPK )>
 <!ELEMENT source ( #PCDATA )>
 <!ELEMENT dataValidatedWithEURPK ( #PCDATA )>
 
@@ -53,7 +53,8 @@
 
 <!ELEMENT vuControlActivityData ( vuControlActivityRecord* )>
 <!ELEMENT vuControlActivityRecord ( controlType, controlTime, controlCardNumber, downloadPeriodBeginTime, downloadPeriodEndTime )>
-<!ELEMENT controlType ( card_downloading, vu_downloading, display, printing )>
+<!ELEMENT controlType ( value, card_downloading, vu_downloading, display, printing )>
+<!ELEMENT value ( #PCDATA )>
 <!ELEMENT card_downloading ( #PCDATA )>
 <!ELEMENT vu_downloading ( #PCDATA )>
 <!ELEMENT display ( #PCDATA )>
@@ -85,7 +86,6 @@
 
 <!ELEMENT vuActivityDailyData ( activityChangeInfo* )>
 <!ELEMENT activityChangeInfo ( value, slot, drivingStatus, cardStatus, activity, time )>
-<!ELEMENT value ( #PCDATA )>
 <!ELEMENT slot ( #PCDATA )>
 <!ELEMENT drivingStatus ( #PCDATA )>
 <!ELEMENT cardStatus ( #PCDATA )>
