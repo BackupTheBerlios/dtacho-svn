@@ -28,15 +28,17 @@ import org.jdom.Element;
  * and/or changes of driving status and/or changes of card status for a driver or a co-driver.
  */
 public class ActivityChangeInfo extends DataClass {
-	/*	
+	/*
 	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2)), 2 bytes
 	 * Value assignment  Octet Aligned: (16 bits)
 	 * 'scpaattttttttttt'B
-	 *  For Data Memory recordings (or slot status):
+	 */
+
+	/*
 	 *	Slot: 's'B
-	 *	DRIVER, '0'B:
-	 *	CO-DRIVER, '1'B:
-	 *	B:1000_0000 = 0x80
+	 *	 DRIVER, '0'B:
+	 *	 CO-DRIVER, '1'B:
+	 *	 B:1000_0000 = 0x80
 	 */
 
 	/**
@@ -59,28 +61,34 @@ public class ActivityChangeInfo extends DataClass {
 	public static final boolean CO_DRIVER = true;
 
 	/*
-                    Driving status: 'c'B
-                      SINGLE, '0'B:
-                      CREW, '1'B:
-                      B:0100_0000 = 0x40
+	 * Depending on the usage of the datatype ActivityChangeInfo (card (driver/workshop) / data memory recordings)
+	 * this field has different meanings:
+	 *	Driving status / activity status: 'c'B
+	 *	 SINGLE / UNKNOWN, '0'B:
+	 *	 CREW / KNOWN, '1'B:
+	 *	 B:0100_0000 = 0x40
 	 */
 	private boolean drivingStatus;
+	private boolean activityStatus;
 	private static final byte DRIVINGSTATUS_MASK = (byte)0x40;
+	private static final byte ACTIVITYSTATUS_MASK = (byte)0x40;
 
 	/**
-	 * Driving status: SINGLE  
+	 * Driving status: SINGLE / activity status UNKNOWN
 	 */
 	public static final boolean SINGLE = false;
+	public static final boolean UNKNOWN = false;
 	/**
-	 * Driving status: CREW
+	 * Driving status: CREW / activity status KNOWN
 	 */
 	public static final boolean CREW = true;
+	public static final boolean KNOWN = true;
 
 	/*
-                    Driver (or workshop) card status in the relevant slot: 'p'B
-                      INSERTED, a card is inserted, '0'B:
-                      NOT INSERTED, no card is inserted (or a card is withdrawn), '1'B:
-                      B:0010_0000 = 0x20
+	 *	Driver (or workshop) card status in the relevant slot: 'p'B
+	 *	 INSERTED, a card is inserted, '0'B:
+	 *	 NOT INSERTED, no card is inserted (or a card is withdrawn), '1'B:
+	 *	 B:0010_0000 = 0x20
 	 */
 	private boolean cardStatus;
 	private static final byte CARDSTATUS_MASK = (byte)0x20;
@@ -94,13 +102,13 @@ public class ActivityChangeInfo extends DataClass {
 	 */
 	public static final boolean NOT_INSERTED = true;
 
-	/*                     
-                    Activity: 'aa'B
-                           BREAK/REST, '00'B:
-                           AVAILABILITY, '01'B:
-                           WORK, '10'B:
-                           DRIVING, '11'B:
-                           B:0001_1000 = 0x18
+	/*
+	 *	Activity: 'aa'B
+	 *	 BREAK/REST, '00'B:
+	 *	 AVAILABILITY, '01'B:
+	 *	 WORK, '10'B:
+	 *	 DRIVING, '11'B:
+	 *	 B:0001_1000 = 0x18
 	 */
 	private byte activity;
 	private static final byte ACTIVITY_MASK = (byte)0x18;
@@ -123,9 +131,9 @@ public class ActivityChangeInfo extends DataClass {
 	public static final byte DRIVING = 3;
 
 	/*
-                    Time of the change: Number of minutes since 00h00 on the given day. 'ttttttttttt'B
-                    B 0000_0111 1111_1111 = 0x07 0xFF
-	 * */
+	 *	Time of the change: Number of minutes since 00h00 on the given day. 'ttttttttttt'B
+	 *	 B 0000_0111 1111_1111 = 0x07 0xFF
+	 */
 	private int time;
 	private static final byte TIME_UPPERBYTE_MASK = (byte)0x07;
 	private static final byte TIME_LOWERBYTE_MASK = (byte)0xff;
@@ -142,56 +150,156 @@ public class ActivityChangeInfo extends DataClass {
 		this.value = value;
 		slot = ( ( value[ 0 ] & SLOT_MASK ) == SLOT_MASK );
 		drivingStatus = ( (value[ 0 ] & DRIVINGSTATUS_MASK ) == DRIVINGSTATUS_MASK );
+		activityStatus = ( (value[ 0 ] & ACTIVITYSTATUS_MASK ) == ACTIVITYSTATUS_MASK );
 		cardStatus = ( ( value[ 0 ] & CARDSTATUS_MASK ) == CARDSTATUS_MASK );
 
 		activity = (byte)( value[ 0 ] & ACTIVITY_MASK );
-		activity = (byte)( activity >> 3);
-		
+		activity = (byte)( activity >> 3 );
+
 		byte tmp = (byte)( value[ 0 ] & TIME_UPPERBYTE_MASK );
 		time = convertIntoUnsigned2ByteInt( new byte[] { tmp, (byte)( value[ 1 ] & TIME_LOWERBYTE_MASK ) } );
 	}
 
 	/**
+	 * Returns the value of an ActivityChangeInfo object.
+	 * 
+	 * @return	the value of the ActivityChangeInfo object ({@link #DRIVER}, {@link #CO_DRIVER})
+	 */
+	public byte[] getValue() {
+		return value;
+	}
+
+	/**
 	 * Returns the slot of an ActivityChangeInfo object.
 	 * 
-	 * @return	slot of the ActivityChangeInfo object ({@link #DRIVER}, {@link #CO_DRIVER})
+	 * @return	the slot of the ActivityChangeInfo object ({@link #DRIVER}, {@link #CO_DRIVER})
 	 */
 	public boolean getSlot() {
 		return slot;
 	}
-	
+
+	/**
+	 * Returns the slot as string of an ActivityChangeInfo object.
+	 * 
+	 * @return	the slot as string of the ActivityChangeInfo object ({@link #DRIVER}, {@link #CO_DRIVER})
+	 */
+	public String getSlotString() {
+		if ( slot == false ) {
+			return "driver";
+		}
+		else {
+			return "co-driver";
+		}
+	}
+
 	/**
 	 * Returns the driving status of an ActivityChangeInfo object.
 	 * 
-	 * @return	 driving status of the ActivityChangeInfo object ({@link #SINGLE}, {@link #CREW})
+	 * @return	the driving status of the ActivityChangeInfo object ({@link #SINGLE}, {@link #CREW})
 	 */
 	public boolean getDrivingStatus() {
 		return drivingStatus;
 	}
-	
+
+	/**
+	 * Returns the driving status as string of an ActivityChangeInfo object.
+	 * 
+	 * @return	the driving status as string of the ActivityChangeInfo object ({@link #SINGLE}, {@link #CREW})
+	 */
+	public String getDrivingStatusString() {
+		if ( drivingStatus == false ) {
+			return "single";
+		}
+		else {
+			return "crew";
+		}
+	}
+
+	/**
+	 * Returns the activity status of an ActivityChangeInfo object.
+	 * 
+	 * @return	the activity status of the ActivityChangeInfo object ({@link #UNKNOWN}, {@link #KNOWN})
+	 */
+	public boolean getActivityStatus() {
+		return activityStatus;
+	}
+
+	/**
+	 * Returns the activity status as string of an ActivityChangeInfo object.
+	 * 
+	 * @return	the activity status as string of the ActivityChangeInfo object ({@link #UNKNOWN}, {@link #KNOWN})
+	 */
+	public String getActivityStatusString() {
+		if ( activityStatus == false ) {
+			return "unknown";
+		}
+		else {
+			return "known";
+		}
+	}
+
 	/**
 	 * Returns the card status of an ActivityChangeInfo object.
 	 * 
-	 * @return	 card status of the ActivityChangeInfo object ({@link #INSERTED}, {@link #NOT_INSERTED})
+	 * @return	the card status of the ActivityChangeInfo object ({@link #INSERTED}, {@link #NOT_INSERTED})
 	 */
 	public boolean getCardStatus() {
 		return cardStatus;
 	}
-	
+
+	/**
+	 * Returns the card status as string of an ActivityChangeInfo object.
+	 * 
+	 * @return	the card status as string of the ActivityChangeInfo object ({@link #INSERTED}, {@link #NOT_INSERTED})
+	 */
+	public String getCardStatusString() {
+		if ( cardStatus == false ) {
+			return "inserted";
+		}
+		else {
+			return "not inserted";
+		}
+	}
+
 	/**
 	 * Returns the activity of an ActivityChangeInfo object.
 	 * 
-	 * @return	 activity of the ActivityChangeInfo object ({@link #BREAK}, {@link #AVAILABILITY},
-	 * 			 {@link #WORK}, {@link #DRIVING})
+	 * @return	the activity of the ActivityChangeInfo object ({@link #BREAK}, {@link #AVAILABILITY},
+	 * 			{@link #WORK}, {@link #DRIVING})
 	 */
 	public byte getActivity() {
 		return activity;
 	}
 
 	/**
+	 * Returns the activity as string of an ActivityChangeInfo object.
+	 * 
+	 * @return	the activity as string of the ActivityChangeInfo object ({@link #BREAK}, {@link #AVAILABILITY},
+	 * 			{@link #WORK}, {@link #DRIVING})
+	 */
+	public String getActivityString() {
+		switch ( activity ) {
+			case ActivityChangeInfo.BREAK:
+				return "break";
+
+			case ActivityChangeInfo.AVAILABILITY:
+				return "availability";
+
+			case ActivityChangeInfo.WORK:
+				return "work";
+
+			case ActivityChangeInfo.DRIVING:
+				return "driving";
+
+			default:
+				return "????";
+		}
+	}
+
+	/**
 	 * Returns the time of an ActivityChangeInfo object.
 	 * 
-	 * @return	time of the ActivityChangeInfo object in number of minutes
+	 * @return	the time of the ActivityChangeInfo object in number of minutes
 	 *			since 00h00 on the given day
 	 */
 	public int getTime() {

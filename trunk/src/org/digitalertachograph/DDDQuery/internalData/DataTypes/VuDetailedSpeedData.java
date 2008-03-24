@@ -76,8 +76,8 @@ public class VuDetailedSpeedData extends DataClass {
 				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] SpeedBlock #%05d:\n", i + 1 );
 
 				byte[] record = arrayCopy( value, 2 + ( i * VuDetailedSpeedBlock.size ), VuDetailedSpeedBlock.size );
-				VuDetailedSpeedBlock tmp = new VuDetailedSpeedBlock( record );
-				vuDetailedSpeedBlocks.add( tmp );
+				VuDetailedSpeedBlock vdsb = new VuDetailedSpeedBlock( record );
+				vuDetailedSpeedBlocks.add( vdsb );
 			}
 		}
 	}

@@ -70,8 +70,8 @@ public class VuControlActivityData extends DataClass {
 		if ( noOfControls != 0 ) {
 			for ( int i = 0; i < noOfControls; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuControlActivityRecord.size ), VuControlActivityRecord.size );
-				VuControlActivityRecord tmp = new VuControlActivityRecord( record );
-				vuControlActivityRecords.add( tmp );
+				VuControlActivityRecord vcar = new VuControlActivityRecord( record );
+				vuControlActivityRecords.add( vcar );
 			}
 		}
 	}

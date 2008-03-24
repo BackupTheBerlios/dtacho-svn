@@ -68,8 +68,8 @@ public class ControlCardControlActivityData extends DataClass {
 	public ControlCardControlActivityData( byte[] value, int noOfControlActivityRecords ) {
 		for ( int i = 0; i < noOfControlActivityRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CardControlActivityDataRecord.size ), CardControlActivityDataRecord.size );
-			CardControlActivityDataRecord tmp = new CardControlActivityDataRecord( record );
-			controlActivityRecords.add( tmp );
+			CardControlActivityDataRecord ccadr = new CardControlActivityDataRecord( record );
+			controlActivityRecords.add( ccadr );
 		}
 
 		size = 2 + noOfControlActivityRecords * CardControlActivityDataRecord.size;

@@ -69,8 +69,8 @@ public class VuPlaceDailyWorkPeriodData extends DataClass {
 		if ( noOfPlaceRecords != 0 ) {
 			for ( int i = 0; i < noOfPlaceRecords; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuPlaceDailyWorkPeriodRecord.size ), VuPlaceDailyWorkPeriodRecord.size );
-				VuPlaceDailyWorkPeriodRecord tmp = new VuPlaceDailyWorkPeriodRecord( record );
-				vuPlaceDailyWorkPeriodRecords.add( tmp );
+				VuPlaceDailyWorkPeriodRecord vpdwpr = new VuPlaceDailyWorkPeriodRecord( record );
+				vuPlaceDailyWorkPeriodRecords.add( vpdwpr );
 			}
 		}
 	}

@@ -83,8 +83,8 @@ public class VuCalibrationData extends DataClass {
 		if ( noOfVuCalibrationRecords != 0 ) {
 			for ( int i = 0; i < noOfVuCalibrationRecords; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuCalibrationRecord.size ), VuCalibrationRecord.size );
-				VuCalibrationRecord tmp = new VuCalibrationRecord( record );
-				vuCalibrationRecords.add( tmp );
+				VuCalibrationRecord vcr = new VuCalibrationRecord( record );
+				vuCalibrationRecords.add( vcr );
 			}
 		}
 	}

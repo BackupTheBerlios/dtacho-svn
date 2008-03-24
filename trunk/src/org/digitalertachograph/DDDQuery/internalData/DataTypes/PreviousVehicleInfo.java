@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -43,6 +44,9 @@ public class PreviousVehicleInfo extends DataClass {
 	private VehicleRegistrationIdentification vehicleRegistrationIdentification;
 	private TimeReal cardWithdrawalTime;
 
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a PreviousVehicleInfo object
 	 */
@@ -59,7 +63,14 @@ public class PreviousVehicleInfo extends DataClass {
 	 * 					object is created.
 	 */
 	public PreviousVehicleInfo( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		vehicleRegistrationIdentification = new VehicleRegistrationIdentification( arrayCopy( value, 0, 15 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNation().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Vehicle registration number: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNumber().getVehicleRegNumberString() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card withdrawal time:" );
 		cardWithdrawalTime = new TimeReal( arrayCopy( value, 15, 4 ) );
 	}
 

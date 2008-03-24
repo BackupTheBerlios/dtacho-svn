@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.VehicleUnit;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.jdom.Element;
@@ -40,6 +41,9 @@ public class PRDT_Technical_Data extends DataClass {
 	private SensorPaired sensorPaired;
 	private VuCalibrationData vuCalibrationData;
 
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a PRDT_Technical_Data object
 	 * 
@@ -48,11 +52,17 @@ public class PRDT_Technical_Data extends DataClass {
 	 * 					object is created.
 	 */
 	public PRDT_Technical_Data( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		int offset1 = 116 + 20;
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit identification:" );
 		vuIdentification = new VuIdentification( arrayCopy( value, 0, 116 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Sensor paired:" );
 		sensorPaired = new SensorPaired( arrayCopy( value, 116, 20 ) );
 
 		int offset2 = 1 + convertIntoUnsigned1ByteInt( value[ 136 ] ) * VuCalibrationRecord.size;
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit calibration data:" );
 		vuCalibrationData = new VuCalibrationData( arrayCopy( value, 136, offset2 ) );
 
 		size = offset1 + offset2;

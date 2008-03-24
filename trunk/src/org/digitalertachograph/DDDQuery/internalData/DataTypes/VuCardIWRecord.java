@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -59,6 +60,8 @@ public class VuCardIWRecord extends DataClass {
 	private PreviousVehicleInfo previousVehicleInfo;
 	private ManualInputFlag manualInputFlag;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuCardIWRecord object
@@ -84,16 +87,48 @@ public class VuCardIWRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public VuCardIWRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+
 		cardHolderName = new HolderName( arrayCopy( value, 0, 72 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Holder name:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Prenames: %s\n", cardHolderName.getHolderFirstNames() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Surname: %s\n", cardHolderName.getHolderSurname() );
+
 		fullCardNumber = new FullCardNumber( arrayCopy( value, 72, 18 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card information:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card type: %s\n", fullCardNumber.getCardType().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", fullCardNumber.getCardIssuingMemberState().toString());
+		if ( fullCardNumber.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", fullCardNumber.getCardNumber().getDriverIdentification(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", fullCardNumber.getCardNumber().getOwnerIdentification(), fullCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card expiry date:" );
 		cardExpiryDate = new TimeReal( arrayCopy( value, 90, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card insertion time:" );
 		cardInsertionTime = new TimeReal( arrayCopy( value, 94, 4 ) );
+
 		vehicleOdometerValueAtInsertion = new OdometerShort( arrayCopy( value, 98, 3 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle odometer value at insertion: %d\n", vehicleOdometerValueAtInsertion.getOdometerShort() );
+
 		cardSlotNumber = new CardSlotNumber( value[ 101 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card slot: %s\n", cardSlotNumber.toString() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card withdrawal time:" );
 		cardWithdrawalTime = new TimeReal( arrayCopy( value, 102, 4 ) );
+
 		vehicleOdometerValueAtWithdrawal = new OdometerShort( arrayCopy( value, 106, 3 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle odometer value at withdrawal: %d\n", vehicleOdometerValueAtWithdrawal.getOdometerShort() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Previous vehicle info:" );
 		previousVehicleInfo = new PreviousVehicleInfo( arrayCopy( value, 109, 19 ) );
+
 		manualInputFlag = new ManualInputFlag( value[ 128 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Manually entered driver activities at card insertion: %s\n", manualInputFlag.getManualInputFlag() );
 	}
 
 	/**

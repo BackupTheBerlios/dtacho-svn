@@ -95,12 +95,12 @@ public class VuIdentification extends DataClass {
 		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit manufacturer code: %02x - %s\n", vuSerialNumber.getManufacturerCode().getManufacturerCode(), vuSerialNumber.getManufacturerCode().toString() );
 
 		vuSoftwareIdentification = new VuSoftwareIdentification( arrayCopy( value, 96, 8 ) );
-		vuManufacturingDate = new VuManufacturingDate( arrayCopy( value, 104, 4 ) );
-		vuApprovalNumber = new VuApprovalNumber( arrayCopy( value, 108, 8 ) );
 
-		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit part number: %s\n", vuPartNumber.getVuPartNumber() );
-		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit serial number: %d\n", vuSerialNumber.getSerialNumber() );
-		//debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Unit software identification: %s\n", vuSoftwareIdentification.getVuSoftwareVersion().getVuSoftwareVersion() );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit manufacturing date:" );
+		vuManufacturingDate = new VuManufacturingDate( arrayCopy( value, 104, 4 ) );
+
+		vuApprovalNumber = new VuApprovalNumber( arrayCopy( value, 108, 8 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit approval number: %s\n", vuApprovalNumber.getVuApprovalNumber() );
 	}
 
 	/**

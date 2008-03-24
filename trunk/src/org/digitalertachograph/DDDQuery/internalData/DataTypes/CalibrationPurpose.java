@@ -96,6 +96,31 @@ public class CalibrationPurpose extends DataClass {
 		this.calibrationPurpose = calibrationPurpose;
 	}
 
+	/**
+	 * Returns the calibration purpose as string.
+	 * 
+	 * @return	the calibration purpose as string
+	 */
+	public String toString() {
+		if ( calibrationPurpose == 0x00 ) {
+			return "reserved value";
+		}
+		if ( calibrationPurpose == 0x01 ) {
+			return "activation: recording of calibration parameters known, at the moment of the VU activation";
+		}
+		if ( calibrationPurpose == 0x02 ) {
+			return "first installation: first calibration of the VU after its activation";
+		}
+		if ( calibrationPurpose == 0x03 ) {
+			return "installation: first calibration of the VU in the current vehicle";
+		}
+		if ( calibrationPurpose == 0x04 ) {
+			return "periodic inspection";
+		}
+
+		return "????";
+	}
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		return new Element( name ).setText( convertIntoHexString( calibrationPurpose ) );

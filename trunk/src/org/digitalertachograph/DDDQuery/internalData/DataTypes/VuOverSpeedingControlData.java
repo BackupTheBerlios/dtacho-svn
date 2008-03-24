@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -45,6 +46,8 @@ public class VuOverSpeedingControlData extends DataClass {
 	private TimeReal firstOverspeedSince;
 	private OverspeedNumber numberOfOverspeedSince;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuOverSpeedingControlData object
@@ -62,9 +65,16 @@ public class VuOverSpeedingControlData extends DataClass {
 	 * 					when the VuOverSpeedingControlData object is created.
 	 */
 	public VuOverSpeedingControlData( byte[] value ) {
+		debugLogger = new DebugLogger();
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Last overspeed control time:" );
 		lastOverspeedControlTime = new TimeReal( arrayCopy( value, 0, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] First overspeed since last control:" );
 		firstOverspeedSince = new TimeReal( arrayCopy( value, 4, 4 ) );
+
 		numberOfOverspeedSince = new OverspeedNumber( value[ 8 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Number of overspeeding events since last control: %d\n", numberOfOverspeedSince.getOverspeedNumber() );
 	}
 
 	/**

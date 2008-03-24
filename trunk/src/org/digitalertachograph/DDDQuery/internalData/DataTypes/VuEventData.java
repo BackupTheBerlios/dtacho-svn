@@ -75,8 +75,8 @@ public class VuEventData extends DataClass {
 		if ( noOfVuEvents != 0 ) {
 			for ( int i = 0; i < noOfVuEvents; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuEventRecord.size ), VuEventRecord.size );
-				VuEventRecord tmp = new VuEventRecord( record );
-				vuEventRecords.add( tmp );
+				VuEventRecord ver = new VuEventRecord( record );
+				vuEventRecords.add( ver );
 			}
 		}
 	}

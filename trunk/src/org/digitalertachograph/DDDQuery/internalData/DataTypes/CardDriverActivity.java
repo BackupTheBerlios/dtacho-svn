@@ -84,9 +84,6 @@ public class CardDriverActivity extends DataClass {
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
 		// records can be accessed linearly from the oldest record (at the beginning
 		// of the array) to the newest record.
-
-		// length of destination CardActivityDailyRecord array (records) is CardDriverActivity length
-		// without offsets for oldest/newest CardActivityDailyRecord (2 * 2 bytes)
 		byte[] records = new byte[ activityStructureLength ];
 
 		int lengthToEnd = records.length - activityPointerOldestDayRecord;

@@ -74,8 +74,8 @@ public class VuFaultData extends DataClass {
 		if ( noOfVuFaults != 0 ) {
 			for ( int i = 0; i < noOfVuFaults; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuFaultRecord.size ), VuFaultRecord.size );
-				VuFaultRecord tmp = new VuFaultRecord( record );
-				vuFaultRecords.add( tmp );
+				VuFaultRecord vfr = new VuFaultRecord( record );
+				vuFaultRecords.add( vfr );
 			}
 		}
 	}

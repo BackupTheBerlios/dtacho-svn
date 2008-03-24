@@ -69,8 +69,8 @@ public class CompanyActivityData extends DataClass {
 	public CompanyActivityData( byte[] value, int noOfCompanyActivityRecords ) {
 		for ( int i = 0; i < noOfCompanyActivityRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CompanyActivityRecord.size ), CompanyActivityRecord.size );
-			CompanyActivityRecord tmp = new CompanyActivityRecord( record );
-			companyActivityRecords.add( tmp );
+			CompanyActivityRecord car = new CompanyActivityRecord( record );
+			companyActivityRecords.add( car );
 		}
 
 		size = 2 + noOfCompanyActivityRecords * CompanyActivityRecord.size;

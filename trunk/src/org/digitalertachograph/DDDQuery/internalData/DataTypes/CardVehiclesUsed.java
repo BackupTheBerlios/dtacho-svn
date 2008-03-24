@@ -63,9 +63,9 @@ public class CardVehiclesUsed extends DataClass {
 		for ( int i = 0; i < noOfCardVehicleRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CardVehicleRecord.size ), CardVehicleRecord.size );
 
-			CardVehicleRecord tmp = new CardVehicleRecord( record );
+			CardVehicleRecord cvr = new CardVehicleRecord( record );
 
-			cardVehicleRecords.add( tmp );
+			cardVehicleRecords.add( cvr );
 		}
 
 		size = 2 + noOfCardVehicleRecords * CardVehicleRecord.size;

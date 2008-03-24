@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -51,6 +52,8 @@ public class SensorPaired extends DataClass {
 	private SensorApprovalNumber sensorApprovalNumber;
 	private SensorPairingDate sensorPairingDateFirst;
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a SensorPaired object
@@ -68,8 +71,19 @@ public class SensorPaired extends DataClass {
 	 * 					when the SensorPaired object is created.
 	 */
 	public SensorPaired( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		sensorSerialNumber = new SensorSerialNumber( arrayCopy( value, 0, 8 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor serial number:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Serial number: %d\n", sensorSerialNumber.getSerialNumber() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Month and year of manufacturing: %s\n", sensorSerialNumber.getMonthYearString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of equipment: %02x\n", sensorSerialNumber.getType() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Manufacturer: %02x - %s\n", sensorSerialNumber.getManufacturerCode().getManufacturerCode(), sensorSerialNumber.getManufacturerCode().toString() );
+
 		sensorApprovalNumber = new SensorApprovalNumber( arrayCopy( value, 8, 8 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor approval number: %s\n", sensorApprovalNumber.getSensorApprovalNumber() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Date of first pairing with a vehicle unit:" );
 		sensorPairingDateFirst = new SensorPairingDate( arrayCopy( value, 16, 4 ) );
 	}
 

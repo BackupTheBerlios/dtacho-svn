@@ -77,8 +77,8 @@ public class VuCardIWData extends DataClass {
 		if ( noOfIWRecords != 0 ) {
 			for ( int i = 0; i < noOfIWRecords; i++ ) {
 				byte[] record = arrayCopy( value, 2 + ( i * VuCardIWRecord.size ), VuCardIWRecord.size );
-				VuCardIWRecord tmp = new VuCardIWRecord( record );
-				vuCardIWRecords.add( tmp );
+				VuCardIWRecord vciwr = new VuCardIWRecord( record );
+				vuCardIWRecords.add( vciwr );
 			}
 		}
 	}

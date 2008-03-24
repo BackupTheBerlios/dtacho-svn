@@ -96,7 +96,7 @@ public class CardControlActivityDataRecord extends DataClass {
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card:" );
 			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card type: %s\n", controlCardNumber.getCardType().toString() );
 			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", controlCardNumber.getCardIssuingMemberState().toString());
-			if ( controlCardNumber.getCardType().getEquipmentType() == EquipmentType.CONTROL_CARD) {
+			if ( controlCardNumber.getCardType().getEquipmentType() == EquipmentType.CONTROL_CARD ) {
 				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", controlCardNumber.getCardNumber().getOwnerIdentification(), controlCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), controlCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), controlCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 			}
 			else {

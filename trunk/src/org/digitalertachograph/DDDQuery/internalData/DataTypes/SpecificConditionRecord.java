@@ -67,7 +67,7 @@ public class SpecificConditionRecord extends DataClass {
 
 		long entryTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 0, 4 ) );
 		if ( entryTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Place record date and time:" );
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition date and time:" );
 		}
 		entryTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 

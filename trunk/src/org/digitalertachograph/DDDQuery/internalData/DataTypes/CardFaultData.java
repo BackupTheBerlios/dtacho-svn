@@ -81,30 +81,30 @@ public class CardFaultData extends DataClass {
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 			switch( j ) {
-			case 0:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] recording eq. faults:" );
-				break;
+				case 0:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] recording eq. faults:" );
+					break;
 
-			case 1:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card faults:" );
-				break;
+				case 1:
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card faults:" );
+					break;
 
-			default:
-				break;
-		}
+				default:
+					break;
+			}
 
 			for ( int i = ( noOfFaultsPerType * CardFaultRecord.size * j ); i < ( noOfFaultsPerType * CardFaultRecord.size * ( j + 1 ) ); i += CardFaultRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardFaultRecord.size );
-				CardFaultRecord tmp = new CardFaultRecord( record );
+				CardFaultRecord cfr = new CardFaultRecord( record );
 
-				if ( tmp.getFaultBeginTime().getTimereal() != 0 ) {
+				if ( cfr.getFaultBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getFaultType().getEventFaultType(), tmp.getFaultType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getFaultType().getEventFaultType(), tmp.getFaultType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
 							break;
 
 						default:
@@ -112,7 +112,7 @@ public class CardFaultData extends DataClass {
 					}
 				}
 
-				cardFaultRecords.get( j ).add( tmp );
+				cardFaultRecords.get( j ).add( cfr );
 			}
 		}
 	}

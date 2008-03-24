@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -45,6 +46,8 @@ public class VuSoftwareIdentification extends DataClass {
 
 	private VuSoftwareVersion vuSoftwareVersion;
 	private VuSoftInstallationDate vuSoftInstallationDate;
+
+	private DebugLogger debugLogger;
 	
 	
 	/**
@@ -63,7 +66,12 @@ public class VuSoftwareIdentification extends DataClass {
 	 * 					object is created.
 	 */
 	public VuSoftwareIdentification( byte[] value ) {
+		debugLogger = new DebugLogger();
+
 		vuSoftwareVersion = new VuSoftwareVersion( arrayCopy( value, 0, 4 ) );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit software version: %s\n", vuSoftwareVersion.getVuSoftwareVersion() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Software installation date:" );
 		vuSoftInstallationDate = new VuSoftInstallationDate( arrayCopy( value, 4, 4 ) );
 	}
 

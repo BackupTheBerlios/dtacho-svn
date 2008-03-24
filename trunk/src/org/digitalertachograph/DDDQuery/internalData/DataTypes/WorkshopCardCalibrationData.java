@@ -70,8 +70,8 @@ public class WorkshopCardCalibrationData extends DataClass {
 
 		for ( int i = 0; i < noOfCalibrationRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 3 + ( i * WorkshopCardCalibrationRecord.size ), WorkshopCardCalibrationRecord.size );
-			WorkshopCardCalibrationRecord tmp = new WorkshopCardCalibrationRecord( record );
-			calibrationRecords.add( tmp );
+			WorkshopCardCalibrationRecord wccr = new WorkshopCardCalibrationRecord( record );
+			calibrationRecords.add( wccr );
 		}
 	}
 

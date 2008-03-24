@@ -102,34 +102,11 @@ public class CardActivityDailyRecord extends DataClass {
 		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength.getCardActivityLengthRange() - 12 ) / ActivityChangeInfo.size );
 
 		for ( int length = 12; length < activityRecordLength.getCardActivityLengthRange(); length += ActivityChangeInfo.size ) {
-			// ActivityChangeInfo <- 2 bytes
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, ActivityChangeInfo.size ) );
 			activityChangeInfo.add( aci );
 
 			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, activity %02x ", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getActivity() );
-
-			switch ( aci.getActivity() ) {
-				case ActivityChangeInfo.BREAK:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- break" );
-					break;
-
-				case ActivityChangeInfo.AVAILABILITY:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- availability" );
-					break;
-
-				case ActivityChangeInfo.WORK:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- work" );
-					break;
-
-				case ActivityChangeInfo.DRIVING:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- driving" );
-					break;
-
-				default:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "- ???" );
-					break;
-			}
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
 		}
 
 		this.complete = true;

@@ -70,8 +70,8 @@ public class VuCompanyLocksData extends DataClass {
 		if ( noOfLocks != 0 ) {
 			for ( int i = 0; i < noOfLocks; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuCompanyLocksRecord.size ), VuCompanyLocksRecord.size );
-				VuCompanyLocksRecord tmp = new VuCompanyLocksRecord( record );
-				vuCompanyLocksRecords.add( tmp );
+				VuCompanyLocksRecord vclr = new VuCompanyLocksRecord( record );
+				vuCompanyLocksRecords.add( vclr );
 			}
 		}
 	}

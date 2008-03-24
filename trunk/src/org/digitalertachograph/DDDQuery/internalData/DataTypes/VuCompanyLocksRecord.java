@@ -71,6 +71,7 @@ public class VuCompanyLocksRecord extends DataClass {
 	 */
 	public VuCompanyLocksRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-in time:" );
 		lockInTime = new TimeReal( arrayCopy( value, 0, 4 ) );

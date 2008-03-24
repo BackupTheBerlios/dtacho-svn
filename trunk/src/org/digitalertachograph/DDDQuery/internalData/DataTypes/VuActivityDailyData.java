@@ -20,9 +20,12 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -52,6 +55,8 @@ public class VuActivityDailyData extends DataClass {
 	// create min. 720 vectors; will be automatically expanded at run time if required!
 	private Vector<ActivityChangeInfo> activityChangeInfos = new Vector<ActivityChangeInfo>( 720 );
 
+	private DebugLogger debugLogger;
+
 
 	/**
 	 * Constructor for a VuActivityDailyData object
@@ -59,18 +64,44 @@ public class VuActivityDailyData extends DataClass {
 	 * @param	value	byte array of a VuActivityDailyData structure
 	 * 					whose data is used when the VuActivityDailyData
 	 * 					object is created.
+	 * 
+	 * @param	downloadedDayDate		byte array of a VuActivityDailyData structure
 	 */
-	public VuActivityDailyData( byte[] value ) {
+	public VuActivityDailyData( byte[] value, TimeReal downloadedDayDate ) {
+		debugLogger = new DebugLogger();
+
 		noOfActivityChanges = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		size = 2 + noOfActivityChanges * ActivityChangeInfo.size;
 
 		if ( noOfActivityChanges != 0 ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", noOfActivityChanges );
+
+
 			for ( int i = 0; i < noOfActivityChanges; i++ ) {
 				byte[] record = arrayCopy( value, 2 + ( i * ActivityChangeInfo.size ), ActivityChangeInfo.size );
-				ActivityChangeInfo tmp = new ActivityChangeInfo( record );
-				activityChangeInfos.add( tmp );
+				ActivityChangeInfo aci = new ActivityChangeInfo( record );
+				activityChangeInfos.add( aci );
+
+				if ( downloadedDayDate.getTimereal() == 0 ) {
+					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %4d minutes after 00:00, activity %02x - %s\n", aci.getTime(), aci.getActivity(), aci.getActivityString() );
+				}
+				else {
+					Date d = new Date( downloadedDayDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
+					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
+				}
 			}
 		}
+	}
+
+	/**
+	 * Constructor for a VuActivityDailyData object
+	 * 
+	 * @param	value					byte array of a VuActivityDailyData structure
+	 * 									whose data is used when the VuActivityDailyData
+	 * 									object is created.
+	 */
+	public VuActivityDailyData( byte[] value ) {
+		this( value, new TimeReal( 0 ) );
 	}
 
 	@Override

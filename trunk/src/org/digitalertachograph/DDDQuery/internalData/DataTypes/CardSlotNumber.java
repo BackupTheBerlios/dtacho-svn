@@ -100,6 +100,17 @@ public class CardSlotNumber extends DataClass {
 		this.cardSlotNumber = cardSlotNumber;
 	}
 
+	public String toString() {
+		if ( cardSlotNumber == DRIVER_SLOT ) {
+			return "Driver slot";
+		}
+		if ( cardSlotNumber == CO_DRIVER_SLOT ) {
+			return "Co-driver slot";
+		}
+
+		return "????";
+	}
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		return new Element( name ).setText( Short.toString( cardSlotNumber ) );

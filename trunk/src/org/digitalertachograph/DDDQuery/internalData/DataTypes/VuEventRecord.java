@@ -20,6 +20,7 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
+import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
 import org.jdom.Element;
 
@@ -56,6 +57,9 @@ public class VuEventRecord extends DataClass {
 	private FullCardNumber cardNumberCodriverSlotEnd;
 	private SimilarEventsNumber similarEventsNumber;
 
+	private DebugLogger debugLogger;
+
+
 	/**
 	 * Constructor for a VuEventRecord object
 	 */
@@ -79,15 +83,67 @@ public class VuEventRecord extends DataClass {
 	 * 					object is created.
 	 */
 	public VuEventRecord( byte[] value ) {
+		debugLogger = new DebugLogger();
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+
 		eventType = new EventFaultType( value[ 0 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of event: %02x - %s\n", eventType.getEventFaultType(), eventType.toString() );
+
 		eventRecordPurpose = new EventFaultRecordPurpose( value[ 1 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Record purpose: %s\n", eventRecordPurpose.toString() );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
 		eventBeginTime = new TimeReal( arrayCopy( value, 2, 4 ) );
+
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
 		eventEndTime = new TimeReal( arrayCopy( value, 6, 4 ) );
+
 		cardNumberDriverSlotBegin = new FullCardNumber( arrayCopy( value, 10, 18 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in driver slot at beginning of event:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberDriverSlotBegin.getCardType().getEquipmentType(), cardNumberDriverSlotBegin.getCardType().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberDriverSlotBegin.getCardIssuingMemberState().toString() );
+		if ( cardNumberDriverSlotBegin.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getDriverIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getOwnerIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+
 		cardNumberCodriverSlotBegin = new FullCardNumber( arrayCopy( value, 28, 18 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in co-driver slot at beginning of event:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberCodriverSlotBegin.getCardType().getEquipmentType(), cardNumberCodriverSlotBegin.getCardType().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberCodriverSlotBegin.getCardIssuingMemberState().toString() );
+		if ( cardNumberCodriverSlotBegin.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberCodriverSlotBegin.getCardNumber().getDriverIdentification(), cardNumberCodriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberCodriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberCodriverSlotBegin.getCardNumber().getOwnerIdentification(), cardNumberCodriverSlotBegin.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberCodriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberCodriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+
 		cardNumberDriverSlotEnd = new FullCardNumber( arrayCopy( value, 46, 18 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in driver slot at end of event:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberDriverSlotEnd.getCardType().getEquipmentType(), cardNumberDriverSlotEnd.getCardType().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberDriverSlotEnd.getCardIssuingMemberState().toString() );
+		if ( cardNumberDriverSlotEnd.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberDriverSlotEnd.getCardNumber().getDriverIdentification(), cardNumberDriverSlotEnd.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotEnd.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberDriverSlotEnd.getCardNumber().getOwnerIdentification(), cardNumberDriverSlotEnd.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberDriverSlotEnd.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotEnd.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+
 		cardNumberCodriverSlotEnd = new FullCardNumber( arrayCopy( value, 64, 18 ) );
+		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in co-driver slot at end of event:" );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberCodriverSlotEnd.getCardType().getEquipmentType(), cardNumberCodriverSlotEnd.getCardType().toString() );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberCodriverSlotEnd.getCardIssuingMemberState().toString() );
+		if ( cardNumberCodriverSlotEnd.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberCodriverSlotEnd.getCardNumber().getDriverIdentification(), cardNumberCodriverSlotEnd.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberCodriverSlotEnd.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+		else {
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberCodriverSlotEnd.getCardNumber().getOwnerIdentification(), cardNumberCodriverSlotEnd.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberCodriverSlotEnd.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberCodriverSlotEnd.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+		}
+
 		similarEventsNumber = new SimilarEventsNumber( value[ 82 ] );
+		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Number of similar events on that day: %d\n", similarEventsNumber.getSimilarEventsNumber() );
 	}
 
 	/**

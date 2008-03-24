@@ -63,9 +63,9 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 		for ( int i = 0; i < noOfCardPlaceRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 1 + ( i * PlaceRecord.size ), PlaceRecord.size );
 
-			PlaceRecord tmp = new PlaceRecord( record );
+			PlaceRecord pr = new PlaceRecord( record );
 
-			placeRecords.add( tmp );
+			placeRecords.add( pr );
 		}
 
 		size = 1 + noOfCardPlaceRecords * PlaceRecord.size;

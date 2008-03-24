@@ -72,8 +72,8 @@ public class VuTimeAdjustmentData extends DataClass {
 		if ( noOfVuTimeAdjRecords != 0 ) {
 			for ( int i = 0; i < noOfVuTimeAdjRecords; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuTimeAdjustmentRecord.size ), VuTimeAdjustmentRecord.size );
-				VuTimeAdjustmentRecord tmp = new VuTimeAdjustmentRecord( record );
-				vuTimeAdjustmentRecords.add( tmp );
+				VuTimeAdjustmentRecord vtar = new VuTimeAdjustmentRecord( record );
+				vuTimeAdjustmentRecords.add( vtar );
 			}
 		}
 	}
@@ -84,8 +84,8 @@ public class VuTimeAdjustmentData extends DataClass {
 
 		Iterator<VuTimeAdjustmentRecord> iter = vuTimeAdjustmentRecords.iterator();
 		while ( iter.hasNext() ) {
-			VuTimeAdjustmentRecord ver = (VuTimeAdjustmentRecord)iter.next();
-			node.addContent( ver.generateXMLElement( "vuTimeAdjustmentRecord" ) );
+			VuTimeAdjustmentRecord vtar = (VuTimeAdjustmentRecord)iter.next();
+			node.addContent( vtar.generateXMLElement( "vuTimeAdjustmentRecord" ) );
 		}
 
 		return node;

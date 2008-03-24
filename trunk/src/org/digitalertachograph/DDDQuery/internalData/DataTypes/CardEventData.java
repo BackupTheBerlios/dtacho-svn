@@ -120,32 +120,32 @@ public class CardEventData extends DataClass{
 
 			for ( int i = ( noOfEventsPerType * CardEventRecord.size * j ); i < ( noOfEventsPerType * CardEventRecord.size * ( j + 1 ) ); i += CardEventRecord.size ) {
 				byte[] record = arrayCopy( value, i, CardEventRecord.size );
-				CardEventRecord tmp = new CardEventRecord( record );
+				CardEventRecord cer = new CardEventRecord( record );
 
-				if ( tmp.getEventBeginTime().getTimereal() != 0 ) {
+				if ( cer.getEventBeginTime().getTimereal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 2:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 3:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 4:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 5:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", tmp.getEventType().getEventFaultType(), tmp.getEventType().toString() );
+							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						default:
@@ -153,7 +153,7 @@ public class CardEventData extends DataClass{
 					}
 				}
 
-				cardEventRecords.get( j ).add( tmp );
+				cardEventRecords.get( j ).add( cer );
 			}
 		}
 	}

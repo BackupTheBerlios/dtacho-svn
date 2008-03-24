@@ -68,8 +68,8 @@ public class VuSpecificConditionData extends DataClass {
 		if ( noOfSpecificConditionRecords != 0 ) {
 			for ( int i = 0; i < noOfSpecificConditionRecords; i++ ) {
 				byte[] record = arrayCopy( value, 2 + ( i * SpecificConditionRecord.size ), SpecificConditionRecord.size );
-				SpecificConditionRecord tmp = new SpecificConditionRecord( record );
-				specificConditionRecords.add( tmp );
+				SpecificConditionRecord scr = new SpecificConditionRecord( record );
+				specificConditionRecords.add( scr );
 			}
 		}
 	}

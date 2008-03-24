@@ -1,3 +1,32 @@
+2008-03-25
+-extended debug information
+
+
+2008-03-22
+-bug fixes
+-more extended debug information
+
+
+2008-03-18
+-DTD files updates
+
+
+2008-03-12
+-more extended debug information
+
+
+2008-03-09
+-bug fixes, more extended infos
+
+
+2008-03-06
+-small changes
+
+
+2008-03-05
+-misc small changes
+
+
 2008-03-02
 -bug fixes
 
@@ -289,7 +318,7 @@
  -fixed debug output
 -misc changes, javadoc documentation
 
- 
+
 2007-12-19
 -ActivityChangeInfo:
  -getter methods added

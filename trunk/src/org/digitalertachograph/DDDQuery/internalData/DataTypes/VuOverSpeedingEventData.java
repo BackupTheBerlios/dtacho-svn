@@ -74,8 +74,8 @@ public class VuOverSpeedingEventData extends DataClass {
 		if ( noOfOverSpeedingEvents != 0 ) {
 			for ( int i = 0; i < noOfOverSpeedingEvents; i++ ) {
 				byte[] record = arrayCopy( value, 1 + ( i * VuOverSpeedingEventRecord.size ), VuOverSpeedingEventRecord.size );
-				VuOverSpeedingEventRecord tmp = new VuOverSpeedingEventRecord( record );
-				vuOverSpeedingEventRecords.add( tmp );
+				VuOverSpeedingEventRecord voser = new VuOverSpeedingEventRecord( record );
+				vuOverSpeedingEventRecords.add( voser );
 			}
 		}
 	}
