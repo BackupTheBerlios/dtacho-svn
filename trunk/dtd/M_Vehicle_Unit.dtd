@@ -100,8 +100,8 @@
 <!ELEMENT dailyWorkPeriodRegion ( #PCDATA )>
 <!ELEMENT vehicleOdometerValue ( #PCDATA )>
 
-<!ELEMENT vuSpecificConditionData ( SpecificConditionRecord* )>
-<!ELEMENT SpecificConditionRecord ( entryTime, specificConditionType )>
+<!ELEMENT vuSpecificConditionData ( specificConditionRecord* )>
+<!ELEMENT specificConditionRecord ( entryTime, specificConditionType )>
 <!ELEMENT entryTime ( #PCDATA )>
 <!ELEMENT specificConditionType ( #PCDATA )>
 
