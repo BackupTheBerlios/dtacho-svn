@@ -79,7 +79,7 @@ public class CardEventData extends DataClass{
 
 		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of events per type: " + noOfEventsPerType );
 
-		size = 6 * noOfEventsPerType * CardEventRecord.size;
+		int noOfValidEventRecords = 0;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
@@ -122,7 +122,8 @@ public class CardEventData extends DataClass{
 				byte[] record = arrayCopy( value, i, CardEventRecord.size );
 				CardEventRecord cer = new CardEventRecord( record );
 
-				if ( cer.getEventBeginTime().getTimereal() != 0 ) {
+				// only add entries with non-default values, i.e. skip empty entries
+				if ( cer.getEventBeginTime().getTimeReal() != 0 ) {
 					switch( j ) {
 						case 0:
 							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
@@ -151,11 +152,15 @@ public class CardEventData extends DataClass{
 						default:
 							break;
 					}
-				}
 
-				cardEventRecords.get( j ).add( cer );
+					cardEventRecords.get( j ).add( cer );
+
+					noOfValidEventRecords += 1;
+				}
 			}
 		}
+
+		size = noOfValidEventRecords * CardEventRecord.size;
 	}
 
 	@Override

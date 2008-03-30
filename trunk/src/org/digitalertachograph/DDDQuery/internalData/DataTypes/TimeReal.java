@@ -20,8 +20,9 @@
 
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
-import java.text.DateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import org.digitalertachograph.DDDQuery.DebugLogger;
 import org.digitalertachograph.DDDQuery.internalData.DataClass;
@@ -80,8 +81,15 @@ public class TimeReal extends DataClass {
 
 		if ( i != 0 ) {
 			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " timestamp: %04x / %d", i, i );
-			Date d = new Date( i * 1000 );
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " - " + DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format(d) );
+
+			SimpleDateFormat timeRealSimpleDate = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss z" ); 
+			timeRealSimpleDate.setTimeZone( TimeZone.getTimeZone( "UTC" ) );
+
+			long timeRealTimeStamp = timereal * 1000;
+
+			Date timeRealDate = new Date( timeRealTimeStamp );
+
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " - " + timeRealSimpleDate.format( timeRealDate ) );
 		}
 	}
 
@@ -92,7 +100,7 @@ public class TimeReal extends DataClass {
 	 * @return	the code for a combined date and time field, where the date and time
 	 * 			are expressed as seconds past 00h.00m.00s on January 1970 GMT of the TimeReal object
 	 */
-	public long getTimereal() {
+	public long getTimeReal() {
 		return timereal;
 	}
 
@@ -103,12 +111,19 @@ public class TimeReal extends DataClass {
 	 * @param	timereal		the code for a combined date and time field, where the date and time
 	 * 							are expressed as seconds past 00h.00m.00s on January 1970 GMT of a TimeReal object
 	 */
-	public void setTimereal( long timereal ) {
+	public void setTimeReal( long timereal ) {
 		this.timereal = timereal;
 	}
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		return new Element( name ).setText( Long.toString( timereal ) );
+		SimpleDateFormat timeRealSimpleDate = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss z" );
+		timeRealSimpleDate.setTimeZone( TimeZone.getTimeZone( "UTC" ) );
+
+		long timeRealTimeStamp = timereal * 1000;
+
+		Date timeRealDate = new Date( timeRealTimeStamp );
+
+		return new Element( name ).setText( timeRealSimpleDate.format( timeRealDate ) );
 	}
 }

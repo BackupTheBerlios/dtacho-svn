@@ -116,7 +116,7 @@ public class SpecificConditionRecord extends DataClass {
 	public void setSpecificConditionType( SpecificConditionType specificConditionType ) {
 		this.specificConditionType = specificConditionType;
 	}
-	
+
 	@Override
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );

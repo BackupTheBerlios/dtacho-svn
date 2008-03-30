@@ -66,13 +66,22 @@ public class ControlCardControlActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public ControlCardControlActivityData( byte[] value, int noOfControlActivityRecords ) {
+		int noOfValidControlActivityRecords = 0;
+
 		for ( int i = 0; i < noOfControlActivityRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CardControlActivityDataRecord.size ), CardControlActivityDataRecord.size );
+
 			CardControlActivityDataRecord ccadr = new CardControlActivityDataRecord( record );
-			controlActivityRecords.add( ccadr );
+
+			// only add entries with non-default values, i.e. skip empty entries
+			if ( ccadr.getControlTime().getTimeReal() != 0 ) {
+				controlActivityRecords.add( ccadr );
+
+				noOfValidControlActivityRecords += 1;
+			}
 		}
 
-		size = 2 + noOfControlActivityRecords * CardControlActivityDataRecord.size;
+		size = 2 + noOfValidControlActivityRecords * CardControlActivityDataRecord.size;
 	}
 
 	@Override

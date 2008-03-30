@@ -72,8 +72,6 @@ public class CardDriverActivity extends DataClass {
 	public CardDriverActivity( byte[] value, int activityStructureLength ) {
 		debugLogger = new DebugLogger();
 
-		size = 2 + 2 + activityStructureLength;
-
 		activityPointerOldestDayRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) ); // = first CardActivityDailyRecord
 		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) ); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
@@ -82,8 +80,8 @@ public class CardDriverActivity extends DataClass {
 
 		// reorganize ringbuffer (=records)
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
-		// records can be accessed linearly from the oldest record (at the beginning
-		// of the array) to the newest record.
+		// records can be accessed linearly from the oldest record at the beginning
+		// of the array to the newest record.
 		byte[] records = new byte[ activityStructureLength ];
 
 		int lengthToEnd = records.length - activityPointerOldestDayRecord;
@@ -114,16 +112,22 @@ public class CardDriverActivity extends DataClass {
 		int cadrIntegrityCheckActivityPreviousRecordLength = 0;
 
 		while ( cardActivityDailyRecordsOffset <= activityPointerLastRecordOffset ) {
-			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy( records, cardActivityDailyRecordsOffset, convertIntoUnsigned2ByteInt( arrayCopy( records, cardActivityDailyRecordsOffset + 2, 2 ) ) ) );
+			int cadrLength = convertIntoUnsigned2ByteInt( arrayCopy( records, cardActivityDailyRecordsOffset + 2, 2 ) );
+
+			if ( cadrLength == 0 ) {
+				break;
+			}
+
+			CardActivityDailyRecord cadr = new CardActivityDailyRecord( arrayCopy( records, cardActivityDailyRecordsOffset, cadrLength ) );
 
 			cadrActivityPreviousRecordLength = cadr.getActivityPreviousRecordLength().getCardActivityLengthRange();
 			cadrActivityRecordLength = cadr.getActivityRecordLength().getCardActivityLengthRange();
 
 			// break loop when empty CardActivityDailyRecord is found
-			// = when default values for structure is used
-			if ( cadrActivityRecordLength == 0 ) {
-				break;
-			}
+			// = when default values for structure are used
+			//if ( cadrActivityRecordLength == 0 ) {
+			//	break;
+			//}
 
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
@@ -147,6 +151,7 @@ public class CardDriverActivity extends DataClass {
 					if ( DebugLogger.logLevel > DebugLogger.LOGLEVEL_INFO_EXTENDED ) {
 						debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "   " );
 					}
+
 					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
 				}
 			}
@@ -157,6 +162,8 @@ public class CardDriverActivity extends DataClass {
 
 			activityDailyRecords.add( cadr );
 		}
+
+		size = 2 + 2 + cardActivityDailyRecordsOffset;
 	}
 
 	/**

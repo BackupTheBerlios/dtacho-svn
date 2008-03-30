@@ -67,13 +67,22 @@ public class CompanyActivityData extends DataClass {
 	 * 					object is created.
 	 */
 	public CompanyActivityData( byte[] value, int noOfCompanyActivityRecords ) {
+		int noOfValidCompanyActivityRecords = 0;
+
 		for ( int i = 0; i < noOfCompanyActivityRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CompanyActivityRecord.size ), CompanyActivityRecord.size );
+
 			CompanyActivityRecord car = new CompanyActivityRecord( record );
-			companyActivityRecords.add( car );
+
+			// only add entries with non-default values, i.e. skip empty entries
+			if ( car.getCompanyActivityTime().getTimeReal() != 0 ) {
+				companyActivityRecords.add( car );
+
+				noOfValidCompanyActivityRecords += 1;
+			}
 		}
 
-		size = 2 + noOfCompanyActivityRecords * CompanyActivityRecord.size;
+		size = 2 + noOfValidCompanyActivityRecords * CompanyActivityRecord.size;
 	}
 
 	@Override

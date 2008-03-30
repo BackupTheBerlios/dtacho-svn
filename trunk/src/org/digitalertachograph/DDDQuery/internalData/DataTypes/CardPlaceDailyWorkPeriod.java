@@ -60,15 +60,22 @@ public class CardPlaceDailyWorkPeriod extends DataClass {
 	 * 					object is created.
 	 */
 	public CardPlaceDailyWorkPeriod( byte[] value, short noOfCardPlaceRecords ) {
+		int noOfValidCardPlaceRecords = 0;
+
 		for ( int i = 0; i < noOfCardPlaceRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 1 + ( i * PlaceRecord.size ), PlaceRecord.size );
 
 			PlaceRecord pr = new PlaceRecord( record );
 
-			placeRecords.add( pr );
+			// only add entries with non-default values, i.e. skip empty entries
+			if ( pr.getEntryTime().getTimeReal() != 0 ) {
+				placeRecords.add( pr );
+
+				noOfValidCardPlaceRecords += 1;
+			}
 		}
 
-		size = 1 + noOfCardPlaceRecords * PlaceRecord.size;
+		size = 1 + noOfValidCardPlaceRecords * PlaceRecord.size;
 	}
 
 	@Override

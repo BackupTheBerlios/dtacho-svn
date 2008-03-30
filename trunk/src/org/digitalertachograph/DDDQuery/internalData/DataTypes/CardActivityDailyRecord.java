@@ -21,8 +21,9 @@
 package org.digitalertachograph.DDDQuery.internalData.DataTypes;
 
 import java.util.Date;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
+import java.util.TimeZone;
 import java.util.Vector;
 
 import org.digitalertachograph.DDDQuery.DebugLogger;
@@ -36,24 +37,24 @@ import org.jdom.Element;
 public class CardActivityDailyRecord extends DataClass {
 	/*
 	 * CardActivityDailyRecord ::= SEQUENCE {
-   	 * 	activityPreviousRecordLength        INTEGER(0..CardActivityLengthRange), 2 bytes
-   	 *  activityRecordLength				INTEGER(0..CardActivityLengthRange), 2 bytes
-   	 *  activityRecordDate                  TimeReal, 4 bytes
-   	 *  activityDailyPresenceCounter        DailyPresenceCounter, 2 bytes
-   	 *  activityDayDistance                 Distance, 2 bytes
-   	 *  activityChangeInfo                  SET SIZE(1..1440) OF ActivityChangeInfo, 2...2880 bytes
-   	 *  }
-   	 * ---
-   	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
+	 * 	activityPreviousRecordLength		INTEGER(0..CardActivityLengthRange), 2 bytes
+	 *  activityRecordLength				INTEGER(0..CardActivityLengthRange), 2 bytes
+	 *  activityRecordDate					TimeReal, 4 bytes
+	 *  activityDailyPresenceCounter		DailyPresenceCounter, 2 bytes
+	 *  activityDayDistance					Distance, 2 bytes
+	 *  activityChangeInfo					SET SIZE(1..1440) OF ActivityChangeInfo, 2...2880 bytes
+	 *  }
+	 * ---
+	 * CardActivityLengthRange ::= INTEGER(0..2^16-1)
 	 * min.:  5544 bytes (28 days * 93 activity changes)
 	 * max.: 13776 bytes (28 days * 240 activity changes)
-   	 * ---
-   	 * DailyPresenceCounter ::= BCDString(SIZE(2))
-   	 * ---
-   	 * Distance ::= INTEGER(0..2^16-1)
-   	 * ---
-   	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2))
-   	 * ---
+	 * ---
+	 * DailyPresenceCounter ::= BCDString(SIZE(2))
+	 * ---
+	 * Distance ::= INTEGER(0..2^16-1)
+	 * ---
+	 * ActivityChangeInfo ::= OCTET STRING (SIZE(2))
+	 * ---
 	 */
 
 	/**
@@ -69,7 +70,7 @@ public class CardActivityDailyRecord extends DataClass {
 	private Distance activityDayDistance;
 	private Vector<ActivityChangeInfo> activityChangeInfo;
 
-	private boolean complete = false;
+	//private boolean complete = false;
 
 	private DebugLogger debugLogger;
 
@@ -85,10 +86,10 @@ public class CardActivityDailyRecord extends DataClass {
 		debugLogger = new DebugLogger();
 
 		// if we get so less bytes we have just a part of an old CardActivityDailyRecord.
-		if ( value.length <= 12 ) {
-			size = 0;
-			return;
-		}
+		//if ( value.length <= 12 ) {
+		//	size = 0;
+		//	return;
+		//}
 
 		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
@@ -105,11 +106,17 @@ public class CardActivityDailyRecord extends DataClass {
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, ActivityChangeInfo.size ) );
 			activityChangeInfo.add( aci );
 
-			Date d = new Date( this.activityRecordDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
+			SimpleDateFormat activityChangeInfoSimpleDate = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss z" ); 
+			activityChangeInfoSimpleDate.setTimeZone( TimeZone.getTimeZone( "UTC" ) );
+
+			long activityChangeInfoTimeStamp = this.activityRecordDate.getTimeReal() * 1000 + aci.getTime() * 60 * 1000;
+
+			Date activityChangeInfoDate = new Date( activityChangeInfoTimeStamp );
+
+			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", activityChangeInfoSimpleDate.format( activityChangeInfoDate ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
 		}
 
-		this.complete = true;
+		//this.complete = true;
 
 		size = 12 + activityRecordLength.getCardActivityLengthRange();
 	}
@@ -119,10 +126,10 @@ public class CardActivityDailyRecord extends DataClass {
 	 * 
 	 * @return			true if the CardActivityDailyRecord object is a complete record
 	 */
-	public boolean isComplete() {
-		return complete;
-	}
-	
+	//public boolean isComplete() {
+	//	return complete;
+	//}
+
 	/**
 	 * Returns the length of the previous CardActivityDailyRecord
 	 * 

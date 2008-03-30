@@ -204,7 +204,7 @@ UMGEBUNGSVARIABLEN
  Die Stufe für Debugmeldungen.
  Standard ist ERROR.
  Folgende Stufen, von der niedrigsten bis zur höchsten, sind möglich:
- NOTHING > ERROR > INFO > INFO_EXTENDED > ALL
+ NOTHING >> ERROR >> INFO >> INFO_EXTENDED >> ALL
 
  NOTHING: keine Debugmeldungen
  ERROR: nur Meldungen ausgeben, wenn ein Fehler aufgetreten ist

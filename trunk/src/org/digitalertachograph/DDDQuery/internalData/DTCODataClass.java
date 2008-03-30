@@ -389,6 +389,7 @@ public abstract class DTCODataClass extends DataClass {
 		while ( dispaterIterator.hasNext() ) {
 			DataClass dc = (DataClass)dispaterIterator.next();
 			Element node = dc.generateXMLElement( dc.getClass().getSimpleName() );
+
 			root.addContent( node );
 		}
 

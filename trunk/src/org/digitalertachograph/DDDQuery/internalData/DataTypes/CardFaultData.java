@@ -70,7 +70,7 @@ public class CardFaultData extends DataClass {
 
 		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of faults per type: " + noOfFaultsPerType );
 
-		size = 2 * noOfFaultsPerType * CardFaultRecord.size;
+		int noOfValidFaultRecords = 0;
 
 		// loops are beautiful. cantaloop... funky, funky...
 		for ( int j = 0; j < sequencesize; j++ ) {
@@ -97,7 +97,8 @@ public class CardFaultData extends DataClass {
 				byte[] record = arrayCopy( value, i, CardFaultRecord.size );
 				CardFaultRecord cfr = new CardFaultRecord( record );
 
-				if ( cfr.getFaultBeginTime().getTimereal() != 0 ) {
+				// only add entries with non-default values, i.e. skip empty entries
+				if ( cfr.getFaultBeginTime().getTimeReal() != 0 ) {
 					switch( j ) {
 						case 0:
 							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
@@ -110,11 +111,15 @@ public class CardFaultData extends DataClass {
 						default:
 							break;
 					}
-				}
 
-				cardFaultRecords.get( j ).add( cfr );
+					cardFaultRecords.get( j ).add( cfr );
+
+					noOfValidFaultRecords += 1;
+				}
 			}
 		}
+
+		size = noOfValidFaultRecords * CardFaultRecord.size;
 	}
 
 	@Override

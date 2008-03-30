@@ -37,8 +37,9 @@ public class EF_Specific_Conditions extends DataClass {
 
 	/**
 	 * Size of structure in bytes.
+	 * Only valid after instantiation of the CardFaultData object.
 	 */
-	public final static int size = SpecificConditionRecord.size;
+	public final int size;
 
 	private Vector<SpecificConditionRecord> specificConditionRecords;
 
@@ -51,22 +52,31 @@ public class EF_Specific_Conditions extends DataClass {
 	 * 					object is created.
 	 */
 	public EF_Specific_Conditions( byte[] value, short cardType ) {
-		short numberOfSpecificConditionRecords;
+		int noOfSpecificConditionRecords;
+		int noOfValidSpecificConditionRecords = 0;
 
 		if ( cardType == EquipmentType.DRIVER_CARD ) {
 			// driver card
-			numberOfSpecificConditionRecords = 56;
+			noOfSpecificConditionRecords = 56;
 		}
 		else {
 			// workshop card
-			numberOfSpecificConditionRecords = 2;
+			noOfSpecificConditionRecords = 2;
 		}
 
-		specificConditionRecords = new Vector<SpecificConditionRecord>( numberOfSpecificConditionRecords );
+		specificConditionRecords = new Vector<SpecificConditionRecord>( noOfSpecificConditionRecords );
 
-		for ( int i = 0; i < numberOfSpecificConditionRecords; i++ ) {
-			specificConditionRecords.add( new SpecificConditionRecord( arrayCopy( value, i * SpecificConditionRecord.size, SpecificConditionRecord.size ) ) );
+		for ( int i = 0; i < noOfSpecificConditionRecords; i++ ) {
+			SpecificConditionRecord scr = new SpecificConditionRecord( arrayCopy( value, i * SpecificConditionRecord.size, SpecificConditionRecord.size ) );
+
+			if ( scr.getEntryTime().getTimeReal() != 0 ) {
+				specificConditionRecords.add( scr );
+
+				noOfValidSpecificConditionRecords += 1;
+			}
 		}
+
+		size = noOfValidSpecificConditionRecords * SpecificConditionRecord.size;
 	}
 
 	public Element generateXMLElement( String name ) {

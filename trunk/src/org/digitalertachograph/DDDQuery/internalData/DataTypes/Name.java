@@ -69,7 +69,7 @@ public class Name extends DataClass{
 	 * Constructor for a Name object
 	 * 
 	 * @param	codePage	byte that specifies the part of the
-	 * 						ISO/IEC 8859 used to code the address
+	 * 						ISO/IEC 8859 used to code the name
 	 * @param	name		byte array that contains the name
 	 */
 	public Name( byte codePage, byte[] name ) {
@@ -143,9 +143,9 @@ public class Name extends DataClass{
 	@Override
 	public Element generateXMLElement( String name ) {
 		Controller c = Controller.getInstance();
-		
+
 		Element node = new Element( name );
-		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage) ) );
+		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage ) ) );
 
 		Element nameElement;
 
@@ -153,10 +153,10 @@ public class Name extends DataClass{
 			byte[] tmp = new byte[ 35 ];
 			for ( int i = 0; i < 35; i++ )
 				tmp[ i ] = 'A';
-			nameElement = new Element( "name" ).setText( convertIntoHexString( tmp ) );
+			nameElement = new Element( "name" ).setText( convertIntoString( tmp, codePage ) );
 		}
 		else {
-			nameElement = new Element( "name" ).setText( convertIntoHexString( this.name ) );
+			nameElement = new Element( "name" ).setText( convertIntoString( this.name, codePage ) );
 		}
 
 		node.addContent( nameElement );

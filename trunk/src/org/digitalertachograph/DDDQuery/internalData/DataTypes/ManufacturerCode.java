@@ -88,7 +88,7 @@ public class ManufacturerCode extends DataClass {
 	 * 
 	 * @return	the name of the manufacturer of the ManufacturerCode object
 	 * 
-	 * Manufacturer codes list as of 12/03/2008
+	 * Manufacturer codes list as of 26/03/2008
 	 * http://dtc.jrc.it/text/cm.html
 	 */
 	public String toString() {

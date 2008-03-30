@@ -48,12 +48,16 @@ public class EF_Control_Activity_Data extends DataClass {
 	public EF_Control_Activity_Data( byte[] value ) {
 		cardControlActivityDataRecord = new CardControlActivityDataRecord( value );
 	}
-	
+
 	public Element generateXMLElement( String name ) {
+		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( name );
 
 		Element child = cardControlActivityDataRecord.generateXMLElement( "cardControlActivityDataRecord" );
-		node.addContent( child );
+
+		if ( child != null ) {
+			node.addContent( child );
+		}
 
 		return node;
 	}

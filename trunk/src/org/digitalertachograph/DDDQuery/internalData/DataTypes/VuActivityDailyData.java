@@ -82,11 +82,11 @@ public class VuActivityDailyData extends DataClass {
 				ActivityChangeInfo aci = new ActivityChangeInfo( record );
 				activityChangeInfos.add( aci );
 
-				if ( downloadedDayDate.getTimereal() == 0 ) {
+				if ( downloadedDayDate.getTimeReal() == 0 ) {
 					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %4d minutes after 00:00, activity %02x - %s\n", aci.getTime(), aci.getActivity(), aci.getActivityString() );
 				}
 				else {
-					Date d = new Date( downloadedDayDate.getTimereal() * 1000 + aci.getTime() * 60 * 1000 );
+					Date d = new Date( downloadedDayDate.getTimeReal() * 1000 + aci.getTime() * 60 * 1000 );
 					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
 				}
 			}

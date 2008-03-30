@@ -251,26 +251,20 @@ public class CardControlActivityDataRecord extends DataClass {
 
 	@Override
 	public Element generateXMLElement( String name ) {
-		/*
-		 * CardControlActivityDataRecord ::= SEQUENCE {
-		 * 	controlType ControlType, 1 byte
-		 * 	controlTime TimeReal, 4 bytes
-		 * 	controlCardNumber FullCardNumber, 18 bytes
-		 * 	controlVehicleRegistration VehicleRegistrationIdentification, 15 bytes
-		 * 	controlDownloadPeriodBegin TimeReal, 4 bytes
-		 * 	controlDownloadPeriodEnd TimeReal, 4 bytes
-		 * }
-		 */
-
 		Element node = new Element( name );
 
-		node.addContent( controlType.generateXMLElement( "controlType" ) );
-		node.addContent( controlTime.generateXMLElement( "controlTime" ) );
-		node.addContent( controlCardNumber.generateXMLElement( "controlCardNumber" ) );
-		node.addContent( controlVehicleRegistration.generateXMLElement( "controlVehicleRegistration" ) );
-		node.addContent( controlDownloadPeriodBegin.generateXMLElement( "controlDownloadPeriodBegin" ) );
-		node.addContent( controlDownloadPeriodEnd.generateXMLElement( "controlDownloadPeriodEnd" ) );
+		if ( controlTime.getTimeReal() != 0 ) {
+			node.addContent( controlType.generateXMLElement( "controlType" ) );
+			node.addContent( controlTime.generateXMLElement( "controlTime" ) );
+			node.addContent( controlCardNumber.generateXMLElement( "controlCardNumber" ) );
+			node.addContent( controlVehicleRegistration.generateXMLElement( "controlVehicleRegistration" ) );
+			node.addContent( controlDownloadPeriodBegin.generateXMLElement( "controlDownloadPeriodBegin" ) );
+			node.addContent( controlDownloadPeriodEnd.generateXMLElement( "controlDownloadPeriodEnd" ) );
 
-		return node;
-	}	
+			return node;
+		}
+		else {
+			return null;
+		}
+	}
 }

@@ -78,10 +78,10 @@ public class SecurityCertificateContent {
 		// eov, certificate end of validity
 		eov = new byte[ 4 ];
 		System.arraycopy( new byte[] {
-				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimereal() >> 24 ) & 0x000000ff ),
-				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimereal() >> 16 ) & 0x000000ff ),
-				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimereal() >> 8  ) & 0x000000ff ),
-				(byte)(   certificateContent.getCertificateEndOfValidity().getTimereal()         & 0x000000ff )
+				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimeReal() >> 24 ) & 0x000000ff ),
+				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimeReal() >> 16 ) & 0x000000ff ),
+				(byte)( ( certificateContent.getCertificateEndOfValidity().getTimeReal() >> 8  ) & 0x000000ff ),
+				(byte)(   certificateContent.getCertificateEndOfValidity().getTimeReal()         & 0x000000ff )
 			}, 0, eov, 0, 4 );
 
 		// chr, certificate holder reference

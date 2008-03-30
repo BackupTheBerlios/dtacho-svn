@@ -135,7 +135,7 @@ public class Address extends DataClass {
 		Element node = new Element( name );
 
 		node.addContent( new Element( "codePage" ).setText( Short.toString( codePage ) ) );
-		node.addContent( new Element( "address" ).setText( convertIntoHexString( address ) ) );
+		node.addContent( new Element( "address" ).setText( convertIntoString( address, codePage ) ) );
 
 		return node;
 	}

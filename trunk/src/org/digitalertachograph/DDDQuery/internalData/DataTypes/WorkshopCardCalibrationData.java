@@ -34,7 +34,7 @@ public class WorkshopCardCalibrationData extends DataClass {
 	/*
 	 * WorkshopCardCalibrationData ::= SEQUENCE {
 	 * 	calibrationTotalNumber INTEGER(0..2^16-1), 2 bytes
-	 * 	calibrationPointerNewestRecord INTEGER(0..NoOfCalibrationRecords-1), 1 bytes
+	 * 	calibrationPointerNewestRecord INTEGER(0..NoOfCalibrationRecords-1), 1 byte
 	 * 	calibrationRecords SET SIZE(NoOfCalibrationRecords) OF WorkshopCardCalibrationRecord, 9240..26775 bytes
 	 * }
 	 * ---
@@ -65,14 +65,23 @@ public class WorkshopCardCalibrationData extends DataClass {
 	 */
 	public WorkshopCardCalibrationData( byte[] value, short noOfCalibrationRecords ) {
 		calibrationTotalNumber = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
-		calibrationPointerNewestRecord = convertIntoUnsigned1ByteInt( value[ 2 ] );
-		size = 3 + calibrationTotalNumber * WorkshopCardCalibrationRecord.size;
+
+		int noOfValidCalibrationRecords = 0;
 
 		for ( int i = 0; i < noOfCalibrationRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 3 + ( i * WorkshopCardCalibrationRecord.size ), WorkshopCardCalibrationRecord.size );
+
 			WorkshopCardCalibrationRecord wccr = new WorkshopCardCalibrationRecord( record );
-			calibrationRecords.add( wccr );
+
+			// only add entries with non-default values, i.e. skip empty entries
+			if ( wccr.getCalibrationPurpose().getCalibrationPurpose() != 0 ) {
+				calibrationRecords.add( wccr );
+
+				noOfValidCalibrationRecords += 1;
+			}
 		}
+
+		size = 3 + noOfValidCalibrationRecords * WorkshopCardCalibrationRecord.size;
 	}
 
 	/**

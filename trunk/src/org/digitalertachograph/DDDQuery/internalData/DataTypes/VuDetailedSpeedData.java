@@ -67,6 +67,19 @@ public class VuDetailedSpeedData extends DataClass {
 	public VuDetailedSpeedData( byte[] value ) {
 		debugLogger = new DebugLogger();
 
+		// if environment variable NODETALEDSPEED is set to true
+		// skip processing of vuDetailedSpeedBlocks
+		String envTagInfo = System.getenv( "NODETAILEDSPEED" );
+
+		if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
+			if ( envTagInfo.toLowerCase().compareTo( "true" ) == 0 ) {
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] NODETAILEDSPEED=true found, skipping SpeedBlock entries." );
+				size = 2;
+
+				return;
+			}
+		}
+
 		noOfSpeedBlocks = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );
 		size = 2 + noOfSpeedBlocks * VuDetailedSpeedBlock.size;
 

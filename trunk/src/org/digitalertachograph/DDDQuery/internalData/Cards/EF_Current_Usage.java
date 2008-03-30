@@ -55,7 +55,10 @@ public class EF_Current_Usage extends DataClass {
 		Element node = new Element( this.getClass().getSimpleName() );
 
 		Element child = cardCurrentUse.generateXMLElement( "cardCurrentUse" );
-		node.addContent( child );
+
+		if ( child != null ) {
+			node.addContent( child );
+		}
 
 		return node;
 	}

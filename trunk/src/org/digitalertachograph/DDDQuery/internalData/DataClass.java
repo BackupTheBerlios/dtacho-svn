@@ -20,6 +20,10 @@
 
 package org.digitalertachograph.DDDQuery.internalData;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import org.jdom.Element;
 
 /**
@@ -143,11 +147,39 @@ public abstract class DataClass {
 			if ( lNibble > 0x39 ) {
 				lNibble = '_';
 			}
-			
+
 			tmp = tmp + (char)hNibble + (char)lNibble;
 		}
 
 		return tmp;
+	}
+
+ 	/**
+	 * Converts the byte array <tt>b</tt> into a string.
+	 * 
+	 * @param	b			the byte array to be converted to a string
+	 * @param	codepage	the codepage to be used for conversion
+	 * @return	the string created from byte array <tt>b</tt>
+	 */
+	static protected String convertIntoString( byte[] b, short codePage ) {
+		// if codepage is invalid, return an empty string
+		if ( ( codePage < 1 ) || ( codePage > 16 ) ) {
+			return new String();
+		}
+
+		Charset cs = Charset.forName( "ISO-8859-" + codePage );
+		CharsetDecoder decoder = cs.newDecoder();
+
+		ByteBuffer bb = ByteBuffer.wrap( b );
+		CharBuffer cb = null;
+		try {
+			cb = decoder.decode( bb );
+		}
+		catch ( Exception ex ) {
+			throw new RuntimeException( ex );
+		}
+
+		return cb.toString();
 	}
 
 	/**

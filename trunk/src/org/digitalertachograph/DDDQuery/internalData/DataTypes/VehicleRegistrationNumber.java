@@ -70,7 +70,7 @@ public class VehicleRegistrationNumber extends DataClass {
 	 * Constructor for a VehicleRegistrationNumber object
 	 * 
 	 * @param	codePage			byte that specifies the part of the
-	 * 								ISO/IEC 8859 used to code the address
+	 * 								ISO/IEC 8859 used to code the number of the vehicle (VRN)
 	 * @param	vehicleRegNumber	byte array that contains the number of the vehicle (VRN)
 	 */
 	public VehicleRegistrationNumber( byte codePage, byte[] vehicleRegNumber ) {
@@ -143,13 +143,15 @@ public class VehicleRegistrationNumber extends DataClass {
 		// anonymize data if required
 		if ( c.isAnonymized() ) {
 			byte[] tmp = new byte[ 13 ];
-			for ( int i = 0; i < 13; i++ )
+
+			for ( int i = 0; i < 13; i++ ) {
 				tmp[ i ] = 'A';
-			
-			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoHexString( tmp ) ) );
+			}
+
+			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoString( tmp, codePage ) ) );
 		}
 		else {
-			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoHexString( vehicleRegNumber ) ) );
+			node.addContent( new Element( "vehicleRegNumber" ).setText( convertIntoString( vehicleRegNumber, codePage ) ) );
 		}
 		return node;
 	}

@@ -60,15 +60,22 @@ public class CardVehiclesUsed extends DataClass {
 	 * 					object is created.
 	 */
 	public CardVehiclesUsed( byte[] value, int noOfCardVehicleRecords ) {
+		int noOfValidCardVehicleRecords = 0;
+
 		for ( int i = 0; i < noOfCardVehicleRecords; i += 1 ) {
 			byte[] record = arrayCopy( value, 2 + ( i * CardVehicleRecord.size ), CardVehicleRecord.size );
 
 			CardVehicleRecord cvr = new CardVehicleRecord( record );
 
-			cardVehicleRecords.add( cvr );
+			// only add entries with non-default values, i.e. skip empty entries
+			if ( cvr.getVehicleFirstUse().getTimeReal() != 0 ) {
+				cardVehicleRecords.add( cvr );
+
+				noOfValidCardVehicleRecords += 1;
+			}
 		}
 
-		size = 2 + noOfCardVehicleRecords * CardVehicleRecord.size;
+		size = 2 + noOfValidCardVehicleRecords * CardVehicleRecord.size;
 	}
 
 	@Override

@@ -66,10 +66,7 @@ public class CardCurrentUse extends DataClass{
 
 		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card insertion time:" );
 		sessionOpenTime = new TimeReal( arrayCopy( value, 0, 4 ) );
-
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy( value, 4, 15 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration nation: %s\n", sessionOpenVehicle.getVehicleRegistrationNation().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration number: %s\n", sessionOpenVehicle.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 	}
 
 	/**
@@ -120,9 +117,14 @@ public class CardCurrentUse extends DataClass{
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( sessionOpenTime.generateXMLElement( "sessionOpenTime" ) );
-		node.addContent( sessionOpenVehicle.generateXMLElement( "sessionOpenVehicle" ) );
+		if ( sessionOpenTime.getTimeReal() != 0 ) {
+			node.addContent( sessionOpenTime.generateXMLElement( "sessionOpenTime" ) );
+			node.addContent( sessionOpenVehicle.generateXMLElement( "sessionOpenVehicle" ) );
 
-		return node;
+			return node;
+		}
+		else {
+			return null;
+		}
 	}
 }

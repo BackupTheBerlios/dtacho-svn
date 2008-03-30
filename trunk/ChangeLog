@@ -1,3 +1,17 @@
+2008-03-30
+-only output records that contain useful data
+-decoder for ISO-8859-<codepage> encoded strings in DataClass
+ this affects: Address, Name, VehicleRegistrationNumber
+-environment variable NODETAILEDSPEED to suppress output of
+ detailed speed data in XML output
+
+
+2008-03-27
+-times in UTC: TimeReal, CardActivityDailyRecord
+-simple date format (UTC) for times in XML dump now
+ yyyy-MM-dd HH:mm:ss z
+
+
 2008-03-25
 -extended debug information
 

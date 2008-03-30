@@ -197,7 +197,7 @@ ENVIRONMENT
  The level for debug messages.
  Standard is ERROR.
  The following levels, from the lowset to the highest, are possible:
- NOTHING > ERROR > INFO > INFO_EXTENDED > ALL
+ NOTHING >> ERROR >> INFO >> INFO_EXTENDED >> ALL
 
  NOTHING: no debug messages
  ERROR: only output messages when there was an error
