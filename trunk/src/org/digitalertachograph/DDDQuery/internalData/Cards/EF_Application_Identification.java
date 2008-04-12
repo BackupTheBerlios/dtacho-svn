@@ -229,35 +229,30 @@ public class EF_Application_Identification extends DataClass {
 	public int getNoOfCompanyActivityRecords() {
 		return noOfCompanyActivityRecords;
 	}
-	
+
 	public Element generateXMLElement( String name ) {
 		// discard name - this.getClass().getSimpleName() is unique!
 		Element node = new Element( this.getClass().getSimpleName() );
 
-		String child_name;
 		Element child;
 
 		switch ( cardType ) {
 			case EquipmentType.DRIVER_CARD :
-				child_name = driverCardApplicationIdentification.getClass().getSimpleName();
-				child = driverCardApplicationIdentification.generateXMLElement( child_name );
+				child = driverCardApplicationIdentification.generateXMLElement( "driverCardApplicationIdentification" );
 				break;
 
 			case EquipmentType.WORKSHOP_CARD :
-				child_name = workshopCardApplicationIdentification.getClass().getSimpleName(); 
-				child = workshopCardApplicationIdentification.generateXMLElement( child_name );
+				child = workshopCardApplicationIdentification.generateXMLElement( "workshopCardApplicationIdentification" );
 				break;
 
 			case EquipmentType.CONTROL_CARD :
-				child_name = controlCardApplicationIdentification.getClass().getSimpleName();
-				child = controlCardApplicationIdentification.generateXMLElement( child_name );
+				child = controlCardApplicationIdentification.generateXMLElement( "controlCardApplicationIdentification" );
 				break;
 
 			case EquipmentType.COMPANY_CARD :
-				child_name = companyCardApplicationIdentification.getClass().getSimpleName();
-				child = companyCardApplicationIdentification.generateXMLElement( child_name );
+				child = companyCardApplicationIdentification.generateXMLElement( "companyCardApplicationIdentification" );
 				break;
-			
+
 			default :
 				child = new Element( "default" );
 				break;

@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="DriverCard"
+	xmlns:tns="DriverCard"
+	elementFormDefault="unqualified">
+
+    <element name="CardData"
+    	type="tns:CardData">
+    </element>
+
+    <complexType name="CardData">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="Info"
+    			type="tns:Info" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_ICC"
+    			type="tns:EF_ICC" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_IC"
+    			type="tns:EF_IC" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Application_Identification"
+    			type="tns:EF_Application_Identification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Card_Certificate"
+    			type="tns:EF_Card_Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_CA_Certificate"
+    			type="tns:EF_CA_Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Identification"
+    			type="tns:EF_Identification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Driving_Licence_Info"
+    			type="tns:EF_Driving_Licence_Info" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Events_Data"
+    			type="tns:EF_Events_Data" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Faults_Data"
+    			type="tns:EF_Faults_Data" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Driver_Activity_Data"
+    			type="tns:EF_Driver_Activity_Data" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Vehicles_Used"
+    			type="tns:EF_Vehicles_Used" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Places"
+    			type="tns:EF_Places" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Current_Usage"
+    			type="tns:EF_Current_Usage" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Control_Activity_Data"
+    			type="tns:EF_Control_Activity_Data" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="EF_Specific_Conditions"
+    			type="tns:EF_Specific_Conditions" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Info">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="source"
+    			type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dataValidatedWithEURPK"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_ICC">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardIccIdentification"
+    			type="tns:CardIccIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardIccIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="clockStop" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="cardExtendedSerialNumber"
+    			type="tns:ExtendedSerialNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardApprovalNumber"
+    			type="tns:CardApprovalNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardPersonaliserID" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="embedderIcAssemblerId" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="5"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="icIdentifier" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="2"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ExtendedSerialNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="serialNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedLong">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="4294967295"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="monthYear" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<length value="4"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="type" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="manufacturerCode"
+    			type="tns:ManufacturerCode" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_IC">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardChipIdentification"
+    			type="tns:CardChipIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardChipIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="icSerialNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="4"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="icManufacturingReferences" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="4"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Application_Identification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="driverCardApplicationIdentification"
+    			type="tns:DriverCardApplicationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DriverCardApplicationIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="typeOfTachographCardId"
+    			type="tns:EquipmentType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardStructureVersion"
+    			type="tns:CardStructureVersionType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="noOfEventsPerType"
+    			type="tns:NoOfEventsPerType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="noOfFaultsPerType"
+    			type="tns:NoOfFaultsPerType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activityStructureLength"
+    			type="tns:CardActivityLengthRange" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="noOfCardVehicleRecords"
+    			type="tns:NoOfCardVehicleRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="noOfCardPlaceRecords"
+    			type="tns:NoOfCardPlaceRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Card_Certificate">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardCertificate"
+    			type="tns:Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_CA_Certificate">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="memberStateCertificate"
+    			type="tns:Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="ManufacturerCode">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="CardApprovalNumber">
+    	<restriction base="string">
+    		<maxLength value="8"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="EquipmentType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="CardStructureVersionType">
+    	<restriction base="hexBinary">
+    		<length value="2"></length>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="NoOfEventsPerType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="NoOfFaultsPerType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="CardActivityLengthRange">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="NoOfCardVehicleRecords">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="NoOfCardPlaceRecords">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="Certificate">
+    	<restriction base="hexBinary">
+    		<length value="194"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="EF_Identification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardIdentification"
+    			type="tns:CardIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="driverCardHolderIdentification"
+    			type="tns:DriverCardHolderIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardIssuingMemberState"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumber"
+    			type="tns:CardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardIssuingAuthorityName"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardIssueDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardValidityBegin"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardExpiryDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="NationNumeric">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="CardNumber">
+    	<choice minOccurs="1" maxOccurs="1">
+    		<sequence minOccurs="1" maxOccurs="1">
+    			<element name="driverIdentification" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="14"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardReplacementIndex"
+    				type="tns:CardReplacementIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="cardRenewalIndex"
+    				type="tns:CardRenewalIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    		</sequence>
+    		<sequence minOccurs="1" maxOccurs="1">
+    			<element name="ownerIdentification" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="13"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardConsecutiveIndex" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="1"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardReplacementIndex"
+    				type="tns:CardReplacementIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="cardRenewalIndex"
+    				type="tns:CardRenewalIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    		</sequence>
+    	</choice>
+    </complexType>
+
+    <simpleType name="CardReplacementIndex">
+    	<restriction base="string">
+    		<maxLength value="1"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="CardRenewalIndex">
+    	<restriction base="string">
+    		<maxLength value="1"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="Name">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="codePage" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedShort">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="255"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="name" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="35"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="TimeReal">
+    	<restriction base="string">
+    		<pattern value="\d{4,4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\sUTC"></pattern>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="DriverCardHolderIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardHolderName"
+    			type="tns:HolderName" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardHolderBirthDate"
+    			type="tns:Datef" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardHolderPreferredLanguage"
+    			type="tns:Language" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="HolderName">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="holderSurname"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="holderFirstNames"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Datef">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="year" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<length value="4"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="month" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<length value="2"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="day" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<length value="2"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="Language">
+    	<restriction base="string">
+    		<length value="2"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="EF_Driving_Licence_Info">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardDrivingLicenceInformation"
+    			type="tns:CardDrivingLicenceInformation" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardDrivingLicenceInformation">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="drivingLicenceIssuingAuthority"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="drivingLicenceIssuingNation"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="drivingLicenceNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="16"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Events_Data">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardEventData"
+    			type="tns:CardEventData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardEventData">
+    	<sequence minOccurs="6" maxOccurs="6">
+    		<element name="cardEventRecords"
+    			type="tns:CardEventRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardEventRecords">
+    	<sequence minOccurs="0" maxOccurs="12">
+    		<element name="cardEventRecord"
+    			type="tns:CardEventRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardEventRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="eventType"
+    			type="tns:EventFaultType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventVehicleRegistration"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Faults_Data">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardFaultData"
+    			type="tns:CardFaultData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardFaultData">
+    	<sequence minOccurs="2" maxOccurs="2">
+    		<element name="cardFaultRecords"
+    			type="tns:CardFaultRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardFaultRecords">
+    	<sequence minOccurs="0" maxOccurs="24">
+    		<element name="cardFaultRecord"
+    			type="tns:CardFaultRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardFaultRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="faultType"
+    			type="tns:EventFaultType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultVehicleRegistration"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="EventFaultType">
+    	<restriction base="hexBinary">
+    		<length value="1"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VehicleRegistrationIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vehicleRegistrationNation"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleRegistrationNumber"
+    			type="tns:VehicleRegistrationNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VehicleRegistrationNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="codePage" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedShort">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="255"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="vehicleRegNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="13"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Driver_Activity_Data">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardDriverActivity"
+    			type="tns:CardDriverActivity" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardDriverActivity">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardActivityDailyRecords"
+    			type="tns:CardActivityDailyRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardActivityDailyRecords">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="cardActivityDailyRecord"
+    			type="tns:CardActivityDailyRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardActivityDailyRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="activityPreviousRecordLength" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedInt">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="65535"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="activityRecordLength" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedInt">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="65535"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="activityRecordDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activityDailyPresenceCounter"
+    			type="tns:DailyPresenceCounter" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activityDayDistance"
+    			type="tns:Distance" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activityChangeInfos"
+    			type="tns:ActivityChangeInfos" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="DailyPresenceCounter">
+    	<restriction base="string">
+    		<length value="4"></length>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="Distance">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="ActivityChangeInfos">
+    	<sequence maxOccurs="unbounded" minOccurs="1">
+    		<element name="activityChangeInfo"
+    			type="tns:ActivityChangeInfo" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ActivityChangeInfo">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="value" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="2"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="slot"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="drivingStatus"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardStatus"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activity" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="time" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedInt">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="1439"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Vehicles_Used">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardVehiclesUsed"
+    			type="tns:CardVehiclesUsed" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardVehiclesUsed">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardVehicleRecords"
+    			type="tns:CardVehicleRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardVehicleRecords">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="cardVehicleRecord"
+    			type="tns:CardVehicleRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardVehicleRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vehicleOdometerBegin"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleOdometerEnd"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleFirstUse"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleLastUse"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleRegistration"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuDataBlockCounter"
+    			type="tns:VuDataBlockCounter" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="OdometerShort">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="16777215"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="VuDataBlockCounter">
+    	<restriction base="string">
+    		<length value="4"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="EF_Places">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardPlaceDailyWorkPeriod"
+    			type="tns:CardPlaceDailyWorkPeriod" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardPlaceDailyWorkPeriod">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="placeRecords"
+    			type="tns:PlaceRecords" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PlaceRecords">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="placeRecord"
+    			type="tns:PlaceRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PlaceRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="entryTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="entryTypeDailyWorkPeriod"
+    			type="tns:EntryTypeDailyWorkPeriod" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dailyWorkPeriodCountry"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dailyWorkPeriodRegion"
+    			type="tns:RegionNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleOdometerValue"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="RegionNumeric">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="EntryTypeDailyWorkPeriod">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="EF_Current_Usage">
+    	<sequence minOccurs="0" maxOccurs="1">
+    		<element name="cardCurrentUse" type="tns:CardCurrentUse"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardCurrentUse">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="sessionOpenTime" type="tns:TimeReal"
+    			minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="sessionOpenVehicle"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Control_Activity_Data">
+    	<sequence minOccurs="0" maxOccurs="1">
+    		<element name="cardControlActivityDataRecord"
+    			type="tns:CardControlActivityDataRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardControlActivityDataRecord">
+    	<sequence>
+    		<element name="controlType"
+    			type="tns:ControlType">
+    		</element>
+    		<element name="controlTime"
+    			type="tns:TimeReal">
+    		</element>
+    		<element name="controlCardNumber"
+    			type="tns:FullCardNumber">
+    		</element>
+    		<element name="controlVehicleRegistration"
+    			type="tns:VehicleRegistrationIdentification">
+    		</element>
+    		<element name="controlDownloadPeriodBegin"
+    			type="tns:TimeReal">
+    		</element>
+    		<element name="controlDownloadPeriodEnd"
+    			type="tns:TimeReal">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ControlType">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="value" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="card_downloading"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vu_downloading"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="printing"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="display"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="FullCardNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardType"
+    			type="tns:EquipmentType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardIssuingMemberState"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumber"
+    			type="tns:CardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EF_Specific_Conditions">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="specificConditionRecord"
+    			type="tns:SpecificConditionRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="SpecificConditionRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="entryTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="specificConditionType"
+    			type="tns:SpecificConditionType" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="SpecificConditionType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+</schema>

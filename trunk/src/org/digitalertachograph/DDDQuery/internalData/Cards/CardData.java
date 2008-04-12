@@ -630,9 +630,34 @@ public class CardData extends DTCODataClass implements XMLDumper {
 	 */
 	@Override
 	public String generateXML() {
+		String NamespacePrefix;
+
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			NamespacePrefix = "DriverCard";
+		}
+		else if ( cardType == EquipmentType.WORKSHOP_CARD ) {
+			NamespacePrefix = "WorkshopCard";
+		}
+		else if ( cardType == EquipmentType.CONTROL_CARD ) {
+			NamespacePrefix = "ControlCard";
+		}
+		else if ( cardType == EquipmentType.COMPANY_CARD ) {
+			NamespacePrefix = "CompanyCard";
+		}
+		else {
+			NamespacePrefix = "UnknownCard";
+		}
+
 		Document doc = new Document();
 
 		Element root = generateXMLElement( this.getClass().getSimpleName() );
+
+		Namespace ns = Namespace.getNamespace( NamespacePrefix, NamespacePrefix );
+		root.setNamespace( ns );
+
+		Namespace nsxsi = Namespace.getNamespace( "xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+		root.setAttribute( new Attribute( "schemaLocation", NamespacePrefix + " " + NamespacePrefix + ".xsd", nsxsi ) );
+
 		doc.setRootElement( root );
 
 		Format fmt = Format.getPrettyFormat();
@@ -641,26 +666,6 @@ public class CardData extends DTCODataClass implements XMLDumper {
 		fmt.setExpandEmptyElements( true );
 
 		XMLOutputter serializer = new XMLOutputter( fmt );
-
-		String cardDTD;
-
-		if ( cardType == EquipmentType.DRIVER_CARD ) {
-			cardDTD = "C_Driver_Card.dtd";
-		}
-		else if ( cardType == EquipmentType.WORKSHOP_CARD ) {
-			cardDTD = "C_Workshop_Card.dtd";
-		}
-		else if ( cardType == EquipmentType.CONTROL_CARD ) {
-			cardDTD = "C_Control_Card.dtd";
-		}
-		else if ( cardType == EquipmentType.COMPANY_CARD ) {
-			cardDTD = "C_Company_Card.dtd";
-		}
-		else {
-			cardDTD = "C_Unknown_Card.dtd";
-		}
-
-		doc.setDocType( new DocType( "CardData", cardDTD ) );
 
 		return serializer.outputString( doc );
 	}
@@ -672,12 +677,37 @@ public class CardData extends DTCODataClass implements XMLDumper {
 	 */
 	@Override
 	public void generateXML( String filename ) {
+		String NamespacePrefix;
+
+		if ( cardType == EquipmentType.DRIVER_CARD ) {
+			NamespacePrefix = "DriverCard";
+		}
+		else if ( cardType == EquipmentType.WORKSHOP_CARD ) {
+			NamespacePrefix = "WorkshopCard";
+		}
+		else if ( cardType == EquipmentType.CONTROL_CARD ) {
+			NamespacePrefix = "ControlCard";
+		}
+		else if ( cardType == EquipmentType.COMPANY_CARD ) {
+			NamespacePrefix = "CompanyCard";
+		}
+		else {
+			NamespacePrefix = "UnknownCard";
+		}
+
 		Document doc = new Document();
 
 		Element root = generateXMLElement( this.getClass().getSimpleName() );
+
+		Namespace ns = Namespace.getNamespace( NamespacePrefix, NamespacePrefix );
+		root.setNamespace( ns );
+
+		Namespace nsxsi = Namespace.getNamespace( "xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+		root.setAttribute( new Attribute( "schemaLocation", NamespacePrefix + " " + NamespacePrefix + ".xsd", nsxsi ) );
+
 		doc.setRootElement( root );
 
-		try { 
+		try {
 			FileOutputStream fos = new FileOutputStream( filename );
 
 			Format fmt = Format.getPrettyFormat();
@@ -686,26 +716,6 @@ public class CardData extends DTCODataClass implements XMLDumper {
 			fmt.setExpandEmptyElements( true );
 
 			XMLOutputter serializer = new XMLOutputter( fmt );
-
-			String cardDTD;
-
-			if ( cardType == EquipmentType.DRIVER_CARD ) {
-				cardDTD = "C_Driver_Card.dtd";
-			}
-			else if ( cardType == EquipmentType.WORKSHOP_CARD ) {
-				cardDTD = "C_Workshop_Card.dtd";
-			}
-			else if ( cardType == EquipmentType.CONTROL_CARD ) {
-				cardDTD = "C_Control_Card.dtd";
-			}
-			else if ( cardType == EquipmentType.COMPANY_CARD ) {
-				cardDTD = "C_Company_Card.dtd";
-			}
-			else {
-				cardDTD = "C_Unknown_Card.dtd";
-			}
-
-			doc.setDocType( new DocType( "CardData", cardDTD ) );
 
 			serializer.output( doc, fos );
 

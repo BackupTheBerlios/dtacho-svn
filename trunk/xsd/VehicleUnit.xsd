@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="VehicleUnit"
+	xmlns:tns="VehicleUnit"
+	elementFormDefault="unqualified">
+
+    <element name="VehicleUnitData"
+    	type="tns:VehicleUnitData">
+    </element>
+
+    <complexType name="VehicleUnitData">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="Info"
+    			type="tns:Info" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="PRDT_Overview"
+    			type="tns:PRDT_Overview" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<choice minOccurs="0" maxOccurs="unbounded">
+    			<element name="PRDT_Activities"
+    				type="tns:PRDT_Activities" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="PRDT_Events_And_Faults"
+    				type="tns:PRDT_Events_And_Faults" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="PRDT_Detailed_Speed"
+    				type="tns:PRDT_Detailed_Speed" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="PRDT_Technical_Data"
+    				type="tns:PRDT_Technical_Data" minOccurs="1" maxOccurs="1">
+    			</element>
+    		</choice>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Info">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="source"
+    			type="string" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dataValidatedWithEURPK"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PRDT_Overview">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="memberStateCertificate"
+    			type="tns:Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuCertificate"
+    			type="tns:Certificate" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleIdentificationNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="17"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="vehicleRegistrationIdentification"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="currentDateTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuDownloadablePeriod"
+    			type="tns:VuDownloadablePeriod" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardSlotsStatus" minOccurs="1"
+    			maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="vuDownloadActivityData"
+    			type="tns:VuDownloadActivityData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuCompanyLocksData"
+    			type="tns:VuCompanyLocksData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuControlActivityData"
+    			type="tns:VuControlActivityData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PRDT_Activities">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="downloadedDayDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="odoMeterValueMidnight"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuCardIWData"
+    			type="tns:VuCardIWData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuActivityDailyData"
+    			type="tns:VuActivityDailyData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuPlaceDailyWorkPeriodData"
+    			type="tns:VuPlaceDailyWorkPeriodData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuSpecificConditionData"
+    			type="tns:VuSpecificConditionData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PRDT_Events_And_Faults">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vuFaultData"
+    			type="tns:VuFaultData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuEventData"
+    			type="tns:VuEventData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuOverSpeedingControlData"
+    			type="tns:VuOverSpeedingControlData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuOverSpeedingEventData"
+    			type="tns:VuOverSpeedingEventData" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuTimeAdjustmentData"
+    			type="tns:VuTimeAdjustmentData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PRDT_Detailed_Speed">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vuDetailedSpeedData"
+    			type="tns:VuDetailedSpeedData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PRDT_Technical_Data">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vuIdentification"
+    			type="tns:VuIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="sensorPaired"
+    			type="tns:SensorPaired" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuCalibrationData"
+    			type="tns:VuCalibrationData" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="Certificate">
+    	<restriction base="hexBinary">
+    		<length value="194"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VehicleRegistrationIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vehicleRegistrationNation"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleRegistrationNumber"
+    			type="tns:VehicleRegistrationNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="NationNumeric">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VehicleRegistrationNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="codePage" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedShort">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="255"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="vehicleRegNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="13"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="TimeReal">
+    	<restriction base="string">
+    		<pattern value="\d{4,4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\sUTC"></pattern>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuDownloadablePeriod">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="minDownloadableTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="maxDownloadableTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuDownloadActivityData">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="downloadingTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="fullCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="companyOrWorkshopName"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="FullCardNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardType"
+    			type="tns:EquipmentType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardIssuingMemberState"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumber"
+    			type="tns:CardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="EquipmentType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="CardNumber">
+    	<choice minOccurs="1" maxOccurs="1">
+    		<sequence minOccurs="1" maxOccurs="1">
+    			<element name="driverIdentification" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="14"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardReplacementIndex"
+    				type="tns:CardReplacementIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="cardRenewalIndex"
+    				type="tns:CardRenewalIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    		</sequence>
+    		<sequence minOccurs="1" maxOccurs="1">
+    			<element name="ownerIdentification" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="13"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardConsecutiveIndex" minOccurs="1" maxOccurs="1">
+    				<simpleType>
+    					<restriction base="string">
+    						<maxLength value="1"></maxLength>
+    					</restriction>
+    				</simpleType>
+    			</element>
+    			<element name="cardReplacementIndex"
+    				type="tns:CardReplacementIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    			<element name="cardRenewalIndex"
+    				type="tns:CardRenewalIndex" minOccurs="1" maxOccurs="1">
+    			</element>
+    		</sequence>
+    	</choice>
+    </complexType>
+
+    <simpleType name="CardReplacementIndex">
+    	<restriction base="string">
+    		<maxLength value="1"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="CardRenewalIndex">
+    	<restriction base="string">
+    		<maxLength value="1"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="Name">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="codePage" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedShort">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="255"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="name" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="35"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuCompanyLocksData">
+    	<sequence minOccurs="0" maxOccurs="20">
+    		<element name="vuCompanyLocksRecord"
+    			type="tns:VuCompanyLocksRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuCompanyLocksRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="lockInTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="lockOutTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="companyName" 
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="companyAddress"
+    			type="tns:Address" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="companyCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="Address">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="codePage" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedShort">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="255"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="address" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<maxLength value="35"></maxLength>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuControlActivityData">
+    	<sequence minOccurs="0" maxOccurs="20">
+    		<element name="vuControlActivityRecord"
+    			type="tns:VuControlActivityRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuControlActivityRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="controlType"
+    			type="tns:ControlType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="controlTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="controlCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="downloadPeriodBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="downloadPeriodEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ControlType">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="value" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="card_downloading"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vu_downloading"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="printing"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="display"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="OdometerShort">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="16777215"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuCardIWData">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="vuCardIWRecord"
+    			type="tns:VuCardIWRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuCardIWRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="cardHolderName"
+    			type="tns:HolderName" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="fullCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardExpiryDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardInsertionTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleOdometerValueAtInsertion"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardSlotNumber"
+    			type="tns:CardSlotNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardWithdrawalTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleOdometerValueAtWithdrawal"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="previousVehicleInfo"
+    			type="tns:PreviousVehicleInfo" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="manualInputFlag"
+    			type="tns:ManualInputFlag" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="ManualInputFlag">
+    	<restriction base="boolean"></restriction>
+    </simpleType>
+
+    <complexType name="HolderName">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="holderSurname"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="holderFirstNames"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="CardSlotNumber">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="1"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="PreviousVehicleInfo">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vehicleRegistrationIdentification"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardWithdrawalTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuActivityDailyData">
+    	<sequence minOccurs="0" maxOccurs="1440">
+    		<element name="activityChangeInfo"
+    			type="tns:ActivityChangeInfo" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ActivityChangeInfo">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="value" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="2"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="slot"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="drivingStatus"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardStatus"
+    			type="boolean" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="activity" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="time" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedInt">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="1439"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuPlaceDailyWorkPeriodData">
+    	<sequence minOccurs="0" maxOccurs="255">
+    		<element name="vuPlaceDailyWorkPeriodRecord"
+    			type="tns:VuPlaceDailyWorkPeriodRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuPlaceDailyWorkPeriodRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="fullCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="placeRecord"
+    			type="tns:PlaceRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PlaceRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="entryTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="entryTypeDailyWorkPeriod"
+    			type="tns:EntryTypeDailyWorkPeriod" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dailyWorkPeriodCountry"
+    			type="tns:NationNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="dailyWorkPeriodRegion"
+    			type="tns:RegionNumeric" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleOdometerValue"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="RegionNumeric">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="EntryTypeDailyWorkPeriod">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuSpecificConditionData">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="specificConditionRecord"
+    			type="tns:SpecificConditionRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="SpecificConditionRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="entryTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="specificConditionType"
+    			type="tns:SpecificConditionType" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="SpecificConditionType">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuFaultData">
+    	<sequence minOccurs="0" maxOccurs="255">
+    		<element name="vuFaultRecord"
+    			type="tns:VuFaultRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuFaultRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="faultType"
+    			type="tns:EventFaultType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultRecordPurpose"
+    			type="tns:EventFaultRecordPurpose" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="faultEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberDriverSlotBegin"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberCodriverSlotBegin"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberDriverSlotEnd"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberCodriverSlotEnd"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="EventFaultType">
+    	<restriction base="hexBinary">
+    		<length value="1"></length>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="EventFaultRecordPurpose">
+    	<restriction base="hexBinary">
+    		<length value="1"></length>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuEventData">
+    	<sequence minOccurs="0" maxOccurs="255">
+    		<element name="vuEventRecord"
+    			type="tns:VuEventRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuEventRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="eventType"
+    			type="tns:EventFaultType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventRecordPurpose"
+    			type="tns:EventFaultRecordPurpose" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberDriverSlotBegin"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberCodriverSlotBegin"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberDriverSlotEnd"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberCodriverSlotEnd"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="similarEventsNumber"
+    			type="tns:SimilarEventsNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="SimilarEventsNumber">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuOverSpeedingControlData">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="lastOverspeedControlTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="firstOverspeedSince"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="numberOfOverspeedSince"
+    			type="tns:OverspeedNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="OverspeedNumber">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuOverSpeedingEventData">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="vuOverSpeedingEventRecord"
+    			type="tns:VuOverSpeedingEventRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuOverSpeedingEventRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="eventType"
+    			type="tns:EventFaultType" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventRecordPurpose"
+    			type="tns:EventFaultRecordPurpose" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventBeginTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="eventEndTime"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="maxSpeedValue"
+    			type="tns:SpeedMax" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="averageSpeedValue"
+    			type="tns:SpeedAverage" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="cardNumberDriverSlotBegin"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="similarEventsNumber"
+    			type="tns:SimilarEventsNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="SpeedMax">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="SpeedAverage">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuTimeAdjustmentData">
+    	<sequence minOccurs="0" maxOccurs="6">
+    		<element name="vuTimeAdjustmentRecord"
+    			type="tns:VuTimeAdjustmentRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuTimeAdjustmentRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="oldTimeValue"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="newTimeValue"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopName"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopAddress"
+    			type="tns:Address" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuDetailedSpeedData">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="vuDetailedSpeedBlock"
+    			type="tns:VuDetailedSpeedBlock" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuDetailedSpeedBlock">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="speedBlockBeginDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="speedsPerSecond"
+    			type="tns:Speed" minOccurs="60" maxOccurs="60">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="Speed">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vuManufacturerName"
+    			type="tns:VuManufacturerName" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuManufacturerAddress"
+    			type="tns:VuManufacurerAddress" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuPartNumber"
+    			type="tns:VuPartNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuSerialNumber"
+    			type="tns:VuSerialNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuSoftwareIdentification"
+    			type="tns:VuSoftwareIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuManufacturingDate"
+    			type="tns:VuManufacturingDate" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuApprovalNumber"
+    			type="tns:VuApprovalNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuManufacturerName">
+    	<complexContent>
+    		<extension base="tns:Name"></extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="VuManufacurerAddress">
+    	<complexContent>
+    		<extension base="tns:Address"></extension>
+    	</complexContent>
+    </complexType>
+
+    <simpleType name="VuPartNumber">
+    	<restriction base="string">
+    		<maxLength value="16"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="ExtendedSerialNumber">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="serialNumber" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="unsignedLong">
+    					<minInclusive value="0"></minInclusive>
+    					<maxInclusive value="4294967295"></maxInclusive>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="monthYear" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<length value="4"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="type" minOccurs="1" maxOccurs="1">
+    			<simpleType>
+    				<restriction base="hexBinary">
+    					<length value="1"></length>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="manufacturerCode"
+    			type="tns:ManufacturerCode" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="ManufacturerCode">
+    	<restriction base="unsignedShort">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="255"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuSerialNumber">
+    	<complexContent>
+    		<extension base="tns:ExtendedSerialNumber"></extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="VuSoftwareIdentification">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="vuSoftwareVersion"
+    			type="tns:VuSoftwareVersion" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vuSoftInstallationDate"
+    			type="tns:VuSoftInstallationDate" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="VuSoftwareVersion">
+    	<restriction base="string">
+    		<maxLength value="4"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="VuSoftInstallationDate">
+    	<simpleContent>
+    		<extension base="tns:TimeReal"></extension>
+    	</simpleContent>
+    </complexType>
+
+    <complexType name="VuManufacturingDate">
+    	<simpleContent>
+    		<extension base="tns:TimeReal"></extension>
+    	</simpleContent>
+    </complexType>
+
+    <complexType name="VuApprovalNumber">
+    	<simpleContent>
+    		<extension base="string"></extension>
+    	</simpleContent>
+    </complexType>
+
+    <complexType name="SensorPaired">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="sensorSerialNumber"
+    			type="tns:SensorSerialNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="sensorApprovalNumber"
+    			type="tns:SensorApprovalNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="sensorPairingDateFirst"
+    			type="tns:SensorPairingDate" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="SensorSerialNumber">
+    	<complexContent>
+    		<extension base="tns:ExtendedSerialNumber"></extension>
+    	</complexContent>
+    </complexType>
+
+    <simpleType name="SensorApprovalNumber">
+    	<restriction base="string">
+    		<maxLength value="8"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="SensorPairingDate">
+    	<simpleContent>
+    		<extension base="tns:TimeReal"></extension>
+    	</simpleContent>
+    </complexType>
+
+    <complexType name="VuCalibrationData">
+    	<sequence minOccurs="0" maxOccurs="255">
+    		<element name="vuCalibrationRecord"
+    			type="tns:VuCalibrationRecord" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="VuCalibrationRecord">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="calibrationPurpose"
+    			type="tns:CalibrationPurpose" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopName"
+    			type="tns:Name" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopAddress"
+    			type="tns:Address" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopCardNumber"
+    			type="tns:FullCardNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="workshopCardExpiryDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleIdentificationNumber"
+    			type="tns:VehicleIdentificationNumber" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="vehicleRegistrationIdentification"
+    			type="tns:VehicleRegistrationIdentification" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="wVehicleCharacteristicConstant"
+    			type="tns:W-VehicleCharacteristicConstant" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="kConstantOfRecordingEquipment"
+    			type="tns:K-ConstantOfRecordingEquipment" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="lTyreCircumference"
+    			type="tns:L-TyreCircumference" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="tyreSize"
+    			type="tns:TyreSize" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="authorisedSpeed"
+    			type="tns:SpeedAuthorised" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="oldOdometerValue"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="newOdometerValue"
+    			type="tns:OdometerShort" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="oldTimeValue"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="newTimeValue"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    		<element name="nextCalibrationDate"
+    			type="tns:TimeReal" minOccurs="1" maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <simpleType name="CalibrationPurpose">
+    	<restriction base="hexBinary">
+    		<length value="1"></length>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="VehicleIdentificationNumber">
+    	<restriction base="string">
+    		<maxLength value="17"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="W-VehicleCharacteristicConstant">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="K-ConstantOfRecordingEquipment">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="L-TyreCircumference">
+    	<restriction base="unsignedInt">
+    		<minInclusive value="0"></minInclusive>
+    		<maxInclusive value="65535"></maxInclusive>
+    	</restriction>
+    </simpleType>
+
+    <simpleType name="TyreSize">
+    	<restriction base="string">
+    		<maxLength value="15"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="SpeedAuthorised">
+    	<simpleContent>
+    		<extension base="tns:Speed"></extension>
+    	</simpleContent>
+    </complexType>
+
+</schema>

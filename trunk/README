@@ -38,9 +38,11 @@ The format converter from byte data to XML is written in Java. The status of
 dtacho is alpha. It may not work under all circumstances and may produce false
 or unexpected results.
 
-24.02.2008
+13.04.2008
 This software converts both the data of DTCO driver card .DDD files (C_*.DDD)
 and the data of vehicle unit .DDD files to XML files.
+
+The generated XML files can be validated with XML Schema Daefinitions (XSD).
 
 The code for converting driver card .DDD files was developed by Martin Barth
 in his diploma thesis.and was extended by Gerald Schnabel to also convert the

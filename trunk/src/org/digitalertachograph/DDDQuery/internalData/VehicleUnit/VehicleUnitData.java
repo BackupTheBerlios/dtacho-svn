@@ -26,9 +26,7 @@ import org.digitalertachograph.DDDQuery.internalData.DTCODataClass;
 import org.digitalertachograph.DDDQuery.internalData.DataTypes.*;
 import org.digitalertachograph.DDDQuery.internalData.Security.SecurityByteArrayTools;
 import org.digitalertachograph.DDDQuery.internalData.Security.SecurityCertificateCheck;
-import org.jdom.DocType;
-import org.jdom.Document;
-import org.jdom.Element;
+import org.jdom.*;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
@@ -289,6 +287,13 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 		Document doc = new Document();
 
 		Element root = generateXMLElement( this.getClass().getSimpleName() );
+
+		Namespace ns = Namespace.getNamespace( "VehicleUnit", "VehicleUnit" );
+		root.setNamespace( ns );
+
+		Namespace nsxsi = Namespace.getNamespace( "xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+		root.setAttribute( new Attribute( "schemaLocation", "VehicleUnit VehicleUnit.xsd", nsxsi ) );
+
 		doc.setRootElement( root );
 
 		Format fmt = Format.getPrettyFormat();
@@ -297,8 +302,6 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 		fmt.setExpandEmptyElements( true );
 
 		XMLOutputter serializer = new XMLOutputter( fmt );
-
-		doc.setDocType( new DocType( "VehicleUnitData", "M_Vehicle_Unit.dtd" ) );
 
 		return serializer.outputString( doc );
 	}
@@ -313,6 +316,13 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 		Document doc = new Document();
 
 		Element root = generateXMLElement( this.getClass().getSimpleName() );
+
+		Namespace ns = Namespace.getNamespace( "VehicleUnit", "VehicleUnit" );
+		root.setNamespace( ns );
+
+		Namespace nsxsi = Namespace.getNamespace( "xsi", "http://www.w3.org/2001/XMLSchema-instance" );
+		root.setAttribute( new Attribute( "schemaLocation", "VehicleUnit VehicleUnit.xsd", nsxsi ) );
+
 		doc.setRootElement( root );
 
 		try { 
@@ -324,8 +334,6 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 			fmt.setExpandEmptyElements( true );
 
 			XMLOutputter serializer = new XMLOutputter( fmt );
-
-			doc.setDocType( new DocType( "VehicleUnitData", "M_Vehicle_Unit.dtd" ) );
 
 			serializer.output( doc, fos );
 

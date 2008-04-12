@@ -159,7 +159,7 @@ public class CardActivityDailyRecord extends DataClass {
 		node.addContent( activityDayDistance.generateXMLElement( "activityDayDistance" ) );
 
 		Iterator<ActivityChangeInfo> it = activityChangeInfo.iterator();
-		Element activityChangeInfoElement = new Element( "activityChangeInfoSet" );
+		Element activityChangeInfoElement = new Element( "activityChangeInfos" );
 		while ( it.hasNext() ) {
 			ActivityChangeInfo aci = (ActivityChangeInfo)it.next();
 			activityChangeInfoElement.addContent( aci.generateXMLElement( "activityChangeInfo" ) );

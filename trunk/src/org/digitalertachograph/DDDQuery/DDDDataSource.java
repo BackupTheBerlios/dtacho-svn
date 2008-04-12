@@ -595,11 +595,16 @@ public class DDDDataSource implements DataSource {
 		}
 
 		String filename = f.getName().substring( 0, 2 );
-		
-		if ( filename.compareTo( "C_" ) == 0 ) {
+
+		byte[] filemagic = new byte[ 2 ];
+		System.arraycopy( s, 0, filemagic, 0, 2 );
+
+		// file name starts with C_ or file content starts with EF_ICC
+		if ( ( filename.compareTo( "C_" ) == 0 ) || ( Arrays.equals( filemagic, new byte[]{ 0x00, 0x02 } ) ) ) {
 			srcType = SRC_TYPE_CARD;
 		}
-		else if ( filename.compareTo( "M_" ) == 0 ) {
+		// file name starts with M_ or file content starts with SID/TREP 0x76/0x03
+		else if ( ( filename.compareTo( "M_" ) == 0 ) || ( Arrays.equals( filemagic, new byte[]{ 0x76, 0x01 } ) ) ) {
 			srcType = SRC_TYPE_VU;
 		}
 		else {

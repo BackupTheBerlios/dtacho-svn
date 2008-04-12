@@ -249,8 +249,8 @@ public class ControlType extends DataClass {
 		node.addContent( new Element( "value" ).setText( convertIntoHexString( value ) ) );
 		node.addContent( new Element( "card_downloading" ).setText( Boolean.toString( card_downloading ) ) );
 		node.addContent( new Element( "vu_downloading" ).setText( Boolean.toString( vu_downloading ) ) );
-		node.addContent( new Element( "display" ).setText( Boolean.toString( display ) ) );
 		node.addContent( new Element( "printing" ).setText( Boolean.toString( printing ) ) );
+		node.addContent( new Element( "display" ).setText( Boolean.toString( display ) ) );
 
 		return node;
 	}

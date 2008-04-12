@@ -1,3 +1,20 @@
+2008-04-13
+-XML Schema Definition (XSD) instead of Document Type Definition (DTD)
+
+
+2008-04-06
+-EF_Application_Identification: fixed XML output of card application type
+-CardActivityDailyRecord: XML output changes
+-ControlType: XML output fix
+-C_Driver_Card.dtd: added changes of EF_Application_Identification,
+ CardActivityDailyRecord and ControlType XML output
+
+
+2008-03-31
+-DDDDataSource: file type (card, vehicle unit) is guessed with
+ file magic in addition to file name prefix (C_, M_)
+
+
 2008-03-30
 -only output records that contain useful data
 -decoder for ISO-8859-<codepage> encoded strings in DataClass
