@@ -1,3 +1,8 @@
+2008-04.16
+-FullCardNumber: output empty CardNumber XML element if default values
+ for FullCardNumber elements are used
+
+
 2008-04-13
 -XML Schema Definition (XSD) instead of Document Type Definition (DTD)
 

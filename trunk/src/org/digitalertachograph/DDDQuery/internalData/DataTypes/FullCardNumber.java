@@ -129,7 +129,13 @@ public class FullCardNumber extends DataClass {
 
 		node.addContent( cardType.generateXMLElement( "cardType" ) );
 		node.addContent( cardIssuingMemberState.generateXMLElement( "cardIssuingMemberState" ) );
-		node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );
+
+		if ( ( cardType.getEquipmentType() == 0xff ) && ( cardIssuingMemberState.getNationNumeric() == 0xff ) ) {
+			node.addContent( new CardNumber().generateXMLElement( "cardNumber" ) );
+		}
+		else {
+			node.addContent( cardNumber.generateXMLElement( "cardNumber" ) );
+		}
 
 		return node;
 	}
