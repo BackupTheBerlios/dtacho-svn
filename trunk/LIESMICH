@@ -135,8 +135,8 @@ Beispiele:
 -Den Quellcode compilieren
 
  Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
- sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u5.
- Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
+ sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u6
+ (17.04.2008). Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
 
  -in das Verzeichnis trunk/src wechseln
 
@@ -183,7 +183,7 @@ Beispiele:
 
  Beispiele:
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
  org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
 
  Es wird die Datei C_driver_card.DDD einer Fahrerkarte gelesen, einige
@@ -193,7 +193,7 @@ Beispiele:
 
  Mehrere Dateien/Wildcards werden über die Kommandozeile unterstützt, z.B.
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
  org.digitalertachograph.DDDQuery.Controller C_*.DDD
 
  konvertiert alle Dateien von Fahrerkarten (C_*.DDD) im aktuellen Verzeichnis
@@ -204,8 +204,11 @@ UMGEBUNGSVARIABLEN
 ------------------
 
 -DEBUGLOGLEVEL:
+
  Die Stufe für Debugmeldungen.
- Standard ist ERROR.
+
+ Standardvorgabe ist ERROR.
+
  Folgende Stufen, von der niedrigsten bis zur höchsten, sind möglich:
  NOTHING >> ERROR >> INFO >> INFO_EXTENDED >> ALL
 
@@ -218,15 +221,29 @@ UMGEBUNGSVARIABLEN
  Eine gewählte Stufe schließt alle Stufen darunter mit ein!
 
 -DEBUGPRINTSTREAM:
+
  Stream, an den Debugmeldungen ausgegeben werden.
- Standard ist die Standardausgabe (System.out, stdout).
+
+ Standardvorgabe ist die Standardausgabe (System.out, stdout).
+
  Ansonsten werden die Debugmeldungen an die über diese Umgebungsvariable
  angegebene Datei angehängt. Das Anhängen an die Datei lässt sich über
  DEBUGPRINTSTREAMAPPEND=false abschalten.
 
 -EURPKPATH:
+
  Pfad zum europäischen öffentlichen Schlüssel, siehe Kapitel
  DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL.
+
+-NODETAILEDSPEED:
+ Unterdrückt die Ausgabe der Daten aus dem Block detailed speed
+
+ Standardvorgabe ist false.
+
+ Die Daten aus dem Block detailed speed der Massenspeicherdaten von Fahrzeug-
+ einheiten machen den größten Anteil der Elemente der mit dem Formatwandler
+ ausgegebenen XML-Daten aus. Mit dieser Umgebungsvariablen lässt sich die
+ Ausgabe der detaillierten Geschwindigkeiten unterdrücken. 
 
 
 DER EUROPÄISCHE ÖFFENTLICHE SCHLÜSSEL
@@ -236,10 +253,9 @@ Der europäische öffentliche Schlüssel ist auf der Web-Site der European
 Root Certification Authority (ERCA) unter http://dtc.jrc.it/text/erca.html
 erhältlich.
 
-Der Byte-Daten nach XML Konvertierer benötigt die Datei EC_PK.bin aus dem
-Archiv EC_PK.zip.
+Der Formatwandler benötigt die Datei EC_PK.bin aus dem Archiv EC_PK.zip.
 
-Der Konvertierer lädt die Datei EC_PK.bin aus dem Pfad, der in der Umgebungs-
+Der Formatwandler lädt die Datei EC_PK.bin aus dem Pfad, der in der Umgebungs-
 variable EURPKPATH gesetzt ist (oder aus dem aktuellen Verzeichnis, wenn
 EURPKPATH nicht gesetzt ist).
 

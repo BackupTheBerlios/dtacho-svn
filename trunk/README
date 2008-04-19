@@ -129,7 +129,7 @@ Examples:
 -Compiling the source
 
  To compile the source the Java Development Kit (JDK) must be installed.
- Please use a recent JDK. Development is done with version 6.0u5.
+ Please use a recent JDK. Development is done with version 6.0u6 (17.04.2008).
  See http://java.sun.com/javase/downloads/index.jsp for more.
 
  -change to the trunk/src directory
@@ -176,7 +176,7 @@ Examples:
 
  Examples:
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
  org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
 
  This will read the driver card file C_driver_card.DDD, print some (debug)
@@ -185,7 +185,7 @@ Examples:
 
  Multiple files/wildcards are supported via command line, e.g.
 
- gerald@dtachdev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
+ gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
  org.digitalertachograph.DDDQuery.Controller C_*.DDD
 
  will convert all driver card files (C_*.DDD) in the current directory
@@ -196,8 +196,11 @@ ENVIRONMENT
 -----------
 
 -DEBUGLOGLEVEL:
+
  The level for debug messages.
- Standard is ERROR.
+
+ Default is ERROR.
+
  The following levels, from the lowset to the highest, are possible:
  NOTHING >> ERROR >> INFO >> INFO_EXTENDED >> ALL
 
@@ -210,13 +213,28 @@ ENVIRONMENT
  A selected level includes all levels below!
 
 -DEBUGPRINTSTREAM:
+
  Stream, where the debug messages are put.
- Standard is the standard output (System.out, stdout).
- Otherwise the debug messages are appended to the file given by this environment
- variable. Appending can be disabled by specifying DEBUGPRINTSTREAMAPPEND=false.
+
+ Default is the standard output (System.out, stdout).
+
+ Otherwise the debug messages are appended to the file given by this
+ environment variable. Appending can be disabled by specifying
+ DEBUGPRINTSTREAMAPPEND=false.
 
 -EURPKPATH:
  Path to the European Public Key, see chapter THE EUROPEAN PUBLIC KEY.
+
+
+-NODETAILEDSPEED:
+ Suppresses the output of the data block detailed speed
+
+ Default is false.
+
+ The data block detailed speed of the vehicle unit data produces a lot of
+ XML elements in the output when converting with the format converter.
+ The output of the detailed speed data can be suppressed with this environment
+ variable. 
 
 
 THE EUROPEAN PUBLIC KEY
@@ -225,11 +243,10 @@ THE EUROPEAN PUBLIC KEY
 The European Public Key can be found on the web site of the European
 Root Certification Authority (ERCA) at http://dtc.jrc.it/text/erca.html
 
-The file EC_PK.bin from the archive EC_PK.zip is required for the byte
-data to XML converter.
+The file EC_PK.bin from the archive EC_PK.zip is required for format converter.
 
-The converter looks for the file EC_PK.bin in the path set by the environment
-variable EURPKPATH (or the current path, if EURPKPATH is not set).
+The format converter looks for the file EC_PK.bin in the path set by the
+environment variable EURPKPATH (or the current path, if EURPKPATH is not set).
 
 
 SPECIFICATIONS
