@@ -82,7 +82,9 @@ public class XMLInfo extends DataClass {
 	public Element generateXMLElement( String name ) {
 		Element node = new Element( name );
 
-		node.addContent( new Element( "source" ).setText( new File( sourceFilename ).getName() ) );
+		if ( sourceFilename != null ) {
+			node.addContent( new Element( "source" ).setText( new File( sourceFilename ).getName() ) );
+		}
 		node.addContent( new Element( "dataValidatedWithEURPK" ).setText( Boolean.toString( dataValidatedWithEURPK ) ) );
 
 		return node;

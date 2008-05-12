@@ -48,13 +48,15 @@ public class Controller {
 		Controller c = Controller.getInstance();
 		c.setupWebserver();
 		//c.manual();
-		for ( int i = 0; i < args.length; i++ ) {
-			debugLogger.resetPrintDelayed();
-			c.process( args[ i ] );
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
-		}
+		if ( args.length > 0) {
+			for ( int i = 0; i < args.length; i++ ) {
+				debugLogger.resetPrintDelayed();
+				c.process( args[ i ] );
+				debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
+			}
 
-		System.exit( 0 );
+			System.exit( 0 );
+		}
 	}
 
 	public static Controller getInstance(){
@@ -72,7 +74,7 @@ public class Controller {
 	public static void sendXML( String xml ) {
 		try {
 			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-			config.setServerURL( new URL( "http://127.0.0.1:5001/RPC2" ) );
+			config.setServerURL( new URL( "http://127.0.0.1:5002/RPC2" ) );
 			XmlRpcClient client = new XmlRpcClient();
 			client.setConfig( config );
 
@@ -139,9 +141,10 @@ public class Controller {
 		if ( ds.processSource() == true ) {
 			XMLDumper xmld = ds.getXMLDumper();
 
+			xmld.setXMLInfo( new XMLInfo() );
 			String xml = xmld.generateXML();
 			// System.out.println( "pre sendXML" );
-			sendXML( xml );
+			//sendXML( xml );
 			//	System.out.println( "post sendXML" );
 			return xml;
 		}

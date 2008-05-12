@@ -1,3 +1,9 @@
+2008-05-12
+-Controller: process() method bug fix
+-RpcController: changed srcType to int. XMLRPC doesn't know datatype short
+-XMLInfo: fixed null pointer exception in XML output
+
+
 2008-04.16
 -FullCardNumber: output empty CardNumber XML element if default values
  for FullCardNumber elements are used

@@ -22,8 +22,8 @@ package org.digitalertachograph.DDDQuery;
 
 public class RpcController {
 
-	public String process( byte[] data, short srcType ){
-		String xml = Controller.getInstance().process( data, srcType );
+	public String process( byte[] data, int srcType ){
+		String xml = Controller.getInstance().process( data, (short)srcType );
 		return xml;
 	}
 }
