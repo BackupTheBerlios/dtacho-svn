@@ -1,3 +1,7 @@
+2008-07-26
+-ManufacturerCode: update to latest changes
+-README, LIESMICH: updates
+
 2008-05-12
 -Controller: process() method bug fix
 -RpcController: changed srcType to int. XMLRPC doesn't know datatype short

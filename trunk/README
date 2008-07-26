@@ -129,7 +129,7 @@ Examples:
 -Compiling the source
 
  To compile the source the Java Development Kit (JDK) must be installed.
- Please use a recent JDK. Development is done with version 6.0u6 (17.04.2008).
+ Please use a recent JDK. Development is done with version 6.0u7 (26.07.2008).
  See http://java.sun.com/javase/downloads/index.jsp for more.
 
  -change to the trunk/src directory

@@ -135,8 +135,8 @@ Beispiele:
 -Den Quellcode compilieren
 
  Um den Quellcode zu compilieren, muss das Java Development Kit (JDK) installiert
- sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u6
- (17.04.2008). Siehe http://java.sun.com/javase/downloads/index.jsp für weiteres.
+ sein. Bitte ein aktuelles JDK 6 verwenden. Entwickelt wird mit Version 6.0u7
+ (26.07.2008). Siehe http://java.sun.com/javase/downloads/index.jsp für Weiteres.
 
  -in das Verzeichnis trunk/src wechseln
 
