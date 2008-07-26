@@ -88,7 +88,7 @@ public class ManufacturerCode extends DataClass {
 	 * 
 	 * @return	the name of the manufacturer of the ManufacturerCode object
 	 * 
-	 * Manufacturer codes list as of 26/03/2008
+	 * Manufacturer codes list as of 23/07/2008
 	 * http://dtc.jrc.it/text/cm.html
 	 */
 	public String toString() {
@@ -171,10 +171,10 @@ public class ManufacturerCode extends DataClass {
 			return "Setec";
 		}
 		if ( manufacturerCode == 0xa1 ) {
-			return "Siemens";
+			return "Continental Automotive GmbH (formerly Siemens AG - Siemens VDO Automotive Siemens Automotive)";
 		}
 		if ( manufacturerCode == 0xa2 ) {
-			return "Stoneridge";
+			return "Stoneridge Electronics AB";
 		}
 		if ( manufacturerCode == 0xa3 ) {
 			return "Axalto (formerly SchlumbergerSEMA)";
