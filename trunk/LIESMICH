@@ -1,6 +1,6 @@
 
-dtacho Projekt
-==============
+Projekt opendtacho.org
+======================
 
 
 INFO
@@ -11,7 +11,7 @@ zu erstellen, die Daten von Fahrerkarten und Fahrzeugeinheiten eines Digitalen
 Tachographen (DTCO) nach XML konvertiert. Eine Anwendung zur Untersuchung und
 zur Visualisierung der Daten soll ebenfalls entwickelt werden.
 
-Webseite                  : http://www.digitaler-tachograph.org/
+Webseite                  : http://www.opendtacho.org/
 Projekt-/Entwicklungsseite: http://developer.berlios.de/projects/dtacho/
 
 Es exisitieren Mailinglisten für Benutzer und Entwickler dieses Projekts. Für
@@ -144,7 +144,7 @@ Beispiele:
 
  -den Java-Compiler aufrufen:
 
-  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/digitalertachograph/DDDQuery/*.java
+  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/opendtacho/DDDQuery/*.java
 
 
 -Starten des Programms
@@ -160,7 +160,7 @@ Beispiele:
 
  gerald@dtachodev:~/workspace/dtacho/bin$ ls -lR | grep ^d
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
- drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 opendtacho
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
  drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
@@ -184,7 +184,7 @@ Beispiele:
  Beispiele:
 
  gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
- org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
+ org.opendtacho.DDDQuery.Controller C_driver_card.DDD
 
  Es wird die Datei C_driver_card.DDD einer Fahrerkarte gelesen, einige
  (Debug-) Informationen ausgegeben und die Datei C_driver_card.DDD.xml
@@ -194,7 +194,7 @@ Beispiele:
  Mehrere Dateien/Wildcards werden über die Kommandozeile unterstützt, z.B.
 
  gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
- org.digitalertachograph.DDDQuery.Controller C_*.DDD
+ org.opendtacho.DDDQuery.Controller C_*.DDD
 
  konvertiert alle Dateien von Fahrerkarten (C_*.DDD) im aktuellen Verzeichnis
  zu XML-Dateien.

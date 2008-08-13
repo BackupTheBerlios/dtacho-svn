@@ -1,6 +1,6 @@
-org.digitalertachograph.DDDQuery
-org.digitalertachograph.DDDQuery.internalData
-org.digitalertachograph.DDDQuery.internalData.Cards
-org.digitalertachograph.DDDQuery.internalData.DataTypes
-org.digitalertachograph.DDDQuery.internalData.Security
-org.digitalertachograph.DDDQuery.internalData.VehicleUnit
+org.opendtacho.DDDQuery
+org.opendtacho.DDDQuery.internalData
+org.opendtacho.DDDQuery.internalData.Cards
+org.opendtacho.DDDQuery.internalData.DataTypes
+org.opendtacho.DDDQuery.internalData.Security
+org.opendtacho.DDDQuery.internalData.VehicleUnit

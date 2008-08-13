@@ -1,6 +1,6 @@
 
-dtacho project
-==============
+Project opendtacho.org
+======================
 
 
 INFO
@@ -11,7 +11,7 @@ software to convert driver card and vehicle unit byte data of a digital
 tachograph (DTCO) to XML. An application to examine and visualize the data
 shall also be developed.
 
-Web page (German):        http://www.digitaler-tachograph.org/
+Web page (German):        http://www.opendtacho.org/
 Project/development page: http://developer.berlios.de/projects/dtacho/
 
 User and developer mailing lists for this project are available. For details
@@ -42,7 +42,7 @@ or unexpected results.
 This software converts both the data of DTCO driver card .DDD files (C_*.DDD)
 and the data of vehicle unit .DDD files to XML files.
 
-The generated XML files can be validated with XML Schema Daefinitions (XSD).
+The generated XML files can be validated with XML Schema Definitions (XSD).
 
 The code for converting driver card .DDD files was developed by Martin Barth
 in his diploma thesis.and was extended by Gerald Schnabel to also convert the
@@ -138,7 +138,7 @@ Examples:
 
  -run the java compiler:
 
-  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/digitalertachograph/DDDQuery/*.java
+  gerald@dtachodev:/tmp/dtacho_test/trunk/src$ javac -cp ".:../classes/*" org/opendtacho/DDDQuery/*.java
 
 
 -Running the program
@@ -154,7 +154,7 @@ Examples:
 
  gerald@dtachodev:~/workspace/dtacho/bin$ ls -lR | grep ^d
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 org
- drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 digitalertachograph
+ drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 opendtacho
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 DDDQuery
  drwxr-xr-x 3 gerald gerald 4096 2007-12-02 20:49 internalData
  drwxr-xr-x 2 gerald gerald 4096 2007-12-02 20:49 DataTypes
@@ -177,7 +177,7 @@ Examples:
  Examples:
 
  gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
- org.digitalertachograph.DDDQuery.Controller C_driver_card.DDD
+ org.opendtacho.DDDQuery.Controller C_driver_card.DDD
 
  This will read the driver card file C_driver_card.DDD, print some (debug)
  info and output the file C_driver_card.DDD.xml
@@ -186,7 +186,7 @@ Examples:
  Multiple files/wildcards are supported via command line, e.g.
 
  gerald@dtachodev:~/workspace/dtacho/bin$ java -cp ".:../classes/*" \
- org.digitalertachograph.DDDQuery.Controller C_*.DDD
+ org.opendtacho.DDDQuery.Controller C_*.DDD
 
  will convert all driver card files (C_*.DDD) in the current directory
  to XML files.

@@ -1,6 +1,11 @@
+2008-08-13
+-refactored packages from org.digitalertachograph.* to org.opendtacho.*
+
+
 2008-07-26
 -ManufacturerCode: update to latest changes
 -README, LIESMICH: updates
+
 
 2008-05-12
 -Controller: process() method bug fix
