@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:ManufacturerCode.java 61 2008-08-13 20:26:38Z deetee $
 
     Copyright (C) 2008, Gerald Schnabel
 
@@ -88,7 +88,7 @@ public class ManufacturerCode extends DataClass {
 	 * 
 	 * @return	the name of the manufacturer of the ManufacturerCode object
 	 * 
-	 * Manufacturer codes list as of 23/07/2008
+	 * Manufacturer codes list as of 02/09/2008
 	 * http://dtc.jrc.it/text/cm.html
 	 */
 	public String toString() {

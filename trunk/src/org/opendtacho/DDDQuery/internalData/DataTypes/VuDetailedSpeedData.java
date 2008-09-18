@@ -1,5 +1,5 @@
 /*
-    $Id$
+    $Id:VuDetailedSpeedData.java 61 2008-08-13 20:26:38Z deetee $
 
     Copyright (C) 2008, Gerald Schnabel
 
@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import org.jdom.Element;
+import org.opendtacho.DDDQuery.Config;
 import org.opendtacho.DDDQuery.DebugLogger;
 import org.opendtacho.DDDQuery.internalData.DataClass;
 
@@ -67,17 +68,15 @@ public class VuDetailedSpeedData extends DataClass {
 	public VuDetailedSpeedData( byte[] value ) {
 		debugLogger = new DebugLogger();
 
-		// if environment variable NODETALEDSPEED is set to true
+		// if environment variable NODETAILEDSPEEDDATA is set to true
 		// skip processing of vuDetailedSpeedBlocks
-		String envTagInfo = System.getenv( "NODETAILEDSPEED" );
+		boolean noDetailedSpeedData = Config.getNoDetailedSpeedData();
 
-		if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
-			if ( envTagInfo.toLowerCase().compareTo( "true" ) == 0 ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] NODETAILEDSPEED=true found, skipping SpeedBlock entries." );
-				size = 2;
+		if ( noDetailedSpeedData == true ) {
+			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] NODETAILEDSPEED=true found, skipping SpeedBlock entries." );
+			size = 2;
 
-				return;
-			}
+			return;
 		}
 
 		noOfSpeedBlocks = convertIntoUnsigned2ByteInt( arrayCopy( value, 0, 2 ) );

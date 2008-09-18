@@ -66,7 +66,7 @@ public class DebugLogger {
 	 * Constructor for a DebugLogger object.
 	 * 
 	 * The static settings must be either set with the corresponding
-	 * setter routines of by {@link #InitEnv()}.
+	 * setter routines or by {@link #InitFromEnv()}.
 	 */
 	public DebugLogger() {
 
@@ -114,7 +114,7 @@ public class DebugLogger {
 	 * DEBUGLOGLEVEL: sets the debug log level
 	 * DEBUGPRINTSTREAM: sets the printstream where the debug messages are put.
 	 */
-	public static void InitEnv() {
+	public static void InitFromEnv() {
 		// try to read log level from environment variable
 		// defaults to LOGLEVEL_ERROR
 		logLevel = LOGLEVEL_ERROR;
@@ -154,6 +154,7 @@ public class DebugLogger {
 		// try to read DEBUGPRINTSTREAM environment variable for logging
 		// defaults to System.out
 		logPrintStream = System.out;
+
 		try {
 			String envDebugPrintStream = System.getenv( "DEBUGPRINTSTREAM" );
 

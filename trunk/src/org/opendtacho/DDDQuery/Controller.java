@@ -30,35 +30,52 @@ import org.apache.xmlrpc.server.XmlRpcServer;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
 
-
+/**
+ * The main class of the format converter
+ */
 public class Controller {
 	private static Controller self;
 	private boolean anonymized = false;
 	private static DebugLogger debugLogger;
-	
+
 	public boolean isAnonymized() {
 		return anonymized;
 	}
 
+	/**
+	 * The main routine called from command line
+	 * 
+	 * @param args		command line arguments
+	 */
 	public static void main ( String[] args ) {
 		debugLogger = new DebugLogger();
 
-		DebugLogger.InitEnv();
-
+		DebugLogger.InitFromEnv();
 		Controller c = Controller.getInstance();
-		c.setupWebserver();
-		//c.manual();
-		if ( args.length > 0) {
-			for ( int i = 0; i < args.length; i++ ) {
-				debugLogger.resetPrintDelayed();
-				c.process( args[ i ] );
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
-			}
 
-			System.exit( 0 );
+		Config.setConfigureFromEnv( true );
+
+		if ( args.length >= 1 ) {
+			if ( args[ 0 ].compareTo( "-s" ) == 0 ) {
+				// start XML-RPC server when command line option '-s' is given
+				c.setupWebserver();
+			}
+			else {
+				// otherwise process files
+				for ( int i = 0; i < args.length; i++ ) {
+					debugLogger.resetPrintDelayed();
+					c.process( args[ i ] );
+					debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
+				}
+			}
 		}
 	}
 
+	/**
+	 * Returns an instance of the Controller if none exists
+	 * 
+	 * @return		an instance of the Controller
+	 */
 	public static Controller getInstance(){
 		if ( self == null ) {
 			self = new Controller();
@@ -67,10 +84,14 @@ public class Controller {
 		return self;
 	}
 
-	private Controller() {
+	/**
+	 * Constructor for a Controller object
+	 */
+	public Controller() {
 
 	}
 
+	// TODO: to be removed
 	public static void sendXML( String xml ) {
 		try {
 			XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
@@ -91,6 +112,7 @@ public class Controller {
 		}
 	}
 
+	// TODO: to be removed
 	public void manual() {
 		String pwd = "org_daten";
 
@@ -101,6 +123,11 @@ public class Controller {
 		process( org_file2 );
 	}
 
+	/**
+	 * Converts a DDD file to XML and writes it to DDDFilename.xml
+	 * 
+	 * @param file			the DDD file that will be converted to XML
+	 */
 	public void process( String file ) {
 		debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "\n" + file + "\n", true );
 
@@ -123,6 +150,8 @@ public class Controller {
 	}
 
 	/**
+	 * Converts the binary data of a DDD file given in the byte array
+	 * <code>data</code> to XML
 	 * 
 	 * @param data			byte array of DDD data
 	 * @param srcType		the type of DDD data ({@link DDDDataSource#SRC_TYPE_CARD}, {@link DDDDataSource#SRC_TYPE_VU})
@@ -152,6 +181,10 @@ public class Controller {
 		return null;
 	}
 
+	/**
+	 * Starts an XML-RPC server on port 5001 that waits for the binary data
+	 * of a .DDD-file and returns its data as XML
+	 */
 	public void setupWebserver() {
 		try {
 			WebServer webserver = new WebServer( 5001 );
@@ -159,6 +192,7 @@ public class Controller {
 
 			PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
+			// class that handles requests
 			phm.addHandler( "RpcController", RpcController.class );
 			xmlRpcServer.setHandlerMapping( phm );
 

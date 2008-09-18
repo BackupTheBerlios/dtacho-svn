@@ -22,6 +22,14 @@ package org.opendtacho.DDDQuery;
 
 public class RpcController {
 
+	/**
+	 * Converts the binary data of a DDD file given in the byte array
+	 * <code>data</code>to XML
+	 * 
+	 * @param data			byte array of DDD data
+	 * @param srcType		the type of DDD data ({@link DDDDataSource#SRC_TYPE_CARD}, {@link DDDDataSource#SRC_TYPE_VU})
+	 * @return				the parsed DDD data as XML stream
+	 */
 	public String process( byte[] data, int srcType ){
 		String xml = Controller.getInstance().process( data, (short)srcType );
 		return xml;

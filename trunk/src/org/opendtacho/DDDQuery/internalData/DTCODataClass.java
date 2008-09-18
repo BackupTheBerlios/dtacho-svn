@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import org.jdom.Element;
+import org.opendtacho.DDDQuery.Config;
 import org.opendtacho.DDDQuery.DebugLogger;
 import org.opendtacho.DDDQuery.XMLInfo;
 import org.opendtacho.DDDQuery.internalData.Security.SecurityCAPublicKey;
@@ -80,44 +81,30 @@ public abstract class DTCODataClass extends DataClass {
 	 * Tries to load and initialise the European Public Key. If the key
 	 * could be successfully initialised, it will be used for deciphering
 	 * the CA certificate.
-	 * The path where the European Public Key resides can be set by the
-	 * environment variable EURPKPATH.
+	 * The path where the European Public Key resides can be set with
+	 * {@link Config#setEURPKPath( String )} or by the environment variable
+	 * EURPKPATH.
 	 * 
 	 * @return	true if the EC public key could be initialised
 	 * 			false otherwise
 	 * 	
 	 */
 	public boolean initECPublicKey() {
-		String envEURPKPath = new String();
 		FileInputStream ecPubKeyFIS;
 
-		try {
-			envEURPKPath = System.getenv( "EURPKPATH" );
-
-			if ( ( envEURPKPath != null ) && ( envEURPKPath.length() > 0 ) ) {
-				if ( envEURPKPath.charAt( envEURPKPath.length() - 1 ) != '/' ) {
-					envEURPKPath = envEURPKPath + "/";
-				}
-			}
-		}
-		catch ( NullPointerException npe ) {
-			npe.printStackTrace();
-		}
-		catch ( SecurityException se ) {
-			se.printStackTrace();
-		}
+		String eurPKPath = Config.getEURPKPath();
 
 		try {
 			// try to open the EC Public Key
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] trying to open the European Public Key:" );
 			debugLogger.print( DebugLogger.LOGLEVEL_INFO, "[INFO] " );
-			if ( envEURPKPath != null ) {
-				debugLogger.print( DebugLogger.LOGLEVEL_INFO, envEURPKPath );
+			if ( eurPKPath != null ) {
+				debugLogger.print( DebugLogger.LOGLEVEL_INFO, eurPKPath );
 			}
 			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "EC_PK.bin" );
 
-			if ( envEURPKPath != null ) {
-				ecPubKeyFIS = new FileInputStream( envEURPKPath + "EC_PK.bin" );
+			if ( eurPKPath != null ) {
+				ecPubKeyFIS = new FileInputStream( eurPKPath + "EC_PK.bin" );
 			}
 			else {
 				ecPubKeyFIS = new FileInputStream( "EC_PK.bin" );

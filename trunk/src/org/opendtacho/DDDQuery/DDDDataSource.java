@@ -225,22 +225,7 @@ public class DDDDataSource implements DataSource {
 			if ( parseresult == true ) {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
-				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
-				String envTagInfo = System.getenv( "TAGINFO" );
-
-				if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
-					if ( envTagInfo.toUpperCase().compareTo( "TAG" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAG;
-					}
-
-					if ( envTagInfo.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAGLENGTH;
-					}
-
-					if ( envTagInfo.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAGVALUE;
-					}
-				}
+				tagInfoOutput tagInfo = Config.getTagInfo();
 
 				if ( tagInfo == tagInfoOutput.TAG ) {
 					cardData.printT();
@@ -251,18 +236,7 @@ public class DDDDataSource implements DataSource {
 				}
 
 				if ( tagInfo == tagInfoOutput.TAGVALUE ) {
-					int hexDumpWidth = 16;
-					String hexDumpWidthEnv = System.getenv( "HEXDUMPWIDTH" );
-
-					if ( ( hexDumpWidthEnv != null ) && ( hexDumpWidthEnv.length() > 0 ) ) {
-						int hexDumpWidthTemp = Integer.parseInt( hexDumpWidthEnv, 10 );
-
-						if ( ( hexDumpWidthTemp >= 16 ) && ( hexDumpWidthTemp <= 64 ) ) {
-							hexDumpWidth = hexDumpWidthTemp;
-						}
-					}
-
-					cardData.printTV( hexDumpWidth );
+					cardData.printTV( Config.getHexDumpWidth() );
 				}
 
 				
@@ -504,22 +478,7 @@ public class DDDDataSource implements DataSource {
 			if ( parseresult == true ) {
 				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
-				tagInfoOutput tagInfo = tagInfoOutput.TAGLENGTH;
-				String envTagInfo = System.getenv( "TAGINFO" );
-
-				if ( ( envTagInfo != null ) && ( envTagInfo.length() > 0 ) ) {
-					if ( envTagInfo.toUpperCase().compareTo( "TAG" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAG;
-					}
-
-					if ( envTagInfo.toUpperCase().compareTo( "TAGLENGTH" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAGLENGTH;
-					}
-
-					if ( envTagInfo.toUpperCase().compareTo( "TAGVALUE" ) == 0 ) {
-						tagInfo = tagInfoOutput.TAGVALUE;
-					}
-				}
+				tagInfoOutput tagInfo = Config.getTagInfo();
 
 				if ( tagInfo == tagInfoOutput.TAG ) {
 					vehicleUnitData.printT();
@@ -530,18 +489,7 @@ public class DDDDataSource implements DataSource {
 				}
 
 				if ( tagInfo == tagInfoOutput.TAGVALUE ) {
-					int hexDumpWidth = 16;
-					String envHexDumpWidth = System.getenv( "HEXDUMPWIDTH" );
-
-					if ( ( envHexDumpWidth != null ) && ( envHexDumpWidth.length() > 0 ) ) {
-						int hexDumpWidthTemp = Integer.parseInt( envHexDumpWidth, 10 );
-
-						if ( ( hexDumpWidthTemp >= 16 ) && ( hexDumpWidthTemp <= 64 ) ) {
-							hexDumpWidth = hexDumpWidthTemp;
-						}
-					}
-
-					vehicleUnitData.printTV( hexDumpWidth );
+					vehicleUnitData.printTV( Config.getHexDumpWidth() );
 				}
 
 				if ( vehicleUnitData.invalidDataFound() == true ) {

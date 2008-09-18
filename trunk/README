@@ -53,7 +53,7 @@ NOTES
 -----
 
 This software depends on some additional components (jars) that can be found
-in the classes directory.
+in the lib directory.
 
 These jars were obtained from the following sources:
 

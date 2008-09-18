@@ -56,7 +56,7 @@ BEMERKUNGEN
 -----------
 
 Diese Software hängt von einigen zusätzlichen Komponenten (jars) ab, welche im
-Verzeichnis classes abgelegt sind.
+Verzeichnis lib abgelegt sind.
 
 Die jars wurden von folgenden Quellen bezogen:
 
