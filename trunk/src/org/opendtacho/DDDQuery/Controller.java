@@ -31,7 +31,7 @@ import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
 
 /**
- * The main class of the format converter
+ * The main class of the format converter.
  */
 public class Controller {
 	private static Controller self;
@@ -88,7 +88,7 @@ public class Controller {
 	 * Constructor for a Controller object
 	 */
 	public Controller() {
-
+		debugLogger = new DebugLogger();
 	}
 
 	// TODO: to be removed

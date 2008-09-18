@@ -20,11 +20,14 @@
 
 package org.opendtacho.DDDQuery;
 
+/**
+ * Class that implements XML-RPC functions.
+ */
 public class RpcController {
 
 	/**
 	 * Converts the binary data of a DDD file given in the byte array
-	 * <code>data</code>to XML
+	 * <code>data</code> to XML
 	 * 
 	 * @param data			byte array of DDD data
 	 * @param srcType		the type of DDD data ({@link DDDDataSource#SRC_TYPE_CARD}, {@link DDDDataSource#SRC_TYPE_VU})

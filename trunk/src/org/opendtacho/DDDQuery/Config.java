@@ -23,7 +23,7 @@ package org.opendtacho.DDDQuery;
 import org.opendtacho.DDDQuery.DDDDataSource.tagInfoOutput;
 
 /**
- * Class for configuration of the format converter
+ * Class for configuration of the format converter.
  */
 public class Config {
 
