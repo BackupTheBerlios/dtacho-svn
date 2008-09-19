@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<overview Implementation-Title="Canoo Webtest" Implementation-Version="R_1708">
+	<folder name="001_XmlFileUploadBas">
+<summary duration='687' starttime='Fri Sep 19 16:38:24 CEST 2008' name='XmlFileUpload basic operations: upload file' successful='no'><topsteps total='5' notexecuted='4' failed='1' successful='0'></topsteps><steps total='12' notexecuted='11' failed='1' successful='0'></steps><timingprofile number='1' average='687'><range to='1' number='1' from='0'></range><range to='3' number='0' from='1'></range><range to='5' number='0' from='3'></range><range to='10' number='0' from='5'></range><range to='30' number='0' from='10'></range><range number='0' from='30'></range></timingprofile><failingstep description='' name='invoke'></failingstep></summary>
+</folder>
+
+</overview>

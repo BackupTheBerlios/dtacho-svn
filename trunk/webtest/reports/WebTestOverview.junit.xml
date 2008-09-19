@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite time="0.687" tests="1" name="WebTest" failures="0" errors="1">
+<!--
+			This is an overview of the WebTest results in JUnit "standard" format.
+			It doesn't present all the information available in WebTest reports but can be easily be integrated
+			in reports of continuous integration tools like Cruise Control.
+			-->
+<testcase time="0.687" name="XmlFileUpload basic operations: upload file" classname="WebTest">
+<failure type="Failed test" message="Failing step: XmlFileUpload basic operations: upload file ()"/>
+</testcase>
+</testsuite>
