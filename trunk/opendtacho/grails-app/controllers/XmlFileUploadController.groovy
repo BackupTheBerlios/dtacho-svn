@@ -12,7 +12,12 @@ class XmlFileUploadController {
         if(file && !file.empty) {
 
             // TODO: avoid saving file in temp directory, this requires a change in the interface of ReadXmlService
-            def fileName = "C:\\temp\\tmpFileUploadDir\\${file.getOriginalFilename()}"
+            def tempdir = System.getProperty("java.io.tmpdir");
+
+            if ( !(tempdir.endsWith("/") || tempdir.endsWith("\\")) )
+                tempdir = tempdir + System.getProperty("file.separator");
+
+            def fileName = tempdir + file.getOriginalFilename()
             file.transferTo( new java.io.File(fileName))
 
             // load XML to database

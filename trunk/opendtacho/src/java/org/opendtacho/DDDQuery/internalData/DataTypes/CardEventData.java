@@ -50,7 +50,7 @@ public class CardEventData extends DataClass{
 	 * cardEventRecords[5]:	security breach attempts,
 	 * 						vehicle unit related & sensor related	'10'H...'2F'H
 	 * ---
-	 * sechs Folgen von Datens‰tzen (cardEventRecords[0..5]), die jeweils
+	 * sechs Folgen von Datens√§tzen (cardEventRecords[0..5]), die jeweils
 	 * "NoOfEventsPerType"-fach CardEventRecords der "EventFaultTypes" oben enthalten
 	 * (req. 204 & 223).
 	 */
@@ -70,9 +70,10 @@ public class CardEventData extends DataClass{
 	/**
 	 * Constructor for a CardEventData object
 	 * 
-	 * @param	value	byte array of a CardEventData structure
-	 * 					whose data is used when the CardEventData
-	 * 					object is created.
+	 * @param	value	            byte array of a CardEventData structure
+	 *              				whose data is used when the CardEventData
+	 * 				            	object is created.
+     * @param   noOfEventsPerType   number of events per type
 	 */
 	public CardEventData( byte[] value, short noOfEventsPerType ) {
 		debugLogger = new DebugLogger();

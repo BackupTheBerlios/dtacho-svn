@@ -32,12 +32,12 @@ public class RegionNumeric extends DataClass {
 	 * 		Value assignment:
 	 * 		'00'H No information available
 	 * 		Spain:
-	 * 		'01'H Andalucía
-	 * 		'02'H Aragón
+	 * 		'01'H AndalucÃ­a
+	 * 		'02'H AragÃ³n
 	 * 		'03'H Asturias
 	 * 		'04'H Cantabria
-	 * 		'05'H Cataluña
-	 * 		'06'H Castilla-León
+	 * 		'05'H CataluÃ±a
+	 * 		'06'H Castilla-LeÃ³n
 	 * 		'07'H Castilla-La-Mancha
 	 * 		'08'H Valencia
 	 * 		'09'H Extremadura
@@ -48,7 +48,7 @@ public class RegionNumeric extends DataClass {
 	 *		'0E'H Madrid
 	 *		'0F'H Murcia
 	 *		'10'H Navarra
-	 *		'11'H País Vasco.
+	 *		'11'H PaÃ­s Vasco.
 	 */
 
 	/**
@@ -108,10 +108,10 @@ public class RegionNumeric extends DataClass {
 				return "No information available";
 
 			case 0x01:
-				return "Andalucía";
+				return "AndalucÃ­a";
 
 			case 0x02:
-				return "Aragón";
+				return "AragÃ³n";
 
 			case 0x03:
 				return "Asturias";
@@ -120,10 +120,10 @@ public class RegionNumeric extends DataClass {
 				return "Cantabria";
 
 			case 0x05:
-				return "Cataluña";
+				return "CataluÃ±a";
 
 			case 0x06:
-				return "Castilla-León";
+				return "Castilla-LeÃ³n";
 
 			case 0x07:
 				return "Castilla-La-Mancha";
@@ -156,7 +156,7 @@ public class RegionNumeric extends DataClass {
 				return "Navarra";
 
 			case 0x011:
-				return "País Vasco";
+				return "PaÃ­s Vasco";
 
 			default:
 				return "Invalid";

@@ -120,7 +120,7 @@ public class ManufacturerCode extends DataClass {
 			return "certSIGN";
 		}
 		if ( manufacturerCode == 0x30 ) {
-			return "Sdu Identification B.V. (formerly Enschedé/Sdu B.V.)";
+			return "Sdu Identification B.V. (formerly EnschedÃ©/Sdu B.V.)";
 		}
 		if ( manufacturerCode == 0x31 ) {
 			return "Electricfil Industries";
@@ -129,7 +129,7 @@ public class ManufacturerCode extends DataClass {
 			return "EFKON AG.";
 		}
 		if ( manufacturerCode == 0x38 ) {
-			return "Fábrica Nacional de Moneda y Timbre";
+			return "FÃ¡brica Nacional de Moneda y Timbre";
 		}
 		if ( manufacturerCode == 0x40 ) {
 			return "Giesecke & Devrient GmbH";
@@ -162,7 +162,7 @@ public class ManufacturerCode extends DataClass {
 			return "Sagem Orga (formerly ORGA Kartensysteme GmbH)";
 		}
 		if ( manufacturerCode == 0x82 ) {
-			return "Österreichische Staatsdruckerei GmbH";
+			return "Ã–sterreichische Staatsdruckerei GmbH";
 		}
 		if ( manufacturerCode == 0x88 ) {
 			return "PVT a.s.";
@@ -192,10 +192,10 @@ public class ManufacturerCode extends DataClass {
 			return "T-Systems International GmbH";
 		}
 		if ( manufacturerCode == 0xac ) {
-			return "Trüb AG";
+			return "TrÃ¼b AG";
 		}
 		if ( manufacturerCode == 0xad ) {
-			return "Trüb Baltic AS";
+			return "TrÃ¼b Baltic AS";
 		}
 		if ( manufacturerCode == 0xae ) {
 			return "TEMPEST a.s.";

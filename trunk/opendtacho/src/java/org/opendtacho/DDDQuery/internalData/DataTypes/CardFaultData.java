@@ -40,9 +40,9 @@ public class CardFaultData extends DataClass {
 	 * NoOfFaultsPerType ::= 12..24 for driver card
 	 * NoOfFaultsPerType ::= 6      for workshop card
 	 * ---
-	 * zwei Folgen von Datens‰tzen, die jeweils "NoOfFaultsPerType"-fach CardFaultRecords enthalten.
-	 * -die erste Folge enth‰lt Stˆrungsdatens‰tze des Kontrollger‰ts
-	 * -die zweite Folge enth‰lt Stˆrungsdatens‰tze der Karte
+	 * zwei Folgen von Datens√§tzen, die jeweils "NoOfFaultsPerType"-fach CardFaultRecords enthalten.
+	 * -die erste Folge enth√§lt St√∂rungsdatens√§tze des Kontrollger√§ts
+	 * -die zweite Folge enth√§lt St√∂rungsdatens√§tze der Karte
 	 * (req. 207 & 233).
 	 */
 

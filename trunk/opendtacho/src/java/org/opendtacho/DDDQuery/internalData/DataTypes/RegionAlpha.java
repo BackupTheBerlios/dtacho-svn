@@ -104,10 +104,10 @@ public class RegionAlpha extends DataClass {
 			return "No information available";
 		}
 		else if ( regionAlpha.compareTo( "AN " ) == 0 ) {
-			return "Andalucía";
+			return "AndalucÃ­a";
 		}
 		else if ( regionAlpha.compareTo( "AR " ) == 0 ) {
-			return "Aragón";
+			return "AragÃ³n";
 			}
 		else if ( regionAlpha.compareTo( "AST" ) == 0 ) {
 			return "Asturias";
@@ -116,10 +116,10 @@ public class RegionAlpha extends DataClass {
 			return "Cantabria";
 		}
 		else if ( regionAlpha.compareTo( "CAT" ) == 0 ) {
-			return "Cataluña";
+			return "CataluÃ±a";
 		}
 		else if ( regionAlpha.compareTo( "CL " ) == 0 ) {
-			return "Castilla-León";
+			return "Castilla-LeÃ³n";
 		}
 		else if ( regionAlpha.compareTo( "CM " ) == 0 ) {
 			return "Castilla-La-Mancha";
@@ -152,7 +152,7 @@ public class RegionAlpha extends DataClass {
 			return "Navarra";
 		}
 		else if ( regionAlpha.compareTo( "PV " ) == 0 ) {
-			return "País Vasco";
+			return "PaÃ­s Vasco";
 		}
 		else {
 			return "Invalid";

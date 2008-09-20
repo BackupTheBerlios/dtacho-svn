@@ -158,7 +158,7 @@ public abstract class DataClass {
 	 * Converts the byte array <tt>b</tt> into a string.
 	 * 
 	 * @param	b			the byte array to be converted to a string
-	 * @param	codepage	the codepage to be used for conversion
+	 * @param	codePage	the codepage to be used for conversion
 	 * @return	the string created from byte array <tt>b</tt>
 	 */
 	static protected String convertIntoString( byte[] b, short codePage ) {
