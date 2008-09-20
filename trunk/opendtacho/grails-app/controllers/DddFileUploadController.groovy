@@ -24,10 +24,18 @@ class DddFileUploadController {
 
             // convert to XML
             // TODO: convert to XML
+            org.opendtacho.DDDQuery.Controller.main(fileName)
 
             // load XML to database
             // TODO: handle errors
-            readXmlService.loadXmlFile(fileName)
+            readXmlService.loadXmlFile(fileName + ".xml")
+
+            // remove temporary files
+            def rmfile = new File(fileName)
+            rmfile.delete()
+
+            def rmxmlfile = new File(fileName + ".xml")
+            rmxmlfile.delete()
 
             flash.message = ''
         }

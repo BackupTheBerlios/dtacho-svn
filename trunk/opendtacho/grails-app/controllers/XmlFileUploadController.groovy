@@ -24,6 +24,10 @@ class XmlFileUploadController {
             // TODO: handle errors
             readXmlService.loadXmlFile(fileName)
 
+            // remove temporary file
+            def rmfile = new File(fileName)
+            rmfile.delete()
+
             flash.message = ''
         }
         else

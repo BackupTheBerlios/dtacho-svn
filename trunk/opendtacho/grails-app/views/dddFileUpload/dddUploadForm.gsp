@@ -17,13 +17,13 @@
     <span class="menuButton"><a class="home" href="${createLinkTo()}">Home</a></span>
 </div>
 <div class="body" >
-    <h1>Choose file</h1>
+    <h1>Choose DDD file</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
     </g:if>
 
     <form action="upload" enctype="multipart/form-data" method="post" >
-        <input type="file" name="binFile" />
+        <input type="file" name="binFile" size="50" value=""/>
         <br/>
         <input type="submit" value="Upload!"/>
     </form>
