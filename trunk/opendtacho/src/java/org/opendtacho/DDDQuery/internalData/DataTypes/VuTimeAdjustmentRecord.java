@@ -74,26 +74,26 @@ public class VuTimeAdjustmentRecord extends DataClass {
 	public VuTimeAdjustmentRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old time value:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old time value:" );
 		oldTimeValue = new TimeReal( arrayCopy( value, 0, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New time value:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New time value:" );
 		newTimeValue = new TimeReal( arrayCopy( value, 4, 4 ) );
 
 		workshopName = new Name( arrayCopy( value, 8, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop name: %s\n", workshopName.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop name: %s\n", workshopName.getNameString() );
 
 		workshopAddress = new Address( arrayCopy( value, 44, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop address: %s\n", workshopAddress.getAddressString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop address: %s\n", workshopAddress.getAddressString() );
 
 		workshopCardNumber = new FullCardNumber( arrayCopy( value, 80, 18 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", workshopCardNumber.getCardType().getEquipmentType(), workshopCardNumber.getCardType().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", workshopCardNumber.getCardIssuingMemberState().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", workshopCardNumber.getCardType().getEquipmentType(), workshopCardNumber.getCardType().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", workshopCardNumber.getCardIssuingMemberState().toString() );
 		if ( workshopCardNumber.getCardType().getEquipmentType() == EquipmentType.WORKSHOP_CARD ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", workshopCardNumber.getCardNumber().getOwnerIdentification(), workshopCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), workshopCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), workshopCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", workshopCardNumber.getCardNumber().getOwnerIdentification(), workshopCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), workshopCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), workshopCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 		else {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Wrong card type. Expected a workshop card." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Wrong card type. Expected a workshop card." );
 		}
 	}
 

@@ -79,47 +79,47 @@ public class CardControlActivityDataRecord extends DataClass {
 		debugLogger = new DebugLogger();
 
 		controlType = new ControlType( value[ 0 ] );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control type:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card downloaded: %s\n", Boolean.toString( controlType.isCardDownloading() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] VU downloaded: %s\n", Boolean.toString( controlType.isVuDownloading() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Printing done during control: %s\n", Boolean.toString( controlType.isPrinting() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Display used during control: %s\n", Boolean.toString( controlType.isDisplay() ) );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control type:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card downloaded: %s\n", Boolean.toString( controlType.isCardDownloading() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] VU downloaded: %s\n", Boolean.toString( controlType.isVuDownloading() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Printing done during control: %s\n", Boolean.toString( controlType.isPrinting() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Display used during control: %s\n", Boolean.toString( controlType.isDisplay() ) );
 
 		long controlTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 1, 4 ) );
 		if ( controlTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control time:" );
 		}
 		controlTime = new TimeReal( arrayCopy( value, 1, 4 ) );
 
 		controlCardNumber = new FullCardNumber( arrayCopy( value, 5, 18 ) );
 		if ( controlTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card:" );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card type: %s\n", controlCardNumber.getCardType().toString() );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", controlCardNumber.getCardIssuingMemberState().toString());
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card:" );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card type: %s\n", controlCardNumber.getCardType().toString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", controlCardNumber.getCardIssuingMemberState().toString());
 			if ( controlCardNumber.getCardType().getEquipmentType() == EquipmentType.CONTROL_CARD ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", controlCardNumber.getCardNumber().getOwnerIdentification(), controlCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), controlCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), controlCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", controlCardNumber.getCardNumber().getOwnerIdentification(), controlCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), controlCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), controlCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 			}
 			else {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Wrong card type?! Expected a control card" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Wrong card type?! Expected a control card" );
 			}
 		}
 
 		controlVehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 23, 15 ) );
 		if ( controlTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control vehicle registration:" );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Nation where vehicle is registered: %s\n", controlVehicleRegistration.getVehicleRegistrationNation().toString() );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Vehicle registration number: %s\n", controlVehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumberString() );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control vehicle registration:" );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Nation where vehicle is registered: %s\n", controlVehicleRegistration.getVehicleRegistrationNation().toString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Vehicle registration number: %s\n", controlVehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 		}
 
 		long controlDownloadPeriodBeginTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 38, 4 ) );
 		if ( controlDownloadPeriodBeginTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control download period begin:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control download period begin:" );
 		}
 		controlDownloadPeriodBegin = new TimeReal( arrayCopy( value, 38, 4 ) );
 
 		long controlDownloadPeriodEndTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 42, 4 ) );
 		if ( controlDownloadPeriodEndTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control download period end:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control download period end:" );
 		}
 		controlDownloadPeriodEnd = new TimeReal( arrayCopy( value, 42, 4 ) );
 	}

@@ -61,23 +61,23 @@ public class PRDT_Events_And_Faults extends DataClass {
 		debugLogger = new DebugLogger();
 
 		int offset1 = 1 + convertIntoUnsigned1ByteInt( value[ 0 ] ) * VuFaultRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Fault data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Fault data:" );
 		vuFaultData = new VuFaultData( arrayCopy( value, 0, offset1 ) );
 
 		int offset2 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 ] ) * VuEventRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Event data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Event data:" );
 		vuEventData = new VuEventData( arrayCopy( value, offset1, offset2 ) );
 
 		int offset3 = 9;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Overspeeding control data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Overspeeding control data:" );
 		vuOverSpeedingControlData = new VuOverSpeedingControlData( arrayCopy( value, offset1 + offset2, offset3 ) );
 
 		int offset4 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 + offset2 + offset3 ] ) * VuOverSpeedingEventRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Overspeeding event data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Overspeeding event data:" );
 		vuOverSpeedingEventData = new VuOverSpeedingEventData( arrayCopy( value, offset1 + offset2 + offset3, offset4 ) );
 
 		int offset5 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 + offset2 + offset3 + offset4 ] ) * VuTimeAdjustmentRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU time adjustment data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU time adjustment data:" );
 		vuTimeAdjustmentData = new VuTimeAdjustmentData( arrayCopy( value, offset1 + offset2 + offset3 + offset4, offset5 ) );
 
 		size = offset1 + offset2 + offset3 + offset4 + offset5;

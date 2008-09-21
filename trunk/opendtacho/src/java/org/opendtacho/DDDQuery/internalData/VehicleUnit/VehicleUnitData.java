@@ -119,7 +119,7 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 
 			if ( super.isECPublicKeyAvailable() == true ) {
 				// check member state certificate
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] checking Member State certificate" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] checking Member State certificate" );
 				msCertificate = new SecurityCertificateCheck();
 
 				// set public key
@@ -127,39 +127,39 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 					msCertificate.setRSAPublicKey( super.getECPubKeyModulus(), super.getECPubKeyExponent() );
 
 					// decipher member state certificate
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] deciphering Member State certificate" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] deciphering Member State certificate" );
 					msCertificate.decipherCertificateSignature( memberStateCertificateValue );
 					genuineMSCertificate = msCertificate.isGenuineCertificate();
 
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", memberStateCertificateValue.length, new SecurityByteArrayTools().ByteArrayToHexString( memberStateCertificateValue ) );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", msCertificate.getDecipheredSignatureByteArray().length, msCertificate.getDecipheredSignatureHexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", msCertificate.isValidSignature());
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", msCertificate.getC_NByteArray().length, msCertificate.getC_NHexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", msCertificate.getCARByteArray().length, msCertificate.getCARHexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", msCertificate.getC_RByteArray().length, msCertificate.getC_RHexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", msCertificate.getC_0ByteArray().length, msCertificate.getC_0HexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", msCertificate.getH_0ByteArray().length, msCertificate.getH_0HexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", msCertificate.getC_0SHAHashByteArray().length, msCertificate.getC_0SHAHashHexString() );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", msCertificate.isGenuineCertificate());
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", memberStateCertificateValue.length, new SecurityByteArrayTools().ByteArrayToHexString( memberStateCertificateValue ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", msCertificate.getDecipheredSignatureByteArray().length, msCertificate.getDecipheredSignatureHexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", msCertificate.isValidSignature());
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", msCertificate.getC_NByteArray().length, msCertificate.getC_NHexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", msCertificate.getCARByteArray().length, msCertificate.getCARHexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", msCertificate.getC_RByteArray().length, msCertificate.getC_RHexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", msCertificate.getC_0ByteArray().length, msCertificate.getC_0HexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", msCertificate.getH_0ByteArray().length, msCertificate.getH_0HexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", msCertificate.getC_0SHAHashByteArray().length, msCertificate.getC_0SHAHashHexString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", msCertificate.isGenuineCertificate());
 
 					if ( genuineMSCertificate == true ) {
-						debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate content:");
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", msCertificate.getCertificateContent().getCPIByteArray().length, msCertificate.getCertificateContent().getCPIHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", msCertificate.getCertificateContent().getCARByteArray().length, msCertificate.getCertificateContent().getCARHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", msCertificate.getCertificateContent().getCHAByteArray().length, msCertificate.getCertificateContent().getCHAHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", msCertificate.getCertificateContent().getEOVByteArray().length, msCertificate.getCertificateContent().getEOVHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", msCertificate.getCertificateContent().getCHRByteArray().length, msCertificate.getCertificateContent().getCHRHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", msCertificate.getCertificateContent().getNByteArray().length, msCertificate.getCertificateContent().getNHexString() );
-						debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", msCertificate.getCertificateContent().getEByteArray().length, msCertificate.getCertificateContent().getEHexString() );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate content:");
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", msCertificate.getCertificateContent().getCPIByteArray().length, msCertificate.getCertificateContent().getCPIHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", msCertificate.getCertificateContent().getCARByteArray().length, msCertificate.getCertificateContent().getCARHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", msCertificate.getCertificateContent().getCHAByteArray().length, msCertificate.getCertificateContent().getCHAHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", msCertificate.getCertificateContent().getEOVByteArray().length, msCertificate.getCertificateContent().getEOVHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", msCertificate.getCertificateContent().getCHRByteArray().length, msCertificate.getCertificateContent().getCHRHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", msCertificate.getCertificateContent().getNByteArray().length, msCertificate.getCertificateContent().getNHexString() );
+						debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", msCertificate.getCertificateContent().getEByteArray().length, msCertificate.getCertificateContent().getEHexString() );
 
-						debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] Member State certificate is valid" );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Member State certificate is valid" );
 						if ( msCertificate.getCertificateContent().getEOVHexString().compareTo( "FFFFFFFF") != 0 ) {
-							debugLogger.print( DebugLogger.LOGLEVEL_INFO, " [INFO] Member State certificate end of validity:\n " );
+							debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Member State certificate end of validity:\n " );
 							new TimeReal( convertIntoUnsigned4ByteInt( msCertificate.getCertificateContent().getEOVByteArray() ) );
 						}
 
 						// check vehicle unit certificate
-						debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] checking Vehicle Unit certificate" );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] checking Vehicle Unit certificate" );
 						vuCertificate = new SecurityCertificateCheck();
 
 						try {
@@ -167,34 +167,34 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 							vuCertificate.setRSAPublicKey( msCertificate.getCertificateContent().getNHexString(), msCertificate.getCertificateContent().getEHexString() );
 
 							// decipher card certificate
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] deciphering Vehicle Unit certificate" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] deciphering Vehicle Unit certificate" );
 							vuCertificate.decipherCertificateSignature( vuCertificateValue );
 							genuineVuCertificate = vuCertificate.isGenuineCertificate();
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", vuCertificateValue.length, new SecurityByteArrayTools().ByteArrayToHexString( vuCertificateValue ) );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", vuCertificate.getDecipheredSignatureByteArray().length, vuCertificate.getDecipheredSignatureHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", vuCertificate.isValidSignature() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", vuCertificate.getC_NByteArray().length, vuCertificate.getC_NHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", vuCertificate.getCARByteArray().length, vuCertificate.getCARHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", vuCertificate.getC_RByteArray().length, vuCertificate.getC_RHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", vuCertificate.getC_0ByteArray().length, vuCertificate.getC_0HexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", vuCertificate.getH_0ByteArray().length, vuCertificate.getH_0HexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", vuCertificate.getC_0SHAHashByteArray().length, vuCertificate.getC_0SHAHashHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", vuCertificate.isGenuineCertificate() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", vuCertificateValue.length, new SecurityByteArrayTools().ByteArrayToHexString( vuCertificateValue ) );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", vuCertificate.getDecipheredSignatureByteArray().length, vuCertificate.getDecipheredSignatureHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", vuCertificate.isValidSignature() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", vuCertificate.getC_NByteArray().length, vuCertificate.getC_NHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", vuCertificate.getCARByteArray().length, vuCertificate.getCARHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", vuCertificate.getC_RByteArray().length, vuCertificate.getC_RHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", vuCertificate.getC_0ByteArray().length, vuCertificate.getC_0HexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", vuCertificate.getH_0ByteArray().length, vuCertificate.getH_0HexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", vuCertificate.getC_0SHAHashByteArray().length, vuCertificate.getC_0SHAHashHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", vuCertificate.isGenuineCertificate() );
 
 							if ( genuineVuCertificate == true ) {
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate content:");
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCPIByteArray().length, vuCertificate.getCertificateContent().getCPIHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCARByteArray().length, vuCertificate.getCertificateContent().getCARHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCHAByteArray().length, vuCertificate.getCertificateContent().getCHAHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", vuCertificate.getCertificateContent().getEOVByteArray().length, vuCertificate.getCertificateContent().getEOVHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCHRByteArray().length, vuCertificate.getCertificateContent().getCHRHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", vuCertificate.getCertificateContent().getNByteArray().length, vuCertificate.getCertificateContent().getNHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", vuCertificate.getCertificateContent().getEByteArray().length, vuCertificate.getCertificateContent().getEHexString() );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate content:");
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCPIByteArray().length, vuCertificate.getCertificateContent().getCPIHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCARByteArray().length, vuCertificate.getCertificateContent().getCARHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCHAByteArray().length, vuCertificate.getCertificateContent().getCHAHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", vuCertificate.getCertificateContent().getEOVByteArray().length, vuCertificate.getCertificateContent().getEOVHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", vuCertificate.getCertificateContent().getCHRByteArray().length, vuCertificate.getCertificateContent().getCHRHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", vuCertificate.getCertificateContent().getNByteArray().length, vuCertificate.getCertificateContent().getNHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", vuCertificate.getCertificateContent().getEByteArray().length, vuCertificate.getCertificateContent().getEHexString() );
 
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] Vehicle Unit certificate is valid" );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Vehicle Unit certificate is valid" );
 								if ( vuCertificate.getCertificateContent().getEOVHexString().compareTo( "FFFFFFFF") != 0 ) {
-									debugLogger.print( DebugLogger.LOGLEVEL_INFO, " [INFO] Vehicle Unit certificate end of validity:\n " );
+									debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Vehicle Unit certificate end of validity:\n " );
 									new TimeReal( convertIntoUnsigned4ByteInt( vuCertificate.getCertificateContent().getEOVByteArray() ) );
 								}
 
@@ -203,7 +203,7 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 								}
 							}
 							else {
-								debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] Vehicle Unit certificate is invalid" );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] Vehicle Unit certificate is invalid" );
 								invalid_data_found = true;
 							}
 						}
@@ -215,7 +215,7 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 						}
 					}
 					else {
-						debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] Member State certificate is invalid" );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] Member State certificate is invalid" );
 						invalid_data_found = true;
 					}
 				}
@@ -268,9 +268,9 @@ public class VehicleUnitData extends DTCODataClass implements XMLDumper {
 			}
 		}
 		else {
-			debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "[ERROR] unknown tag, " );
-			debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
-			debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 1 ] & 0xff ) );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] unknown tag, " );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 1 ] & 0xff ) );
 			parseresult = false;
 		}
 

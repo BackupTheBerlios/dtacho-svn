@@ -75,12 +75,9 @@ public class Config {
 					tagInfo = tagInfoOutput.TAGVALUE;
 				}
 			}
+        }
 
-			return tagInfo;
-		}
-		else {
-			return tagInfo;
-		}
+        return tagInfo;
 	}
 
 	/**
@@ -109,12 +106,9 @@ public class Config {
 					hexDumpWidth = hexDumpWidthTemp;
 				}
 			}
+		}
 
-			return hexDumpWidth;
-		}
-		else {
-			return hexDumpWidth;
-		}
+		return hexDumpWidth;
 	}
 
 	/**
@@ -143,12 +137,9 @@ public class Config {
 
 				eurPKPath = envEURPKPath;
 			}
+		}
 
-			return eurPKPath;
-		}
-		else {
-			return eurPKPath;
-		}
+		return eurPKPath;
 	}
 
 	/**
@@ -176,12 +167,9 @@ public class Config {
 					noDetailedSpeedData = true;
 				}
 			}
+		}
 
-			return noDetailedSpeedData;
-		}
-		else {
-			return noDetailedSpeedData;
-		}
+		return noDetailedSpeedData;
 	}
 
 	/**

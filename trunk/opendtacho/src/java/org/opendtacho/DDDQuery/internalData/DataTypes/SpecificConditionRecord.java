@@ -67,13 +67,13 @@ public class SpecificConditionRecord extends DataClass {
 
 		long entryTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 0, 4 ) );
 		if ( entryTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition date and time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition date and time:" );
 		}
 		entryTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 
 		specificConditionType = new SpecificConditionType( value[ 4 ] );
 		if ( entryTimeTmp != 0 ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition type: %s\n", specificConditionType.toString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Specific condition type: %s\n", specificConditionType.toString() );
 		}
 	}
 

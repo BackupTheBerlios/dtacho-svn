@@ -91,7 +91,7 @@ public class CardActivityDailyRecord extends DataClass {
 		//	return;
 		//}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		this.activityPreviousRecordLength = new CardActivityLengthRange( arrayCopy( value, 0, 2 ) );
 		this.activityRecordLength = new CardActivityLengthRange( arrayCopy( value, 2, 2 ) );
@@ -100,7 +100,7 @@ public class CardActivityDailyRecord extends DataClass {
 		this.activityDayDistance = new Distance( arrayCopy( value, 10, 2 ) );
 		this.activityChangeInfo = new Vector<ActivityChangeInfo>();
 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength.getCardActivityLengthRange() - 12 ) / ActivityChangeInfo.size );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", ( activityRecordLength.getCardActivityLengthRange() - 12 ) / ActivityChangeInfo.size );
 
 		for ( int length = 12; length < activityRecordLength.getCardActivityLengthRange(); length += ActivityChangeInfo.size ) {
 			ActivityChangeInfo aci = new ActivityChangeInfo( arrayCopy( value, length, ActivityChangeInfo.size ) );
@@ -113,7 +113,7 @@ public class CardActivityDailyRecord extends DataClass {
 
 			Date activityChangeInfoDate = new Date( activityChangeInfoTimeStamp );
 
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", activityChangeInfoSimpleDate.format( activityChangeInfoDate ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", activityChangeInfoSimpleDate.format( activityChangeInfoDate ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
 		}
 
 		//this.complete = true;

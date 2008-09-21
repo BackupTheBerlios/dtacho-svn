@@ -78,7 +78,7 @@ public class CardEventData extends DataClass{
 	public CardEventData( byte[] value, short noOfEventsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of events per type: " + noOfEventsPerType );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of events per type: " + noOfEventsPerType );
 
 		int noOfValidEventRecords = 0;
 
@@ -88,31 +88,31 @@ public class CardEventData extends DataClass{
 			// max. NoOfEventsPerType = 12
 			cardEventRecords.add( new Vector<CardEventRecord>( 12 ) );
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 			switch( j ) {
 				case 0:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] time overlap events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] time overlap events:" );
 					break;
 
 				case 1:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card insertion while driving events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card insertion while driving events:" );
 					break;
 
 				case 2:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] last card session not correctly closed events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] last card session not correctly closed events:" );
 					break;
 
 				case 3:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] power supply interruption events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] power supply interruption events:" );
 					break;
 
 				case 4:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] motion data error events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] motion data error events:" );
 					break;
 
 				case 5:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] security breach attempt events:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] security breach attempt events:" );
 					break;
 
 				default:
@@ -127,27 +127,27 @@ public class CardEventData extends DataClass{
 				if ( cer.getEventBeginTime().getTimeReal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 2:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 3:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 4:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						case 5:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cer.getEventType().getEventFaultType(), cer.getEventType().toString() );
 							break;
 
 						default:

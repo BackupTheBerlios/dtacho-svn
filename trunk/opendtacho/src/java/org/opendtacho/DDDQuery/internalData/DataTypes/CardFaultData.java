@@ -68,7 +68,7 @@ public class CardFaultData extends DataClass {
 	public CardFaultData( byte[] value, short noOfFaultsPerType ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of faults per type: " + noOfFaultsPerType );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no of faults per type: " + noOfFaultsPerType );
 
 		int noOfValidFaultRecords = 0;
 
@@ -78,15 +78,15 @@ public class CardFaultData extends DataClass {
 			// max. NoOfFaultsPerType = 24
 			cardFaultRecords.add( new Vector<CardFaultRecord>( 24 ) );
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 			switch( j ) {
 				case 0:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] recording eq. faults:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] recording eq. faults:" );
 					break;
 
 				case 1:
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card faults:" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] card faults:" );
 					break;
 
 				default:
@@ -101,11 +101,11 @@ public class CardFaultData extends DataClass {
 				if ( cfr.getFaultBeginTime().getTimeReal() != 0 ) {
 					switch( j ) {
 						case 0:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
 							break;
 
 						case 1:
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] event fault type: 0x%02x, %s\n", cfr.getFaultType().getEventFaultType(), cfr.getFaultType().toString() );
 							break;
 
 						default:

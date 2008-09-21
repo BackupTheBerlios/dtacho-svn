@@ -135,7 +135,7 @@ public class DDDDataSource implements DataSource {
 		if ( srcType == SRC_TYPE_CARD ) {
 			// card data parser
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] parsing card data" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] parsing card data" );
 
 			boolean parseresult = false;
 
@@ -172,12 +172,12 @@ public class DDDDataSource implements DataSource {
 
 							// OPTAC download tools with firmware < v2.3 write two bytes (76 06, SID/TREP?!) at the
 							// beginning of a .DDD file that are out of specs...
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] data 76 06 (SID/TREP?!, OPTAC FW < v2.3 ) found, skipping..." );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] data 76 06 (SID/TREP?!, OPTAC FW < v2.3 ) found, skipping..." );
 							pos -= 1;
 						}
 						else {
 							// invalid tag
-							debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid tag, %02x %02x %02x\n", tag[ 0 ], tag[ 1 ], tag[ 2 ] );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] invalid tag, %02x %02x %02x\n", tag[ 0 ], tag[ 1 ], tag[ 2 ] );
 							pos -= 2;
 						}
 					}
@@ -223,7 +223,7 @@ public class DDDDataSource implements DataSource {
 			}// end data parser
 
 			if ( parseresult == true ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
 				tagInfoOutput tagInfo = Config.getTagInfo();
 
@@ -241,7 +241,7 @@ public class DDDDataSource implements DataSource {
 
 				
 				if ( cardData.invalidDataFound() == true ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
 					return false;
 				}
 
@@ -253,7 +253,7 @@ public class DDDDataSource implements DataSource {
 		else if ( srcType == SRC_TYPE_VU ) {
 			// vehicle unit data parser
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] parsing vehicle unit data" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] parsing vehicle unit data" );
 
 			boolean parseresult = false;
 
@@ -288,19 +288,19 @@ public class DDDDataSource implements DataSource {
 					if ( vehicleUnitData.isValidSIDTREP( tag ) == true ) {
 						if ( Arrays.equals( tag, new byte[]{ 0x76, 0x01 } ) ) {
 							// positive response transfer data overview
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] SID/TREP: 76/01, overview" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] SID/TREP: 76/01, overview" );
 
 							prdtLength = 194 + 194 + 17 + 1 + 14 + 4 + 4 + 4 + 1 + 4 + 18 + 36;
 
 							int noOfLocks = ( src[ pos + prdtLength ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfLocks: %d\n", noOfLocks );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfLocks: %d\n", noOfLocks );
 
 							prdtLength += 1;
 							prdtLength += ( noOfLocks * 98 );
 
 							int noOfControls = ( src[ pos + prdtLength ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfControls: %d\n", noOfControls );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfControls: %d\n", noOfControls );
 
 							prdtLength += 1;
 							prdtLength += ( noOfControls * 31 );
@@ -308,7 +308,7 @@ public class DDDDataSource implements DataSource {
 							// signature length
 							prdtLength += 128;
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
 
 							parseresult = true;
 							break;
@@ -316,31 +316,31 @@ public class DDDDataSource implements DataSource {
 
 						if ( Arrays.equals( tag, new byte[]{ 0x76, 0x02 } ) ) {
 							// positive response transfer data activities
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] SID/TREP: 76/02, activities" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] SID/TREP: 76/02, activities" );
 
 							prdtLength = 4 + 3;
 
 							int noOfVuCardIWRecords = ( ( src[ pos + prdtLength ] & 0xff ) << 8 ) + ( src[ pos + prdtLength + 1 ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuCardIWRecords: %d\n", noOfVuCardIWRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuCardIWRecords: %d\n", noOfVuCardIWRecords );
 
 							prdtLength += 2;
 							prdtLength += ( noOfVuCardIWRecords * 129 );
 							
 							int noOfActivityChanges = ( ( src[ pos + prdtLength ] & 0xff ) << 8 ) + ( src[ pos + prdtLength + 1 ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfActivityChanges: %d\n", noOfActivityChanges );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfActivityChanges: %d\n", noOfActivityChanges );
 
 							prdtLength += 2;
 							prdtLength += ( noOfActivityChanges * 2 );
 
 							int noOfPlaceRecords = src[ pos + prdtLength ] & 0xff;
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfPlaceRecords: %d\n", noOfPlaceRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfPlaceRecords: %d\n", noOfPlaceRecords );
 
 							prdtLength += 1;
 							prdtLength += ( noOfPlaceRecords * 28 );
 
 							int noOfSpecificConditionsRecords = ( ( src[ pos + prdtLength ] & 0xff ) << 8 ) + ( src[ pos + prdtLength + 1 ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfSpecificConditionsRecords: %d\n", noOfSpecificConditionsRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfSpecificConditionsRecords: %d\n", noOfSpecificConditionsRecords );
 
 							prdtLength += 2;
 							prdtLength += ( noOfSpecificConditionsRecords * 5 );
@@ -348,7 +348,7 @@ public class DDDDataSource implements DataSource {
 							// signature length
 							prdtLength += 128;
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
 
 							parseresult = true;
 							break;
@@ -356,17 +356,17 @@ public class DDDDataSource implements DataSource {
 
 						if ( Arrays.equals( tag, new byte[]{ 0x76, 0x03 } ) ) {
 							// positive response transfer data events and faults
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] SID/TREP: 76/03, events and faults" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] SID/TREP: 76/03, events and faults" );
 
 							int noOfVuFaults = src[ pos + prdtLength ] & 0xff;
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuFaults: %d\n", noOfVuFaults );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuFaults: %d\n", noOfVuFaults );
 
 							prdtLength += 1;
 							prdtLength += ( noOfVuFaults * 82 );
 
 							int noOfVuEvents = src[ pos + prdtLength ] & 0xff;
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuEvents: %d\n", noOfVuEvents );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuEvents: %d\n", noOfVuEvents );
 
 							prdtLength += 1;
 							prdtLength += ( noOfVuEvents * 83 );
@@ -374,13 +374,13 @@ public class DDDDataSource implements DataSource {
 							prdtLength += 4 + 4 + 1;
 
 							int noOfVuOverSpeedingRecords = src[ pos + prdtLength ] & 0xff;
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuOverSpeedingRecords: %d\n", noOfVuOverSpeedingRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuOverSpeedingRecords: %d\n", noOfVuOverSpeedingRecords );
 
 							prdtLength += 1;
 							prdtLength += ( noOfVuOverSpeedingRecords * 31 );
 
 							int noOfVuTimeAdjRecords = src[ pos + prdtLength ] & 0xff;
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuTimeAdjRecords: %d\n", noOfVuTimeAdjRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuTimeAdjRecords: %d\n", noOfVuTimeAdjRecords );
 
 							prdtLength += 1;
 							prdtLength += ( noOfVuTimeAdjRecords * 98 );
@@ -388,7 +388,7 @@ public class DDDDataSource implements DataSource {
 							// signature length
 							prdtLength += 128;
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
 
 							parseresult = true;
 							break;
@@ -396,11 +396,11 @@ public class DDDDataSource implements DataSource {
 
 						if ( Arrays.equals( tag, new byte[]{ 0x76, 0x04 } ) ) {
 							// positive response transfer data detailed speed
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] SID/TREP: 76/04, detailed speed" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] SID/TREP: 76/04, detailed speed" );
 
 							int noOfSpeedBlocks = ( ( src[ pos + prdtLength ] & 0xff ) << 8 ) + ( src[ pos + prdtLength + 1 ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfSpeedBlocks: %d\n", noOfSpeedBlocks );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfSpeedBlocks: %d\n", noOfSpeedBlocks );
 
 							prdtLength += 2;
 							prdtLength += ( noOfSpeedBlocks * 64 );
@@ -408,7 +408,7 @@ public class DDDDataSource implements DataSource {
 							// signature length
 							prdtLength += 128;
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
 
 							parseresult = true;
 							break;
@@ -416,13 +416,13 @@ public class DDDDataSource implements DataSource {
 
 						if ( Arrays.equals( tag, new byte[]{ 0x76, 0x05 } ) ) {
 							// positive response transfer data technical data
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] SID/TREP: 76/05, technical data" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] vehicle unit data tag:" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] SID/TREP: 76/05, technical data" );
 
 							prdtLength = 36 + 36 + 16 + 8 + 4 + 4 + 4 + 8 + 8 + 8 + 4;
 
 							int noOfVuCalibrationsRecords = ( src[ pos + prdtLength ] & 0xff );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  noOfVuCalibrationsRecords: %d\n", noOfVuCalibrationsRecords );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  noOfVuCalibrationsRecords: %d\n", noOfVuCalibrationsRecords );
 
 							prdtLength += 1;
 							prdtLength += ( noOfVuCalibrationsRecords * 167 );
@@ -430,7 +430,7 @@ public class DDDDataSource implements DataSource {
 							// signature length
 							prdtLength += 128;
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  length: %d bytes\n", prdtLength );
 
 							parseresult = true;
 							break;
@@ -476,7 +476,7 @@ public class DDDDataSource implements DataSource {
 			}// end data parser
 
 			if ( parseresult == true ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "[INFO_EXT] internal tag structure:" );
 
 				tagInfoOutput tagInfo = Config.getTagInfo();
 
@@ -493,7 +493,7 @@ public class DDDDataSource implements DataSource {
 				}
 
 				if ( vehicleUnitData.invalidDataFound() == true ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] invalid certificates/data/signatures were found" );
 					return false;
 				}
 

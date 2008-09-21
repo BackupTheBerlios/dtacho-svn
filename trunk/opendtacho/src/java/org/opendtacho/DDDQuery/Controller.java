@@ -65,7 +65,7 @@ public class Controller {
 				for ( int i = 0; i < args.length; i++ ) {
 					debugLogger.resetPrintDelayed();
 					c.process( args[ i ] );
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] end of file processing" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] end of file processing" );
 				}
 			}
 		}
@@ -129,14 +129,14 @@ public class Controller {
 	 * @param file			the DDD file that will be converted to XML
 	 */
 	public void process( String file ) {
-		debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "\n" + file + "\n", true );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "\n" + file + "\n", true );
 
 		DDDDataSource ds = new DDDDataSource();
 		ds.setSourceFile( file );
 
 		if ( ds.processSourceFile() == true ) {
 			XMLDumper xmld = ds.getXMLDumper();
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] dumping XML..." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] dumping XML..." );
 
 			XMLInfo.setSourceFilename( file );
 
@@ -144,8 +144,8 @@ public class Controller {
 			xmld.generateXML( file + ".xml" );	
 		}
 		else {
-			debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] there was an error while parsing data" );
-			debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] NOT dumping XML!" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] there was an error while parsing data" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] NOT dumping XML!" );
 		}
 	}
 
@@ -161,7 +161,7 @@ public class Controller {
 		DDDDataSource ds = new DDDDataSource();
 
 		for ( int i = 0; i < data.length; i++ ) {
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, (char)data[ i ] );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, (char)data[ i ] );
 		}
 
 		ds.setSrcType( srcType );

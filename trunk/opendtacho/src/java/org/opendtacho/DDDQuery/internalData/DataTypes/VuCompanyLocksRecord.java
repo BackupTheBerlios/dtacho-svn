@@ -71,22 +71,22 @@ public class VuCompanyLocksRecord extends DataClass {
 	 */
 	public VuCompanyLocksRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-in time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-in time:" );
 		lockInTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-out time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Lock-out time:" );
 		lockOutTime = new TimeReal( arrayCopy( value, 4, 4 ) );
 
 		companyName = new Name( arrayCopy( value, 8, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company name: %s\n", companyName.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company name: %s\n", companyName.getNameString() );
 
 		companyAddress = new Address( arrayCopy( value, 44, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company address: %s\n", companyAddress.getAddressString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company address: %s\n", companyAddress.getAddressString() );
 
 		companyCardNumber = new FullCardNumber( arrayCopy( value, 80, 18 ) ); 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company card number: %s\n", companyCardNumber.getCardNumber().getOwnerIdentification() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company card number: %s\n", companyCardNumber.getCardNumber().getOwnerIdentification() );
 	}
 
 	/**

@@ -74,7 +74,7 @@ public class VuActivityDailyData extends DataClass {
 		size = 2 + noOfActivityChanges * ActivityChangeInfo.size;
 
 		if ( noOfActivityChanges != 0 ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", noOfActivityChanges );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  %d activity change(s) in this record\n", noOfActivityChanges );
 
 
 			for ( int i = 0; i < noOfActivityChanges; i++ ) {
@@ -83,11 +83,11 @@ public class VuActivityDailyData extends DataClass {
 				activityChangeInfos.add( aci );
 
 				if ( downloadedDayDate.getTimeReal() == 0 ) {
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %4d minutes after 00:00, activity %02x - %s\n", aci.getTime(), aci.getActivity(), aci.getActivityString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   %4d minutes after 00:00, activity %02x - %s\n", aci.getTime(), aci.getActivity(), aci.getActivityString() );
 				}
 				else {
 					Date d = new Date( downloadedDayDate.getTimeReal() * 1000 + aci.getTime() * 60 * 1000 );
-					debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   %s, value %02x%02x, activity %02x - %s\n", DateFormat.getDateTimeInstance( DateFormat.LONG, DateFormat.LONG ).format( d ), aci.getValue()[ 0 ], aci.getValue()[ 1 ], aci.getActivity(), aci.getActivityString() );
 				}
 			}
 		}

@@ -64,16 +64,16 @@ public class VuPlaceDailyWorkPeriodRecord extends DataClass {
 	 */
 	public VuPlaceDailyWorkPeriodRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		fullCardNumber = new FullCardNumber( arrayCopy( value, 0, 18 ) ); 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", fullCardNumber.getCardType().getEquipmentType(), fullCardNumber.getCardType().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", fullCardNumber.getCardIssuingMemberState().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", fullCardNumber.getCardType().getEquipmentType(), fullCardNumber.getCardType().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", fullCardNumber.getCardIssuingMemberState().toString() );
 		if ( fullCardNumber.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s\n", fullCardNumber.getCardNumber().getDriverIdentification(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s\n", fullCardNumber.getCardNumber().getDriverIdentification(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 		else {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", fullCardNumber.getCardNumber().getOwnerIdentification(), fullCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", fullCardNumber.getCardNumber().getOwnerIdentification(), fullCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), fullCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), fullCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 
 		placeRecord = new PlaceRecord( arrayCopy( value, 18, 10 ) );

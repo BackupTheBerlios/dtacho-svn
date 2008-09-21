@@ -63,7 +63,7 @@ public class VehicleIdentificationNumber extends DataClass {
 		debugLogger = new DebugLogger();
 
 		vehicleIdentificationNumber = new String( arrayCopy( value, 0, 17 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle identification number: %s\n", vehicleIdentificationNumber );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle identification number: %s\n", vehicleIdentificationNumber );
 	}
 
 	/**

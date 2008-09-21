@@ -62,27 +62,27 @@ public class PRDT_Activities extends DataClass {
 		debugLogger = new DebugLogger();
 
 		int offset1 = 7;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Date of day downloaded:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Date of day downloaded:" );
 		downloadedDayDate = new TimeReal( arrayCopy( value, 0, 4 ) );
 
 		odoMeterValueMidnight = new OdometerShort( arrayCopy( value, 4, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Odometer at end of downloaded day: %d\n", odoMeterValueMidnight.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Odometer at end of downloaded day: %d\n", odoMeterValueMidnight.getOdometerShort() );
 
 		int offset2 = 2 + convertIntoUnsigned2ByteInt( arrayCopy( value, offset1, 2 ) ) * VuCardIWRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Cards insertion withdrawal cycles data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Cards insertion withdrawal cycles data:" );
 		vuCardIWData = new VuCardIWData( arrayCopy( value, offset1, offset2 ) );
 
 		int offset3 = 2 + convertIntoUnsigned2ByteInt( arrayCopy( value, offset1 + offset2, 2 ) ) * ActivityChangeInfo.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Slots status at 00:00 and activity changes" );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * for the day downloaded:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Slots status at 00:00 and activity changes" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * for the day downloaded:" );
 		vuActivityDailyData = new VuActivityDailyData( arrayCopy( value, offset1 + offset2, offset3 ), downloadedDayDate );
 
 		int offset4 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 + offset2 + offset3 ] ) * VuPlaceDailyWorkPeriodRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Places related data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Places related data:" );
 		vuPlaceDailyWorkPeriodData = new VuPlaceDailyWorkPeriodData( arrayCopy( value, offset1 + offset2 + offset3, offset4 ) );
 
 		int offset5 = 2 + convertIntoUnsigned2ByteInt( arrayCopy( value, offset1 + offset2 + offset3 + offset4, 2 ) ) * SpecificConditionRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Specific conditions data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Specific conditions data:" );
 		vuSpecificConditionData = new VuSpecificConditionData( arrayCopy( value, offset1 + offset2 + offset3 + offset4, offset5 ) );
 
 		size = offset1 + offset2 + offset3 + offset4 + offset5;

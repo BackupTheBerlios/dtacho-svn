@@ -108,29 +108,29 @@ public class VuCalibrationRecord extends DataClass {
 	 */
 	public VuCalibrationRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		calibrationPurpose = new CalibrationPurpose( value[ 0 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Calibration purpose: %02x\n", calibrationPurpose.getCalibrationPurpose() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] %s\n", calibrationPurpose.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Calibration purpose: %02x\n", calibrationPurpose.getCalibrationPurpose() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] %s\n", calibrationPurpose.toString() );
 
 		workshopName = new Name( arrayCopy( value, 1, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop name: %s\n", workshopName.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop name: %s\n", workshopName.getNameString() );
 
 		workshopAddress = new Address( arrayCopy( value, 37, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop address: %s\n", workshopAddress.getAddressString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop address: %s\n", workshopAddress.getAddressString() );
 
 		workshopCardNumber = new FullCardNumber( arrayCopy( value, 73, 18 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", workshopCardNumber.getCardType().getEquipmentType(), workshopCardNumber.getCardType().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", workshopCardNumber.getCardIssuingMemberState().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of card: %02x - %s\n", workshopCardNumber.getCardType().getEquipmentType(), workshopCardNumber.getCardType().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", workshopCardNumber.getCardIssuingMemberState().toString() );
 		if ( workshopCardNumber.getCardType().getEquipmentType() == EquipmentType.WORKSHOP_CARD ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", workshopCardNumber.getCardNumber().getOwnerIdentification(), workshopCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), workshopCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), workshopCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", workshopCardNumber.getCardNumber().getOwnerIdentification(), workshopCardNumber.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), workshopCardNumber.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), workshopCardNumber.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 		else {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Wrong card type. Expected a workshop card." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Wrong card type. Expected a workshop card." );
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop card expiry date:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Workshop card expiry date:" );
 		workshopCardExpiryDate = new TimeReal( arrayCopy( value, 91, 4 ) );
 
 		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy( value, 95, 17 ) );
@@ -138,33 +138,33 @@ public class VuCalibrationRecord extends DataClass {
 		vehicleRegistrationIdentification = new VehicleRegistrationIdentification( arrayCopy( value, 112, 15 ) );
 
 		wVehicleCharacteristicConstant = new W_VehicleCharacteristicConstant( arrayCopy( value, 127, 2 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Characteristic coefficient of the vehicle (pulses/km): %d\n", wVehicleCharacteristicConstant.getWVehicleCharacteristicConstant() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Characteristic coefficient of the vehicle (pulses/km): %d\n", wVehicleCharacteristicConstant.getWVehicleCharacteristicConstant() );
 
 		kConstantOfRecordingEquipment = new K_ConstantOfRecordingEquipment( arrayCopy( value, 129, 2 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Constant of the recording equipment (pulses/km): %d\n", kConstantOfRecordingEquipment.getKConstantOfRecordingEquipment() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Constant of the recording equipment (pulses/km): %d\n", kConstantOfRecordingEquipment.getKConstantOfRecordingEquipment() );
 
 		lTyreCircumference = new L_TyreCircumference( arrayCopy( value, 131, 2 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Tyre circumference: value %d - %.2f mm\n", lTyreCircumference.getLTyreCircumference(), lTyreCircumference.getLTyreCircumference() * 0.125 );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Tyre circumference: value %d - %.2f mm\n", lTyreCircumference.getLTyreCircumference(), lTyreCircumference.getLTyreCircumference() * 0.125 );
 
 		tyreSize = new TyreSize( arrayCopy( value, 133, 15 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Tyre size: %s\n", tyreSize.getTyreSize() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Tyre size: %s\n", tyreSize.getTyreSize() );
 
 		authorisedSpeed = new SpeedAuthorised( value[ 148 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Authorised speed: %d\n", authorisedSpeed.getSpeed() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Authorised speed: %d\n", authorisedSpeed.getSpeed() );
 
 		oldOdometerValue = new OdometerShort( arrayCopy( value, 149, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old odometer value: %d\n", oldOdometerValue.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old odometer value: %d\n", oldOdometerValue.getOdometerShort() );
 
 		newOdometerValue = new OdometerShort( arrayCopy( value, 152, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New odometer value: %d\n", newOdometerValue.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New odometer value: %d\n", newOdometerValue.getOdometerShort() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old time value:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Old time value:" );
 		oldTimeValue = new TimeReal( arrayCopy( value, 155, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New time value:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] New time value:" );
 		newTimeValue = new TimeReal( arrayCopy( value, 159, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Next calibration date:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Next calibration date:" );
 		nextCalibrationDate = new TimeReal( arrayCopy( value, 163, 4 ) );
 	}
 

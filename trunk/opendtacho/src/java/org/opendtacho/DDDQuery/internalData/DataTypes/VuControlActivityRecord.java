@@ -72,25 +72,25 @@ public class VuControlActivityRecord extends DataClass {
 	 */
 	public VuControlActivityRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		controlType = new ControlType( value[ 0 ] );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control type:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card downloaded: %s\n", Boolean.toString( controlType.isCardDownloading() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] VU downloaded: %s\n", Boolean.toString( controlType.isVuDownloading() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Printing done during control: %s\n", Boolean.toString( controlType.isPrinting() ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Display used during control: %s\n", Boolean.toString( controlType.isDisplay() ) );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control type:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card downloaded: %s\n", Boolean.toString( controlType.isCardDownloading() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] VU downloaded: %s\n", Boolean.toString( controlType.isVuDownloading() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Printing done during control: %s\n", Boolean.toString( controlType.isPrinting() ) );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Display used during control: %s\n", Boolean.toString( controlType.isDisplay() ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control time:" );
 		controlTime = new TimeReal( arrayCopy( value, 1, 4 ) );
 
 		controlCardNumber = new FullCardNumber( arrayCopy( value, 5, 18 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card number: %s\n", controlCardNumber.getCardNumber().getOwnerIdentification() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Control card number: %s\n", controlCardNumber.getCardNumber().getOwnerIdentification() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period begin time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period begin time:" );
 		downloadPeriodBeginTime = new TimeReal( arrayCopy( value, 23, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period end time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Download period end time:" );
 		downloadPeriodEndTime = new TimeReal( arrayCopy( value, 27, 4 ) );
 	}
 

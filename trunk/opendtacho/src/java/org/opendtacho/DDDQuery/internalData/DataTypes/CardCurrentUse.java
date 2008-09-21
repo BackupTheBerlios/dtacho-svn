@@ -64,7 +64,7 @@ public class CardCurrentUse extends DataClass{
 	public CardCurrentUse( byte[] value ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card insertion time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card insertion time:" );
 		sessionOpenTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 		sessionOpenVehicle = new VehicleRegistrationIdentification( arrayCopy( value, 4, 15 ) );
 	}

@@ -76,7 +76,7 @@ public class CardDriverActivity extends DataClass {
 		activityPointerNewestRecord = convertIntoUnsigned2ByteInt( arrayCopy( value, 2, 2 ) ); // = last CardActivityDailyRecord
 		activityDailyRecords = new Vector<CardActivityDailyRecord>();
 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " activities offsets: %d, %d\n", activityPointerOldestDayRecord, activityPointerNewestRecord );
 
 		// reorganize ringbuffer (=records)
 		// copy the (shifted) CardActivityDailyRecord array to a new array where the
@@ -91,7 +91,7 @@ public class CardDriverActivity extends DataClass {
 			System.arraycopy( value, 4, records, lengthToEnd, activityPointerOldestDayRecord );
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " records.length: " + records.length );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " records.length: " + records.length );
 
 		int activityPointerLastRecordOffset;
 
@@ -132,27 +132,27 @@ public class CardDriverActivity extends DataClass {
 			// do some integrity checks
 			if ( cardActivityDailyRecordsOffset == 0 ) {
 				if ( cadrActivityPreviousRecordLength == 0 ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] this is the first record" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] this is the first record" );
 				}
 				else {
 					// indent output if log level >= LOGLEVEL_INFO_EXTENDED
-					if ( DebugLogger.logLevel >= DebugLogger.LOGLEVEL_INFO_EXTENDED ) {
-						debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "   " );
+					if ( DebugLogger.debugLogLevel >= DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED ) {
+						debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_ERROR, "   " );
 					}
-					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] this should be the first record but previous length is not 0(?!)" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] this should be the first record but previous length is not 0(?!)" );
 				}
 			}
 			else {
 				if ( cadrActivityPreviousRecordLength == cadrIntegrityCheckActivityPreviousRecordLength ) {
-					debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] integrity check ok: ActivityPreviousRecordLength matches" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   [INFO_EXT] integrity check ok: ActivityPreviousRecordLength matches" );
 				}
 				else {
 					// indent output if log level >= LOGLEVEL_INFO_EXTENDED
-					if ( DebugLogger.logLevel > DebugLogger.LOGLEVEL_INFO_EXTENDED ) {
-						debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "   " );
+					if ( DebugLogger.debugLogLevel > DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED ) {
+						debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_ERROR, "   " );
 					}
 
-					debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
+					debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] integrity check failed: ActivityPreviousRecordLength does NOT match" );
 				}
 			}
 

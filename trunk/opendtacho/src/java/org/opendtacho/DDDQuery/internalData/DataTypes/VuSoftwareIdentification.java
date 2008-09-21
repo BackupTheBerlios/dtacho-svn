@@ -69,9 +69,9 @@ public class VuSoftwareIdentification extends DataClass {
 		debugLogger = new DebugLogger();
 
 		vuSoftwareVersion = new VuSoftwareVersion( arrayCopy( value, 0, 4 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit software version: %s\n", vuSoftwareVersion.getVuSoftwareVersion() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle unit software version: %s\n", vuSoftwareVersion.getVuSoftwareVersion() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Software installation date:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Software installation date:" );
 		vuSoftInstallationDate = new VuSoftInstallationDate( arrayCopy( value, 4, 4 ) );
 	}
 

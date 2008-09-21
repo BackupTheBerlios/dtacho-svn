@@ -75,14 +75,14 @@ public class CardFaultRecord extends DataClass {
 
 		long faultBeginTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 1, 4 ) );
 		if ( faultBeginTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT]" );
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Fault begin time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT]" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Fault begin time:" );
 		}
 		faultBeginTime = new TimeReal( arrayCopy( value, 1, 4 ) );
 
 		long faultEndTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 5, 4 ) );
 		if ( faultEndTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Fault end time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Fault end time:" );
 		}
 		faultEndTime   = new TimeReal( arrayCopy( value, 5, 4 ) );
 

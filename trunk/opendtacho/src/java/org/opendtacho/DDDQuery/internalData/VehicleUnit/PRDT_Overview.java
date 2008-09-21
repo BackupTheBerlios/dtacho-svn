@@ -71,90 +71,90 @@ public class PRDT_Overview extends DataClass {
 		memberStateCertificate = new MemberStateCertificate( arrayCopy( value, 0, 194 ) );
 		vuCertificate = new VuCertificate( arrayCopy( value, 194, 194 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle identification:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle identification:" );
 		vehicleIdentificationNumber = new VehicleIdentificationNumber( arrayCopy( value, 388, 17 ) );
 
 		vehicleRegistrationIdentification = new VehicleRegistrationIdentification( arrayCopy( value, 405, 15 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Current date and time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Current date and time:" );
 		currentDateTime = new CurrentDateTime( arrayCopy( value, 420, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vu downloadable period:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vu downloadable period:" );
 		vuDownloadablePeriod = new VuDownloadablePeriod( arrayCopy( value, 424, 8 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Card slots status:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Card slots status:" );
 		cardSlotsStatus = new CardSlotsStatus( value[ 432 ] );
 
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Value: %02x\n", cardSlotsStatus.getCardSlotsStatus() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Value: %02x\n", cardSlotsStatus.getCardSlotsStatus() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driver slot:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driver slot:" );
 
 		byte driverSlotsStatus = cardSlotsStatus.getDriverCardSlotsStatus();
 
 		switch ( driverSlotsStatus ) {
 			case CardSlotsStatus.NO_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no card inserted" );
 				break;
 
 			case CardSlotsStatus.DRIVER_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] driver card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] driver card inserted" );
 				break;
 
 			case CardSlotsStatus.WORKSHOP_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] workshop card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] workshop card inserted" );
 				break;
 
 			case CardSlotsStatus.CONTROL_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] control card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] control card inserted" );
 				break;
 
 			case CardSlotsStatus.COMPANY_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] company card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] company card inserted" );
 				break;
 
 			default:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] ????" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] ????" );
 				break;
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Co-driver slot:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Co-driver slot:" );
 
 		byte coDriverSlotsStatus = cardSlotsStatus.getCoDriverCardSlotsStatus();
 
 		switch ( coDriverSlotsStatus ) {
 			case CardSlotsStatus.NO_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] no card inserted" );
 				break;
 
 			case CardSlotsStatus.DRIVER_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] driver card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] driver card inserted" );
 				break;
 
 			case CardSlotsStatus.WORKSHOP_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] workshop card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] workshop card inserted" );
 				break;
 
 			case CardSlotsStatus.CONTROL_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] control card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] control card inserted" );
 				break;
 
 			case CardSlotsStatus.COMPANY_CARD_INSERTED:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] company card inserted" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] company card inserted" );
 				break;
 
 			default:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] ????" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] ????" );
 				break;
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Previous VU download:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Previous VU download:" );
 		vuDownloadActivityData = new VuDownloadActivityData( arrayCopy( value, 433, 58 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU company locks data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU company locks data:" );
 		int offset2 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 ] ) * VuCompanyLocksRecord.size;
 		vuCompanyLocksData = new VuCompanyLocksData( arrayCopy( value, offset1, offset2 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU control activity data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * VU control activity data:" );
 		int offset3 = 1 + convertIntoUnsigned1ByteInt( value[ offset1 + offset2 ] ) * VuControlActivityRecord.size;
 		vuControlActivityData = new VuControlActivityData( arrayCopy( value, offset1 + offset2, offset3 ) );
 

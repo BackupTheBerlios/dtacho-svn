@@ -70,13 +70,13 @@ public class CardDrivingLicenceInformation extends DataClass {
 		debugLogger = new DebugLogger();
 
 		drivingLicenceIssuingAuthority = new Name( arrayCopy( value, 0, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing authority: %s\n", drivingLicenceIssuingAuthority.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing authority: %s\n", drivingLicenceIssuingAuthority.getNameString() );
 
 		drivingLicenceIssuingNation = new NationNumeric( value[ 36 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing nation: %s\n", drivingLicenceIssuingNation.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence issuing nation: %s\n", drivingLicenceIssuingNation.toString() );
 
 		drivingLicenceNumber = new String( arrayCopy( value, 37, 16 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence number: %s\n", drivingLicenceNumber );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Driving licence number: %s\n", drivingLicenceNumber );
 	}
 
 	/**

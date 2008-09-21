@@ -78,26 +78,26 @@ public class CardVehicleRecord extends DataClass {
 	 */
 	public CardVehicleRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		vehicleOdometerBegin = new OdometerShort( arrayCopy( value, 0, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Odometer value at the beginning of use of the vehicle: %s\n", vehicleOdometerBegin.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Odometer value at the beginning of use of the vehicle: %s\n", vehicleOdometerBegin.getOdometerShort() );
 
 		vehicleOdometerEnd = new OdometerShort( arrayCopy( value, 3, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Odometer value at the end of use of the vehicle: %d\n", vehicleOdometerEnd.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Odometer value at the end of use of the vehicle: %d\n", vehicleOdometerEnd.getOdometerShort() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Beginning of use of the vehicle:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Beginning of use of the vehicle:" );
 		vehicleFirstUse = new TimeReal( arrayCopy( value, 6, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] End of use of the vehicle:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] End of use of the vehicle:" );
 		vehicleLastUse = new TimeReal( arrayCopy( value, 10, 4) );
 
 		vehicleRegistration = new VehicleRegistrationIdentification( arrayCopy( value, 14, 15 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistration.getVehicleRegistrationNation().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Registration Number: %s\n", vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumberString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistration.getVehicleRegistrationNation().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle Registration Number: %s\n", vehicleRegistration.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 
 		vuDataBlockCounter = new VuDataBlockCounter( arrayCopy( value, 29, 2 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] VuDataBlockCounter: %s\n", vuDataBlockCounter.getVuDataBlockCounterString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] VuDataBlockCounter: %s\n", vuDataBlockCounter.getVuDataBlockCounterString() );
 	}
 
 	/**

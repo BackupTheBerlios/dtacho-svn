@@ -73,7 +73,7 @@ public class VuDetailedSpeedData extends DataClass {
 		boolean noDetailedSpeedData = Config.getNoDetailedSpeedData();
 
 		if ( noDetailedSpeedData == true ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] NODETAILEDSPEED=true found, skipping SpeedBlock entries." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] NODETAILEDSPEED=true found, skipping SpeedBlock entries." );
 			size = 2;
 
 			return;
@@ -85,7 +85,7 @@ public class VuDetailedSpeedData extends DataClass {
 		if ( noOfSpeedBlocks != 0 ) {
 			for ( int i = 0; i < noOfSpeedBlocks; i++ ) {
 
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] SpeedBlock #%05d:\n", i + 1 );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] SpeedBlock #%05d:\n", i + 1 );
 
 				byte[] record = arrayCopy( value, 2 + ( i * VuDetailedSpeedBlock.size ), VuDetailedSpeedBlock.size );
 				VuDetailedSpeedBlock vdsb = new VuDetailedSpeedBlock( record );

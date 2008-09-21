@@ -74,10 +74,10 @@ public class VehicleRegistrationIdentification extends DataClass {
 		debugLogger = new DebugLogger();
 
 		vehicleRegistrationNation = new NationNumeric( value[ 0 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationNation.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationNation.toString() );
 
 		vehicleRegistrationNumber = new VehicleRegistrationNumber( arrayCopy( value, 1, 14 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration number: %s\n", vehicleRegistrationNumber.getVehicleRegNumberString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration number: %s\n", vehicleRegistrationNumber.getVehicleRegNumberString() );
 	}
 
 	/**

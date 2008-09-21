@@ -212,8 +212,8 @@ public class CardData extends DTCODataClass implements XMLDumper {
 			tagInfo = tagInfo + " unknown tag type";
 		}
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] card data tag:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO, " [INFO] FID %02x %02x %02x, %s\n", tag[ 0 ], tag[ 1 ], tag[ 2 ], tagInfo );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] card data tag:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] FID %02x %02x %02x, %s\n", tag[ 0 ], tag[ 1 ], tag[ 2 ], tagInfo );
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class CardData extends DTCODataClass implements XMLDumper {
 
 					if ( super.isECPublicKeyAvailable() == true ) {
 						// check CA certificate
-						debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] checking CA certificate" );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] checking CA certificate" );
 						caCertificate = new SecurityCertificateCheck();
 
 						// set public key
@@ -325,39 +325,39 @@ public class CardData extends DTCODataClass implements XMLDumper {
 							caCertificate.setRSAPublicKey( super.getECPubKeyModulus(), super.getECPubKeyExponent() );
 
 							// decipher CA certificate
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] deciphering CA certificate" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] deciphering CA certificate" );
 							caCertificate.decipherCertificateSignature( value );
 							genuineCACertificate = caCertificate.isGenuineCertificate();
 
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", value.length, new SecurityByteArrayTools().ByteArrayToHexString( value ) );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", caCertificate.getDecipheredSignatureByteArray().length, caCertificate.getDecipheredSignatureHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", caCertificate.isValidSignature());
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", caCertificate.getC_NByteArray().length, caCertificate.getC_NHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", caCertificate.getCARByteArray().length, caCertificate.getCARHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", caCertificate.getC_RByteArray().length, caCertificate.getC_RHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", caCertificate.getC_0ByteArray().length, caCertificate.getC_0HexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", caCertificate.getH_0ByteArray().length, caCertificate.getH_0HexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", caCertificate.getC_0SHAHashByteArray().length, caCertificate.getC_0SHAHashHexString() );
-							debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", caCertificate.isGenuineCertificate());
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", value.length, new SecurityByteArrayTools().ByteArrayToHexString( value ) );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", caCertificate.getDecipheredSignatureByteArray().length, caCertificate.getDecipheredSignatureHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", caCertificate.isValidSignature());
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", caCertificate.getC_NByteArray().length, caCertificate.getC_NHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", caCertificate.getCARByteArray().length, caCertificate.getCARHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", caCertificate.getC_RByteArray().length, caCertificate.getC_RHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", caCertificate.getC_0ByteArray().length, caCertificate.getC_0HexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", caCertificate.getH_0ByteArray().length, caCertificate.getH_0HexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", caCertificate.getC_0SHAHashByteArray().length, caCertificate.getC_0SHAHashHexString() );
+							debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", caCertificate.isGenuineCertificate());
 
 							if ( genuineCACertificate == true ) {
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate content:");
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", caCertificate.getCertificateContent().getCPIByteArray().length, caCertificate.getCertificateContent().getCPIHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", caCertificate.getCertificateContent().getCARByteArray().length, caCertificate.getCertificateContent().getCARHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", caCertificate.getCertificateContent().getCHAByteArray().length, caCertificate.getCertificateContent().getCHAHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", caCertificate.getCertificateContent().getEOVByteArray().length, caCertificate.getCertificateContent().getEOVHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", caCertificate.getCertificateContent().getCHRByteArray().length, caCertificate.getCertificateContent().getCHRHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", caCertificate.getCertificateContent().getNByteArray().length, caCertificate.getCertificateContent().getNHexString() );
-								debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", caCertificate.getCertificateContent().getEByteArray().length, caCertificate.getCertificateContent().getEHexString() );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate content:");
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", caCertificate.getCertificateContent().getCPIByteArray().length, caCertificate.getCertificateContent().getCPIHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", caCertificate.getCertificateContent().getCARByteArray().length, caCertificate.getCertificateContent().getCARHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", caCertificate.getCertificateContent().getCHAByteArray().length, caCertificate.getCertificateContent().getCHAHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", caCertificate.getCertificateContent().getEOVByteArray().length, caCertificate.getCertificateContent().getEOVHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", caCertificate.getCertificateContent().getCHRByteArray().length, caCertificate.getCertificateContent().getCHRHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", caCertificate.getCertificateContent().getNByteArray().length, caCertificate.getCertificateContent().getNHexString() );
+								debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", caCertificate.getCertificateContent().getEByteArray().length, caCertificate.getCertificateContent().getEHexString() );
 
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] CA certificate is valid" );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] CA certificate is valid" );
 								if ( caCertificate.getCertificateContent().getEOVHexString().compareTo( "FFFFFFFF") != 0 ) {
-									debugLogger.print( DebugLogger.LOGLEVEL_INFO, " [INFO] CA certificate end of validity:\n " );
+									debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] CA certificate end of validity:\n " );
 									new TimeReal( convertIntoUnsigned4ByteInt( caCertificate.getCertificateContent().getEOVByteArray() ) );
 								}
 
 								// check card certificate
-								debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] checking Card certificate" );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] checking Card certificate" );
 								cardCertificate = new SecurityCertificateCheck();
 
 								try {
@@ -365,34 +365,34 @@ public class CardData extends DTCODataClass implements XMLDumper {
 									cardCertificate.setRSAPublicKey( caCertificate.getCertificateContent().getNHexString(), caCertificate.getCertificateContent().getEHexString() );
 
 									// decipher card certificate
-									debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] deciphering Card certificate" );
+									debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] deciphering Card certificate" );
 									cardCertificate.decipherCertificateSignature( ef_card_value );
 									genuineCardCertificate = cardCertificate.isGenuineCertificate();
 
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", ef_card_value.length, new SecurityByteArrayTools().ByteArrayToHexString( ef_card_value ) );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", cardCertificate.getDecipheredSignatureByteArray().length, cardCertificate.getDecipheredSignatureHexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", cardCertificate.isValidSignature() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", cardCertificate.getC_NByteArray().length, cardCertificate.getC_NHexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", cardCertificate.getCARByteArray().length, cardCertificate.getCARHexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", cardCertificate.getC_RByteArray().length, cardCertificate.getC_RHexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", cardCertificate.getC_0ByteArray().length, cardCertificate.getC_0HexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", cardCertificate.getH_0ByteArray().length, cardCertificate.getH_0HexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", cardCertificate.getC_0SHAHashByteArray().length, cardCertificate.getC_0SHAHashHexString() );
-									debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", cardCertificate.isGenuineCertificate() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate          [%3d]: %s\n", ef_card_value.length, new SecurityByteArrayTools().ByteArrayToHexString( ef_card_value ) );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", cardCertificate.getDecipheredSignatureByteArray().length, cardCertificate.getDecipheredSignatureHexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  valid signature?     [---]: %s\n", cardCertificate.isValidSignature() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_n                  [%3d]: %s\n", cardCertificate.getC_NByteArray().length, cardCertificate.getC_NHexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", cardCertificate.getCARByteArray().length, cardCertificate.getCARHexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_r                  [%3d]: %s\n", cardCertificate.getC_RByteArray().length, cardCertificate.getC_RHexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  c_0                  [%3d]: %s\n", cardCertificate.getC_0ByteArray().length, cardCertificate.getC_0HexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  h_0                  [%3d]: %s\n", cardCertificate.getH_0ByteArray().length, cardCertificate.getH_0HexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  calculated SHA1 hash [%3d]: %s\n", cardCertificate.getC_0SHAHashByteArray().length, cardCertificate.getC_0SHAHashHexString() );
+									debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  genuine certificate? [---]: %s\n", cardCertificate.isGenuineCertificate() );
 
 									if ( genuineCardCertificate == true ) {
-										debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  certificate content:");
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCPIByteArray().length, cardCertificate.getCertificateContent().getCPIHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCARByteArray().length, cardCertificate.getCertificateContent().getCARHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCHAByteArray().length, cardCertificate.getCertificateContent().getCHAHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", cardCertificate.getCertificateContent().getEOVByteArray().length, cardCertificate.getCertificateContent().getEOVHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCHRByteArray().length, cardCertificate.getCertificateContent().getCHRHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", cardCertificate.getCertificateContent().getNByteArray().length, cardCertificate.getCertificateContent().getNHexString() );
-										debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", cardCertificate.getCertificateContent().getEByteArray().length, cardCertificate.getCertificateContent().getEHexString() );
+										debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  certificate content:");
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cpi                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCPIByteArray().length, cardCertificate.getCertificateContent().getCPIHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  car                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCARByteArray().length, cardCertificate.getCertificateContent().getCARHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  cha                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCHAByteArray().length, cardCertificate.getCertificateContent().getCHAHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  eov                  [%3d]: %s\n", cardCertificate.getCertificateContent().getEOVByteArray().length, cardCertificate.getCertificateContent().getEOVHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  chr                  [%3d]: %s\n", cardCertificate.getCertificateContent().getCHRByteArray().length, cardCertificate.getCertificateContent().getCHRHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  n                    [%3d]: %s\n", cardCertificate.getCertificateContent().getNByteArray().length, cardCertificate.getCertificateContent().getNHexString() );
+										debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  e                    [%3d]: %s\n", cardCertificate.getCertificateContent().getEByteArray().length, cardCertificate.getCertificateContent().getEHexString() );
 
-										debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] Card certificate is valid" );
+										debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Card certificate is valid" );
 										if ( cardCertificate.getCertificateContent().getEOVHexString().compareTo( "FFFFFFFF") != 0 ) {
-											debugLogger.print( DebugLogger.LOGLEVEL_INFO, " [INFO] Card certificate end of validity:\n " );
+											debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] Card certificate end of validity:\n " );
 											new TimeReal( convertIntoUnsigned4ByteInt( cardCertificate.getCertificateContent().getEOVByteArray() ) );
 										}
 
@@ -402,7 +402,7 @@ public class CardData extends DTCODataClass implements XMLDumper {
 										}
 									}
 									else {
-										debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] Card certificate is invalid" );
+										debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] Card certificate is invalid" );
 										invalid_data_found = true;
 									}
 								}
@@ -414,7 +414,7 @@ public class CardData extends DTCODataClass implements XMLDumper {
 								}
 							}
 							else {
-								debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] CA certificate is invalid" );
+								debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] CA certificate is invalid" );
 								invalid_data_found = true;
 							}
 						}
@@ -568,10 +568,10 @@ public class CardData extends DTCODataClass implements XMLDumper {
 					efstate = EF_SIGNATURE_ENTITY;
 				}
 				else {
-					debugLogger.print( DebugLogger.LOGLEVEL_ERROR, "[ERROR] unknown tag, " );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x", (int)( tag[ 1 ] & 0xff ) );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 2 ] & 0xff ) );
+					debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] unknown tag, " );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x", (int)( tag[ 1 ] & 0xff ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 2 ] & 0xff ) );
 					parseresult = false;
 				}
 
@@ -582,22 +582,22 @@ public class CardData extends DTCODataClass implements XMLDumper {
 			case EF_SIGNATURE_ENTITY:
 				if ( tag[ 2 ] != 0x01 ) {
 					// not a signature tag
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "[ERROR] expected signature tag %02x %02x 01, got", tag2[ 0 ], tag2[ 1 ] );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x", (int)( tag[ 1 ] & 0xff ) );
-					debugLogger.printf( DebugLogger.LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 2 ] & 0xff ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] expected signature tag %02x %02x 01, got", tag2[ 0 ], tag2[ 1 ] );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x", (int)( tag[ 0 ] & 0xff ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x", (int)( tag[ 1 ] & 0xff ) );
+					debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_ERROR, "%02x\n", (int)( tag[ 2 ] & 0xff ) );
 					parseresult = false;
 				}
 				else {
 					printTagInfo( tag );
 
 					if ( Arrays.equals( tag2, new byte[]{ tag[ 0 ], tag[ 1 ] } ) ) {
-						debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] signature belongs to previous tag" );
+						debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] signature belongs to previous tag" );
 						parseresult = true;
 
 						if ( Arrays.equals( tag, new byte[]{ 0x05, 0x01, 0x01 } ) && ( super.isECPublicKeyAvailable() == true ) ) {
 							// save application identification signature
-							debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] saving this signature. Checking will be done when the required certificates are available" );
+							debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] saving this signature. Checking will be done when the required certificates are available" );
 							ef_application_identification_signature = value;
 						}
 

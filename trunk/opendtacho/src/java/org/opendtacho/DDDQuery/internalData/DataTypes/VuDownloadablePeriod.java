@@ -64,10 +64,10 @@ public class VuDownloadablePeriod extends DataClass {
 	public VuDownloadablePeriod( byte[] value ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Oldest card insertion date and time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Oldest card insertion date and time:" );
 		minDownloadableTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Latest card withdrawal date and time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Latest card withdrawal date and time:" );
 		maxDownloadableTime = new TimeReal( arrayCopy( value, 4, 4 ) );
 	}
 

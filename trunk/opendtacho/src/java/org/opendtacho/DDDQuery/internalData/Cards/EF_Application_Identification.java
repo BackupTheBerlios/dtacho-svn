@@ -83,7 +83,7 @@ public class EF_Application_Identification extends DataClass {
 				activityStructureLength = driverCardApplicationIdentification.getActivityStructureLength().getCardActivityLengthRange();
 				noOfCardVehicleRecords = driverCardApplicationIdentification.getNoOfCardVehicleRecords().getNoOfCardVehicleRecords();
 				noOfCardPlaceRecords = driverCardApplicationIdentification.getNoOfCardPlaceRecords().getNoOfCardPlaceRecords();
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] this is a driver card" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] this is a driver card" );
 				break;
 
 			case EquipmentType.WORKSHOP_CARD:
@@ -96,7 +96,7 @@ public class EF_Application_Identification extends DataClass {
 				noOfCardVehicleRecords = workshopCardApplicationIdentification.getNoOfCardVehicleRecords().getNoOfCardVehicleRecords();
 				noOfCardPlaceRecords = workshopCardApplicationIdentification.getNoOfCardPlaceRecords().getNoOfCardPlaceRecords();
 				noOfCalibrationRecords = workshopCardApplicationIdentification.getNoOfCalibrationRecords().getNoOfCalibrationRecords();
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] this is a workshop card" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] this is a workshop card" );
 				break;
 
 			case EquipmentType.CONTROL_CARD:
@@ -104,7 +104,7 @@ public class EF_Application_Identification extends DataClass {
 
 				cardStructureVersion = controlCardApplicationIdentification.getCardStructureVersion().getCardStructureVersion();
 				noOfControlActivityRecords = controlCardApplicationIdentification.getNoOfControlActivityRecords().getNoOfControlActivityRecords();
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] this is a control card" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] this is a control card" );
 				break;
 
 			case EquipmentType.COMPANY_CARD:
@@ -112,7 +112,7 @@ public class EF_Application_Identification extends DataClass {
 
 				cardStructureVersion = companyCardApplicationIdentification.getCardStructureVersion().getCardStructureVersion();
 				noOfCompanyActivityRecords = companyCardApplicationIdentification.getNoOfCompanyActivityRecords().getNoOfCompanyActivityRecords();
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] this is a company card" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] this is a company card" );
 				break;
 				
 			default:

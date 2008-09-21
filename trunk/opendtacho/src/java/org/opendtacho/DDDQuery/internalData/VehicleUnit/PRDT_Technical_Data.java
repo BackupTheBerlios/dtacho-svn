@@ -55,14 +55,14 @@ public class PRDT_Technical_Data extends DataClass {
 		debugLogger = new DebugLogger();
 
 		int offset1 = 116 + 20;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit identification:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit identification:" );
 		vuIdentification = new VuIdentification( arrayCopy( value, 0, 116 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Sensor paired:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Sensor paired:" );
 		sensorPaired = new SensorPaired( arrayCopy( value, 116, 20 ) );
 
 		int offset2 = 1 + convertIntoUnsigned1ByteInt( value[ 136 ] ) * VuCalibrationRecord.size;
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit calibration data:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] * Vehicle unit calibration data:" );
 		vuCalibrationData = new VuCalibrationData( arrayCopy( value, 136, offset2 ) );
 
 		size = offset1 + offset2;

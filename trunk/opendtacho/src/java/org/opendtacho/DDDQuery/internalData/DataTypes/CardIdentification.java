@@ -77,26 +77,26 @@ public class CardIdentification extends DataClass {
 		debugLogger = new DebugLogger();
 
 		cardIssuingMemberState = new NationNumeric( value[ 0 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", cardIssuingMemberState.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing member state: %s\n", cardIssuingMemberState.toString() );
 
 		cardNumber = new CardNumber( arrayCopy( value, 1, 16 ), cardType );
 		if ( cardType == EquipmentType.DRIVER_CARD ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s\n", cardNumber.getDriverIdentification(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s\n", cardNumber.getDriverIdentification(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
 		}
 		else {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", cardNumber.getOwnerIdentification(), cardNumber.getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card number: %s%s%s%s\n", cardNumber.getOwnerIdentification(), cardNumber.getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumber.getCardReplacementIndex().getCardReplacementIndex(), cardNumber.getCardRenewalIndex().getCardRenewalIndex() );
 		}
 
 		cardIssuingAuthorityName = new Name( arrayCopy( value, 17, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing authority name: %s\n", cardIssuingAuthorityName.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issuing authority name: %s\n", cardIssuingAuthorityName.getNameString() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issue date:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card issue date:" );
 		cardIssueDate = new TimeReal( arrayCopy( value, 53, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card validity begin:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card validity begin:" );
 		cardValidityBegin = new TimeReal( arrayCopy( value, 57, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card expiry date:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card expiry date:" );
 		cardExpiryDate = new TimeReal( arrayCopy( value, 61, 4 ) );
 	}
 

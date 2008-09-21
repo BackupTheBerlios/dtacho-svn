@@ -72,52 +72,52 @@ public class PlaceRecord extends DataClass {
 	 */
 	public PlaceRecord( byte[] record ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Place record date and time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Place record date and time:" );
 		entryTime = new TimeReal( arrayCopy( record, 0, 4 ) );
 
 		entryTypeDailyWorkPeriod = new EntryTypeDailyWorkPeriod( record[ 4 ] );
-		debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Entry type daily work period: " );
+		debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Entry type daily work period: " );
 
 		switch( entryTypeDailyWorkPeriod.getEntryTypeDailyWorkPeriod() ) {
 			case EntryTypeDailyWorkPeriod.CARD_INSERTION_TIME_OR_TIME_OF_ENTRY:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "card insertion time or time of entry" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "card insertion time or time of entry" );
 				break;
 
 			case EntryTypeDailyWorkPeriod.CARD_WITHDRAWAL_TIME_OR_TIME_OF_ENTRY:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "card withdrawal time or time of entry" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "card withdrawal time or time of entry" );
 				break;
 
 			case EntryTypeDailyWorkPeriod.MANUALLY_ENTERED_START_TIME:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "manually entered start time" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "manually entered start time" );
 				break;
 
 			case EntryTypeDailyWorkPeriod.MANUALLY_ENTERED_END_TIME:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "manually entered end of work period" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "manually entered end of work period" );
 				break;
 
 			case EntryTypeDailyWorkPeriod.START_TIME_ASSUMED_BY_VU:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "start time assumed by VU" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "start time assumed by VU" );
 				break;
 
 			case EntryTypeDailyWorkPeriod.END_TIME_ASSUMED_BY_VU:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "end time assumed by VU" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "end time assumed by VU" );
 				break;
 
 			default:
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "????" );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "????" );
 				break;
 		}
 		
 		dailyWorkPeriodCountry = new NationNumeric( record[ 5 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Daily work period country: %s\n", dailyWorkPeriodCountry.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Daily work period country: %s\n", dailyWorkPeriodCountry.toString() );
 
 		dailyWorkPeriodRegion = new RegionNumeric( record[ 6 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Daily work period region: %s\n", dailyWorkPeriodRegion.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Daily work period region: %s\n", dailyWorkPeriodRegion.toString() );
 
 		vehicleOdometerValue = new OdometerShort( arrayCopy( record, 7, 3 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle odometer value: %d\n", vehicleOdometerValue.getOdometerShort() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle odometer value: %d\n", vehicleOdometerValue.getOdometerShort() );
 	}
 
 	/**

@@ -81,39 +81,39 @@ public class VuOverSpeedingEventRecord extends DataClass {
 	 */
 	public VuOverSpeedingEventRecord( byte[] value ) {
 		debugLogger = new DebugLogger();
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] ------------------------------------------------------------" );
 
 		eventType = new EventFaultType( value[ 0 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of event: %02x - %s\n", eventType.getEventFaultType(), eventType.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Type of event: %02x - %s\n", eventType.getEventFaultType(), eventType.toString() );
 
 		eventRecordPurpose = new EventFaultRecordPurpose( value[ 1 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Record purpose: %s\n", eventRecordPurpose.toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Record purpose: %s\n", eventRecordPurpose.toString() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
 		eventBeginTime = new TimeReal( arrayCopy( value, 2, 4 ) );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
 		eventEndTime = new TimeReal( arrayCopy( value, 6, 4 ) );
 
 		maxSpeedValue = new SpeedMax( value[ 10 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Maximum speed: %d\n", maxSpeedValue.getSpeed() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Maximum speed: %d\n", maxSpeedValue.getSpeed() );
 
 		averageSpeedValue = new SpeedAverage( value[ 11 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Average speed: %d\n", averageSpeedValue.getSpeed() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Average speed: %d\n", averageSpeedValue.getSpeed() );
 
 		cardNumberDriverSlotBegin = new FullCardNumber( arrayCopy( value, 12, 18 ) );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in driver slot at beginning of event:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberDriverSlotBegin.getCardType().getEquipmentType(), cardNumberDriverSlotBegin.getCardType().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberDriverSlotBegin.getCardIssuingMemberState().toString() );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card in driver slot at beginning of event:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of card: %02x - %s\n", cardNumberDriverSlotBegin.getCardType().getEquipmentType(), cardNumberDriverSlotBegin.getCardType().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card issuing member state: %s\n", cardNumberDriverSlotBegin.getCardIssuingMemberState().toString() );
 		if ( cardNumberDriverSlotBegin.getCardType().getEquipmentType() == EquipmentType.DRIVER_CARD ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getDriverIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getDriverIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 		else {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getOwnerIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Card number: %s%s%s%s\n", cardNumberDriverSlotBegin.getCardNumber().getOwnerIdentification(), cardNumberDriverSlotBegin.getCardNumber().getCardConsecutiveIndex().getCardConsecutiveIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardReplacementIndex().getCardReplacementIndex(), cardNumberDriverSlotBegin.getCardNumber().getCardRenewalIndex().getCardRenewalIndex() );
 		}
 
 		similarEventsNumber = new SimilarEventsNumber( value[ 30 ] );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Number of similar events on that day: %d\n", similarEventsNumber.getSimilarEventsNumber() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Number of similar events on that day: %d\n", similarEventsNumber.getSimilarEventsNumber() );
 	}
 
 	/**

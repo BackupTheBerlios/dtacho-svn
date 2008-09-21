@@ -80,7 +80,7 @@ public class TimeReal extends DataClass {
 		debugLogger = new DebugLogger();
 
 		if ( i != 0 ) {
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " timestamp: %04x / %d", i, i );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " timestamp: %04x / %d", i, i );
 
 			SimpleDateFormat timeRealSimpleDate = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss z" ); 
 			timeRealSimpleDate.setTimeZone( TimeZone.getTimeZone( "UTC" ) );
@@ -89,7 +89,7 @@ public class TimeReal extends DataClass {
 
 			Date timeRealDate = new Date( timeRealTimeStamp );
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " - " + timeRealSimpleDate.format( timeRealDate ) );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " - " + timeRealSimpleDate.format( timeRealDate ) );
 		}
 	}
 

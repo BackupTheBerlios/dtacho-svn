@@ -78,7 +78,7 @@ public class EF_Identification extends DataClass {
 			size = WorkshopCardHolderIdentification.size;
 		}
 		else {
-			debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] EF_Identification: unknown card type" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] EF_Identification: unknown card type" );
 			size = 0;
 		}
 	}

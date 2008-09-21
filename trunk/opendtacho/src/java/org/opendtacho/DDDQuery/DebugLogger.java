@@ -30,32 +30,32 @@ public class DebugLogger {
 	/**
 	 * Debug loglevel NOTHING: nothing will be logged
 	 */
-	public final static int LOGLEVEL_NOTHING = 0;
+	public final static int DEBUG_LOGLEVEL_NOTHING = 0;
 	/**
 	 * Debug loglevel ERROR: errors will be logged
 	 */
-	public final static int LOGLEVEL_ERROR = 1;
+	public final static int DEBUG_LOGLEVEL_ERROR = 1;
 	/**
 	 * Debug loglevel INFO: information will be logged
 	 */
-	public final static int LOGLEVEL_INFO = 2;
+	public final static int DEBUG_LOGLEVEL_INFO = 2;
 	/**
 	 * Debug loglevel INFO_EXTENDED: extended information will be logged
 	 */
-	public final static int LOGLEVEL_INFO_EXTENDED = 4;
+	public final static int DEBUG_LOGLEVEL_INFO_EXTENDED = 4;
 	/**
 	 * Debug loglevel ALL: every output will be logged
 	 */
-	public final static int LOGLEVEL_ALL = 8;
+	public final static int DEBUG_LOGLEVEL_ALL = 8;
 
 	/**
 	 * The log level for outputting messages
 	 */
-	public static int logLevel;
+	public static int debugLogLevel;
 	/**
 	 * The printstream where messages will be put
 	 */
-	public static PrintStream logPrintStream;
+	public static PrintStream debugPrintStream = System.out;
 
 	private static int printDelayedLevel;
 	private static String printDelayedString;
@@ -78,16 +78,16 @@ public class DebugLogger {
 	 * @return	the log level
 	 */
 	public static int getLogLevel() {
-		return logLevel;
+		return debugLogLevel;
 	}
 
 	/**
 	 * Sets the log level of the DebugLogger.
 	 * 
-	 * @param	pLogLevel	the log level to be set
+	 * @param	pDebugLogLevel	the log level to be set
 	 */
-	public static void setLogLevel( int pLogLevel) {
-		logLevel = pLogLevel;
+	public static void setLogLevel( int pDebugLogLevel ) {
+		debugLogLevel = pDebugLogLevel;
 	}
 
 	/**
@@ -95,17 +95,17 @@ public class DebugLogger {
 	 * 
 	 * @return	the printstream
 	 */
-	public static PrintStream getLogPrintStream() {
-		return logPrintStream;
+	public static PrintStream getDebugPrintStream() {
+		return debugPrintStream;
 	}
 
 	/**
 	 * Sets the printstream of the DebugLogger.
 	 * 
-	 * @param	pLogPrintStream	the printstream to be set
+	 * @param	pDebugPrintStream	the printstream to be set
 	 */
-	public static void setLogPrintStream( PrintStream pLogPrintStream) {
-		logPrintStream = pLogPrintStream;
+	public static void setDebugPrintStream( PrintStream pDebugPrintStream ) {
+		debugPrintStream = pDebugPrintStream;
 	}
 
 	/**
@@ -113,34 +113,36 @@ public class DebugLogger {
 	 *
 	 * DEBUGLOGLEVEL: sets the debug log level
 	 * DEBUGPRINTSTREAM: sets the printstream where the debug messages are put.
+     * DEBUGPRINTSTREAMAPPEND: indicates if debug messages are appended to debug print
+     *                         stream(default) or not
 	 */
 	public static void InitFromEnv() {
 		// try to read log level from environment variable
 		// defaults to LOGLEVEL_ERROR
-		logLevel = LOGLEVEL_ERROR;
+		debugLogLevel = DEBUG_LOGLEVEL_ERROR;
 		try {
 			String envLogLevel = System.getenv( "DEBUGLOGLEVEL" );
 
 			if ( envLogLevel != null ) {
 				// LOGLEVEL_NOTHING
 				if ( envLogLevel.toUpperCase().compareTo( "NOTHING" ) == 0 ) {
-					logLevel = LOGLEVEL_NOTHING;
+					debugLogLevel = DEBUG_LOGLEVEL_NOTHING;
 				}
 				// LOGLEVEL_ERROR
 				if ( envLogLevel.toUpperCase().compareTo( "ERROR" ) == 0 ) {
-					logLevel = LOGLEVEL_ERROR;
+					debugLogLevel = DEBUG_LOGLEVEL_ERROR;
 				}
 				// LOGLEVEL_INFO
 				if ( envLogLevel.toUpperCase().compareTo( "INFO" ) == 0 ) {
-					logLevel = LOGLEVEL_INFO;
+					debugLogLevel = DEBUG_LOGLEVEL_INFO;
 				}
 				// LOGLEVEL_INFO_EXTENDED
 				if ( envLogLevel.toUpperCase().compareTo( "INFO_EXTENDED" ) == 0 ) {
-					logLevel = LOGLEVEL_INFO_EXTENDED;
+					debugLogLevel = DEBUG_LOGLEVEL_INFO_EXTENDED;
 				}
 				// LOGLEVEL_ALL
 				if ( envLogLevel.toUpperCase().compareTo( "ALL" ) == 0 ) {
-					logLevel = LOGLEVEL_ALL;
+					debugLogLevel = DEBUG_LOGLEVEL_ALL;
 				}
 			}
 		}
@@ -151,25 +153,25 @@ public class DebugLogger {
 			se.printStackTrace();
 		}
 
-		// try to read DEBUGPRINTSTREAM environment variable for logging
+        // try to read DEBUGPRINTSTREAM environment variable for logging
 		// defaults to System.out
-		logPrintStream = System.out;
+		debugPrintStream = System.out;
 
 		try {
 			String envDebugPrintStream = System.getenv( "DEBUGPRINTSTREAM" );
 
 			if ( ( envDebugPrintStream != null ) && ( envDebugPrintStream.length() > 0 ) ) {
-				boolean DebugPrintStreamAppend = true;
-				String envDebugPrintStreamAppend = System.getenv( "DEBUGPRINTSTREAMAPPEND" );
+                String envDebugPrintStreamAppend = System.getenv( "DEBUGPRINTSTREAMAPPEND" );
 
-				if ( ( envDebugPrintStreamAppend != null ) && ( envDebugPrintStreamAppend.length() > 0 ) ) {
-					if ( envDebugPrintStreamAppend.toLowerCase().compareTo( "false" ) == 0 ) {
-						DebugPrintStreamAppend = false;
-					}
-				}
+                boolean tmpDebugPrintStreamAppend = true;
+                if ( ( envDebugPrintStreamAppend != null ) && ( envDebugPrintStreamAppend.length() > 0 ) ) {
+                    if ( envDebugPrintStreamAppend.toLowerCase().compareTo( "false" ) == 0 ) {
+                        tmpDebugPrintStreamAppend = false;
+                    }
+                }
 
-				FileOutputStream envPrintStreamFile = new FileOutputStream( envDebugPrintStream, DebugPrintStreamAppend );
-				logPrintStream = new PrintStream( envPrintStreamFile, true );
+                FileOutputStream envPrintStreamFile = new FileOutputStream( envDebugPrintStream, tmpDebugPrintStreamAppend );
+				debugPrintStream = new PrintStream( envPrintStreamFile, true );
 			}
 		}
 		catch ( FileNotFoundException fnfe ) {
@@ -181,18 +183,18 @@ public class DebugLogger {
 		catch ( SecurityException se ) {
 			se.printStackTrace();
 		}
-	}
+    }
 
-	/**
+    /**
 	 * Prints the given char for the given debug level.
 	 * 
 	 * @param	level	the debug level
 	 * @param	c		the char to be printed
 	 */
 	public void print( int level, char c ) {
-		if ( logLevel >= level ) {
+		if ( debugLogLevel >= level ) {
 			printDelayed();
-			logPrintStream.print( c );
+			debugPrintStream.print( c );
 		}
 	}
 
@@ -203,9 +205,9 @@ public class DebugLogger {
 	 * @param	s		the string to be printed
 	 */
 	public void print( int level, String s ) {
-		if ( logLevel >= level ) {
+		if ( debugLogLevel >= level ) {
 			printDelayed();
-			logPrintStream.print( s );
+			debugPrintStream.print( s );
 		}
 	}
 
@@ -217,9 +219,9 @@ public class DebugLogger {
 	 * @param	args	the arguments for the formatted string
 	 */
 	public void printf( int level, String format, Object... args ) {
-		if ( logLevel >= level ) {
+		if ( debugLogLevel >= level ) {
 			printDelayed();
-			logPrintStream.printf( format, args );
+			debugPrintStream.printf( format, args );
 		}
 	}
 
@@ -230,9 +232,9 @@ public class DebugLogger {
 	 * @param	x		the string to be printed
 	 */
 	public void println( int level, String x ) {
-		if ( logLevel >= level ) {
+		if ( debugLogLevel >= level ) {
 			printDelayed();
-			logPrintStream.println( x );
+			debugPrintStream.println( x );
 		}
 	}
 
@@ -262,9 +264,9 @@ public class DebugLogger {
 	 * @param	level	the debug level
 	 */
 	public void println( int level ) {
-		if ( logLevel >= level ) {
+		if ( debugLogLevel >= level ) {
 			printDelayed();
-			logPrintStream.println();
+			debugPrintStream.println();
 		}
 	}
 

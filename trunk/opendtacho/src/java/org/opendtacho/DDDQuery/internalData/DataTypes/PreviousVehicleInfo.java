@@ -66,11 +66,11 @@ public class PreviousVehicleInfo extends DataClass {
 		debugLogger = new DebugLogger();
 
 		vehicleRegistrationIdentification = new VehicleRegistrationIdentification( arrayCopy( value, 0, 15 ) );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNation().toString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Vehicle registration number: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNumber().getVehicleRegNumberString() );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Vehicle registration:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Nation where vehicle is registered: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNation().toString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Vehicle registration number: %s\n", vehicleRegistrationIdentification.getVehicleRegistrationNumber().getVehicleRegNumberString() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card withdrawal time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card withdrawal time:" );
 		cardWithdrawalTime = new TimeReal( arrayCopy( value, 15, 4 ) );
 	}
 

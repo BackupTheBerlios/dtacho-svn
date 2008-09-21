@@ -67,14 +67,14 @@ public class VuDownloadActivityData extends DataClass {
 	public VuDownloadActivityData( byte[] value ) {
 		debugLogger = new DebugLogger();
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Downloading time:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Downloading time:" );
 		downloadingTime = new TimeReal( arrayCopy( value, 0, 4 ) );
 
 		fullCardNumber = new FullCardNumber( arrayCopy( value, 4, 18 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card used to authorize the download: %s\n", fullCardNumber.getCardNumber().getOwnerIdentification() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Card used to authorize the download: %s\n", fullCardNumber.getCardNumber().getOwnerIdentification() );
 
 		companyOrWorkshopName = new Name( arrayCopy( value, 22, 36 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company or workshop name: %s\n", companyOrWorkshopName.getNameString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Company or workshop name: %s\n", companyOrWorkshopName.getNameString() );
 	}
 
 	/**

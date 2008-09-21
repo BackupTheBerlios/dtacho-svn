@@ -74,16 +74,16 @@ public class SensorPaired extends DataClass {
 		debugLogger = new DebugLogger();
 
 		sensorSerialNumber = new SensorSerialNumber( arrayCopy( value, 0, 8 ) );
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor serial number:" );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Serial number: %d\n", sensorSerialNumber.getSerialNumber() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Month and year of manufacturing: %s\n", sensorSerialNumber.getMonthYearString() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of equipment: %02x\n", sensorSerialNumber.getType() );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Manufacturer: %02x - %s\n", sensorSerialNumber.getManufacturerCode().getManufacturerCode(), sensorSerialNumber.getManufacturerCode().toString() );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor serial number:" );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Serial number: %d\n", sensorSerialNumber.getSerialNumber() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Month and year of manufacturing: %s\n", sensorSerialNumber.getMonthYearString() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Type of equipment: %02x\n", sensorSerialNumber.getType() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  [INFO_EXT] Manufacturer: %02x - %s\n", sensorSerialNumber.getManufacturerCode().getManufacturerCode(), sensorSerialNumber.getManufacturerCode().toString() );
 
 		sensorApprovalNumber = new SensorApprovalNumber( arrayCopy( value, 8, 8 ) );
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor approval number: %s\n", sensorApprovalNumber.getSensorApprovalNumber() );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Sensor approval number: %s\n", sensorApprovalNumber.getSensorApprovalNumber() );
 
-		debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Date of first pairing with a vehicle unit:" );
+		debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Date of first pairing with a vehicle unit:" );
 		sensorPairingDateFirst = new SensorPairingDate( arrayCopy( value, 16, 4 ) );
 	}
 

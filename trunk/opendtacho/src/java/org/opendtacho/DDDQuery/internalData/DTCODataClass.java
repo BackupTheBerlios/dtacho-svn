@@ -96,12 +96,12 @@ public abstract class DTCODataClass extends DataClass {
 
 		try {
 			// try to open the EC Public Key
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] trying to open the European Public Key:" );
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO, "[INFO] " );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] trying to open the European Public Key:" );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] " );
 			if ( eurPKPath != null ) {
-				debugLogger.print( DebugLogger.LOGLEVEL_INFO, eurPKPath );
+				debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO, eurPKPath );
 			}
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "EC_PK.bin" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "EC_PK.bin" );
 
 			if ( eurPKPath != null ) {
 				ecPubKeyFIS = new FileInputStream( eurPKPath + "EC_PK.bin" );
@@ -115,7 +115,7 @@ public abstract class DTCODataClass extends DataClass {
 			if ( ecPKLength != 144 ) {
 				ecPubKeyFIS.close();
 				ecPublicKeyAvailable = false;
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] EC public key not found. Will skip signature checks." );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] EC public key not found. Will skip signature checks." );
 
 				return ecPublicKeyAvailable;
 			}
@@ -129,7 +129,7 @@ public abstract class DTCODataClass extends DataClass {
 			ecPubKeyExponent = caPublicKey.getPublicKeyExponentHexString();
 
 			ecPublicKeyAvailable = true;
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] EC public key found. Signatures will be checked." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] EC public key found. Signatures will be checked." );
 
 			XMLInfo.setDataValidatedWithEURPK( true );
 
@@ -137,7 +137,7 @@ public abstract class DTCODataClass extends DataClass {
 		}
 		catch ( Exception e ) {
 			ecPublicKeyAvailable = false;
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, "[INFO] EC public key not found. Will skip signature checks." );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, "[INFO] EC public key not found. Will skip signature checks." );
 
 			return ecPublicKeyAvailable;
 		}
@@ -183,7 +183,7 @@ public abstract class DTCODataClass extends DataClass {
 	 */
 	public boolean verifyDataSignatureIntegrity( String publicKeyModulusHexString, String publicKeyExponentHexString, byte[] tag, byte[] data, byte[] signature ) {
 		// check data/signature integrity
-		debugLogger.printf( DebugLogger.LOGLEVEL_INFO, " [INFO] verifying data/signature integrity of %02x %02x\n", tag[ 0 ], tag[ 1 ] );
+		debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] verifying data/signature integrity of %02x %02x\n", tag[ 0 ], tag[ 1 ] );
 		SecurityDataSignatureCheck efDataSignatureCheck = new SecurityDataSignatureCheck();
 
 		try {
@@ -191,23 +191,23 @@ public abstract class DTCODataClass extends DataClass {
 			efDataSignatureCheck.setRSAPublicKey( publicKeyModulusHexString, publicKeyExponentHexString );
 
 			// decipher signature
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] deciphering signature" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] deciphering signature" );
 			efDataSignatureCheck.decipherSignature( signature );
 
 			// calculate data sha1 hash
 			efDataSignatureCheck.setDataByteArray( data );
 
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", efDataSignatureCheck.getDecipheredSignatureByteArray().length, efDataSignatureCheck.getDecipheredSignatureHexString() );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  data SHA1 hash       [%3d]: %s\n", efDataSignatureCheck.getDataSHAHashByteArray().length, efDataSignatureCheck.getDataSHAHashHexString() );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  signature SHA1 hash  [%3d]: %s\n", efDataSignatureCheck.getDecipheredSignatureByteArray().length-108, efDataSignatureCheck.getDecipheredSignatureHexString().substring( 216, 256 ) );
-			debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  data valid?          [---]: %s\n", efDataSignatureCheck.isValidData());
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature            [%3d]: %s\n", efDataSignatureCheck.getDecipheredSignatureByteArray().length, efDataSignatureCheck.getDecipheredSignatureHexString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  data SHA1 hash       [%3d]: %s\n", efDataSignatureCheck.getDataSHAHashByteArray().length, efDataSignatureCheck.getDataSHAHashHexString() );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  signature SHA1 hash  [%3d]: %s\n", efDataSignatureCheck.getDecipheredSignatureByteArray().length-108, efDataSignatureCheck.getDecipheredSignatureHexString().substring( 216, 256 ) );
+			debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  data valid?          [---]: %s\n", efDataSignatureCheck.isValidData());
 
 			if ( efDataSignatureCheck.isValidData() == true ) {
-				debugLogger.println( DebugLogger.LOGLEVEL_INFO, " [INFO] data is valid. Data and signature SHA1 hash are equal." );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO, " [INFO] data is valid. Data and signature SHA1 hash are equal." );
 				return true;
 			}
 			else {
-				debugLogger.println( DebugLogger.LOGLEVEL_ERROR, "[ERROR] data is invalid. Data and signature SHA1 hash are not equal." );
+				debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_ERROR, "[ERROR] data is invalid. Data and signature SHA1 hash are not equal." );
 				return false;
 			}
 		}
@@ -227,13 +227,13 @@ public abstract class DTCODataClass extends DataClass {
 		while ( it.hasNext() ) {
 			Object[] tmp = (Object[])it.next();
 
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "tag: " );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "tag: " );
 
 			for ( int i = 0; i < ( (byte[])tmp[ 0 ]).length; i++ ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ])[ i ] & 0xff ) );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ])[ i ] & 0xff ) );
 			}
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED );
 		}
 	}
 
@@ -246,13 +246,13 @@ public abstract class DTCODataClass extends DataClass {
 		while ( it.hasNext() ) {
 			Object[] tmp = (Object[])it.next();
 
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "tag: " );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "tag: " );
 
 			for ( int i = 0; i < ( (byte[])tmp[ 0 ]).length; i++ ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ])[ i ] & 0xff ) );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ])[ i ] & 0xff ) );
 			}
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "\t - length: " + ( (byte[])tmp[ 1 ] ).length );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "\t - length: " + ( (byte[])tmp[ 1 ] ).length );
 		}
 	}
 
@@ -281,23 +281,23 @@ public abstract class DTCODataClass extends DataClass {
 			Object[] tmp = (Object[])it.next();
 
 			// TAG
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "tag: " );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "tag: " );
 
 			for ( int i = 0; i < ( (byte[])tmp[ 0 ] ).length; i++ ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ] )[ i ] & 0xff) );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " %02x", (int)( ( (byte[])tmp[ 0 ] )[ i ] & 0xff) );
 			}
 
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "\t - length: " + ( (byte[])tmp[ 1 ] ).length );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "\t - length: " + ( (byte[])tmp[ 1 ] ).length );
 
 			// VALUE
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, "value:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "value:" );
 
 			for ( int i = 0; i < ( (byte[])tmp[ 1 ] ).length; i++ ) {
 				hexdump( (byte)( ( (byte[])tmp[ 1 ] )[ i ] & 0xff) );
 			}
 
 			hexdump_flush();
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED );
 		}
 	}
 
@@ -322,28 +322,28 @@ public abstract class DTCODataClass extends DataClass {
 	private void hexdump_flush() {
 		if ( hexdumpcount > 0 ) {
 			for ( int i = 0; i < hexdumpcount; i++ ) {
-				debugLogger.printf( DebugLogger.LOGLEVEL_INFO_EXTENDED, " %02x", hexdumpbyte[ i ] );
+				debugLogger.printf( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " %02x", hexdumpbyte[ i ] );
 			}
 
-			debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "  " );
+			debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "  " );
 
 			for ( int i = 0; i < hexdumpwidth-hexdumpcount; i++ ) {
-				debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "   " );
+				debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "   " );
 			}
 
 			for( int i = 0; i < hexdumpcount; i++ ) {
 				if ( ( hexdumpbyte[ i ] >= 0x20 ) && ( hexdumpbyte[i] < 0x7f ) ) {
 					// print visible chars only
-					debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, (char)hexdumpbyte[ i ] );
+					debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, (char)hexdumpbyte[ i ] );
 				}
 				else {
 					// otherwise print a dot
-					debugLogger.print( DebugLogger.LOGLEVEL_INFO_EXTENDED, "." );
+					debugLogger.print( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, "." );
 				}
 			}
 			
 			hexdumpcount = 0;
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED );
 		}
 	}
 

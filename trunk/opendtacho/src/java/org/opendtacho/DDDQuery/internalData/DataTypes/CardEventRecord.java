@@ -75,14 +75,14 @@ public class CardEventRecord extends DataClass {
 
 		long eventBeginTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 1, 4 ) );
 		if ( eventBeginTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT]" );
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT]" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event begin time:" );
 		}
 		eventBeginTime = new TimeReal( arrayCopy( value, 1, 4 ) );
 
 		long eventEndTimeTmp = convertIntoUnsigned4ByteInt( arrayCopy( value, 5, 4 ) );
 		if ( eventEndTimeTmp != 0 ) {
-			debugLogger.println( DebugLogger.LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
+			debugLogger.println( DebugLogger.DEBUG_LOGLEVEL_INFO_EXTENDED, " [INFO_EXT] Event end time:" );
 		}
 		eventEndTime = new TimeReal( arrayCopy( value, 5, 4 ) );
 
