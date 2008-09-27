@@ -226,19 +226,17 @@ class InsertUpdateService implements org.opendtacho.serviceinterfaces.InsertUpda
             def tranactionStatus = transactionManager.getTransaction()
 
             try {
-            objectSet.each { object ->
-                log.debug("About to save $object")
-                
-                if(!object.save(/*flush:true*/))
-                    throw new Exception('Could not save object: ' + object + '(Cause: ' + object.errors.allErrors + ')')
-            }
+                objectSet.each {object ->
+                    log.debug("About to save $object")
+
+                    if (!object.save(/*flush:true*/))
+                        throw new Exception('Could not save object: ' + object + '(Cause: ' + object.errors.allErrors + ')')
+                }
+                transactionManager.commit(tranactionStatus)
             }
             catch(Exception e) {
                 transactionManager.rollback(tranactionStatus)
                 throw e
-            }
-            finally {
-                transactionManager.commit(tranactionStatus)
             }
         }
         else
