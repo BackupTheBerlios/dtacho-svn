@@ -8,39 +8,82 @@ class DddFileUploadController {
     }
 
     def upload = {
-        def file = request.getFile('binFile')
-        if(file && !file.empty) {
+        Iterator itr = request.getFileNames()
 
-            // save file
+        while (itr.hasNext()) {
+            // get item
+            def fileitem = itr.next()
 
-            // TODO: save file in archive, make base directory configurable
-            def tempdir = System.getProperty("java.io.tmpdir");
+            // get filename
+            def file = request.getFile( fileitem )
 
-            if ( !(tempdir.endsWith("/") || tempdir.endsWith("\\")) )
-                tempdir = tempdir + System.getProperty("file.separator");
+            if (file && !file.empty) {
 
-            def fileName = tempdir + file.getOriginalFilename()
-            file.transferTo( new java.io.File(fileName))
+                println file.getOriginalFilename()
+                
+                // save file
+                // TODO: save file in archive, make base directory configurable
 
-            // convert to XML
-            // TODO: convert to XML
-            org.opendtacho.DDDQuery.Controller.main(fileName)
+                // get system's temporary directory
+                def tempdir = System.getProperty("java.io.tmpdir")
 
-            // load XML to database
-            // TODO: handle errors
-            readXmlService.loadXmlFile(fileName + ".xml")
+                if ( !(tempdir.endsWith("/") || tempdir.endsWith("\\")) ) {
+                    tempdir = tempdir + System.getProperty("file.separator")
+                }
 
-            // remove temporary files
-            def rmfile = new File(fileName)
-            rmfile.delete()
+                // filename
+                def fileName = tempdir + file.getOriginalFilename()
 
-            def rmxmlfile = new File(fileName + ".xml")
-            rmxmlfile.delete()
+                // dump file to temporary directory
+                //file.transferTo( new java.io.File(fileName))
 
-            flash.message = ''
+                // convert to XML
+                //org.opendtacho.DDDQuery.Controller.main(fileName)
+
+                // instantiate & configure XML converter
+                def xmlconverter = new org.opendtacho.DDDQuery.Controller()
+                org.opendtacho.DDDQuery.Config.setNoDetailedSpeedData( true )
+
+                print "dddfiletype" + fileitem.substring(7,8) + ": "
+                println request.getParameter( "dddfiletype" + fileitem.substring(7,8) )
+
+                def dddfiletype = request.getParameter( "dddfiletype" + fileitem.substring(7,8) )
+                def xmlconvertersrctype
+
+                // set source data type accoriding to FORM data
+                xmlconvertersrctype = null
+                if ( dddfiletype.compareTo( "drivercard" ) == 0 ) {
+                    xmlconvertersrctype = org.opendtacho.DDDQuery.DDDDataSource.SRC_TYPE_CARD
+                } else if ( dddfiletype.compareTo( "vehicleunit" ) == 0 ) {
+                    xmlconvertersrctype = org.opendtacho.DDDQuery.DDDDataSource.SRC_TYPE_VU
+                }
+
+                // convert to XML
+                String xmldata = xmlconverter.process( file.getBytes(), xmlconvertersrctype )
+
+                // write XML string to temporary file
+                def xmlfile = new FileOutputStream( fileName + ".xml" )
+                xmlfile.write( xmldata.getBytes() )
+                xmlfile.close()
+
+                // load XML to database
+                // TODO: handle errors
+                readXmlService.loadXmlFile(fileName + ".xml")
+
+                // remove temporary files
+                // DDD file
+                //def rmfile = new File(fileName)
+                //rmfile.delete()
+                // XML file
+                def rmxmlfile = new File(fileName + ".xml")
+                rmxmlfile.delete()
+
+                flash.message = ''
+            }
+
+            //else
+            //    flash.message = 'Non-existing or empty file!'
         }
-        else
-            flash.message = 'Non-existing or empty file!'
 
         render(view:'dddUploadForm')
     }
