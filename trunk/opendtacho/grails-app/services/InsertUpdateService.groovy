@@ -223,7 +223,7 @@ class InsertUpdateService implements org.opendtacho.serviceinterfaces.InsertUpda
         if(objectSet) {
             log.info("Now saving ${objectSet.size()} objects of type: $domainType")
 
-            def tranactionStatus = transactionManager.getTransaction()
+            def transactionStatus = transactionManager.getTransaction()
 
             try {
                 objectSet.each {object ->
@@ -232,10 +232,10 @@ class InsertUpdateService implements org.opendtacho.serviceinterfaces.InsertUpda
                     if (!object.save(/*flush:true*/))
                         throw new Exception('Could not save object: ' + object + '(Cause: ' + object.errors.allErrors + ')')
                 }
-                transactionManager.commit(tranactionStatus)
+                transactionManager.commit(transactionStatus)
             }
             catch(Exception e) {
-                transactionManager.rollback(tranactionStatus)
+                transactionManager.rollback(transactionStatus)
                 throw e
             }
         }
