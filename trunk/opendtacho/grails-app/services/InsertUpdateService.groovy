@@ -52,7 +52,8 @@ class InsertUpdateService implements org.opendtacho.serviceinterfaces.InsertUpda
 
     // Set of property names that shall not be used for object comparison or attribute copy
     private static def domainClassIgnoredProperties = [
-            'id','version','log','dateCreated','lastUpdated','class','hasMany','belongsTo','constraints','events','errors','metaClass',
+            'id','version','log','dateCreated','lastUpdated','class','hasMany','belongsTo',
+            'constraints','events','errors','metaClass','attached',
             // the following are project specific properties
             'domainKeys','sdf'
     ] as Set

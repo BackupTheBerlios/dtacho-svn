@@ -9,12 +9,12 @@ Hier einige Infos:
 - Die Anwendung basiert auf dem Grails-Framework (http://www.grails.org)
 - Der Formatwnadler ist integriert, kann aber auch separat genutzt werden.
 - Die Entwicklung erfolgt mit der IDE IntelliJ IDEA von JetBrains
-  (http://www.jetbrains.com) in Version 8.1
+  (http://www.jetbrains.com) in Version 8.1.3
   Falls IDEA als IDE eingesetzt werden soll, steht ein initialer Satz von
   Konfigurations-Dateien in dem zip-file initialIDEAsettings.zip zu Verfügung.
   Einfach lokal extrahieren...
   
 Zugrundeliegende Frameworks
-- Grails 1.1, zur Installation s. http://www.grails.org/Installation
+- Grails 1.1.1, zur Installation s. http://www.grails.org/Installation
 - Java 1.6
 
