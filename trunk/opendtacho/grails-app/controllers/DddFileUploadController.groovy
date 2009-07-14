@@ -63,8 +63,10 @@ class DddFileUploadController {
 
                 // write XML string to temporary file
                 def xmlfile = new FileOutputStream( fileName + ".xml" )
-                xmlfile.write( xmldata.getBytes() )
-                xmlfile.close()
+                def osw = new OutputStreamWriter( xmlfile, "UTF-8");
+
+                osw.write( xmldata )
+                osw.close()
 
                 // load XML to database
                 // TODO: handle errors

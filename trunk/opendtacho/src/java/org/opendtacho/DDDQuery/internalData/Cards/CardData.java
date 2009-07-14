@@ -22,6 +22,8 @@ package org.opendtacho.DDDQuery.internalData.Cards;
 
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.security.*;
 import java.security.spec.*;
@@ -709,6 +711,7 @@ public class CardData extends DTCODataClass implements XMLDumper {
 
 		try {
 			FileOutputStream fos = new FileOutputStream( filename );
+            OutputStreamWriter osw = new OutputStreamWriter( fos, "UTF-8");
 
 			Format fmt = Format.getPrettyFormat();
 			fmt.setLineSeparator( "\n" );
@@ -717,10 +720,10 @@ public class CardData extends DTCODataClass implements XMLDumper {
 
 			XMLOutputter serializer = new XMLOutputter( fmt );
 
-			serializer.output( doc, fos );
+			serializer.output( doc, osw );
 
-			fos.flush();
-			fos.close();
+			osw.flush();
+			osw.close();
 		}
 		catch ( Exception e ) {
 			// TODO: handle exception
