@@ -4,7 +4,22 @@ html * {
 }
 
 /* GENERAL */
-
+#header {
+    background: #FFFFFF url(../images/header_background.gif) repeat-x;
+    margin: 0px auto;
+}
+#header h1 {
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 20px 0 0 6px;
+    font-size: 1.6em;
+}
+#footer {
+    clear: both;
+    text-align: center;
+    padding: 3px;
+    border-top: 1px solid #333;
+}
 .spinner {
     padding: 5px;
     position: absolute;
@@ -21,7 +36,7 @@ a:link, a:visited, a:hover {
     color: #666;
     font-weight: bold;
     text-decoration: none;
-} 
+}
 
 h1 {
     color: #006dba;
@@ -31,7 +46,7 @@ h1 {
 }
 
 ul {
-    padding-left: 15px;	
+    padding-left: 15px;
 }
 
 input, select, textarea {
@@ -64,7 +79,7 @@ input:focus, select:focus, textarea:focus {
 .nav {
     background: #fff url(../images/skin/shadow.jpg) bottom repeat-x;
     border: 1px solid #ccc;
-    border-style: solid none solid none;	
+    border-style: solid none solid none;
     margin-top: 5px;
     padding: 7px 12px;
 }
@@ -112,7 +127,7 @@ div.errors {
 }
 div.errors ul {
     list-style: none;
-    padding: 0;	
+    padding: 0;
 }
 div.errors li {
 	background: url(../images/skin/exclamation.png) 8px 0% no-repeat;
@@ -136,7 +151,7 @@ table {
 tr {
     border: 0;
 }
-td, th { 
+td, th {
     font: 11px verdana, arial, helvetica, sans-serif;
     line-height: 12px;
     padding: 5px 6px;
@@ -222,12 +237,12 @@ th.desc a {
 }
 .prop .name {
     text-align: left;
-    width: 15%;
+    width: 10%;
     white-space: nowrap;
 }
 .prop .value {
     text-align: left;
-    width: 85%;
+    width: 90%;
 }
 
 /* ACTION BUTTONS */
