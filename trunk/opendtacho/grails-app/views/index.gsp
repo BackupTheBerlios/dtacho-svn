@@ -1,15 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <title>Hagos opendtacho</title>
 		<meta name="layout" content="main" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     </head>
     <body>
-        <div class="dialog" style="margin-left:20px;width:60%;">
-            <ul>
-              <g:each var="c" in="${grailsApplication.controllerClasses}">
-                    <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-              </g:each>
-            </ul>
+        <div class="nav">
+          <span class="menuButton"><a class="home" href="${resource(dir:'')}"><g:message code="menu.home"/></a></span>
+          <span class="menuButton"><a class="activitiesList" href="${resource(dir:'/dtActivityChange/list')}"><g:message code="menu.activities"/></a></span>
+          <span class="menuButton"><a class="driverList" href="${resource(dir:'/dtDriver/list')}"><g:message code="menu.driver"/></a></span>
+          <span class="menuButton"><a class="xmlUpload" href="${resource(dir:'/xmlFileUpload/xmlUploadForm')}"><g:message code="menu.xml"/></a></span>
+          <span class="menuButton"><a class="dddUpload" href="${resource(dir:'/dddFileUpload/dddUploadForm')}"><g:message code="menu.ddd"/></a></span>
+          <span class="menuButton"><a class="pdfReport" href="${resource(dir:'/dtActivityChange/pdfReport')}"><g:message code="menu.pdf"/></a></span>
+          <span class="menuButton"><a class="screenReport" href="${resource(dir:'/dtActivityChange/screenReport')}"><g:message code="menu.screen"/></a></span>
         </div>
     </body>
 </html>

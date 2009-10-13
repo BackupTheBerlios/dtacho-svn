@@ -8,7 +8,7 @@
 
 public class DtActivityChangeTemp {
     String activityRecordDate
-    String activityRecordDay
+    int activityRecordDay
     String activity
     String time
     String next

@@ -5,14 +5,15 @@ html * {
 
 /* GENERAL */
 #header {
-    background: #FFFFFF url(../images/header_background.gif) repeat-x;
-    margin: 0px auto;
+    background: #FFFFFF url(../images/bannerWebsite.jpg) repeat-x;
+   
 }
-#header h1 {
-    font-family: Arial, sans-serif;
-    color: white;
-    padding: 20px 0 0 6px;
-    font-size: 1.6em;
+
+#topbar {
+    text-align: right;
+
+    margin-right: 20px;
+    padding: 5px 0;
 }
 #footer {
     clear: both;
@@ -40,8 +41,9 @@ a:link, a:visited, a:hover {
 
 h1 {
     color: #006dba;
-    font-weight: normal;
-    font-size: 16px;
+    
+    font-weight: bold;
+    font-size: 20px;
     margin: .8em 0 .3em 0;
 }
 
@@ -91,6 +93,36 @@ input:focus, select:focus, textarea:focus {
 .menuButton a {
     color: #333;
     padding: 4px 6px;
+}
+.menuButton a.driverList {
+    background: url(../images/skin/person.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.activitiesList {
+    background: url(../images/skin/list.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.screenReport {
+    background: url(../images/skin/screenReport.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.pdfReport {
+    background: url(../images/skin/pdfReport.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.dddUpload {
+    background: url(../images/skin/dddUpload.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.xmlUpload {
+    background: url(../images/skin/xmlUpload.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
 }
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
@@ -192,13 +224,24 @@ th.desc a {
 }
 
 /* LIST */
-
 .list table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-style: dashed;
+    table-layout: auto;
 }
-.list th, .list td {
-    border-left: 1px solid #ddd;
+
+.list thead {
+    font-weight: bold;
+    color:blue;
+    text-align:center;
 }
+
+.list td {
+    text-align:center;
+}
+
+
+
 .list th:hover, .list tr:hover {
     background: #b2d1ff;
 }
@@ -280,3 +323,6 @@ th.desc a {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+
+
+
