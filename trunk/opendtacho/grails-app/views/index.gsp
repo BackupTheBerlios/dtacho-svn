@@ -12,8 +12,7 @@
           <span class="menuButton"><a class="driverList" href="${resource(dir:'/dtDriver/list')}"><g:message code="menu.driver"/></a></span>
           <span class="menuButton"><a class="xmlUpload" href="${resource(dir:'/xmlFileUpload/xmlUploadForm')}"><g:message code="menu.xml"/></a></span>
           <span class="menuButton"><a class="dddUpload" href="${resource(dir:'/dddFileUpload/dddUploadForm')}"><g:message code="menu.ddd"/></a></span>
-          <span class="menuButton"><a class="pdfReport" href="${resource(dir:'/dtActivityChange/pdfReport')}"><g:message code="menu.pdf"/></a></span>
-          <span class="menuButton"><a class="screenReport" href="${resource(dir:'/dtActivityChange/screenReport')}"><g:message code="menu.screen"/></a></span>
+          <span class="menuButton"><a class="report" href="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report"/></a></span>
         </div>
     </body>
 </html>

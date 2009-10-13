@@ -8,12 +8,11 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
-    <title>DDD File Upload Page</title>
+  <head>
+    <title><g:message code="ddd.title"/></title>
     <meta name="layout" content="main"/>
-
     <script type="text/javascript">
-function setDDDFileType( field ) {
+      function setDDDFileType( field ) {
   var dddfile = document.dddinput['dddfile' + field].value;
 
   if ( dddfile ) {
@@ -38,7 +37,7 @@ function setDDDFileType( field ) {
   }
 }
 
-function setRadioButtons( dddfileprefix, drivercardradio, vehicleunitradio, divname ) {
+      function setRadioButtons( dddfileprefix, drivercardradio, vehicleunitradio, divname ) {
   if ( dddfileprefix == "C_" ) {
     drivercardradio.checked = true;
     document.getElementsByName(divname)[0].style.backgroundColor="#00ff00";
@@ -54,21 +53,21 @@ function setRadioButtons( dddfileprefix, drivercardradio, vehicleunitradio, divn
   }
 }
 
-function setGreenBackground( element ) {
+      function setGreenBackground( element ) {
   document.getElementsByName(element)[0].style.backgroundColor="#00ff00";
 }
 
-function setWhiteBackground( element ) {
+      function setWhiteBackground( element ) {
   document.getElementsByName(element)[0].style.backgroundColor="#ffffff";
 }
 
-function setYellowBackground( element ) {
+      function setYellowBackground( element ) {
   document.getElementsByName(element)[0].style.backgroundColor="#ffff00";
 }
 
-var tablerow = 5;
+      var tablerow = 5;
 
-function addFileUpload() {
+      function addFileUpload() {
   if ( tablerow <15 ) {
     var table = document.getElementById("filetable");
     var row = table.insertRow( tablerow + 1 );
@@ -88,10 +87,10 @@ function addFileUpload() {
   }
 }
 
-busyImage = new Image(); 
-busyImage.src = "/opendtacho/images/wait30.gif";
+      busyImage = new Image();
+      busyImage.src = "/opendtacho/images/spinner.gif";
 
-function setBusy() {
+      function setBusy() {
     var uploadbutton = document.getElementById("formactionarea");
     var busyimg = document.createElement("img");
     var imgsrc = document.createAttribute("src");
@@ -99,18 +98,17 @@ function setBusy() {
     busyimg.setAttributeNode(imgsrc);
     uploadbutton.appendChild(busyimg);
 }
-</script>
-
-</head>
-<body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLinkTo()}">Home</a></span>
-</div>
-<div class="body" >
-    <h1>Choose DDD files</h1>
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
+    </script>
+  </head>
+  <body>
+    <div class="nav">
+        <span class="menuButton"><a class="home" href="${createLinkTo()}"><g:message code="menu.home"/></a></span>
+    </div>
+    <div class="body" >
+      <h1><g:message code="ddd.header"/></h1>
+      <g:if test="${flash.message}">
+          <div class="message">${flash.message}</div>
+      </g:if>
 
     <form name="dddinput" action="upload" enctype="multipart/form-data" method="post" >
         <table id="filetable">
@@ -180,8 +178,12 @@ function setBusy() {
             <tr>
                 <td id="formactionarea">
                     <div id="addfilebutton"><input type="button" value="+" onclick="javascript:addFileUpload()" />&nbsp;Add file selector</div>
-                    <br /><br /><br /><br />
-                    <input type="submit" value="Upload!" onclick="javascript:setBusy()" />
+                    <br />
+                    <div class="buttons">
+                      <span class="button">
+                        <input class="upload" type="image" alt="<g:message code="ddd.button.upload"/>" onclick="javascript:setBusy()" />
+                      </span>
+                    </div>
                 </td>
                 <td>
                 </td>

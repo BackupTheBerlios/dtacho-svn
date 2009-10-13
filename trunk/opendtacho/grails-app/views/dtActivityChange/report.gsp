@@ -7,84 +7,85 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="layout" content="main" />
-        <title>REPORT</title>
-    </head>
-    <body>
-        <div class="nav">
-            <span class="menuButton"><a class="home" href="${resource(dir:'')}">Home</a></span>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="layout" content="main" />
+    <title><g:message code="report.title"/></title>
+  </head>
+  <body>
+    <div class="nav">
+      <span class="menuButton"><a class="home" href="${resource(dir:'')}"><g:message code="menu.home"/></a></span>
+    </div>
+    <div class="body">
+      <h1><g:message code="report.title"/></h1>
+      <g:if test="${flash.message}">
+        <div class="message">${flash.message}</div>
+      </g:if>
+      %{--temporary date variable for pdf report filename--}%
+      <g:set var="a" value="${new Date()}"/>
+      <g:pdfForm controller="dtActivityChange" action="pdfResults" method="post" filename="report_for_${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}.pdf">
+        <div class="dialog">
+          <table>
+            <tbody>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="report.company"/></strong>
+                </td>
+                <td>
+                  <g:select name="company" optionKey="companyName" optionValue="companyName" from="${DtCompany.list()}"/>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="report.subsidiary"/></strong>
+                </td>
+                <td>
+                  <g:select name="city" optionKey="city" optionValue="city" from="${DtSubsidiary.list()}"/>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="report.driver"/></strong>
+                </td>
+                <td>
+                  <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="report.date"/></strong>
+                </td>
+                <td valign="top" class="value">
+                  <g:message code="report.date.from"/>
+                  <g:datePicker name="minDate" precision="day"/>
+                  <g:message code="report.date.to"/>
+                  <g:datePicker name="maxDate" precision="day"/>
+                </td>
+              </tr>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="report.shortcut"/></strong>
+                </td>
+                <td valign="top" class="value">
+                  <g:radio name='shortcut' value="null"/><em><g:message code="report.shortcut.none"/></em><br/>
+                  <g:radio name='shortcut' value="lastWeek"/><em><g:message code="report.shortcut.lastWeek"/></em><br/>
+                  <g:radio name='shortcut' value="thisMonth"/><em><g:message code="report.shortcut.thisMonth"/></em><br/>
+                  <g:radio name='shortcut' value="lastMonth"/><em><g:message code="report.shortcut.lastMonth"/></em><br/>
+                  <g:radio name='shortcut' value="thisYear"/><em><g:message code="report.shortcut.thisYear"/></em>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="body">
-            <h1>Report</h1>
-
-            <g:if test="${flash.message}">
-                <div class="message">${flash.message}</div>
-            </g:if>
-
-            <g:form action="results" method="post" >
-                <div class="dialog">
-                    <table>
-                        <tbody>
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="company"><strong>Company</strong></label>
-                                </td>
-                                <td>
-                                    <g:select name="company" optionKey="companyName" optionValue="companyName" from="${DtCompany.list()}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="subsidiary"><strong>Subsidiary</strong></label>
-                                </td>
-                                <td>
-                                    <g:select name="city" optionKey="city" optionValue="city" from="${DtSubsidiary.list()}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="driver"><strong>Driver</strong></label>
-                                </td>
-                                <td>
-                                    <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="date"><strong>Date</strong></label>
-                                </td>
-                                <td valign="top" class="value">
-                                    from
-                                    <g:datePicker name="minDate" precision="day"/>
-                                    to
-                                    <g:datePicker name="maxDate" precision="day"/>
-                                </td>
-                            </tr>
-
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="shortcuts"><strong>Shortcuts</strong></label>
-                                </td>
-                                <td valign="top" class="value">
-                                    <g:radio name='shortcut' value="null"/><em>None</em><br/>
-                                    <g:radio name='shortcut' value="lastWeek"/><em>Last Week</em><br/>
-                                    <g:radio name='shortcut' value="thisMonth"/><em>This Month</em><br/>
-                                    <g:radio name='shortcut' value="lastMonth"/><em>Last Month</em><br/>
-                                    <g:radio name='shortcut' value="thisYear"/><em>This Year</em>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="buttons">
-                    <span class="button"><input type="submit" value="Report" /></span>
-                </div>
-            </g:form>
+        <div class="buttons">
+          <span class="button">
+            <input class="pdf" type="image" alt="<g:message code="report.button.pdf"/>" />
+          </span>
+          <span class="button">
+            <input class="screen" type="button" value="<g:message code="report.button.screen"/>" onClick="document.simplePdfForm.action='screenResults'; document.simplePdfForm.submit();"/>  
+          </span>
         </div>
-    </body>
+      </g:pdfForm>
+    </div>
+  </body>
 </html>

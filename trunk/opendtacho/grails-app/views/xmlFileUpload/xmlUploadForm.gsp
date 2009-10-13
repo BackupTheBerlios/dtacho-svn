@@ -8,26 +8,41 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-<head>
-    <title>XML File Upload Page</title>
+  <head>
+    <title><g:message code="xml.title"/></title>
     <meta name="layout" content="main"/>
-</head>
-<body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLinkTo()}">Home</a></span>
+  </head>
+  <body>
+    <div class="nav">
+    <span class="menuButton"><a class="home" href="${createLinkTo()}"><g:message code="menu.home"/></a></span>
 </div>
-<div class="body" >
-    <h1>Choose XML file</h1>
-    <g:if test="${flash.message}">
+
+    <div class="body" >
+      <h1>XML</h1>
+      <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
-    </g:if>
-
-    <form action="upload" enctype="multipart/form-data" method="post" >
-        <input type="file" name="xmlFile" size="50" value=""/>
-        <br/>
-        <input type="submit" name="uploadFile" value="Upload!"/>
-    </form>
-
-</div>
-</body>
+      </g:if>
+      <form action="upload" enctype="multipart/form-data" method="post" >
+        <div class="dialog">
+          <table>
+            <tbody>
+              <tr class="prop">
+                <td valign="top" class="name">
+                  <strong><g:message code="xml.header"/></strong>
+                </td>
+                <td>
+                  <input type="file" name="xmlFile" size="50" value=""/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="buttons">
+          <span class="button">
+            <input class="upload" type="image" alt="<g:message code="xml.button.upload"/>"/>
+          </span>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

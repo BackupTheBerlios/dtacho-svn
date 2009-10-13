@@ -6,9 +6,7 @@ html * {
 /* GENERAL */
 #header {
     background: #FFFFFF url(../images/bannerWebsite.jpg) repeat-x;
-   
-}
-
+   }
 #topbar {
     text-align: right;
 
@@ -26,19 +24,16 @@ html * {
     position: absolute;
     right: 0;
 }
-
 body {
     background: #fff;
     color: #333;
     font: 11px verdana, arial, helvetica, sans-serif;
 }
-
 a:link, a:visited, a:hover {
     color: #666;
     font-weight: bold;
     text-decoration: none;
 }
-
 h1 {
     color: #006dba;
     
@@ -46,11 +41,9 @@ h1 {
     font-size: 20px;
     margin: .8em 0 .3em 0;
 }
-
 ul {
     padding-left: 15px;
 }
-
 input, select, textarea {
     background-color: #fcfcfc;
     border: 1px solid #ccc;
@@ -66,11 +59,9 @@ textarea {
 	height: 150px;
 	vertical-align: top;
 }
-
 input:focus, select:focus, textarea:focus {
     border: 1px solid #b2d1ff;
 }
-
 .body {
     float: left;
     margin: 0 15px 10px 15px;
@@ -94,36 +85,7 @@ input:focus, select:focus, textarea:focus {
     color: #333;
     padding: 4px 6px;
 }
-.menuButton a.driverList {
-    background: url(../images/skin/person.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.activitiesList {
-    background: url(../images/skin/list.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.screenReport {
-    background: url(../images/skin/screenReport.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.pdfReport {
-    background: url(../images/skin/pdfReport.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.dddUpload {
-    background: url(../images/skin/dddUpload.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.xmlUpload {
-    background: url(../images/skin/xmlUpload.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
+
 .menuButton a.home {
     background: url(../images/skin/house.png) center left no-repeat;
     color: #333;
@@ -136,6 +98,33 @@ input:focus, select:focus, textarea:focus {
 }
 .menuButton a.create {
     background: url(../images/skin/database_add.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+
+/* non-standard menubar button, also user defined*/
+.menuButton a.activitiesList {
+    background: url(../images/skin/list.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.driverList {
+    background: url(../images/skin/person.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.report {
+    background: url(../images/skin/report.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.dddUpload {
+    background: url(../images/skin/dddUpload.png) center left no-repeat;
+    color: #333;
+    padding-left: 25px;
+}
+.menuButton a.xmlUpload {
+    background: url(../images/skin/xmlUpload.png) center left no-repeat;
     color: #333;
     padding-left: 25px;
 }
@@ -321,6 +310,19 @@ th.desc a {
 }
 .buttons input.save {
     background: transparent url(../images/skin/database_save.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+/* non-standard buttons, also user defined buttons */
+.buttons input.pdf {
+    background: transparent url(../images/skin/pdfReport.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+.buttons input.screen {
+    background: transparent url(../images/skin/screenReport.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
+.buttons input.upload {
+    background: transparent url(../images/skin/upload.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
 
