@@ -14,8 +14,8 @@
     <style type="text/css">
       .list table{
         border-collapse: separate;
-        border-style: dashed;
-        table-layout: auto;
+        border-style: solid;
+        table-layout: fixed;
       }
       .list th, .list td{
         border-left:none;
@@ -27,6 +27,9 @@
       <span class="menuButton"><a class="home" href="${resource(dir:'')}"><g:message code="menu.home"/></a></span>
     </div>
     <div class="body">
+      %{--temporary date variable for pdf report--}%
+      <g:set var="a" value="${new Date()}"/>
+      <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}</p>
       <h1 style="text-align: center;"><g:message code="results.header"/></h1>
 
       <h3><g:message code="results.infos"/></h3>
@@ -205,6 +208,66 @@
               </tr>
             </g:each>
           </tbody>
+        </table>
+        %{--Footer for this activities list--}%
+        <table style="border-collapse: collapse;border-top:none;">
+          <tr>
+            <td></td>
+            <td><strong><g:message code="results.activities.driverSum"/></strong></td>
+            <td>
+              <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+              <strong>RZ</strong>
+            </td>
+            <td><strong><g:message code="results.activities.number"/></strong></td>
+            <td>${RZ}</td>
+            <td></td>
+            <td></td>
+            <td>${RZDur}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
+              <strong>AR</strong>
+            </td>
+            <td><strong><g:message code="results.activities.number"/></strong></td>
+            <td>${AR}</td>
+            <td></td>
+            <td>${ARDur}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
+              <strong>LZ</strong>
+            </td>
+            <td><strong><g:message code="results.activities.number"/></strong></td>
+            <td>${LZ}</td>
+            <td>${LZDur}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><strong><g:message code="results.activities.sum"/></strong></td>
+            <td><strong><g:message code="results.activities.number"/></strong></td>
+            <td>${sum}</td>
+            <td>${sumDur}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </table>
       </div>
       <br/>
