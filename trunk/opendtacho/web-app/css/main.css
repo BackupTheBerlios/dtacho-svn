@@ -214,9 +214,7 @@ th.desc a {
 
 /* LIST */
 .list table {
-    border-collapse: separate;
-    border-style: dashed;
-    table-layout: auto;
+    border-collapse: collapse;
 }
 
 .list thead {
@@ -229,10 +227,12 @@ th.desc a {
     text-align:center;
 }
 
-
-
 .list th:hover, .list tr:hover {
     background: #b2d1ff;
+}
+
+.list th, .list td {
+    border-left: 1px solid #ddd;
 }
 
 /* PAGINATION */

@@ -11,6 +11,16 @@
   <head>
     <title><g:message code="results.title"/></title>
     <meta name="layout" content="main"/>
+    <style type="text/css">
+      .list table{
+        border-collapse: separate;
+        border-style: dashed;
+        table-layout: auto;
+      }
+      .list th, .list td{
+        border-left:none;
+      }
+    </style>
   </head>
   <body>
     <div class="nav">
