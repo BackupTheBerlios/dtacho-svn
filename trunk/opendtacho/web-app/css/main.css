@@ -326,5 +326,10 @@ th.desc a {
     padding-left: 28px;
 }
 
+/* Invisible */
+.invi {
+    display:none;
+}
+
 
 

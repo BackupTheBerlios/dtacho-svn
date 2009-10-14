@@ -10,7 +10,7 @@ import java.util.Date;
 public class DtActivityChangeQuery {
     private Date minDate;
     private Date maxDate;
-    private DtDriver driver;
+
 
     //Getter and Setter
     public Date getMinDate(){
@@ -27,11 +27,6 @@ public class DtActivityChangeQuery {
         this.maxDate = maxDate;
     }
 
-    public DtDriver getDriver(){
-        return driver;
-    }
-    public void setDriver(DtDriver driver){
-        this.driver = driver;
-    }
+    
 
 }

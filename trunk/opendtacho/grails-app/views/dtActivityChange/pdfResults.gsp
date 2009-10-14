@@ -288,57 +288,62 @@
             </g:each>
           </tbody>
         </table>
-        %{--Footer for this activities list--}%
-        <table style="border-collapse: separate;border-top:none;">
+        %{--"Footer" for this activities list--}%
+        <table style="border-collapse:collapse;border-top:none;border-bottom:none;">
+            <tr>
+              <td></td>
+              <td><strong><g:message code="results.activities.driverSum"/></strong></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                <strong>RZ</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${RZ}</strong></td>
+              <td></td>
+              <td></td>
+              <td><strong>${RZDur}</strong></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
+                <strong>AR</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${AR}</strong></td>
+              <td></td>
+              <td><strong>${ARDur}</strong></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
+                <strong>LZ</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${LZ}</strong></td>
+              <td><strong>${LZDur}</strong></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        </table>
+        <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;">
           <tr>
             <td></td>
-            <td><strong><g:message code="results.activities.driverSum"/></strong></td>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-              <strong>RZ</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${RZ}</td>
             <td></td>
-            <td></td>
-            <td>${RZDur}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th colspan="2"></th>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
-              <strong>AR</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${AR}</td>
-            <td></td>
-            <td>${ARDur}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th colspan="2"></th>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
-              <strong>LZ</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${LZ}</td>
-            <td>${LZDur}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th colspan="2"></th>
             <td><strong><g:message code="results.activities.sum"/></strong></td>
             <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${sum}</td>
-            <td>${sumDur}</td>
+            <td><strong>${sum}</strong></td>
+            <td><strong>${sumDur}</strong></td>
             <td></td>
             <td></td>
             <td></td>

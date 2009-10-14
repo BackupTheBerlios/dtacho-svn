@@ -209,60 +209,62 @@
             </g:each>
           </tbody>
         </table>
-        %{--Footer for this activities list--}%
-        <table style="border-collapse: collapse;border-top:none;">
-          <tr>
-            <td></td>
-            <td><strong><g:message code="results.activities.driverSum"/></strong></td>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-              <strong>RZ</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${RZ}</td>
-            <td></td>
-            <td></td>
-            <td>${RZDur}</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
-              <strong>AR</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${AR}</td>
-            <td></td>
-            <td>${ARDur}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
-              <strong>LZ</strong>
-            </td>
-            <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${LZ}</td>
-            <td>${LZDur}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+        %{--"Footer" for this activities list--}%
+        <table style="border-collapse:collapse;border-top:none;border-bottom:none;">
+            <tr>
+              <td></td>
+              <td><strong><g:message code="results.activities.driverSum"/></strong></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                <strong>RZ</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${RZ}</strong></td>
+              <td></td>
+              <td></td>
+              <td><strong>${RZDur}</strong></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
+                <strong>AR</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${AR}</strong></td>
+              <td></td>
+              <td><strong>${ARDur}</strong></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>
+                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
+                <strong>LZ</strong>
+              </td>
+              <td><strong><g:message code="results.activities.number"/></strong></td>
+              <td><strong>${LZ}</strong></td>
+              <td><strong>${LZDur}</strong></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+        </table>
+        <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;">
           <tr>
             <td></td>
             <td></td>
             <td><strong><g:message code="results.activities.sum"/></strong></td>
             <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td>${sum}</td>
-            <td>${sumDur}</td>
+            <td><strong>${sum}</strong></td>
+            <td><strong>${sumDur}</strong></td>
             <td></td>
             <td></td>
             <td></td>
@@ -271,6 +273,21 @@
         </table>
       </div>
       <br/>
+
+      %{--hidden form, send params to pdfResults to create pdf file--}%
+      <g:pdfForm name="screenResultsForm" controller="dtActivityChange" action="pdfResults" method="post" filename="report_for_${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}.pdf">
+      <div class="invi">
+        <input type="text" name="driver" value="${foundDriver.cardHolderName_holderSurname}"/>
+        <g:datePicker name="minDate" value="${minDate}"/>
+        <g:datePicker name="maxDate" value="${maxDate}"/>
+        <input type="text" name="shortcut" value="null"/>
+      </div>
+      <button type="submit">
+        <img src="${createLinkTo(dir:'images/skin',file:'pdfReport.png')}" alt="pdf" />
+        <g:message code="report.button.pdf"/>
+      </button>
+    </g:pdfForm>
+      
     </div>
   </body>
 </html>

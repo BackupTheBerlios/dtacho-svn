@@ -330,6 +330,6 @@ class DtActivityChangeController {
       }
     }
 
-    return [entries:temp,foundDriver:foundDriver,cardNumber:foundCard[0].cardNumber_driverIdentification,cardExp:dateTrans(foundCard[0].cardExpiryDate),RZ:RZ,RZDur:timeTrans(RZDur),AR:AR,ARDur:timeTrans(ARDur),LZ:LZ,LZDur:timeTrans(LZDur),sum:RZ+AR+LZ,sumDur:timeTrans(RZDur+ARDur+LZDur),date:dateTrans(new Date()),from:dateTrans(query.minDate),to:dateTrans(query.maxDate)]
+    return [entries:temp,foundDriver:foundDriver,cardNumber:foundCard[0].cardNumber_driverIdentification,cardExp:dateTrans(foundCard[0].cardExpiryDate),RZ:RZ,RZDur:timeTrans(RZDur),AR:AR,ARDur:timeTrans(ARDur),LZ:LZ,LZDur:timeTrans(LZDur),sum:RZ+AR+LZ,sumDur:timeTrans(RZDur+ARDur+LZDur),date:dateTrans(new Date()),from:dateTrans(query.minDate),to:dateTrans(query.maxDate),minDate:query.minDate,maxDate:query.maxDate]
   }
 }
