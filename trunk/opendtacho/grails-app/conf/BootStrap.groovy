@@ -6,7 +6,7 @@ import grails.util.GrailsUtil
 
 class BootStrap {
 
-    def fixtureLoader
+    //def fixtureLoader
 
     def init = {servletContext ->
 
@@ -19,9 +19,9 @@ class BootStrap {
 //         readXmlService.loadXmlFile('C_20080118_1624_A_Bartnik                            _DF000016247620.DDD.xml')
 //         readXmlService.loadXmlFile('C_20080118_1624_A_Bartnik                            _DF000016247620.DDD.xml')
 
-        if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
+        /*if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
             fixtureLoader.load("TestData")
-        }
+        }*/
 
     }
     def destroy = {
