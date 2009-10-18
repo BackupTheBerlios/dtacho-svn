@@ -16,5 +16,7 @@ Hier einige Infos:
   
 Zugrundeliegende Frameworks
 - Grails 1.1.1, zur Installation s. http://www.grails.org/Installation
+  Benötigte Plugins:
+  * Fixtures
 - Java 1.6
 

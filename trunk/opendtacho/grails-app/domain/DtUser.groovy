@@ -15,6 +15,9 @@ class DtUser {
 
     static constraints = {
         username(blank:false, unique:true)
+        password(nullable:true)
+        deletionFlag(nullable:false)
+        validFrom(nullable:true)
         validTo(nullable:true)
     }
 

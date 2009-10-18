@@ -15,7 +15,8 @@ class DtActivityChange {
     String activity
     int time
 
-    // no property 'domainKeys' here, because no identifying combination of attributes could be found
+    // no identifying combination of attributes could be found -> use all as domain keys!
+    static domainKeys = ['vehicle','driver','activityRecordDate','slot','drivingStatus','cardStatus','activity','time']
 
     private static SimpleDateFormat sdf = new SimpleDateFormat('yyyy-MM-dd HH:mm:ss z')
 

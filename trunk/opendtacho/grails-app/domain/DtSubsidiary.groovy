@@ -13,7 +13,11 @@ class DtSubsidiary {
     String addressSupplement
 
     static constraints = {
+        zipcode(nullable:true)
         city(blank:false)
+        street(nullable:true)
+        housenumber(nullable:true)
+        addressSupplement(nullable:true)
     }
 
     String toString() {

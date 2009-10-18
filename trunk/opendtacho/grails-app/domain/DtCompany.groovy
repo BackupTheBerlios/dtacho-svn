@@ -16,8 +16,19 @@ class DtCompany {
     String housenumber
     String addressSupplement
 
+    static domainKeys = ['companyName', 'companyAddress']
+
     static constraints = {
+        companyName(blank:false)
+        companyAddress(blank:false)
         name1(blank:false)
+        name2(nullable:true)
+        name3(nullable:true)
+        zipcode(nullable:true)
+        city(nullable:true)
+        street(nullable:true)
+        housenumber(nullable:true)
+        addressSupplement(nullable:true)
     }
 
     String toString() {
