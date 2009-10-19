@@ -5,7 +5,7 @@ class DtUser {
 
     // References
     DtPerson person
-    
+
     // Data
     String username
     String password

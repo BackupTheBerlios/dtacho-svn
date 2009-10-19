@@ -1,4 +1,5 @@
-class DtUserController {
 
-    def scaffold = DtUser
+
+class DtUserController {
+  def scaffold = DtUser
 }
