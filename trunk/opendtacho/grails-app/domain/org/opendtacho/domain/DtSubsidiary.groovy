@@ -1,6 +1,8 @@
+package org.opendtacho.domain
+
 class DtSubsidiary {
     static belongsTo = DtCompany
-    static hasMany = [persons:DtPerson]
+//    static hasMany = [person2subsidiaries:DtPerson2Subsidiary]
 
     // References
     DtCompany company

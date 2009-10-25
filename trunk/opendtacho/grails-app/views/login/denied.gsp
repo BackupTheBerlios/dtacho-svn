@@ -2,5 +2,5 @@
 <title>Denied</title>
 
 <div class='body'>
-	<div class='errors'><g:message code="login.denied"/></div>
+	<div class='errors'>Sorry, you're not authorized to view this page.</div>
 </div>

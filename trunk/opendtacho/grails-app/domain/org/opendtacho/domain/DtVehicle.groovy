@@ -1,3 +1,4 @@
+package org.opendtacho.domain
 class DtVehicle {
     static hasMany = [events:DtEvent,vehicleUses:DtVehicleUse,activityChanges:DtActivityChange]
 

@@ -1,8 +1,7 @@
-
-
-
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken as AuthToken
 import org.springframework.security.context.SecurityContextHolder as SCH
+import org.opendtacho.domain.DtRole
+import org.opendtacho.domain.DtUser
 
 /**
  * Registration controller.
@@ -27,7 +26,7 @@ class RegisterController {
 		}
 
 		if (session.id) {
-			def person = new User()
+			def person = new DtUser()
 			person.properties = params
 			return [person: person]
 		}
@@ -133,13 +132,13 @@ class RegisterController {
 			return
 		}
 
-		def person = new User()
+		def person = new DtUser()
 		person.properties = params
 
 		def config = authenticateService.securityConfig
 		def defaultRole = config.security.defaultRole
 
-		def role = Role.findByAuthority(defaultRole)
+		def role = DtRole.findByAuthority(defaultRole)
 		if (!role) {
 			person.passwd = ''
 			flash.message = 'Default Role not found.'

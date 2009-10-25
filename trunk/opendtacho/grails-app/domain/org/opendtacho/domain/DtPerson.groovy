@@ -1,9 +1,12 @@
+package org.opendtacho.domain
+
 class DtPerson {
-    static belongsTo = DtSubsidiary
+    static belongsTo = [DtCompany]
+//    static hasMany = [person2subsidiaries:DtPerson2Subsidiary, users:DtUser]
     static hasMany = [users:DtUser]
 
     // References
-    DtSubsidiary subsidiary
+    DtCompany company
 
     // Data
     String personnelNumber
@@ -39,6 +42,7 @@ class DtPerson {
         phone(nullable:true)
         fax(nullable:true)
         preferredLanguage(nullable:true)
+        company(nullable:true)                      // relation to company is optional
     }
 
     String toString() {

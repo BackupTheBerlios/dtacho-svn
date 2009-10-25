@@ -1,10 +1,10 @@
-
-
+import org.opendtacho.domain.DtRole
+import org.opendtacho.domain.DtRequestMap
 
 /**
  * Authority Controller.
  */
-class RoleController {
+class DtRoleController {
 
 	// the delete, save and update actions only accept POST requests
 	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
@@ -22,16 +22,16 @@ class RoleController {
 		if (!params.max) {
 			params.max = 10
 		}
-		[authorityList: Role.list(params)]
+		[authorityList: DtRole.list(params)]
 	}
 
 	/**
 	 * Display the show authority page.
 	 */
 	def show = {
-		def authority = Role.get(params.id)
+		def authority = DtRole.get(params.id)
 		if (!authority) {
-			flash.message = "Role not found with id $params.id"
+			flash.message = "DtRole not found with id $params.id"
 			redirect action: list
 			return
 		}
@@ -43,16 +43,16 @@ class RoleController {
 	 * Delete an authority.
 	 */
 	def delete = {
-		def authority = Role.get(params.id)
+		def authority = DtRole.get(params.id)
 		if (!authority) {
-			flash.message = "Role not found with id $params.id"
+			flash.message = "DtRole not found with id $params.id"
 			redirect action: list
 			return
 		}
 
 		authenticateService.deleteRole(authority)
 
-		flash.message = "Role $params.id deleted."
+		flash.message = "DtRole $params.id deleted."
 		redirect action: list
 	}
 
@@ -60,9 +60,9 @@ class RoleController {
 	 * Display the edit authority page.
 	 */
 	def edit = {
-		def authority = Role.get(params.id)
+		def authority = DtRole.get(params.id)
 		if (!authority) {
-			flash.message = "Role not found with id $params.id"
+			flash.message = "DtRole not found with id $params.id"
 			redirect action: list
 			return
 		}
@@ -75,9 +75,9 @@ class RoleController {
 	 */
 	def update = {
 
-		def authority = Role.get(params.id)
+		def authority = DtRole.get(params.id)
 		if (!authority) {
-			flash.message = "Role not found with id $params.id"
+			flash.message = "DtRole not found with id $params.id"
 			redirect action: edit, id: params.id
 			return
 		}
@@ -85,7 +85,7 @@ class RoleController {
 		long version = params.version.toLong()
 		if (authority.version > version) {
 			authority.errors.rejectValue 'version', 'authority.optimistic.locking.failure',
-				'Another user has updated this Role while you were editing.'
+				'Another user has updated this DtRole while you were editing.'
 			render view: 'edit', model: [authority: authority]
 			return
 		}
@@ -103,7 +103,7 @@ class RoleController {
 	 * Display the create new authority page.
 	 */
 	def create = {
-		[authority: new Role()]
+		[authority: new DtRole()]
 	}
 
 	/**
@@ -111,7 +111,7 @@ class RoleController {
 	 */
 	def save = {
 
-		def authority = new Role()
+		def authority = new DtRole()
 		authority.properties = params
 		if (authority.save()) {
 			redirect action: show, id: authority.id

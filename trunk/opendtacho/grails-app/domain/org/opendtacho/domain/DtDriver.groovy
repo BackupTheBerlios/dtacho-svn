@@ -1,3 +1,4 @@
+package org.opendtacho.domain
 class DtDriver {
     static hasMany = [activityChanges:DtActivityChange,card2drivers:DtCard2driver]
 

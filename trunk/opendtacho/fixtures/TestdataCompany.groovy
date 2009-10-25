@@ -1,8 +1,14 @@
+import org.opendtacho.domain.DtCompany
+
 fixture {
     company0(DtCompany) {
-        subsidiaries = [subsidiary0]
         companyName = 'Testfirma'
         companyAddress = 'TestAdresse'
         name1 = 'Testfirma'
+    }
+    company1(DtCompany) {
+        companyName = 'Testfirma2'
+        companyAddress = 'TestAdresse2'
+        name1 = 'Testfirma2'
     }
 }

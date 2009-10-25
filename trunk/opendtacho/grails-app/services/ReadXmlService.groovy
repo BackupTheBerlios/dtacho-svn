@@ -1,3 +1,6 @@
+import org.opendtacho.domain.*
+
+
 class ReadXmlService implements org.opendtacho.serviceinterfaces.ReadXmlServiceInt {
 
     // This must not be transactional, because then all database modifications would be done finally in one transaction.

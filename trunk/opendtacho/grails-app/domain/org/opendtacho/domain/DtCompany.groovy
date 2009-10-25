@@ -1,5 +1,6 @@
+package org.opendtacho.domain
 class DtCompany {
-    static hasMany = [subsidiaries:DtSubsidiary]
+//    static hasMany = [subsidiaries:DtSubsidiary]
 
     // References
 

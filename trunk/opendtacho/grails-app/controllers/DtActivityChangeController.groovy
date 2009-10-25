@@ -1,3 +1,6 @@
+import org.opendtacho.domain.*
+
+
 class DtActivityChangeController {
   def scaffold = DtActivityChange
 

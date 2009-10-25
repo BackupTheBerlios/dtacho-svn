@@ -1,18 +1,17 @@
-<%@ page import="org.opendtacho.domain.DtRole; org.opendtacho.domain.DtRole" %>
 <head>
 	<meta name="layout" content="main" />
-	<title>Role List</title>
+	<title>DtRole List</title>
 </head>
 
 <body>
 
 	<div class="nav">
 		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-		<span class="menuButton"><g:link class="create" action="create">New Role</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">New DtRole</g:link></span>
 	</div>
 
 	<div class="body">
-		<h1>Role List</h1>
+		<h1>DtRole List</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
@@ -21,7 +20,7 @@
 			<thead>
 				<tr>
 					<g:sortableColumn property="id" title="ID" />
-					<g:sortableColumn property="authority" title="Role Name" />
+					<g:sortableColumn property="authority" title="DtRole Name" />
 					<g:sortableColumn property="description" title="Description" />
 					<th>&nbsp;</th>
 				</tr>
@@ -44,7 +43,7 @@
 		</div>
 
 		<div class="paginateButtons">
-			<g:paginate total="${DtRole.count()}" />
+			<g:paginate total="${org.opendtacho.domain.DtRole.count()}" />
 		</div>
 	</div>
 </body>

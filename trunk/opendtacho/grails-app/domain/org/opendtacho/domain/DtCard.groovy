@@ -1,3 +1,5 @@
+package org.opendtacho.domain
+
 import java.text.SimpleDateFormat
 
 class DtCard {

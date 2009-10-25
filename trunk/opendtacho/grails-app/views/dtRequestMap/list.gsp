@@ -1,18 +1,17 @@
-<%@ page import="org.opendtacho.domain.DtRole; org.opendtacho.domain.DtRole" %>
 <head>
 	<meta name="layout" content="main" />
-	<title>Role List</title>
+	<title>DtRequestMap List</title>
 </head>
 
 <body>
 
 	<div class="nav">
 		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-		<span class="menuButton"><g:link class="create" action="create">New Role</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">New DtRequestMap</g:link></span>
 	</div>
 
 	<div class="body">
-		<h1>Role List</h1>
+		<h1>DtRequestMap List</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
@@ -21,30 +20,31 @@
 			<thead>
 				<tr>
 					<g:sortableColumn property="id" title="ID" />
-					<g:sortableColumn property="authority" title="Role Name" />
-					<g:sortableColumn property="description" title="Description" />
+					<g:sortableColumn property="url" title="URL Pattern" />
+					<g:sortableColumn property="configAttribute" title="Roles" />
 					<th>&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-			<g:each in="${authorityList}" status="i" var="authority">
+			<g:each in="${requestmapList}" status="i" var="requestmap">
 				<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-					<td>${authority.id}</td>
-					<td>${authority.authority?.encodeAsHTML()}</td>
-					<td>${authority.description?.encodeAsHTML()}</td>
+					<td>${requestmap.id}</td>
+					<td>${requestmap.url?.encodeAsHTML()}</td>
+					<td>${requestmap.configAttribute}</td>
 					<td class="actionButtons">
 						<span class="actionButton">
-							<g:link action="show" id="${authority.id}">Show</g:link>
+						<g:link action="show" id="${requestmap.id}">Show</g:link>
 						</span>
 					</td>
 				</tr>
-			</g:each>
+				</g:each>
 			</tbody>
 			</table>
 		</div>
 
 		<div class="paginateButtons">
-			<g:paginate total="${DtRole.count()}" />
+			<g:paginate total="${org.opendtacho.domain.DtRequestMap.count()}" />
 		</div>
+
 	</div>
 </body>

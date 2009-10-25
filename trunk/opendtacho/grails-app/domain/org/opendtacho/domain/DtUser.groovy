@@ -1,26 +1,29 @@
+package org.opendtacho.domain
 
-
-
+import org.opendtacho.domain.DtRole
+import org.opendtacho.domain.DtPerson
 
 /**
  * User domain class.
  */
-class User {
+class DtUser {
 	static transients = ['pass']
-	static hasMany = [authorities: Role]
-	static belongsTo = Role
+	static hasMany = [authorities: DtRole]
+	static belongsTo = DtRole
 
+    DtPerson person
+    
 	/** Username */
 	String username
 	/** User Real Name*/
 	String userRealName
 	/** MD5 Password */
-	String passwd
+	String password
 	/** enabled */
 	boolean enabled
 
-	String email
-	boolean emailShow
+//	String email
+//	boolean emailShow
 
 	/** description */
 	String description = ''
@@ -31,7 +34,7 @@ class User {
 	static constraints = {
 		username(blank: false, unique: true)
 		userRealName(blank: false)
-		passwd(blank: false)
+		password(blank: false)
 		enabled()
 	}
 }
