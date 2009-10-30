@@ -16,7 +16,10 @@ Hier einige Infos:
   
 Zugrundeliegende Frameworks
 - Grails 1.1.1, zur Installation s. http://www.grails.org/Installation
-  Benötigte Plugins:
-  * Fixtures
+  Benoegte Plugins:
+  * Fixtures (grails install-plugin fixtures)
+  * Acegi (grails install-plugin acegi)
+  * Grails-ui (grails install-plugin grails-ui)
+  * PDF 0.4.5 (also, nicht direkt vom grails.org, manuell grails install-plugin ../grails-plugins/grails-pdf-0.4.5.zip) 
 - Java 1.6
 
