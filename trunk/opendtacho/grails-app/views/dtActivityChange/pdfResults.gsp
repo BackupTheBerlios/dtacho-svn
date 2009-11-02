@@ -108,7 +108,7 @@
     <div class="body">
       %{--temporary date variable for pdf report--}%
       <g:set var="a" value="${new Date()}"/>
-      <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}</p>
+      <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900} ${a.getHours()}:${a.getMinutes()}</p>
       <p style="text-align:right;font-style:italic;"><g:loggedInUserInfo field="userRealName"/></p>
       <h1 style="text-align: center;"><g:message code="results.header"/></h1>
 

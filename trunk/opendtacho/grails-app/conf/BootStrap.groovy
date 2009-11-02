@@ -9,7 +9,7 @@ import org.opendtacho.domain.DtUser
 class BootStrap {
 
     def fixtureLoader
-    def authenticateService
+    //def authenticateService
 
     def init = {servletContext ->
 

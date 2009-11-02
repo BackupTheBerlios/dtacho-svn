@@ -7,6 +7,11 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
+%{-- Style sheet for tooltip of grails-ui plugin--}%
+<link rel="stylesheet" type="text/css" href="${createLinkTo(dir:'css',file:'grails_ui.css')}"/>
+
+%{--used component decleartion, here is tooltip--}%
+<gui:resources components="['toolTip']"/>
 <html>
   <head>
     <title><g:message code="results.title"/></title>
@@ -29,7 +34,7 @@
     <div class="body">
       %{--temporary date variable for pdf report--}%
       <g:set var="a" value="${new Date()}"/>
-      <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}</p>
+      <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900} ${a.getHours()}:${a.getMinutes()}</p>
       <p style="text-align:right;font-style:italic;"><g:loggedInUserInfo field="userRealName"/></p>
       <h1 style="text-align: center;"><g:message code="results.header"/></h1>
 
@@ -75,24 +80,30 @@
           <tbody>
             <tr class='odd'>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-                <strong>RZ</strong>
+                <gui:toolTip text="Ruhe">
+                  <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                  <strong>RZ</strong>
+                </gui:toolTip>
               </td>
               <td>${RZ}</td>
               <td>${RZDur}</td>
             </tr>
             <tr class='even'>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
-                <strong>AR</strong>
+                <gui:toolTip text="Arbeit">
+                  <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                  <strong>AR</strong>
+                </gui:toolTip>
               </td>
               <td>${AR}</td>
               <td>${ARDur}</td>
             </tr>
             <tr class='odd'>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
-                <strong>LZ</strong>
+                <gui:toolTip text="Lenken">
+                  <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                  <strong>LZ</strong>
+                </gui:toolTip>
               </td>
               <td>${LZ}</td>
               <td>${LZDur}</td>
@@ -160,16 +171,24 @@
 
                 <td>
                   <g:if test="${entry.activity=='RZ'}">
-                    <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                    <gui:toolTip text="Ruhe">
+                      <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                    </gui:toolTip>
                   </g:if>
                   <g:elseif test="${entry.activity=='BS'}">
-                    <img src="${createLinkTo(dir:'images',file:'bereitschaft.png')}" alt="Bereitschaft" />
+                    <gui:toolTip text="Bereitschaft">
+                      <img src="${createLinkTo(dir:'images',file:'bereitschaft.png')}" alt="Bereitschaft" />
+                    </gui:toolTip>
                   </g:elseif>
                   <g:elseif test="${entry.activity=='AR'}">
-                    <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                    <gui:toolTip text="Arbeit">
+                      <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                    </gui:toolTip>
                   </g:elseif>
                   <g:elseif test="${entry.activity=='LZ'}">
-                    <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                    <gui:toolTip text="Lenken">
+                      <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                    </gui:toolTip>
                   </g:elseif>
                 </td>
 
@@ -216,8 +235,10 @@
               <td></td>
               <td><strong><g:message code="results.activities.driverSum"/></strong></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-                <strong>RZ</strong>
+                <gui:toolTip text="Ruhe">
+                  <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                  <strong>RZ</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${RZ}</strong></td>
@@ -231,8 +252,10 @@
               <td></td>
               <td></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
-                <strong>AR</strong>
+                <gui:toolTip text="Arbeit">
+                  <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
+                  <strong>AR</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${AR}</strong></td>
@@ -246,8 +269,10 @@
               <td></td>
               <td></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
-                <strong>LZ</strong>
+                <gui:toolTip text="Lenken">
+                  <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
+                  <strong>LZ</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${LZ}</strong></td>
