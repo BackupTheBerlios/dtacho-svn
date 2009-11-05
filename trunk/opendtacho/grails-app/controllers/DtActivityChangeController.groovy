@@ -41,54 +41,6 @@ class DtActivityChangeController {
     DtActivityChangeQuery query = new DtActivityChangeQuery()
     bindData(query,params)
 
-    //if the user has choose a shortcut for time interval
-    if(params.shortcut!="null"){
-      def test = new Date()
-      int y = test.getYear()
-      int m = test.getMonth()
-      int d = test.getDate()
-      int day = test.getDay()
-
-      if(params.shortcut=="lastWeek"){
-        if(day==0){
-          query.minDate = new Date(y,m,d-6)
-          query.maxDate = new Date(y,m,d)
-        }
-        if(day==1){
-          query.minDate = new Date(y,m,d-7)
-          query.maxDate = new Date(y,m,d-1)
-        }
-        if(2<=day&&day<=5){
-          def temp = new Date()
-          for(int i in 1..4){
-            temp = new Date(y,m,d-i)
-            if(temp.getDay()==1) break
-          }
-          query.minDate = new Date(y,m,temp.getDate()-7)
-          query.maxDate = new Date(y,m,temp.getDate()-1)
-        }
-        if(d==6){
-          query.minDate = new Date(y,m,d-5)
-          query.maxDate = new Date(y,m,d+1)
-        }
-      }
-
-      if(params.shortcut=="thisMonth"){
-        query.minDate = new Date(y,m,1)
-        query.maxDate = test
-      }
-
-      if(params.shortcut=="lastMonth"){
-        query.minDate = new Date(y,m-1,1)
-        query.maxDate = new Date(y,m-1,31)
-      }
-
-      if(params.shortcut=="thisYear"){
-        query.minDate = new Date(y,0,1)
-        query.maxDate = test
-      }
-    }
-
     //end data in a entries list
     def entries = DtActivityChange.withCriteria {
       and{
@@ -191,54 +143,6 @@ class DtActivityChangeController {
     //temporary query obj for criteria queries
     DtActivityChangeQuery query = new DtActivityChangeQuery()
     bindData(query,params)
-
-    //if the user has choose a shortcut for time interval
-    if(params.shortcut!="null"){
-      def test = new Date()
-      int y = test.getYear()
-      int m = test.getMonth()
-      int d = test.getDate()
-      int day = test.getDay()
-
-      if(params.shortcut=="lastWeek"){
-        if(day==0){
-          query.minDate = new Date(y,m,d-6)
-          query.maxDate = new Date(y,m,d)
-        }
-        if(day==1){
-          query.minDate = new Date(y,m,d-7)
-          query.maxDate = new Date(y,m,d-1)
-        }
-        if(2<=day&&day<=5){
-          def temp = new Date()
-          for(int i in 1..4){
-            temp = new Date(y,m,d-i)
-            if(temp.getDay()==1) break
-          }
-          query.minDate = new Date(y,m,temp.getDate()-7)
-          query.maxDate = new Date(y,m,temp.getDate()-1)
-        }
-        if(d==6){
-          query.minDate = new Date(y,m,d-5)
-          query.maxDate = new Date(y,m,d+1)
-        }
-      }
-
-      if(params.shortcut=="thisMonth"){
-        query.minDate = new Date(y,m,1)
-        query.maxDate = test
-      }
-
-      if(params.shortcut=="lastMonth"){
-        query.minDate = new Date(y,m-1,1)
-        query.maxDate = new Date(y,m-1,31)
-      }
-
-      if(params.shortcut=="thisYear"){
-        query.minDate = new Date(y,0,1)
-        query.maxDate = test
-      }
-    }
 
     //end data in a entries list
     def entries = DtActivityChange.withCriteria {
