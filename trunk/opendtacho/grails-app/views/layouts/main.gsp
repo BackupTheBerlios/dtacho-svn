@@ -18,8 +18,7 @@
             <g:loggedInUsername/> (<g:link controller='logout'>Logout</g:link>)
           </g:isLoggedIn>
           <g:isNotLoggedIn>
-            <g:link controller="login">Login</g:link> |
-            <g:link controller="register">Register</g:link>
+            <g:link controller="login">Login</g:link>
           </g:isNotLoggedIn>
       </span>
 
