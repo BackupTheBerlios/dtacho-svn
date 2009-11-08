@@ -20,7 +20,7 @@
       .list table{
         border-collapse: separate;
         border-style: solid;
-        table-layout: fixed;
+        table-layout: auto;
       }
       .list th, .list td{
         border-left:none;
@@ -134,7 +134,7 @@
               <td><strong>AR</strong></td>
               <td><strong>RZ</strong></td>
               <td><strong>BS</strong></td>
-              <td><strong><g:message code="results.activities.comment"/></strong></td>
+              <td style="width:60%"><strong><g:message code="results.activities.comment"/></strong></td>
             </tr>
           </thead>
           <tbody>
@@ -230,9 +230,8 @@
           </tbody>
         </table>
         %{--"Footer" for this activities list--}%
-        <table style="border-collapse:collapse;border-top:none;border-bottom:none;">
+        <table style="border-collapse:collapse;border-top:none;border-bottom:none;table-layout:fixed;">
             <tr>
-              <td></td>
               <td><strong><g:message code="results.activities.driverSum"/></strong></td>
               <td>
                 <gui:toolTip text="Ruhe">
@@ -242,14 +241,9 @@
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${RZ}</strong></td>
-              <td></td>
-              <td></td>
               <td><strong>${RZDur}</strong></td>
-              <td></td>
-              <td></td>
             </tr>
             <tr>
-              <td></td>
               <td></td>
               <td>
                 <gui:toolTip text="Arbeit">
@@ -259,14 +253,9 @@
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${AR}</strong></td>
-              <td></td>
               <td><strong>${ARDur}</strong></td>
-              <td></td>
-              <td></td>
-              <td></td>
             </tr>
             <tr>
-              <td></td>
               <td></td>
               <td>
                 <gui:toolTip text="Lenken">
@@ -277,24 +266,15 @@
               <td><strong><g:message code="results.activities.number"/></strong></td>
               <td><strong>${LZ}</strong></td>
               <td><strong>${LZDur}</strong></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
             </tr>
         </table>
-        <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;">
+        <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;table-layout:fixed;">
           <tr>
-            <td></td>
-            <td></td>
             <td><strong><g:message code="results.activities.sum"/></strong></td>
+            <td><strong>All</strong></td>
             <td><strong><g:message code="results.activities.number"/></strong></td>
             <td><strong>${sum}</strong></td>
             <td><strong>${sumDur}</strong></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
         </table>
       </div>
