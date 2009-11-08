@@ -17,17 +17,17 @@
   <nobr>
     <gui:toolTip text="deutsch">
       <g:link controller="${params?.controller}" action="${params?.action}" params="[lang:'de']">
-        <img src="${createLinkTo(dir:'images',file:'de.png')}" alt="de" />
+        <img src="${resource(dir:'images',file:'de.png')}" alt="de" />
       </g:link>
     </gui:toolTip> |
     <gui:toolTip text="english">
       <g:link controller="${params?.controller}" action="${params?.action}" params="[lang:'en']">
-        <img src="${createLinkTo(dir:'images',file:'en.png')}" alt="en" />
+        <img src="${resource(dir:'images',file:'en.png')}" alt="en" />
       </g:link>
     </gui:toolTip> |
     <gui:toolTip text="fran&ccedil;ais">
       <g:link controller="${params?.controller}" action="${params?.action}" params="[lang:'fr']">
-        <img src="${createLinkTo(dir:'images',file:'fr.png')}" alt="fr" />
+        <img src="${resource(dir:'images',file:'fr.png')}" alt="fr" />
       </g:link>
     </gui:toolTip>
   </nobr>

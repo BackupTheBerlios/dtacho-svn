@@ -18,11 +18,11 @@ fixture {
         configAttribute = 'ROLE_ADMIN'
     }
     rm5(DtRequestMap) {
-        url = '/user/**'
+        url = '/dtuser/**'
         configAttribute = 'ROLE_ADMIN'
     }
     rm6(DtRequestMap) {
-        url = '/role/**'
+        url = '/dtrole/**'
         configAttribute = 'ROLE_ADMIN'
     }
 }

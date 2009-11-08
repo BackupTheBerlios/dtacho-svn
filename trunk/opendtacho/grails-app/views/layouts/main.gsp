@@ -31,16 +31,27 @@
     </div>
 
     <gui:menubar id="guiMenubar" renderTo="innerMenu">
+      <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin"/></gui:menuitem>
+
       <gui:submenu label="${message(code:'menu.list')}">
         <gui:menuitem url="${resource(dir:'/dtActivityChange/list')}"><g:message code="menu.list.activities"/> </gui:menuitem>
         <gui:menuitem url="${resource(dir:'/dtDriver/list')}"><g:message code="menu.list.driver"/></gui:menuitem>
       </gui:submenu>
+
       <gui:submenu label="${message(code:'menu.import')}">
         <gui:menuitem url="${resource(dir:'/dddFileUpload/dddUploadForm')}"><g:message code="menu.import.ddd"/></gui:menuitem>
         <gui:menuitem url="${resource(dir:'/xmlFileUpload/xmlUploadForm')}"><g:message code="menu.import.xml"/></gui:menuitem>
       </gui:submenu>
+
+      <gui:submenu label="${message(code:'menu.export')}"/>
+
+      <gui:submenu label="${message(code:'menu.management')}"/>
+
+      <gui:submenu label="${message(code:'menu.control')}"/>
+      
       <gui:submenu label="${message(code:'menu.report')}">
         <gui:menuitem url="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report.activities"/></gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report.driver"/></gui:menuitem>
       </gui:submenu>
     </gui:menubar>
 
