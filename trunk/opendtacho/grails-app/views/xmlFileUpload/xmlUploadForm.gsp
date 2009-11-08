@@ -13,10 +13,6 @@
     <meta name="layout" content="main"/>
   </head>
   <body>
-    <div class="nav">
-    <span class="menuButton"><a class="home" href="${createLinkTo()}"><g:message code="menu.home"/></a></span>
-</div>
-
     <div class="body" >
       <h1>XML</h1>
       <g:if test="${flash.message}">

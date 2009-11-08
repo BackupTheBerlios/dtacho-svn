@@ -101,9 +101,6 @@
     </script>
 </head>
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLinkTo()}"><g:message code="menu.home"/></a></span>
-</div>
 <div class="body">
     <h1><g:message code="ddd.header"/></h1>
     <g:if test="${flash.message}">

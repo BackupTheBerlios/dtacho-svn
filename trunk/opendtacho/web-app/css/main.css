@@ -102,33 +102,6 @@ input:focus, select:focus, textarea:focus {
     padding-left: 25px;
 }
 
-/* non-standard menubar button, also user defined*/
-.menuButton a.activitiesList {
-    background: url(../images/skin/list.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.driverList {
-    background: url(../images/skin/person.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.report {
-    background: url(../images/skin/report.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.dddUpload {
-    background: url(../images/skin/dddUpload.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-.menuButton a.xmlUpload {
-    background: url(../images/skin/xmlUpload.png) center left no-repeat;
-    color: #333;
-    padding-left: 25px;
-}
-
 /* MESSAGES AND ERRORS */
 
 .message {

@@ -1,15 +1,18 @@
 <html>
   <head>
     <title><g:layoutTitle default="Hagos opendtacho" /></title>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
-    <link rel="shortcut icon" href="${createLinkTo(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+    <link rel="stylesheet" href="${resource(dir:'css',file:'main.css')}" />
+    <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
+
+    %{-- what grails-ui components will be used--}%
+    <gui:resources components="['menu']"/>
+
     <g:layoutHead />
     <g:javascript library="application" />
-
   </head>
-  <body>
+  <body class='yui-skin-sam'>
     <div id="spinner" class="spinner" style="display:none;">
-      <img src="${createLinkTo(dir:'images',file:'spinner.gif')}" alt="Spinner" />
+      <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Spinner" />
     </div>
     <div id="topbar">
       <g:render template="/common/topbar"/>
@@ -24,8 +27,23 @@
 
     </div>
     <div id="header">
-      <img src="${createLinkTo(dir:'images',file:'bannerWebsite.jpg')}" alt="banner website" />
+      <img src="${resource(dir:'images',file:'bannerWebsite.jpg')}" alt="banner website" />
     </div>
+
+    <gui:menubar id="guiMenubar" renderTo="innerMenu">
+      <gui:submenu label="${message(code:'menu.list')}">
+        <gui:menuitem url="${resource(dir:'/dtActivityChange/list')}"><g:message code="menu.list.activities"/> </gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtDriver/list')}"><g:message code="menu.list.driver"/></gui:menuitem>
+      </gui:submenu>
+      <gui:submenu label="${message(code:'menu.import')}">
+        <gui:menuitem url="${resource(dir:'/dddFileUpload/dddUploadForm')}"><g:message code="menu.import.ddd"/></gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/xmlFileUpload/xmlUploadForm')}"><g:message code="menu.import.xml"/></gui:menuitem>
+      </gui:submenu>
+      <gui:submenu label="${message(code:'menu.report')}">
+        <gui:menuitem url="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report.activities"/></gui:menuitem>
+      </gui:submenu>
+    </gui:menubar>
+
     <g:layoutBody/>
     <div id="footer">
       <g:render template="/common/footer"/>

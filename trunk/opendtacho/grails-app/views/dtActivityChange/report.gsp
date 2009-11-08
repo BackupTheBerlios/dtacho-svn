@@ -98,9 +98,6 @@
     </script>
   </head>
   <body>
-    <div class="nav">
-      <span class="menuButton"><a class="home" href="${resource(dir:'')}"><g:message code="menu.home"/></a></span>
-    </div>
     <div class="body">
       <h1><g:message code="report.title"/></h1>
       <g:if test="${flash.message}">
