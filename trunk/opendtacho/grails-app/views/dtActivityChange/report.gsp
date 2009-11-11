@@ -26,18 +26,7 @@
         return a;
       }
 
-      function nullUpdate(){
-        var today = new Date();
-
-        document.getElementById("minDate_year").value = today.getFullYear();
-        document.getElementById("minDate_month").value = today.getMonth()+1;
-        document.getElementById("minDate_day").value = today.getDate();
-
-        document.getElementById("maxDate_year").value = today.getFullYear();
-        document.getElementById("maxDate_month").value = today.getMonth()+1;
-        document.getElementById("maxDate_day").value = today.getDate();  
-      }
-      function lastWeekUpdate(){
+      function defaultUpdate(){
         var today = new Date();
         var firstDayOfThisWeek = positionMonday(today);
         //alert(firstDayOfThisWeek.getDay()+"_"+firstDayOfThisWeek.getDate()+"."+firstDayOfThisWeek.getMonth());
@@ -131,6 +120,13 @@
                 </td>
                 <td>
                   <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
+                  %{--
+                  <g:each in="${DtDriver.list()}">
+                    <input type="checkbox" name="selectedDriversList" value="${it.id}"/>
+                    ${it.cardHolderName_holderSurname}, ${it.cardHolderName_holderFirstNames}
+                    <br/>
+                  </g:each>
+                  --}%
                 </td>
               </tr>
               <tr class="prop">
@@ -149,8 +145,7 @@
                   <strong><g:message code="report.shortcut"/></strong>
                 </td>
                 <td valign="top" class="value">
-                  <g:radio name='shortcut' value="null" onclick="nullUpdate();"/><em><g:message code="report.shortcut.none"/></em><br/>
-                  <g:radio name='shortcut' value="lastWeek" onclick="lastWeekUpdate();"/><em><g:message code="report.shortcut.lastWeek"/></em><br/>
+                  <g:radio id='shortcut_default' name='shortcut' value="default" onclick="defaultUpdate();" checked="checked"/><em><g:message code="report.shortcut.default"/></em><br/>
                   <g:radio name='shortcut' value="thisMonth" onclick="thisMonthUpdate();"/><em><g:message code="report.shortcut.thisMonth"/></em><br/>
                   <g:radio name='shortcut' value="lastMonth" onclick="lastMonthUpdate();"/><em><g:message code="report.shortcut.lastMonth"/></em><br/>
                   <g:radio name='shortcut' value="thisYear" onclick="thisYearUpdate();"/><em><g:message code="report.shortcut.thisYear"/></em>

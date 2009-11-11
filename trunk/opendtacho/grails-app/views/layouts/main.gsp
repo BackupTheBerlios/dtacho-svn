@@ -10,7 +10,8 @@
     <g:layoutHead />
     <g:javascript library="application" />
   </head>
-  <body class='yui-skin-sam'>
+  %{--onload attribute just for report.gsp, cause i can't call this attribut DIRECT from this page--}% 
+  <body class='yui-skin-sam' onload="defaultUpdate();">
     <div id="spinner" class="spinner" style="display:none;">
       <img src="${resource(dir:'images',file:'spinner.gif')}" alt="Spinner" />
     </div>
