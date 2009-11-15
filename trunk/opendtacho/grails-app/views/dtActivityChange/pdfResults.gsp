@@ -30,7 +30,7 @@
           font-style: italic;
         }
         @bottom-center {
-          content: "opendtacho.org - Dr. Markus Eberspaecher, Gerald Lang, Hoang Anh Le";
+          content: "opendtacho.org";
           font-style: bold;
           font-family: verdana, arial, monospace;
         }
@@ -103,110 +103,120 @@
   </head>
   <body>
     <div class="banner">
-      <img src="${createLinkTo(dir:'images',file:'banner.jpg')}" alt="banner" />
+      <img src="${resource(dir:'images',file:'banner.jpg')}" alt="banner" />
     </div>
     <div class="body">
+
       %{--temporary date variable for pdf report--}%
       <g:set var="a" value="${new Date()}"/>
       <p style="text-align:right;font-style:italic;">${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900} ${a.getHours()}:${a.getMinutes()}</p>
       <p style="text-align:right;font-style:italic;"><g:loggedInUserInfo field="userRealName"/></p>
       <h1 style="text-align: center;"><g:message code="results.header"/></h1>
 
-      <h3><g:message code="results.infos"/></h3>
-      <div class="list">
-        <table>
-          <thead>
-            <tr>
-              <td><g:message code="results.infos.company"/></td>
-              <td><g:message code="results.infos.subsidiary"/></td>
-              <td><g:message code="results.infos.driver"/></td>
-              <td><g:message code="results.infos.licence"/></td>
-              <td><g:message code="results.infos.cardNr"/></td>
-              <td><g:message code="results.infos.cardExp"/></td>
-              <td><g:message code="results.infos.period"/></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="odd">
-              <td></td>
-              <td></td>
-              <td>${foundDriver.cardHolderName_holderSurname}, ${foundDriver.cardHolderName_holderFirstNames}</td>
-              <td>${foundDriver.drivingLicenceNumber}</td>
-              <td>${cardNumber}</td>
-              <td>${cardExp}</td>
-              <td>${from} - ${to}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <br/>
+      %{--each object in array resultList is a complete result--}%
+      <g:each in="${resultList}" var="result">
 
-      <h3><g:message code="results.statistic"/></h3>
-      <div class="list">
-        <table>
-          <thead>
-            <tr>
-              <td></td>
-              <td><g:message code="results.statistic.number"/></td>
-              <td><g:message code="results.statistic.duration"/></td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class='odd'>
-              <td>
-                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-                <strong>RZ</strong>
-              </td>
-              <td>${RZ}</td>
-              <td>${RZDur}</td>
-            </tr>
-            <tr class='even'>
-              <td>
-                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
-                <strong>AR</strong>
-              </td>
-              <td>${AR}</td>
-              <td>${ARDur}</td>
-            </tr>
-            <tr class='odd'>
-              <td>
-                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
-                <strong>LZ</strong>
-              </td>
-              <td>${LZ}</td>
-              <td>${LZDur}</td>
-            </tr>
-            <tr class='even'>
-              <td>
-                <strong>sum</strong>
-              </td>
-              <td>${sum}</td>
-              <td>${sumDur}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <br/>
+        <h3><g:message code="results.infos"/></h3>
+        <div class="list">
+          <table>
+            <thead>
+              <tr>
+                <td><strong><g:message code="results.infos.company"/></strong></td>
+                <td><strong><g:message code="results.infos.subsidiary"/></strong></td>
+                <td><strong><g:message code="results.infos.driver"/></strong></td>
+                <td><strong><g:message code="results.infos.licence"/></strong></td>
+                <td><strong><g:message code="results.infos.cardNr"/></strong></td>
+                <td><strong><g:message code="results.infos.cardExp"/></strong></td>
+                <td><strong><g:message code="results.infos.period"/></strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd">
+                <td></td>
+                <td></td>
+                <td><strong>${result.driver.lastName}, ${result.driver.firstName}</strong></td>
+                <td>${result.driver.licenceNr}</td>
+                <td>${result.card.cardNr}</td>
+                <td>${result.card.cardExp}</td>
+                <td>${result.from} - ${result.to}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/>
 
-      <h3><g:message code="results.activities"/></h3>
-      <div class="list">
-        <table>
+        <h3><g:message code="results.statistic"/></h3>
+        <div class="list">
+          <table>
+            <thead>
+              <tr>
+                <td> </td>
+                <td><strong><g:message code="results.statistic.number"/></strong></td>
+                <td><strong><g:message code="results.statistic.duration"/></strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class='odd'>
+                <td>
+                  <gui:toolTip text="Ruhe">
+                    <img src="${resource(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                    <strong>RZ</strong>
+                  </gui:toolTip>
+                </td>
+                <td>${result.statistic.RZ}</td>
+                <td>${result.statistic.RZDur}</td>
+              </tr>
+              <tr class='even'>
+                <td>
+                  <gui:toolTip text="Arbeit">
+                    <img src="${resource(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                    <strong>AR</strong>
+                  </gui:toolTip>
+                </td>
+                <td>${result.statistic.AR}</td>
+                <td>${result.statistic.ARDur}</td>
+              </tr>
+              <tr class='odd'>
+                <td>
+                  <gui:toolTip text="Lenken">
+                    <img src="${resource(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                    <strong>LZ</strong>
+                  </gui:toolTip>
+                </td>
+                <td>${result.statistic.LZ}</td>
+                <td>${result.statistic.LZDur}</td>
+              </tr>
+              <tr class='even'>
+                <td>
+                  <strong>sum</strong>
+                </td>
+                <td>${result.statistic.sum}</td>
+                <td>${result.statistic.sumDur}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/>
+
+        <h3><g:message code="results.activities"/></h3>
+        <div style="page-break-after:left;" class="list">
+          <table>
           <thead>
             <tr>
-              <td><g:message code="results.activities.date"/></td>
-              <td><g:message code="results.activities.day"/></td>
-              <td><g:message code="results.activities.type"/></td>
-              <td><g:message code="results.activities.start"/></td>
-              <td><g:message code="results.activities.end"/></td>
-              <td>LZ</td>
-              <td>AR</td>
-              <td>RZ</td>
-              <td>BS</td>
-              <td style="width:70%"><g:message code="results.activities.comment"/></td>
+              <td><strong><g:message code="results.activities.date"/></strong></td>
+              <td><strong><g:message code="results.activities.day"/></strong></td>
+              <td><strong><g:message code="results.activities.type"/></strong></td>
+              <td><strong><g:message code="results.activities.start"/></strong></td>
+              <td><strong><g:message code="results.activities.end"/></strong></td>
+              <td><strong>LZ</strong></td>
+              <td><strong>AR</strong></td>
+              <td><strong>RZ</strong></td>
+              <td><strong>BS</strong></td>
+              <td style="width:60%"><strong><g:message code="results.activities.comment"/></strong></td>
             </tr>
           </thead>
           <tbody>
-            <g:each var="entry" in="${entries}" status="i">
+            <g:each var="entry" in="${result.activities}" status="i">
               <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                 <g:if test="${entry.time=='00:00'}">
                   <td><strong>${entry.activityRecordDate}</strong></td>
@@ -239,16 +249,24 @@
 
                 <td>
                   <g:if test="${entry.activity=='RZ'}">
-                    <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                    <gui:toolTip text="Ruhe">
+                      <img src="${resource(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                    </gui:toolTip>
                   </g:if>
                   <g:elseif test="${entry.activity=='BS'}">
-                    <img src="${createLinkTo(dir:'images',file:'bereitschaft.png')}" alt="Bereitschaft" />
+                    <gui:toolTip text="Bereitschaft">
+                      <img src="${resource(dir:'images',file:'bereitschaft.png')}" alt="Bereitschaft" />
+                    </gui:toolTip>
                   </g:elseif>
                   <g:elseif test="${entry.activity=='AR'}">
-                    <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                    <gui:toolTip text="Arbeit">
+                      <img src="${resource(dir:'images',file:'arbeit.png')}" alt="Arbeit" />
+                    </gui:toolTip>
                   </g:elseif>
                   <g:elseif test="${entry.activity=='LZ'}">
-                    <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                    <gui:toolTip text="Lenken">
+                      <img src="${resource(dir:'images',file:'lenken.png')}" alt="Lenken" />
+                    </gui:toolTip>
                   </g:elseif>
                 </td>
 
@@ -289,50 +307,59 @@
             </g:each>
           </tbody>
         </table>
-        %{--"Footer" for this activities list--}%
-        <table style="border-collapse:collapse;border-top:none;border-bottom:none;table-layout:fixed;">
+          %{--"Footer" for this activities list--}%
+          <table style="border-collapse:collapse;border-top:none;border-bottom:none;table-layout:fixed;">
             <tr>
               <td><strong><g:message code="results.activities.driverSum"/></strong></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
-                <strong>RZ</strong>
+                <gui:toolTip text="Ruhe">
+                  <img src="${resource(dir:'images',file:'ruhe.png')}" alt="Ruhe" />
+                  <strong>RZ</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
-              <td><strong>${RZ}</strong></td>
-              <td><strong>${RZDur}</strong></td>
+              <td><strong>${result.statistic.RZ}</strong></td>
+              <td><strong>${result.statistic.RZDur}</strong></td>
             </tr>
             <tr>
               <td></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
-                <strong>AR</strong>
+                <gui:toolTip text="Arbeit">
+                  <img src="${resource(dir:'images',file:'arbeit.png')}" alt="Ruhe" />
+                  <strong>AR</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
-              <td><strong>${AR}</strong></td>
-              <td><strong>${ARDur}</strong></td>
+              <td><strong>${result.statistic.AR}</strong></td>
+              <td><strong>${result.statistic.ARDur}</strong></td>
             </tr>
             <tr>
               <td></td>
               <td>
-                <img src="${createLinkTo(dir:'images',file:'lenken.png')}" alt="Ruhe" />
-                <strong>LZ</strong>
+                <gui:toolTip text="Lenken">
+                  <img src="${resource(dir:'images',file:'lenken.png')}" alt="Ruhe" />
+                  <strong>LZ</strong>
+                </gui:toolTip>
               </td>
               <td><strong><g:message code="results.activities.number"/></strong></td>
-              <td><strong>${LZ}</strong></td>
-              <td><strong>${LZDur}</strong></td>
+              <td><strong>${result.statistic.LZ}</strong></td>
+              <td><strong>${result.statistic.LZDur}</strong></td>
             </tr>
         </table>
-        <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;table-layout:fixed;">
-          <tr>
+          <table style="border-collapse:collapse;border-top-width:2px;border-top-style:solid;table-layout:fixed;">
+          <tr bgcolor="#A9A9A9">
             <td><strong><g:message code="results.activities.sum"/></strong></td>
             <td><strong>All</strong></td>
             <td><strong><g:message code="results.activities.number"/></strong></td>
-            <td><strong>${sum}</strong></td>
-            <td><strong>${sumDur}</strong></td>
+            <td><strong>${result.statistic.sum}</strong></td>
+            <td><strong>${result.statistic.sumDur}</strong></td>
           </tr>
         </table>
-      </div>
-      <br/>
+        </div>
+        <br/>
+
+      </g:each>
+
     </div>
   </body>
 </html>

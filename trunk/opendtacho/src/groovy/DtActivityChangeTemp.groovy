@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
+//every object represents an activity with needed properties e.g. activity, time, next, duration etc...
 public class DtActivityChangeTemp {
     String activityRecordDate
     int activityRecordDay

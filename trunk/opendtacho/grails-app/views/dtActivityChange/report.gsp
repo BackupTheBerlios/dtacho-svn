@@ -119,14 +119,15 @@
                   <strong><g:message code="report.driver"/></strong>
                 </td>
                 <td>
-                  <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
                   %{--
+                  <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
+                  --}%
                   <g:each in="${DtDriver.list()}">
-                    <input type="checkbox" name="selectedDriversList" value="${it.id}"/>
+                    <input type="checkbox" name="drivers" value="${it.id}"/>
                     ${it.cardHolderName_holderSurname}, ${it.cardHolderName_holderFirstNames}
                     <br/>
                   </g:each>
-                  --}%
+
                 </td>
               </tr>
               <tr class="prop">
