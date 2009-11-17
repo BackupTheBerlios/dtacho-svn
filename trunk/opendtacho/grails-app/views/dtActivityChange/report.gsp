@@ -84,14 +84,28 @@
         document.getElementById("maxDate_month").value = today.getMonth()+1;
         document.getElementById("maxDate_day").value = today.getDate();
       }
+
+      function selectAll(){
+        var drivers = document.getElementsByName('drivers');
+        for(var x=0;x<drivers.length;x++) drivers[x].checked=true;
+      }
+      function unselectAll(){
+        var drivers = document.getElementsByName('drivers');
+        for(var y=0;y<drivers.length;y++) drivers[y].checked=false;
+      }
+
     </script>
   </head>
   <body>
     <div class="body">
       <h1><g:message code="report.title"/></h1>
+      %{--
       <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>
       </g:if>
+      --}%
+
+      
       %{--temporary date variable for pdf report filename--}%
       <g:set var="a" value="${new Date()}"/>
       <g:pdfForm controller="dtActivityChange" action="pdfResults" method="post" filename="report_for_${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}.pdf">
@@ -119,11 +133,12 @@
                   <strong><g:message code="report.driver"/></strong>
                 </td>
                 <td>
-                  %{--
-                  <g:select name="driver" optionKey="cardHolderName_holderSurname" optionValue="cardHolderName_holderSurname" from="${DtDriver.list()}"/>
-                  --}%
+                  <input type="button" value="${message(code:'report.driver.selectAll')}" onclick="selectAll();"/>
+                  <input type="button" value="${message(code:'report.driver.unselectAll')}" onclick="unselectAll();"/>
+                  <br/>
+
                   <g:each in="${DtDriver.list()}">
-                    <input type="checkbox" name="drivers" value="${it.id}"/>
+                    <input type="checkbox" id="drivers" name="drivers" value="${it.id}"/>
                     ${it.cardHolderName_holderSurname}, ${it.cardHolderName_holderFirstNames}
                     <br/>
                   </g:each>
@@ -146,7 +161,7 @@
                   <strong><g:message code="report.shortcut"/></strong>
                 </td>
                 <td valign="top" class="value">
-                  <g:radio id='shortcut_default' name='shortcut' value="default" onclick="defaultUpdate();" checked="checked"/><em><g:message code="report.shortcut.default"/></em><br/>
+                  <g:radio name='shortcut' value="default" onclick="defaultUpdate();" checked="checked"/><em><g:message code="report.shortcut.default"/></em><br/>
                   <g:radio name='shortcut' value="thisMonth" onclick="thisMonthUpdate();"/><em><g:message code="report.shortcut.thisMonth"/></em><br/>
                   <g:radio name='shortcut' value="lastMonth" onclick="lastMonthUpdate();"/><em><g:message code="report.shortcut.lastMonth"/></em><br/>
                   <g:radio name='shortcut' value="thisYear" onclick="thisYearUpdate();"/><em><g:message code="report.shortcut.thisYear"/></em>
