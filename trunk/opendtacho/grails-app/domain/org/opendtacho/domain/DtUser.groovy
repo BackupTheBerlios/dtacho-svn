@@ -36,5 +36,6 @@ class DtUser {
 		userRealName(blank: false)
 		password(blank: false)
 		enabled()
+        person(nullable:true)
 	}
 }
