@@ -12,7 +12,7 @@ class DtUser {
 	static belongsTo = DtRole
 
     DtPerson person
-    
+
 	/** Username */
 	String username
 	/** User Real Name*/
