@@ -29,9 +29,17 @@
   </head>
   <body>
     <div class="body">
-
-      %{-- not found drivers --}%
-      <g:if test="${notFoundDriverNames}">
+      %{-- test section --}%
+      %{--
+      <strong>Test section</strong><br/>
+      NotFoundDriverIds :${notFoundDriverIds}<br/>
+      NotFoundDriverNames :${notFoundDriverNames}<br/>
+      FoundDriverIds :${foundDriverIds}<br/>
+      FoundDriverNames :${foundDriverNames}<br/>
+      --}%
+      
+      %{-- NOT FOUND drivers --}%
+      <g:if test="${notFoundDriverIds}">
 
         <p style="color:red;">
           <g:message code="results.notFound"/>
@@ -49,7 +57,7 @@
 
         <a href="${resource(dir:'/dtActivityChange/report')}"><g:message code="results.notFound.back"/></a>
       </g:if>
-      <g:else>
+      <g:elseif test="${!foundDriverIds}">
 
         <p style="color:red;">
           <g:message code="results.notFound.noDriver"/>
@@ -57,9 +65,10 @@
         <br/>
 
         <a href="${resource(dir:'/dtActivityChange/report')}"><g:message code="results.notFound.back"/></a>
-      </g:else>
 
-      %{-- found drivers --}%
+      </g:elseif>
+
+      %{-- FOUND drivers --}%
       <g:if test="${foundDriverIds}">
 
         <a name="top"></a>

@@ -109,8 +109,8 @@
 
     <div class="body">
 
-      %{-- not found drivers --}%
-      <g:if test="${notFoundDriverNames}">
+      %{-- NOT FOUND drivers --}%
+      <g:if test="${notFoundDriverIds}">
 
         <p style="color:red;">
           <g:message code="results.notFound"/>
@@ -126,17 +126,20 @@
           <g:message code="results.notFound.hint"/>
         </p>
 
+        <a href="${resource(dir:'/dtActivityChange/report')}"><g:message code="results.notFound.back"/></a>
       </g:if>
-      <g:else>
+      <g:elseif test="${!foundDriverIds}">
 
         <p style="color:red;">
           <g:message code="results.notFound.noDriver"/>
         </p>
         <br/>
 
-      </g:else>
+        <a href="${resource(dir:'/dtActivityChange/report')}"><g:message code="results.notFound.back"/></a>
 
-      %{-- found drivers --}%
+      </g:elseif>
+
+      %{-- FOUND drivers --}%
       <g:if test="${foundDriverIds}">
 
         <g:set var="a" value="${new Date()}"/>
