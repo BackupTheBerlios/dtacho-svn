@@ -46,16 +46,6 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Email:</td>
-					<td valign="top" class="value">${person.email?.encodeAsHTML()}</td>
-				</tr>
-
-				<tr class="prop">
-					<td valign="top" class="name">Show Email:</td>
-					<td valign="top" class="value">${person.emailShow}</td>
-				</tr>
-
-				<tr class="prop">
 					<td valign="top" class="name">Roles:</td>
 					<td valign="top" class="value">
 						<ul>

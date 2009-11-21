@@ -98,10 +98,10 @@ class DtUserController {
 			return
 		}
 
-		def oldPassword = person.passwd
+		def oldPassword = person.password
 		person.properties = params
-		if (!params.passwd.equals(oldPassword)) {
-			person.passwd = authenticateService.encodePassword(params.passwd)
+		if (!params.password.equals(oldPassword)) {
+			person.password = authenticateService.encodePassword(params.password)
 		}
 		if (person.save()) {
 			DtRole.findAll().each { it.removeFromPeople(person) }
@@ -124,7 +124,7 @@ class DtUserController {
 
 		def person = new DtUser()
 		person.properties = params
-		person.passwd = authenticateService.encodePassword(params.passwd)
+		person.password = authenticateService.encodePassword(params.password)
 		if (person.save()) {
 			addRoles(person)
 			redirect action: show, id: person.id
