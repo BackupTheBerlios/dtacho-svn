@@ -23,7 +23,7 @@ class BootStrap {
 //         readXmlService.loadXmlFile('C_20080118_1624_A_Bartnik                            _DF000016247620.DDD.xml')
 
         if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
-            fixtureLoader.load("TestData")
+            fixtureLoader.load("Testdata")
         }
 
         //create roles
