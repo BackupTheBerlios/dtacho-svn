@@ -11,6 +11,7 @@ class DtUser {
 	static hasMany = [authorities: DtRole]
 	static belongsTo = DtRole
 
+    // References
     DtPerson person
 
 	/** Username */

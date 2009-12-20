@@ -1,9 +1,12 @@
 package org.opendtacho.domain
+
 class DtDriver {
-    static hasMany = [activityChanges:DtActivityChange,card2drivers:DtCard2driver]
+    static hasMany = [activityChanges:DtActivityChange, card2drivers:DtCard2driver]
+    static belongsTo = DtPerson
 
     // References
-
+    DtPerson person
+    
     // Data
     // from driverCardHolderIdentification
     String cardHolderName_holderSurname
@@ -17,6 +20,9 @@ class DtDriver {
     
     static domainKeys = ['drivingLicenceIssuingNation','drivingLicenceNumber']
 
+    static constraints = {
+        person(nullable:true)                      // relation to person is optional
+    }
 
     DtDriver() {
     }
