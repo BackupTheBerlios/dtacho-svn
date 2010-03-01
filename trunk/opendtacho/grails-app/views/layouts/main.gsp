@@ -32,7 +32,12 @@
     </div>
 
     <gui:menubar id="guiMenubar" renderTo="innerMenu">
-      <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin"/></gui:menuitem>
+
+      <gui:submenu label="${message(code:'menu.admin')}">
+        <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin.user"/> </gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtRole')}"><g:message code="menu.admin.role"/> </gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtRequestMap')}"><g:message code="menu.admin.map"/> </gui:menuitem>
+      </gui:submenu>
 
       <gui:submenu label="${message(code:'menu.list')}">
         <gui:menuitem url="${resource(dir:'/dtActivityChange/list')}"><g:message code="menu.list.activities"/> </gui:menuitem>
