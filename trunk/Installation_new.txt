@@ -1,0 +1,24 @@
+Software
+========
+* Java 6
+
+* IntelliJ IDEA 9.0.2
+http://www.jetbrains.com/idea/download/
+
+* Grails 1.1.1
+http://www.grails.org/Download
+
+* Groovy 1.7.2
+http://groovy.codehaus.org/Download
+
+Installation
+============
+1. $JAVA_HOME, $GRAILS_HOME, $GROOVY_HOME einsetzen
+2. $GRAILS_HOME/bin, $GROOVY_HOME/bin in $PATH
+3. Source code in http://svn.berlios.de/svnroot/repos/dtacho/trunk auschecken
+4. Plugins installieren (weil es ein paar Konflikte mit dem neuen grails 1.2.2. gibt, bitte die Plugins in grails-plugins Ordner nutzen, NICHT in Repository von Grails)
+	4.1. Fixtures 0.9-RC4
+	4.2. Acegi 0.5.2
+	4.3. Grails UI 1.1.1
+	4.4. PDF 0.4.5
+5. Testen mit grails run-app
