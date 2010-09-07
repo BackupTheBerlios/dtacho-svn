@@ -115,6 +115,9 @@ class DtRequestMapController {
 
     
     def modResults = {
+      def test = params.test
+      def test1 = params.activity_ROLE_USER
 
+      return[test:test,test1:test1]
     }
 }
