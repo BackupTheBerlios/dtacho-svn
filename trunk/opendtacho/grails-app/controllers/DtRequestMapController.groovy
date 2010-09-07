@@ -113,11 +113,170 @@ class DtRequestMapController {
 
     }
 
-    
+    /*process the authentication change*/
     def modResults = {
-      def test = params.test
-      def test1 = params.activity_ROLE_USER
 
-      return[test:test,test1:test1]
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtActivityChange URL*/
+      def dtactivitychange = DtRequestMap.findByUrl("/dtactivitychange/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dtactivitychange_ROLE_USER && !(dtactivitychange.configAttribute.contains('ROLE_USER')))
+          dtactivitychange.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dtactivitychange_ROLE_USER) && dtactivitychange.configAttribute.contains('ROLE_USER'))
+          dtactivitychange.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dtactivitychange_ROLE_DUMMY && !(dtactivitychange.configAttribute.contains('ROLE_DUMMY')))
+          dtactivitychange.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dtactivitychange_ROLE_DUMMY) && dtactivitychange.configAttribute.contains('ROLE_DUMMY'))
+          dtactivitychange.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtDriver URL*/
+      def dtdriver = DtRequestMap.findByUrl("/dtdriver/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dtdriver_ROLE_USER && !(dtdriver.configAttribute.contains('ROLE_USER')))
+          dtdriver.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dtdriver_ROLE_USER) && dtdriver.configAttribute.contains('ROLE_USER'))
+          dtdriver.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dtdriver_ROLE_DUMMY && !(dtdriver.configAttribute.contains('ROLE_DUMMY')))
+          dtdriver.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dtdriver_ROLE_DUMMY) && dtdriver.configAttribute.contains('ROLE_DUMMY'))
+          dtdriver.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for XmlFileUpload URL*/
+      def xmlfileupload = DtRequestMap.findByUrl("/xmlfileupload/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.xmlfileupload_ROLE_USER && !(xmlfileupload.configAttribute.contains('ROLE_USER')))
+          xmlfileupload.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.xmlfileupload_ROLE_USER) && xmlfileupload.configAttribute.contains('ROLE_USER'))
+          xmlfileupload.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.xmlfileupload_ROLE_DUMMY && !(xmlfileupload.configAttribute.contains('ROLE_DUMMY')))
+          xmlfileupload.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.xmlfileupload_ROLE_DUMMY) && xmlfileupload.configAttribute.contains('ROLE_DUMMY'))
+          xmlfileupload.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DddFileUpload URL*/
+      def dddfileupload = DtRequestMap.findByUrl("/dddfileupload/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dddfileupload_ROLE_USER && !(dddfileupload.configAttribute.contains('ROLE_USER')))
+          dddfileupload.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dddfileupload_ROLE_USER) && dddfileupload.configAttribute.contains('ROLE_USER'))
+          dddfileupload.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dddfileupload_ROLE_DUMMY && !(dddfileupload.configAttribute.contains('ROLE_DUMMY')))
+          dddfileupload.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dddfileupload_ROLE_DUMMY) && dddfileupload.configAttribute.contains('ROLE_DUMMY'))
+          dddfileupload.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtUser URL*/
+      def dtuser = DtRequestMap.findByUrl("/dtuser/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dtuser_ROLE_USER && !(dtuser.configAttribute.contains('ROLE_USER')))
+          dtuser.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dtuser_ROLE_USER) && dtuser.configAttribute.contains('ROLE_USER'))
+          dtuser.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dtuser_ROLE_DUMMY && !(dtuser.configAttribute.contains('ROLE_DUMMY')))
+          dtuser.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dtuser_ROLE_DUMMY) && dtuser.configAttribute.contains('ROLE_DUMMY'))
+          dtuser.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtRole URL*/
+      def dtrole = DtRequestMap.findByUrl("/dtrole/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dtrole_ROLE_USER && !(dtrole.configAttribute.contains('ROLE_USER')))
+          dtrole.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dtrole_ROLE_USER) && dtrole.configAttribute.contains('ROLE_USER'))
+          dtrole.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dtrole_ROLE_DUMMY && !(dtrole.configAttribute.contains('ROLE_DUMMY')))
+          dtrole.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dtrole_ROLE_DUMMY) && dtrole.configAttribute.contains('ROLE_DUMMY'))
+          dtrole.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtRequestMap URL*/
+      def dtrequestmap = DtRequestMap.findByUrl("/dtrequestmap/**")
+
+        /*check if radio button for role_user ON and this instance DON'T have role_user*/
+        if(params.dtrequestmap_ROLE_USER && !(dtrequestmap.configAttribute.contains('ROLE_USER')))
+          dtrequestmap.configAttribute+=",ROLE_USER"
+
+        /*check if radio button for role_user OFF and this instance HAVE role_user*/
+        if(!(params.dtrequestmap_ROLE_USER) && dtrequestmap.configAttribute.contains('ROLE_USER'))
+          dtrequestmap.configAttribute-=",ROLE_USER"
+
+        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        if(params.dtrequestmap_ROLE_DUMMY && !(dtrequestmap.configAttribute.contains('ROLE_DUMMY')))
+          dtrequestmap.configAttribute+=",ROLE_DUMMY"
+
+        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+        if(!(params.dtrequestmap_ROLE_DUMMY) && dtrequestmap.configAttribute.contains('ROLE_DUMMY'))
+          dtrequestmap.configAttribute-=",ROLE_DUMMY"
+      /*=======================================================================================================*/
+
+      return[dtactivitychange:dtactivitychange,
+             dtdriver:dtdriver,
+             xmlfileupload:xmlfileupload,
+             dddfileupload:dddfileupload,
+             dtuser:dtuser,
+             dtrole:dtrole,
+             dtrequestmap:dtrequestmap
+              ]
+
     }
 }

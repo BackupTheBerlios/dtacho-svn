@@ -9,5 +9,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
   <head><title>Simple GSP page</title></head>
-  <body>Access updated</body>
+  <body>Access updated </body>
 </html>
