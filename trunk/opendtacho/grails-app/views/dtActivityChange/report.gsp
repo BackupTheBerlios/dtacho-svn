@@ -99,12 +99,6 @@
   <body>
     <div class="body">
       <h1><g:message code="report.title"/></h1>
-      %{--
-      <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-      </g:if>
-      --}%
-
       
       %{--temporary date variable for pdf report filename--}%
       <g:set var="a" value="${new Date()}"/>

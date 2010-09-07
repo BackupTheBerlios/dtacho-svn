@@ -48,98 +48,106 @@
 
       %{--dtrequestmap variable holds the DtRequestMap instance for DtRequestMap URL--}%
       <g:set var ="dtrequestmap" value='${DtRequestMap.findByUrl("/dtrequestmap/**")}'/>
-      
+
+      <g:form name="modifyForm" action="modResults">
+
         <div class="list">
-              <table>
-                <thead>
-                  <tr>
-                    <td></td>
-                    <td><strong>activity list</strong></td>
-                    <td><strong>driver list</strong></td>
-                    <td><strong>xml upload</strong></td>
-                    <td><strong>ddd upload</strong></td>
-                    <td><strong>user list</strong></td>
-                    <td><strong>role list</strong></td>
-                    <td><strong>request map list</strong></td>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  %{--iterate every role--}%
-                  <g:each in ="${roles}" var="role">
+          <table>
+                  <thead>
                     <tr>
-                      <td>
-                        ${role.getDescription()}
-                      </td>
-
-                      <td>
-                        <g:if test ='${dtactivitychange.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="activityTrue" name="activityTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="activityFalse" name="activityFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${dtdriver.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="driverTrue" name="driverTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="driverFalse" name="driverFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${xmlfileupload.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="xmlfileuploadTrue" name="xmlfileuploadTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="xmlfileuploadFalse" name="xmlfileuploadFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${dddfileupload.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="dddfileuploadTrue" name="dddfileuploadTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="dddfileuploadFalse" name="dddfileuploadFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${dtuser.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="dtuserTrue" name="dtuserTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="dtuserFalse" name="dtuserFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${dtrole.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="dtroleTrue" name="dtroleTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="dtroleFalse" name="dtroleFalse"/>
-                        </g:else>
-                      </td>
-
-                      <td>
-                        <g:if test ='${dtrequestmap.configAttribute.contains("${role.authority}")}'>
-                          <input type ="checkbox" id="dtrequestmapTrue" name="dtrequestmapTrue" checked/>
-                        </g:if>
-                        <g:else>
-                          <input type ="checkbox" id="dtrequestmapFalse" name="dtrequestmapFalse"/>
-                        </g:else>
-                      </td>
+                      <td></td>
+                      <td><strong>activity list</strong></td>
+                      <td><strong>driver list</strong></td>
+                      <td><strong>xml upload</strong></td>
+                      <td><strong>ddd upload</strong></td>
+                      <td><strong>user list</strong></td>
+                      <td><strong>role list</strong></td>
+                      <td><strong>request map list</strong></td>
                     </tr>
-                  </g:each>
-                </tbody>
-              </table>
-         </div>
+                  </thead>
+                  <tbody>
 
+                    %{--iterate every role--}%
+                    <g:each in ="${roles}" var="role">
+                      <tr>
+                        <td>
+                          ${role.getDescription()}
+                        </td>
+
+                        <td>
+                          <g:if test ='${dtactivitychange.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="activityTrue" name="activityTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="activityFalse" name="activityFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${dtdriver.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="driverTrue" name="driverTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="driverFalse" name="driverFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${xmlfileupload.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="xmlfileuploadTrue" name="xmlfileuploadTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="xmlfileuploadFalse" name="xmlfileuploadFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${dddfileupload.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="dddfileuploadTrue" name="dddfileuploadTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="dddfileuploadFalse" name="dddfileuploadFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${dtuser.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="dtuserTrue" name="dtuserTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="dtuserFalse" name="dtuserFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${dtrole.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="dtroleTrue" name="dtroleTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="dtroleFalse" name="dtroleFalse"/>
+                          </g:else>
+                        </td>
+
+                        <td>
+                          <g:if test ='${dtrequestmap.configAttribute.contains("${role.authority}")}'>
+                            <input type ="checkbox" id="dtrequestmapTrue" name="dtrequestmapTrue" checked/>
+                          </g:if>
+                          <g:else>
+                            <input type ="checkbox" id="dtrequestmapFalse" name="dtrequestmapFalse"/>
+                          </g:else>
+                        </td>
+                      </tr>
+                    </g:each>
+                  </tbody>
+                </table>
+        </div>
+
+        <div class="buttons">
+          <span class="button">
+            <input class="screen" type="button" value="update" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
+          </span>
+        </div>
+      </g:form>
 
     </div>
   </body>

@@ -112,4 +112,9 @@ class DtRequestMapController {
     def mod = {
 
     }
+
+    
+    def modResults = {
+
+    }
 }
