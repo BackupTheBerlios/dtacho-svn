@@ -298,6 +298,10 @@ th.desc a {
     background: transparent url(../images/skin/upload.png) 5px 50% no-repeat;
     padding-left: 28px;
 }
+.buttons input.update {
+    background: transparent url(../images/skin/update.png) 5px 50% no-repeat;
+    padding-left: 28px;
+}
 
 /* Invisible */
 .invi {

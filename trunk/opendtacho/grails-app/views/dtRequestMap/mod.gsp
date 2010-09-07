@@ -144,7 +144,7 @@
 
         <div class="buttons">
           <span class="button">
-            <input class="screen" type="button" value="update" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
+            <input class="update" type="button" value="update" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
           </span>
         </div>
       </g:form>
