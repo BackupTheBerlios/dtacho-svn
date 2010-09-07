@@ -107,4 +107,9 @@ class DtRequestMapController {
 			render view: 'create', model: [requestmap: requestmap]
 		}
 	}
+
+    /*empty action, just forward to mod.gsp*/
+    def mod = {
+
+    }
 }

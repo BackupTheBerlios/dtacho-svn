@@ -25,4 +25,8 @@ fixture {
         url = '/dtrole/**'
         configAttribute = 'ROLE_ADMIN'
     }
+    rm7(DtRequestMap) {
+        url = '/dtrequestmap/**'
+        configAttribute = 'ROLE_ADMIN'    
+    }
 }
