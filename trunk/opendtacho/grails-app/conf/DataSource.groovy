@@ -35,14 +35,8 @@ environments {
 	}
 	test {
 		dataSource {
-			//dbCreate = "update"
-			//url = "jdbc:hsqldb:mem:testDb"
-
-            dbCreate = "update"
-            url = "jdbc:mysql://localhost/databasetest"
-            driverClassName = "com.mysql.jdbc.Driver"
-            username = "root"
-            password = ""
+			dbCreate = "update"
+			url = "jdbc:hsqldb:mem:testDb"
 		}
 	}
 	production {
