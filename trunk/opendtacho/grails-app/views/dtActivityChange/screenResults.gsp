@@ -29,15 +29,7 @@
   </head>
   <body>
     <div class="body">
-      %{-- test section --}%
-      %{--
-      <strong>Test section</strong><br/>
-      NotFoundDriverIds :${notFoundDriverIds}<br/>
-      NotFoundDriverNames :${notFoundDriverNames}<br/>
-      FoundDriverIds :${foundDriverIds}<br/>
-      FoundDriverNames :${foundDriverNames}<br/>
-      --}%
-      
+
       %{-- NOT FOUND drivers --}%
       <g:if test="${notFoundDriverIds}">
 
