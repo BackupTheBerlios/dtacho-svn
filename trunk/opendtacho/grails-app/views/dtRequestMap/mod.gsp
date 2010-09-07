@@ -20,7 +20,7 @@
 
   <body>
     <div class="body">
-
+      <h1><g:message code="authen.title"/></h1>
       %{--maps variable contains all DtRequestMap instances--}%
       <g:set var="maps" value="${DtRequestMap.list()}"/>
       
@@ -144,7 +144,7 @@
 
         <div class="buttons">
           <span class="button">
-            <input class="update" type="button" value="update" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
+            <input class="update" type="button" value="<g:message code="authen.button"/>" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
           </span>
         </div>
       </g:form>

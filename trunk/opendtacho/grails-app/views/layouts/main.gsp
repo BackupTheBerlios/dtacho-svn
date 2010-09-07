@@ -37,6 +37,7 @@
         <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin.user"/> </gui:menuitem>
         <gui:menuitem url="${resource(dir:'/dtRole')}"><g:message code="menu.admin.role"/> </gui:menuitem>
         <gui:menuitem url="${resource(dir:'/dtRequestMap')}"><g:message code="menu.admin.map"/> </gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtRequestMap/mod')}"><g:message code="authen.title"/> </gui:menuitem>
       </gui:submenu>
 
       <gui:submenu label="${message(code:'menu.list')}">
