@@ -29,6 +29,7 @@ environments {
               url point to the database
               here we have MySQL, standard port is 3306
               don't forget to copy mysql-connector-java-[version]-bin.jar into lib folder
+              if it isn't here
              */
             url = "jdbc:mysql://localhost:3306/opendtacho_db?autoreconnect=true"
 		}
