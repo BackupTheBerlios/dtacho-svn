@@ -114,6 +114,8 @@ class DtRequestMapController {
     }
 
     /*process the authentication change*/
+    //TODO the changing don't take effect directly like I make change with dynamic request map
+    //must have to restart application
     def modResults = {
 
       /*=======================================================================================================*/
@@ -166,19 +168,24 @@ class DtRequestMapController {
 
         /*check if radio button for role_user ON and this instance DON'T have role_user*/
         if(params.xmlfileupload_ROLE_USER && !(xmlfileupload.configAttribute.contains('ROLE_USER')))
-          xmlfileupload.configAttribute+=",ROLE_USER"
-
+        {xmlfileupload.configAttribute+=",ROLE_USER"
+          xmlfileupload.save()
+        }
         /*check if radio button for role_user OFF and this instance HAVE role_user*/
         if(!(params.xmlfileupload_ROLE_USER) && xmlfileupload.configAttribute.contains('ROLE_USER'))
-          xmlfileupload.configAttribute-=",ROLE_USER"
-
+        {  xmlfileupload.configAttribute-=",ROLE_USER"
+          xmlfileupload.save()
+        }
         /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
         if(params.xmlfileupload_ROLE_DUMMY && !(xmlfileupload.configAttribute.contains('ROLE_DUMMY')))
-          xmlfileupload.configAttribute+=",ROLE_DUMMY"
-
+        {xmlfileupload.configAttribute+=",ROLE_DUMMY"
+          xmlfileupload.save()
+        }
         /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
         if(!(params.xmlfileupload_ROLE_DUMMY) && xmlfileupload.configAttribute.contains('ROLE_DUMMY'))
-          xmlfileupload.configAttribute-=",ROLE_DUMMY"
+        {xmlfileupload.configAttribute-=",ROLE_DUMMY"
+          xmlfileupload.save()
+        }
       /*=======================================================================================================*/
 
 

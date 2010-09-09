@@ -22,8 +22,9 @@ environments {
 			  but just have conflicts with fixtures plugin, have to change to dbCreate="create-drop"
 			  dbCreated mapped direct to hbm2dll.value
 			 */
-            //TODO change to "update"
-            dbCreate = "create-drop"
+
+            dbCreate = "update"
+            /*dbCreate = "create"*/
 
             /*
               url point to the database
