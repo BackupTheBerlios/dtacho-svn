@@ -38,7 +38,7 @@ class DtPersonController {
 		if (!params.max) {
 			params.max = 10
 		}
-		[personList: DtUser.list(params)]
+		[personList: DtPerson.list(params)]
 	}
     // def scaffold = DtPerson
 }
