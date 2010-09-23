@@ -34,10 +34,18 @@
     <gui:menubar id="guiMenubar" renderTo="innerMenu">
 
       <gui:submenu label="${message(code:'menu.admin')}">
-        <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin.user"/> </gui:menuitem>
-        <gui:menuitem url="${resource(dir:'/dtRole')}"><g:message code="menu.admin.role"/> </gui:menuitem>
-        <gui:menuitem url="${resource(dir:'/dtRequestMap')}"><g:message code="menu.admin.map"/> </gui:menuitem>
-        <gui:menuitem url="${resource(dir:'/dtRequestMap/mod')}"><g:message code="authen.title"/> </gui:menuitem>
+        <gui:submenu label="${message(code:'menu.admin.userandgroupmanagement')}">
+          <gui:menuitem url="${resource(dir:'/dtUser')}"><g:message code="menu.admin.user"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtRole')}"><g:message code="menu.admin.role"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtRequestMap')}"><g:message code="menu.admin.map"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtRequestMap/mod')}"><g:message code="authen.title"/> </gui:menuitem>
+        </gui:submenu>
+        <gui:submenu label="${message(code:'menu.admin.masterdata')}">
+          <gui:menuitem url="${resource(dir:'/dtPerson')}"><g:message code="menu.admin.masterdata.person"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtCompany')}"><g:message code="menu.admin.masterdata.company"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtSubsidiary')}"><g:message code="menu.admin.masterdata.subsidiary"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtDriver')}"><g:message code="menu.admin.masterdata.driver"/> </gui:menuitem>
+         </gui:submenu>
       </gui:submenu>
 
       <gui:submenu label="${message(code:'menu.list')}">

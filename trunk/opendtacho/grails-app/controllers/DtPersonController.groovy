@@ -40,5 +40,30 @@ class DtPersonController {
 		}
 		[personList: DtPerson.list(params)]
 	}
+
+  def show = {
+		def person = DtPerson.get(params.id)
+		if (!person) {
+			flash.message = "DtPerson not found with id $params.id"
+			redirect action: list
+			return
+		}
+		[person: person]
+	}
+  	def create = {
+		[person: new DtPerson(params)]
+	}
+  
+  	def save = {
+
+		def person = new DtPerson()
+		person.properties = params
+		if (person.save()) {
+			redirect action: show, id: person.id
+		}
+		else {
+			render view: 'create', model: [authorityList: DtRole.list(), person: person]
+		}
+	}
     // def scaffold = DtPerson
 }

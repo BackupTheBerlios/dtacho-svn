@@ -50,7 +50,7 @@ class DtPerson {
     static domainKeys = ['firstName', 'lastName']
 
     static constraints = {
-        personnelNumber(nullable:true)
+        personnelNumber(nullable:false)
         title(nullable:true)
         salutation(nullable:true)
         firstName(nullable:true)
