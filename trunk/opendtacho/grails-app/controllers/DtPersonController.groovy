@@ -22,48 +22,6 @@
 import org.opendtacho.domain.DtPerson
 
 class DtPersonController {
-   // As part of the Base data update, Person should be both viewable and editable to accomodate for new data-based
-   // Authentification framework.
 
-    def authenticateService
-
-	// the delete, save and update actions only accept POST requests
-	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
-
-	def index = {
-		redirect action: list, params: params
-	}
-
-	def list = {
-		if (!params.max) {
-			params.max = 10
-		}
-		[personList: DtPerson.list(params)]
-	}
-
-  def show = {
-		def person = DtPerson.get(params.id)
-		if (!person) {
-			flash.message = "DtPerson not found with id $params.id"
-			redirect action: list
-			return
-		}
-		[person: person]
-	}
-  	def create = {
-		[person: new DtPerson(params)]
-	}
-  
-  	def save = {
-
-		def person = new DtPerson()
-		person.properties = params
-		if (person.save()) {
-			redirect action: show, id: person.id
-		}
-		else {
-			render view: 'create', model: [authorityList: DtRole.list(), person: person]
-		}
-	}
-    // def scaffold = DtPerson
+  def scaffold = DtPerson
 }

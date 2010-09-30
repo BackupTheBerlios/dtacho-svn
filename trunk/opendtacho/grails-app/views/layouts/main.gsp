@@ -41,10 +41,13 @@
           <gui:menuitem url="${resource(dir:'/dtRequestMap/mod')}"><g:message code="authen.title"/> </gui:menuitem>
         </gui:submenu>
         <gui:submenu label="${message(code:'menu.admin.masterdata')}">
-          <gui:menuitem url="${resource(dir:'/dtPerson')}"><g:message code="menu.admin.masterdata.person"/> </gui:menuitem>
           <gui:menuitem url="${resource(dir:'/dtCompany')}"><g:message code="menu.admin.masterdata.company"/> </gui:menuitem>
           <gui:menuitem url="${resource(dir:'/dtSubsidiary')}"><g:message code="menu.admin.masterdata.subsidiary"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtDepartment')}"><g:message code="menu.admin.masterdata.department"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtPerson')}"><g:message code="menu.admin.masterdata.person"/> </gui:menuitem>
           <gui:menuitem url="${resource(dir:'/dtDriver')}"><g:message code="menu.admin.masterdata.driver"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtCard')}"><g:message code="menu.admin.masterdata.card"/> </gui:menuitem>
+          <gui:menuitem url="${resource(dir:'/dtVehicle')}"><g:message code="menu.admin.masterdata.vehicle"/> </gui:menuitem>          
          </gui:submenu>
       </gui:submenu>
 

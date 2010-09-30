@@ -22,12 +22,15 @@
 package org.opendtacho.domain
 
 class DtPerson {
-    static belongsTo = [DtCompany]
+    static belongsTo = [DtCompany, DtSubsidiary, DtDepartment]
+
 //    static hasMany = [person2subsidiaries:DtPerson2Subsidiary, users:DtUser]
     static hasMany = [users:DtUser]
 
     // References
     DtCompany company
+    DtSubsidiary subsidiary
+    DtDepartment department
 
     // Data
     String personnelNumber
@@ -40,7 +43,7 @@ class DtPerson {
     String privateStreet
     String privateHousenumber
     String privateAddressSupplement
-    String trafficSignalValue
+    int trafficSignalValue
 
     String email
     String phone
@@ -50,7 +53,7 @@ class DtPerson {
     static domainKeys = ['firstName', 'lastName']
 
     static constraints = {
-        personnelNumber(nullable:false)
+        personnelNumber(nullable:false,unique:true)
         title(nullable:true)
         salutation(nullable:true)
         firstName(nullable:true)
@@ -64,8 +67,10 @@ class DtPerson {
         phone(nullable:true)
         fax(nullable:true)
         preferredLanguage(nullable:true)
-        company(nullable:true)                      // relation to company is optional
+        company(nullable:false)                      // relation to company is mandatory
+        subsidiary(nullable:false)
         trafficSignalValue(nullable:true)
+        users()
     }
 
     String toString() {

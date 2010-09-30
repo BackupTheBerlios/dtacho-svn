@@ -3,6 +3,7 @@
 
 include "TestdataCompany"
 include "TestdataSubsidiary"
+include "TestdataDepartment"
 include "TestdataPerson"
 include "TestdataUser"
 include "TestdataRole"
