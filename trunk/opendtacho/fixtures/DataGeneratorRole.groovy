@@ -1,5 +1,6 @@
 import org.opendtacho.domain.DtRole
-
+//Attention:
+//all roles HAVE TO HAVE ROLE_**** names, otherwise it WON'T work
 fixture{
   roleAdmin(DtRole){
     people = [userAdmin]

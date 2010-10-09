@@ -17,7 +17,6 @@ class BootStrap {
       // please use this fixture JUST ONE TIME AT BEGINNING to create the database we need
       // and NEXT TIME we boot this app please INACTIVE IT before, just make it to comments
       if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
-//        fixtureLoader.load("Testdata")
         fixtureLoader.load("DataGenerator")
       }
 

@@ -29,20 +29,21 @@ fixture{
     url = '/dtrequestmap/**'
     configAttribute = 'ROLE_ADMIN'
   }
+  //Master Data
   rm8(DtRequestMap) {
     url = '/dtcompany/**'
-    configAttribute = 'ROLE_ADMIN'
+    configAttribute = 'ROLE_ADMIN,ROLE_COMPANY_MANAGER'
   }
   rm9(DtRequestMap) {
     url = '/dtsubsidiary/**'
-    configAttribute = 'ROLE_ADMIN'
+    configAttribute = 'ROLE_ADMIN,ROLE_COMPANY_MANAGER,ROLE_SUBSIDIARY_MANAGER'
   }
   rm10(DtRequestMap) {
     url = '/dtdepartment/**'
-    configAttribute = 'ROLE_ADMIN'
+    configAttribute = 'ROLE_ADMIN,ROLE_COMPANY_MANAGER,ROLE_SUBSIDIARY_MANAGER,ROLE_DEPARTMENT_MANAGER'
   }
   rm11(DtRequestMap) {
     url = '/dtperson/**'
-    configAttribute = 'ROLE_ADMIN'
+    configAttribute = 'ROLE_ADMIN,ROLE_COMPANY_MANAGER,ROLE_SUBSIDIARY_MANAGER,ROLE_DEPARTMENT_MANAGER'
   }
 }
