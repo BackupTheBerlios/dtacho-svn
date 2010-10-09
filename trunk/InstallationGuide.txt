@@ -34,3 +34,4 @@ Installation
 6. Testen mit grails run-app
 7. ATTENTION: we use fixture plugin JUST ONLY ONE TIME AT BEGINNING to create the database we need, next time when you start this app
 please inactive the code for fixture in bootstrap. All is commented in BootStrap.groovy
+Always run "grails clean" before "grails run-app"

@@ -24,11 +24,11 @@ package org.opendtacho.domain;
 import java.text.SimpleDateFormat
 
 class DtActivityChange {
-    static belongsTo = [DtVehicle, DtDriver]
+    static belongsTo = [vehicle:DtVehicle,driver:DtDriver]
 
     // References
-    DtVehicle vehicle
-    DtDriver driver
+//    DtVehicle vehicle
+//    DtDriver driver
 
     // Data
     Date activityRecordDate

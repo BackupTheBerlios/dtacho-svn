@@ -22,6 +22,10 @@ import org.opendtacho.domain.DtDepartment
 
 class DtDepartmentController {
 
-    def scaffold = DtDepartment
-  
+  def scaffold = DtDepartment
+
+//  def customList = {
+//
+//    return [personInstanceList: Person.list( params ), personInstanceTotal: Person.count() ]
+//  }
 }

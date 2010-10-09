@@ -23,10 +23,10 @@ package org.opendtacho.domain
 
 class DtDriver {
     static hasMany = [activityChanges:DtActivityChange, card2drivers:DtCard2driver]
-    static belongsTo = DtPerson
+    static belongsTo = [person:DtPerson]
 
     // References
-    DtPerson person
+//    DtPerson person
     
     // Data
     // from driverCardHolderIdentification
