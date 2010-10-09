@@ -8,7 +8,7 @@ fixture {
     }
     subsMuenchen(DtSubsidiary) {
         company = company0
-        city = 'M�nchen'
+        city = 'Munich'
     }
     subsKarlsruhe(DtSubsidiary) {
         company = company0

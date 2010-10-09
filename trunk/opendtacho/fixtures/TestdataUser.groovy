@@ -31,7 +31,15 @@ fixture {
     }
     hoangUser(DtUser) {
         person = weinertPerson
-        username = 'hal'
+        username = 'hoang'
+        userRealName = 'Hoang Anh Le'
+        password = '-' // dummy value
+        enabled = true
+    }
+
+    philippUser(DtUser){
+        person = weinertPerson
+        username = 'hoang'
         userRealName = 'Hoang Anh Le'
         password = '-' // dummy value
         enabled = true

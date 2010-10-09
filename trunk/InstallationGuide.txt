@@ -19,12 +19,13 @@ Installation
 1. $JAVA_HOME, $GRAILS_HOME, $GROOVY_HOME, $MYSQL_HOME einsetzen
 2. $GRAILS_HOME/bin, $GROOVY_HOME/bin, $MYSQL_HOME/bin in $PATH
 3. neue Datenbank mit MySQL einlegen und alle Privillegen fuer die Applikation auf diese DB gewaheren
-	# create database opendtacho_db
-	# grant all on opendtacho_db.* to opendtacho@localhost identified by 'opendtacho' 
+	# create database opendtacho_db;
+	# use opendtacho_db;
+	# grant all on opendtacho_db.* to opendtacho@localhost identified by 'opendtacho'; 
 4. Source code in http://svn.berlios.de/svnroot/repos/dtacho/trunk auschecken
 5. Plugins installieren (weil es ein paar Konflikte mit dem neuen grails 1.3.4 gibt, bitte die Plugins in grails-plugins Ordner nutzen, NICHT in Repository von Grails)
 	In Homeordner von Application
-	5.1. Fixtures 0.9-RC4 (grails install-plugin ../grails-plugins/grails-fixtures-0.9-RC4.zip) 
+	5.1. Fixtures 1.0.1 (grails install-plugin ../grails-plugins/grails-fixtures-1.0.1.zip) 
 	5.2. Acegi 0.5.2 (grails install-plugin ../grails-plugins/grails-acegi-0.5.2.zip)
 	5.3. YUI 2.7.0.1 (grails install-plugin ../grails-plugins/grails-yui-2.7.0.1.zip)
 	5.4. Bubbling 2.1.1 (grails install-plugin ../grails-plugins/grails-bubbling-2.1.1.zip)

@@ -22,28 +22,32 @@
 package org.opendtacho.domain
 
 class DtSubsidiary {
-  static belongsTo = DtCompany
+  //belongsTo keyword has 2 forms
+  //belongsTo = A is unidirectional, it means in class A you can get reference to B, reserve is impossible
+  //belongsTo = [a:A] is bidirectional
+  static belongsTo = [company:DtCompany]
+//  static belongsTo = DtCompany
+//  DtCompany company
+  
   static hasMany = [departments: DtDepartment, persons: DtPerson]
 
-    // References
-    DtCompany company
+  // Data
+  String zipcode
+  String city
+  String street
+  String housenumber
+  String addressSupplement
 
-    // Data
-    String zipcode
-    String city
-    String street
-    String housenumber
-    String addressSupplement
-
-    static constraints = {
+  static constraints = {
         zipcode(nullable:true)
         city(blank:false)
         street(nullable:true)
         housenumber(nullable:true)
         addressSupplement(nullable:true)
-    }
+  }
 
-    String toString() {
-        "DtSubsidiary: ${(street)?street + ' ' + housenumber + ', ':''}${(zipcode)?zipcode + ' ':''}$city${(addressSupplement)?' '+addressSupplement:''}"
-    }
+  String toString() {
+    //"DtSubsidiary: ${(street)?street + ' ' + housenumber + ', ':''}${(zipcode)?zipcode + ' ':''}$city${(addressSupplement)?' '+addressSupplement:''}"
+    "Subsidiary: ${city}"
+  }
 }

@@ -21,9 +21,8 @@
 
 package org.opendtacho.domain
 class DtCompany {
-    static hasMany = [subsidiaries:DtSubsidiary]
 
-    // References
+  static hasMany = [subsidiaries:DtSubsidiary,persons:DtPerson]
 
     // Data
     String companyName     // from import company card, display only
@@ -54,6 +53,7 @@ class DtCompany {
     }
 
     String toString() {
-        "DtCompany: $name1${(name2)?' '+name2:''}${(name3)?' '+name3:''}"
+        //"DtCompany: $name1${(name2)?' '+name2:''}${(name3)?' '+name3:''}"
+        "Company: ${companyName}"
     }
 }

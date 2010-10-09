@@ -22,15 +22,15 @@
 package org.opendtacho.domain
 
 class DtPerson {
-    static belongsTo = [DtCompany, DtSubsidiary, DtDepartment]
+  //belongsTo keyword has 2 forms
+  //belongsTo = A is unidirectional, it means in class A you can get reference to B, reserve is impossible
+  //belongsTo = [a:A] is bidirectional
+  static belongsTo = [company:DtCompany,subsidiary:DtSubsidiary,department:DtDepartment]
+//  DtCompany company
+//  DtSubsidiary subsidiary
+//  DtDepartment department
 
-//    static hasMany = [person2subsidiaries:DtPerson2Subsidiary, users:DtUser]
-    static hasMany = [users:DtUser]
-
-    // References
-    DtCompany company
-    DtSubsidiary subsidiary
-    DtDepartment department
+  static hasMany = [users:DtUser]
 
     // Data
     String personnelNumber
@@ -67,13 +67,14 @@ class DtPerson {
         phone(nullable:true)
         fax(nullable:true)
         preferredLanguage(nullable:true)
-        company(nullable:false)                      // relation to company is mandatory
-        subsidiary(nullable:false)
         trafficSignalValue(nullable:true)
-        users()
+        company(nullable:true)
+        subsidiary(nullable:true)
+        department(nullable:true)
     }
 
     String toString() {
-        "DtPerson: ${(firstName)?firstName+' ':''}$lastName"
+      //"DtPerson: ${(firstName)?firstName+' ':''}$lastName"
+      "Person: ${firstName} ${lastName}"  
     }
 }
