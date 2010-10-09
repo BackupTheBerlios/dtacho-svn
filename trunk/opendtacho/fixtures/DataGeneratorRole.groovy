@@ -12,7 +12,7 @@ fixture{
   //dummy user access
   roleDummy(DtRole){
     people = [userDummy]
-    authority = 'ROLE_Dummy'
+    authority = 'ROLE_DUMMY'
     description = 'dummy access'
   }
 
