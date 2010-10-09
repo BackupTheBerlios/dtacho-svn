@@ -135,175 +135,555 @@ class DtRequestMapController {
     }
 
     /*process the authentication change*/
-    //TODO the changing don't take effect directly like I make change with dynamic request map
-    //must have to restart application
+    //using authenticateService.clearCachedRequestmaps() brings the direct effect
+    //the codes below maybe long, but easy to understand
+    //i had another way, briefly but complex, so i decided to choose the long way
     def modResults = {
 
+      //DRIVER DATA
       /*=======================================================================================================*/
       /*DtRequestMap instance for DtActivityChange URL*/
       def dtactivitychange = DtRequestMap.findByUrl("/dtactivitychange/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dtactivitychange_ROLE_USER && !(dtactivitychange.configAttribute.contains('ROLE_USER')))
-          dtactivitychange.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dtactivitychange_ROLE_USER) && dtactivitychange.configAttribute.contains('ROLE_USER'))
-          dtactivitychange.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dtactivitychange_ROLE_DUMMY && !(dtactivitychange.configAttribute.contains('ROLE_DUMMY')))
           dtactivitychange.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dtactivitychange_ROLE_DUMMY) && dtactivitychange.configAttribute.contains('ROLE_DUMMY'))
           dtactivitychange.configAttribute-=",ROLE_DUMMY"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtactivitychange_ROLE_COMPANY_MANAGER && !(dtactivitychange.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtactivitychange.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtactivitychange_ROLE_COMPANY_MANAGER) && dtactivitychange.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtactivitychange.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtactivitychange_ROLE_SUBSIDIARY_MANAGER && !(dtactivitychange.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtactivitychange.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtactivitychange_ROLE_SUBSIDIARY_MANAGER) && dtactivitychange.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtactivitychange.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtactivitychange_ROLE_DEPARTMENT_MANAGER && !(dtactivitychange.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtactivitychange.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtactivitychange_ROLE_DEPARTMENT_MANAGER) && dtactivitychange.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtactivitychange.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtactivitychange.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
-
-
       /*=======================================================================================================*/
       /*DtRequestMap instance for DtDriver URL*/
       def dtdriver = DtRequestMap.findByUrl("/dtdriver/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dtdriver_ROLE_USER && !(dtdriver.configAttribute.contains('ROLE_USER')))
-          dtdriver.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dtdriver_ROLE_USER) && dtdriver.configAttribute.contains('ROLE_USER'))
-          dtdriver.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dtdriver_ROLE_DUMMY && !(dtdriver.configAttribute.contains('ROLE_DUMMY')))
           dtdriver.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dtdriver_ROLE_DUMMY) && dtdriver.configAttribute.contains('ROLE_DUMMY'))
           dtdriver.configAttribute-=",ROLE_DUMMY"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtdriver_ROLE_COMPANY_MANAGER && !(dtdriver.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtdriver.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtdriver_ROLE_COMPANY_MANAGER) && dtdriver.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtdriver.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtdriver_ROLE_SUBSIDIARY_MANAGER && !(dtdriver.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtdriver.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtdriver_ROLE_SUBSIDIARY_MANAGER) && dtdriver.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtdriver.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtdriver_ROLE_DEPARTMENT_MANAGER && !(dtdriver.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtdriver.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtdriver_ROLE_DEPARTMENT_MANAGER) && dtdriver.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtdriver.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtdriver.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
 
-
+      //FILE UPLOAD
       /*=======================================================================================================*/
       /*DtRequestMap instance for XmlFileUpload URL*/
       def xmlfileupload = DtRequestMap.findByUrl("/xmlfileupload/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.xmlfileupload_ROLE_USER && !(xmlfileupload.configAttribute.contains('ROLE_USER')))
-        {xmlfileupload.configAttribute+=",ROLE_USER"
-          xmlfileupload.save()
-        }
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.xmlfileupload_ROLE_USER) && xmlfileupload.configAttribute.contains('ROLE_USER'))
-        {  xmlfileupload.configAttribute-=",ROLE_USER"
-          xmlfileupload.save()
-        }
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.xmlfileupload_ROLE_DUMMY && !(xmlfileupload.configAttribute.contains('ROLE_DUMMY')))
-        {xmlfileupload.configAttribute+=",ROLE_DUMMY"
+          xmlfileupload.configAttribute+=",ROLE_DUMMY"
           xmlfileupload.save()
-        }
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.xmlfileupload_ROLE_DUMMY) && xmlfileupload.configAttribute.contains('ROLE_DUMMY'))
-        {xmlfileupload.configAttribute-=",ROLE_DUMMY"
+          xmlfileupload.configAttribute-=",ROLE_DUMMY"
           xmlfileupload.save()
-        }
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.xmlfileupload_ROLE_COMPANY_MANAGER && !(xmlfileupload.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          xmlfileupload.configAttribute+=",ROLE_COMPANY_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.xmlfileupload_ROLE_COMPANY_MANAGER) && xmlfileupload.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          xmlfileupload.configAttribute-=",ROLE_COMPANY_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.xmlfileupload_ROLE_SUBSIDIARY_MANAGER && !(xmlfileupload.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          xmlfileupload.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.xmlfileupload_ROLE_SUBSIDIARY_MANAGER) && xmlfileupload.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          xmlfileupload.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.xmlfileupload_ROLE_DEPARTMENT_MANAGER && !(xmlfileupload.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          xmlfileupload.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.xmlfileupload_ROLE_DEPARTMENT_MANAGER) && xmlfileupload.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          xmlfileupload.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          xmlfileupload.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
-
-
       /*=======================================================================================================*/
       /*DtRequestMap instance for DddFileUpload URL*/
       def dddfileupload = DtRequestMap.findByUrl("/dddfileupload/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dddfileupload_ROLE_USER && !(dddfileupload.configAttribute.contains('ROLE_USER')))
-          dddfileupload.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dddfileupload_ROLE_USER) && dddfileupload.configAttribute.contains('ROLE_USER'))
-          dddfileupload.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dddfileupload_ROLE_DUMMY && !(dddfileupload.configAttribute.contains('ROLE_DUMMY')))
           dddfileupload.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dddfileupload_ROLE_DUMMY) && dddfileupload.configAttribute.contains('ROLE_DUMMY'))
           dddfileupload.configAttribute-=",ROLE_DUMMY"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dddfileupload_ROLE_COMPANY_MANAGER && !(dddfileupload.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dddfileupload.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dddfileupload_ROLE_COMPANY_MANAGER) && dddfileupload.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dddfileupload.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dddfileupload_ROLE_SUBSIDIARY_MANAGER && !(dddfileupload.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dddfileupload.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dddfileupload_ROLE_SUBSIDIARY_MANAGER) && dddfileupload.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dddfileupload.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dddfileupload_ROLE_DEPARTMENT_MANAGER && !(dddfileupload.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dddfileupload.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dddfileupload_ROLE_DEPARTMENT_MANAGER) && dddfileupload.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dddfileupload.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dddfileupload.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
 
-
+      //USER MANAGEMENT
       /*=======================================================================================================*/
       /*DtRequestMap instance for DtUser URL*/
       def dtuser = DtRequestMap.findByUrl("/dtuser/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dtuser_ROLE_USER && !(dtuser.configAttribute.contains('ROLE_USER')))
-          dtuser.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dtuser_ROLE_USER) && dtuser.configAttribute.contains('ROLE_USER'))
-          dtuser.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dtuser_ROLE_DUMMY && !(dtuser.configAttribute.contains('ROLE_DUMMY')))
           dtuser.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dtuser_ROLE_DUMMY) && dtuser.configAttribute.contains('ROLE_DUMMY'))
           dtuser.configAttribute-=",ROLE_DUMMY"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtuser_ROLE_COMPANY_MANAGER && !(dtuser.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtuser.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtuser_ROLE_COMPANY_MANAGER) && dtuser.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtuser.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtuser_ROLE_SUBSIDIARY_MANAGER && !(dtuser.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtuser.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtuser_ROLE_SUBSIDIARY_MANAGER) && dtuser.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtuser.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtuser_ROLE_DEPARTMENT_MANAGER && !(dtuser.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtuser.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtuser_ROLE_DEPARTMENT_MANAGER) && dtuser.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtuser.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtuser.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
-
-
       /*=======================================================================================================*/
       /*DtRequestMap instance for DtRole URL*/
       def dtrole = DtRequestMap.findByUrl("/dtrole/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dtrole_ROLE_USER && !(dtrole.configAttribute.contains('ROLE_USER')))
-          dtrole.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dtrole_ROLE_USER) && dtrole.configAttribute.contains('ROLE_USER'))
-          dtrole.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dtrole_ROLE_DUMMY && !(dtrole.configAttribute.contains('ROLE_DUMMY')))
           dtrole.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dtrole_ROLE_DUMMY) && dtrole.configAttribute.contains('ROLE_DUMMY'))
           dtrole.configAttribute-=",ROLE_DUMMY"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtrole_ROLE_COMPANY_MANAGER && !(dtrole.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtrole.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtrole_ROLE_COMPANY_MANAGER) && dtrole.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtrole.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtrole_ROLE_SUBSIDIARY_MANAGER && !(dtrole.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtrole.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtrole_ROLE_SUBSIDIARY_MANAGER) && dtrole.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtrole.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtrole_ROLE_DEPARTMENT_MANAGER && !(dtrole.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtrole.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtrole_ROLE_DEPARTMENT_MANAGER) && dtrole.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtrole.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtrole.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
-
-
       /*=======================================================================================================*/
       /*DtRequestMap instance for DtRequestMap URL*/
       def dtrequestmap = DtRequestMap.findByUrl("/dtrequestmap/**")
 
-        /*check if radio button for role_user ON and this instance DON'T have role_user*/
-        if(params.dtrequestmap_ROLE_USER && !(dtrequestmap.configAttribute.contains('ROLE_USER')))
-          dtrequestmap.configAttribute+=",ROLE_USER"
-
-        /*check if radio button for role_user OFF and this instance HAVE role_user*/
-        if(!(params.dtrequestmap_ROLE_USER) && dtrequestmap.configAttribute.contains('ROLE_USER'))
-          dtrequestmap.configAttribute-=",ROLE_USER"
-
-        /*check if radio button for role_dummy ON and this instance DON'T have role_dummy*/
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
         if(params.dtrequestmap_ROLE_DUMMY && !(dtrequestmap.configAttribute.contains('ROLE_DUMMY')))
           dtrequestmap.configAttribute+=",ROLE_DUMMY"
-
-        /*check if radio button for role_dummy OFF and this instance HAVE role_dummy*/
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
         if(!(params.dtrequestmap_ROLE_DUMMY) && dtrequestmap.configAttribute.contains('ROLE_DUMMY'))
           dtrequestmap.configAttribute-=",ROLE_DUMMY"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtrequestmap_ROLE_COMPANY_MANAGER && !(dtrequestmap.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtrequestmap.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtrequestmap_ROLE_COMPANY_MANAGER) && dtrequestmap.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtrequestmap.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtrequestmap_ROLE_SUBSIDIARY_MANAGER && !(dtrequestmap.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtrequestmap.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtrequestmap_ROLE_SUBSIDIARY_MANAGER) && dtrequestmap.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtrequestmap.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtrequestmap_ROLE_DEPARTMENT_MANAGER && !(dtrequestmap.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtrequestmap.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtrequestmap_ROLE_DEPARTMENT_MANAGER) && dtrequestmap.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtrequestmap.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtrequestmap.save()
+          authenticateService.clearCachedRequestmaps()
       /*=======================================================================================================*/
 
-      return[dtactivitychange:dtactivitychange,
-             dtdriver:dtdriver,
-             xmlfileupload:xmlfileupload,
-             dddfileupload:dddfileupload,
-             dtuser:dtuser,
-             dtrole:dtrole,
-             dtrequestmap:dtrequestmap
+      //MASTER DATA
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtCompany URL*/
+      def dtcompany = DtRequestMap.findByUrl("/dtcompany/**")
+
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
+        if(params.dtcompany_ROLE_DUMMY && !(dtcompany.configAttribute.contains('ROLE_DUMMY')))
+          dtcompany.configAttribute+=",ROLE_DUMMY"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
+        if(!(params.dtcompany_ROLE_DUMMY) && dtcompany.configAttribute.contains('ROLE_DUMMY'))
+          dtcompany.configAttribute-=",ROLE_DUMMY"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtcompany_ROLE_COMPANY_MANAGER && !(dtcompany.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtcompany.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtcompany_ROLE_COMPANY_MANAGER) && dtcompany.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtcompany.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtcompany_ROLE_SUBSIDIARY_MANAGER && !(dtcompany.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtcompany.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtcompany_ROLE_SUBSIDIARY_MANAGER) && dtcompany.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtcompany.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtcompany_ROLE_DEPARTMENT_MANAGER && !(dtcompany.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtcompany.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtcompany_ROLE_DEPARTMENT_MANAGER) && dtcompany.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtcompany.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtcompany.save()
+          authenticateService.clearCachedRequestmaps()
+      /*=======================================================================================================*/
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtSubsidiary URL*/
+      def dtsubsidiary = DtRequestMap.findByUrl("/dtsubsidiary/**")
+
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
+        if(params.dtsubsidiary_ROLE_DUMMY && !(dtsubsidiary.configAttribute.contains('ROLE_DUMMY')))
+          dtsubsidiary.configAttribute+=",ROLE_DUMMY"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
+        if(!(params.dtsubsidiary_ROLE_DUMMY) && dtsubsidiary.configAttribute.contains('ROLE_DUMMY'))
+          dtsubsidiary.configAttribute-=",ROLE_DUMMY"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtsubsidiary_ROLE_COMPANY_MANAGER && !(dtsubsidiary.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtsubsidiary.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtsubsidiary_ROLE_COMPANY_MANAGER) && dtsubsidiary.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtsubsidiary.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtsubsidiary_ROLE_SUBSIDIARY_MANAGER && !(dtsubsidiary.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtsubsidiary.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtsubsidiary_ROLE_SUBSIDIARY_MANAGER) && dtsubsidiary.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtsubsidiary.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtsubsidiary_ROLE_DEPARTMENT_MANAGER && !(dtsubsidiary.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtsubsidiary.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtsubsidiary_ROLE_DEPARTMENT_MANAGER) && dtsubsidiary.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtsubsidiary.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtsubsidiary.save()
+          authenticateService.clearCachedRequestmaps()
+      /*=======================================================================================================*/
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtDepartment URL*/
+      def dtdepartment = DtRequestMap.findByUrl("/dtdepartment/**")
+
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
+        if(params.dtdepartment_ROLE_DUMMY && !(dtdepartment.configAttribute.contains('ROLE_DUMMY')))
+          dtdepartment.configAttribute+=",ROLE_DUMMY"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
+        if(!(params.dtdepartment_ROLE_DUMMY) && dtdepartment.configAttribute.contains('ROLE_DUMMY'))
+          dtdepartment.configAttribute-=",ROLE_DUMMY"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtdepartment_ROLE_COMPANY_MANAGER && !(dtdepartment.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtdepartment.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtdepartment_ROLE_COMPANY_MANAGER) && dtdepartment.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtdepartment.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtdepartment_ROLE_SUBSIDIARY_MANAGER && !(dtdepartment.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtdepartment.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtdepartment_ROLE_SUBSIDIARY_MANAGER) && dtdepartment.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtdepartment.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtdepartment_ROLE_DEPARTMENT_MANAGER && !(dtdepartment.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtdepartment.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtdepartment_ROLE_DEPARTMENT_MANAGER) && dtdepartment.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtdepartment.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtdepartment.save()
+          authenticateService.clearCachedRequestmaps()
+      /*=======================================================================================================*/
+      /*=======================================================================================================*/
+      /*DtRequestMap instance for DtPerson URL*/
+      def dtperson = DtRequestMap.findByUrl("/dtperson/**")
+
+        /*check if radio button for ROLE_DUMMY ON and this instance DON'T have ROLE_DUMMY*/
+        if(params.dtperson_ROLE_DUMMY && !(dtperson.configAttribute.contains('ROLE_DUMMY')))
+          dtperson.configAttribute+=",ROLE_DUMMY"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DUMMY OFF and this instance HAVE ROLE_DUMMY*/
+        if(!(params.dtperson_ROLE_DUMMY) && dtperson.configAttribute.contains('ROLE_DUMMY'))
+          dtperson.configAttribute-=",ROLE_DUMMY"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_COMPANY_MANAGER ON and this instance DON'T have ROLE_COMPANY_MANAGER*/
+        if(params.dtperson_ROLE_COMPANY_MANAGER && !(dtperson.configAttribute.contains('ROLE_COMPANY_MANAGER')))
+          dtperson.configAttribute+=",ROLE_COMPANY_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_COMPANY_MANAGER OFF and this instance HAVE ROLE_COMPANY_MANAGER*/
+        if(!(params.dtperson_ROLE_COMPANY_MANAGER) && dtperson.configAttribute.contains('ROLE_COMPANY_MANAGER'))
+          dtperson.configAttribute-=",ROLE_COMPANY_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER ON and this instance DON'T have ROLE_SUBSIDIARY_MANAGER*/
+        if(params.dtperson_ROLE_SUBSIDIARY_MANAGER && !(dtperson.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER')))
+          dtperson.configAttribute+=",ROLE_SUBSIDIARY_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_SUBSIDIARY_MANAGER OFF and this instance HAVE ROLE_SUBSIDIARY_MANAGER*/
+        if(!(params.dtperson_ROLE_SUBSIDIARY_MANAGER) && dtperson.configAttribute.contains('ROLE_SUBSIDIARY_MANAGER'))
+          dtperson.configAttribute-=",ROLE_SUBSIDIARY_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER ON and this instance DON'T have ROLE_DEPARTMENT_MANAGER*/
+        if(params.dtperson_ROLE_DEPARTMENT_MANAGER && !(dtperson.configAttribute.contains('ROLE_DEPARTMENT_MANAGER')))
+          dtperson.configAttribute+=",ROLE_DEPARTMENT_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+        /*check if radio button for ROLE_DEPARTMENT_MANAGER OFF and this instance HAVE ROLE_DEPARTMENT_MANAGER*/
+        if(!(params.dtperson_ROLE_DEPARTMENT_MANAGER) && dtperson.configAttribute.contains('ROLE_DEPARTMENT_MANAGER'))
+          dtperson.configAttribute-=",ROLE_DEPARTMENT_MANAGER"
+          dtperson.save()
+          authenticateService.clearCachedRequestmaps()
+      /*=======================================================================================================*/
+
+      return[
+//              dtactivitychange:dtactivitychange,
+//             dtdriver:dtdriver,
+//             xmlfileupload:xmlfileupload,
+//             dddfileupload:dddfileupload,
+//             dtuser:dtuser,
+//             dtrole:dtrole,
+//             dtrequestmap:dtrequestmap
               ]
 
     }
