@@ -60,4 +60,8 @@ class DtUser {
 		enabled()
         person(nullable:true)
 	}
+
+    String toString(){
+      "User: ${username}"
+    }
 }

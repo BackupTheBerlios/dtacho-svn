@@ -32,7 +32,7 @@ fixture{
   userPhilipp(DtUser){
     person = personPhilipp
     username = 'philipp'
-    userRealName = 'admin'
+    userRealName = 'Philipp Naegele'
     password = '-' // dummy value
     enabled = true
   }
