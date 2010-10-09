@@ -2,11 +2,21 @@ import org.opendtacho.domain.DtRole
 //Attention:
 //all roles HAVE TO HAVE ROLE_**** names, otherwise it WON'T work
 fixture{
+  //administration access
   roleAdmin(DtRole){
     people = [userAdmin]
     authority = 'ROLE_ADMIN'
     description = 'administration access'
   }
+  
+  //dummy user access
+  roleDummy(DtRole){
+    people = [userDummy]
+    authority = 'ROLE_Dummy'
+    description = 'dummy access'
+  }
+
+  //for master data
   roleComMan(DtRole){
     people = [userGerald]
     authority = 'ROLE_COMPANY_MANAGER'
@@ -22,4 +32,5 @@ fixture{
     authority = 'ROLE_DEPARTMENT_MANAGER'
     description = 'department manager access'
   }
+
 }

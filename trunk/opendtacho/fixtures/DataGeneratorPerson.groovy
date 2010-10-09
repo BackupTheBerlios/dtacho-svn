@@ -1,17 +1,31 @@
 import org.opendtacho.domain.DtPerson
 
 fixture {
+  //admin
   personAdmin(DtPerson) {
     personnelNumber = 1
-    lastName = 'Bond'
-    firstName = 'James'
+    lastName = 'Admin'
+    firstName = 'Admin'
 
     company = null  //admin don't have any direct relationship with company
     subsidiary = null
     department = null
   }
-  personGerald(DtPerson) {
+
+  //dummy user
+  personDummy(DtPerson) {
     personnelNumber = 2
+    lastName = 'Dummy'
+    firstName = 'Dummy'
+
+    company = null  
+    subsidiary = null
+    department = null
+  }
+
+  //for master data
+  personGerald(DtPerson) {
+    personnelNumber = 3
     lastName = 'Lang'
     firstName = 'Gerald'
 
@@ -20,7 +34,7 @@ fixture {
     department = null
   }
   personIlya(DtPerson) {
-    personnelNumber = 3
+    personnelNumber = 4
     lastName = 'Grygoryev'
     firstName = 'Ilya'
 
@@ -29,7 +43,7 @@ fixture {
     department = null
   }
   personHoang(DtPerson) {
-    personnelNumber = 4
+    personnelNumber = 5
     lastName = 'Le'
     firstName = 'Hoang Anh'
 
@@ -38,7 +52,7 @@ fixture {
     department = depDEV
   }
   personPhilipp(DtPerson) {
-    personnelNumber = 5
+    personnelNumber = 6
     lastName = 'Naegele'
     firstName = 'Philipp'
 

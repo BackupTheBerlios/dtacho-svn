@@ -1,6 +1,7 @@
 import org.opendtacho.domain.DtUser
 
 fixture{
+  //admin
   userAdmin(DtUser){
     person = personAdmin
     username = 'admin'
@@ -8,6 +9,17 @@ fixture{
     password = '-' // dummy value
     enabled = true
   }
+
+  //dummy user
+  userDummy(DtUser){
+    person = personDummy
+    username = 'dummy'
+    userRealName = 'dummy'
+    password = '-' // dummy value
+    enabled = true
+  }
+
+  //for master data
   userGerald(DtUser){
     person = personGerald
     username = 'gerald'
@@ -43,6 +55,8 @@ post {
   // have to set password here, because in fixture no service is available!
   userAdmin.password = authenticateService.encodePassword("pw")
   userAdmin.save()
+  userDummy.password = authenticateService.encodePassword("pw")
+  userDummy.save()
   userGerald.password = authenticateService.encodePassword("pw")
   userGerald.save()
   userHoang.password = authenticateService.encodePassword("pw")
