@@ -52,11 +52,8 @@ class DtDepartmentController {
 
             def tempSubList = currentCompany.getSubsidiaries()
 
-            def tempDepList = []
-
             tempSubList.each{aSub->
-                tempDepList = aSub.getDepartments()
-                tempList += tempDepList
+                tempList += aSub.getDepartments()
             }
 
             return [ dtDepartmentInstanceList: tempList, dtDepartmentInstanceTotal: tempList.count() ]

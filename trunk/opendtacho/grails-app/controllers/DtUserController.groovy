@@ -22,6 +22,7 @@
 
 import org.opendtacho.domain.DtUser
 import org.opendtacho.domain.DtRole
+import org.opendtacho.domain.DtPerson
 
 /**
  * User controller.
@@ -30,6 +31,8 @@ class DtUserController {
 
 	def authenticateService
 
+    def scaffold = DtUser
+
 	// the delete, save and update actions only accept POST requests
 	static Map allowedMethods = [delete: 'POST', save: 'POST', update: 'POST']
 
@@ -37,11 +40,66 @@ class DtUserController {
 		redirect action: list, params: params
 	}
 
+    //modified list actions returns the COMPATIBLE data for request
 	def list = {
-		if (!params.max) {
-			params.max = 10
-		}
-		[personList: DtUser.list(params)]
+        def currentPersonId = authenticateService.userDomain().getPerson().id
+        def currentPerson = DtPerson.get(currentPersonId)
+
+        def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
+        def currentRole = currentRoleMap[0].getAuthority()
+
+        //see everything
+        if(currentRole=="ROLE_ADMIN"){
+            return [ dtUserInstanceList: DtUser.list( params ), dtUserInstanceTotal: DtUser.count() ]
+        }
+
+        //see only users related persons in company
+        if(currentRole=="ROLE_COMPANY_MANAGER"){
+            def currentCompany = currentPerson.getCompany()
+
+            def tempPersonList = currentCompany.getPersons()
+
+            def tempList = []
+
+            tempPersonList.each{aPerson->
+                tempList+=aPerson.getUsers()
+            }
+            println "${tempList}"
+            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+        }
+
+        //see only users related persons in subsidiary
+        if(currentRole=="ROLE_SUBSIDIARY_MANAGER"){
+            def currentSubsidiary = currentPerson.getSubsidiary()
+
+            def tempPersonList = currentSubsidiary.getPersons()
+
+            def tempList = []
+
+
+            tempPersonList.each{aPerson->
+                tempList+=aPerson.getUsers()
+            }
+            println "${tempList}"
+            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+        }
+
+        //see only users related persons in department
+        if(currentRole=="ROLE_DEPARTMENT_MANAGER"){
+            def currentDepartment = currentPerson.getDepartment()
+
+            def tempPersonList = currentDepartment.getPersons()
+
+            def tempList = []
+
+
+            tempPersonList.each{aPerson->
+                tempList+=aPerson.getUsers()
+            }
+            println "${tempList}"
+            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+        }
+
 	}
 
 	def show = {
