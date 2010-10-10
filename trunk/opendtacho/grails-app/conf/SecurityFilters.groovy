@@ -32,8 +32,6 @@ class SecurityFilters {
     //ATTENTION: controller name is case sensitive, DtUser --> dtUser, dtuser --> don't work
     userFilter(controller:"dtUser",action:"(show|edit)"){
       before = {
-        def currentUserId = authenticateService.userDomain().id
-
         def currentRole = authenticateService.userDomain().getAuthorities().toList()
 
         //admin can everything
@@ -62,16 +60,63 @@ class SecurityFilters {
             redirect(controller:"login",action:"denied")
             return false
           }
-
         }
 
+        //subsidiary manager can modify all related users
+        if(currentRole[0].getAuthority()=="ROLE_SUBSIDIARY_MANAGER"){
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentSubsidiary = currentPerson.getSubsidiary()
 
+          def tempPersonList = currentSubsidiary.getPersons()
 
-//        if(currentUserId != params.id.toLong()){//currentUserId has type bigint, therefore params.id.toLong()
-//          redirect(controller:"login",action:"denied")
-//          return false
-//        }
-//        return true
+          def tempList = []
+
+          tempPersonList.each {aPerson->
+            tempList+=aPerson.getUsers()
+          }
+          println "${tempList}"
+          if(tempList.contains(DtUser.get(params.id))){
+            return true
+          }
+          else {
+            redirect(controller:"login",action:"denied")
+            return false
+          }
+        }
+
+        //department manager can modify all related users
+        if(currentRole[0].getAuthority()=="ROLE_DEPARTMENT_MANAGER"){
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentDepartment = currentPerson.getDepartment()
+
+          def tempPersonList = currentDepartment.getPersons()
+
+          def tempList = []
+
+          tempPersonList.each {aPerson->
+            tempList+=aPerson.getUsers()
+          }
+          println "${tempList}"
+          if(tempList.contains(DtUser.get(params.id))){
+            return true
+          }
+          else {
+            redirect(controller:"login",action:"denied")
+            return false
+          }
+        }
+
+        //user can only modify the own profile
+        if(currentRole[0].getAuthority()=="ROLE_DUMMY"){
+            def currentUserId = authenticateService.userDomain().id
+            if(currentUserId != params.id.toLong()){//currentUserId has type bigint, therefore params.id.toLong()
+              redirect(controller:"login",action:"denied")
+              return false
+            }
+            return true
+        }
       }
     }
 

@@ -70,6 +70,13 @@ class DtPersonController {
 
               return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
           }
+
+          //user can only the own profile
+          if(currentRole=="ROLE_DUMMY"){
+              def tempList = DtPerson.findAllById(currentPersonId)
+
+              return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
+          }
       }
 
     def show = {

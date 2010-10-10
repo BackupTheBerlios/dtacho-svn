@@ -104,6 +104,15 @@ class DtUserController {
             return [ personList: tempList/*, dtUserInstanceTotal: tempList.count() */]
         }
 
+        //user can only see the own profile
+        if(currentRole=="ROLE_DUMMY"){
+            def currentUserId = authenticateService.userDomain().id
+
+            def tempList = DtUser.findAllById(currentUserId)
+          
+            return [ personList: tempList/*, dtUserInstanceTotal: tempList.count() */]
+        }
+
 	}
 
 	def show = {
