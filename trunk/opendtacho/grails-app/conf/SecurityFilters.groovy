@@ -56,17 +56,41 @@ class SecurityFilters {
 
         //company manager can modify all related persons
         if(currentRole[0].getAuthority()=="ROLE_COMPANY_MANAGER"){
-          return true
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentCompany = currentPerson.getCompany()
+
+          if(currentCompany.getPersons().contains(DtPerson.get(params.id))) return true
+          else{
+            redirect(controller:"login",action:"denied")
+            return false
+          }
         }
 
         //subsidiary manager can modify all related persons
         if(currentRole[0].getAuthority()=="ROLE_SUBSIDIARY_MANAGER"){
-          return true
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentSubsidiary = currentPerson.getSubsidiary()
+
+          if(currentSubsidiary.getPersons().contains(DtPerson.get(params.id))) return true
+          else{
+            redirect(controller:"login",action:"denied")
+            return false
+          }
         }
 
         //department manager can modify all related persons
         if(currentRole[0].getAuthority()=="ROLE_DEPARTMENT_MANAGER"){
-          return true
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentDepartment = currentPerson.getDepartment()
+
+          if(currentDepartment.getPersons().contains(DtPerson.get(params.id))) return true
+          else{
+            redirect(controller:"login",action:"denied")
+            return false
+          }
         }
 
         //the logged person can only modify the own profile
