@@ -4,6 +4,10 @@ class SecurityFilters {
 
   def authenticateService
 
+
+  //the filters here are only used to decide whether a user can see something or don't
+  //don't help to response the compatible data to the user
+  //this is in controller
   def filters = {
 
     //only admin can create or delete erevything

@@ -20,8 +20,116 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import org.opendtacho.domain.DtCompany
+import org.opendtacho.domain.DtPerson
+import org.opendtacho.domain.DtUser
 
 class DtCompanyController {
+    def authenticateService
 
     def scaffold = DtCompany
+
+    def index = { redirect(action:list,params:params) }
+
+    // the delete, save and update actions only accept POST requests
+    static allowedMethods = [delete:'POST', save:'POST', update:'POST']
+
+    def list = {
+        def currentUserId = authenticateService.userDomain().id
+
+        if(DtUser.get(currentUserId).getUsername()=="admin"){
+          return [ dtCompanyInstanceList: DtCompany.list( params ), dtCompanyInstanceTotal: DtCompany.count() ]
+        }
+        else{
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentCompany = currentPerson.getCompany()
+          def tempList = DtCompany.findAllById(currentCompany.id)
+          return [ dtCompanyInstanceList: tempList, dtCompanyInstanceTotal: tempList.count() ]
+        }
+    }
+
+    def show = {
+        def dtCompanyInstance = DtCompany.get( params.id )
+
+        if(!dtCompanyInstance) {
+            flash.message = "DtCompany not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else { return [ dtCompanyInstance : dtCompanyInstance ] }
+    }
+
+    def delete = {
+        def dtCompanyInstance = DtCompany.get( params.id )
+        if(dtCompanyInstance) {
+            try {
+                dtCompanyInstance.delete(flush:true)
+                flash.message = "DtCompany ${params.id} deleted"
+                redirect(action:list)
+            }
+            catch(org.springframework.dao.DataIntegrityViolationException e) {
+                flash.message = "DtCompany ${params.id} could not be deleted"
+                redirect(action:show,id:params.id)
+            }
+        }
+        else {
+            flash.message = "DtCompany not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def edit = {
+        def dtCompanyInstance = DtCompany.get( params.id )
+
+        if(!dtCompanyInstance) {
+            flash.message = "DtCompany not found with id ${params.id}"
+            redirect(action:list)
+        }
+        else {
+            return [ dtCompanyInstance : dtCompanyInstance ]
+        }
+    }
+
+    def update = {
+        def dtCompanyInstance = DtCompany.get( params.id )
+        if(dtCompanyInstance) {
+            if(params.version) {
+                def version = params.version.toLong()
+                if(dtCompanyInstance.version > version) {
+
+                    dtCompanyInstance.errors.rejectValue("version", "dtCompany.optimistic.locking.failure", "Another user has updated this DtCompany while you were editing.")
+                    render(view:'edit',model:[dtCompanyInstance:dtCompanyInstance])
+                    return
+                }
+            }
+            dtCompanyInstance.properties = params
+            if(!dtCompanyInstance.hasErrors() && dtCompanyInstance.save()) {
+                flash.message = "DtCompany ${params.id} updated"
+                redirect(action:show,id:dtCompanyInstance.id)
+            }
+            else {
+                render(view:'edit',model:[dtCompanyInstance:dtCompanyInstance])
+            }
+        }
+        else {
+            flash.message = "DtCompany not found with id ${params.id}"
+            redirect(action:list)
+        }
+    }
+
+    def create = {
+        def dtCompanyInstance = new DtCompany()
+        dtCompanyInstance.properties = params
+        return ['dtCompanyInstance':dtCompanyInstance]
+    }
+
+    def save = {
+        def dtCompanyInstance = new DtCompany(params)
+        if(!dtCompanyInstance.hasErrors() && dtCompanyInstance.save()) {
+            flash.message = "DtCompany ${dtCompanyInstance.id} created"
+            redirect(action:show,id:dtCompanyInstance.id)
+        }
+        else {
+            render(view:'create',model:[dtCompanyInstance:dtCompanyInstance])
+        }
+    }
 }
