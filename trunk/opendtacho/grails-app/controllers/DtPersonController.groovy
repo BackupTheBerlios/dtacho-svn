@@ -22,54 +22,55 @@
 import org.opendtacho.domain.DtPerson
 
 class DtPersonController {
-  def authenticateService
+    def authenticateService
 
-  def scaffold = DtPerson
+    def scaffold = DtPerson
 
-  def index = { redirect(action:list,params:params) }
+    def index = { redirect(action:list,params:params) }
 
     // the delete, save and update actions only accept POST requests
     static allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
+    //modified list actions returns the COMPATIBLE data for request
     def list = {
-        def currentPersonId = authenticateService.userDomain().getPerson().id
-        def currentPerson = DtPerson.get(currentPersonId)
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
 
-        def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
-        def currentRole = currentRoleMap[0].getAuthority()
+          def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
+          def currentRole = currentRoleMap[0].getAuthority()
 
-        //see everything
-        if(currentRole=="ROLE_ADMIN"){
-            return [ dtPersonInstanceList: DtPerson.list( params ), dtPersonInstanceTotal: DtPerson.count() ]
-        }
+          //see everything
+          if(currentRole=="ROLE_ADMIN"){
+              return [ dtPersonInstanceList: DtPerson.list( params ), dtPersonInstanceTotal: DtPerson.count() ]
+          }
 
-        //see all persons to the company
-        if(currentRole=="ROLE_COMPANY_MANAGER"){
-            def currentCompany = currentPerson.getCompany()
+          //see all persons to the company
+          if(currentRole=="ROLE_COMPANY_MANAGER"){
+              def currentCompany = currentPerson.getCompany()
 
-            def tempList = currentCompany.getPersons()
+              def tempList = currentCompany.getPersons()
 
-            return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
-        }
+              return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
+          }
 
-        //see all persons to subsidiary
-        if(currentRole=="ROLE_SUBSIDIARY_MANAGER"){
-            def currentSubsidiary = currentPerson.getSubsidiary()
+          //see all persons to subsidiary
+          if(currentRole=="ROLE_SUBSIDIARY_MANAGER"){
+              def currentSubsidiary = currentPerson.getSubsidiary()
 
-            def tempList = currentSubsidiary.getPersons()
+              def tempList = currentSubsidiary.getPersons()
 
-            return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
-        }
+              return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
+          }
 
-        //see all persons to department
-        if(currentRole=="ROLE_DEPARTMENT_MANAGER"){
-            def currentDepartment = currentPerson.getDepartment()
+          //see all persons to department
+          if(currentRole=="ROLE_DEPARTMENT_MANAGER"){
+              def currentDepartment = currentPerson.getDepartment()
 
-            def tempList = currentDepartment.getPersons()
+              def tempList = currentDepartment.getPersons()
 
-            return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
-        }
-    }
+              return [ dtPersonInstanceList: tempList, dtPersonInstanceTotal: tempList.count() ]
+          }
+      }
 
     def show = {
         def dtPersonInstance = DtPerson.get( params.id )

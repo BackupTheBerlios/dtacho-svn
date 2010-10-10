@@ -32,6 +32,7 @@ class DtSubsidiaryController {
     // the delete, save and update actions only accept POST requests
     static allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
+    //modified list actions returns the COMPATIBLE data for request
     def list = {
         def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
