@@ -1,6 +1,7 @@
 import org.opendtacho.domain.DtSubsidiary
 
 fixture {
+  //for ISCL
   subLinkenheim(DtSubsidiary) {
     company = comISCL
     city = 'Linkenheim'
@@ -12,6 +13,16 @@ fixture {
   subStuttgart(DtSubsidiary) {
     company = comISCL
     city = 'Stuttgart'
+  }
+
+  //for Apple
+  subBerlin(DtSubsidiary){
+    company = comApple
+    city = 'Berlin'
+  }
+  subHannover(DtSubsidiary){
+    company = comApple
+    city = 'Hannover'
   }
 }
 
