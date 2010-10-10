@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="\${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="\${resource(dir:'')}">Home</a></span>
             <span class="menuButton"><g:link class="list" action="list">${className} List</g:link></span>
             <span class="menuButton"><g:link class="create" action="create">New ${className}</g:link></span>
         </div>
@@ -24,6 +24,7 @@
             </g:hasErrors>
             <g:form method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
                 <input type="hidden" name="id" value="\${${propertyName}?.id}" />
+                <input type="hidden" name="version" value="\${${propertyName}?.version}" />
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -45,7 +46,7 @@
                                 <td valign="top" class="name">
                                     <label for="${p.name}">${p.naturalName}:</label>
                                 </td>
-                                <td valign="top" class="value \${hasErrors(bean:${domainClass.propertyName},field:'${p.name}','errors')}">
+                                <td valign="top" class="value \${hasErrors(bean:${propertyName},field:'${p.name}','errors')}">
                                     ${renderEditor(p)}
                                 </td>
                             </tr> 

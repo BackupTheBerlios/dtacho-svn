@@ -21,9 +21,6 @@
 
 package org.opendtacho.domain
 
-import org.opendtacho.domain.DtRole
-import org.opendtacho.domain.DtPerson
-
 /**
  * User domain class.
  */

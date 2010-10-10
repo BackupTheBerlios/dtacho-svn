@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="\${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="\${resource(dir:'')}">Home</a></span>
             <span class="menuButton"><g:link class="create" action="create">New ${className}</g:link></span>
         </div>
         <div class="body">
@@ -20,18 +20,17 @@
                 <table>
                     <thead>
                         <tr>
-				<th>Action</th>
                         <%
                             excludedProps = ['version',
                                                Events.ONLOAD_EVENT,
                                                Events.BEFORE_DELETE_EVENT,
                                                Events.BEFORE_INSERT_EVENT,
                                                Events.BEFORE_UPDATE_EVENT]
-
+                            
                             props = domainClass.properties.findAll { !excludedProps.contains(it.name) && it.type != Set.class }
                             Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
                             props.eachWithIndex { p,i ->
-                   	            if(i < 10) {
+                   	            if(i < 6) {
                    	                if(p.isAssociation()) { %>
                    	        <th>${p.naturalName}</th>
                    	    <%          } else { %>
@@ -42,17 +41,11 @@
                     <tbody>
                     <g:each in="\${${propertyName}List}" status="i" var="${propertyName}">
                         <tr class="\${(i % 2) == 0 ? 'odd' : 'even'}">
-                            <td>
-                                <g:link action="show" id="\${${propertyName}?.id}">view</g:link> |
-                                <g:link action="edit" id="\${${propertyName}?.id}">edit</g:link> |
-                                <g:link action="del" id="\${${propertyName}?.id}" onclick="return confirm('Are you sure?');">del</g:link>
-                            </td>
-
                         <%  props.eachWithIndex { p,i ->
                                 if(i == 0) { %>
-                            <td><g:link action="show" id="\${${propertyName}.id}">\${${propertyName}.${p.name}?.encodeAsHTML()}</g:link></td>
-                        <%      } else if(i < 10) { %>
-                            <td>\${${propertyName}.${p.name}?.encodeAsHTML()}</td>
+                            <td><g:link action="show" id="\${${propertyName}.id}">\${fieldValue(bean:${propertyName}, field:'${p.name}')}</g:link></td>
+                        <%      } else if(i < 6) { %>
+                            <td>\${fieldValue(bean:${propertyName}, field:'${p.name}')}</td>
                         <%  }   } %>
                         </tr>
                     </g:each>
@@ -60,9 +53,8 @@
                 </table>
             </div>
             <div class="paginateButtons">
-                <g:paginate total="\${${className}.count()}" />
+                <g:paginate total="\${${propertyName}Total}" />
             </div>
         </div>
     </body>
 </html>
-

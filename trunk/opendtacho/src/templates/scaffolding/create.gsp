@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="\${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="\${resource(dir:'')}">Home</a></span>
             <span class="menuButton"><g:link class="list" action="list">${className} List</g:link></span>
         </div>
         <div class="body">
@@ -37,7 +37,7 @@
 
                             Collections.sort(props, comparator.constructors[0].newInstance([domainClass] as Object[]))
                             props.each { p ->
-                                if(p.type != Set.class) {
+                                if(!Collection.class.isAssignableFrom(p.type)) {
                                     cp = domainClass.constrainedProperties[p.name]
                                     display = (cp ? cp.display : true)        
                                     if(display) { %>
@@ -45,7 +45,7 @@
                                 <td valign="top" class="name">
                                     <label for="${p.name}">${p.naturalName}:</label>
                                 </td>
-                                <td valign="top" class="value \${hasErrors(bean:${domainClass.propertyName},field:'${p.name}','errors')}">
+                                <td valign="top" class="value \${hasErrors(bean:${propertyName},field:'${p.name}','errors')}">
                                     ${renderEditor(p)}
                                 </td>
                             </tr> 

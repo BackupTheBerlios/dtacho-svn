@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="\${createLinkTo(dir:'')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="\${resource(dir:'')}">Home</a></span>
             <span class="menuButton"><g:link class="list" action="list">${className} List</g:link></span>
             <span class="menuButton"><g:link class="create" action="create">New ${className}</g:link></span>
         </div>
@@ -34,7 +34,7 @@
                             <td valign="top" class="name">${p.naturalName}:</td>
                             <% if(p.isEnum()) { %>
                             <td valign="top" class="value">\${${propertyName}?.${p.name}?.encodeAsHTML()}</td>
-                            <% } else if(p.oneToMany) { %>
+                            <% } else if(p.oneToMany || p.manyToMany) { %>
                             <td  valign="top" style="text-align:left;" class="value">
                                 <ul>
                                 <g:each var="${p.name[0]}" in="\${${propertyName}.${p.name}}">

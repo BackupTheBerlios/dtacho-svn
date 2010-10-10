@@ -14,4 +14,6 @@ security {
 
     useRequestMapDomainClass = true
 
+    basicProcessingFilter = true
+
 }

@@ -3,13 +3,10 @@ import org.springframework.context.ApplicationContext
 import org.opendtacho.serviceinterfaces.*
 import org.codehaus.groovy.grails.commons.GrailsApplication
 import grails.util.GrailsUtil
-import org.opendtacho.domain.DtRole
-import org.opendtacho.domain.DtUser
 
 class BootStrap {
 
     def fixtureLoader
-
 
     def init = {servletContext ->
 
@@ -20,9 +17,8 @@ class BootStrap {
 //        fixtureLoader.load("DataGenerator")
       }
 
-        
-
     }
+
     def destroy = {
     }
 } 
