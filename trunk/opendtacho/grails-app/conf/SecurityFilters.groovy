@@ -6,7 +6,7 @@ class SecurityFilters {
 
   def filters = {
 
-    //only admin can create or delete something
+    //only admin can create or delete erevything
     adminFilter(controller:"*",action:"(delete|create)"){
       before={
         //methods getAuthorities() (from DtUser) returns a list with Hibernate type
@@ -20,11 +20,15 @@ class SecurityFilters {
         return true
       }
     }
-
+    
     //user filter is used to check the current user, if the current user don't relate to the data --> denied
     //ATTENTION: controller name is case sensitive, DtUser --> dtUser, dtuser --> don't work
     userFilter(controller:"dtUser",action:"(show|edit)"){
       before = {
+        //admin can everything
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
+
         def currentUserId = authenticateService.userDomain().id
         if(currentUserId != params.id.toLong()){//currentUserId has type bigint, therefore params.id.toLong()
           redirect(controller:"login",action:"denied")
@@ -37,6 +41,10 @@ class SecurityFilters {
     //person filter
     personFilter(controller:"dtPerson",action:"(show|edit)"){
       before={
+        //admin can everything
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
+
         def currentPersonId = authenticateService.userDomain().getPerson().id
         if(currentPersonId!=params.id.toLong()){
           redirect(controller:"login",action:"denied")
@@ -49,6 +57,10 @@ class SecurityFilters {
     //department filter
     departmentFilter(controller:"dtDepartment",action:"(show|edit)"){
       before={
+        //admin can everything
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
+
         //the method userDomain() returns a detached instance, which means it isn't
         //bound to the underlying Hibernate session
         //therefore we have to do the tricky way below :(
@@ -67,6 +79,10 @@ class SecurityFilters {
     //subsidiary filter
     subsidiaryFilter(controller:"dtSubsidiary",action:"(show|edit)"){
       before={
+        //admin can everything
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
+
         def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
         def currentSubsidiary = currentPerson.getSubsidiary()
@@ -82,6 +98,10 @@ class SecurityFilters {
     //company filter
     companyFilter(controller:"dtCompany",action:"(show|edit)"){
       before={
+        //admin can everything
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
+
         def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
         def currentCompany = currentPerson.getCompany()
@@ -93,8 +113,6 @@ class SecurityFilters {
         return true
       }
     }
-
-
 
   }
     
