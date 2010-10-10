@@ -6,9 +6,23 @@ class SecurityFilters {
 
   def filters = {
 
-    //user filter is used to check the current user, if the current user don't relate to
-    //the data --> denied
-    //attention: controller name is case sensitive, DtUser --> dtUser, dtuser --> don't work
+    //only admin can create or delete something
+    adminFilter(controller:"*",action:"(delete|create)"){
+      before={
+        //methods getAuthorities() (from DtUser) returns a list with Hibernate type
+        //org.hibernate.collection.PersistentSet
+        //have to convert to groovy list
+        def currentRole = authenticateService.userDomain().getAuthorities().toList() //here is a list
+        if(currentRole[0].getAuthority()!="ROLE_ADMIN"){                             //take the first and the only one instance in list
+          redirect(controller:"login",action:"denied")
+          return false
+        }
+        return true
+      }
+    }
+
+    //user filter is used to check the current user, if the current user don't relate to the data --> denied
+    //ATTENTION: controller name is case sensitive, DtUser --> dtUser, dtuser --> don't work
     userFilter(controller:"dtUser",action:"(show|edit)"){
       before = {
         def currentUserId = authenticateService.userDomain().id
@@ -53,7 +67,7 @@ class SecurityFilters {
     //subsidiary filter
     subsidiaryFilter(controller:"dtSubsidiary",action:"(show|edit)"){
       before={
-        def currentPersonId = authenticateService.userDomain().id
+        def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
         def currentSubsidiary = currentPerson.getSubsidiary()
 
@@ -68,7 +82,7 @@ class SecurityFilters {
     //company filter
     companyFilter(controller:"dtCompany",action:"(show|edit)"){
       before={
-        def currentPersonId = authenticateService.userDomain().id
+        def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
         def currentCompany = currentPerson.getCompany()
 
@@ -79,6 +93,9 @@ class SecurityFilters {
         return true
       }
     }
+
+
+
   }
     
 }
