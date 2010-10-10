@@ -21,7 +21,6 @@
 
 import org.opendtacho.domain.DtCompany
 import org.opendtacho.domain.DtPerson
-import org.opendtacho.domain.DtUser
 
 class DtCompanyController {
     def authenticateService
@@ -34,16 +33,23 @@ class DtCompanyController {
     static allowedMethods = [delete:'POST', save:'POST', update:'POST']
 
     def list = {
-        def currentUserId = authenticateService.userDomain().id
+        def currentPersonId = authenticateService.userDomain().getPerson().id
+        def currentPerson = DtPerson.get(currentPersonId)
 
-        if(DtUser.get(currentUserId).getUsername()=="admin"){
+        def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
+        def currentRole = currentRoleMap[0].getAuthority()
+
+        //see everything
+        if(currentRole=="ROLE_ADMIN"){
           return [ dtCompanyInstanceList: DtCompany.list( params ), dtCompanyInstanceTotal: DtCompany.count() ]
         }
-        else{
-          def currentPersonId = authenticateService.userDomain().getPerson().id
-          def currentPerson = DtPerson.get(currentPersonId)
+
+        //see only your company
+        if(currentRole=="ROLE_COMPANY_MANAGER"){
+
           def currentCompany = currentPerson.getCompany()
           def tempList = DtCompany.findAllById(currentCompany.id)
+
           return [ dtCompanyInstanceList: tempList, dtCompanyInstanceTotal: tempList.count() ]
         }
     }

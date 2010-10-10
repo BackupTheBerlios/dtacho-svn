@@ -99,6 +99,10 @@
   <body>
     <div class="body">
       <h1><g:message code="report.title"/></h1>
+
+      %{--matched company and subsidiary to the logged in user--}%
+      <g:set var ="company" value="${currentCompany}"/>
+      <g:set var ="subsidiary" value="${currentSubsidiary}"/> 
       
       %{--temporary date variable for pdf report filename--}%
       <g:set var="a" value="${new Date()}"/>

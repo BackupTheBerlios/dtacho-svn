@@ -23,10 +23,25 @@ import org.opendtacho.domain.*
 
 
 class DtActivityChangeController {
+  def authenticateService
+
   def scaffold = DtActivityChange
 
   //empty action, just forward to the view report.gsp
-  def report = { }
+  def report = {
+//    def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
+//    def currentRole = currentRoleMap[0].getAuthority()
+//
+//    if(currentRole=="ROLE_ADMIN")
+//      return [currentCompany:DtCompany.list(),currentSubsidiary:DtSubsi]
+//
+//    def currentPersonId = authenticateService.userDomain().getPerson().id
+//    def currentPerson = DtPerson.get(currentPersonId)
+//    def currentSubsidiary = currentPerson.getSubsidiary()
+//    def currentCompany = currentPerson.getCompany()
+//
+//    return [currentSubsidiary:currentSubsidiary,currentCompany:currentCompany]
+  }
 
   //Transformation function from minute number to time String
   String timeTrans (int z) {
