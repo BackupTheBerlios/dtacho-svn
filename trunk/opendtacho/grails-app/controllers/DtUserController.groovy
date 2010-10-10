@@ -42,6 +42,10 @@ class DtUserController {
 
     //modified list actions returns the COMPATIBLE data for request
 	def list = {
+//		if (!params.max) {
+//			params.max = 10
+//		}
+//		[personList: DtUser.list(params)]
         def currentPersonId = authenticateService.userDomain().getPerson().id
         def currentPerson = DtPerson.get(currentPersonId)
 
@@ -50,7 +54,7 @@ class DtUserController {
 
         //see everything
         if(currentRole=="ROLE_ADMIN"){
-            return [ dtUserInstanceList: DtUser.list( params ), dtUserInstanceTotal: DtUser.count() ]
+            return [ personList: DtUser.list( params )/*, personInstanceTotal: DtUser.count() */]
         }
 
         //see only users related persons in company
@@ -65,7 +69,7 @@ class DtUserController {
                 tempList+=aPerson.getUsers()
             }
             println "${tempList}"
-            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+            return [ personList: tempList/*, personTotal: tempList.count() */]
         }
 
         //see only users related persons in subsidiary
@@ -81,7 +85,7 @@ class DtUserController {
                 tempList+=aPerson.getUsers()
             }
             println "${tempList}"
-            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+            return [ personList: tempList/*, personTotal: tempList.count() */]
         }
 
         //see only users related persons in department
@@ -97,7 +101,7 @@ class DtUserController {
                 tempList+=aPerson.getUsers()
             }
             println "${tempList}"
-            return [ dtUserInstanceList: tempList, dtUserInstanceTotal: tempList.count() ]
+            return [ personList: tempList/*, dtUserInstanceTotal: tempList.count() */]
         }
 
 	}

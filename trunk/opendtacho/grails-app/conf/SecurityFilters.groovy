@@ -1,6 +1,7 @@
 import org.opendtacho.domain.DtPerson
 import org.opendtacho.domain.DtSubsidiary
 import org.opendtacho.domain.DtDepartment
+import org.opendtacho.domain.DtUser
 
 class SecurityFilters {
 
@@ -31,16 +32,46 @@ class SecurityFilters {
     //ATTENTION: controller name is case sensitive, DtUser --> dtUser, dtuser --> don't work
     userFilter(controller:"dtUser",action:"(show|edit)"){
       before = {
-        //admin can everything
-        def currentRole = authenticateService.userDomain().getAuthorities().toList()
-        if(currentRole[0].getAuthority()=="ROLE_ADMIN") return true
-
         def currentUserId = authenticateService.userDomain().id
-        if(currentUserId != params.id.toLong()){//currentUserId has type bigint, therefore params.id.toLong()
-          redirect(controller:"login",action:"denied")
-          return false
+
+        def currentRole = authenticateService.userDomain().getAuthorities().toList()
+
+        //admin can everything
+        if(currentRole[0].getAuthority()=="ROLE_ADMIN"){
+          return true
         }
-        return true
+
+        //company manager can modify all related users
+        if(currentRole[0].getAuthority()=="ROLE_COMPANY_MANAGER"){
+          def currentPersonId = authenticateService.userDomain().getPerson().id
+          def currentPerson = DtPerson.get(currentPersonId)
+          def currentCompany = currentPerson.getCompany()
+
+          def tempPersonList = currentCompany.getPersons()
+
+          def tempList = []
+
+          tempPersonList.each {aPerson->
+            tempList+=aPerson.getUsers()
+          }
+          println "${tempList}"
+          if(tempList.contains(DtUser.get(params.id))){
+            return true
+          }
+          else {
+            redirect(controller:"login",action:"denied")
+            return false
+          }
+
+        }
+
+
+
+//        if(currentUserId != params.id.toLong()){//currentUserId has type bigint, therefore params.id.toLong()
+//          redirect(controller:"login",action:"denied")
+//          return false
+//        }
+//        return true
       }
     }
 
