@@ -1,7 +1,5 @@
 security {
 
-	// see DefaultSecurityConfig.groovy for all settable/overridable properties
-
 	active = true
 
 	loginUserDomainClass = "org.opendtacho.domain.DtUser"
@@ -16,4 +14,8 @@ security {
 
     basicProcessingFilter = true
 
+    //the user management principles are based on 3 techniques
+    //1. MAPPING roles to url (url-based)
+    //2. FILTER FOR REQUEST, a user can't see data of another user
+    //3. MODIFIED LIST ACTION, controllers return only compatible data
 }
