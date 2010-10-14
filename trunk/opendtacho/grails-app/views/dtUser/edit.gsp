@@ -1,3 +1,4 @@
+<%@ page import="org.opendtacho.domain.DtPerson" %>
 <head>
 	<meta name="layout" content="main" />
 	<title>Edit DtUser</title>
@@ -16,6 +17,8 @@
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
+
+        %{--person is a DtUser instance, sended from DtUserController--}%
 		<g:hasErrors bean="${person}">
 		<div class="errors">
 			<g:renderErrors bean="${person}" as="list" />
@@ -82,6 +85,13 @@
 						</td>
 					</tr>
 
+                    %{--show the related persons--}%
+                    <tr class="prop">
+						<td valign="top" class="name"><label for="person">Person:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'person','errors')}">
+					      <g:select name="person" optionKey="lastName" optionValue="lastName" from="${DtPerson.list()}"/>
+                        </td>
+					</tr>
 				</tbody>
 				</table>
 			</div>

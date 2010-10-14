@@ -45,6 +45,11 @@
 					<td valign="top" class="value">${person.description?.encodeAsHTML()}</td>
 				</tr>
 
+                <tr class="prop">
+					<td valign="top" class="name">Person:</td>
+					<td valign="top" class="value">${person.person}</td>
+				</tr>
+
 				<tr class="prop">
 					<td valign="top" class="name">Roles:</td>
 					<td valign="top" class="value">

@@ -71,6 +71,7 @@ class DtPerson {
         company(nullable:true)
         subsidiary(nullable:true)
         department(nullable:true)
+        users(nullable:true)
     }
 
     String toString() {

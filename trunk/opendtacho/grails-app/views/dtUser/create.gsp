@@ -71,6 +71,14 @@
 					</tr>
 					</g:each>
 
+                    %{--added select box for related DtPerson--}%
+                    <g:each in="${dtpersonList}">
+					<tr>
+						<td valign="top" class="name" align="left">${it.lastName.encodeAsHTML()}</td>
+						<td align="left"><g:checkBox name="${it.lastName}"/></td>
+					</tr>
+					</g:each>
+
 				</tbody>
 				</table>
 			</div>

@@ -115,13 +115,34 @@ class DtUserController {
 
 	}
 
-	def show = {
-		def person = DtUser.get(params.id)
+//    original show action of acegi plugin
+//	def show = {
+//		def person = DtUser.get(params.id)
+//		if (!person) {
+//			flash.message = "DtUser not found with id $params.id"
+//			redirect action: list
+//			return
+//		}
+//		List roleNames = []
+//		for (role in person.authorities) {
+//			roleNames << role.authority
+//		}
+//		roleNames.sort { n1, n2 ->
+//			n1 <=> n2
+//		}
+//		[person: person, roleNames: roleNames]
+//	}
+
+    //modified show action
+    def show = {
+
+        def person = DtUser.get(params.id)
 		if (!person) {
 			flash.message = "DtUser not found with id $params.id"
 			redirect action: list
 			return
 		}
+
 		List roleNames = []
 		for (role in person.authorities) {
 			roleNames << role.authority
@@ -129,7 +150,11 @@ class DtUserController {
 		roleNames.sort { n1, n2 ->
 			n1 <=> n2
 		}
-		[person: person, roleNames: roleNames]
+
+        //the related person
+        def dtperson = person.getPerson()
+
+		[person: person, dtperson: dtperson, roleNames: roleNames]
 	}
 
 	/**
@@ -206,8 +231,14 @@ class DtUserController {
 		}
 	}
 
-	def create = {
-		[person: new DtUser(params), authorityList: DtRole.list()]
+//  original action of acegi plugin
+//	def create = {
+//		[person: new DtUser(params), authorityList: DtRole.list()]
+//	}
+
+//  modified create action
+    def create = {
+		[person: new DtUser(params), authorityList: DtRole.list(), dtpersonList: DtPerson.list()]
 	}
 
 	/**
