@@ -5,9 +5,9 @@
       <configuration>
         <webroots>
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/web-app" relative="/" />
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/web-app" relative="/" />
+          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -51,9 +51,9 @@
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library">
         <CLASSES>
+          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" />
           <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/lib" />
         </CLASSES>
         <JAVADOC />

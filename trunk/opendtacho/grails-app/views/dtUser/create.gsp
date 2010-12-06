@@ -71,6 +71,10 @@
 					</tr>
 					</g:each>
 
+
+                    <tr class="prop">
+                        <td valign ="top" class="name" align="left">Persons:</td> 
+                    </tr>
                     %{--added select box for related DtPerson--}%
                     <g:each in="${dtpersonList}">
 					<tr>
