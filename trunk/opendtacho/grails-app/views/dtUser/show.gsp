@@ -22,32 +22,34 @@
 
 				<tr class="prop">
 					<td valign="top" class="name">ID:</td>
-					<td valign="top" class="value">${person.id}</td>
+					<td valign="top" class="value">${user.id}</td>
 				</tr>
 
 				<tr class="prop">
 					<td valign="top" class="name">Login Name:</td>
-					<td valign="top" class="value">${person.username?.encodeAsHTML()}</td>
+					<td valign="top" class="value">${user.username?.encodeAsHTML()}</td>
 				</tr>
 
 				<tr class="prop">
 					<td valign="top" class="name">Full Name:</td>
-					<td valign="top" class="value">${person.userRealName?.encodeAsHTML()}</td>
+					<td valign="top" class="value">${user.userRealName?.encodeAsHTML()}</td>
 				</tr>
 
 				<tr class="prop">
 					<td valign="top" class="name">Enabled:</td>
-					<td valign="top" class="value">${person.enabled}</td>
+					<td valign="top" class="value">${user.enabled}</td>
 				</tr>
 
 				<tr class="prop">
 					<td valign="top" class="name">Description:</td>
-					<td valign="top" class="value">${person.description?.encodeAsHTML()}</td>
+					<td valign="top" class="value">${user.description?.encodeAsHTML()}</td>
 				</tr>
 
+
+                %{--the related person in context with this user--}%
                 <tr class="prop">
 					<td valign="top" class="name">Person:</td>
-					<td valign="top" class="value">${person.person}</td>
+					<td valign="top" class="value">${user.person}</td>
 				</tr>
 
 				<tr class="prop">
@@ -67,7 +69,7 @@
 
 		<div class="buttons">
 			<g:form>
-				<input type="hidden" name="id" value="${person.id}" />
+				<input type="hidden" name="id" value="${user.id}" />
 				<span class="button"><g:actionSubmit class="edit" value="Edit" /></span>
 				<span class="button"><g:actionSubmit class="delete" onclick="return confirm('Are you sure?');" value="Delete" /></span>
 			</g:form>

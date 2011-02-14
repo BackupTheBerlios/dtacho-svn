@@ -3,7 +3,7 @@ import org.opendtacho.domain.DtRequestMap
 fixture{
   rm1(DtRequestMap) {
     url = '/dtactivitychange/**'
-    configAttribute = 'ROLE_ADMIN'
+    configAttribute = 'ROLE_ADMIN,ROLE_COMPANY_MANAGER'
   }
   rm2(DtRequestMap) {
     url = '/dtdriver/**'

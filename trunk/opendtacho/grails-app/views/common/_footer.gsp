@@ -7,5 +7,5 @@
 --%>
 
 <span class="copyright">
-    &copy; 2010 <g:link url="http://www.opendtacho.org">opendtacho.org</g:link><br/>
+    &copy; 2011 <g:link url="http://www.opendtacho.org">opendtacho.org</g:link><br/>
 </span>

@@ -19,79 +19,92 @@
 		</g:if>
 
         %{--person is a DtUser instance, sended from DtUserController--}%
-		<g:hasErrors bean="${person}">
+		<g:hasErrors bean="${user}">
 		<div class="errors">
-			<g:renderErrors bean="${person}" as="list" />
+			<g:renderErrors bean="${user}" as="list" />
 		</div>
 		</g:hasErrors>
 
 		<div class="prop">
 			<span class="name">ID:</span>
-			<span class="value">${person.id}</span>
+			<span class="value">${user.id}</span>
 		</div>
 
 		<g:form>
-			<input type="hidden" name="id" value="${person.id}" />
-			<input type="hidden" name="version" value="${person.version}" />
+			<input type="hidden" name="id" value="${user.id}" />
+			<input type="hidden" name="version" value="${user.version}" />
 			<div class="dialog">
 				<table>
 				<tbody>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="username">Login Name:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
-							<input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'username','errors')}">
+							<input type="text" id="username" name="username" value="${user.username?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="userRealName">Full Name:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
-							<input type="text" id="userRealName" name="userRealName" value="${person.userRealName?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'userRealName','errors')}">
+							<input type="text" id="userRealName" name="userRealName" value="${user.userRealName?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="password">Password:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
-							<input type="password" id="password" name="password" value="${person.password?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'password','errors')}">
+							<input type="password" id="password" name="password" value="${user.password?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="enabled">Enabled:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
-							<g:checkBox name="enabled" value="${person.enabled}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'enabled','errors')}">
+							<g:checkBox name="enabled" value="${user.enabled}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="description">Description:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
-							<input type="text" id="description" name="description" value="${person.description?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'description','errors')}">
+							<input type="text" id="description" name="description" value="${user.description?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="authorities">Roles:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'authorities','errors')}">
+						<td valign="top" class="name">
+                            <label for="authorities">Roles:</label>
+                        </td>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'authorities','errors')}">
 							<ul>
-							<g:each var="entry" in="${roleMap}">
-								<li>${entry.key.authority.encodeAsHTML()}
-									<g:checkBox name="${entry.key.authority}" value="${entry.value}"/>
-								</li>
-							</g:each>
+                                <g:each var="entry" in="${roleMap}">
+                                    <li>${entry.key.authority.encodeAsHTML()}
+                                        <g:checkBox name="${entry.key.authority}" value="${entry.value}"/>
+                                    </li>
+                                </g:each>
 							</ul>
 						</td>
 					</tr>
 
-                    %{--show the related persons--}%
+
+                    %{--show the related person--}%
                     <tr class="prop">
-						<td valign="top" class="name"><label for="person">Person:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'person','errors')}">
-					      <g:select name="person" optionKey="lastName" optionValue="lastName" from="${DtPerson.list()}"/>
+                        <td valign="top" class="name">
+                            <label for="persons">Persons:</label>
                         </td>
-					</tr>
+                        <td valign="top" class="value ${hasErrors(bean:user,field:'person','errors')}">
+                            <ul>
+                                <g:each var="entry" in="${DtPerson.list()}">
+                                    <li>
+                                        ${entry.lastName}, ${entry.firstName}
+                                        <g:radio value="${entry.id}" name="person"/> 
+                                    </li>
+                                </g:each>
+                            </ul>
+                        </td>
+                    </tr>
+
 				</tbody>
 				</table>
 			</div>

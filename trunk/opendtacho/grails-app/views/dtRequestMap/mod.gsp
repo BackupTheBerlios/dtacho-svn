@@ -197,7 +197,10 @@
 
         <div class="buttons">
           <span class="button">
-            <input class="update" type="button" value="<g:message code="authen.button"/>" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/> 
+            <input class="update" type="button" value="<g:message code="authen.update"/>" onClick="document.modifyForm.action='modResults'; document.modifyForm.submit();"/>
+
+            %{--call the controller: dtRole, action: create--}%
+            <input class="save" type="button" value="<g:message code="authen.group"/>" onClick='window.location.href="<g:createLink controller='dtRole' action='create'/>"'/>
           </span>
         </div>
       </g:form>

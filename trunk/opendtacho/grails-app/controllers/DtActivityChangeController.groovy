@@ -28,6 +28,12 @@ class DtActivityChangeController {
   def scaffold = DtActivityChange
 
   //empty action, just forward to the view report.gsp
+  /*
+    MODIFIED
+    
+
+
+  */
   def report = {
 //    def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
 //    def currentRole = currentRoleMap[0].getAuthority()
@@ -41,6 +47,34 @@ class DtActivityChangeController {
 //    def currentCompany = currentPerson.getCompany()
 //
 //    return [currentSubsidiary:currentSubsidiary,currentCompany:currentCompany]
+
+    def currentPersonId = authenticateService.userDomain().getPerson().id
+    def currentPerson = DtPerson.get(currentPersonId)
+
+    def currentRoleMap = authenticateService.userDomain().getAuthorities().toList()
+    def currentRole = currentRoleMap[0].getAuthority()
+
+    //see everything
+    if(currentRole=="ROLE_ADMIN"){
+      System.out.println(currentPerson)
+      System.out.println(currentRole)
+
+      return [ dtCompanyInstanceList: DtCompany.list(), dtDriverInstanceList: DtDriver.list()]
+    }
+
+    //see only your company
+    if(currentRole=="ROLE_COMPANY_MANAGER"){
+      System.out.println(currentPerson)
+      System.out.println(currentRole)
+
+      def currentCompany = currentPerson.getCompany()
+      def companyList = DtCompany.findAllById(currentCompany.id)
+
+      def driverList = currentCompany.getDrivers()
+
+      return [ dtCompanyInstanceList: companyList, dtDriverInstanceList: driverList ]
+    }
+
   }
 
   //Transformation function from minute number to time String

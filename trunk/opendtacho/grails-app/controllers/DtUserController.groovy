@@ -40,7 +40,10 @@ class DtUserController {
 		redirect action: list, params: params
 	}
 
-    //modified list actions returns the COMPATIBLE data for request
+    /*
+      MODIFIED list action
+      returns the COMPATIBLE data for request
+    */
 	def list = {
 //		if (!params.max) {
 //			params.max = 10
@@ -115,46 +118,31 @@ class DtUserController {
 
 	}
 
-//    original show action of acegi plugin
-//	def show = {
-//		def person = DtUser.get(params.id)
-//		if (!person) {
-//			flash.message = "DtUser not found with id $params.id"
-//			redirect action: list
-//			return
-//		}
-//		List roleNames = []
-//		for (role in person.authorities) {
-//			roleNames << role.authority
-//		}
-//		roleNames.sort { n1, n2 ->
-//			n1 <=> n2
-//		}
-//		[person: person, roleNames: roleNames]
-//	}
-
-    //modified show action
     def show = {
 
-        def person = DtUser.get(params.id)
-		if (!person) {
+        //get the user in context with help of his id
+        def user = DtUser.get(params.id)
+
+        //if this user don't exist
+		if (!user) {
 			flash.message = "DtUser not found with id $params.id"
 			redirect action: list
 			return
 		}
 
+        //gets the roles of this user
 		List roleNames = []
-		for (role in person.authorities) {
+		for (role in user.authorities) {
 			roleNames << role.authority
 		}
 		roleNames.sort { n1, n2 ->
 			n1 <=> n2
 		}
 
-        //the related person
-        def dtperson = person.getPerson()
-
-		[person: person, dtperson: dtperson, roleNames: roleNames]
+        //forward to SHOW.GSP to show
+        //user: this user instance in context
+        //roleNames: a list of all roles of this user
+        [user: user, roleNames: roleNames]
 	}
 
 	/**
@@ -163,17 +151,17 @@ class DtUserController {
 	 */
 	def delete = {
 
-		def person = DtUser.get(params.id)
-		if (person) {
+		def user = DtUser.get(params.id)
+		if (user) {
 			def authPrincipal = authenticateService.principal()
 			//avoid self-delete if the logged-in user is an admin
-			if (!(authPrincipal instanceof String) && authPrincipal.username == person.username) {
+			if (!(authPrincipal instanceof String) && authPrincipal.username == user.username) {
 				flash.message = "You can not delete yourself, please login as another admin and try again"
 			}
 			else {
 				//first, delete this person from People_Authorities table.
-				DtRole.findAll().each { it.removeFromPeople(person) }
-				person.delete()
+				DtRole.findAll().each { it.removeFromPeople(user) }
+				user.delete()
 				flash.message = "DtUser $params.id deleted."
 			}
 		}
@@ -186,59 +174,67 @@ class DtUserController {
 
 	def edit = {
 
-		def person = DtUser.get(params.id)
-		if (!person) {
+        //get the user in context with help of his id
+		def user = DtUser.get(params.id)
+
+        //if this user don't exist
+		if (!user) {
 			flash.message = "DtUser not found with id $params.id"
 			redirect action: list
 			return
 		}
 
-		return buildPersonModel(person)
+
+		return buildPersonModel(user)
 	}
 
 	/**
 	 * Person update action.
+     * MODIFIED
+     *
+     * update with relation with person
 	 */
 	def update = {
 
-		def person = DtUser.get(params.id)
-		if (!person) {
+		def user = DtUser.get(params.id)
+		if (!user) {
 			flash.message = "DtUser not found with id $params.id"
 			redirect action: edit, id: params.id
 			return
 		}
 
 		long version = params.version.toLong()
-		if (person.version > version) {
-			person.errors.rejectValue 'version', "person.optimistic.locking.failure",
+		if (user.version > version) {
+			user.errors.rejectValue 'version', "person.optimistic.locking.failure",
 				"Another user has updated this DtUser while you were editing."
-				render view: 'edit', model: buildPersonModel(person)
+				render view: 'edit', model: buildPersonModel(user)
 			return
 		}
 
-		def oldPassword = person.password
-		person.properties = params
+		def oldPassword = user.password
+		user.properties = params
 		if (!params.password.equals(oldPassword)) {
-			person.password = authenticateService.encodePassword(params.password)
+			user.password = authenticateService.encodePassword(params.password)
 		}
-		if (person.save()) {
-			DtRole.findAll().each { it.removeFromPeople(person) }
-			addRoles(person)
-			redirect action: show, id: person.id
+		if (user.save()) {
+			DtRole.findAll().each { it.removeFromPeople(user) }
+
+            //invokes the addRoles() function, assign a new role or many new roles to the new created user
+            addRoles(user)
+
+            //invokes the addPerson() function, assgin a new person to the new created user
+            //ATTENTION: just only one person for a user, but many users can assgin to a person
+            addPerson(user)
+
+			redirect action: show, id: user.id
 		}
 		else {
-			render view: 'edit', model: buildPersonModel(person)
+			render view: 'edit', model: buildPersonModel(user)
 		}
 	}
 
-//  original action of acegi plugin
-//	def create = {
-//		[person: new DtUser(params), authorityList: DtRole.list()]
-//	}
-
-//  modified create action
-    def create = {
-		[person: new DtUser(params), authorityList: DtRole.list(), dtpersonList: DtPerson.list()]
+	def create = {
+		[user: new DtUser(params), authorityList: DtRole.list()]
 	}
 
 	/**
@@ -246,34 +242,65 @@ class DtUserController {
 	 */
 	def save = {
 
-		def person = new DtUser()
-		person.properties = params
-		person.password = authenticateService.encodePassword(params.password)
-		if (person.save()) {
-			addRoles(person)
-			redirect action: show, id: person.id
+		def user = new DtUser()
+		user.properties = params
+		user.password = authenticateService.encodePassword(params.password)
+		if (user.save()) {
+
+            //invokes the addRoles() function, assign a new role or many new roles to the new created user
+            addRoles(user)
+
+            //invokes the addPerson() function, assgin a new person to the new created user
+            //ATTENTION: just only one person for a user, but many users can assgin to a person
+            addPerson(user)
+
+            redirect action: show, id: user.id
 		}
 		else {
-			render view: 'create', model: [authorityList: DtRole.list(), person: person]
+			render view: 'create', model: [authorityList: DtRole.list(), user: user]
 		}
 	}
 
-	private void addRoles(person) {
+
+    /*
+      take properties from the "create form" (create.gsp),
+      create a blank person and add the properties to this person
+      if the user choose a role then add the role to this person
+      help method for CREATE action
+    */
+	private void addRoles(user) {
 		for (String key in params.keySet()) {
 			if (key.contains('ROLE') && 'on' == params.get(key)) {
-				DtRole.findByAuthority(key).addToPeople(person)
+				DtRole.findByAuthority(key).addToPeople(user)
 			}
 		}
 	}
 
-	private Map buildPersonModel(person) {
 
+    /*
+      MODIFIED
+      assign the new created user to the related person
+      help method for CREATE action
+    */
+    private void addPerson(user){
+
+      //takes the selected person by invoking the get method with params.person=id of this selected person
+      def person = DtPerson.get(params.person);
+
+      //adds this person to the new created user
+      user.person = person
+    }
+
+	private Map buildPersonModel(user) {
+
+        //gets all available roles, and sort this list
 		List roles = DtRole.list()
 		roles.sort { r1, r2 ->
 			r1.authority <=> r2.authority
 		}
-		Set userRoleNames = []
-		for (role in person.authorities) {
+
+        Set userRoleNames = []
+		for (role in user.authorities) {
 			userRoleNames << role.authority
 		}
 		LinkedHashMap<DtRole, Boolean> roleMap = [:]
@@ -281,6 +308,6 @@ class DtUserController {
 			roleMap[(role)] = userRoleNames.contains(role.authority)
 		}
 
-		return [person: person, roleMap: roleMap]
+		return [user: user, roleMap: roleMap]
 	}
 }

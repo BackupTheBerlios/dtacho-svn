@@ -115,17 +115,17 @@
                   <strong><g:message code="report.company"/></strong>
                 </td>
                 <td>
-                  <g:select name="company" optionKey="companyName" optionValue="companyName" from="${DtCompany.list()}"/>
+                  <g:select name="company" optionKey="companyName" optionValue="companyName" from="${dtCompanyInstanceList}"/>
                 </td>
               </tr>
-              <tr class="prop">
+              %{--<tr class="prop">
                 <td valign="top" class="name">
                   <strong><g:message code="report.subsidiary"/></strong>
                 </td>
                 <td>
                   <g:select name="city" optionKey="city" optionValue="city" from="${DtSubsidiary.list()}"/>
                 </td>
-              </tr>
+              </tr>--}%
               <tr class="prop">
                 <td valign="top" class="name">
                   <strong><g:message code="report.driver"/></strong>
@@ -135,7 +135,7 @@
                   <input type="button" value="${message(code:'report.driver.unselectAll')}" onclick="unselectAll();"/>
                   <br/>
 
-                  <g:each in="${DtDriver.list()}">
+                  <g:each in="${dtDriverInstanceList}">
                     <input type="checkbox" id="drivers" name="drivers" value="${it.id}"/>
                     ${it.cardHolderName_holderSurname}, ${it.cardHolderName_holderFirstNames}
                     <br/>

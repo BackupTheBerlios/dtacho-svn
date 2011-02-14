@@ -25,7 +25,7 @@ class DtPerson {
   //belongsTo keyword has 2 forms
   //belongsTo = A is unidirectional, it means in class A you can get reference to B, reserve is impossible
   //belongsTo = [a:A] is bidirectional
-  static belongsTo = [company:DtCompany,subsidiary:DtSubsidiary,department:DtDepartment]
+  static belongsTo = [company:DtCompany,subsidiary:DtSubsidiary,department:DtDepartment,driver:DtDriver]
 //  DtCompany company
 //  DtSubsidiary subsidiary
 //  DtDepartment department
@@ -72,6 +72,7 @@ class DtPerson {
         subsidiary(nullable:true)
         department(nullable:true)
         users(nullable:true)
+        driver(nullable:true)
     }
 
     String toString() {

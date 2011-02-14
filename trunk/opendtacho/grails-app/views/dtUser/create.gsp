@@ -1,3 +1,4 @@
+<%@ page import="org.opendtacho.domain.DtPerson" %>
 <head>
 	<meta name="layout" content="main" />
 	<title>Create DtUser</title>
@@ -15,9 +16,9 @@
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
-		<g:hasErrors bean="${person}">
+		<g:hasErrors bean="${user}">
 		<div class="errors">
-			<g:renderErrors bean="${person}" as="list" />
+			<g:renderErrors bean="${user}" as="list" />
 		</div>
 		</g:hasErrors>
 		<g:form action="save">
@@ -27,36 +28,36 @@
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="username">Login Name:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
-							<input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'username','errors')}">
+							<input type="text" id="username" name="username" value="${user.username?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="userRealName">Full Name:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
-							<input type="text" id="userRealName" name="userRealName" value="${person.userRealName?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'userRealName','errors')}">
+							<input type="text" id="userRealName" name="userRealName" value="${user.userRealName?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="password">Password:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'password','errors')}">
-							<input type="password" id="password" name="password" value="${person.password?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'password','errors')}">
+							<input type="password" id="password" name="password" value="${user.password?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="enabled">Enabled:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
-							<g:checkBox name="enabled" value="${person.enabled}" ></g:checkBox>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'enabled','errors')}">
+							<g:checkBox name="enabled" value="${user.enabled}" ></g:checkBox>
 						</td>
 					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="description">Description:</label></td>
-						<td valign="top" class="value ${hasErrors(bean:person,field:'description','errors')}">
-							<input type="text" id="description" name="description" value="${person.description?.encodeAsHTML()}"/>
+						<td valign="top" class="value ${hasErrors(bean:user,field:'description','errors')}">
+							<input type="text" id="description" name="description" value="${user.description?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
@@ -75,13 +76,20 @@
                     <tr class="prop">
                         <td valign ="top" class="name" align="left">Persons:</td> 
                     </tr>
+
+
+
                     %{--added select box for related DtPerson--}%
-                    <g:each in="${dtpersonList}">
-					<tr>
-						<td valign="top" class="name" align="left">${it.lastName.encodeAsHTML()}</td>
-						<td align="left"><g:checkBox name="${it.lastName}"/></td>
-					</tr>
-					</g:each>
+                    <g:each in="${DtPerson.list()}">
+                      <tr>
+                        <td valign="top" class="name" align="left">
+                          ${it.lastName}, ${it.firstName}
+                        </td>
+                        <td align="left">
+                          <g:radio value="${it.id}" name="person"/>
+                        </td>
+                      </tr>
+                    </g:each>
 
 				</tbody>
 				</table>

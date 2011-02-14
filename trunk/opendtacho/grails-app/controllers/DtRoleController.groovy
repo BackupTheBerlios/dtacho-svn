@@ -124,6 +124,8 @@ class DtRoleController {
 	 * Display the create new authority page.
 	 */
 	def create = {
+
+        flash.message = "A new group have to begin with ROLE_, e.g. ROLE_DUMMY"
 		[authority: new DtRole()]
 	}
 
