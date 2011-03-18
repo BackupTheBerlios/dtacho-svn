@@ -4,10 +4,12 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/web-app" relative="/" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -15,35 +17,66 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/bubbling-2.1.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/src/groovy" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/src/groovy" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/fixtures-1.0.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1" />
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/controllers" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1">
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/web-app/plugins" />
     </content>
-    <content url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1">
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/grails-app/taglib" isTestSource="false" />
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/web-app/plugins" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/grails-app/controllers" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/grails-app/services" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/web-app/plugins" />
+    </content>
+    <content url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1">
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/grails-app/taglib" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/target/classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/target/test-classes" />
+      <excludeFolder url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/yui-2.7.0.1/web-app/plugins" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -51,17 +84,19 @@
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library">
         <CLASSES>
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/lib" />
-          <root url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/lib" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/lib" />
+          <root url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME_GRAILS$/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/acegi-0.5.2/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/grails-ui-1.1.1/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/hibernate-1.1.1/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/pdf-0.4.5/lib" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/.grails/1.1.1/projects/opendtacho/plugins/richui-0.8/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>

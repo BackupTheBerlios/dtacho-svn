@@ -20,7 +20,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import org.opendtacho.domain.*
-
+import org.opendtacho.laws.Law
+import org.opendtacho.laws.LZ.*
 
 class DtActivityChangeController {
   def authenticateService
@@ -76,7 +77,9 @@ class DtActivityChangeController {
     }
 
   }
+  def reportLaw = {
 
+  }
   //Transformation function from minute number to time String
   String timeTrans (int z) {
     int hour = (int)(z/60)
@@ -106,7 +109,7 @@ class DtActivityChangeController {
 
   //results action handles inputs from report.gsp and sends result infos to pdfResults.gsp (also, the view of the action pdfResults)
   def pdfResults = {
-    //drivers variable takes the selected drivers of repost.gsp
+    //drivers variable takes the selected drivers of report.gsp
     def drivers = params.drivers
 
     //temporary query obj for criteria queries, also take the query.minDate and query.maxDate
@@ -128,8 +131,8 @@ class DtActivityChangeController {
     drivers.each {aDriver->
       def foundActivities = DtActivityChange.withCriteria {
         and{
-          between('activityRecordDate',query.minDate,query.maxDate)
-          //TODO maxDate not recognize
+          between('activityRecordDate',query.minDate,query.maxDate+1)
+
           driver{
             eq('id',aDriver as long)
           }
@@ -195,8 +198,8 @@ class DtActivityChangeController {
         //end data in a entries list
         def entries = DtActivityChange.withCriteria {
           and{
-            between('activityRecordDate',query.minDate,query.maxDate)
-            //TODO maxDate not recognize
+            between('activityRecordDate',query.minDate,query.maxDate+1)
+
             driver{
               eq('id',aDriver as long)
             }
@@ -315,7 +318,7 @@ class DtActivityChangeController {
 
   //results action handles inputs from screenReport.gsp and sends result infos to screenResults.gsp (also, the view of the action screenResults)
   def screenResults = {
-    //drivers variable takes the selected drivers of repost.gsp
+    //drivers variable takes the selected drivers of report.gsp
     def drivers = params.drivers
 
     //temporary query obj for criteria queries, also take the query.minDate and query.maxDate
@@ -337,8 +340,8 @@ class DtActivityChangeController {
     drivers.each {aDriver->
       def foundActivities = DtActivityChange.withCriteria {
         and{
-          between('activityRecordDate',query.minDate,query.maxDate)
-          //TODO maxDate not recognize
+          between('activityRecordDate',query.minDate,query.maxDate+1)
+
           driver{
             eq('id',aDriver as long)
           }
@@ -404,8 +407,8 @@ class DtActivityChangeController {
         //end data in a entries list
         def entries = DtActivityChange.withCriteria {
           and{
-            between('activityRecordDate',query.minDate,query.maxDate)
-            //TODO maxDate not recognize
+            between('activityRecordDate',query.minDate,query.maxDate+1)
+
             driver{
               eq('id',aDriver as long)
             }
@@ -521,4 +524,61 @@ class DtActivityChangeController {
             notFoundDriverNames:notFoundDriverNames,
             resultList:resultList]
   }
+
+  def lawResults = {
+    //die ausgewählte Fahrer
+    def drivers = params.drivers
+    def driversList = []
+    def dates = []
+    // def tagLZ = new Tageslenkzeit(540)
+    def wochenLZ = new Wochenlenkzeit(56*60)
+    Law[] laws
+    //der ausgewählte Zeitraum
+    //temporary query obj for criteria queries, also take the query.minDate and query.maxDate
+      DtActivityChangeQuery query = new DtActivityChangeQuery()
+      bindData(query, params)
+
+    int index = 0
+
+    drivers.each { aDriver ->
+        def driver = DtDriver.get(aDriver as long)
+        driversList.add(driver)
+    }
+        drivers.each { aDriver->
+         def driverAndDate = DtActivityChange.withCriteria {
+          and {
+            between('activityRecordDate',query.minDate,query.maxDate+1)
+            driver {
+              eq('id', aDriver as long)
+            }
+          }
+          order('activityRecordDate','asc')
+          order('time','asc')
+        }
+        dates.add(driverAndDate)
+        index++
+      }
+
+      // TEST CODE
+      def tagLZParams = new ArrayList<List<Object>>()
+      def law = new Law()
+      tagLZParams.add(0, new LinkedList())
+      tagLZParams.get(0).add(0, query.minDate)
+      tagLZParams.get(0).add(1, 480)
+      tagLZParams.add(1, new LinkedList())
+      if(dates.size() == 0) {
+          System.out.println("Empty")
+      } else {
+      def date = law.fillDates(dates.get(0)).get((int)Math.floor(law.fillDates(dates.get(0)).size/2))
+
+          tagLZParams.get(1).add(0, date)
+          tagLZParams.get(1).add(1, 540)
+      // TEST CODE
+      def tagLZ = new Tageslenkzeit(tagLZParams)
+      laws = [tagLZ, wochenLZ]
+      }
+      return [driversList:driversList,
+              dates:dates,
+              laws:laws]
+   }
 }

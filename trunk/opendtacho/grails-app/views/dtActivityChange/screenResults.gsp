@@ -17,12 +17,12 @@
     <title><g:message code="results.title"/></title>
     <meta name="layout" content="main"/>
     <style type="text/css">
-      .list table{
+      .list table {
         border-collapse: separate;
         border-style: solid;
         table-layout: auto;
       }
-      .list th, .list td{
+      .list th, .list td {
         border-left:none;
       }
     </style>

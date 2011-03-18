@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
-  User: lha
-  Date: Oct 8, 2009
-  Time: 8:52:22 PM
+  User: ilia
+  Date: 12/24/10
+  Time: 7:53 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page import="org.opendtacho.domain.DtCompany; org.opendtacho.domain.DtSubsidiary; org.opendtacho.domain.DtDriver" contentType="text/html;charset=UTF-8" %>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main" />
-    <title><g:message code="report.title"/></title>
+    <title><g:message code="reportLaw.title"/></title>
     <script type="text/javascript">
       //Yester calculation function
       function yesterday(a){
@@ -85,25 +85,26 @@
         document.getElementById("maxDate_day").value = today.getDate();
       }
 
-      function selectAll() {
+      function selectAll(){
         var drivers = document.getElementsByName('drivers');
         for(var x=0;x<drivers.length;x++) drivers[x].checked=true;
       }
-      function unselectAll() {
+      function unselectAll(){
         var drivers = document.getElementsByName('drivers');
         for(var y=0;y<drivers.length;y++) drivers[y].checked=false;
       }
-
     </script>
   </head>
-  <body>
+
+<body>
+%{--<%= link(action:'reportLaw',controller:'dtActivityChange') %>--}%
     <div class="body">
-      <h1><g:message code="report.title"/></h1>
+      <h1><g:message code="Law report"/></h1>
 
       %{--matched company and subsidiary to the logged in user--}%
       <g:set var ="company" value="${currentCompany}"/>
-      <g:set var ="subsidiary" value="${currentSubsidiary}"/> 
-      
+      <g:set var ="subsidiary" value="${currentSubsidiary}"/>
+
       %{--temporary date variable for pdf report filename--}%
       <g:set var="a" value="${new Date()}"/>
       <g:pdfForm controller="dtActivityChange" action="pdfResults" method="post" filename="report_for_${a.getDate()}.${a.getMonth()+1}.${a.getYear()+1900}.pdf">
@@ -115,17 +116,17 @@
                   <strong><g:message code="report.company"/></strong>
                 </td>
                 <td>
-                  <g:select name="company" optionKey="companyName" optionValue="companyName" from="${dtCompanyInstanceList}"/>
+                  <g:select name="company" optionKey="companyName" optionValue="companyName" from="${DtCompany.list()}"/>
                 </td>
               </tr>
-              %{--<tr class="prop">
+              <tr class="prop">
                 <td valign="top" class="name">
                   <strong><g:message code="report.subsidiary"/></strong>
                 </td>
                 <td>
                   <g:select name="city" optionKey="city" optionValue="city" from="${DtSubsidiary.list()}"/>
                 </td>
-              </tr>--}%
+              </tr>
               <tr class="prop">
                 <td valign="top" class="name">
                   <strong><g:message code="report.driver"/></strong>
@@ -135,7 +136,7 @@
                   <input type="button" value="${message(code:'report.driver.unselectAll')}" onclick="unselectAll();"/>
                   <br/>
 
-                  <g:each in="${dtDriverInstanceList}">
+                  <g:each in="${DtDriver.list()}">
                     <input type="checkbox" id="drivers" name="drivers" value="${it.id}"/>
                     ${it.cardHolderName_holderSurname}, ${it.cardHolderName_holderFirstNames}
                     <br/>
@@ -170,10 +171,11 @@
         </div>
         <div class="buttons">
           <span class="button">
-            <input class="pdf" type="image" alt="<g:message code="report.button.pdf"/>" />
+            <input class="pdf" type="image" alt="<g:message code="report.button.pdf"/>"/>
           </span>
           <span class="button">
-            <input class="screen" type="button" value="<g:message code="report.button.screen"/>" onClick="document.simplePdfForm.action='screenResults'; document.simplePdfForm.submit();"/>  
+            <input class="screen" type="button" value="<g:message code="report.button.screen"/>" onClick="document.simplePdfForm.action='screenResults'; document.simplePdfForm.submit();"/>
+            <input class="screen" type="button" value="Law Report" onClick="document.simplePdfForm.action='lawResults'; document.simplePdfForm.submit();"/>
           </span>
         </div>
       </g:pdfForm>

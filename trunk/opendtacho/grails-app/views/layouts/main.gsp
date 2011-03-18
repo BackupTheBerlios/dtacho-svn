@@ -70,6 +70,8 @@
       <gui:submenu label="${message(code:'menu.report')}">
         <gui:menuitem url="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report.activities"/></gui:menuitem>
         <gui:menuitem url="${resource(dir:'/dtActivityChange/report')}"><g:message code="menu.report.driver"/></gui:menuitem>
+        <gui:menuitem url="${resource(dir:'/dtActivityChange/reportLaw')}"><g:message code="Law report"/></gui:menuitem>
+
       </gui:submenu>
     </gui:menubar>
 
