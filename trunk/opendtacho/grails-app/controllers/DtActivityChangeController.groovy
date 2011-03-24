@@ -566,17 +566,20 @@ class DtActivityChangeController {
       tagLZParams.get(0).add(0, query.minDate)
       tagLZParams.get(0).add(1, 480)
       tagLZParams.add(1, new LinkedList())
-      if(dates.size() == 0) {
-          System.out.println("Empty")
-      } else {
-      def date = law.fillDates(dates.get(0)).get((int)Math.floor(law.fillDates(dates.get(0)).size/2))
+      try {
+          def date = law.fillDates(dates.get(0)).get((int)Math.floor(law.fillDates(dates.get(0)).size/2))
+
 
           tagLZParams.get(1).add(0, date)
           tagLZParams.get(1).add(1, 540)
       // TEST CODE
       def tagLZ = new Tageslenkzeit(tagLZParams)
       laws = [tagLZ, wochenLZ]
+          } catch (IndexOutOfBoundsException) {
+
+           System.out.println("Empty dates list " + dates.size())
       }
+
       return [driversList:driversList,
               dates:dates,
               laws:laws]

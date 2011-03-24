@@ -32,6 +32,11 @@
      <resource:accordion skin="default" />
   </head>
   <body>
+<a href="${resource(dir:'/dtActivityChange/reportLaw')}">Back<br></a>
+<g:if test="${driversList.size() == 0 | dates.size() == 0}">
+    No driver selected
+</g:if>
+<g:else>
 <div class align="list">
 
 <richui:tabView id="tabView">
@@ -47,6 +52,10 @@
 
     <g:each in="${driversList}" var="driversList" status = "i" >
     <richui:tabContent>
+    <g:if test="${dates.get(i).size() == 0}">
+          No activities found for these dates
+    </g:if>
+    <g:else>
     <g:each in = "${laws}" var = "law" status = "g">
                <table>
                   <g:each in="${law.checkLaw(dates.get(i))}" var="checkLawList" status="j">
@@ -57,7 +66,8 @@
                       </tr>
                   </g:each>
                 </table>
-        </g:each>
+     </g:each>
+     </g:else>
  </richui:tabContent>
      </g:each>
 
@@ -65,5 +75,6 @@
 </richui:tabView>
 
  </div>
+</g:else>
   </body>
 </html>
