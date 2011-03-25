@@ -33,7 +33,7 @@
   </head>
   <body>
 <a href="${resource(dir:'/dtActivityChange/reportLaw')}">Back<br></a>
-<g:if test="${driversList.size() == 0 | dates.size() == 0}">
+<g:if test="${driversList.size() == 0}">
     No driver selected
 </g:if>
 <g:else>

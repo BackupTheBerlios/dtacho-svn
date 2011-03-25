@@ -24,6 +24,7 @@ class Tageslenkzeit extends Lenkzeit {
   def checkLaw = { List<DtActivityChange> driverAndDate->
       def datesAndTimes = datesAndTimesList(driverAndDate)
       if(lawParams.size() == 0) {
+          System.out.println("here")
             lawParams.add(0, new LinkedList<Object>())
             lawParams.get(0).add(0, driverAndDate.get(0).activityRecordDate)
             lawParams.get(0).add(1, limitHours)
