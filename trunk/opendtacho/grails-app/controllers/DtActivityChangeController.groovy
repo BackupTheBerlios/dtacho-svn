@@ -22,6 +22,7 @@
 import org.opendtacho.domain.*
 import org.opendtacho.laws.Law
 import org.opendtacho.laws.LZ.*
+import static java.util.Calendar.*
 
 class DtActivityChangeController {
   def authenticateService
@@ -561,25 +562,13 @@ class DtActivityChangeController {
 
       // TEST CODE
       def tagLZParams = new ArrayList<List<Object>>()
-      def law = new Law()
+      def date1 = new Date(0150, JANUARY, 1)
+      def date2 = new Date(0155, JANUARY, 1)
       tagLZParams.add(0, new LinkedList())
-      tagLZParams.get(0).add(0, query.minDate)
+      tagLZParams.get(0).add(0, date1)
       tagLZParams.get(0).add(1, 480)
       tagLZParams.add(1, new LinkedList())
-      def date
-      int ind = 0
-      for (int i = 0; i < dates.size(); i++) {
-          if(dates.get(i).size() != 0) {
-              ind = i
-              break
-          }
-      }
-      if (dates.get(ind).size() != 0) {
-        date = law.fillDates(dates.get(ind)).get((int)Math.floor(law.fillDates(dates.get(ind)).size/2))
-      } else {
-        System.out.println("Empty dates list " + dates.size())
-      }
-      tagLZParams.get(1).add(0, date)
+      tagLZParams.get(1).add(0, date2)
       tagLZParams.get(1).add(1, 540)
       // TEST CODE
       def tagLZ = new Tageslenkzeit(tagLZParams)
