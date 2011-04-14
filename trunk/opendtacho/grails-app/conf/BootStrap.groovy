@@ -10,12 +10,12 @@ class BootStrap {
 
     def init = {servletContext ->
 
-      //we use database, don't need fixtures
-      // please use this fixture JUST ONE TIME AT BEGINNING to create the database we need
-      // and NEXT TIME we boot this app please INACTIVE IT before, just make it to comments
-   //   if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
-   //     fixtureLoader.load("DataGenerator")
-   //   }
+
+	// Die folgenden 3 Zeilen müssen nach dem Erststart auskommentiert oder gelöscht werden!  
+     
+	if (GrailsUtil.environment == GrailsApplication.ENV_DEVELOPMENT) {
+	  fixtureLoader.load("DataGenerator")
+	}
 
     }
 
