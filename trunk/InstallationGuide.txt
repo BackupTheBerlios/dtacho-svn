@@ -13,7 +13,7 @@ Benötigte Software
 http://dev.mysql.com/downloads/mysql/
 
 * Grails 1.1.1 (exakte Version)
-http://www.grails.org/
+http://grails.org/download/archive/Grails
 
 * Groovy
 http://groovy.codehaus.org/
@@ -29,13 +29,13 @@ Installation
 
 1. Die Umgebungsvariablen $JAVA_HOME, $GRAILS_HOME und $GROOVY_HOME setzen oder sicherstellen, dass diese richtig gesetzt sind.
 
-Beispiele Für Ubuntu, Debian und Derivate mit per Packetmanager installierten Programmen:
+Beispiele Für Ubuntu, Debian und Derivate:
 
-$JAVA_HOME=/usr/lib/jvm/java-6-sun
-$GROOVY_HOME=/usr/share/groovy/
-$GRAILS_HOME=/pfad/zu/grails_1.1.1/
+JAVA_HOME=/usr/lib/jvm/java-6-sun
+GROOVY_HOME=/usr/share/groovy/
+GRAILS_HOME=/pfad/zu/grails_1.1.1/
 
-2. Die Eintragungen $GRAILS_HOME/bin und $GROOVY_HOME/bin zu ihrer $PATH-Variable hinzufügen.
+2. Die Eintragung $GRAILS_HOME/bin zu ihrer $PATH-Variable hinzufügen.
 
 3. Eine neue Datenbank "opendtacho_db" mit MySQL anlegen und alle Rechte auf diese dem Benutzer "opendtacho" geben (Passwort des Benutzers in Datei opendtacho/grails-app/conf/DataSource.groovy setzen).
 	
