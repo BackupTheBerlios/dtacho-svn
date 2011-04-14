@@ -43,7 +43,7 @@ class DtDriver {
 
     static constraints = {
         person(nullable:true) // relation to person is optional
-        company(blank:false)
+	company(nullable:true)
     }
 
     DtDriver() {
